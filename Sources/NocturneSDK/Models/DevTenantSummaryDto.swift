@@ -13,7 +13,6 @@ public struct DevTenantSummaryDto: Sendable, Codable, Hashable {
     public var slug: String?
     public var displayName: String?
     public var isActive: Bool?
-    public var timezone: String?
     public var createdAt: Date?
     public var entries: Int64?
     public var treatments: Int64?
@@ -23,12 +22,11 @@ public struct DevTenantSummaryDto: Sendable, Codable, Hashable {
     public var latestEntry: Date?
     public var connectors: [DevConnectorSummaryDto]?
 
-    public init(id: String? = nil, slug: String? = nil, displayName: String? = nil, isActive: Bool? = nil, timezone: String? = nil, createdAt: Date? = nil, entries: Int64? = nil, treatments: Int64? = nil, deviceStatuses: Int64? = nil, profiles: Int? = nil, members: Int? = nil, latestEntry: Date? = nil, connectors: [DevConnectorSummaryDto]? = nil) {
+    public init(id: String? = nil, slug: String? = nil, displayName: String? = nil, isActive: Bool? = nil, createdAt: Date? = nil, entries: Int64? = nil, treatments: Int64? = nil, deviceStatuses: Int64? = nil, profiles: Int? = nil, members: Int? = nil, latestEntry: Date? = nil, connectors: [DevConnectorSummaryDto]? = nil) {
         self.id = id
         self.slug = slug
         self.displayName = displayName
         self.isActive = isActive
-        self.timezone = timezone
         self.createdAt = createdAt
         self.entries = entries
         self.treatments = treatments
@@ -44,7 +42,6 @@ public struct DevTenantSummaryDto: Sendable, Codable, Hashable {
         case slug
         case displayName
         case isActive
-        case timezone
         case createdAt
         case entries
         case treatments
@@ -63,7 +60,6 @@ public struct DevTenantSummaryDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(slug, forKey: .slug)
         try container.encodeIfPresent(displayName, forKey: .displayName)
         try container.encodeIfPresent(isActive, forKey: .isActive)
-        try container.encodeIfPresent(timezone, forKey: .timezone)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(entries, forKey: .entries)
         try container.encodeIfPresent(treatments, forKey: .treatments)

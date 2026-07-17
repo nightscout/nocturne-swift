@@ -194,6 +194,40 @@ open class PatientRecordAPI {
     }
 
     /**
+     Lists distinct (DataSource, Device) combinations seen in recent unattributed readings — candidate streams the user can register as devices from the settings UI.
+     
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [DiscoveredSource]
+     */
+    open class func patientRecordGetDiscoveredSources(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [DiscoveredSource] {
+        return try await patientRecordGetDiscoveredSourcesWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Lists distinct (DataSource, Device) combinations seen in recent unattributed readings — candidate streams the user can register as devices from the settings UI.
+     - GET /api/v4/patient-record/devices/discovered-sources
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[DiscoveredSource]> 
+     */
+    open class func patientRecordGetDiscoveredSourcesWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[DiscoveredSource]> {
+        let localVariablePath = "/api/v4/patient-record/devices/discovered-sources"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[DiscoveredSource]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Get all patient insulins
      
      - parameter apiConfiguration: The configuration for the http request.
@@ -259,6 +293,42 @@ open class PatientRecordAPI {
         let localVariableRequestBuilder: RequestBuilder<PatientRecord>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Reassigns device priority in a single batch. Drag-to-reorder in the UI sends the full ordered list; each entry's position becomes its Rank. One round trip instead of one PUT per device. An imperative command (no HTML form), mirroring the delete/restore surface.
+     
+     - parameter deviceRankAssignment: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [PatientDevice]
+     */
+    open class func patientRecordReorderDevices(deviceRankAssignment: [DeviceRankAssignment], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [PatientDevice] {
+        return try await patientRecordReorderDevicesWithRequestBuilder(deviceRankAssignment: deviceRankAssignment, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Reassigns device priority in a single batch. Drag-to-reorder in the UI sends the full ordered list; each entry's position becomes its Rank. One round trip instead of one PUT per device. An imperative command (no HTML form), mirroring the delete/restore surface.
+     - POST /api/v4/patient-record/devices/reorder
+     - parameter deviceRankAssignment: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[PatientDevice]> 
+     */
+    open class func patientRecordReorderDevicesWithRequestBuilder(deviceRankAssignment: [DeviceRankAssignment], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[PatientDevice]> {
+        let localVariablePath = "/api/v4/patient-record/devices/reorder"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: deviceRankAssignment, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[PatientDevice]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
     }
 
     /**

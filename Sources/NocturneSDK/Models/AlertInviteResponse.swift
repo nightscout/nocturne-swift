@@ -11,16 +11,16 @@ public struct AlertInviteResponse: Sendable, Codable, Hashable {
 
     public var id: String?
     public var token: String?
-    public var escalationStepId: String?
+    public var alertRuleChannelId: String?
     public var permissionScope: String?
     public var isUsed: Bool?
     public var expiresAt: Date?
     public var createdAt: Date?
 
-    public init(id: String? = nil, token: String? = nil, escalationStepId: String? = nil, permissionScope: String? = nil, isUsed: Bool? = nil, expiresAt: Date? = nil, createdAt: Date? = nil) {
+    public init(id: String? = nil, token: String? = nil, alertRuleChannelId: String? = nil, permissionScope: String? = nil, isUsed: Bool? = nil, expiresAt: Date? = nil, createdAt: Date? = nil) {
         self.id = id
         self.token = token
-        self.escalationStepId = escalationStepId
+        self.alertRuleChannelId = alertRuleChannelId
         self.permissionScope = permissionScope
         self.isUsed = isUsed
         self.expiresAt = expiresAt
@@ -30,7 +30,7 @@ public struct AlertInviteResponse: Sendable, Codable, Hashable {
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case id
         case token
-        case escalationStepId
+        case alertRuleChannelId
         case permissionScope
         case isUsed
         case expiresAt
@@ -43,7 +43,7 @@ public struct AlertInviteResponse: Sendable, Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(token, forKey: .token)
-        try container.encodeIfPresent(escalationStepId, forKey: .escalationStepId)
+        try container.encodeIfPresent(alertRuleChannelId, forKey: .alertRuleChannelId)
         try container.encodeIfPresent(permissionScope, forKey: .permissionScope)
         try container.encodeIfPresent(isUsed, forKey: .isUsed)
         try container.encodeIfPresent(expiresAt, forKey: .expiresAt)

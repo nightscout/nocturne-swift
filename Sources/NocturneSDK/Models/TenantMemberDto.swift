@@ -12,35 +12,41 @@ public struct TenantMemberDto: Sendable, Codable, Hashable {
     public var id: String?
     public var subjectId: String?
     public var name: String?
+    public var isSystemSubject: Bool?
     public var roles: [TenantMemberRoleDto]?
     public var directPermissions: [String]?
     public var label: String?
     public var limitTo24Hours: Bool?
     public var lastUsedAt: Date?
     public var sysCreatedAt: Date?
+    public var isPlatformAdmin: Bool?
 
-    public init(id: String? = nil, subjectId: String? = nil, name: String? = nil, roles: [TenantMemberRoleDto]? = nil, directPermissions: [String]? = nil, label: String? = nil, limitTo24Hours: Bool? = nil, lastUsedAt: Date? = nil, sysCreatedAt: Date? = nil) {
+    public init(id: String? = nil, subjectId: String? = nil, name: String? = nil, isSystemSubject: Bool? = nil, roles: [TenantMemberRoleDto]? = nil, directPermissions: [String]? = nil, label: String? = nil, limitTo24Hours: Bool? = nil, lastUsedAt: Date? = nil, sysCreatedAt: Date? = nil, isPlatformAdmin: Bool? = nil) {
         self.id = id
         self.subjectId = subjectId
         self.name = name
+        self.isSystemSubject = isSystemSubject
         self.roles = roles
         self.directPermissions = directPermissions
         self.label = label
         self.limitTo24Hours = limitTo24Hours
         self.lastUsedAt = lastUsedAt
         self.sysCreatedAt = sysCreatedAt
+        self.isPlatformAdmin = isPlatformAdmin
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case id
         case subjectId
         case name
+        case isSystemSubject
         case roles
         case directPermissions
         case label
         case limitTo24Hours
         case lastUsedAt
         case sysCreatedAt
+        case isPlatformAdmin
     }
 
     // Encodable protocol methods
@@ -50,12 +56,14 @@ public struct TenantMemberDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(subjectId, forKey: .subjectId)
         try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(isSystemSubject, forKey: .isSystemSubject)
         try container.encodeIfPresent(roles, forKey: .roles)
         try container.encodeIfPresent(directPermissions, forKey: .directPermissions)
         try container.encodeIfPresent(label, forKey: .label)
         try container.encodeIfPresent(limitTo24Hours, forKey: .limitTo24Hours)
         try container.encodeIfPresent(lastUsedAt, forKey: .lastUsedAt)
         try container.encodeIfPresent(sysCreatedAt, forKey: .sysCreatedAt)
+        try container.encodeIfPresent(isPlatformAdmin, forKey: .isPlatformAdmin)
     }
 }
 

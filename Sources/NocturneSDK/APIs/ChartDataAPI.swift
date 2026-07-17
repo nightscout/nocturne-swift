@@ -10,6 +10,48 @@ import Foundation
 open class ChartDataAPI {
 
     /**
+     Gets the basal delivery series for a time window without running the full IOB/COB compute pipeline. Fetches only temp basals and profile data, making it significantly cheaper than the dashboard endpoint.
+     
+     - parameter startTime: (query) Start of the requested window as a Unix timestamp in milliseconds. (optional)
+     - parameter endTime: (query) End of the requested window as a Unix timestamp in milliseconds.             Must be greater than startTime. (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [BasalPoint]
+     */
+    open class func chartDataGetBasalSeries(startTime: Int64? = nil, endTime: Int64? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [BasalPoint] {
+        return try await chartDataGetBasalSeriesWithRequestBuilder(startTime: startTime, endTime: endTime, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Gets the basal delivery series for a time window without running the full IOB/COB compute pipeline. Fetches only temp basals and profile data, making it significantly cheaper than the dashboard endpoint.
+     - GET /api/v4/ChartData/basal-series
+     - parameter startTime: (query) Start of the requested window as a Unix timestamp in milliseconds. (optional)
+     - parameter endTime: (query) End of the requested window as a Unix timestamp in milliseconds.             Must be greater than startTime. (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[BasalPoint]> 
+     */
+    open class func chartDataGetBasalSeriesWithRequestBuilder(startTime: Int64? = nil, endTime: Int64? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[BasalPoint]> {
+        let localVariablePath = "/api/v4/ChartData/basal-series"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "startTime": (wrappedValue: startTime?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endTime": (wrappedValue: endTime?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[BasalPoint]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Gets complete dashboard chart data in a single call. Returns pre-calculated IOB, COB, basal series, categorized treatment markers, state spans, system events, tracker markers, and glucose readings.
      
      - parameter startTime: (query) Start of the requested window as a Unix timestamp in milliseconds. (optional)

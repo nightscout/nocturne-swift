@@ -22,9 +22,11 @@ public struct DataSourceInfo: Sendable, Codable, Hashable {
     public var status: String?
     public var minutesSinceLastData: Int?
     public var icon: String?
+    public var connectorId: String?
+    public var lastSuccessfulSync: Date?
     public var isHealthy: Bool?
 
-    public init(id: String? = nil, name: String? = nil, deviceId: String? = nil, category: String? = nil, sourceType: String? = nil, description: String? = nil, lastSeen: Date? = nil, firstSeen: Date? = nil, entriesLast24h: Int? = nil, totalEntries: Int64? = nil, status: String? = nil, minutesSinceLastData: Int? = nil, icon: String? = nil, isHealthy: Bool? = nil) {
+    public init(id: String? = nil, name: String? = nil, deviceId: String? = nil, category: String? = nil, sourceType: String? = nil, description: String? = nil, lastSeen: Date? = nil, firstSeen: Date? = nil, entriesLast24h: Int? = nil, totalEntries: Int64? = nil, status: String? = nil, minutesSinceLastData: Int? = nil, icon: String? = nil, connectorId: String? = nil, lastSuccessfulSync: Date? = nil, isHealthy: Bool? = nil) {
         self.id = id
         self.name = name
         self.deviceId = deviceId
@@ -38,6 +40,8 @@ public struct DataSourceInfo: Sendable, Codable, Hashable {
         self.status = status
         self.minutesSinceLastData = minutesSinceLastData
         self.icon = icon
+        self.connectorId = connectorId
+        self.lastSuccessfulSync = lastSuccessfulSync
         self.isHealthy = isHealthy
     }
 
@@ -55,6 +59,8 @@ public struct DataSourceInfo: Sendable, Codable, Hashable {
         case status
         case minutesSinceLastData
         case icon
+        case connectorId
+        case lastSuccessfulSync
         case isHealthy
     }
 
@@ -75,6 +81,8 @@ public struct DataSourceInfo: Sendable, Codable, Hashable {
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(minutesSinceLastData, forKey: .minutesSinceLastData)
         try container.encodeIfPresent(icon, forKey: .icon)
+        try container.encodeIfPresent(connectorId, forKey: .connectorId)
+        try container.encodeIfPresent(lastSuccessfulSync, forKey: .lastSuccessfulSync)
         try container.encodeIfPresent(isHealthy, forKey: .isHealthy)
     }
 }

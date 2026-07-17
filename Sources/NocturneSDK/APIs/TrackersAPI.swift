@@ -10,7 +10,7 @@ import Foundation
 open class TrackersAPI {
 
     /**
-     Acknowledge/snooze a tracker notification
+     Acknowledge a tracker notification. SnoozeMins is stored on the instance (pill display/legacy clients); the alert-engine side is a plain acknowledgement of the managed rules' open excursions — re-notification is the threshold ladder's and alert_state escalation rules' job, not a snooze re-fire.
      
      - parameter id: (path)  
      - parameter ackTrackerRequest: (body)  
@@ -22,7 +22,7 @@ open class TrackersAPI {
     }
 
     /**
-     Acknowledge/snooze a tracker notification
+     Acknowledge a tracker notification. SnoozeMins is stored on the instance (pill display/legacy clients); the alert-engine side is a plain acknowledgement of the managed rules' open excursions — re-notification is the threshold ladder's and alert_state escalation rules' job, not a snooze re-fire.
      - POST /api/v4/trackers/instances/{id}/ack
      - parameter id: (path)  
      - parameter ackTrackerRequest: (body)  
@@ -401,7 +401,7 @@ open class TrackersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [TrackerDefinitionDto]
      */
-    open class func trackersGetDefinitions(category: TrackersGetDefinitionsCategoryParameter? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [TrackerDefinitionDto] {
+    open class func trackersGetDefinitions(category: TrackerCategory? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [TrackerDefinitionDto] {
         return try await trackersGetDefinitionsWithRequestBuilder(category: category, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -412,7 +412,7 @@ open class TrackersAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[TrackerDefinitionDto]> 
      */
-    open class func trackersGetDefinitionsWithRequestBuilder(category: TrackersGetDefinitionsCategoryParameter? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[TrackerDefinitionDto]> {
+    open class func trackersGetDefinitionsWithRequestBuilder(category: TrackerCategory? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[TrackerDefinitionDto]> {
         let localVariablePath = "/api/v4/trackers/definitions"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil

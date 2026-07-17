@@ -16,20 +16,20 @@ public struct UpdateTrackerDefinitionRequest: Sendable, Codable, Hashable {
     public var triggerEventTypes: [String]?
     public var triggerNotesContains: String?
     public var lifespanHours: Int?
+    /** Reservoir category only: units level below which the synced managed reservoir rule fires. The tracker editor posts the whole definition, so for a Reservoir definition this value is applied as-is on every update — null clears the rule (null-means-keep cannot express clearing). */
+    public var lowReservoirUnits: Double?
+    public var lowReservoirUrgency: NotificationUrgency?
     public var notificationThresholds: [CreateNotificationThresholdRequest]?
     public var isFavorite: Bool?
-    /** Dashboard visibility: Off, Always, Info, Warn, Hazard, Urgent */
     public var dashboardVisibility: DashboardVisibility?
-    /** Visibility level for this tracker (Public, Private, RoleRestricted) */
     public var visibility: TrackerVisibility?
     /** Event type to create when tracker is started (for Nightscout compatibility) */
     public var startEventType: String?
     /** Event type to create when tracker is completed (for Nightscout compatibility) */
     public var completionEventType: String?
-    /** Tracker mode: Duration (time-based) or Event (scheduled datetime) */
     public var mode: TrackerMode?
 
-    public init(name: String? = nil, description: String? = nil, category: TrackerCategory? = nil, icon: String? = nil, triggerEventTypes: [String]? = nil, triggerNotesContains: String? = nil, lifespanHours: Int? = nil, notificationThresholds: [CreateNotificationThresholdRequest]? = nil, isFavorite: Bool? = nil, dashboardVisibility: DashboardVisibility? = nil, visibility: TrackerVisibility? = nil, startEventType: String? = nil, completionEventType: String? = nil, mode: TrackerMode? = nil) {
+    public init(name: String? = nil, description: String? = nil, category: TrackerCategory? = nil, icon: String? = nil, triggerEventTypes: [String]? = nil, triggerNotesContains: String? = nil, lifespanHours: Int? = nil, lowReservoirUnits: Double? = nil, lowReservoirUrgency: NotificationUrgency? = nil, notificationThresholds: [CreateNotificationThresholdRequest]? = nil, isFavorite: Bool? = nil, dashboardVisibility: DashboardVisibility? = nil, visibility: TrackerVisibility? = nil, startEventType: String? = nil, completionEventType: String? = nil, mode: TrackerMode? = nil) {
         self.name = name
         self.description = description
         self.category = category
@@ -37,6 +37,8 @@ public struct UpdateTrackerDefinitionRequest: Sendable, Codable, Hashable {
         self.triggerEventTypes = triggerEventTypes
         self.triggerNotesContains = triggerNotesContains
         self.lifespanHours = lifespanHours
+        self.lowReservoirUnits = lowReservoirUnits
+        self.lowReservoirUrgency = lowReservoirUrgency
         self.notificationThresholds = notificationThresholds
         self.isFavorite = isFavorite
         self.dashboardVisibility = dashboardVisibility
@@ -54,6 +56,8 @@ public struct UpdateTrackerDefinitionRequest: Sendable, Codable, Hashable {
         case triggerEventTypes
         case triggerNotesContains
         case lifespanHours
+        case lowReservoirUnits
+        case lowReservoirUrgency
         case notificationThresholds
         case isFavorite
         case dashboardVisibility
@@ -74,6 +78,8 @@ public struct UpdateTrackerDefinitionRequest: Sendable, Codable, Hashable {
         try container.encodeIfPresent(triggerEventTypes, forKey: .triggerEventTypes)
         try container.encodeIfPresent(triggerNotesContains, forKey: .triggerNotesContains)
         try container.encodeIfPresent(lifespanHours, forKey: .lifespanHours)
+        try container.encodeIfPresent(lowReservoirUnits, forKey: .lowReservoirUnits)
+        try container.encodeIfPresent(lowReservoirUrgency, forKey: .lowReservoirUrgency)
         try container.encodeIfPresent(notificationThresholds, forKey: .notificationThresholds)
         try container.encodeIfPresent(isFavorite, forKey: .isFavorite)
         try container.encodeIfPresent(dashboardVisibility, forKey: .dashboardVisibility)

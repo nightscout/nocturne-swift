@@ -13,12 +13,20 @@ public struct TargetRangeEntry: Sendable, Codable, Hashable {
     public var low: Double?
     public var high: Double?
     public var timeAsSeconds: Int?
+    public var veryLow: Int?
+    public var tightLow: Int?
+    public var tightHigh: Int?
+    public var veryHigh: Int?
 
-    public init(time: String? = nil, low: Double? = nil, high: Double? = nil, timeAsSeconds: Int? = nil) {
+    public init(time: String? = nil, low: Double? = nil, high: Double? = nil, timeAsSeconds: Int? = nil, veryLow: Int? = nil, tightLow: Int? = nil, tightHigh: Int? = nil, veryHigh: Int? = nil) {
         self.time = time
         self.low = low
         self.high = high
         self.timeAsSeconds = timeAsSeconds
+        self.veryLow = veryLow
+        self.tightLow = tightLow
+        self.tightHigh = tightHigh
+        self.veryHigh = veryHigh
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -26,6 +34,10 @@ public struct TargetRangeEntry: Sendable, Codable, Hashable {
         case low
         case high
         case timeAsSeconds
+        case veryLow
+        case tightLow
+        case tightHigh
+        case veryHigh
     }
 
     // Encodable protocol methods
@@ -36,6 +48,10 @@ public struct TargetRangeEntry: Sendable, Codable, Hashable {
         try container.encodeIfPresent(low, forKey: .low)
         try container.encodeIfPresent(high, forKey: .high)
         try container.encodeIfPresent(timeAsSeconds, forKey: .timeAsSeconds)
+        try container.encodeIfPresent(veryLow, forKey: .veryLow)
+        try container.encodeIfPresent(tightLow, forKey: .tightLow)
+        try container.encodeIfPresent(tightHigh, forKey: .tightHigh)
+        try container.encodeIfPresent(veryHigh, forKey: .veryHigh)
     }
 }
 

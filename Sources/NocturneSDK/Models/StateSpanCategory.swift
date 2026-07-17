@@ -13,7 +13,6 @@ public enum StateSpanCategory: String, Sendable, Codable, CaseIterable {
     case pumpConnectivity = "PumpConnectivity"
     case _override = "Override"
     case profile = "Profile"
-    case sleep = "Sleep"
     case exercise = "Exercise"
     case illness = "Illness"
     case travel = "Travel"

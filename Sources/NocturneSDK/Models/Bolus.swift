@@ -32,12 +32,13 @@ public struct Bolus: Sendable, Codable, Hashable {
     public var insulinContext: TreatmentInsulinContext?
     public var unabsorbed: Double?
     public var deviceId: String?
+    public var patientDeviceId: String?
     public var pumpRecordId: String?
     public var bolusCalculationId: String?
     public var apsSnapshotId: String?
     public var additionalProperties: [String: JSONValue]?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, insulin: Double? = nil, programmed: Double? = nil, delivered: Double? = nil, bolusType: BolusType? = nil, automatic: Bool? = nil, kind: BolusKind? = nil, duration: Double? = nil, syncIdentifier: String? = nil, insulinType: String? = nil, insulinContext: TreatmentInsulinContext? = nil, unabsorbed: Double? = nil, deviceId: String? = nil, pumpRecordId: String? = nil, bolusCalculationId: String? = nil, apsSnapshotId: String? = nil, additionalProperties: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, insulin: Double? = nil, programmed: Double? = nil, delivered: Double? = nil, bolusType: BolusType? = nil, automatic: Bool? = nil, kind: BolusKind? = nil, duration: Double? = nil, syncIdentifier: String? = nil, insulinType: String? = nil, insulinContext: TreatmentInsulinContext? = nil, unabsorbed: Double? = nil, deviceId: String? = nil, patientDeviceId: String? = nil, pumpRecordId: String? = nil, bolusCalculationId: String? = nil, apsSnapshotId: String? = nil, additionalProperties: [String: JSONValue]? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -61,6 +62,7 @@ public struct Bolus: Sendable, Codable, Hashable {
         self.insulinContext = insulinContext
         self.unabsorbed = unabsorbed
         self.deviceId = deviceId
+        self.patientDeviceId = patientDeviceId
         self.pumpRecordId = pumpRecordId
         self.bolusCalculationId = bolusCalculationId
         self.apsSnapshotId = apsSnapshotId
@@ -91,6 +93,7 @@ public struct Bolus: Sendable, Codable, Hashable {
         case insulinContext
         case unabsorbed
         case deviceId
+        case patientDeviceId
         case pumpRecordId
         case bolusCalculationId
         case apsSnapshotId
@@ -124,6 +127,7 @@ public struct Bolus: Sendable, Codable, Hashable {
         try container.encodeIfPresent(insulinContext, forKey: .insulinContext)
         try container.encodeIfPresent(unabsorbed, forKey: .unabsorbed)
         try container.encodeIfPresent(deviceId, forKey: .deviceId)
+        try container.encodeIfPresent(patientDeviceId, forKey: .patientDeviceId)
         try container.encodeIfPresent(pumpRecordId, forKey: .pumpRecordId)
         try container.encodeIfPresent(bolusCalculationId, forKey: .bolusCalculationId)
         try container.encodeIfPresent(apsSnapshotId, forKey: .apsSnapshotId)

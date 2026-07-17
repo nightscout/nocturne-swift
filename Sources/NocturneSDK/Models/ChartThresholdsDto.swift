@@ -14,13 +14,17 @@ public struct ChartThresholdsDto: Sendable, Codable, Hashable {
     public var veryLow: Double?
     public var veryHigh: Double?
     public var glucoseYMax: Double?
+    public var targetLow: Double?
+    public var targetHigh: Double?
 
-    public init(low: Double? = nil, high: Double? = nil, veryLow: Double? = nil, veryHigh: Double? = nil, glucoseYMax: Double? = nil) {
+    public init(low: Double? = nil, high: Double? = nil, veryLow: Double? = nil, veryHigh: Double? = nil, glucoseYMax: Double? = nil, targetLow: Double? = nil, targetHigh: Double? = nil) {
         self.low = low
         self.high = high
         self.veryLow = veryLow
         self.veryHigh = veryHigh
         self.glucoseYMax = glucoseYMax
+        self.targetLow = targetLow
+        self.targetHigh = targetHigh
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -29,6 +33,8 @@ public struct ChartThresholdsDto: Sendable, Codable, Hashable {
         case veryLow
         case veryHigh
         case glucoseYMax
+        case targetLow
+        case targetHigh
     }
 
     // Encodable protocol methods
@@ -40,6 +46,8 @@ public struct ChartThresholdsDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(veryLow, forKey: .veryLow)
         try container.encodeIfPresent(veryHigh, forKey: .veryHigh)
         try container.encodeIfPresent(glucoseYMax, forKey: .glucoseYMax)
+        try container.encodeIfPresent(targetLow, forKey: .targetLow)
+        try container.encodeIfPresent(targetHigh, forKey: .targetHigh)
     }
 }
 

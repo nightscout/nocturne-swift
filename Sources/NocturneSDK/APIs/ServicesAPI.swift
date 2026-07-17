@@ -487,6 +487,48 @@ open class ServicesAPI {
     }
 
     /**
+     Reset a connector's sync cursor for the current tenant and re-pull historical data.
+     
+     - parameter id: (path) Connector ID (e.g., \&quot;nightscout\&quot;, \&quot;dexcom\&quot;). 
+     - parameter resetCursorRequest: (body) Optional lower bound and data-type filter. Omit from to re-pull all available history; omit dataTypes to reset every supported type. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: SyncResult
+     */
+    open class func servicesResetConnectorCursor(id: String, resetCursorRequest: ResetCursorRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> SyncResult {
+        return try await servicesResetConnectorCursorWithRequestBuilder(id: id, resetCursorRequest: resetCursorRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Reset a connector's sync cursor for the current tenant and re-pull historical data.
+     - POST /api/v4/services/connectors/{id}/reset-cursor
+     - Nocturne does not persist a sync cursor — each data type resumes from the latest record already stored. This endpoint forces a fresh ingest of history by running an explicit-range sync (an upper bound of \"now\" bypasses the per-type catch-up cursors), so the effect is a cursor reset. Re-ingested records are deduplicated on their idempotency keys (see the \"Syncing\" guide), so it is safe to run after fixing a connector bug to push corrected data to a tenant.              Latency: this runs synchronously. A full-history re-pull with no lower bound re-ingests every data type over the connector's entire history (glucose can be tens of thousands of records), which is a multi-minute request and may approach or exceed reverse-proxy / browser timeouts. Scope it with from and/or dataTypes when possible. The cross-tenant equivalent (POST /api/v4/admin/connectors/{tenantId}/reset-cursors) runs as a background job to avoid this.
+     - parameter id: (path) Connector ID (e.g., \&quot;nightscout\&quot;, \&quot;dexcom\&quot;). 
+     - parameter resetCursorRequest: (body) Optional lower bound and data-type filter. Omit from to re-pull all available history; omit dataTypes to reset every supported type. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<SyncResult> 
+     */
+    open class func servicesResetConnectorCursorWithRequestBuilder(id: String, resetCursorRequest: ResetCursorRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<SyncResult> {
+        var localVariablePath = "/api/v4/services/connectors/{id}/reset-cursor"
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: resetCursorRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<SyncResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Trigger a manual sync for a specific connector.
      
      - parameter id: (path) Connector ID (e.g., \&quot;dexcom\&quot;, \&quot;tidepool\&quot;) 

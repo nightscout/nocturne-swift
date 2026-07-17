@@ -85,7 +85,7 @@ open class StateSpansAPI {
     }
 
     /**
-     Get all activity state spans (sleep, exercise, illness, travel)
+     Get all activity state spans (exercise, illness, travel)
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -100,7 +100,7 @@ open class StateSpansAPI {
     }
 
     /**
-     Get all activity state spans (sleep, exercise, illness, travel)
+     Get all activity state spans (exercise, illness, travel)
      - GET /api/v4/state-spans/activities
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -116,13 +116,14 @@ open class StateSpansAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp1: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp1)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -167,13 +168,14 @@ open class StateSpansAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp2: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp2)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -218,13 +220,14 @@ open class StateSpansAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp3: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp3)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -269,13 +272,14 @@ open class StateSpansAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp4: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp4)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -320,13 +324,14 @@ open class StateSpansAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp5: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp5)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -371,13 +376,14 @@ open class StateSpansAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp6: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp6)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -422,64 +428,14 @@ open class StateSpansAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp7: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
         ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfStateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
-
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
-    }
-
-    /**
-     Get sleep state spans (user-annotated sleep periods)
-     
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
-     - parameter limit: (query)  (optional, default to 100)
-     - parameter offset: (query)  (optional, default to 0)
-     - parameter sort: (query)  (optional, default to "timestamp_desc")
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: PaginatedResponseOfStateSpan
-     */
-    open class func stateSpansGetSleep(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfStateSpan {
-        return try await stateSpansGetSleepWithRequestBuilder(from: from, to: to, limit: limit, offset: offset, sort: sort, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     Get sleep state spans (user-annotated sleep periods)
-     - GET /api/v4/state-spans/sleep
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
-     - parameter limit: (query)  (optional, default to 100)
-     - parameter offset: (query)  (optional, default to 0)
-     - parameter sort: (query)  (optional, default to "timestamp_desc")
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<PaginatedResponseOfStateSpan> 
-     */
-    open class func stateSpansGetSleepWithRequestBuilder(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfStateSpan> {
-        let localVariablePath = "/api/v4/state-spans/sleep"
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters: [String: any Sendable]? = nil
-
-        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp7)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -546,7 +502,7 @@ open class StateSpansAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedResponseOfStateSpan
      */
-    open class func stateSpansGetStateSpans(category: StateSpansGetStateSpansCategoryParameter? = nil, state: String? = nil, from: Date? = nil, to: Date? = nil, source: String? = nil, active: Bool? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfStateSpan {
+    open class func stateSpansGetStateSpans(category: StateSpanCategory? = nil, state: String? = nil, from: Date? = nil, to: Date? = nil, source: String? = nil, active: Bool? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfStateSpan {
         return try await stateSpansGetStateSpansWithRequestBuilder(category: category, state: state, from: from, to: to, source: source, active: active, limit: limit, offset: offset, sort: sort, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -565,13 +521,13 @@ open class StateSpansAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedResponseOfStateSpan> 
      */
-    open class func stateSpansGetStateSpansWithRequestBuilder(category: StateSpansGetStateSpansCategoryParameter? = nil, state: String? = nil, from: Date? = nil, to: Date? = nil, source: String? = nil, active: Bool? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfStateSpan> {
+    open class func stateSpansGetStateSpansWithRequestBuilder(category: StateSpanCategory? = nil, state: String? = nil, from: Date? = nil, to: Date? = nil, source: String? = nil, active: Bool? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfStateSpan> {
         let localVariablePath = "/api/v4/state-spans"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp8: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "category": (wrappedValue: category?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "state": (wrappedValue: state?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
@@ -581,7 +537,8 @@ open class StateSpansAPI {
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp8)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -626,13 +583,14 @@ open class StateSpansAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp9: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp9)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -677,13 +635,14 @@ open class StateSpansAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp10: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp10)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :

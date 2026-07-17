@@ -19,9 +19,10 @@ public struct GuestLinkInfo: Sendable, Codable, Hashable {
     public var activatedAt: Date?
     public var activatedIp: String?
     public var revokedAt: Date?
+    public var dismissedAt: Date?
     public var status: GuestLinkStatus?
 
-    public init(id: String? = nil, dataOwnerSubjectId: String? = nil, createdBySubjectId: String? = nil, label: String? = nil, scopes: [String]? = nil, createdAt: Date? = nil, expiresAt: Date? = nil, activatedAt: Date? = nil, activatedIp: String? = nil, revokedAt: Date? = nil, status: GuestLinkStatus? = nil) {
+    public init(id: String? = nil, dataOwnerSubjectId: String? = nil, createdBySubjectId: String? = nil, label: String? = nil, scopes: [String]? = nil, createdAt: Date? = nil, expiresAt: Date? = nil, activatedAt: Date? = nil, activatedIp: String? = nil, revokedAt: Date? = nil, dismissedAt: Date? = nil, status: GuestLinkStatus? = nil) {
         self.id = id
         self.dataOwnerSubjectId = dataOwnerSubjectId
         self.createdBySubjectId = createdBySubjectId
@@ -32,6 +33,7 @@ public struct GuestLinkInfo: Sendable, Codable, Hashable {
         self.activatedAt = activatedAt
         self.activatedIp = activatedIp
         self.revokedAt = revokedAt
+        self.dismissedAt = dismissedAt
         self.status = status
     }
 
@@ -46,6 +48,7 @@ public struct GuestLinkInfo: Sendable, Codable, Hashable {
         case activatedAt
         case activatedIp
         case revokedAt
+        case dismissedAt
         case status
     }
 
@@ -63,6 +66,7 @@ public struct GuestLinkInfo: Sendable, Codable, Hashable {
         try container.encodeIfPresent(activatedAt, forKey: .activatedAt)
         try container.encodeIfPresent(activatedIp, forKey: .activatedIp)
         try container.encodeIfPresent(revokedAt, forKey: .revokedAt)
+        try container.encodeIfPresent(dismissedAt, forKey: .dismissedAt)
         try container.encodeIfPresent(status, forKey: .status)
     }
 }

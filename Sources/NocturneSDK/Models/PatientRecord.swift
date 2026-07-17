@@ -14,21 +14,25 @@ public struct PatientRecord: Sendable, Codable, Hashable {
     public var diabetesTypeOther: String?
     public var diagnosisDate: Date?
     public var dateOfBirth: Date?
+    public var sex: BiologicalSex?
     public var preferredName: String?
     public var pronouns: String?
     public var avatarUrl: String?
+    public var timezone: String?
     public var createdAt: Date?
     public var modifiedAt: Date?
 
-    public init(id: String? = nil, diabetesType: DiabetesType? = nil, diabetesTypeOther: String? = nil, diagnosisDate: Date? = nil, dateOfBirth: Date? = nil, preferredName: String? = nil, pronouns: String? = nil, avatarUrl: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    public init(id: String? = nil, diabetesType: DiabetesType? = nil, diabetesTypeOther: String? = nil, diagnosisDate: Date? = nil, dateOfBirth: Date? = nil, sex: BiologicalSex? = nil, preferredName: String? = nil, pronouns: String? = nil, avatarUrl: String? = nil, timezone: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.id = id
         self.diabetesType = diabetesType
         self.diabetesTypeOther = diabetesTypeOther
         self.diagnosisDate = diagnosisDate
         self.dateOfBirth = dateOfBirth
+        self.sex = sex
         self.preferredName = preferredName
         self.pronouns = pronouns
         self.avatarUrl = avatarUrl
+        self.timezone = timezone
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
     }
@@ -39,9 +43,11 @@ public struct PatientRecord: Sendable, Codable, Hashable {
         case diabetesTypeOther
         case diagnosisDate
         case dateOfBirth
+        case sex
         case preferredName
         case pronouns
         case avatarUrl
+        case timezone
         case createdAt
         case modifiedAt
     }
@@ -55,9 +61,11 @@ public struct PatientRecord: Sendable, Codable, Hashable {
         try container.encodeIfPresent(diabetesTypeOther, forKey: .diabetesTypeOther)
         try container.encodeIfPresent(diagnosisDate, forKey: .diagnosisDate)
         try container.encodeIfPresent(dateOfBirth, forKey: .dateOfBirth)
+        try container.encodeIfPresent(sex, forKey: .sex)
         try container.encodeIfPresent(preferredName, forKey: .preferredName)
         try container.encodeIfPresent(pronouns, forKey: .pronouns)
         try container.encodeIfPresent(avatarUrl, forKey: .avatarUrl)
+        try container.encodeIfPresent(timezone, forKey: .timezone)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
     }

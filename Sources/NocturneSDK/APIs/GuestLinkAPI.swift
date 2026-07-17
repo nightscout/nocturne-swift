@@ -82,27 +82,71 @@ open class GuestLinkAPI {
     }
 
     /**
+     Dismiss a terminal (revoked or expired) guest link from the UI.
+     
+     - parameter grantId: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: Void
+     */
+    open class func guestLinkDismissGuestLink(grantId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
+        return try await guestLinkDismissGuestLinkWithRequestBuilder(grantId: grantId, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Dismiss a terminal (revoked or expired) guest link from the UI.
+     - PATCH /api/v4/guest-links/{grantId}/dismiss
+     - parameter grantId: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<Void> 
+     */
+    open class func guestLinkDismissGuestLinkWithRequestBuilder(grantId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
+        var localVariablePath = "/api/v4/guest-links/{grantId}/dismiss"
+        let grantIdPreEscape = "\(APIHelper.mapValueToPathItem(grantId))"
+        let grantIdPostEscape = grantIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{grantId}", with: grantIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+
+        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      List guest links for the current user's effective subject.
      
+     - parameter includeDismissed: (query)  (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [GuestLinkInfo]
      */
-    open class func guestLinkGetGuestLinks(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [GuestLinkInfo] {
-        return try await guestLinkGetGuestLinksWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    open class func guestLinkGetGuestLinks(includeDismissed: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [GuestLinkInfo] {
+        return try await guestLinkGetGuestLinksWithRequestBuilder(includeDismissed: includeDismissed, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      List guest links for the current user's effective subject.
      - GET /api/v4/guest-links
+     - parameter includeDismissed: (query)  (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[GuestLinkInfo]> 
      */
-    open class func guestLinkGetGuestLinksWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[GuestLinkInfo]> {
+    open class func guestLinkGetGuestLinksWithRequestBuilder(includeDismissed: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[GuestLinkInfo]> {
         let localVariablePath = "/api/v4/guest-links"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "includeDismissed": (wrappedValue: includeDismissed?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :

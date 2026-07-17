@@ -16,7 +16,6 @@ public struct GlucoseAnalyticsRequest: Sendable, Codable, Hashable {
     public var boluses: [Bolus]?
     /** Optional collection of carb intakes */
     public var carbIntakes: [CarbIntake]?
-    /** Optional extended analysis configuration */
     public var config: ExtendedAnalysisConfig?
 
     public init(entries: [SensorGlucose]? = nil, boluses: [Bolus]? = nil, carbIntakes: [CarbIntake]? = nil, config: ExtendedAnalysisConfig? = nil) {

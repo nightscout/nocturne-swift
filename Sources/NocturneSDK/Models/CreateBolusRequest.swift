@@ -26,9 +26,7 @@ public struct CreateBolusRequest: Sendable, Codable, Hashable {
     public var programmed: Double?
     /** Actually delivered insulin amount in units. */
     public var delivered: Double?
-    /** Bolus delivery pattern (normal, square wave, dual wave, etc.). */
     public var bolusType: BolusType?
-    /** Whether this bolus was manually entered or originated from a pump/loop system. */
     public var kind: BolusKind?
     /** Whether this bolus was delivered automatically by an APS/loop system. */
     public var automatic: Bool?

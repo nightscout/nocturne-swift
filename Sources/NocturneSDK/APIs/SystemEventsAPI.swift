@@ -136,7 +136,7 @@ open class SystemEventsAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [SystemEvent]
      */
-    open class func systemEventsGetSystemEvents(type: SystemEventsGetSystemEventsTypeParameter? = nil, category: SystemEventsGetSystemEventsCategoryParameter? = nil, from: Date? = nil, to: Date? = nil, source: String? = nil, count: Int? = nil, skip: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [SystemEvent] {
+    open class func systemEventsGetSystemEvents(type: SystemEventType? = nil, category: SystemEventCategory? = nil, from: Date? = nil, to: Date? = nil, source: String? = nil, count: Int? = nil, skip: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [SystemEvent] {
         return try await systemEventsGetSystemEventsWithRequestBuilder(type: type, category: category, from: from, to: to, source: source, count: count, skip: skip, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -153,13 +153,13 @@ open class SystemEventsAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[SystemEvent]> 
      */
-    open class func systemEventsGetSystemEventsWithRequestBuilder(type: SystemEventsGetSystemEventsTypeParameter? = nil, category: SystemEventsGetSystemEventsCategoryParameter? = nil, from: Date? = nil, to: Date? = nil, source: String? = nil, count: Int? = nil, skip: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[SystemEvent]> {
+    open class func systemEventsGetSystemEventsWithRequestBuilder(type: SystemEventType? = nil, category: SystemEventCategory? = nil, from: Date? = nil, to: Date? = nil, source: String? = nil, count: Int? = nil, skip: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[SystemEvent]> {
         let localVariablePath = "/api/v4/system-events"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp1: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "type": (wrappedValue: type?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "category": (wrappedValue: category?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
@@ -167,7 +167,8 @@ open class SystemEventsAPI {
             "source": (wrappedValue: source?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "count": (wrappedValue: count?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "skip": (wrappedValue: skip?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp1)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :

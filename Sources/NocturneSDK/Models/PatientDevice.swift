@@ -20,11 +20,12 @@ public struct PatientDevice: Sendable, Codable, Hashable {
     public var startDate: Date?
     public var endDate: Date?
     public var isCurrent: Bool?
+    public var rank: Int?
     public var notes: String?
     public var createdAt: Date?
     public var modifiedAt: Date?
 
-    public init(id: String? = nil, deviceCategory: DeviceCategory? = nil, manufacturer: String? = nil, model: String? = nil, catalogId: String? = nil, aidAlgorithm: AidAlgorithm? = nil, serialNumber: String? = nil, deviceId: String? = nil, startDate: Date? = nil, endDate: Date? = nil, isCurrent: Bool? = nil, notes: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    public init(id: String? = nil, deviceCategory: DeviceCategory? = nil, manufacturer: String? = nil, model: String? = nil, catalogId: String? = nil, aidAlgorithm: AidAlgorithm? = nil, serialNumber: String? = nil, deviceId: String? = nil, startDate: Date? = nil, endDate: Date? = nil, isCurrent: Bool? = nil, rank: Int? = nil, notes: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         self.id = id
         self.deviceCategory = deviceCategory
         self.manufacturer = manufacturer
@@ -36,6 +37,7 @@ public struct PatientDevice: Sendable, Codable, Hashable {
         self.startDate = startDate
         self.endDate = endDate
         self.isCurrent = isCurrent
+        self.rank = rank
         self.notes = notes
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
@@ -53,6 +55,7 @@ public struct PatientDevice: Sendable, Codable, Hashable {
         case startDate
         case endDate
         case isCurrent
+        case rank
         case notes
         case createdAt
         case modifiedAt
@@ -73,6 +76,7 @@ public struct PatientDevice: Sendable, Codable, Hashable {
         try container.encodeIfPresent(startDate, forKey: .startDate)
         try container.encodeIfPresent(endDate, forKey: .endDate)
         try container.encodeIfPresent(isCurrent, forKey: .isCurrent)
+        try container.encodeIfPresent(rank, forKey: .rank)
         try container.encodeIfPresent(notes, forKey: .notes)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)

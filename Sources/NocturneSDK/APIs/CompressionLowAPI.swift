@@ -175,7 +175,7 @@ open class CompressionLowAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [CompressionLowSuggestion]
      */
-    open class func compressionLowGetSuggestions(status: CompressionLowGetSuggestionsStatusParameter? = nil, nightOf: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [CompressionLowSuggestion] {
+    open class func compressionLowGetSuggestions(status: CompressionLowStatus? = nil, nightOf: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [CompressionLowSuggestion] {
         return try await compressionLowGetSuggestionsWithRequestBuilder(status: status, nightOf: nightOf, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -187,7 +187,7 @@ open class CompressionLowAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[CompressionLowSuggestion]> 
      */
-    open class func compressionLowGetSuggestionsWithRequestBuilder(status: CompressionLowGetSuggestionsStatusParameter? = nil, nightOf: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[CompressionLowSuggestion]> {
+    open class func compressionLowGetSuggestionsWithRequestBuilder(status: CompressionLowStatus? = nil, nightOf: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[CompressionLowSuggestion]> {
         let localVariablePath = "/api/v4/compression-lows/suggestions"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil

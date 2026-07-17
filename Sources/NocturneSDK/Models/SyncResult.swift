@@ -14,10 +14,10 @@ public struct SyncResult: Sendable, Codable, Hashable {
     public var startTime: Date?
     public var endTime: Date?
     public var itemsSynced: [String: Int]?
-    public var lastEntryTimes: [String: Date?]?
+    public var lastEntryTimes: [String: Date]?
     public var errors: [String]?
 
-    public init(success: Bool? = nil, message: String? = nil, startTime: Date? = nil, endTime: Date? = nil, itemsSynced: [String: Int]? = nil, lastEntryTimes: [String: Date?]? = nil, errors: [String]? = nil) {
+    public init(success: Bool? = nil, message: String? = nil, startTime: Date? = nil, endTime: Date? = nil, itemsSynced: [String: Int]? = nil, lastEntryTimes: [String: Date]? = nil, errors: [String]? = nil) {
         self.success = success
         self.message = message
         self.startTime = startTime

@@ -15,20 +15,16 @@ public struct TenantEntityDto: Sendable, Codable, Hashable {
     public var displayName: String?
     public var isActive: Bool?
     public var lastReadingAt: Date?
-    public var timezone: String?
-    public var subjectName: String?
     public var allowAccessRequests: Bool?
     public var sysCreatedAt: Date?
     public var sysUpdatedAt: Date?
 
-    public init(id: String? = nil, slug: String? = nil, displayName: String? = nil, isActive: Bool? = nil, lastReadingAt: Date? = nil, timezone: String? = nil, subjectName: String? = nil, allowAccessRequests: Bool? = nil, sysCreatedAt: Date? = nil, sysUpdatedAt: Date? = nil) {
+    public init(id: String? = nil, slug: String? = nil, displayName: String? = nil, isActive: Bool? = nil, lastReadingAt: Date? = nil, allowAccessRequests: Bool? = nil, sysCreatedAt: Date? = nil, sysUpdatedAt: Date? = nil) {
         self.id = id
         self.slug = slug
         self.displayName = displayName
         self.isActive = isActive
         self.lastReadingAt = lastReadingAt
-        self.timezone = timezone
-        self.subjectName = subjectName
         self.allowAccessRequests = allowAccessRequests
         self.sysCreatedAt = sysCreatedAt
         self.sysUpdatedAt = sysUpdatedAt
@@ -40,8 +36,6 @@ public struct TenantEntityDto: Sendable, Codable, Hashable {
         case displayName
         case isActive
         case lastReadingAt
-        case timezone
-        case subjectName
         case allowAccessRequests
         case sysCreatedAt
         case sysUpdatedAt
@@ -56,8 +50,6 @@ public struct TenantEntityDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(displayName, forKey: .displayName)
         try container.encodeIfPresent(isActive, forKey: .isActive)
         try container.encodeIfPresent(lastReadingAt, forKey: .lastReadingAt)
-        try container.encodeIfPresent(timezone, forKey: .timezone)
-        try container.encodeIfPresent(subjectName, forKey: .subjectName)
         try container.encodeIfPresent(allowAccessRequests, forKey: .allowAccessRequests)
         try container.encodeIfPresent(sysCreatedAt, forKey: .sysCreatedAt)
         try container.encodeIfPresent(sysUpdatedAt, forKey: .sysUpdatedAt)

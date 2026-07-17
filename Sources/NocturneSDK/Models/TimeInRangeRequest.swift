@@ -12,7 +12,6 @@ public struct TimeInRangeRequest: Sendable, Codable, Hashable {
 
     /** Collection of sensor glucose readings */
     public var entries: [SensorGlucose]?
-    /** Optional glycemic thresholds */
     public var thresholds: GlycemicThresholds?
 
     public init(entries: [SensorGlucose]? = nil, thresholds: GlycemicThresholds? = nil) {

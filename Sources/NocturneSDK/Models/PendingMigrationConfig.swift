@@ -12,7 +12,6 @@ public struct PendingMigrationConfig: Sendable, Codable, Hashable {
 
     /** Whether there is a pending migration configuration in env vars */
     public var hasPendingConfig: Bool?
-    /** Migration mode from MIGRATION_MODE env var */
     public var mode: MigrationMode?
     /** Nightscout URL from MIGRATION_NS_URL env var */
     public var nightscoutUrl: String?

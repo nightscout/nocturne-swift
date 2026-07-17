@@ -77,6 +77,38 @@ open class MyTenantsAPI {
 
     /**
 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: TenantOverviewResponse
+     */
+    open class func myTenantsGetOverview(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> TenantOverviewResponse {
+        return try await myTenantsGetOverviewWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     - GET /api/v4/me/tenants/overview
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<TenantOverviewResponse> 
+     */
+    open class func myTenantsGetOverviewWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<TenantOverviewResponse> {
+        let localVariablePath = "/api/v4/me/tenants/overview"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<TenantOverviewResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+
      - parameter slug: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: SlugValidationResult

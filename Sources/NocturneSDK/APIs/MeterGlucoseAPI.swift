@@ -10,6 +10,43 @@ import Foundation
 open class MeterGlucoseAPI {
 
     /**
+     Restores multiple soft-deleted records by their IDs.
+     
+     - parameter requestBody: (body) The unique identifiers of the soft-deleted records. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [MeterGlucose]
+     */
+    open class func meterGlucoseBulkRestore(requestBody: [String], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [MeterGlucose] {
+        return try await meterGlucoseBulkRestoreWithRequestBuilder(requestBody: requestBody, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Restores multiple soft-deleted records by their IDs.
+     - POST /api/v4/glucose/meter/restore
+     - Returns `200 OK` with the restored records. IDs that don't match a soft-deleted record are silently ignored.
+     - parameter requestBody: (body) The unique identifiers of the soft-deleted records. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[MeterGlucose]> 
+     */
+    open class func meterGlucoseBulkRestoreWithRequestBuilder(requestBody: [String], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[MeterGlucose]> {
+        let localVariablePath = "/api/v4/glucose/meter/restore"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: requestBody, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[MeterGlucose]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Creates a new record and returns it with a `Location` header pointing to the created resource.
      
      - parameter upsertMeterGlucoseRequest: (body) The data used to create the record. 
@@ -121,7 +158,7 @@ open class MeterGlucoseAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp1: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
@@ -129,7 +166,8 @@ open class MeterGlucoseAPI {
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "device": (wrappedValue: device?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "source": (wrappedValue: source?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp1)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -180,6 +218,88 @@ open class MeterGlucoseAPI {
         let localVariableRequestBuilder: RequestBuilder<MeterGlucose>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Lists soft-deleted records available for restoration, ordered by deletion date (newest first).
+     
+     - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
+     - parameter offset: (query) Number of records to skip for pagination. Defaults to &#x60;0&#x60;. (optional, default to 0)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: PaginatedResponseOfMeterGlucose
+     */
+    open class func meterGlucoseListDeleted(limit: Int? = nil, offset: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfMeterGlucose {
+        return try await meterGlucoseListDeletedWithRequestBuilder(limit: limit, offset: offset, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Lists soft-deleted records available for restoration, ordered by deletion date (newest first).
+     - GET /api/v4/glucose/meter/deleted
+     - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
+     - parameter offset: (query) Number of records to skip for pagination. Defaults to &#x60;0&#x60;. (optional, default to 0)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<PaginatedResponseOfMeterGlucose> 
+     */
+    open class func meterGlucoseListDeletedWithRequestBuilder(limit: Int? = nil, offset: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfMeterGlucose> {
+        let localVariablePath = "/api/v4/glucose/meter/deleted"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfMeterGlucose>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Restores a soft-deleted record by ID.
+     
+     - parameter id: (path) The unique identifier of the soft-deleted record. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: MeterGlucose
+     */
+    open class func meterGlucoseRestore(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> MeterGlucose {
+        return try await meterGlucoseRestoreWithRequestBuilder(id: id, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Restores a soft-deleted record by ID.
+     - POST /api/v4/glucose/meter/{id}/restore
+     - Returns `200 OK` with the restored record, or `404 Not Found` if no soft-deleted record with the given id exists.
+     - parameter id: (path) The unique identifier of the soft-deleted record. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<MeterGlucose> 
+     */
+    open class func meterGlucoseRestoreWithRequestBuilder(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<MeterGlucose> {
+        var localVariablePath = "/api/v4/glucose/meter/{id}/restore"
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MeterGlucose>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
     }
 
     /**

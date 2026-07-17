@@ -124,6 +124,46 @@ open class ClockFacesAPI {
     }
 
     /**
+     Get the latest glucose readings a public clock face displays (public, no authentication required).
+     
+     - parameter id: (path) Clock face UUID 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [ClockGlucoseDto]
+     */
+    open class func clockFacesGetGlucose(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [ClockGlucoseDto] {
+        return try await clockFacesGetGlucoseWithRequestBuilder(id: id, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get the latest glucose readings a public clock face displays (public, no authentication required).
+     - GET /api/v4/clockfaces/{id}/glucose
+     - The clock UUID is the capability: a caller must hold a valid clock id for the host-resolved tenant to get any data, and tenant-isolation RLS scopes the read to that tenant. This endpoint only ever reads sensor glucose — never treatments, device status, or any other category — so a clock link grants exactly what the clock shows and nothing more. It is deliberately independent of the tenant's global anonymous-read setting.
+     - parameter id: (path) Clock face UUID 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[ClockGlucoseDto]> 
+     */
+    open class func clockFacesGetGlucoseWithRequestBuilder(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[ClockGlucoseDto]> {
+        var localVariablePath = "/api/v4/clockfaces/{id}/glucose"
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[ClockGlucoseDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      List all clock faces for the current user
      
      - parameter apiConfiguration: The configuration for the http request.

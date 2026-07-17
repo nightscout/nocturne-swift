@@ -34,12 +34,18 @@ public struct ConnectorStatusDto: Sendable, Codable, Hashable {
     public var lastSuccessfulSync: Date?
     /** When the last error occurred */
     public var lastErrorAt: Date?
+    /** Whether the connector is enabled in configuration. */
+    public var isEnabled: Bool?
+    /** Whether a configuration exists in the database. */
+    public var hasDatabaseConfig: Bool?
+    /** Whether the connector has secrets configured. */
+    public var hasSecrets: Bool?
     /** Breakdown of total items processed by data type Keys are data type names (e.g., \"Glucose\", \"Treatments\", \"Food\") */
     public var totalItemsBreakdown: [String: Int64]?
     /** Breakdown of items processed in the last 24 hours by data type Keys are data type names (e.g., \"Glucose\", \"Treatments\", \"Food\") */
     public var itemsLast24HoursBreakdown: [String: Int]?
 
-    public init(id: String? = nil, name: String? = nil, status: String? = nil, totalEntries: Int64? = nil, lastEntryTime: Date? = nil, entriesLast24Hours: Int? = nil, state: String? = nil, stateMessage: String? = nil, isHealthy: Bool? = nil, lastSyncAttempt: Date? = nil, lastSuccessfulSync: Date? = nil, lastErrorAt: Date? = nil, totalItemsBreakdown: [String: Int64]? = nil, itemsLast24HoursBreakdown: [String: Int]? = nil) {
+    public init(id: String? = nil, name: String? = nil, status: String? = nil, totalEntries: Int64? = nil, lastEntryTime: Date? = nil, entriesLast24Hours: Int? = nil, state: String? = nil, stateMessage: String? = nil, isHealthy: Bool? = nil, lastSyncAttempt: Date? = nil, lastSuccessfulSync: Date? = nil, lastErrorAt: Date? = nil, isEnabled: Bool? = nil, hasDatabaseConfig: Bool? = nil, hasSecrets: Bool? = nil, totalItemsBreakdown: [String: Int64]? = nil, itemsLast24HoursBreakdown: [String: Int]? = nil) {
         self.id = id
         self.name = name
         self.status = status
@@ -52,6 +58,9 @@ public struct ConnectorStatusDto: Sendable, Codable, Hashable {
         self.lastSyncAttempt = lastSyncAttempt
         self.lastSuccessfulSync = lastSuccessfulSync
         self.lastErrorAt = lastErrorAt
+        self.isEnabled = isEnabled
+        self.hasDatabaseConfig = hasDatabaseConfig
+        self.hasSecrets = hasSecrets
         self.totalItemsBreakdown = totalItemsBreakdown
         self.itemsLast24HoursBreakdown = itemsLast24HoursBreakdown
     }
@@ -69,6 +78,9 @@ public struct ConnectorStatusDto: Sendable, Codable, Hashable {
         case lastSyncAttempt
         case lastSuccessfulSync
         case lastErrorAt
+        case isEnabled
+        case hasDatabaseConfig
+        case hasSecrets
         case totalItemsBreakdown
         case itemsLast24HoursBreakdown
     }
@@ -89,6 +101,9 @@ public struct ConnectorStatusDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(lastSyncAttempt, forKey: .lastSyncAttempt)
         try container.encodeIfPresent(lastSuccessfulSync, forKey: .lastSuccessfulSync)
         try container.encodeIfPresent(lastErrorAt, forKey: .lastErrorAt)
+        try container.encodeIfPresent(isEnabled, forKey: .isEnabled)
+        try container.encodeIfPresent(hasDatabaseConfig, forKey: .hasDatabaseConfig)
+        try container.encodeIfPresent(hasSecrets, forKey: .hasSecrets)
         try container.encodeIfPresent(totalItemsBreakdown, forKey: .totalItemsBreakdown)
         try container.encodeIfPresent(itemsLast24HoursBreakdown, forKey: .itemsLast24HoursBreakdown)
     }

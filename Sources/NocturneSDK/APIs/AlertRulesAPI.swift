@@ -10,7 +10,7 @@ import Foundation
 open class AlertRulesAPI {
 
     /**
-     Create an alert rule with nested schedules, escalation steps, and channels.
+     Create an alert rule with a flat channel list.
      
      - parameter createAlertRuleRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,7 +21,7 @@ open class AlertRulesAPI {
     }
 
     /**
-     Create an alert rule with nested schedules, escalation steps, and channels.
+     Create an alert rule with a flat channel list.
      - POST /api/v4/alert-rules
      - parameter createAlertRuleRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -46,7 +46,7 @@ open class AlertRulesAPI {
     }
 
     /**
-     Delete an alert rule (cascades to schedules, steps, channels).
+     Delete an alert rule (cascades to its channels).
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,7 +57,7 @@ open class AlertRulesAPI {
     }
 
     /**
-     Delete an alert rule (cascades to schedules, steps, channels).
+     Delete an alert rule (cascades to its channels).
      - DELETE /api/v4/alert-rules/{id}
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -85,7 +85,7 @@ open class AlertRulesAPI {
     }
 
     /**
-     Get a single alert rule with full schedule/escalation tree.
+     Get a single alert rule with its flat channel list.
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -96,7 +96,7 @@ open class AlertRulesAPI {
     }
 
     /**
-     Get a single alert rule with full schedule/escalation tree.
+     Get a single alert rule with its flat channel list.
      - GET /api/v4/alert-rules/{id}
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -124,7 +124,7 @@ open class AlertRulesAPI {
     }
 
     /**
-     List all alert rules for the current tenant with schedules and escalation steps.
+     List all alert rules for the current tenant with their flat channel list.
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [AlertRuleResponse]
@@ -134,7 +134,7 @@ open class AlertRulesAPI {
     }
 
     /**
-     List all alert rules for the current tenant with schedules and escalation steps.
+     List all alert rules for the current tenant with their flat channel list.
      - GET /api/v4/alert-rules
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[AlertRuleResponse]> 
@@ -155,6 +155,81 @@ open class AlertRulesAPI {
         let localVariableRequestBuilder: RequestBuilder<[AlertRuleResponse]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Fire a saved rule through its real channel list as a test. Writes a is_test=true instance + delivery rows so the user can verify their channels without polluting the active-alerts surface.
+     
+     - parameter id: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: Void
+     */
+    open class func alertRulesTestFire(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
+        return try await alertRulesTestFireWithRequestBuilder(id: id, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Fire a saved rule through its real channel list as a test. Writes a is_test=true instance + delivery rows so the user can verify their channels without polluting the active-alerts surface.
+     - POST /api/v4/alert-rules/{id}/test-fire
+     - parameter id: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<Void> 
+     */
+    open class func alertRulesTestFireWithRequestBuilder(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
+        var localVariablePath = "/api/v4/alert-rules/{id}/test-fire"
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Test-fire variant for the editor on an unsaved rule. Same provider chain, no rule lookup — channels and metadata come straight from the request body.
+     
+     - parameter testFireDryRunRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: Void
+     */
+    open class func alertRulesTestFireDryRun(testFireDryRunRequest: TestFireDryRunRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
+        return try await alertRulesTestFireDryRunWithRequestBuilder(testFireDryRunRequest: testFireDryRunRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Test-fire variant for the editor on an unsaved rule. Same provider chain, no rule lookup — channels and metadata come straight from the request body.
+     - POST /api/v4/alert-rules/test-fire-dry-run
+     - parameter testFireDryRunRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<Void> 
+     */
+    open class func alertRulesTestFireDryRunWithRequestBuilder(testFireDryRunRequest: TestFireDryRunRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
+        let localVariablePath = "/api/v4/alert-rules/test-fire-dry-run"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: testFireDryRunRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
     }
 
     /**

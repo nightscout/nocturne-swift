@@ -12,7 +12,6 @@ public struct MigrationSourceDto: Sendable, Codable, Hashable {
 
     /** Unique identifier for this source */
     public var id: String?
-    /** Migration mode (Api or MongoDb) */
     public var mode: MigrationMode?
     /** Nightscout URL (for API mode) */
     public var nightscoutUrl: String?

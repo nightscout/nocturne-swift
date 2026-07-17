@@ -14,27 +14,36 @@ public struct AlertRuleResponse: Sendable, Codable, Hashable {
     public var description: String?
     public var conditionType: AlertConditionType?
     public var conditionParams: JSONValue?
-    public var hysteresisMinutes: Int?
-    public var confirmationReadings: Int?
     public var isEnabled: Bool?
     public var sortOrder: Int?
     public var severity: AlertRuleSeverity?
+    /** When true, this rule still fires while the tenant is in Do Not Disturb mode.             Critical rules implicitly bypass DND regardless of this flag. */
+    public var allowThroughDnd: Bool?
+    public var scopeClass: RuleScopeClass?
+    /** Owner tag when this rule is synthesised from another feature's configuration             (e.g. tracker:{definitionId}). Null for user-authored rules. Managed rules             cannot be deleted here — the owning configuration re-syncs their condition, name and             severity; channels and client configuration remain user-editable. */
+    public var managedBy: String?
+    public var autoResolveEnabled: Bool?
+    public var autoResolveParams: JSONValue?
     public var clientConfiguration: JSONValue?
-    public var schedules: [AlertScheduleResponse]?
+    /** Flat list of delivery channels. Dispatched in parallel when the rule fires. */
+    public var channels: [AlertRuleChannelResponse]?
 
-    public init(id: String? = nil, name: String? = nil, description: String? = nil, conditionType: AlertConditionType? = nil, conditionParams: JSONValue? = nil, hysteresisMinutes: Int? = nil, confirmationReadings: Int? = nil, isEnabled: Bool? = nil, sortOrder: Int? = nil, severity: AlertRuleSeverity? = nil, clientConfiguration: JSONValue? = nil, schedules: [AlertScheduleResponse]? = nil) {
+    public init(id: String? = nil, name: String? = nil, description: String? = nil, conditionType: AlertConditionType? = nil, conditionParams: JSONValue? = nil, isEnabled: Bool? = nil, sortOrder: Int? = nil, severity: AlertRuleSeverity? = nil, allowThroughDnd: Bool? = nil, scopeClass: RuleScopeClass? = nil, managedBy: String? = nil, autoResolveEnabled: Bool? = nil, autoResolveParams: JSONValue? = nil, clientConfiguration: JSONValue? = nil, channels: [AlertRuleChannelResponse]? = nil) {
         self.id = id
         self.name = name
         self.description = description
         self.conditionType = conditionType
         self.conditionParams = conditionParams
-        self.hysteresisMinutes = hysteresisMinutes
-        self.confirmationReadings = confirmationReadings
         self.isEnabled = isEnabled
         self.sortOrder = sortOrder
         self.severity = severity
+        self.allowThroughDnd = allowThroughDnd
+        self.scopeClass = scopeClass
+        self.managedBy = managedBy
+        self.autoResolveEnabled = autoResolveEnabled
+        self.autoResolveParams = autoResolveParams
         self.clientConfiguration = clientConfiguration
-        self.schedules = schedules
+        self.channels = channels
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -43,13 +52,16 @@ public struct AlertRuleResponse: Sendable, Codable, Hashable {
         case description
         case conditionType
         case conditionParams
-        case hysteresisMinutes
-        case confirmationReadings
         case isEnabled
         case sortOrder
         case severity
+        case allowThroughDnd
+        case scopeClass
+        case managedBy
+        case autoResolveEnabled
+        case autoResolveParams
         case clientConfiguration
-        case schedules
+        case channels
     }
 
     // Encodable protocol methods
@@ -61,13 +73,16 @@ public struct AlertRuleResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(conditionType, forKey: .conditionType)
         try container.encodeIfPresent(conditionParams, forKey: .conditionParams)
-        try container.encodeIfPresent(hysteresisMinutes, forKey: .hysteresisMinutes)
-        try container.encodeIfPresent(confirmationReadings, forKey: .confirmationReadings)
         try container.encodeIfPresent(isEnabled, forKey: .isEnabled)
         try container.encodeIfPresent(sortOrder, forKey: .sortOrder)
         try container.encodeIfPresent(severity, forKey: .severity)
+        try container.encodeIfPresent(allowThroughDnd, forKey: .allowThroughDnd)
+        try container.encodeIfPresent(scopeClass, forKey: .scopeClass)
+        try container.encodeIfPresent(managedBy, forKey: .managedBy)
+        try container.encodeIfPresent(autoResolveEnabled, forKey: .autoResolveEnabled)
+        try container.encodeIfPresent(autoResolveParams, forKey: .autoResolveParams)
         try container.encodeIfPresent(clientConfiguration, forKey: .clientConfiguration)
-        try container.encodeIfPresent(schedules, forKey: .schedules)
+        try container.encodeIfPresent(channels, forKey: .channels)
     }
 }
 

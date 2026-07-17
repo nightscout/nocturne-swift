@@ -22,10 +22,12 @@ public struct UpsertStepCountRequest: Sendable, Codable, Hashable {
     public var device: String?
     /** Name of the application that submitted this record. */
     public var app: String?
-    /** Upstream data source identifier. */
+    /** Upstream data source identifier; paired with SyncIdentifier for dedup. */
     public var dataSource: String?
+    /** Stable per-source identifier. When paired with DataSource, re-uploading the same measurement updates the existing record in place rather than creating a duplicate. */
+    public var syncIdentifier: String?
 
-    public init(timestamp: Date? = nil, utcOffset: Int? = nil, metric: Int? = nil, source: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil) {
+    public init(timestamp: Date? = nil, utcOffset: Int? = nil, metric: Int? = nil, source: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, syncIdentifier: String? = nil) {
         self.timestamp = timestamp
         self.utcOffset = utcOffset
         self.metric = metric
@@ -33,6 +35,7 @@ public struct UpsertStepCountRequest: Sendable, Codable, Hashable {
         self.device = device
         self.app = app
         self.dataSource = dataSource
+        self.syncIdentifier = syncIdentifier
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -43,6 +46,7 @@ public struct UpsertStepCountRequest: Sendable, Codable, Hashable {
         case device
         case app
         case dataSource
+        case syncIdentifier
     }
 
     // Encodable protocol methods
@@ -56,6 +60,7 @@ public struct UpsertStepCountRequest: Sendable, Codable, Hashable {
         try container.encodeIfPresent(device, forKey: .device)
         try container.encodeIfPresent(app, forKey: .app)
         try container.encodeIfPresent(dataSource, forKey: .dataSource)
+        try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
     }
 }
 

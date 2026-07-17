@@ -85,6 +85,47 @@ open class DevAdminAPI {
     }
 
     /**
+     Put a tenant into recovery mode in one call: strips the target subject's credentials (passkeys and OIDC identities — a global operation, so a fixture subject shared with other tenants loses them everywhere until the next startup re-seed) and, if no other credentialed member remains, creates a synthetic \"keeper\" member so the tenant reports recovery_mode_active instead of setup_required. Defaults to the first owner-role member.
+     
+     - parameter id: (path)  
+     - parameter devRecoveryModeRequest: (body)  (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: URL
+     */
+    open class func devAdminEnterRecoveryMode(id: String, devRecoveryModeRequest: DevRecoveryModeRequest? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> URL {
+        return try await devAdminEnterRecoveryModeWithRequestBuilder(id: id, devRecoveryModeRequest: devRecoveryModeRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Put a tenant into recovery mode in one call: strips the target subject's credentials (passkeys and OIDC identities — a global operation, so a fixture subject shared with other tenants loses them everywhere until the next startup re-seed) and, if no other credentialed member remains, creates a synthetic \"keeper\" member so the tenant reports recovery_mode_active instead of setup_required. Defaults to the first owner-role member.
+     - POST /api/v4/dev-only/admin/tenants/{id}/recovery-mode
+     - parameter id: (path)  
+     - parameter devRecoveryModeRequest: (body)  (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<URL> 
+     */
+    open class func devAdminEnterRecoveryModeWithRequestBuilder(id: String, devRecoveryModeRequest: DevRecoveryModeRequest? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<URL> {
+        var localVariablePath = "/api/v4/dev-only/admin/tenants/{id}/recovery-mode"
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: devRecoveryModeRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<URL>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Export a full snapshot of all tenants and their identity/config data. Secrets are decrypted to plaintext for portability.
      
      - parameter apiConfiguration: The configuration for the http request.
@@ -227,6 +268,83 @@ open class DevAdminAPI {
         let localVariableRequestBuilder: RequestBuilder<[DevTenantSummaryDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Populate an existing tenant with realistic sample data (oref-simulated CGM entries and treatments, device changes, sleep, heart rate, steps, trackers, and alert rules with alarm history), written through the normal ingestion services so device attribution and the v4 canonical stream are correct. Trackers are owned by the first owner-role member.
+     
+     - parameter id: (path)  
+     - parameter devSeedSampleDataRequest: (body)  (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: SampleDataSeedResult
+     */
+    open class func devAdminSeedSampleData(id: String, devSeedSampleDataRequest: DevSeedSampleDataRequest? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> SampleDataSeedResult {
+        return try await devAdminSeedSampleDataWithRequestBuilder(id: id, devSeedSampleDataRequest: devSeedSampleDataRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Populate an existing tenant with realistic sample data (oref-simulated CGM entries and treatments, device changes, sleep, heart rate, steps, trackers, and alert rules with alarm history), written through the normal ingestion services so device attribution and the v4 canonical stream are correct. Trackers are owned by the first owner-role member.
+     - POST /api/v4/dev-only/admin/tenants/{id}/seed-sample-data
+     - parameter id: (path)  
+     - parameter devSeedSampleDataRequest: (body)  (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<SampleDataSeedResult> 
+     */
+    open class func devAdminSeedSampleDataWithRequestBuilder(id: String, devSeedSampleDataRequest: DevSeedSampleDataRequest? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<SampleDataSeedResult> {
+        var localVariablePath = "/api/v4/dev-only/admin/tenants/{id}/seed-sample-data"
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: devSeedSampleDataRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<SampleDataSeedResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Create a tenant, owner subject, synthetic passkey, owner membership, and a session in one call. The synthetic passkey satisfies the TenantSetupMiddleware credential check so the returned session can immediately call tenant APIs. Subjects from the committed dev identity fixture (docs/seed/dev-identities.json) are added as additional owners, so a developer's real passkey signs in too. With sampleData: true the tenant is populated with realistic history across the board — glucose/treatments, device changes, sleep, heart rate, steps, consumable trackers, and alert rules with alarm history — making the returned loginLink a browser tab with visible data on every dashboard. Used by E2E tests and headless dev tooling to bypass passkey/OIDC ceremonies.
+     
+     - parameter devSeedTenantRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: DevSeedTenantResponse
+     */
+    open class func devAdminSeedTenant(devSeedTenantRequest: DevSeedTenantRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DevSeedTenantResponse {
+        return try await devAdminSeedTenantWithRequestBuilder(devSeedTenantRequest: devSeedTenantRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Create a tenant, owner subject, synthetic passkey, owner membership, and a session in one call. The synthetic passkey satisfies the TenantSetupMiddleware credential check so the returned session can immediately call tenant APIs. Subjects from the committed dev identity fixture (docs/seed/dev-identities.json) are added as additional owners, so a developer's real passkey signs in too. With sampleData: true the tenant is populated with realistic history across the board — glucose/treatments, device changes, sleep, heart rate, steps, consumable trackers, and alert rules with alarm history — making the returned loginLink a browser tab with visible data on every dashboard. Used by E2E tests and headless dev tooling to bypass passkey/OIDC ceremonies.
+     - POST /api/v4/dev-only/admin/seed-tenant
+     - parameter devSeedTenantRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<DevSeedTenantResponse> 
+     */
+    open class func devAdminSeedTenantWithRequestBuilder(devSeedTenantRequest: DevSeedTenantRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DevSeedTenantResponse> {
+        let localVariablePath = "/api/v4/dev-only/admin/seed-tenant"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: devSeedTenantRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<DevSeedTenantResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
     }
 
     /**

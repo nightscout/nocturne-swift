@@ -10,6 +10,43 @@ import Foundation
 open class SensorGlucoseAPI {
 
     /**
+     Restores multiple soft-deleted records by their IDs.
+     
+     - parameter requestBody: (body) The unique identifiers of the soft-deleted records. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [SensorGlucose]
+     */
+    open class func sensorGlucoseBulkRestore(requestBody: [String], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [SensorGlucose] {
+        return try await sensorGlucoseBulkRestoreWithRequestBuilder(requestBody: requestBody, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Restores multiple soft-deleted records by their IDs.
+     - POST /api/v4/glucose/sensor/restore
+     - Returns `200 OK` with the restored records. IDs that don't match a soft-deleted record are silently ignored.
+     - parameter requestBody: (body) The unique identifiers of the soft-deleted records. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[SensorGlucose]> 
+     */
+    open class func sensorGlucoseBulkRestoreWithRequestBuilder(requestBody: [String], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[SensorGlucose]> {
+        let localVariablePath = "/api/v4/glucose/sensor/restore"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: requestBody, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[SensorGlucose]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
 
      - parameter upsertSensorGlucoseRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -120,7 +157,8 @@ open class SensorGlucoseAPI {
     }
 
     /**
-
+     Lists sensor glucose readings. Adds an optional patientDeviceId query filter on top of the base list surface: when set, results are that registered device's raw readings (canonical stream selection is bypassed); when unset, the caller sees every stored reading. Pagination totals match the base device/source behaviour (the count is unscoped by the device filters).
+     
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -136,7 +174,9 @@ open class SensorGlucoseAPI {
     }
 
     /**
+     Lists sensor glucose readings. Adds an optional patientDeviceId query filter on top of the base list surface: when set, results are that registered device's raw readings (canonical stream selection is bypassed); when unset, the caller sees every stored reading. Pagination totals match the base device/source behaviour (the count is unscoped by the device filters).
      - GET /api/v4/glucose/sensor
+     - The patientDeviceId query parameter is read directly from the request because the base list signature (shared by every V4 read controller) has no device-attribution concept — binding it here keeps a single GET action while adding the sensor-glucose-only filter.
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -153,7 +193,7 @@ open class SensorGlucoseAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp1: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
@@ -161,7 +201,8 @@ open class SensorGlucoseAPI {
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "device": (wrappedValue: device?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "source": (wrappedValue: source?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp1)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -212,6 +253,88 @@ open class SensorGlucoseAPI {
         let localVariableRequestBuilder: RequestBuilder<SensorGlucose>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Lists soft-deleted records available for restoration, ordered by deletion date (newest first).
+     
+     - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
+     - parameter offset: (query) Number of records to skip for pagination. Defaults to &#x60;0&#x60;. (optional, default to 0)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: PaginatedResponseOfSensorGlucose
+     */
+    open class func sensorGlucoseListDeleted(limit: Int? = nil, offset: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfSensorGlucose {
+        return try await sensorGlucoseListDeletedWithRequestBuilder(limit: limit, offset: offset, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Lists soft-deleted records available for restoration, ordered by deletion date (newest first).
+     - GET /api/v4/glucose/sensor/deleted
+     - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
+     - parameter offset: (query) Number of records to skip for pagination. Defaults to &#x60;0&#x60;. (optional, default to 0)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<PaginatedResponseOfSensorGlucose> 
+     */
+    open class func sensorGlucoseListDeletedWithRequestBuilder(limit: Int? = nil, offset: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfSensorGlucose> {
+        let localVariablePath = "/api/v4/glucose/sensor/deleted"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfSensorGlucose>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Restores a soft-deleted record by ID.
+     
+     - parameter id: (path) The unique identifier of the soft-deleted record. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: SensorGlucose
+     */
+    open class func sensorGlucoseRestore(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> SensorGlucose {
+        return try await sensorGlucoseRestoreWithRequestBuilder(id: id, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Restores a soft-deleted record by ID.
+     - POST /api/v4/glucose/sensor/{id}/restore
+     - Returns `200 OK` with the restored record, or `404 Not Found` if no soft-deleted record with the given id exists.
+     - parameter id: (path) The unique identifier of the soft-deleted record. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<SensorGlucose> 
+     */
+    open class func sensorGlucoseRestoreWithRequestBuilder(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<SensorGlucose> {
+        var localVariablePath = "/api/v4/glucose/sensor/{id}/restore"
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<SensorGlucose>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
     }
 
     /**

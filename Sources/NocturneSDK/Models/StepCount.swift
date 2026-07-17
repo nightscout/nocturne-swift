@@ -19,8 +19,9 @@ public struct StepCount: Sendable, Codable, Hashable {
     public var device: String?
     public var enteredBy: String?
     public var dataSource: String?
+    public var syncIdentifier: String?
 
-    public init(id: String? = nil, createdAt: String? = nil, mills: Int64? = nil, utcOffset: Int? = nil, timestamp: Date? = nil, metric: Int? = nil, source: Int? = nil, device: String? = nil, enteredBy: String? = nil, dataSource: String? = nil) {
+    public init(id: String? = nil, createdAt: String? = nil, mills: Int64? = nil, utcOffset: Int? = nil, timestamp: Date? = nil, metric: Int? = nil, source: Int? = nil, device: String? = nil, enteredBy: String? = nil, dataSource: String? = nil, syncIdentifier: String? = nil) {
         self.id = id
         self.createdAt = createdAt
         self.mills = mills
@@ -31,6 +32,7 @@ public struct StepCount: Sendable, Codable, Hashable {
         self.device = device
         self.enteredBy = enteredBy
         self.dataSource = dataSource
+        self.syncIdentifier = syncIdentifier
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -44,6 +46,7 @@ public struct StepCount: Sendable, Codable, Hashable {
         case device
         case enteredBy
         case dataSource = "data_source"
+        case syncIdentifier
     }
 
     // Encodable protocol methods
@@ -60,6 +63,7 @@ public struct StepCount: Sendable, Codable, Hashable {
         try container.encodeIfPresent(device, forKey: .device)
         try container.encodeIfPresent(enteredBy, forKey: .enteredBy)
         try container.encodeIfPresent(dataSource, forKey: .dataSource)
+        try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
     }
 }
 

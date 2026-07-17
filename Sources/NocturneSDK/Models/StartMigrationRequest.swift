@@ -10,7 +10,6 @@ import Foundation
 /** Parameters for starting a new data migration from Nightscout or MongoDB. */
 public struct StartMigrationRequest: Sendable, Codable, Hashable {
 
-    /** Migration mode (API or MongoDB) */
     public var mode: MigrationMode?
     /** Nightscout URL (for API mode) */
     public var nightscoutUrl: String?

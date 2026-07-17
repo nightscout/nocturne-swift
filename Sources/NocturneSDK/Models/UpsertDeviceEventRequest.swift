@@ -20,7 +20,6 @@ public struct UpsertDeviceEventRequest: Sendable, Codable, Hashable {
     public var app: String?
     /** Upstream data source identifier. */
     public var dataSource: String?
-    /** The type of device event (e.g. site change, sensor start, pump resume). */
     public var eventType: DeviceEventType?
     /** Free-text notes associated with the event (capped at 10,000 characters). */
     public var notes: String?

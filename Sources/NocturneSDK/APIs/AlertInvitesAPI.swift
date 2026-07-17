@@ -10,7 +10,7 @@ import Foundation
 open class AlertInvitesAPI {
 
     /**
-     Generate an invite link for a follower to join an escalation step.
+     Generate an invite link for a follower to attach to a rule channel.
      
      - parameter createAlertInviteRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,7 +21,7 @@ open class AlertInvitesAPI {
     }
 
     /**
-     Generate an invite link for a follower to join an escalation step.
+     Generate an invite link for a follower to attach to a rule channel.
      - POST /api/v4/alert-invites
      - parameter createAlertInviteRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.

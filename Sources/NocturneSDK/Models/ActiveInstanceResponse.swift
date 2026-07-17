@@ -10,28 +10,23 @@ import Foundation
 public struct ActiveInstanceResponse: Sendable, Codable, Hashable {
 
     public var id: String?
-    public var scheduleId: String?
     public var status: String?
-    public var currentStepOrder: Int?
     public var triggeredAt: Date?
-    public var nextEscalationAt: Date?
+    /** One of \"dnd\" when delivery was suppressed at fire time, otherwise null. */
+    public var suppressionReason: String?
 
-    public init(id: String? = nil, scheduleId: String? = nil, status: String? = nil, currentStepOrder: Int? = nil, triggeredAt: Date? = nil, nextEscalationAt: Date? = nil) {
+    public init(id: String? = nil, status: String? = nil, triggeredAt: Date? = nil, suppressionReason: String? = nil) {
         self.id = id
-        self.scheduleId = scheduleId
         self.status = status
-        self.currentStepOrder = currentStepOrder
         self.triggeredAt = triggeredAt
-        self.nextEscalationAt = nextEscalationAt
+        self.suppressionReason = suppressionReason
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case id
-        case scheduleId
         case status
-        case currentStepOrder
         case triggeredAt
-        case nextEscalationAt
+        case suppressionReason
     }
 
     // Encodable protocol methods
@@ -39,11 +34,9 @@ public struct ActiveInstanceResponse: Sendable, Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(scheduleId, forKey: .scheduleId)
         try container.encodeIfPresent(status, forKey: .status)
-        try container.encodeIfPresent(currentStepOrder, forKey: .currentStepOrder)
         try container.encodeIfPresent(triggeredAt, forKey: .triggeredAt)
-        try container.encodeIfPresent(nextEscalationAt, forKey: .nextEscalationAt)
+        try container.encodeIfPresent(suppressionReason, forKey: .suppressionReason)
     }
 }
 

@@ -44,6 +44,47 @@ open class AlertsAPI {
     }
 
     /**
+     Acknowledge a single alert excursion, halting escalation delivery for its active instances. Acknowledging an excursion that is already acknowledged or already closed is a no-op. Returns 404 when the excursion does not exist for the current tenant.
+     
+     - parameter excursionId: (path)  
+     - parameter acknowledgeRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: Void
+     */
+    open class func alertsAcknowledgeExcursion(excursionId: String, acknowledgeRequest: AcknowledgeRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
+        return try await alertsAcknowledgeExcursionWithRequestBuilder(excursionId: excursionId, acknowledgeRequest: acknowledgeRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Acknowledge a single alert excursion, halting escalation delivery for its active instances. Acknowledging an excursion that is already acknowledged or already closed is a no-op. Returns 404 when the excursion does not exist for the current tenant.
+     - POST /api/v4/alerts/excursions/{excursionId}/acknowledge
+     - parameter excursionId: (path)  
+     - parameter acknowledgeRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<Void> 
+     */
+    open class func alertsAcknowledgeExcursionWithRequestBuilder(excursionId: String, acknowledgeRequest: AcknowledgeRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
+        var localVariablePath = "/api/v4/alerts/excursions/{excursionId}/acknowledge"
+        let excursionIdPreEscape = "\(APIHelper.mapValueToPathItem(excursionId))"
+        let excursionIdPostEscape = excursionIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{excursionId}", with: excursionIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: acknowledgeRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      List active (unresolved) excursions for the current tenant.
      
      - parameter apiConfiguration: The configuration for the http request.
@@ -78,26 +119,30 @@ open class AlertsAPI {
     }
 
     /**
-     Get paginated history of resolved excursions.
+     Get paginated history of resolved excursions. Test fires are excluded by default; pass includeTest = true to include them.
      
      - parameter page: (query)  (optional, default to 1)
      - parameter pageSize: (query)  (optional, default to 20)
+     - parameter alertRuleId: (query)  (optional)
+     - parameter includeTest: (query)  (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: AlertHistoryResponse
      */
-    open class func alertsGetAlertHistory(page: Int? = nil, pageSize: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> AlertHistoryResponse {
-        return try await alertsGetAlertHistoryWithRequestBuilder(page: page, pageSize: pageSize, apiConfiguration: apiConfiguration).execute().body
+    open class func alertsGetAlertHistory(page: Int? = nil, pageSize: Int? = nil, alertRuleId: String? = nil, includeTest: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> AlertHistoryResponse {
+        return try await alertsGetAlertHistoryWithRequestBuilder(page: page, pageSize: pageSize, alertRuleId: alertRuleId, includeTest: includeTest, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
-     Get paginated history of resolved excursions.
+     Get paginated history of resolved excursions. Test fires are excluded by default; pass includeTest = true to include them.
      - GET /api/v4/alerts/history
      - parameter page: (query)  (optional, default to 1)
      - parameter pageSize: (query)  (optional, default to 20)
+     - parameter alertRuleId: (query)  (optional)
+     - parameter includeTest: (query)  (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<AlertHistoryResponse> 
      */
-    open class func alertsGetAlertHistoryWithRequestBuilder(page: Int? = nil, pageSize: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<AlertHistoryResponse> {
+    open class func alertsGetAlertHistoryWithRequestBuilder(page: Int? = nil, pageSize: Int? = nil, alertRuleId: String? = nil, includeTest: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<AlertHistoryResponse> {
         let localVariablePath = "/api/v4/alerts/history"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -106,6 +151,8 @@ open class AlertsAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "page": (wrappedValue: page?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "pageSize": (wrappedValue: pageSize?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "alertRuleId": (wrappedValue: alertRuleId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "includeTest": (wrappedValue: includeTest?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [

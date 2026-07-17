@@ -18,7 +18,6 @@ public struct CreateMealRequest: Sendable, Codable, Hashable {
     public var insulin: Double?
     /** Amount of carbohydrates consumed in grams. */
     public var carbs: Double?
-    /** Bolus delivery pattern (normal, square wave, dual wave, etc.). */
     public var bolusType: BolusType?
     /** Extended/square bolus duration in minutes. */
     public var duration: Double?

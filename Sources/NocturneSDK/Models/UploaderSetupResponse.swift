@@ -10,7 +10,6 @@ import Foundation
 /** Response model for uploader setup instructions */
 public struct UploaderSetupResponse: Sendable, Codable, Hashable {
 
-    /** The uploader app details */
     public var app: UploaderApp?
     /** Base URL for this Nocturne instance */
     public var baseUrl: String?

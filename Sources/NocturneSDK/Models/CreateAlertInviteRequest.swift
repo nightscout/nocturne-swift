@@ -9,16 +9,16 @@ import Foundation
 
 public struct CreateAlertInviteRequest: Sendable, Codable, Hashable {
 
-    public var escalationStepId: String?
+    public var alertRuleChannelId: String?
     public var permissionScope: String?
 
-    public init(escalationStepId: String? = nil, permissionScope: String? = nil) {
-        self.escalationStepId = escalationStepId
+    public init(alertRuleChannelId: String? = nil, permissionScope: String? = nil) {
+        self.alertRuleChannelId = alertRuleChannelId
         self.permissionScope = permissionScope
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
-        case escalationStepId
+        case alertRuleChannelId
         case permissionScope
     }
 
@@ -26,7 +26,7 @@ public struct CreateAlertInviteRequest: Sendable, Codable, Hashable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(escalationStepId, forKey: .escalationStepId)
+        try container.encodeIfPresent(alertRuleChannelId, forKey: .alertRuleChannelId)
         try container.encodeIfPresent(permissionScope, forKey: .permissionScope)
     }
 }

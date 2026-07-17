@@ -26,7 +26,6 @@ public struct GlucosePredictionResponse: Sendable, Codable, Hashable {
     public var sensitivityRatio: Double?
     /** Prediction interval in minutes */
     public var intervalMinutes: Int?
-    /** Prediction curves with different scenarios */
     public var predictions: PredictionCurves?
 
     public init(timestamp: Date? = nil, currentBg: Double? = nil, delta: Double? = nil, eventualBg: Double? = nil, iob: Double? = nil, cob: Double? = nil, sensitivityRatio: Double? = nil, intervalMinutes: Int? = nil, predictions: PredictionCurves? = nil) {

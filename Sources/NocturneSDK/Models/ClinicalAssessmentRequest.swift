@@ -10,9 +10,7 @@ import Foundation
 /** Request model for clinical assessment */
 public struct ClinicalAssessmentRequest: Sendable, Codable, Hashable {
 
-    /** Glucose analytics to assess */
     public var analytics: GlucoseAnalytics?
-    /** Diabetes population type for clinical target assessment */
     public var population: DiabetesPopulation?
 
     public init(analytics: GlucoseAnalytics? = nil, population: DiabetesPopulation? = nil) {

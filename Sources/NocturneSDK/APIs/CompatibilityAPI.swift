@@ -22,7 +22,7 @@ open class CompatibilityAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: AnalysesListResponse
      */
-    open class func compatibilityGetAnalyses(requestPath: String? = nil, overallMatch: CompatibilityGetAnalysesOverallMatchParameter? = nil, requestMethod: String? = nil, fromDate: Date? = nil, toDate: Date? = nil, count: Int? = nil, skip: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> AnalysesListResponse {
+    open class func compatibilityGetAnalyses(requestPath: String? = nil, overallMatch: ResponseMatchType? = nil, requestMethod: String? = nil, fromDate: Date? = nil, toDate: Date? = nil, count: Int? = nil, skip: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> AnalysesListResponse {
         return try await compatibilityGetAnalysesWithRequestBuilder(requestPath: requestPath, overallMatch: overallMatch, requestMethod: requestMethod, fromDate: fromDate, toDate: toDate, count: count, skip: skip, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -39,13 +39,13 @@ open class CompatibilityAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<AnalysesListResponse> 
      */
-    open class func compatibilityGetAnalysesWithRequestBuilder(requestPath: String? = nil, overallMatch: CompatibilityGetAnalysesOverallMatchParameter? = nil, requestMethod: String? = nil, fromDate: Date? = nil, toDate: Date? = nil, count: Int? = nil, skip: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<AnalysesListResponse> {
+    open class func compatibilityGetAnalysesWithRequestBuilder(requestPath: String? = nil, overallMatch: ResponseMatchType? = nil, requestMethod: String? = nil, fromDate: Date? = nil, toDate: Date? = nil, count: Int? = nil, skip: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<AnalysesListResponse> {
         let localVariablePath = "/api/v4/compatibility/analyses"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp1: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "requestPath": (wrappedValue: requestPath?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "overallMatch": (wrappedValue: overallMatch?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "requestMethod": (wrappedValue: requestMethod?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
@@ -53,7 +53,8 @@ open class CompatibilityAPI {
             "toDate": (wrappedValue: toDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "count": (wrappedValue: count?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "skip": (wrappedValue: skip?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp1)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :

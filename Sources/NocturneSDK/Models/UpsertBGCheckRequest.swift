@@ -22,9 +22,7 @@ public struct UpsertBGCheckRequest: Sendable, Codable, Hashable {
     public var dataSource: String?
     /** Blood glucose reading value (validated 0-10,000). */
     public var glucose: Double?
-    /** Unit of the glucose reading (mg/dL or mmol/L). */
     public var units: GlucoseUnit?
-    /** Origin of the glucose value (finger stick, sensor, manual, etc.). */
     public var glucoseType: GlucoseType?
     /** Upstream sync identifier for deduplication. */
     public var syncIdentifier: String?

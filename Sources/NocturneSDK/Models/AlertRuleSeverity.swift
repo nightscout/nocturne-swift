@@ -9,6 +9,7 @@ import Foundation
 
 /**  */
 public enum AlertRuleSeverity: String, Sendable, Codable, CaseIterable {
-    case normal = "normal"
     case critical = "critical"
+    case warning = "warning"
+    case info = "info"
 }

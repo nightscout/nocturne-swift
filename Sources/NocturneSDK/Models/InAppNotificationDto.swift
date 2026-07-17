@@ -16,13 +16,14 @@ public struct InAppNotificationDto: Sendable, Codable, Hashable {
     public var title: String?
     public var subtitle: String?
     public var createdAt: Date?
+    public var readAt: Date?
     public var icon: String?
     public var source: String?
     public var sourceId: String?
     public var metadata: [String: JSONValue]?
     public var actions: [NotificationActionDto]?
 
-    public init(id: String? = nil, type: String? = nil, category: NotificationCategory? = nil, urgency: NotificationUrgency? = nil, title: String? = nil, subtitle: String? = nil, createdAt: Date? = nil, icon: String? = nil, source: String? = nil, sourceId: String? = nil, metadata: [String: JSONValue]? = nil, actions: [NotificationActionDto]? = nil) {
+    public init(id: String? = nil, type: String? = nil, category: NotificationCategory? = nil, urgency: NotificationUrgency? = nil, title: String? = nil, subtitle: String? = nil, createdAt: Date? = nil, readAt: Date? = nil, icon: String? = nil, source: String? = nil, sourceId: String? = nil, metadata: [String: JSONValue]? = nil, actions: [NotificationActionDto]? = nil) {
         self.id = id
         self.type = type
         self.category = category
@@ -30,6 +31,7 @@ public struct InAppNotificationDto: Sendable, Codable, Hashable {
         self.title = title
         self.subtitle = subtitle
         self.createdAt = createdAt
+        self.readAt = readAt
         self.icon = icon
         self.source = source
         self.sourceId = sourceId
@@ -45,6 +47,7 @@ public struct InAppNotificationDto: Sendable, Codable, Hashable {
         case title
         case subtitle
         case createdAt
+        case readAt
         case icon
         case source
         case sourceId
@@ -63,6 +66,7 @@ public struct InAppNotificationDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(title, forKey: .title)
         try container.encodeIfPresent(subtitle, forKey: .subtitle)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        try container.encodeIfPresent(readAt, forKey: .readAt)
         try container.encodeIfPresent(icon, forKey: .icon)
         try container.encodeIfPresent(source, forKey: .source)
         try container.encodeIfPresent(sourceId, forKey: .sourceId)

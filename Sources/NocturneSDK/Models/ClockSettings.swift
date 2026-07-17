@@ -14,13 +14,15 @@ public struct ClockSettings: Sendable, Codable, Hashable {
     public var alwaysShowTime: Bool?
     public var backgroundImage: String?
     public var backgroundOpacity: Int?
+    public var screensaverMode: Bool?
 
-    public init(bgColor: Bool? = nil, staleMinutes: Int? = nil, alwaysShowTime: Bool? = nil, backgroundImage: String? = nil, backgroundOpacity: Int? = nil) {
+    public init(bgColor: Bool? = nil, staleMinutes: Int? = nil, alwaysShowTime: Bool? = nil, backgroundImage: String? = nil, backgroundOpacity: Int? = nil, screensaverMode: Bool? = nil) {
         self.bgColor = bgColor
         self.staleMinutes = staleMinutes
         self.alwaysShowTime = alwaysShowTime
         self.backgroundImage = backgroundImage
         self.backgroundOpacity = backgroundOpacity
+        self.screensaverMode = screensaverMode
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -29,6 +31,7 @@ public struct ClockSettings: Sendable, Codable, Hashable {
         case alwaysShowTime
         case backgroundImage
         case backgroundOpacity
+        case screensaverMode
     }
 
     // Encodable protocol methods
@@ -40,6 +43,7 @@ public struct ClockSettings: Sendable, Codable, Hashable {
         try container.encodeIfPresent(alwaysShowTime, forKey: .alwaysShowTime)
         try container.encodeIfPresent(backgroundImage, forKey: .backgroundImage)
         try container.encodeIfPresent(backgroundOpacity, forKey: .backgroundOpacity)
+        try container.encodeIfPresent(screensaverMode, forKey: .screensaverMode)
     }
 }
 

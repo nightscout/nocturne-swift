@@ -17,8 +17,10 @@ public struct HistoryExcursionResponse: Sendable, Codable, Hashable {
     public var endedAt: Date?
     public var acknowledgedAt: Date?
     public var acknowledgedBy: String?
+    /** True when every instance of this excursion was a test fire. */
+    public var isTest: Bool?
 
-    public init(id: String? = nil, alertRuleId: String? = nil, ruleName: String? = nil, conditionType: AlertConditionType? = nil, startedAt: Date? = nil, endedAt: Date? = nil, acknowledgedAt: Date? = nil, acknowledgedBy: String? = nil) {
+    public init(id: String? = nil, alertRuleId: String? = nil, ruleName: String? = nil, conditionType: AlertConditionType? = nil, startedAt: Date? = nil, endedAt: Date? = nil, acknowledgedAt: Date? = nil, acknowledgedBy: String? = nil, isTest: Bool? = nil) {
         self.id = id
         self.alertRuleId = alertRuleId
         self.ruleName = ruleName
@@ -27,6 +29,7 @@ public struct HistoryExcursionResponse: Sendable, Codable, Hashable {
         self.endedAt = endedAt
         self.acknowledgedAt = acknowledgedAt
         self.acknowledgedBy = acknowledgedBy
+        self.isTest = isTest
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -38,6 +41,7 @@ public struct HistoryExcursionResponse: Sendable, Codable, Hashable {
         case endedAt
         case acknowledgedAt
         case acknowledgedBy
+        case isTest
     }
 
     // Encodable protocol methods
@@ -52,6 +56,7 @@ public struct HistoryExcursionResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(endedAt, forKey: .endedAt)
         try container.encodeIfPresent(acknowledgedAt, forKey: .acknowledgedAt)
         try container.encodeIfPresent(acknowledgedBy, forKey: .acknowledgedBy)
+        try container.encodeIfPresent(isTest, forKey: .isTest)
     }
 }
 

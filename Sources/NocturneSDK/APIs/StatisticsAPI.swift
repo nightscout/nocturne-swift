@@ -836,6 +836,48 @@ open class StatisticsAPI {
     }
 
     /**
+     Calculates the average insulin delivered per hour of day, split by scheduled basal, temp adjustments, and boluses, from pump-confirmed delivery records. Basal insulin is duration-weighted across the user-local hours each TempBasal overlaps, and averages are taken over the days that have delivery data — a window that extends before the first record does not distort the pattern.
+     
+     - parameter startDate: (query) Start date of the analysis period (UTC) (optional)
+     - parameter endDate: (query) End date of the analysis period (UTC) (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: HourlyInsulinDeliveryResponse
+     */
+    open class func statisticsGetHourlyInsulinDelivery(startDate: Date? = nil, endDate: Date? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> HourlyInsulinDeliveryResponse {
+        return try await statisticsGetHourlyInsulinDeliveryWithRequestBuilder(startDate: startDate, endDate: endDate, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Calculates the average insulin delivered per hour of day, split by scheduled basal, temp adjustments, and boluses, from pump-confirmed delivery records. Basal insulin is duration-weighted across the user-local hours each TempBasal overlaps, and averages are taken over the days that have delivery data — a window that extends before the first record does not distort the pattern.
+     - GET /api/v4/Statistics/hourly-insulin-delivery
+     - parameter startDate: (query) Start date of the analysis period (UTC) (optional)
+     - parameter endDate: (query) End date of the analysis period (UTC) (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<HourlyInsulinDeliveryResponse> 
+     */
+    open class func statisticsGetHourlyInsulinDeliveryWithRequestBuilder(startDate: Date? = nil, endDate: Date? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<HourlyInsulinDeliveryResponse> {
+        let localVariablePath = "/api/v4/Statistics/hourly-insulin-delivery"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "startDate": (wrappedValue: startDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endDate": (wrappedValue: endDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HourlyInsulinDeliveryResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Calculate comprehensive insulin delivery statistics for a date range
      
      - parameter startDate: (query) Start date of the analysis period (optional)
@@ -890,7 +932,7 @@ open class StatisticsAPI {
     /**
      Gets comprehensive statistics for multiple time periods (1, 3, 7, 30, and 90 days). Fetches sensor glucose, bolus, carb, and temp-basal data from the database for each period, computes GlucoseAnalytics, TreatmentSummary, and InsulinDeliveryStatistics, and caches the result for 5 minutes.
      - GET /api/v4/Statistics/periods
-     - When no TempBasal or algorithm bolus records are found but a profile is loaded, the method falls back to computing scheduled basal from the active profile schedule via IBasalRateResolver. GMI reliability is assessed per-period using context-appropriate recommended-day minimums (e.g., 1-day periods cannot require 14 days of data).
+     - When no TempBasal or algorithm bolus records are found but a profile is loaded, the method falls back to integrating scheduled basal across the period via IBasalSegmentService. GMI reliability is assessed per-period using context-appropriate recommended-day minimums (e.g., 1-day periods cannot require 14 days of data).
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<MultiPeriodStatistics> 
      */
@@ -908,6 +950,96 @@ open class StatisticsAPI {
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
         let localVariableRequestBuilder: RequestBuilder<MultiPeriodStatistics>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Pre-aggregated month-by-day statistics for the calendar punch-card view. Fetches glucose, boluses, carb intakes, and daily basal totals in a single batch, then computes per-day TIR and treatment summaries inline (no per-day round-trips). Replaces a frontend orchestrator that was issuing ~62 sequential HTTP calls per 31-day month.
+     
+     - parameter startDate: (query) Inclusive start of the date range. (optional)
+     - parameter endDate: (query) Inclusive end of the date range. (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: PunchCardResponse
+     */
+    open class func statisticsGetPunchCardData(startDate: Date? = nil, endDate: Date? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PunchCardResponse {
+        return try await statisticsGetPunchCardDataWithRequestBuilder(startDate: startDate, endDate: endDate, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Pre-aggregated month-by-day statistics for the calendar punch-card view. Fetches glucose, boluses, carb intakes, and daily basal totals in a single batch, then computes per-day TIR and treatment summaries inline (no per-day round-trips). Replaces a frontend orchestrator that was issuing ~62 sequential HTTP calls per 31-day month.
+     - GET /api/v4/Statistics/punch-card
+     - parameter startDate: (query) Inclusive start of the date range. (optional)
+     - parameter endDate: (query) Inclusive end of the date range. (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<PunchCardResponse> 
+     */
+    open class func statisticsGetPunchCardDataWithRequestBuilder(startDate: Date? = nil, endDate: Date? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PunchCardResponse> {
+        let localVariablePath = "/api/v4/Statistics/punch-card"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "startDate": (wrappedValue: startDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endDate": (wrappedValue: endDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<PunchCardResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Extended glucose analytics for a date range, computed server-side. Fetches glucose, manual boluses, and carb intakes for the window from the database and runs AnalyzeGlucoseDataExtended plus CalculateAveragedStats.
+     
+     - parameter startDate: (query) Start of the window (inclusive, UTC). (optional)
+     - parameter endDate: (query) End of the window (exclusive, UTC). (optional)
+     - parameter population: (query) Diabetes population for clinical target assessment. Defaults to Type 1 adult. (optional)
+     - parameter patientDeviceId: (query)  (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: ReportAnalysisResult
+     */
+    open class func statisticsGetRangeAnalytics(startDate: Date? = nil, endDate: Date? = nil, population: DiabetesPopulation? = nil, patientDeviceId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> ReportAnalysisResult {
+        return try await statisticsGetRangeAnalyticsWithRequestBuilder(startDate: startDate, endDate: endDate, population: population, patientDeviceId: patientDeviceId, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Extended glucose analytics for a date range, computed server-side. Fetches glucose, manual boluses, and carb intakes for the window from the database and runs AnalyzeGlucoseDataExtended plus CalculateAveragedStats.
+     - GET /api/v4/Statistics/range-analytics
+     - parameter startDate: (query) Start of the window (inclusive, UTC). (optional)
+     - parameter endDate: (query) End of the window (exclusive, UTC). (optional)
+     - parameter population: (query) Diabetes population for clinical target assessment. Defaults to Type 1 adult. (optional)
+     - parameter patientDeviceId: (query)  (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<ReportAnalysisResult> 
+     */
+    open class func statisticsGetRangeAnalyticsWithRequestBuilder(startDate: Date? = nil, endDate: Date? = nil, population: DiabetesPopulation? = nil, patientDeviceId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<ReportAnalysisResult> {
+        let localVariablePath = "/api/v4/Statistics/range-analytics"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "startDate": (wrappedValue: startDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endDate": (wrappedValue: endDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "population": (wrappedValue: population?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "patientDeviceId": (wrappedValue: patientDeviceId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ReportAnalysisResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
     }

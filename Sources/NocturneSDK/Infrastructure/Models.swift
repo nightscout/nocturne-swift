@@ -116,20 +116,25 @@ public struct Response<T> {
 extension Response : Sendable where T : Sendable {}
 
 public final class RequestTask: @unchecked Sendable {
-    private let _state = OpenAPIMutex<URLSessionDataTaskProtocol?>(nil)
+    private let lock = NSRecursiveLock()
+    private var task: URLSessionDataTaskProtocol?
 
     internal func set(task: URLSessionDataTaskProtocol) {
-        _state.withValue { $0 = task }
+        lock.withLock {
+            self.task = task
+        }
     }
 
     internal func get() -> URLSessionDataTaskProtocol? {
-        _state.value
+        lock.withLock {
+            task
+        }
     }
 
     public func cancel() {
-        _state.withValue {
-            $0?.cancel()
-            $0 = nil
+        lock.withLock {
+            task?.cancel()
+            task = nil
         }
     }
 }

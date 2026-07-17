@@ -49,6 +49,46 @@ open class PredictionAPI {
     }
 
     /**
+     Get the pre-resolved therapy profile for the next 24 hours, flattened into contiguous absolute-time segments, for an offline on-device oref prediction run.
+     
+     - parameter profileId: (query) Optional profile name. The device omits it (resolves the active profile). (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: ProfileSnapshotResponse
+     */
+    open class func predictionGetProfileSnapshot(profileId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> ProfileSnapshotResponse {
+        return try await predictionGetProfileSnapshotWithRequestBuilder(profileId: profileId, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get the pre-resolved therapy profile for the next 24 hours, flattened into contiguous absolute-time segments, for an offline on-device oref prediction run.
+     - GET /api/v4/predictions/profile-snapshot
+     - Unlike GetPredictions, this action is intentionally available regardless of Predictions:Source: the client runs oref on-device and needs its therapy profile precisely when server-side prediction is off (the offline case). It depends only on the unconditionally-registered profile resolvers, not on IPredictionService, so it carries no _predictionService/_source guard.              Clients must additionally apply the fixed oref constants max_iob=10, max_basal=4, max_daily_basal=2 (which PredictionService.GetProfileAsync hardcodes) to match a server-side oref run; they are not part of this payload.
+     - parameter profileId: (query) Optional profile name. The device omits it (resolves the active profile). (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<ProfileSnapshotResponse> 
+     */
+    open class func predictionGetProfileSnapshotWithRequestBuilder(profileId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<ProfileSnapshotResponse> {
+        let localVariablePath = "/api/v4/predictions/profile-snapshot"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "profileId": (wrappedValue: profileId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ProfileSnapshotResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Check the status of the prediction service.
      
      - parameter apiConfiguration: The configuration for the http request.

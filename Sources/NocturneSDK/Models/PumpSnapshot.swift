@@ -29,13 +29,15 @@ public struct PumpSnapshot: Sendable, Codable, Hashable {
     public var bolusing: Bool?
     public var suspended: Bool?
     public var pumpStatus: String?
+    public var pumpMode: String?
     public var clock: String?
     public var deviceId: String?
+    public var patientDeviceId: String?
     public var iob: Double?
     public var bolusIob: Double?
     public var additionalProperties: [String: JSONValue]?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, manufacturer: String? = nil, model: String? = nil, reservoir: Double? = nil, reservoirDisplay: String? = nil, batteryPercent: Int? = nil, batteryVoltage: Double? = nil, bolusing: Bool? = nil, suspended: Bool? = nil, pumpStatus: String? = nil, clock: String? = nil, deviceId: String? = nil, iob: Double? = nil, bolusIob: Double? = nil, additionalProperties: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, manufacturer: String? = nil, model: String? = nil, reservoir: Double? = nil, reservoirDisplay: String? = nil, batteryPercent: Int? = nil, batteryVoltage: Double? = nil, bolusing: Bool? = nil, suspended: Bool? = nil, pumpStatus: String? = nil, pumpMode: String? = nil, clock: String? = nil, deviceId: String? = nil, patientDeviceId: String? = nil, iob: Double? = nil, bolusIob: Double? = nil, additionalProperties: [String: JSONValue]? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -56,8 +58,10 @@ public struct PumpSnapshot: Sendable, Codable, Hashable {
         self.bolusing = bolusing
         self.suspended = suspended
         self.pumpStatus = pumpStatus
+        self.pumpMode = pumpMode
         self.clock = clock
         self.deviceId = deviceId
+        self.patientDeviceId = patientDeviceId
         self.iob = iob
         self.bolusIob = bolusIob
         self.additionalProperties = additionalProperties
@@ -84,8 +88,10 @@ public struct PumpSnapshot: Sendable, Codable, Hashable {
         case bolusing
         case suspended
         case pumpStatus
+        case pumpMode
         case clock
         case deviceId
+        case patientDeviceId
         case iob
         case bolusIob
         case additionalProperties
@@ -115,8 +121,10 @@ public struct PumpSnapshot: Sendable, Codable, Hashable {
         try container.encodeIfPresent(bolusing, forKey: .bolusing)
         try container.encodeIfPresent(suspended, forKey: .suspended)
         try container.encodeIfPresent(pumpStatus, forKey: .pumpStatus)
+        try container.encodeIfPresent(pumpMode, forKey: .pumpMode)
         try container.encodeIfPresent(clock, forKey: .clock)
         try container.encodeIfPresent(deviceId, forKey: .deviceId)
+        try container.encodeIfPresent(patientDeviceId, forKey: .patientDeviceId)
         try container.encodeIfPresent(iob, forKey: .iob)
         try container.encodeIfPresent(bolusIob, forKey: .bolusIob)
         try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)

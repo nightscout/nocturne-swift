@@ -13,26 +13,28 @@ public struct CreateAlertRuleRequest: Sendable, Codable, Hashable {
     public var description: String?
     public var conditionType: AlertConditionType?
     public var conditionParams: JSONValue?
-    public var hysteresisMinutes: Int?
-    public var confirmationReadings: Int?
     public var isEnabled: Bool?
     public var sortOrder: Int?
     public var severity: AlertRuleSeverity?
+    public var allowThroughDnd: Bool?
+    public var autoResolveEnabled: Bool?
+    public var autoResolveParams: JSONValue?
     public var clientConfiguration: JSONValue?
-    public var schedules: [CreateAlertScheduleRequest]?
+    public var channels: [CreateAlertRuleChannelRequest]?
 
-    public init(name: String? = nil, description: String? = nil, conditionType: AlertConditionType? = nil, conditionParams: JSONValue? = nil, hysteresisMinutes: Int? = nil, confirmationReadings: Int? = nil, isEnabled: Bool? = nil, sortOrder: Int? = nil, severity: AlertRuleSeverity? = nil, clientConfiguration: JSONValue? = nil, schedules: [CreateAlertScheduleRequest]? = nil) {
+    public init(name: String? = nil, description: String? = nil, conditionType: AlertConditionType? = nil, conditionParams: JSONValue? = nil, isEnabled: Bool? = nil, sortOrder: Int? = nil, severity: AlertRuleSeverity? = nil, allowThroughDnd: Bool? = nil, autoResolveEnabled: Bool? = nil, autoResolveParams: JSONValue? = nil, clientConfiguration: JSONValue? = nil, channels: [CreateAlertRuleChannelRequest]? = nil) {
         self.name = name
         self.description = description
         self.conditionType = conditionType
         self.conditionParams = conditionParams
-        self.hysteresisMinutes = hysteresisMinutes
-        self.confirmationReadings = confirmationReadings
         self.isEnabled = isEnabled
         self.sortOrder = sortOrder
         self.severity = severity
+        self.allowThroughDnd = allowThroughDnd
+        self.autoResolveEnabled = autoResolveEnabled
+        self.autoResolveParams = autoResolveParams
         self.clientConfiguration = clientConfiguration
-        self.schedules = schedules
+        self.channels = channels
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -40,13 +42,14 @@ public struct CreateAlertRuleRequest: Sendable, Codable, Hashable {
         case description
         case conditionType
         case conditionParams
-        case hysteresisMinutes
-        case confirmationReadings
         case isEnabled
         case sortOrder
         case severity
+        case allowThroughDnd
+        case autoResolveEnabled
+        case autoResolveParams
         case clientConfiguration
-        case schedules
+        case channels
     }
 
     // Encodable protocol methods
@@ -57,13 +60,14 @@ public struct CreateAlertRuleRequest: Sendable, Codable, Hashable {
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(conditionType, forKey: .conditionType)
         try container.encodeIfPresent(conditionParams, forKey: .conditionParams)
-        try container.encodeIfPresent(hysteresisMinutes, forKey: .hysteresisMinutes)
-        try container.encodeIfPresent(confirmationReadings, forKey: .confirmationReadings)
         try container.encodeIfPresent(isEnabled, forKey: .isEnabled)
         try container.encodeIfPresent(sortOrder, forKey: .sortOrder)
         try container.encodeIfPresent(severity, forKey: .severity)
+        try container.encodeIfPresent(allowThroughDnd, forKey: .allowThroughDnd)
+        try container.encodeIfPresent(autoResolveEnabled, forKey: .autoResolveEnabled)
+        try container.encodeIfPresent(autoResolveParams, forKey: .autoResolveParams)
         try container.encodeIfPresent(clientConfiguration, forKey: .clientConfiguration)
-        try container.encodeIfPresent(schedules, forKey: .schedules)
+        try container.encodeIfPresent(channels, forKey: .channels)
     }
 }
 

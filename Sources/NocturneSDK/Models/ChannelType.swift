@@ -10,6 +10,7 @@ import Foundation
 /**  */
 public enum ChannelType: String, Sendable, Codable, CaseIterable {
     case webPush = "web_push"
+    case inApp = "in_app"
     case webhook = "webhook"
     case discordDm = "discord_dm"
     case discordChannel = "discord_channel"
@@ -20,4 +21,7 @@ public enum ChannelType: String, Sendable, Codable, CaseIterable {
     case telegramGroup = "telegram_group"
     case whatsapp = "whatsapp"
     case whatsappDm = "whatsapp_dm"
+    case homeAssistant = "home_assistant"
+    case resendEmail = "resend_email"
+    case deviceAction = "device_action"
 }

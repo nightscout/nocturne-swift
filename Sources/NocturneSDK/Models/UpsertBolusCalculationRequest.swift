@@ -32,7 +32,6 @@ public struct UpsertBolusCalculationRequest: Sendable, Codable, Hashable {
     public var insulinRecommendation: Double?
     /** Insulin-to-carb ratio used in the calculation (grams per unit). Must be strictly positive. */
     public var carbRatio: Double?
-    /** Type of calculation performed (e.g. correction only, meal only, combined). */
     public var calculationType: CalculationType?
     /** Portion of the recommendation attributable to carb coverage. */
     public var insulinRecommendationForCarbs: Double?

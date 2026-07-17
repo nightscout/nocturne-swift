@@ -21,8 +21,10 @@ public struct OidcProviderResponse: Sendable, Codable, Hashable {
     public var displayOrder: Int?
     public var icon: String?
     public var buttonColor: String?
+    public var providerType: OidcProviderType?
+    public var oAuth2: OAuth2ProviderSettings?
 
-    public init(id: String? = nil, name: String? = nil, issuerUrl: String? = nil, clientId: String? = nil, hasSecret: Bool? = nil, scopes: [String]? = nil, claimMappings: [String: String]? = nil, defaultRoles: [String]? = nil, isEnabled: Bool? = nil, displayOrder: Int? = nil, icon: String? = nil, buttonColor: String? = nil) {
+    public init(id: String? = nil, name: String? = nil, issuerUrl: String? = nil, clientId: String? = nil, hasSecret: Bool? = nil, scopes: [String]? = nil, claimMappings: [String: String]? = nil, defaultRoles: [String]? = nil, isEnabled: Bool? = nil, displayOrder: Int? = nil, icon: String? = nil, buttonColor: String? = nil, providerType: OidcProviderType? = nil, oAuth2: OAuth2ProviderSettings? = nil) {
         self.id = id
         self.name = name
         self.issuerUrl = issuerUrl
@@ -35,6 +37,8 @@ public struct OidcProviderResponse: Sendable, Codable, Hashable {
         self.displayOrder = displayOrder
         self.icon = icon
         self.buttonColor = buttonColor
+        self.providerType = providerType
+        self.oAuth2 = oAuth2
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -50,6 +54,8 @@ public struct OidcProviderResponse: Sendable, Codable, Hashable {
         case displayOrder
         case icon
         case buttonColor
+        case providerType
+        case oAuth2
     }
 
     // Encodable protocol methods
@@ -68,6 +74,8 @@ public struct OidcProviderResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(displayOrder, forKey: .displayOrder)
         try container.encodeIfPresent(icon, forKey: .icon)
         try container.encodeIfPresent(buttonColor, forKey: .buttonColor)
+        try container.encodeIfPresent(providerType, forKey: .providerType)
+        try container.encodeIfPresent(oAuth2, forKey: .oAuth2)
     }
 }
 

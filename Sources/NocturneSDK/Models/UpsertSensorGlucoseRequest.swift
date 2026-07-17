@@ -22,7 +22,6 @@ public struct UpsertSensorGlucoseRequest: Sendable, Codable, Hashable {
     public var dataSource: String?
     /** Glucose reading in mg/dL (validated 0-10,000). */
     public var mgdl: Double?
-    /** Glucose trend direction (rising, falling, stable, etc.). */
     public var direction: GlucoseDirection?
     /** Rate of glucose change in mg/dL per minute. */
     public var trendRate: Double?

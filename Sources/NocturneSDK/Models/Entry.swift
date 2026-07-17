@@ -13,6 +13,7 @@ public struct Entry: Sendable, Codable, Hashable {
     public var createdAt: String?
     public var mills: Int64?
     public var utcOffset: Int?
+    public var date: Int64?
     public var dateString: String?
     public var mgdl: Double?
     public var mbg: Double?
@@ -49,11 +50,12 @@ public struct Entry: Sendable, Codable, Hashable {
     public var srvCreated: Int64?
     public var subject: String?
 
-    public init(id: String? = nil, createdAt: String? = nil, mills: Int64? = nil, utcOffset: Int? = nil, dateString: String? = nil, mgdl: Double? = nil, mbg: Double? = nil, mmol: Double? = nil, sgv: Double? = nil, direction: String? = nil, trend: Int? = nil, trendRate: Double? = nil, isCalibration: Bool? = nil, type: String? = nil, device: String? = nil, notes: String? = nil, delta: Double? = nil, scaled: JSONValue? = nil, sysTime: String? = nil, noise: Int? = nil, filtered: Double? = nil, unfiltered: Double? = nil, rssi: Int? = nil, slope: Double? = nil, intercept: Double? = nil, scale: Double? = nil, modifiedAt: Date? = nil, dataSource: String? = nil, meta: [String: JSONValue]? = nil, canonicalId: String? = nil, sources: [String]? = nil, app: String? = nil, units: String? = nil, isValid: Bool? = nil, isReadOnly: Bool? = nil, identifier: String? = nil, srvModified: Int64? = nil, srvCreated: Int64? = nil, subject: String? = nil) {
+    public init(id: String? = nil, createdAt: String? = nil, mills: Int64? = nil, utcOffset: Int? = nil, date: Int64? = nil, dateString: String? = nil, mgdl: Double? = nil, mbg: Double? = nil, mmol: Double? = nil, sgv: Double? = nil, direction: String? = nil, trend: Int? = nil, trendRate: Double? = nil, isCalibration: Bool? = nil, type: String? = nil, device: String? = nil, notes: String? = nil, delta: Double? = nil, scaled: JSONValue? = nil, sysTime: String? = nil, noise: Int? = nil, filtered: Double? = nil, unfiltered: Double? = nil, rssi: Int? = nil, slope: Double? = nil, intercept: Double? = nil, scale: Double? = nil, modifiedAt: Date? = nil, dataSource: String? = nil, meta: [String: JSONValue]? = nil, canonicalId: String? = nil, sources: [String]? = nil, app: String? = nil, units: String? = nil, isValid: Bool? = nil, isReadOnly: Bool? = nil, identifier: String? = nil, srvModified: Int64? = nil, srvCreated: Int64? = nil, subject: String? = nil) {
         self.id = id
         self.createdAt = createdAt
         self.mills = mills
         self.utcOffset = utcOffset
+        self.date = date
         self.dateString = dateString
         self.mgdl = mgdl
         self.mbg = mbg
@@ -96,6 +98,7 @@ public struct Entry: Sendable, Codable, Hashable {
         case createdAt
         case mills
         case utcOffset
+        case date
         case dateString
         case mgdl
         case mbg
@@ -141,6 +144,7 @@ public struct Entry: Sendable, Codable, Hashable {
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(mills, forKey: .mills)
         try container.encodeIfPresent(utcOffset, forKey: .utcOffset)
+        try container.encodeIfPresent(date, forKey: .date)
         try container.encodeIfPresent(dateString, forKey: .dateString)
         try container.encodeIfPresent(mgdl, forKey: .mgdl)
         try container.encodeIfPresent(mbg, forKey: .mbg)

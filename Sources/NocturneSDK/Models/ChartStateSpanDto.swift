@@ -10,6 +10,7 @@ import Foundation
 public struct ChartStateSpanDto: Sendable, Codable, Hashable {
 
     public var id: String?
+    public var kind: ChartSpanKind?
     public var category: StateSpanCategory?
     public var state: String?
     public var startMills: Int64?
@@ -17,8 +18,9 @@ public struct ChartStateSpanDto: Sendable, Codable, Hashable {
     public var color: ChartColor?
     public var metadata: [String: JSONValue]?
 
-    public init(id: String? = nil, category: StateSpanCategory? = nil, state: String? = nil, startMills: Int64? = nil, endMills: Int64? = nil, color: ChartColor? = nil, metadata: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, kind: ChartSpanKind? = nil, category: StateSpanCategory? = nil, state: String? = nil, startMills: Int64? = nil, endMills: Int64? = nil, color: ChartColor? = nil, metadata: [String: JSONValue]? = nil) {
         self.id = id
+        self.kind = kind
         self.category = category
         self.state = state
         self.startMills = startMills
@@ -29,6 +31,7 @@ public struct ChartStateSpanDto: Sendable, Codable, Hashable {
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case id
+        case kind
         case category
         case state
         case startMills
@@ -42,6 +45,7 @@ public struct ChartStateSpanDto: Sendable, Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(kind, forKey: .kind)
         try container.encodeIfPresent(category, forKey: .category)
         try container.encodeIfPresent(state, forKey: .state)
         try container.encodeIfPresent(startMills, forKey: .startMills)

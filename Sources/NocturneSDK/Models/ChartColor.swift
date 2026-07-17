@@ -27,6 +27,7 @@ public enum ChartColor: String, Sendable, Codable, CaseIterable {
     case pumpModeExercise = "pump-mode-exercise"
     case pumpModeSuspended = "pump-mode-suspended"
     case pumpModeOff = "pump-mode-off"
+    case pumpModeLiberty = "pump-mode-liberty"
     case systemEventAlarm = "system-event-alarm"
     case systemEventHazard = "system-event-hazard"
     case systemEventWarning = "system-event-warning"

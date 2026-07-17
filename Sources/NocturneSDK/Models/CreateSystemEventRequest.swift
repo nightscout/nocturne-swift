@@ -10,9 +10,7 @@ import Foundation
 /** Request body for creating a new SystemEvent record. */
 public struct CreateSystemEventRequest: Sendable, Codable, Hashable {
 
-    /** Gets or sets the event type (alarm, warning, or info). */
     public var eventType: SystemEventType?
-    /** Gets or sets the event category. */
     public var category: SystemEventCategory?
     /** Gets or sets an optional short code identifying the event. */
     public var code: String?

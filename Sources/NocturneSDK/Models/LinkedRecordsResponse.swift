@@ -12,7 +12,6 @@ public struct LinkedRecordsResponse: Sendable, Codable, Hashable {
 
     /** Gets or sets the canonical record identifier shared by all linked records. */
     public var canonicalId: String?
-    /** Gets or sets the record type of the canonical group. */
     public var recordType: RecordType?
     /** Gets or sets the full list of records linked to the canonical group. */
     public var linkedRecords: [LinkedRecord]?

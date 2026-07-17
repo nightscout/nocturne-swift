@@ -10,7 +10,6 @@ import Foundation
 /** Snapshot of a single tenant&#39;s identity and configuration data for dev-only export/import. */
 public struct TenantSnapshotDto: Sendable, Codable, Hashable {
 
-    /** The tenant entity itself. */
     public var tenant: TenantEntityDto?
     /** All subjects (users/service accounts) belonging to this tenant. */
     public var subjects: [SubjectEntityDto]?

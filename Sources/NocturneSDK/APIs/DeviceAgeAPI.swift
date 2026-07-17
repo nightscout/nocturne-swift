@@ -75,13 +75,14 @@ open class DeviceAgeAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp1: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "info": (wrappedValue: info?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "warn": (wrappedValue: warn?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "urgent": (wrappedValue: urgent?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "display": (wrappedValue: display?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "enableAlerts": (wrappedValue: enableAlerts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp1)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -126,13 +127,14 @@ open class DeviceAgeAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp2: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "info": (wrappedValue: info?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "warn": (wrappedValue: warn?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "urgent": (wrappedValue: urgent?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "display": (wrappedValue: display?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "enableAlerts": (wrappedValue: enableAlerts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp2)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -177,13 +179,14 @@ open class DeviceAgeAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp3: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "info": (wrappedValue: info?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "warn": (wrappedValue: warn?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "urgent": (wrappedValue: urgent?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "display": (wrappedValue: display?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "enableAlerts": (wrappedValue: enableAlerts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp3)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -228,13 +231,14 @@ open class DeviceAgeAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+        let _qp4: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "info": (wrappedValue: info?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "warn": (wrappedValue: warn?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "urgent": (wrappedValue: urgent?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "display": (wrappedValue: display?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "enableAlerts": (wrappedValue: enableAlerts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ])
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp4)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
