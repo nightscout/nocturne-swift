@@ -84,6 +84,43 @@ open class BolusAPI {
     }
 
     /**
+     Create or update boluses in bulk (max 1000).
+     
+     - parameter createBolusRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [Bolus]
+     */
+    open class func bolusCreateBolusesBulk(createBolusRequest: [CreateBolusRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [Bolus] {
+        return try await bolusCreateBolusesBulkWithRequestBuilder(createBolusRequest: createBolusRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Create or update boluses in bulk (max 1000).
+     - POST /api/v4/insulin/boluses/bulk
+     - Array semantics are per-item upsert, not all-or-nothing: each bolus carrying both `dataSource` and `syncIdentifier` updates the row already matched by that pair; all others insert. Validation failures reject the whole request with `400 Bad Request` before anything is persisted.
+     - parameter createBolusRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[Bolus]> 
+     */
+    open class func bolusCreateBolusesBulkWithRequestBuilder(createBolusRequest: [CreateBolusRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[Bolus]> {
+        let localVariablePath = "/api/v4/insulin/boluses/bulk"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createBolusRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[Bolus]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Deletes a record by ID.
      
      - parameter id: (path) The unique identifier of the record to delete. 

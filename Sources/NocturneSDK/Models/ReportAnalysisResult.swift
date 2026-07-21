@@ -12,17 +12,20 @@ public struct ReportAnalysisResult: Sendable, Codable, Hashable {
     public var analysis: ExtendedGlucoseAnalytics?
     public var averagedStats: [AveragedStats]?
     public var contributingDevices: [ContributingDevice]?
+    public var personalRange: PersonalRangeTimeInRange?
 
-    public init(analysis: ExtendedGlucoseAnalytics? = nil, averagedStats: [AveragedStats]? = nil, contributingDevices: [ContributingDevice]? = nil) {
+    public init(analysis: ExtendedGlucoseAnalytics? = nil, averagedStats: [AveragedStats]? = nil, contributingDevices: [ContributingDevice]? = nil, personalRange: PersonalRangeTimeInRange? = nil) {
         self.analysis = analysis
         self.averagedStats = averagedStats
         self.contributingDevices = contributingDevices
+        self.personalRange = personalRange
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case analysis
         case averagedStats
         case contributingDevices
+        case personalRange
     }
 
     // Encodable protocol methods
@@ -32,6 +35,7 @@ public struct ReportAnalysisResult: Sendable, Codable, Hashable {
         try container.encodeIfPresent(analysis, forKey: .analysis)
         try container.encodeIfPresent(averagedStats, forKey: .averagedStats)
         try container.encodeIfPresent(contributingDevices, forKey: .contributingDevices)
+        try container.encodeIfPresent(personalRange, forKey: .personalRange)
     }
 }
 

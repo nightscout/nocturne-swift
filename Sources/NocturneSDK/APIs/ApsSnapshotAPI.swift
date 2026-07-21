@@ -10,6 +10,43 @@ import Foundation
 open class ApsSnapshotAPI {
 
     /**
+     Create or update APS snapshots in bulk (max 1000).
+     
+     - parameter upsertApsSnapshotRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [ApsSnapshot]
+     */
+    open class func apsSnapshotCreateApsSnapshots(upsertApsSnapshotRequest: [UpsertApsSnapshotRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [ApsSnapshot] {
+        return try await apsSnapshotCreateApsSnapshotsWithRequestBuilder(upsertApsSnapshotRequest: upsertApsSnapshotRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Create or update APS snapshots in bulk (max 1000).
+     - POST /api/v4/device-status/aps
+     - Array semantics are per-item upsert, not all-or-nothing: each snapshot carrying both `dataSource` and `syncIdentifier` updates the row already matched by that pair; all others insert. Validation failures reject the whole request with `400 Bad Request` before anything is persisted.              Device attribution is a deliberate scope cut: unlike the legacy decomposer path, records written here carry no Device/PatientDevice link (snapshots are not IDeviceAttributed, so the stamper can't take them). Reads that join by correlationId are unaffected.
+     - parameter upsertApsSnapshotRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[ApsSnapshot]> 
+     */
+    open class func apsSnapshotCreateApsSnapshotsWithRequestBuilder(upsertApsSnapshotRequest: [UpsertApsSnapshotRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[ApsSnapshot]> {
+        let localVariablePath = "/api/v4/device-status/aps"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: upsertApsSnapshotRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[ApsSnapshot]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Lists records with pagination, optional date range, device, and source filtering.
      
      - parameter from: (query) Inclusive start of the date range filter. (optional)

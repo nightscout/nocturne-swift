@@ -69,6 +69,7 @@ Class | Method | HTTP request | Description
 *AnalyticsAPI* | [**analyticsGetUsageStatistics**](docs/AnalyticsAPI.md#analyticsgetusagestatistics) | **GET** /api/v4/Analytics/metrics/usage | Gets current usage statistics such as endpoint hit counts and feature usage.
 *AnalyticsAPI* | [**analyticsTrackCustomEvent**](docs/AnalyticsAPI.md#analyticstrackcustomevent) | **POST** /api/v4/Analytics/events | Tracks a custom AnalyticsEvent. Useful for integration testing or manually recording discrete events. Returns 400 Bad Request if analytics collection is disabled.
 *AnalyticsAPI* | [**analyticsUpdateAnalyticsConfig**](docs/AnalyticsAPI.md#analyticsupdateanalyticsconfig) | **PUT** /api/v4/Analytics/config | Updates analytics collection configuration.
+*ApsSnapshotAPI* | [**apsSnapshotCreateApsSnapshots**](docs/ApsSnapshotAPI.md#apssnapshotcreateapssnapshots) | **POST** /api/v4/device-status/aps | Create or update APS snapshots in bulk (max 1000).
 *ApsSnapshotAPI* | [**apsSnapshotGetAll**](docs/ApsSnapshotAPI.md#apssnapshotgetall) | **GET** /api/v4/device-status/aps | Lists records with pagination, optional date range, device, and source filtering.
 *ApsSnapshotAPI* | [**apsSnapshotGetById**](docs/ApsSnapshotAPI.md#apssnapshotgetbyid) | **GET** /api/v4/device-status/aps/{id} | Retrieves a single record by its unique identifier.
 *AuditAPI* | [**auditGetAuditConfig**](docs/AuditAPI.md#auditgetauditconfig) | **GET** /api/v4/audit/config | Get the audit configuration for the current tenant.
@@ -88,6 +89,7 @@ Class | Method | HTTP request | Description
 *BGCheckAPI* | [**bGCheckUpdate**](docs/BGCheckAPI.md#bgcheckupdate) | **PUT** /api/v4/observations/bg-checks/{id} | Updates an existing record by ID and returns the updated record.
 *BasalInjectionAPI* | [**basalInjectionBulkRestore**](docs/BasalInjectionAPI.md#basalinjectionbulkrestore) | **POST** /api/v4/insulin/basal-injections/restore | Restores multiple soft-deleted records by their IDs.
 *BasalInjectionAPI* | [**basalInjectionCreate**](docs/BasalInjectionAPI.md#basalinjectioncreate) | **POST** /api/v4/insulin/basal-injections | Creates a new record and returns it with a &#x60;Location&#x60; header pointing to the created resource.
+*BasalInjectionAPI* | [**basalInjectionCreateBasalInjectionsBulk**](docs/BasalInjectionAPI.md#basalinjectioncreatebasalinjectionsbulk) | **POST** /api/v4/insulin/basal-injections/bulk | Create or update basal injections in bulk (max 1000).
 *BasalInjectionAPI* | [**basalInjectionDelete**](docs/BasalInjectionAPI.md#basalinjectiondelete) | **DELETE** /api/v4/insulin/basal-injections/{id} | Deletes a record by ID.
 *BasalInjectionAPI* | [**basalInjectionGetAll**](docs/BasalInjectionAPI.md#basalinjectiongetall) | **GET** /api/v4/insulin/basal-injections | Lists records with pagination, optional date range, device, and source filtering.
 *BasalInjectionAPI* | [**basalInjectionGetById**](docs/BasalInjectionAPI.md#basalinjectiongetbyid) | **GET** /api/v4/insulin/basal-injections/{id} | Retrieves a single record by its unique identifier.
@@ -107,6 +109,7 @@ Class | Method | HTTP request | Description
 *BodyWeightAPI* | [**bodyWeightUpdateBodyWeight**](docs/BodyWeightAPI.md#bodyweightupdatebodyweight) | **PUT** /api/v4/body-weight/{id} | Update an existing body weight record
 *BolusAPI* | [**bolusBulkRestore**](docs/BolusAPI.md#bolusbulkrestore) | **POST** /api/v4/insulin/boluses/restore | Restores multiple soft-deleted records by their IDs.
 *BolusAPI* | [**bolusCreate**](docs/BolusAPI.md#boluscreate) | **POST** /api/v4/insulin/boluses | Creates a new record and returns it with a &#x60;Location&#x60; header pointing to the created resource.
+*BolusAPI* | [**bolusCreateBolusesBulk**](docs/BolusAPI.md#boluscreatebolusesbulk) | **POST** /api/v4/insulin/boluses/bulk | Create or update boluses in bulk (max 1000).
 *BolusAPI* | [**bolusDelete**](docs/BolusAPI.md#bolusdelete) | **DELETE** /api/v4/insulin/boluses/{id} | Deletes a record by ID.
 *BolusAPI* | [**bolusDeleteBySyncIdentifier**](docs/BolusAPI.md#bolusdeletebysyncidentifier) | **DELETE** /api/v4/insulin/boluses/by-sync-id | Delete a bolus by its external sync identifier (dataSource + syncIdentifier pair).
 *BolusAPI* | [**bolusGetAll**](docs/BolusAPI.md#bolusgetall) | **GET** /api/v4/insulin/boluses | 
@@ -329,6 +332,7 @@ Class | Method | HTTP request | Description
 *NotificationsAPI* | [**notificationsMarkAsRead**](docs/NotificationsAPI.md#notificationsmarkasread) | **POST** /api/v4/notifications/{id}/read | 
 *NutritionAPI* | [**nutritionAddCarbIntakeFood**](docs/NutritionAPI.md#nutritionaddcarbintakefood) | **POST** /api/v4/nutrition/carbs/{id}/foods | Add a food breakdown entry to a carb intake record.
 *NutritionAPI* | [**nutritionCreateCarbIntake**](docs/NutritionAPI.md#nutritioncreatecarbintake) | **POST** /api/v4/nutrition/carbs | Create a new carb intake
+*NutritionAPI* | [**nutritionCreateCarbIntakesBulk**](docs/NutritionAPI.md#nutritioncreatecarbintakesbulk) | **POST** /api/v4/nutrition/carbs/bulk | Create or update carb intakes in bulk (max 1000).
 *NutritionAPI* | [**nutritionCreateMeal**](docs/NutritionAPI.md#nutritioncreatemeal) | **POST** /api/v4/nutrition/meals | Atomically create a correlated Bolus + CarbIntake for a meal event. Both records share a single CorrelationId and are persisted within a single transaction. When an existing row matches on (DataSource, SyncIdentifier), the idempotent upsert applies and the response returns 200 instead of 201.
 *NutritionAPI* | [**nutritionDeleteCarbIntake**](docs/NutritionAPI.md#nutritiondeletecarbintake) | **DELETE** /api/v4/nutrition/carbs/{id} | Delete a carb intake
 *NutritionAPI* | [**nutritionDeleteCarbIntakeBySyncIdentifier**](docs/NutritionAPI.md#nutritiondeletecarbintakebysyncidentifier) | **DELETE** /api/v4/nutrition/carbs/by-sync-id | Delete a carb intake by its external sync identifier (dataSource + syncIdentifier pair).
@@ -339,6 +343,19 @@ Class | Method | HTTP request | Description
 *NutritionAPI* | [**nutritionGetMeals**](docs/NutritionAPI.md#nutritiongetmeals) | **GET** /api/v4/nutrition/meals | Get meal events grouped by CorrelationId. Each event carries its own carb intakes, correlated boluses, food attribution rows, and aggregated totals. Carb intakes with a null CorrelationId become single-member events on their own (they are NOT collapsed together).
 *NutritionAPI* | [**nutritionUpdateCarbIntake**](docs/NutritionAPI.md#nutritionupdatecarbintake) | **PUT** /api/v4/nutrition/carbs/{id} | Update an existing carb intake
 *NutritionAPI* | [**nutritionUpdateCarbIntakeFood**](docs/NutritionAPI.md#nutritionupdatecarbintakefood) | **PUT** /api/v4/nutrition/carbs/{id}/foods/{foodEntryId} | Update a food breakdown entry.
+*OAuthAPI* | [**oAuthApproveConsent**](docs/OAuthAPI.md#oauthapproveconsent) | **POST** /api/oauth/authorize | Consent approval endpoint. Called by the consent page when the user approves.
+*OAuthAPI* | [**oAuthAuthorize**](docs/OAuthAPI.md#oauthauthorize) | **GET** /api/oauth/authorize | Authorization endpoint (Authorization Code + PKCE flow). Redirects to login if not authenticated, then shows consent screen.
+*OAuthAPI* | [**oAuthDeleteGrant**](docs/OAuthAPI.md#oauthdeletegrant) | **DELETE** /api/oauth/grants/{grantId} | Revoke (delete) a specific grant owned by the authenticated user.
+*OAuthAPI* | [**oAuthDeviceApprove**](docs/OAuthAPI.md#oauthdeviceapprove) | **POST** /api/oauth/device-approve | Approve or deny a device authorization request. Called by the device approval page.
+*OAuthAPI* | [**oAuthDeviceAuthorization**](docs/OAuthAPI.md#oauthdeviceauthorization) | **POST** /api/oauth/device | Device Authorization endpoint (RFC 8628). Used by headless clients (CLI tools, scripts, IoT devices, pump rigs).
+*OAuthAPI* | [**oAuthGetClientInfo**](docs/OAuthAPI.md#oauthgetclientinfo) | **GET** /api/oauth/client-info | Get client info for the consent page.
+*OAuthAPI* | [**oAuthGetDeviceInfo**](docs/OAuthAPI.md#oauthgetdeviceinfo) | **GET** /api/oauth/device-info | Get device code info for the approval page.
+*OAuthAPI* | [**oAuthGetGrants**](docs/OAuthAPI.md#oauthgetgrants) | **GET** /api/oauth/grants | List all active grants for the authenticated user.
+*OAuthAPI* | [**oAuthIntrospect**](docs/OAuthAPI.md#oauthintrospect) | **POST** /api/oauth/introspect | Token introspection endpoint (RFC 7662). Returns metadata about a token including its active status, scopes, and subject. Per RFC 7662, always returns 200 OK; invalid tokens get active&#x3D;false.
+*OAuthAPI* | [**oAuthRegister**](docs/OAuthAPI.md#oauthregister) | **POST** /api/oauth/register | RFC 7591 Dynamic Client Registration. Allows third-party native apps (Trio, xDrip+, Loop, AAPS) to obtain a tenant-scoped client_id without any out-of-band registration step. Idempotent on (tenant, software_id): re-registering with the same software_id returns the existing client_id.
+*OAuthAPI* | [**oAuthRevoke**](docs/OAuthAPI.md#oauthrevoke) | **POST** /api/oauth/revoke | Token revocation endpoint (RFC 7009). Per the specification, always returns 200 OK regardless of whether the token was found or already revoked.
+*OAuthAPI* | [**oAuthToken**](docs/OAuthAPI.md#oauthtoken) | **POST** /api/oauth/token | Token endpoint. Handles authorization code exchange, refresh token rotation, and device code polling.
+*OAuthAPI* | [**oAuthUpdateGrant**](docs/OAuthAPI.md#oauthupdategrant) | **PATCH** /api/oauth/grants/{grantId} | Update a grant&#39;s label and/or scopes.
 *OidcProviderAdminAPI* | [**oidcProviderAdminCreate**](docs/OidcProviderAdminAPI.md#oidcprovideradmincreate) | **POST** /api/v4/admin/oidc-providers | 
 *OidcProviderAdminAPI* | [**oidcProviderAdminDelete**](docs/OidcProviderAdminAPI.md#oidcprovideradmindelete) | **DELETE** /api/v4/admin/oidc-providers/{id} | 
 *OidcProviderAdminAPI* | [**oidcProviderAdminDisable**](docs/OidcProviderAdminAPI.md#oidcprovideradmindisable) | **POST** /api/v4/admin/oidc-providers/{id}/disable | 
@@ -403,6 +420,7 @@ Class | Method | HTTP request | Description
 *ProfileAPI* | [**profileUpdateSensitivitySchedule**](docs/ProfileAPI.md#profileupdatesensitivityschedule) | **PUT** /api/v4/profile/sensitivity/{id} | Update an existing sensitivity schedule
 *ProfileAPI* | [**profileUpdateTargetRangeSchedule**](docs/ProfileAPI.md#profileupdatetargetrangeschedule) | **PUT** /api/v4/profile/target-range/{id} | Update an existing target range schedule
 *ProfileAPI* | [**profileUpdateTherapySettings**](docs/ProfileAPI.md#profileupdatetherapysettings) | **PUT** /api/v4/profile/settings/{id} | Update an existing therapy settings record
+*PumpSnapshotAPI* | [**pumpSnapshotCreatePumpSnapshots**](docs/PumpSnapshotAPI.md#pumpsnapshotcreatepumpsnapshots) | **POST** /api/v4/device-status/pump | Create or update pump snapshots in bulk (max 1000).
 *PumpSnapshotAPI* | [**pumpSnapshotGetAll**](docs/PumpSnapshotAPI.md#pumpsnapshotgetall) | **GET** /api/v4/device-status/pump | Lists records with pagination, optional date range, device, and source filtering.
 *PumpSnapshotAPI* | [**pumpSnapshotGetById**](docs/PumpSnapshotAPI.md#pumpsnapshotgetbyid) | **GET** /api/v4/device-status/pump/{id} | Retrieves a single record by its unique identifier.
 *ReservoirAPI* | [**reservoirGetEstimate**](docs/ReservoirAPI.md#reservoirgetestimate) | **GET** /api/v4/reservoir | Get the current reservoir estimate.
@@ -454,6 +472,7 @@ Class | Method | HTTP request | Description
 *ShareLinkAPI* | [**shareLinkSetShareLinkFullHistory**](docs/ShareLinkAPI.md#sharelinksetsharelinkfullhistory) | **PUT** /api/v4/share/full-history | Choose whether the public view shows full history or only the last 24 hours.
 *ShareLinkAPI* | [**shareLinkSetShareLinkScopes**](docs/ShareLinkAPI.md#sharelinksetsharelinkscopes) | **PUT** /api/v4/share/scopes | Set which data categories anonymous viewers can see. Scopes must be read-permission atoms drawn from TenantPermissions.PublicShareScopes; an empty list keeps the link live but shares nothing.
 *SleepAPI* | [**sleepCreateSession**](docs/SleepAPI.md#sleepcreatesession) | **POST** /api/v4/sleep/sessions | Create or upsert a sleep session
+*SleepAPI* | [**sleepCreateSessionsBulk**](docs/SleepAPI.md#sleepcreatesessionsbulk) | **POST** /api/v4/sleep/sessions/bulk | Create or upsert sleep sessions in bulk (max 100)
 *SleepAPI* | [**sleepDeleteSession**](docs/SleepAPI.md#sleepdeletesession) | **DELETE** /api/v4/sleep/sessions/{id} | Delete a sleep session
 *SleepAPI* | [**sleepGetSession**](docs/SleepAPI.md#sleepgetsession) | **GET** /api/v4/sleep/sessions/{id} | Get a sleep session by ID (includes stages and biometric samples)
 *SleepAPI* | [**sleepGetSessions**](docs/SleepAPI.md#sleepgetsessions) | **GET** /api/v4/sleep/sessions | Query sleep sessions with optional filtering (stages and biometrics excluded)
@@ -523,6 +542,9 @@ Class | Method | HTTP request | Description
 *SystemEventsAPI* | [**systemEventsDeleteSystemEvent**](docs/SystemEventsAPI.md#systemeventsdeletesystemevent) | **DELETE** /api/v4/system-events/{id} | Delete a system event.
 *SystemEventsAPI* | [**systemEventsGetSystemEvent**](docs/SystemEventsAPI.md#systemeventsgetsystemevent) | **GET** /api/v4/system-events/{id} | Get a specific system event by ID.
 *SystemEventsAPI* | [**systemEventsGetSystemEvents**](docs/SystemEventsAPI.md#systemeventsgetsystemevents) | **GET** /api/v4/system-events | Query system events with optional filtering.
+*TempBasalAPI* | [**tempBasalCreateTempBasals**](docs/TempBasalAPI.md#tempbasalcreatetempbasals) | **POST** /api/v4/insulin/temp-basals | Write temp basal spans and cancels in bulk (max 1000).
+*TempBasalAPI* | [**tempBasalGetAll**](docs/TempBasalAPI.md#tempbasalgetall) | **GET** /api/v4/insulin/temp-basals | Lists temp basal spans, newest-first by default.
+*TempBasalAPI* | [**tempBasalGetById**](docs/TempBasalAPI.md#tempbasalgetbyid) | **GET** /api/v4/insulin/temp-basals/{id} | Returns a single temp basal span by ID.
 *TenantAPI* | [**tenantAddMember**](docs/TenantAPI.md#tenantaddmember) | **POST** /api/v4/admin/tenants/{id}/members | 
 *TenantAPI* | [**tenantAttachOidcIdentity**](docs/TenantAPI.md#tenantattachoidcidentity) | **POST** /api/v4/admin/tenants/{id}/members/{subjectId}/credentials/oidc | Attaches an OIDC identity to a member subject.
 *TenantAPI* | [**tenantCreate**](docs/TenantAPI.md#tenantcreate) | **POST** /api/v4/admin/tenants | 
@@ -569,6 +591,7 @@ Class | Method | HTTP request | Description
 *UISettingsAPI* | [**uISettingsSaveAlarmConfiguration**](docs/UISettingsAPI.md#uisettingssavealarmconfiguration) | **PUT** /api/v4/ui-settings/notifications/alarms | Save alarm profiles configuration (xDrip+-style).
 *UISettingsAPI* | [**uISettingsSaveNotificationSettings**](docs/UISettingsAPI.md#uisettingssavenotificationsettings) | **PUT** /api/v4/ui-settings/notifications | Save notification settings including alarm configuration.
 *UISettingsAPI* | [**uISettingsSaveUISettings**](docs/UISettingsAPI.md#uisettingssaveuisettings) | **PUT** /api/v4/ui-settings | Save complete UI settings configuration.
+*UploaderSnapshotAPI* | [**uploaderSnapshotCreateUploaderSnapshots**](docs/UploaderSnapshotAPI.md#uploadersnapshotcreateuploadersnapshots) | **POST** /api/v4/device-status/uploader | Create or update uploader snapshots in bulk (max 1000).
 *UploaderSnapshotAPI* | [**uploaderSnapshotGetAll**](docs/UploaderSnapshotAPI.md#uploadersnapshotgetall) | **GET** /api/v4/device-status/uploader | Lists records with pagination, optional date range, device, and source filtering.
 *UploaderSnapshotAPI* | [**uploaderSnapshotGetById**](docs/UploaderSnapshotAPI.md#uploadersnapshotgetbyid) | **GET** /api/v4/device-status/uploader/{id} | Retrieves a single record by its unique identifier.
 *UserPreferencesAPI* | [**userPreferencesGetPreferences**](docs/UserPreferencesAPI.md#userpreferencesgetpreferences) | **GET** /api/v4/user/preferences | Get the current user&#39;s preferences
@@ -690,12 +713,15 @@ Class | Method | HTTP request | Description
  - [ChannelUnavailableReason](docs/ChannelUnavailableReason.md)
  - [ChargeCycle](docs/ChargeCycle.md)
  - [ChartColor](docs/ChartColor.md)
+ - [ChartPreferences](docs/ChartPreferences.md)
  - [ChartSpanKind](docs/ChartSpanKind.md)
  - [ChartStateSpanDto](docs/ChartStateSpanDto.md)
  - [ChartThresholdsDto](docs/ChartThresholdsDto.md)
  - [ChatIdentityLinkResponse](docs/ChatIdentityLinkResponse.md)
  - [ClaimChatIdentityLinkRequest](docs/ClaimChatIdentityLinkRequest.md)
  - [ClientDeviceDto](docs/ClientDeviceDto.md)
+ - [ClientRegistrationRequest](docs/ClientRegistrationRequest.md)
+ - [ClientRegistrationResponse](docs/ClientRegistrationResponse.md)
  - [ClinicalAssessmentLevel](docs/ClinicalAssessmentLevel.md)
  - [ClinicalAssessmentRequest](docs/ClinicalAssessmentRequest.md)
  - [ClinicalTargetAssessment](docs/ClinicalTargetAssessment.md)
@@ -772,6 +798,7 @@ Class | Method | HTTP request | Description
  - [CreateRoleRequest](docs/CreateRoleRequest.md)
  - [CreateStateSpanRequest](docs/CreateStateSpanRequest.md)
  - [CreateSystemEventRequest](docs/CreateSystemEventRequest.md)
+ - [CreateTempBasalRequest](docs/CreateTempBasalRequest.md)
  - [CreateTenantRequest](docs/CreateTenantRequest.md)
  - [CreateTrackerDefinitionRequest](docs/CreateTrackerDefinitionRequest.md)
  - [CreateTrackerPresetRequest](docs/CreateTrackerPresetRequest.md)
@@ -825,6 +852,7 @@ Class | Method | HTTP request | Description
  - [DeviceCapabilityInfo](docs/DeviceCapabilityInfo.md)
  - [DeviceCatalogEntry](docs/DeviceCatalogEntry.md)
  - [DeviceCategory](docs/DeviceCategory.md)
+ - [DeviceCodeInfo](docs/DeviceCodeInfo.md)
  - [DeviceEvent](docs/DeviceEvent.md)
  - [DeviceEventMarkerDto](docs/DeviceEventMarkerDto.md)
  - [DeviceEventType](docs/DeviceEventType.md)
@@ -964,6 +992,12 @@ Class | Method | HTTP request | Description
  - [NotificationUrgency](docs/NotificationUrgency.md)
  - [OAuth2ProviderSettings](docs/OAuth2ProviderSettings.md)
  - [OAuthClientEntityDto](docs/OAuthClientEntityDto.md)
+ - [OAuthClientInfoResponse](docs/OAuthClientInfoResponse.md)
+ - [OAuthDeviceAuthorizationResponse](docs/OAuthDeviceAuthorizationResponse.md)
+ - [OAuthError](docs/OAuthError.md)
+ - [OAuthGrantDto](docs/OAuthGrantDto.md)
+ - [OAuthGrantListResponse](docs/OAuthGrantListResponse.md)
+ - [OAuthTokenResponse](docs/OAuthTokenResponse.md)
  - [OidcDiscoveryDocument](docs/OidcDiscoveryDocument.md)
  - [OidcIdentityDto](docs/OidcIdentityDto.md)
  - [OidcProviderResponse](docs/OidcProviderResponse.md)
@@ -988,6 +1022,7 @@ Class | Method | HTTP request | Description
  - [PaginatedResponseOfSensorGlucose](docs/PaginatedResponseOfSensorGlucose.md)
  - [PaginatedResponseOfSleepSession](docs/PaginatedResponseOfSleepSession.md)
  - [PaginatedResponseOfStateSpan](docs/PaginatedResponseOfStateSpan.md)
+ - [PaginatedResponseOfTempBasal](docs/PaginatedResponseOfTempBasal.md)
  - [PaginatedResponseOfTherapySettings](docs/PaginatedResponseOfTherapySettings.md)
  - [PaginatedResponseOfUploaderSnapshot](docs/PaginatedResponseOfUploaderSnapshot.md)
  - [PaginationInfo](docs/PaginationInfo.md)
@@ -1003,11 +1038,13 @@ Class | Method | HTTP request | Description
  - [PerformanceMetrics](docs/PerformanceMetrics.md)
  - [PeriodMetrics](docs/PeriodMetrics.md)
  - [PeriodStatistics](docs/PeriodStatistics.md)
+ - [PersonalRangeTimeInRange](docs/PersonalRangeTimeInRange.md)
  - [PlatformCredentials](docs/PlatformCredentials.md)
  - [PlatformSettingsSummary](docs/PlatformSettingsSummary.md)
  - [PluginSettings](docs/PluginSettings.md)
  - [PredictionCurves](docs/PredictionCurves.md)
  - [PredictionErrorResponse](docs/PredictionErrorResponse.md)
+ - [PredictionPreferences](docs/PredictionPreferences.md)
  - [PredictionSettings](docs/PredictionSettings.md)
  - [PredictionStatusResponse](docs/PredictionStatusResponse.md)
  - [ProblemDetails](docs/ProblemDetails.md)
@@ -1143,7 +1180,9 @@ Class | Method | HTTP request | Description
  - [TargetRangeEntry](docs/TargetRangeEntry.md)
  - [TargetRangeSchedule](docs/TargetRangeSchedule.md)
  - [TargetStatus](docs/TargetStatus.md)
+ - [TempBasal](docs/TempBasal.md)
  - [TempBasalInfo](docs/TempBasalInfo.md)
+ - [TempBasalOrigin](docs/TempBasalOrigin.md)
  - [TenantAlertSettingsResponse](docs/TenantAlertSettingsResponse.md)
  - [TenantConnectorSummary](docs/TenantConnectorSummary.md)
  - [TenantConnectorsDto](docs/TenantConnectorsDto.md)
@@ -1178,6 +1217,7 @@ Class | Method | HTTP request | Description
  - [TimeSeriesPoint](docs/TimeSeriesPoint.md)
  - [TimeValue](docs/TimeValue.md)
  - [TimezoneTimelineEntry](docs/TimezoneTimelineEntry.md)
+ - [TokenIntrospectionResponse](docs/TokenIntrospectionResponse.md)
  - [TrackerCategory](docs/TrackerCategory.md)
  - [TrackerDefinitionDto](docs/TrackerDefinitionDto.md)
  - [TrackerInstanceDto](docs/TrackerInstanceDto.md)
@@ -1204,6 +1244,7 @@ Class | Method | HTTP request | Description
  - [UpdateChatIdentityLinkRequest](docs/UpdateChatIdentityLinkRequest.md)
  - [UpdateClockFaceRequest](docs/UpdateClockFaceRequest.md)
  - [UpdateCoachMarkRequest](docs/UpdateCoachMarkRequest.md)
+ - [UpdateGrantRequest](docs/UpdateGrantRequest.md)
  - [UpdateMembershipRequestSettingsRequest](docs/UpdateMembershipRequestSettingsRequest.md)
  - [UpdateOidcProviderRequest](docs/UpdateOidcProviderRequest.md)
  - [UpdateRoleRequest](docs/UpdateRoleRequest.md)
@@ -1218,6 +1259,7 @@ Class | Method | HTTP request | Description
  - [UploaderSetupResponse](docs/UploaderSetupResponse.md)
  - [UploaderSnapshot](docs/UploaderSnapshot.md)
  - [UpsertActivityRequest](docs/UpsertActivityRequest.md)
+ - [UpsertApsSnapshotRequest](docs/UpsertApsSnapshotRequest.md)
  - [UpsertBGCheckRequest](docs/UpsertBGCheckRequest.md)
  - [UpsertBolusCalculationRequest](docs/UpsertBolusCalculationRequest.md)
  - [UpsertCalibrationRequest](docs/UpsertCalibrationRequest.md)
@@ -1226,11 +1268,14 @@ Class | Method | HTTP request | Description
  - [UpsertMeterGlucoseRequest](docs/UpsertMeterGlucoseRequest.md)
  - [UpsertNoteRequest](docs/UpsertNoteRequest.md)
  - [UpsertPlatformSettingsRequest](docs/UpsertPlatformSettingsRequest.md)
+ - [UpsertPumpSnapshotRequest](docs/UpsertPumpSnapshotRequest.md)
  - [UpsertSensorGlucoseRequest](docs/UpsertSensorGlucoseRequest.md)
  - [UpsertStepCountRequest](docs/UpsertStepCountRequest.md)
  - [UpsertTimezoneEntryRequest](docs/UpsertTimezoneEntryRequest.md)
+ - [UpsertUploaderSnapshotRequest](docs/UpsertUploaderSnapshotRequest.md)
  - [UsageStatistics](docs/UsageStatistics.md)
  - [UserAlarmConfiguration](docs/UserAlarmConfiguration.md)
+ - [UserDisplayPreferences](docs/UserDisplayPreferences.md)
  - [UserPreferencesResponse](docs/UserPreferencesResponse.md)
  - [V4AlarmState](docs/V4AlarmState.md)
  - [V4GlucoseReading](docs/V4GlucoseReading.md)

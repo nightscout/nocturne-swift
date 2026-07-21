@@ -87,6 +87,43 @@ open class NutritionAPI {
     }
 
     /**
+     Create or update carb intakes in bulk (max 1000).
+     
+     - parameter createCarbIntakeRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [CarbIntake]
+     */
+    open class func nutritionCreateCarbIntakesBulk(createCarbIntakeRequest: [CreateCarbIntakeRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [CarbIntake] {
+        return try await nutritionCreateCarbIntakesBulkWithRequestBuilder(createCarbIntakeRequest: createCarbIntakeRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Create or update carb intakes in bulk (max 1000).
+     - POST /api/v4/nutrition/carbs/bulk
+     - Array semantics are per-item upsert, not all-or-nothing: each intake carrying both `dataSource` and `syncIdentifier` updates the row already matched by that pair; all others insert. Validation failures reject the whole request with `400 Bad Request` before anything is persisted.
+     - parameter createCarbIntakeRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[CarbIntake]> 
+     */
+    open class func nutritionCreateCarbIntakesBulkWithRequestBuilder(createCarbIntakeRequest: [CreateCarbIntakeRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[CarbIntake]> {
+        let localVariablePath = "/api/v4/nutrition/carbs/bulk"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createCarbIntakeRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[CarbIntake]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Atomically create a correlated Bolus + CarbIntake for a meal event. Both records share a single CorrelationId and are persisted within a single transaction. When an existing row matches on (DataSource, SyncIdentifier), the idempotent upsert applies and the response returns 200 instead of 201.
      
      - parameter createMealRequest: (body)  

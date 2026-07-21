@@ -84,6 +84,43 @@ open class BasalInjectionAPI {
     }
 
     /**
+     Create or update basal injections in bulk (max 1000).
+     
+     - parameter createBasalInjectionRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [BasalInjection]
+     */
+    open class func basalInjectionCreateBasalInjectionsBulk(createBasalInjectionRequest: [CreateBasalInjectionRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [BasalInjection] {
+        return try await basalInjectionCreateBasalInjectionsBulkWithRequestBuilder(createBasalInjectionRequest: createBasalInjectionRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Create or update basal injections in bulk (max 1000).
+     - POST /api/v4/insulin/basal-injections/bulk
+     - Array semantics are per-item upsert, not all-or-nothing: each injection carrying both `dataSource` and `syncIdentifier` updates the row already matched by that pair; all others insert. Every item is validated with the same rules as the single create; validation failures reject the whole request with `400 Bad Request` before anything is persisted.
+     - parameter createBasalInjectionRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[BasalInjection]> 
+     */
+    open class func basalInjectionCreateBasalInjectionsBulkWithRequestBuilder(createBasalInjectionRequest: [CreateBasalInjectionRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[BasalInjection]> {
+        let localVariablePath = "/api/v4/insulin/basal-injections/bulk"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createBasalInjectionRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[BasalInjection]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Deletes a record by ID.
      
      - parameter id: (path) The unique identifier of the record to delete. 

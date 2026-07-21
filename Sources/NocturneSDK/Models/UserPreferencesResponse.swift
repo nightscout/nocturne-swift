@@ -12,13 +12,16 @@ public struct UserPreferencesResponse: Sendable, Codable, Hashable {
 
     /** User's preferred language code (e.g., \"en\", \"fr\", \"de\") */
     public var preferredLanguage: String?
+    public var preferences: UserDisplayPreferences?
 
-    public init(preferredLanguage: String? = nil) {
+    public init(preferredLanguage: String? = nil, preferences: UserDisplayPreferences? = nil) {
         self.preferredLanguage = preferredLanguage
+        self.preferences = preferences
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case preferredLanguage
+        case preferences
     }
 
     // Encodable protocol methods
@@ -26,6 +29,7 @@ public struct UserPreferencesResponse: Sendable, Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(preferredLanguage, forKey: .preferredLanguage)
+        try container.encodeIfPresent(preferences, forKey: .preferences)
     }
 }
 

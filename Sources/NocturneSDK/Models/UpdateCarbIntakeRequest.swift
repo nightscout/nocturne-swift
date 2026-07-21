@@ -28,10 +28,14 @@ public struct UpdateCarbIntakeRequest: Sendable, Codable, Hashable {
     public var carbTime: Double?
     /** Expected carb absorption duration in minutes. */
     public var absorptionTime: Int?
+    /** Fat consumed in grams, when the source reports macros. */
+    public var fatGrams: Double?
+    /** Protein consumed in grams, when the source reports macros. */
+    public var proteinGrams: Double?
     /** Correlation identifier for grouping related events. */
     public var correlationId: String?
 
-    public init(timestamp: Date? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, carbs: Double? = nil, syncIdentifier: String? = nil, carbTime: Double? = nil, absorptionTime: Int? = nil, correlationId: String? = nil) {
+    public init(timestamp: Date? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, carbs: Double? = nil, syncIdentifier: String? = nil, carbTime: Double? = nil, absorptionTime: Int? = nil, fatGrams: Double? = nil, proteinGrams: Double? = nil, correlationId: String? = nil) {
         self.timestamp = timestamp
         self.utcOffset = utcOffset
         self.device = device
@@ -41,6 +45,8 @@ public struct UpdateCarbIntakeRequest: Sendable, Codable, Hashable {
         self.syncIdentifier = syncIdentifier
         self.carbTime = carbTime
         self.absorptionTime = absorptionTime
+        self.fatGrams = fatGrams
+        self.proteinGrams = proteinGrams
         self.correlationId = correlationId
     }
 
@@ -54,6 +60,8 @@ public struct UpdateCarbIntakeRequest: Sendable, Codable, Hashable {
         case syncIdentifier
         case carbTime
         case absorptionTime
+        case fatGrams
+        case proteinGrams
         case correlationId
     }
 
@@ -70,6 +78,8 @@ public struct UpdateCarbIntakeRequest: Sendable, Codable, Hashable {
         try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
         try container.encodeIfPresent(carbTime, forKey: .carbTime)
         try container.encodeIfPresent(absorptionTime, forKey: .absorptionTime)
+        try container.encodeIfPresent(fatGrams, forKey: .fatGrams)
+        try container.encodeIfPresent(proteinGrams, forKey: .proteinGrams)
         try container.encodeIfPresent(correlationId, forKey: .correlationId)
     }
 }

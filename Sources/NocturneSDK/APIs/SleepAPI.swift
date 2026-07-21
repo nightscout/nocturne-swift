@@ -46,6 +46,43 @@ open class SleepAPI {
     }
 
     /**
+     Create or upsert sleep sessions in bulk (max 100)
+     
+     - parameter sleepSession: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [SleepSession]
+     */
+    open class func sleepCreateSessionsBulk(sleepSession: [SleepSession], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [SleepSession] {
+        return try await sleepCreateSessionsBulkWithRequestBuilder(sleepSession: sleepSession, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Create or upsert sleep sessions in bulk (max 100)
+     - POST /api/v4/sleep/sessions/bulk
+     - Sessions are upserted one by one with the same dedup semantics as the single create, so a retried batch is idempotent. On a concurrent-insert conflict the request stops with `409 Conflict`; sessions upserted before the conflict remain persisted, and retrying the whole batch is safe.
+     - parameter sleepSession: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[SleepSession]> 
+     */
+    open class func sleepCreateSessionsBulkWithRequestBuilder(sleepSession: [SleepSession], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[SleepSession]> {
+        let localVariablePath = "/api/v4/sleep/sessions/bulk"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: sleepSession, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[SleepSession]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Delete a sleep session
      
      - parameter id: (path)  
