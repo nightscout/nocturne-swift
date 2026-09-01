@@ -10,7 +10,7 @@ import Foundation
 open class ReservoirReportsAPI {
 
     /**
-     Report a known reservoir value: a spot reading of the pump's current level, or the amount just filled into a fresh reservoir/pod.
+     Create
      
      - parameter createReservoirReportRequest: (body) The reservoir report. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class ReservoirReportsAPI {
     }
 
     /**
-     Report a known reservoir value: a spot reading of the pump's current level, or the amount just filled into a fresh reservoir/pod.
+     Create
      - POST /api/v4/reservoir/reports
+     - Writes pump_snapshots and, for a fill, device_events — both the devices category in GovernedTables, matching the scope PumpSnapshotController and DeviceEventController require. The class-level [Authorize] alone is satisfied by read-only credentials such as a guest-link session.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createReservoirReportRequest: (body) The reservoir report. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PumpSnapshot> 
@@ -42,6 +49,6 @@ open class ReservoirReportsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PumpSnapshot>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

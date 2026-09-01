@@ -10,7 +10,7 @@ import Foundation
 open class ActogramAPI {
 
     /**
-     Get actogram report data for a time window.
+     Get actogram
      
      - parameter startTime: (query) Start of the window as Unix milliseconds (inclusive). (optional)
      - parameter endTime: (query) End of the window as Unix milliseconds (exclusive).             Must be greater than startTime. (optional)
@@ -22,8 +22,15 @@ open class ActogramAPI {
     }
 
     /**
-     Get actogram report data for a time window.
+     Get actogram
      - GET /api/v4/Actogram
+     - Get actogram report data for a time window.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter startTime: (query) Start of the window as Unix milliseconds (inclusive). (optional)
      - parameter endTime: (query) End of the window as Unix milliseconds (exclusive).             Must be greater than startTime. (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -48,6 +55,6 @@ open class ActogramAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ActogramReportData>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

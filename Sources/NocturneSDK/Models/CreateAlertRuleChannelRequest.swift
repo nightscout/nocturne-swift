@@ -9,18 +9,22 @@ import Foundation
 
 public struct CreateAlertRuleChannelRequest: Sendable, Codable, Hashable {
 
+    public static let secretRule = StringRule(minLength: nil, maxLength: 256, pattern: nil)
     public var channelType: ChannelType?
     /** Channel-specific address: webhook URL, chat handle, device kind for device_action, etc. Empty for in-app/web-push. */
     public var destination: String?
     public var destinationLabel: String?
     /** Channel-specific config, persisted as JSONB. For device_action: { \"capabilities\": [\"notify\", ...] }. */
     public var metadata: JSONValue?
+    /** Write-only HMAC signing secret for a webhook channel; the receiver verifies it against the X-Nocturne-Signature header. Omit to keep the secret stored against this channel type and destination — changing either is a new channel and carries no secret over. Send empty to clear it. At most 256 bytes once UTF-8 encoded. Never returned — the read side reports HasSecret instead. */
+    public var secret: String?
 
-    public init(channelType: ChannelType? = nil, destination: String? = nil, destinationLabel: String? = nil, metadata: JSONValue? = nil) {
+    public init(channelType: ChannelType? = nil, destination: String? = nil, destinationLabel: String? = nil, metadata: JSONValue? = nil, secret: String? = nil) {
         self.channelType = channelType
         self.destination = destination
         self.destinationLabel = destinationLabel
         self.metadata = metadata
+        self.secret = secret
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -28,6 +32,7 @@ public struct CreateAlertRuleChannelRequest: Sendable, Codable, Hashable {
         case destination
         case destinationLabel
         case metadata
+        case secret
     }
 
     // Encodable protocol methods
@@ -38,6 +43,7 @@ public struct CreateAlertRuleChannelRequest: Sendable, Codable, Hashable {
         try container.encodeIfPresent(destination, forKey: .destination)
         try container.encodeIfPresent(destinationLabel, forKey: .destinationLabel)
         try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(secret, forKey: .secret)
     }
 }
 

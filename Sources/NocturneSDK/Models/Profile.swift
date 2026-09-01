@@ -13,6 +13,8 @@ public struct Profile: Sendable, Codable, Hashable {
     public var defaultProfile: String?
     public var startDate: String?
     public var mills: Int64?
+    public var srvModified: Int64?
+    public var srvCreated: Int64?
     public var createdAt: String?
     public var units: String?
     public var store: [String: ProfileData]?
@@ -20,11 +22,13 @@ public struct Profile: Sendable, Codable, Hashable {
     public var loopSettings: LoopProfileSettings?
     public var isExternallyManaged: Bool?
 
-    public init(id: String? = nil, defaultProfile: String? = nil, startDate: String? = nil, mills: Int64? = nil, createdAt: String? = nil, units: String? = nil, store: [String: ProfileData]? = nil, enteredBy: String? = nil, loopSettings: LoopProfileSettings? = nil, isExternallyManaged: Bool? = nil) {
+    public init(id: String? = nil, defaultProfile: String? = nil, startDate: String? = nil, mills: Int64? = nil, srvModified: Int64? = nil, srvCreated: Int64? = nil, createdAt: String? = nil, units: String? = nil, store: [String: ProfileData]? = nil, enteredBy: String? = nil, loopSettings: LoopProfileSettings? = nil, isExternallyManaged: Bool? = nil) {
         self.id = id
         self.defaultProfile = defaultProfile
         self.startDate = startDate
         self.mills = mills
+        self.srvModified = srvModified
+        self.srvCreated = srvCreated
         self.createdAt = createdAt
         self.units = units
         self.store = store
@@ -38,6 +42,8 @@ public struct Profile: Sendable, Codable, Hashable {
         case defaultProfile
         case startDate
         case mills
+        case srvModified
+        case srvCreated
         case createdAt = "created_at"
         case units
         case store
@@ -54,6 +60,8 @@ public struct Profile: Sendable, Codable, Hashable {
         try container.encodeIfPresent(defaultProfile, forKey: .defaultProfile)
         try container.encodeIfPresent(startDate, forKey: .startDate)
         try container.encodeIfPresent(mills, forKey: .mills)
+        try container.encodeIfPresent(srvModified, forKey: .srvModified)
+        try container.encodeIfPresent(srvCreated, forKey: .srvCreated)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(units, forKey: .units)
         try container.encodeIfPresent(store, forKey: .store)

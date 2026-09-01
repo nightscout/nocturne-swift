@@ -10,7 +10,8 @@ import Foundation
 open class ChatIdentityDirectoryAPI {
 
     /**
-
+     Create pending
+     
      - parameter createPendingLinkRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PendingLinkResponse
@@ -20,7 +21,14 @@ open class ChatIdentityDirectoryAPI {
     }
 
     /**
+     Create pending
      - POST /api/v4/chat-identity/directory/pending-links
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createPendingLinkRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PendingLinkResponse> 
@@ -40,11 +48,11 @@ open class ChatIdentityDirectoryAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PendingLinkResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Returns ALL directory candidates for a (platform, platformUserId). Caller is responsible for label disambiguation. Each candidate includes the tenantSlug (joined from tenants table).
+     Resolve
      
      - parameter platform: (query) Chat platform identifier (e.g., \&quot;discord\&quot;, \&quot;telegram\&quot;). (optional)
      - parameter platformUserId: (query) Unique user identifier on the specified platform. (optional)
@@ -56,8 +64,15 @@ open class ChatIdentityDirectoryAPI {
     }
 
     /**
-     Returns ALL directory candidates for a (platform, platformUserId). Caller is responsible for label disambiguation. Each candidate includes the tenantSlug (joined from tenants table).
+     Resolve
      - GET /api/v4/chat-identity/directory/resolve
+     - Returns ALL directory candidates for a (platform, platformUserId). Caller is responsible for label disambiguation. Each candidate includes the tenantSlug (joined from tenants table).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter platform: (query) Chat platform identifier (e.g., \&quot;discord\&quot;, \&quot;telegram\&quot;). (optional)
      - parameter platformUserId: (query) Unique user identifier on the specified platform. (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -82,11 +97,11 @@ open class ChatIdentityDirectoryAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DirectoryCandidatesResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Revoke a link by id, verifying the (platform, platformUserId) on the row matches the body. Used by /disconnect from the bot.
+     Revoke by platform user
      
      - parameter id: (path)  
      - parameter revokeByPlatformUserRequest: (body)  
@@ -98,8 +113,15 @@ open class ChatIdentityDirectoryAPI {
     }
 
     /**
-     Revoke a link by id, verifying the (platform, platformUserId) on the row matches the body. Used by /disconnect from the bot.
+     Revoke by platform user
      - DELETE /api/v4/chat-identity/directory/links/{id}
+     - Revoke a link by id, verifying the (platform, platformUserId) on the row matches the body. Used by /disconnect from the bot.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter revokeByPlatformUserRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -123,6 +145,6 @@ open class ChatIdentityDirectoryAPI {
 
         let localVariableRequestBuilder: RequestBuilder<URL>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

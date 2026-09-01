@@ -10,7 +10,7 @@ import Foundation
 open class BatteryAPI {
 
     /**
-     Get battery readings for a device over a time period
+     Get battery readings
      
      - parameter device: (query) Device identifier (optional, returns all devices if not specified) (optional)
      - parameter from: (query) Start time in milliseconds since Unix epoch (optional)
@@ -23,8 +23,15 @@ open class BatteryAPI {
     }
 
     /**
-     Get battery readings for a device over a time period
+     Get battery readings
      - GET /api/v4/Battery/readings
+     - Get battery readings for a device over a time period
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter device: (query) Device identifier (optional, returns all devices if not specified) (optional)
      - parameter from: (query) Start time in milliseconds since Unix epoch (optional)
      - parameter to: (query) End time in milliseconds since Unix epoch (optional)
@@ -51,11 +58,11 @@ open class BatteryAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[BatteryReading]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get battery statistics for a device or all devices
+     Get battery statistics
      
      - parameter device: (query) Device identifier (optional, returns all devices if not specified) (optional)
      - parameter from: (query) Start time in milliseconds since Unix epoch (default: 7 days ago) (optional)
@@ -68,8 +75,15 @@ open class BatteryAPI {
     }
 
     /**
-     Get battery statistics for a device or all devices
+     Get battery statistics
      - GET /api/v4/Battery/statistics
+     - Get battery statistics for a device or all devices
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter device: (query) Device identifier (optional, returns all devices if not specified) (optional)
      - parameter from: (query) Start time in milliseconds since Unix epoch (default: 7 days ago) (optional)
      - parameter to: (query) End time in milliseconds since Unix epoch (default: now) (optional)
@@ -96,11 +110,11 @@ open class BatteryAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[BatteryStatistics]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get charge cycle history for a device
+     Get charge cycles
      
      - parameter device: (query) Device identifier (optional, returns all devices if not specified) (optional)
      - parameter from: (query) Start time in milliseconds since Unix epoch (optional)
@@ -114,8 +128,15 @@ open class BatteryAPI {
     }
 
     /**
-     Get charge cycle history for a device
+     Get charge cycles
      - GET /api/v4/Battery/cycles
+     - Get charge cycle history for a device
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter device: (query) Device identifier (optional, returns all devices if not specified) (optional)
      - parameter from: (query) Start time in milliseconds since Unix epoch (optional)
      - parameter to: (query) End time in milliseconds since Unix epoch (optional)
@@ -144,11 +165,11 @@ open class BatteryAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[ChargeCycle]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get the current battery status for all tracked devices
+     Get current battery status
      
      - parameter recentMinutes: (query) How many minutes back to consider for \&quot;recent\&quot; readings (default: 30) (optional, default to 30)
      - parameter apiConfiguration: The configuration for the http request.
@@ -159,8 +180,15 @@ open class BatteryAPI {
     }
 
     /**
-     Get the current battery status for all tracked devices
+     Get current battery status
      - GET /api/v4/Battery/current
+     - Get the current battery status for all tracked devices
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter recentMinutes: (query) How many minutes back to consider for \&quot;recent\&quot; readings (default: 30) (optional, default to 30)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<CurrentBatteryStatus> 
@@ -183,11 +211,11 @@ open class BatteryAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CurrentBatteryStatus>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get list of all known devices with battery data
+     Get known devices
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [String]
@@ -197,8 +225,15 @@ open class BatteryAPI {
     }
 
     /**
-     Get list of all known devices with battery data
+     Get known devices
      - GET /api/v4/Battery/devices
+     - Get list of all known devices with battery data
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[String]> 
      */
@@ -217,6 +252,6 @@ open class BatteryAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[String]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

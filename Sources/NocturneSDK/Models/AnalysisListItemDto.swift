@@ -11,6 +11,7 @@ import Foundation
 public struct AnalysisListItemDto: Sendable, Codable, Hashable {
 
     public var id: String?
+    /** Trace identifier linking the Nightscout and Nocturne requests being compared. The wire name stays correlationId: it predates the TraceId rename and the compatibility page reads it by that name. */
     public var correlationId: String?
     public var analysisTimestamp: Date?
     public var requestMethod: String?

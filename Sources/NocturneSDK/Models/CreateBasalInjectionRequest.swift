@@ -22,7 +22,7 @@ public struct CreateBasalInjectionRequest: Sendable, Codable, Hashable {
     public var dataSource: String?
     /** Upstream sync identifier for deduplication, paired with DataSource. */
     public var syncIdentifier: String?
-    /** Reference to the PatientInsulin used for this injection. The referenced insulin's role must be Basal or Both. The server resolves this to a TreatmentInsulinContext snapshot at write time. */
+    /** Optional reference to the PatientInsulin used for this injection. When supplied, the referenced insulin must exist, carry role Basal or Both, and be active at Timestamp; the server resolves it to a TreatmentInsulinContext snapshot at write time and rejects the request with 400 Bad Request otherwise. When omitted, no insulin is resolved and the stored record's InsulinContext stays null — the shape uploader clients produce when they know nothing about the patient's insulin catalog. */
     public var patientInsulinId: String?
     /** Insulin units injected. Must be greater than zero. */
     public var units: Double?

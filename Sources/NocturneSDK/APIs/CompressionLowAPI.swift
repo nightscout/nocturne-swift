@@ -10,7 +10,7 @@ import Foundation
 open class CompressionLowAPI {
 
     /**
-     Accept a suggestion with adjusted bounds
+     Accept suggestion
      
      - parameter id: (path)  
      - parameter acceptSuggestionRequest: (body)  
@@ -22,8 +22,15 @@ open class CompressionLowAPI {
     }
 
     /**
-     Accept a suggestion with adjusted bounds
+     Accept suggestion
      - POST /api/v4/compression-lows/suggestions/{id}/accept
+     - Accept a suggestion with adjusted bounds
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter acceptSuggestionRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -47,11 +54,11 @@ open class CompressionLowAPI {
 
         let localVariableRequestBuilder: RequestBuilder<StateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a suggestion and its associated state span
+     Delete suggestion
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -62,8 +69,15 @@ open class CompressionLowAPI {
     }
 
     /**
-     Delete a suggestion and its associated state span
+     Delete suggestion
      - DELETE /api/v4/compression-lows/suggestions/{id}
+     - Delete a suggestion and its associated state span
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -86,11 +100,11 @@ open class CompressionLowAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Dismiss a suggestion
+     Dismiss suggestion
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -101,8 +115,15 @@ open class CompressionLowAPI {
     }
 
     /**
-     Dismiss a suggestion
+     Dismiss suggestion
      - POST /api/v4/compression-lows/suggestions/{id}/dismiss
+     - Dismiss a suggestion
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -125,11 +146,11 @@ open class CompressionLowAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a single suggestion with glucose entries for charting
+     Get suggestion
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -140,8 +161,15 @@ open class CompressionLowAPI {
     }
 
     /**
-     Get a single suggestion with glucose entries for charting
+     Get suggestion
      - GET /api/v4/compression-lows/suggestions/{id}
+     - Get a single suggestion with glucose entries for charting
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<CompressionLowSuggestionWithEntries> 
@@ -164,11 +192,11 @@ open class CompressionLowAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CompressionLowSuggestionWithEntries>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get compression low suggestions with optional filtering
+     Get suggestions
      
      - parameter status: (query)  (optional)
      - parameter nightOf: (query)  (optional)
@@ -180,8 +208,15 @@ open class CompressionLowAPI {
     }
 
     /**
-     Get compression low suggestions with optional filtering
+     Get suggestions
      - GET /api/v4/compression-lows/suggestions
+     - Get compression low suggestions with optional filtering
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter status: (query)  (optional)
      - parameter nightOf: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -206,11 +241,11 @@ open class CompressionLowAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[CompressionLowSuggestion]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Manually trigger detection for a date range (for testing)
+     Trigger detection
      
      - parameter triggerDetectionRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -221,9 +256,15 @@ open class CompressionLowAPI {
     }
 
     /**
-     Manually trigger detection for a date range (for testing)
+     Trigger detection
      - POST /api/v4/compression-lows/detect
-     - Provide either a single `nightOf` date or a range with `startDate` and `endDate`. When using a range, detection runs for each night in the range (inclusive).
+     - Provide either a single `nightOf` date or a range with `startDate` and `endDate`. When using a range, detection runs for each night in the range (inclusive). Each night analysed persists the compression_low_suggestions rows it finds (CompressionLowDetectionService.DetectForNightAsync), so this is a write.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter triggerDetectionRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DetectionResult> 
@@ -243,6 +284,6 @@ open class CompressionLowAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DetectionResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

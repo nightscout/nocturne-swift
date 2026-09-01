@@ -10,7 +10,7 @@ import Foundation
 open class AnalyticsAPI {
 
     /**
-     Clears all locally stored analytics data. This action cannot be undone.
+     Clear analytics data
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -20,8 +20,15 @@ open class AnalyticsAPI {
     }
 
     /**
-     Clears all locally stored analytics data. This action cannot be undone.
+     Clear analytics data
      - DELETE /api/v4/Analytics/data
+     - Clears all locally stored analytics data. This action cannot be undone.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
      */
@@ -40,11 +47,11 @@ open class AnalyticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Gets the current analytics configuration and collection status.
+     Get analytics status
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -54,8 +61,15 @@ open class AnalyticsAPI {
     }
 
     /**
-     Gets the current analytics configuration and collection status.
+     Get analytics status
      - GET /api/v4/Analytics/status
+     - Gets the current analytics configuration and collection status.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
      */
@@ -74,11 +88,11 @@ open class AnalyticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Gets any pending analytics data queued for collection, returned for transparency. Since data is stored locally only, this is informational.
+     Get pending analytics data
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: AnalyticsBatch
@@ -88,8 +102,15 @@ open class AnalyticsAPI {
     }
 
     /**
-     Gets any pending analytics data queued for collection, returned for transparency. Since data is stored locally only, this is informational.
+     Get pending analytics data
      - GET /api/v4/Analytics/data/pending
+     - Gets any pending analytics data queued for collection, returned for transparency. Since data is stored locally only, this is informational.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<AnalyticsBatch> 
      */
@@ -108,11 +129,11 @@ open class AnalyticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AnalyticsBatch>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Gets current system performance metrics such as request latencies and memory usage.
+     Get performance metrics
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PerformanceMetrics
@@ -122,8 +143,15 @@ open class AnalyticsAPI {
     }
 
     /**
-     Gets current system performance metrics such as request latencies and memory usage.
+     Get performance metrics
      - GET /api/v4/Analytics/metrics/performance
+     - Gets current system performance metrics such as request latencies and memory usage.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PerformanceMetrics> 
      */
@@ -142,11 +170,11 @@ open class AnalyticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PerformanceMetrics>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get information about what data is collected and privacy policy
+     Get privacy information
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: URL
@@ -156,8 +184,15 @@ open class AnalyticsAPI {
     }
 
     /**
-     Get information about what data is collected and privacy policy
+     Get privacy information
      - GET /api/v4/Analytics/privacy
+     - Get information about what data is collected and privacy policy
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<URL> 
      */
@@ -176,11 +211,11 @@ open class AnalyticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<URL>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Gets current usage statistics such as endpoint hit counts and feature usage.
+     Get usage statistics
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: UsageStatistics
@@ -190,8 +225,15 @@ open class AnalyticsAPI {
     }
 
     /**
-     Gets current usage statistics such as endpoint hit counts and feature usage.
+     Get usage statistics
      - GET /api/v4/Analytics/metrics/usage
+     - Gets current usage statistics such as endpoint hit counts and feature usage.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<UsageStatistics> 
      */
@@ -210,11 +252,11 @@ open class AnalyticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<UsageStatistics>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Tracks a custom AnalyticsEvent. Useful for integration testing or manually recording discrete events. Returns 400 Bad Request if analytics collection is disabled.
+     Track custom event
      
      - parameter analyticsEvent: (body) The custom AnalyticsEvent to record. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -225,8 +267,15 @@ open class AnalyticsAPI {
     }
 
     /**
-     Tracks a custom AnalyticsEvent. Useful for integration testing or manually recording discrete events. Returns 400 Bad Request if analytics collection is disabled.
+     Track custom event
      - POST /api/v4/Analytics/events
+     - Tracks a custom AnalyticsEvent. Useful for integration testing or manually recording discrete events. Returns 400 Bad Request if analytics collection is disabled.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter analyticsEvent: (body) The custom AnalyticsEvent to record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -246,11 +295,11 @@ open class AnalyticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Updates analytics collection configuration.
+     Update analytics config
      
      - parameter analyticsCollectionConfig: (body) The new AnalyticsCollectionConfig to persist. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -261,8 +310,15 @@ open class AnalyticsAPI {
     }
 
     /**
-     Updates analytics collection configuration.
+     Update analytics config
      - PUT /api/v4/Analytics/config
+     - Updates analytics collection configuration.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter analyticsCollectionConfig: (body) The new AnalyticsCollectionConfig to persist. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<AnalyticsCollectionConfig> 
@@ -282,6 +338,6 @@ open class AnalyticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AnalyticsCollectionConfig>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

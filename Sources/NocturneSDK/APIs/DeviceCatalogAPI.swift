@@ -10,7 +10,7 @@ import Foundation
 open class DeviceCatalogAPI {
 
     /**
-     Get all known device models.
+     Get catalog
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [DeviceCatalogEntry]
@@ -20,8 +20,15 @@ open class DeviceCatalogAPI {
     }
 
     /**
-     Get all known device models.
+     Get catalog
      - GET /api/v4/devices/catalog
+     - Get all known device models.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[DeviceCatalogEntry]> 
      */
@@ -40,11 +47,11 @@ open class DeviceCatalogAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[DeviceCatalogEntry]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get device models filtered by category.
+     Get catalog by category
      
      - parameter category: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -55,8 +62,15 @@ open class DeviceCatalogAPI {
     }
 
     /**
-     Get device models filtered by category.
+     Get catalog by category
      - GET /api/v4/devices/catalog/{category}
+     - Get device models filtered by category.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter category: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[DeviceCatalogEntry]> 
@@ -79,6 +93,6 @@ open class DeviceCatalogAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[DeviceCatalogEntry]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

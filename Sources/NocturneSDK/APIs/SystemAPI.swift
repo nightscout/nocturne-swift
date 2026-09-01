@@ -10,7 +10,8 @@ import Foundation
 open class SystemAPI {
 
     /**
-
+     Get channel statuses
+     
      - parameter apiConfiguration: The configuration for the http request.
      - returns: ChannelStatusResponse
      */
@@ -19,7 +20,14 @@ open class SystemAPI {
     }
 
     /**
+     Get channel statuses
      - GET /api/v4/system/channels
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ChannelStatusResponse> 
      */
@@ -38,11 +46,12 @@ open class SystemAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ChannelStatusResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Heartbeat
+     
      - parameter heartbeatRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -52,7 +61,14 @@ open class SystemAPI {
     }
 
     /**
+     Heartbeat
      - POST /api/v4/system/heartbeat
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter heartbeatRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -72,6 +88,6 @@ open class SystemAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

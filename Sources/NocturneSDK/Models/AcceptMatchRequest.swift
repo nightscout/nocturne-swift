@@ -11,20 +11,21 @@ import Foundation
 public struct AcceptMatchRequest: Sendable, Codable, Hashable {
 
     public var foodEntryId: String?
-    public var treatmentId: String?
+    /** The carb intake to link the food to, from CarbIntakeId. */
+    public var carbIntakeId: String?
     public var carbs: Double?
     public var timeOffsetMinutes: Int?
 
-    public init(foodEntryId: String? = nil, treatmentId: String? = nil, carbs: Double? = nil, timeOffsetMinutes: Int? = nil) {
+    public init(foodEntryId: String? = nil, carbIntakeId: String? = nil, carbs: Double? = nil, timeOffsetMinutes: Int? = nil) {
         self.foodEntryId = foodEntryId
-        self.treatmentId = treatmentId
+        self.carbIntakeId = carbIntakeId
         self.carbs = carbs
         self.timeOffsetMinutes = timeOffsetMinutes
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case foodEntryId
-        case treatmentId
+        case carbIntakeId
         case carbs
         case timeOffsetMinutes
     }
@@ -34,7 +35,7 @@ public struct AcceptMatchRequest: Sendable, Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(foodEntryId, forKey: .foodEntryId)
-        try container.encodeIfPresent(treatmentId, forKey: .treatmentId)
+        try container.encodeIfPresent(carbIntakeId, forKey: .carbIntakeId)
         try container.encodeIfPresent(carbs, forKey: .carbs)
         try container.encodeIfPresent(timeOffsetMinutes, forKey: .timeOffsetMinutes)
     }

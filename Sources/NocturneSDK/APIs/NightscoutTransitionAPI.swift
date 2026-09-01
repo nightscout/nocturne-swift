@@ -10,7 +10,7 @@ import Foundation
 open class NightscoutTransitionAPI {
 
     /**
-     Get the current Nightscout transition status including migration progress, write-back health, and disconnect readiness recommendation.
+     Get transition status
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: NightscoutTransitionStatus
@@ -20,8 +20,15 @@ open class NightscoutTransitionAPI {
     }
 
     /**
-     Get the current Nightscout transition status including migration progress, write-back health, and disconnect readiness recommendation.
+     Get transition status
      - GET /api/v4/nightscout-transition/status
+     - Get the current Nightscout transition status including migration progress, write-back health, and disconnect readiness recommendation.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<NightscoutTransitionStatus> 
      */
@@ -40,6 +47,6 @@ open class NightscoutTransitionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<NightscoutTransitionStatus>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

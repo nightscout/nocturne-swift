@@ -10,7 +10,7 @@ import Foundation
 open class ConnectorFoodEntriesAPI {
 
     /**
-     Import connector food entries.
+     Import entries
      
      - parameter connectorFoodEntryImport: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class ConnectorFoodEntriesAPI {
     }
 
     /**
-     Import connector food entries.
+     Import entries
      - POST /api/v4/connector-food-entries/import
+     - Import connector food entries.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter connectorFoodEntryImport: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[ConnectorFoodEntry]> 
@@ -42,6 +49,6 @@ open class ConnectorFoodEntriesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[ConnectorFoodEntry]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

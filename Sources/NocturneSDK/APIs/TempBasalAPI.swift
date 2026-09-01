@@ -10,7 +10,7 @@ import Foundation
 open class TempBasalAPI {
 
     /**
-     Write temp basal spans and cancels in bulk (max 1000).
+     Create temp basals
      
      - parameter createTempBasalRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,9 +21,15 @@ open class TempBasalAPI {
     }
 
     /**
-     Write temp basal spans and cancels in bulk (max 1000).
+     Create temp basals
      - POST /api/v4/insulin/temp-basals
      - Items are processed in timestamp order, one at a time, so a batch may start a temp basal and cancel it later in the same request. Semantics are per-item, not all-or-nothing:              - A regular item carrying both `dataSource` and `syncIdentifier` updates the row already   matched by that pair; all others insert. - A cancel (`isCancel: true`) truncates the temp basal active at its timestamp by setting   the span end to that instant; with no active temp basal it is a no-op.              Validation failures reject the whole request with `400 Bad Request` before anything is persisted. The response contains every record written or truncated, in processing order.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createTempBasalRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[TempBasal]> 
@@ -43,11 +49,11 @@ open class TempBasalAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[TempBasal]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Lists temp basal spans, newest-first by default.
+     Get all
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -64,8 +70,15 @@ open class TempBasalAPI {
     }
 
     /**
-     Lists temp basal spans, newest-first by default.
+     Get all
      - GET /api/v4/insulin/temp-basals
+     - Never cached, per GetProfileSummary: a just-started or just-cancelled span must not be invisible until a cached list body expires.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -101,11 +114,11 @@ open class TempBasalAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfTempBasal>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Returns a single temp basal span by ID.
+     Get by id
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -116,8 +129,15 @@ open class TempBasalAPI {
     }
 
     /**
-     Returns a single temp basal span by ID.
+     Get by id
      - GET /api/v4/insulin/temp-basals/{id}
+     - Returns a single temp basal span by ID.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TempBasal> 
@@ -140,6 +160,6 @@ open class TempBasalAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TempBasal>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

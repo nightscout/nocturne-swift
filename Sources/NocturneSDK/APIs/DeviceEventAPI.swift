@@ -10,7 +10,7 @@ import Foundation
 open class DeviceEventAPI {
 
     /**
-     Restores multiple soft-deleted records by their IDs.
+     Bulk restore
      
      - parameter requestBody: (body) The unique identifiers of the soft-deleted records. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,9 +21,15 @@ open class DeviceEventAPI {
     }
 
     /**
-     Restores multiple soft-deleted records by their IDs.
+     Bulk restore
      - POST /api/v4/observations/device-events/restore
      - Returns `200 OK` with the restored records. IDs that don't match a soft-deleted record are silently ignored.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter requestBody: (body) The unique identifiers of the soft-deleted records. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[DeviceEvent]> 
@@ -43,13 +49,13 @@ open class DeviceEventAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[DeviceEvent]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Creates a new record and returns it with a `Location` header pointing to the created resource.
+     Create
      
-     - parameter upsertDeviceEventRequest: (body) The data used to create the record. 
+     - parameter upsertDeviceEventRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DeviceEvent
      */
@@ -58,10 +64,15 @@ open class DeviceEventAPI {
     }
 
     /**
-     Creates a new record and returns it with a `Location` header pointing to the created resource.
+     Create
      - POST /api/v4/observations/device-events
-     - `Timestamp` must be set on the mapped model; requests that resolve to a default timestamp are rejected with `400 Bad Request`.              On success, responds with `201 Created` and a `Location` header containing the URL of the newly created record.
-     - parameter upsertDeviceEventRequest: (body) The data used to create the record. 
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter upsertDeviceEventRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DeviceEvent> 
      */
@@ -80,11 +91,11 @@ open class DeviceEventAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DeviceEvent>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Deletes a record by ID.
+     Delete
      
      - parameter id: (path) The unique identifier of the record to delete. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -95,9 +106,15 @@ open class DeviceEventAPI {
     }
 
     /**
-     Deletes a record by ID.
+     Delete
      - DELETE /api/v4/observations/device-events/{id}
      - Returns `204 No Content` on success, or `404 Not Found` if no record with the given id exists.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The unique identifier of the record to delete. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -120,11 +137,11 @@ open class DeviceEventAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a device event by its external sync identifier (dataSource + syncIdentifier pair).
+     Delete by sync identifier
      
      - parameter dataSource: (query)  (optional)
      - parameter syncIdentifier: (query)  (optional)
@@ -136,8 +153,15 @@ open class DeviceEventAPI {
     }
 
     /**
-     Delete a device event by its external sync identifier (dataSource + syncIdentifier pair).
+     Delete by sync identifier
      - DELETE /api/v4/observations/device-events/by-sync-id
+     - Delete a device event by its external sync identifier (dataSource + syncIdentifier pair).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter dataSource: (query)  (optional)
      - parameter syncIdentifier: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -162,19 +186,19 @@ open class DeviceEventAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Lists records with pagination, optional date range, device, and source filtering.
+     Get all
      
-     - parameter from: (query) Inclusive start of the date range filter. (optional)
-     - parameter to: (query) Inclusive end of the date range filter. (optional)
-     - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
-     - parameter offset: (query) Number of records to skip for pagination. Defaults to &#x60;0&#x60;. (optional, default to 0)
-     - parameter sort: (query) Sort order for results by timestamp. Defaults to &#x60;timestamp_desc&#x60;. (optional, default to "timestamp_desc")
-     - parameter device: (query) Optional filter to restrict results to a specific device. (optional)
-     - parameter source: (query) Optional filter to restrict results to a specific data source. (optional)
+     - parameter from: (query)  (optional)
+     - parameter to: (query)  (optional)
+     - parameter limit: (query)  (optional, default to 100)
+     - parameter offset: (query)  (optional, default to 0)
+     - parameter sort: (query)  (optional, default to "timestamp_desc")
+     - parameter device: (query)  (optional)
+     - parameter source: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedResponseOfDeviceEvent
      */
@@ -183,16 +207,22 @@ open class DeviceEventAPI {
     }
 
     /**
-     Lists records with pagination, optional date range, device, and source filtering.
+     Get all
      - GET /api/v4/observations/device-events
-     - The `sort` parameter accepts exactly two values: - `timestamp_asc` — oldest records first - `timestamp_desc` — newest records first (default)              Use `limit` and `offset` together for paginated access to large result sets.
-     - parameter from: (query) Inclusive start of the date range filter. (optional)
-     - parameter to: (query) Inclusive end of the date range filter. (optional)
-     - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
-     - parameter offset: (query) Number of records to skip for pagination. Defaults to &#x60;0&#x60;. (optional, default to 0)
-     - parameter sort: (query) Sort order for results by timestamp. Defaults to &#x60;timestamp_desc&#x60;. (optional, default to "timestamp_desc")
-     - parameter device: (query) Optional filter to restrict results to a specific device. (optional)
-     - parameter source: (query) Optional filter to restrict results to a specific data source. (optional)
+     - The patientDeviceId query parameter is read directly from the request because the base list signature (shared by every V4 read controller) has no device-attribution concept — binding it here keeps a single GET action while adding the device-event-only filter.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter from: (query)  (optional)
+     - parameter to: (query)  (optional)
+     - parameter limit: (query)  (optional, default to 100)
+     - parameter offset: (query)  (optional, default to 0)
+     - parameter sort: (query)  (optional, default to "timestamp_desc")
+     - parameter device: (query)  (optional)
+     - parameter source: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedResponseOfDeviceEvent> 
      */
@@ -221,11 +251,11 @@ open class DeviceEventAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfDeviceEvent>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Retrieves a single record by its unique identifier.
+     Get by id
      
      - parameter id: (path) The unique identifier of the record. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -236,9 +266,15 @@ open class DeviceEventAPI {
     }
 
     /**
-     Retrieves a single record by its unique identifier.
+     Get by id
      - GET /api/v4/observations/device-events/{id}
      - Returns `404 Not Found` if no record with the given id exists.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The unique identifier of the record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DeviceEvent> 
@@ -261,11 +297,11 @@ open class DeviceEventAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DeviceEvent>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Lists soft-deleted records available for restoration, ordered by deletion date (newest first).
+     List deleted
      
      - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
      - parameter offset: (query) Number of records to skip for pagination. Defaults to &#x60;0&#x60;. (optional, default to 0)
@@ -277,8 +313,15 @@ open class DeviceEventAPI {
     }
 
     /**
-     Lists soft-deleted records available for restoration, ordered by deletion date (newest first).
+     List deleted
      - GET /api/v4/observations/device-events/deleted
+     - Gated on the write scope although it reads: the recycle bin exists to feed Restore, and records the owner deleted must not be enumerable by read-only credentials — in particular the anonymous public-share principal, which satisfies the class-level category read gate.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
      - parameter offset: (query) Number of records to skip for pagination. Defaults to &#x60;0&#x60;. (optional, default to 0)
      - parameter apiConfiguration: The configuration for the http request.
@@ -303,11 +346,11 @@ open class DeviceEventAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfDeviceEvent>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Restores a soft-deleted record by ID.
+     Restore
      
      - parameter id: (path) The unique identifier of the soft-deleted record. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -318,9 +361,15 @@ open class DeviceEventAPI {
     }
 
     /**
-     Restores a soft-deleted record by ID.
+     Restore
      - POST /api/v4/observations/device-events/{id}/restore
      - Returns `200 OK` with the restored record, or `404 Not Found` if no soft-deleted record with the given id exists.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The unique identifier of the soft-deleted record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DeviceEvent> 
@@ -343,14 +392,14 @@ open class DeviceEventAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DeviceEvent>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Updates an existing record by ID and returns the updated record.
+     Update
      
-     - parameter id: (path) The unique identifier of the record to update. 
-     - parameter upsertDeviceEventRequest: (body) The data to apply to the existing record. 
+     - parameter id: (path)  
+     - parameter upsertDeviceEventRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DeviceEvent
      */
@@ -359,11 +408,16 @@ open class DeviceEventAPI {
     }
 
     /**
-     Updates an existing record by ID and returns the updated record.
+     Update
      - PUT /api/v4/observations/device-events/{id}
-     - Returns `404 Not Found` if no record with the given id exists.              `Timestamp` must be set on the mapped model; requests that resolve to a default timestamp are rejected with `400 Bad Request`.
-     - parameter id: (path) The unique identifier of the record to update. 
-     - parameter upsertDeviceEventRequest: (body) The data to apply to the existing record. 
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter id: (path)  
+     - parameter upsertDeviceEventRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DeviceEvent> 
      */
@@ -385,6 +439,6 @@ open class DeviceEventAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DeviceEvent>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

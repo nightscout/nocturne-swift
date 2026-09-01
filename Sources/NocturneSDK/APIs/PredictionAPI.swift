@@ -10,7 +10,7 @@ import Foundation
 open class PredictionAPI {
 
     /**
-     Get glucose predictions based on current data. Returns predicted glucose values for the next 4 hours in 5-minute intervals.
+     Get predictions
      
      - parameter profileId: (query) Optional profile ID to use for predictions (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class PredictionAPI {
     }
 
     /**
-     Get glucose predictions based on current data. Returns predicted glucose values for the next 4 hours in 5-minute intervals.
+     Get predictions
      - GET /api/v4/predictions
+     - Get glucose predictions based on current data. Returns predicted glucose values for the next 4 hours in 5-minute intervals.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter profileId: (query) Optional profile ID to use for predictions (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<GlucosePredictionResponse> 
@@ -45,11 +52,11 @@ open class PredictionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<GlucosePredictionResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get the pre-resolved therapy profile for the next 24 hours, flattened into contiguous absolute-time segments, for an offline on-device oref prediction run.
+     Get profile snapshot
      
      - parameter profileId: (query) Optional profile name. The device omits it (resolves the active profile). (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -60,9 +67,15 @@ open class PredictionAPI {
     }
 
     /**
-     Get the pre-resolved therapy profile for the next 24 hours, flattened into contiguous absolute-time segments, for an offline on-device oref prediction run.
+     Get profile snapshot
      - GET /api/v4/predictions/profile-snapshot
      - Unlike GetPredictions, this action is intentionally available regardless of Predictions:Source: the client runs oref on-device and needs its therapy profile precisely when server-side prediction is off (the offline case). It depends only on the unconditionally-registered profile resolvers, not on IPredictionService, so it carries no _predictionService/_source guard.              Clients must additionally apply the fixed oref constants max_iob=10, max_basal=4, max_daily_basal=2 (which PredictionService.GetProfileAsync hardcodes) to match a server-side oref run; they are not part of this payload.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter profileId: (query) Optional profile name. The device omits it (resolves the active profile). (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ProfileSnapshotResponse> 
@@ -85,11 +98,11 @@ open class PredictionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ProfileSnapshotResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Check the status of the prediction service.
+     Get status
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PredictionStatusResponse
@@ -99,8 +112,15 @@ open class PredictionAPI {
     }
 
     /**
-     Check the status of the prediction service.
+     Get status
      - GET /api/v4/predictions/status
+     - Check the status of the prediction service.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PredictionStatusResponse> 
      */
@@ -119,6 +139,6 @@ open class PredictionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PredictionStatusResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

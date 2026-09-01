@@ -10,7 +10,7 @@ import Foundation
 open class BasalInjectionAPI {
 
     /**
-     Restores multiple soft-deleted records by their IDs.
+     Bulk restore
      
      - parameter requestBody: (body) The unique identifiers of the soft-deleted records. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,9 +21,15 @@ open class BasalInjectionAPI {
     }
 
     /**
-     Restores multiple soft-deleted records by their IDs.
+     Bulk restore
      - POST /api/v4/insulin/basal-injections/restore
      - Returns `200 OK` with the restored records. IDs that don't match a soft-deleted record are silently ignored.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter requestBody: (body) The unique identifiers of the soft-deleted records. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[BasalInjection]> 
@@ -43,11 +49,11 @@ open class BasalInjectionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[BasalInjection]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Creates a new record and returns it with a `Location` header pointing to the created resource.
+     Create
      
      - parameter createBasalInjectionRequest: (body) The data used to create the record. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -58,9 +64,15 @@ open class BasalInjectionAPI {
     }
 
     /**
-     Creates a new record and returns it with a `Location` header pointing to the created resource.
+     Create
      - POST /api/v4/insulin/basal-injections
      - `Timestamp` must be set on the mapped model; requests that resolve to a default timestamp are rejected with `400 Bad Request`.              On success, responds with `201 Created` and a `Location` header containing the URL of the newly created record.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createBasalInjectionRequest: (body) The data used to create the record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<BasalInjection> 
@@ -80,11 +92,11 @@ open class BasalInjectionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BasalInjection>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create or update basal injections in bulk (max 1000).
+     Create basal injections bulk
      
      - parameter createBasalInjectionRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -95,9 +107,15 @@ open class BasalInjectionAPI {
     }
 
     /**
-     Create or update basal injections in bulk (max 1000).
+     Create basal injections bulk
      - POST /api/v4/insulin/basal-injections/bulk
      - Array semantics are per-item upsert, not all-or-nothing: each injection carrying both `dataSource` and `syncIdentifier` updates the row already matched by that pair; all others insert. Every item is validated with the same rules as the single create; validation failures reject the whole request with `400 Bad Request` before anything is persisted.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createBasalInjectionRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[BasalInjection]> 
@@ -117,11 +135,11 @@ open class BasalInjectionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[BasalInjection]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Deletes a record by ID.
+     Delete
      
      - parameter id: (path) The unique identifier of the record to delete. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -132,9 +150,15 @@ open class BasalInjectionAPI {
     }
 
     /**
-     Deletes a record by ID.
+     Delete
      - DELETE /api/v4/insulin/basal-injections/{id}
      - Returns `204 No Content` on success, or `404 Not Found` if no record with the given id exists.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The unique identifier of the record to delete. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -157,11 +181,60 @@ open class BasalInjectionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Lists records with pagination, optional date range, device, and source filtering.
+     Delete by sync identifier
+     
+     - parameter dataSource: (query)  (optional)
+     - parameter syncIdentifier: (query)  (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: Void
+     */
+    open class func basalInjectionDeleteBySyncIdentifier(dataSource: String? = nil, syncIdentifier: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
+        return try await basalInjectionDeleteBySyncIdentifierWithRequestBuilder(dataSource: dataSource, syncIdentifier: syncIdentifier, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Delete by sync identifier
+     - DELETE /api/v4/insulin/basal-injections/by-sync-id
+     - Delete a basal injection by its external sync identifier (dataSource + syncIdentifier pair).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter dataSource: (query)  (optional)
+     - parameter syncIdentifier: (query)  (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<Void> 
+     */
+    open class func basalInjectionDeleteBySyncIdentifierWithRequestBuilder(dataSource: String? = nil, syncIdentifier: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
+        let localVariablePath = "/api/v4/insulin/basal-injections/by-sync-id"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "dataSource": (wrappedValue: dataSource?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "syncIdentifier": (wrappedValue: syncIdentifier?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Get all
      
      - parameter from: (query) Inclusive start of the date range filter. (optional)
      - parameter to: (query) Inclusive end of the date range filter. (optional)
@@ -178,9 +251,15 @@ open class BasalInjectionAPI {
     }
 
     /**
-     Lists records with pagination, optional date range, device, and source filtering.
+     Get all
      - GET /api/v4/insulin/basal-injections
-     - The `sort` parameter accepts exactly two values: - `timestamp_asc` — oldest records first - `timestamp_desc` — newest records first (default)              Use `limit` and `offset` together for paginated access to large result sets.
+     - The `sort` parameter accepts exactly two values: - `timestamp_asc` — oldest records first - `timestamp_desc` — newest records first (default)              Use `limit` and `offset` together for paginated access to large result sets. `limit` is capped at MaxPageSize, and a `from`/`to` range wider than MaxDateSpanDays days is rejected with `400 Bad Request`.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query) Inclusive start of the date range filter. (optional)
      - parameter to: (query) Inclusive end of the date range filter. (optional)
      - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
@@ -216,11 +295,11 @@ open class BasalInjectionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfBasalInjection>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Retrieves a single record by its unique identifier.
+     Get by id
      
      - parameter id: (path) The unique identifier of the record. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -231,9 +310,15 @@ open class BasalInjectionAPI {
     }
 
     /**
-     Retrieves a single record by its unique identifier.
+     Get by id
      - GET /api/v4/insulin/basal-injections/{id}
      - Returns `404 Not Found` if no record with the given id exists.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The unique identifier of the record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<BasalInjection> 
@@ -256,11 +341,11 @@ open class BasalInjectionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BasalInjection>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Lists soft-deleted records available for restoration, ordered by deletion date (newest first).
+     List deleted
      
      - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
      - parameter offset: (query) Number of records to skip for pagination. Defaults to &#x60;0&#x60;. (optional, default to 0)
@@ -272,8 +357,15 @@ open class BasalInjectionAPI {
     }
 
     /**
-     Lists soft-deleted records available for restoration, ordered by deletion date (newest first).
+     List deleted
      - GET /api/v4/insulin/basal-injections/deleted
+     - Gated on the write scope although it reads: the recycle bin exists to feed Restore, and records the owner deleted must not be enumerable by read-only credentials — in particular the anonymous public-share principal, which satisfies the class-level category read gate.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
      - parameter offset: (query) Number of records to skip for pagination. Defaults to &#x60;0&#x60;. (optional, default to 0)
      - parameter apiConfiguration: The configuration for the http request.
@@ -298,11 +390,11 @@ open class BasalInjectionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfBasalInjection>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Restores a soft-deleted record by ID.
+     Restore
      
      - parameter id: (path) The unique identifier of the soft-deleted record. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -313,9 +405,15 @@ open class BasalInjectionAPI {
     }
 
     /**
-     Restores a soft-deleted record by ID.
+     Restore
      - POST /api/v4/insulin/basal-injections/{id}/restore
      - Returns `200 OK` with the restored record, or `404 Not Found` if no soft-deleted record with the given id exists.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The unique identifier of the soft-deleted record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<BasalInjection> 
@@ -338,11 +436,11 @@ open class BasalInjectionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BasalInjection>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Updates an existing record by ID and returns the updated record.
+     Update
      
      - parameter id: (path) The unique identifier of the record to update. 
      - parameter updateBasalInjectionRequest: (body) The data to apply to the existing record. 
@@ -354,9 +452,15 @@ open class BasalInjectionAPI {
     }
 
     /**
-     Updates an existing record by ID and returns the updated record.
+     Update
      - PUT /api/v4/insulin/basal-injections/{id}
      - Returns `404 Not Found` if no record with the given id exists.              `Timestamp` must be set on the mapped model; requests that resolve to a default timestamp are rejected with `400 Bad Request`.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The unique identifier of the record to update. 
      - parameter updateBasalInjectionRequest: (body) The data to apply to the existing record. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -380,6 +484,6 @@ open class BasalInjectionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BasalInjection>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

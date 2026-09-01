@@ -10,7 +10,7 @@ import Foundation
 open class AlertReplayAPI {
 
     /**
-     Replay enabled rules over a window. date=null replays the rolling last 24 hours; otherwise replays that calendar day in timezone (UTC if omitted).
+     Replay
      
      - parameter alertReplayRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class AlertReplayAPI {
     }
 
     /**
-     Replay enabled rules over a window. date=null replays the rolling last 24 hours; otherwise replays that calendar day in timezone (UTC if omitted).
+     Replay
      - POST /api/v4/alerts/replay
+     - Replay enabled rules over a window. date=null replays the rolling last 24 hours; otherwise replays that calendar day in timezone (UTC if omitted).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter alertReplayRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<AlertReplayResult> 
@@ -42,11 +49,11 @@ open class AlertReplayAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AlertReplayResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Dry-run replay variant for the rule editor. Layers a user-provided rule definition onto the saved rule set for one call (never persisted), so authors can answer \"would my new/edited rule have woken me last night?\" before saving.
+     Replay dry run
      
      - parameter alertReplayDryRunRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +64,15 @@ open class AlertReplayAPI {
     }
 
     /**
-     Dry-run replay variant for the rule editor. Layers a user-provided rule definition onto the saved rule set for one call (never persisted), so authors can answer \"would my new/edited rule have woken me last night?\" before saving.
+     Replay dry run
      - POST /api/v4/alerts/replay/dry-run
+     - Dry-run replay variant for the rule editor. Layers a user-provided rule definition onto the saved rule set for one call (never persisted), so authors can answer \"would my new/edited rule have woken me last night?\" before saving.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter alertReplayDryRunRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<AlertReplayResult> 
@@ -78,6 +92,6 @@ open class AlertReplayAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AlertReplayResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

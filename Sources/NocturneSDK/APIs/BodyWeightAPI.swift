@@ -10,7 +10,7 @@ import Foundation
 open class BodyWeightAPI {
 
     /**
-     Create a single body weight record
+     Create
      
      - parameter bodyWeight: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class BodyWeightAPI {
     }
 
     /**
-     Create a single body weight record
+     Create
      - POST /api/v4/body-weight
+     - Create a single body weight record
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter bodyWeight: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<BodyWeight> 
@@ -42,11 +49,11 @@ open class BodyWeightAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BodyWeight>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create one or more body weight records (single object or array)
+     Create body weights
      
      - parameter body: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +64,15 @@ open class BodyWeightAPI {
     }
 
     /**
-     Create one or more body weight records (single object or array)
+     Create body weights
      - POST /api/v4/body-weight/batch
+     - Create one or more body weight records (single object or array)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter body: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[BodyWeight]> 
@@ -78,11 +92,11 @@ open class BodyWeightAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[BodyWeight]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a body weight record by ID
+     Delete body weight
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -93,8 +107,15 @@ open class BodyWeightAPI {
     }
 
     /**
-     Delete a body weight record by ID
+     Delete body weight
      - DELETE /api/v4/body-weight/{id}
+     - Delete a body weight record by ID
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -117,11 +138,11 @@ open class BodyWeightAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a specific body weight record by ID
+     Get body weight
      
      - parameter id: (path) Record ID 
      - parameter apiConfiguration: The configuration for the http request.
@@ -132,8 +153,15 @@ open class BodyWeightAPI {
     }
 
     /**
-     Get a specific body weight record by ID
+     Get body weight
      - GET /api/v4/body-weight/{id}
+     - Get a specific body weight record by ID
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) Record ID 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<BodyWeight> 
@@ -156,11 +184,11 @@ open class BodyWeightAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BodyWeight>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get body weight records with optional pagination
+     Get body weights
      
      - parameter count: (query) Maximum number of records to return (default: 10) (optional, default to 10)
      - parameter skip: (query) Number of records to skip for pagination (default: 0) (optional, default to 0)
@@ -172,8 +200,15 @@ open class BodyWeightAPI {
     }
 
     /**
-     Get body weight records with optional pagination
+     Get body weights
      - GET /api/v4/body-weight
+     - Get body weight records with optional pagination
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter count: (query) Maximum number of records to return (default: 10) (optional, default to 10)
      - parameter skip: (query) Number of records to skip for pagination (default: 0) (optional, default to 0)
      - parameter apiConfiguration: The configuration for the http request.
@@ -198,11 +233,11 @@ open class BodyWeightAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[BodyWeight]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update an existing body weight record
+     Update body weight
      
      - parameter id: (path)  
      - parameter bodyWeight: (body)  
@@ -214,8 +249,15 @@ open class BodyWeightAPI {
     }
 
     /**
-     Update an existing body weight record
+     Update body weight
      - PUT /api/v4/body-weight/{id}
+     - Update an existing body weight record
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter bodyWeight: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -239,6 +281,6 @@ open class BodyWeightAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BodyWeight>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 open class MyPermissionsAPI {
 
     /**
-     Get the current user's effective granted scopes for the current tenant.
+     Get my permissions
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [String]
@@ -20,8 +20,15 @@ open class MyPermissionsAPI {
     }
 
     /**
-     Get the current user's effective granted scopes for the current tenant.
+     Get my permissions
      - GET /api/v4/me/permissions
+     - Get the caller's effective granted scopes for the current tenant.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[String]> 
      */
@@ -40,6 +47,6 @@ open class MyPermissionsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[String]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 open class MemberInviteAPI {
 
     /**
-     Accept an invite and join the tenant.
+     Accept invite
      
      - parameter token: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class MemberInviteAPI {
     }
 
     /**
-     Accept an invite and join the tenant.
+     Accept invite
      - POST /api/v4/member-invites/{token}/accept
+     - The caller must be signed in as some subject, but need not already belong to this tenant — that is the point of an invite. InviteTokenAuthorizedAttribute is what lets a non-member reach this action at all, and the token is re-validated against the resolved tenant by the service before any membership is written.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter token: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<AcceptMemberInviteResult> 
@@ -45,11 +52,53 @@ open class MemberInviteAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AcceptMemberInviteResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get effective permissions for a member (union of role permissions + direct permissions).
+     Create invite
+     
+     - parameter createMemberInviteRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: MemberInviteResult
+     */
+    open class func memberInviteCreateInvite(createMemberInviteRequest: CreateMemberInviteRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> MemberInviteResult {
+        return try await memberInviteCreateInviteWithRequestBuilder(createMemberInviteRequest: createMemberInviteRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Create invite
+     - POST /api/v4/member-invites
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter createMemberInviteRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<MemberInviteResult> 
+     */
+    open class func memberInviteCreateInviteWithRequestBuilder(createMemberInviteRequest: CreateMemberInviteRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<MemberInviteResult> {
+        let localVariablePath = "/api/v4/member-invites"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createMemberInviteRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MemberInviteResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Get effective permissions
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -60,8 +109,15 @@ open class MemberInviteAPI {
     }
 
     /**
-     Get effective permissions for a member (union of role permissions + direct permissions).
+     Get effective permissions
      - GET /api/v4/member-invites/members/{id}/effective-permissions
+     - Get effective permissions for a member (union of role permissions + direct permissions).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[String]> 
@@ -84,11 +140,11 @@ open class MemberInviteAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[String]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     List followers of the current tenant (members with the follower role).
+     Get followers
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [TenantMemberDto]
@@ -98,8 +154,15 @@ open class MemberInviteAPI {
     }
 
     /**
-     List followers of the current tenant (members with the follower role).
+     Get followers
      - GET /api/v4/member-invites/members/followers
+     - List followers of the current tenant (members with the follower role).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[TenantMemberDto]> 
      */
@@ -118,11 +181,11 @@ open class MemberInviteAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[TenantMemberDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get invite info for the accept page (anonymous).
+     Get invite info
      
      - parameter token: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -133,8 +196,9 @@ open class MemberInviteAPI {
     }
 
     /**
-     Get invite info for the accept page (anonymous).
+     Get invite info
      - GET /api/v4/member-invites/{token}/info
+     - Anonymous, because the invitee may have no account yet. A caller who does arrive signed in is reported in Viewer so the join page can offer acceptance instead of a second registration — including when they are signed in as a member of some other tenant on this instance, whose session cookie is domain-wide. The token is the whole of the authorization, so an invite that can no longer be accepted answers with the reason alone, as the sibling alert-invite lookup does. The record it would otherwise return names the tenant, the inviter, the roles and permissions being granted and every subject that has already joined through it.
      - parameter token: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<MemberInviteInfo> 
@@ -161,7 +225,7 @@ open class MemberInviteAPI {
     }
 
     /**
-     List all members of the current tenant.
+     Get members
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [TenantMemberDto]
@@ -171,8 +235,15 @@ open class MemberInviteAPI {
     }
 
     /**
-     List all members of the current tenant.
+     Get members
      - GET /api/v4/member-invites/members
+     - List all members of the current tenant.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[TenantMemberDto]> 
      */
@@ -191,11 +262,142 @@ open class MemberInviteAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[TenantMemberDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update the 24-hour data limit for a member.
+     List invites
+     
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [MemberInviteInfo]
+     */
+    open class func memberInviteListInvites(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [MemberInviteInfo] {
+        return try await memberInviteListInvitesWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     List invites
+     - GET /api/v4/member-invites
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[MemberInviteInfo]> 
+     */
+    open class func memberInviteListInvitesWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[MemberInviteInfo]> {
+        let localVariablePath = "/api/v4/member-invites"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[MemberInviteInfo]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Remove member
+     
+     - parameter subjectId: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: Void
+     */
+    open class func memberInviteRemoveMember(subjectId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
+        return try await memberInviteRemoveMemberWithRequestBuilder(subjectId: subjectId, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Remove member
+     - DELETE /api/v4/member-invites/members/{subjectId}
+     - Keyed by subject, unlike the sibling members/{id} routes below, which take the membership id. Removal is the one operation whose caller — the cloud billing service as well as the member list — knows the subject rather than the membership.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter subjectId: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<Void> 
+     */
+    open class func memberInviteRemoveMemberWithRequestBuilder(subjectId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
+        var localVariablePath = "/api/v4/member-invites/members/{subjectId}"
+        let subjectIdPreEscape = "\(APIHelper.mapValueToPathItem(subjectId))"
+        let subjectIdPostEscape = subjectIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{subjectId}", with: subjectIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Revoke invite
+     
+     - parameter inviteId: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: Void
+     */
+    open class func memberInviteRevokeInvite(inviteId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
+        return try await memberInviteRevokeInviteWithRequestBuilder(inviteId: inviteId, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Revoke invite
+     - DELETE /api/v4/member-invites/{inviteId}
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter inviteId: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<Void> 
+     */
+    open class func memberInviteRevokeInviteWithRequestBuilder(inviteId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
+        var localVariablePath = "/api/v4/member-invites/{inviteId}"
+        let inviteIdPreEscape = "\(APIHelper.mapValueToPathItem(inviteId))"
+        let inviteIdPostEscape = inviteIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{inviteId}", with: inviteIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Set member limit to24hours
      
      - parameter id: (path)  
      - parameter setMemberLimitTo24HoursRequest: (body)  
@@ -207,8 +409,15 @@ open class MemberInviteAPI {
     }
 
     /**
-     Update the 24-hour data limit for a member.
+     Set member limit to24hours
      - PUT /api/v4/member-invites/members/{id}/limit-to-24-hours
+     - Update the 24-hour data limit for a member.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter setMemberLimitTo24HoursRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -232,11 +441,11 @@ open class MemberInviteAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Set direct permissions for a member.
+     Set member permissions
      
      - parameter id: (path)  
      - parameter setMemberPermissionsRequest: (body)  
@@ -248,8 +457,15 @@ open class MemberInviteAPI {
     }
 
     /**
-     Set direct permissions for a member.
+     Set member permissions
      - PUT /api/v4/member-invites/members/{id}/permissions
+     - Set direct permissions for a member.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter setMemberPermissionsRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -273,11 +489,11 @@ open class MemberInviteAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Set roles for a member (replaces all role assignments).
+     Set member roles
      
      - parameter id: (path)  
      - parameter setMemberRolesRequest: (body)  
@@ -289,8 +505,15 @@ open class MemberInviteAPI {
     }
 
     /**
-     Set roles for a member (replaces all role assignments).
+     Set member roles
      - PUT /api/v4/member-invites/members/{id}/roles
+     - Set roles for a member (replaces all role assignments).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter setMemberRolesRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -314,6 +537,6 @@ open class MemberInviteAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

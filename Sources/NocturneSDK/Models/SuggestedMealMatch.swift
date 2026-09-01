@@ -7,7 +7,7 @@
 
 import Foundation
 
-/** A suggested meal match between a food entry and treatment */
+/** A suggested meal match between a food entry and a carb intake */
 public struct SuggestedMealMatch: Sendable, Codable, Hashable {
 
     public var foodEntryId: String?
@@ -15,20 +15,20 @@ public struct SuggestedMealMatch: Sendable, Codable, Hashable {
     public var mealName: String?
     public var carbs: Double?
     public var consumedAt: Date?
-    public var treatmentId: String?
-    public var treatmentCarbs: Double?
-    public var treatmentMills: Int64?
+    public var carbIntakeId: String?
+    public var carbIntakeCarbs: Double?
+    public var carbIntakeMills: Int64?
     public var matchScore: Double?
 
-    public init(foodEntryId: String? = nil, foodName: String? = nil, mealName: String? = nil, carbs: Double? = nil, consumedAt: Date? = nil, treatmentId: String? = nil, treatmentCarbs: Double? = nil, treatmentMills: Int64? = nil, matchScore: Double? = nil) {
+    public init(foodEntryId: String? = nil, foodName: String? = nil, mealName: String? = nil, carbs: Double? = nil, consumedAt: Date? = nil, carbIntakeId: String? = nil, carbIntakeCarbs: Double? = nil, carbIntakeMills: Int64? = nil, matchScore: Double? = nil) {
         self.foodEntryId = foodEntryId
         self.foodName = foodName
         self.mealName = mealName
         self.carbs = carbs
         self.consumedAt = consumedAt
-        self.treatmentId = treatmentId
-        self.treatmentCarbs = treatmentCarbs
-        self.treatmentMills = treatmentMills
+        self.carbIntakeId = carbIntakeId
+        self.carbIntakeCarbs = carbIntakeCarbs
+        self.carbIntakeMills = carbIntakeMills
         self.matchScore = matchScore
     }
 
@@ -38,9 +38,9 @@ public struct SuggestedMealMatch: Sendable, Codable, Hashable {
         case mealName
         case carbs
         case consumedAt
-        case treatmentId
-        case treatmentCarbs
-        case treatmentMills
+        case carbIntakeId
+        case carbIntakeCarbs
+        case carbIntakeMills
         case matchScore
     }
 
@@ -53,9 +53,9 @@ public struct SuggestedMealMatch: Sendable, Codable, Hashable {
         try container.encodeIfPresent(mealName, forKey: .mealName)
         try container.encodeIfPresent(carbs, forKey: .carbs)
         try container.encodeIfPresent(consumedAt, forKey: .consumedAt)
-        try container.encodeIfPresent(treatmentId, forKey: .treatmentId)
-        try container.encodeIfPresent(treatmentCarbs, forKey: .treatmentCarbs)
-        try container.encodeIfPresent(treatmentMills, forKey: .treatmentMills)
+        try container.encodeIfPresent(carbIntakeId, forKey: .carbIntakeId)
+        try container.encodeIfPresent(carbIntakeCarbs, forKey: .carbIntakeCarbs)
+        try container.encodeIfPresent(carbIntakeMills, forKey: .carbIntakeMills)
         try container.encodeIfPresent(matchScore, forKey: .matchScore)
     }
 }

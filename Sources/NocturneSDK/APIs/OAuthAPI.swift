@@ -10,7 +10,7 @@ import Foundation
 open class OAuthAPI {
 
     /**
-     Consent approval endpoint. Called by the consent page when the user approves.
+     Approve consent
      
      - parameter clientId: (form)  (optional)
      - parameter redirectUri: (form)  (optional)
@@ -27,8 +27,15 @@ open class OAuthAPI {
     }
 
     /**
-     Consent approval endpoint. Called by the consent page when the user approves.
+     Approve consent
      - POST /api/oauth/authorize
+     - Consent approval endpoint. Called by the consent page when the user approves.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter clientId: (form)  (optional)
      - parameter redirectUri: (form)  (optional)
      - parameter scope: (form)  (optional)
@@ -65,11 +72,11 @@ open class OAuthAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Authorization endpoint (Authorization Code + PKCE flow). Redirects to login if not authenticated, then shows consent screen.
+     Authorize
      
      - parameter clientId: (query) The registered OAuth client identifier. (optional)
      - parameter redirectUri: (query) The URI to redirect to after authorization. (optional)
@@ -86,8 +93,9 @@ open class OAuthAPI {
     }
 
     /**
-     Authorization endpoint (Authorization Code + PKCE flow). Redirects to login if not authenticated, then shows consent screen.
+     Authorize
      - GET /api/oauth/authorize
+     - Authorization endpoint (Authorization Code + PKCE flow). Redirects to login if not authenticated, then shows consent screen.
      - parameter clientId: (query) The registered OAuth client identifier. (optional)
      - parameter redirectUri: (query) The URI to redirect to after authorization. (optional)
      - parameter responseType: (query) Must be code. (optional)
@@ -127,7 +135,7 @@ open class OAuthAPI {
     }
 
     /**
-     Revoke (delete) a specific grant owned by the authenticated user.
+     Delete grant
      
      - parameter grantId: (path) The ID of the grant to revoke. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -138,8 +146,15 @@ open class OAuthAPI {
     }
 
     /**
-     Revoke (delete) a specific grant owned by the authenticated user.
+     Delete grant
      - DELETE /api/oauth/grants/{grantId}
+     - Revoke (delete) a specific grant owned by the authenticated user.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter grantId: (path) The ID of the grant to revoke. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -162,11 +177,11 @@ open class OAuthAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Approve or deny a device authorization request. Called by the device approval page.
+     Device approve
      
      - parameter userCode: (form)  (optional)
      - parameter approved: (form)  (optional)
@@ -178,8 +193,15 @@ open class OAuthAPI {
     }
 
     /**
-     Approve or deny a device authorization request. Called by the device approval page.
+     Device approve
      - POST /api/oauth/device-approve
+     - Approve or deny a device authorization request. Called by the device approval page.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter userCode: (form)  (optional)
      - parameter approved: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -206,11 +228,11 @@ open class OAuthAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Device Authorization endpoint (RFC 8628). Used by headless clients (CLI tools, scripts, IoT devices, pump rigs).
+     Device authorization
      
      - parameter clientId: (form)  (optional)
      - parameter scope: (form)  (optional)
@@ -222,8 +244,9 @@ open class OAuthAPI {
     }
 
     /**
-     Device Authorization endpoint (RFC 8628). Used by headless clients (CLI tools, scripts, IoT devices, pump rigs).
+     Device authorization
      - POST /api/oauth/device
+     - Device Authorization endpoint (RFC 8628). Used by headless clients (CLI tools, scripts, IoT devices, pump rigs).
      - parameter clientId: (form)  (optional)
      - parameter scope: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -254,7 +277,7 @@ open class OAuthAPI {
     }
 
     /**
-     Get client info for the consent page.
+     Get client info
      
      - parameter clientId: (query) The client identifier to look up. (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -265,8 +288,9 @@ open class OAuthAPI {
     }
 
     /**
-     Get client info for the consent page.
+     Get client info
      - GET /api/oauth/client-info
+     - Get client info for the consent page.
      - parameter clientId: (query) The client identifier to look up. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<OAuthClientInfoResponse> 
@@ -293,7 +317,7 @@ open class OAuthAPI {
     }
 
     /**
-     Get device code info for the approval page.
+     Get device info
      
      - parameter userCode: (query) The user-facing code displayed on the headless device. (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -304,8 +328,15 @@ open class OAuthAPI {
     }
 
     /**
-     Get device code info for the approval page.
+     Get device info
      - GET /api/oauth/device-info
+     - Get device code info for the approval page.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter userCode: (query) The user-facing code displayed on the headless device. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DeviceCodeInfo> 
@@ -328,11 +359,11 @@ open class OAuthAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DeviceCodeInfo>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     List all active grants for the authenticated user.
+     Get grants
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: OAuthGrantListResponse
@@ -342,8 +373,15 @@ open class OAuthAPI {
     }
 
     /**
-     List all active grants for the authenticated user.
+     Get grants
      - GET /api/oauth/grants
+     - List all active grants for the authenticated user.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<OAuthGrantListResponse> 
      */
@@ -362,11 +400,11 @@ open class OAuthAPI {
 
         let localVariableRequestBuilder: RequestBuilder<OAuthGrantListResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Token introspection endpoint (RFC 7662). Returns metadata about a token including its active status, scopes, and subject. Per RFC 7662, always returns 200 OK; invalid tokens get active=false.
+     Introspect
      
      - parameter token: (form)  (optional)
      - parameter tokenTypeHint: (form)  (optional)
@@ -378,8 +416,15 @@ open class OAuthAPI {
     }
 
     /**
-     Token introspection endpoint (RFC 7662). Returns metadata about a token including its active status, scopes, and subject. Per RFC 7662, always returns 200 OK; invalid tokens get active=false.
+     Introspect
      - POST /api/oauth/introspect
+     - RFC 7662 section 2.1 requires the endpoint to authenticate its caller. Every client here is public (no client secrets), so the caller authenticates as a subject the same way the other credential-bearing endpoints on this controller do, and a request with no identity is refused rather than answered. The response is bounded by that identity: a token issued to another subject reads as inactive, so the endpoint resolves only tokens the caller already holds an identity for.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter token: (form)  (optional)
      - parameter tokenTypeHint: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -406,11 +451,11 @@ open class OAuthAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TokenIntrospectionResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     RFC 7591 Dynamic Client Registration. Allows third-party native apps (Trio, xDrip+, Loop, AAPS) to obtain a tenant-scoped client_id without any out-of-band registration step. Idempotent on (tenant, software_id): re-registering with the same software_id returns the existing client_id.
+     Register
      
      - parameter clientRegistrationRequest: (body) The client registration metadata including redirect URIs, scopes, and optional software ID. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -421,8 +466,9 @@ open class OAuthAPI {
     }
 
     /**
-     RFC 7591 Dynamic Client Registration. Allows third-party native apps (Trio, xDrip+, Loop, AAPS) to obtain a tenant-scoped client_id without any out-of-band registration step. Idempotent on (tenant, software_id): re-registering with the same software_id returns the existing client_id.
+     Register
      - POST /api/oauth/register
+     - RFC 7591 Dynamic Client Registration. Allows third-party native apps (Trio, xDrip+, Loop, AAPS) to obtain a tenant-scoped client_id without any out-of-band registration step. Idempotent on (tenant, software_id): re-registering with the same software_id returns the existing client_id.
      - parameter clientRegistrationRequest: (body) The client registration metadata including redirect URIs, scopes, and optional software ID. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ClientRegistrationResponse> 
@@ -446,7 +492,7 @@ open class OAuthAPI {
     }
 
     /**
-     Token revocation endpoint (RFC 7009). Per the specification, always returns 200 OK regardless of whether the token was found or already revoked.
+     Revoke
      
      - parameter token: (form)  (optional)
      - parameter tokenTypeHint: (form)  (optional)
@@ -458,8 +504,9 @@ open class OAuthAPI {
     }
 
     /**
-     Token revocation endpoint (RFC 7009). Per the specification, always returns 200 OK regardless of whether the token was found or already revoked.
+     Revoke
      - POST /api/oauth/revoke
+     - Anonymous, unlike the introspection endpoint below: the response carries nothing about the token, and a client whose token has already stopped working still needs to be able to retire it.
      - parameter token: (form)  (optional)
      - parameter tokenTypeHint: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -490,7 +537,7 @@ open class OAuthAPI {
     }
 
     /**
-     Token endpoint. Handles authorization code exchange, refresh token rotation, and device code polling.
+     Token
      
      - parameter grantType: (form)  (optional)
      - parameter code: (form)  (optional)
@@ -508,8 +555,9 @@ open class OAuthAPI {
     }
 
     /**
-     Token endpoint. Handles authorization code exchange, refresh token rotation, and device code polling.
+     Token
      - POST /api/oauth/token
+     - Token endpoint. Handles authorization code exchange, refresh token rotation, and device code polling.
      - parameter grantType: (form)  (optional)
      - parameter code: (form)  (optional)
      - parameter redirectUri: (form)  (optional)
@@ -552,7 +600,7 @@ open class OAuthAPI {
     }
 
     /**
-     Update a grant's label and/or scopes.
+     Update grant
      
      - parameter grantId: (path) The ID of the grant to update. 
      - parameter updateGrantRequest: (body) Partial update request containing the new label and/or scopes. 
@@ -564,8 +612,15 @@ open class OAuthAPI {
     }
 
     /**
-     Update a grant's label and/or scopes.
+     Update grant
      - PATCH /api/oauth/grants/{grantId}
+     - Update a grant's label and/or scopes.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter grantId: (path) The ID of the grant to update. 
      - parameter updateGrantRequest: (body) Partial update request containing the new label and/or scopes. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -589,6 +644,6 @@ open class OAuthAPI {
 
         let localVariableRequestBuilder: RequestBuilder<OAuthGrantDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

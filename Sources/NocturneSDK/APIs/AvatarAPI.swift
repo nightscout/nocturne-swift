@@ -10,7 +10,7 @@ import Foundation
 open class AvatarAPI {
 
     /**
-     Delete the current subject's avatar.
+     Delete
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -20,8 +20,15 @@ open class AvatarAPI {
     }
 
     /**
-     Delete the current subject's avatar.
+     Delete
      - DELETE /api/v4/me/avatar
+     - Delete the current subject's avatar.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
      */
@@ -40,11 +47,11 @@ open class AvatarAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Serve the current subject's avatar image.
+     Get
      
      - parameter id: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -55,8 +62,9 @@ open class AvatarAPI {
     }
 
     /**
-     Serve the current subject's avatar image.
+     Get
      - GET /api/v4/me/avatar
+     - Serve the current subject's avatar image.
      - parameter id: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -83,7 +91,7 @@ open class AvatarAPI {
     }
 
     /**
-     Upload or replace the current subject's avatar. Image is resized to 256x256 WebP.
+     Upload
      
      - parameter contentType: (form)  (optional)
      - parameter contentDisposition: (form)  (optional)
@@ -99,8 +107,15 @@ open class AvatarAPI {
     }
 
     /**
-     Upload or replace the current subject's avatar. Image is resized to 256x256 WebP.
+     Upload
      - POST /api/v4/me/avatar
+     - Upload or replace the current subject's avatar. Image is resized to 256x256 WebP.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter contentType: (form)  (optional)
      - parameter contentDisposition: (form)  (optional)
      - parameter headers: (form)  (optional)
@@ -135,6 +150,6 @@ open class AvatarAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AvatarUploadResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

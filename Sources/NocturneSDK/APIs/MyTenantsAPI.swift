@@ -10,7 +10,8 @@ import Foundation
 open class MyTenantsAPI {
 
     /**
-
+     Create tenant
+     
      - parameter createMyTenantRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: TenantCreatedDto
@@ -20,7 +21,14 @@ open class MyTenantsAPI {
     }
 
     /**
+     Create tenant
      - POST /api/v4/me/tenants
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createMyTenantRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TenantCreatedDto> 
@@ -40,11 +48,12 @@ open class MyTenantsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TenantCreatedDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get my tenants
+     
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [TenantDto]
      */
@@ -53,7 +62,14 @@ open class MyTenantsAPI {
     }
 
     /**
+     Get my tenants
      - GET /api/v4/me/tenants
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[TenantDto]> 
      */
@@ -72,11 +88,12 @@ open class MyTenantsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[TenantDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get overview
+     
      - parameter apiConfiguration: The configuration for the http request.
      - returns: TenantOverviewResponse
      */
@@ -85,7 +102,14 @@ open class MyTenantsAPI {
     }
 
     /**
+     Get overview
      - GET /api/v4/me/tenants/overview
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TenantOverviewResponse> 
      */
@@ -104,11 +128,12 @@ open class MyTenantsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TenantOverviewResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Validate slug
+     
      - parameter slug: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: SlugValidationResult
@@ -118,6 +143,7 @@ open class MyTenantsAPI {
     }
 
     /**
+     Validate slug
      - GET /api/v4/me/tenants/validate-slug
      - parameter slug: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.

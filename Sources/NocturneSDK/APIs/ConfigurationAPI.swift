@@ -10,7 +10,7 @@ import Foundation
 open class ConfigurationAPI {
 
     /**
-     Deletes all configuration and secrets for a connector.
+     Delete configuration
      
      - parameter connectorName: (path) The connector name 
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class ConfigurationAPI {
     }
 
     /**
-     Deletes all configuration and secrets for a connector.
+     Delete configuration
      - DELETE /api/v4/connectors/config/{connectorName}
+     - Deletes all configuration and secrets for a connector.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter connectorName: (path) The connector name 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -45,11 +52,11 @@ open class ConfigurationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Gets status information for all registered connectors.
+     Get all connector status
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [ConnectorStatusInfo]
@@ -59,8 +66,15 @@ open class ConfigurationAPI {
     }
 
     /**
-     Gets status information for all registered connectors.
+     Get all connector status
      - GET /api/v4/connectors/config
+     - Gets status information for all registered connectors.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[ConnectorStatusInfo]> 
      */
@@ -79,11 +93,11 @@ open class ConfigurationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[ConnectorStatusInfo]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Gets the configuration for a specific connector. Returns runtime configuration only (secrets are not included).
+     Get configuration
      
      - parameter connectorName: (path) The connector name (e.g., \&quot;Dexcom\&quot;, \&quot;Glooko\&quot;) 
      - parameter apiConfiguration: The configuration for the http request.
@@ -94,8 +108,15 @@ open class ConfigurationAPI {
     }
 
     /**
-     Gets the configuration for a specific connector. Returns runtime configuration only (secrets are not included).
+     Get configuration
      - GET /api/v4/connectors/config/{connectorName}
+     - Gets the configuration for a specific connector. Returns runtime configuration only (secrets are not included).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter connectorName: (path) The connector name (e.g., \&quot;Dexcom\&quot;, \&quot;Glooko\&quot;) 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ConnectorConfigurationResponse> 
@@ -118,11 +139,11 @@ open class ConfigurationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ConnectorConfigurationResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Gets the effective configuration from a running connector. This returns the actual runtime values including those resolved from environment variables. This endpoint is public since it only exposes non-secret configuration values.
+     Get effective configuration
      
      - parameter connectorName: (path) The connector name 
      - parameter apiConfiguration: The configuration for the http request.
@@ -133,8 +154,15 @@ open class ConfigurationAPI {
     }
 
     /**
-     Gets the effective configuration from a running connector. This returns the actual runtime values including those resolved from environment variables. This endpoint is public since it only exposes non-secret configuration values.
+     Get effective configuration
      - GET /api/v4/connectors/config/{connectorName}/effective
+     - Gets the effective configuration for a connector: the non-secret runtime values resolved from stored configuration and environment variables. Secret values (passwords, tokens) are excluded, but the result includes non-secret account identifiers such as the connector account username or email.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter connectorName: (path) The connector name 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[String: JSONValue]> 
@@ -157,11 +185,11 @@ open class ConfigurationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[String: JSONValue]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Gets the JSON Schema for a connector's configuration. Schema is generated from the connector's configuration class attributes. This endpoint is public since schema is just metadata, not sensitive data.
+     Get schema
      
      - parameter connectorName: (path) The connector name 
      - parameter apiConfiguration: The configuration for the http request.
@@ -172,8 +200,9 @@ open class ConfigurationAPI {
     }
 
     /**
-     Gets the JSON Schema for a connector's configuration. Schema is generated from the connector's configuration class attributes. This endpoint is public since schema is just metadata, not sensitive data.
+     Get schema
      - GET /api/v4/connectors/config/{connectorName}/schema
+     - Gets the JSON Schema for a connector's configuration. Schema is generated from the connector's configuration class attributes. This endpoint is public since schema is just metadata, not sensitive data.
      - parameter connectorName: (path) The connector name 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<JsonDocument> 
@@ -200,7 +229,7 @@ open class ConfigurationAPI {
     }
 
     /**
-     Saves or updates runtime configuration for a connector. Only properties marked with [RuntimeConfigurable] are accepted. Validates the configuration against the connector's schema before saving.
+     Save configuration
      
      - parameter connectorName: (path) The connector name 
      - parameter jsonDocument: (body) Configuration values as JSON 
@@ -212,8 +241,15 @@ open class ConfigurationAPI {
     }
 
     /**
-     Saves or updates runtime configuration for a connector. Only properties marked with [RuntimeConfigurable] are accepted. Validates the configuration against the connector's schema before saving.
+     Save configuration
      - PUT /api/v4/connectors/config/{connectorName}
+     - Saves or updates runtime configuration for a connector. Only properties marked with [RuntimeConfigurable] are accepted. Validates the configuration against the connector's schema before saving.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter connectorName: (path) The connector name 
      - parameter jsonDocument: (body) Configuration values as JSON 
      - parameter apiConfiguration: The configuration for the http request.
@@ -237,11 +273,11 @@ open class ConfigurationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ConnectorConfigurationResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Saves encrypted secrets for a connector. Secrets are encrypted using AES-256-GCM before storage.
+     Save secrets
      
      - parameter connectorName: (path) The connector name 
      - parameter requestBody: (body) Dictionary of secret property names to plaintext values 
@@ -253,8 +289,15 @@ open class ConfigurationAPI {
     }
 
     /**
-     Saves encrypted secrets for a connector. Secrets are encrypted using AES-256-GCM before storage.
+     Save secrets
      - PUT /api/v4/connectors/config/{connectorName}/secrets
+     - Saves encrypted secrets for a connector. Secrets are encrypted using AES-256-GCM before storage.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter connectorName: (path) The connector name 
      - parameter requestBody: (body) Dictionary of secret property names to plaintext values 
      - parameter apiConfiguration: The configuration for the http request.
@@ -278,11 +321,11 @@ open class ConfigurationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Enables or disables a connector.
+     Set active
      
      - parameter connectorName: (path) The connector name 
      - parameter setActiveRequest: (body) Request containing the active state 
@@ -294,8 +337,15 @@ open class ConfigurationAPI {
     }
 
     /**
-     Enables or disables a connector.
+     Set active
      - PATCH /api/v4/connectors/config/{connectorName}/active
+     - Enables or disables a connector.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter connectorName: (path) The connector name 
      - parameter setActiveRequest: (body) Request containing the active state 
      - parameter apiConfiguration: The configuration for the http request.
@@ -319,6 +369,6 @@ open class ConfigurationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

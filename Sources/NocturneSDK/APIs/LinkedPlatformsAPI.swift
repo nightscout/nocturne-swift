@@ -10,7 +10,8 @@ import Foundation
 open class LinkedPlatformsAPI {
 
     /**
-
+     Get linked platforms
+     
      - parameter apiConfiguration: The configuration for the http request.
      - returns: LinkedPlatformsResponse
      */
@@ -19,7 +20,14 @@ open class LinkedPlatformsAPI {
     }
 
     /**
+     Get linked platforms
      - GET /api/v4/chat-identity/linked-platforms
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<LinkedPlatformsResponse> 
      */
@@ -38,6 +46,6 @@ open class LinkedPlatformsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<LinkedPlatformsResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

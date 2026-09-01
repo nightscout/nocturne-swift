@@ -10,7 +10,7 @@ import Foundation
 open class SleepAPI {
 
     /**
-     Create or upsert a sleep session
+     Create session
      
      - parameter sleepSession: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class SleepAPI {
     }
 
     /**
-     Create or upsert a sleep session
+     Create session
      - POST /api/v4/sleep/sessions
+     - Create or upsert a sleep session
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter sleepSession: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SleepSession> 
@@ -42,11 +49,11 @@ open class SleepAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SleepSession>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create or upsert sleep sessions in bulk (max 100)
+     Create sessions bulk
      
      - parameter sleepSession: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,9 +64,15 @@ open class SleepAPI {
     }
 
     /**
-     Create or upsert sleep sessions in bulk (max 100)
+     Create sessions bulk
      - POST /api/v4/sleep/sessions/bulk
      - Sessions are upserted one by one with the same dedup semantics as the single create, so a retried batch is idempotent. On a concurrent-insert conflict the request stops with `409 Conflict`; sessions upserted before the conflict remain persisted, and retrying the whole batch is safe.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter sleepSession: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[SleepSession]> 
@@ -79,11 +92,11 @@ open class SleepAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[SleepSession]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a sleep session
+     Delete session
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -94,8 +107,15 @@ open class SleepAPI {
     }
 
     /**
-     Delete a sleep session
+     Delete session
      - DELETE /api/v4/sleep/sessions/{id}
+     - Delete a sleep session
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -118,11 +138,11 @@ open class SleepAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a sleep session by ID (includes stages and biometric samples)
+     Get session
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -133,8 +153,15 @@ open class SleepAPI {
     }
 
     /**
-     Get a sleep session by ID (includes stages and biometric samples)
+     Get session
      - GET /api/v4/sleep/sessions/{id}
+     - Get a sleep session by ID (includes stages and biometric samples)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SleepSession> 
@@ -157,11 +184,11 @@ open class SleepAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SleepSession>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Query sleep sessions with optional filtering (stages and biometrics excluded)
+     Get sessions
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -178,8 +205,15 @@ open class SleepAPI {
     }
 
     /**
-     Query sleep sessions with optional filtering (stages and biometrics excluded)
+     Get sessions
      - GET /api/v4/sleep/sessions
+     - Query sleep sessions with optional filtering (stages and biometrics excluded)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter type: (query)  (optional)
@@ -215,11 +249,11 @@ open class SleepAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfSleepSession>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update an existing sleep session
+     Update session
      
      - parameter id: (path)  
      - parameter sleepSession: (body)  
@@ -231,8 +265,15 @@ open class SleepAPI {
     }
 
     /**
-     Update an existing sleep session
+     Update session
      - PUT /api/v4/sleep/sessions/{id}
+     - Update an existing sleep session
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter sleepSession: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -256,6 +297,6 @@ open class SleepAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SleepSession>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

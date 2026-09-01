@@ -10,7 +10,7 @@ import Foundation
 open class DebugAPI {
 
     /**
-     Echo endpoint for debugging MongoDB queries Returns information about how REST API parameters translate into MongoDB queries
+     Echo query
      
      - parameter echo: (path) Storage type to query (entries, treatments, devicestatus, activity) 
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,9 @@ open class DebugAPI {
     }
 
     /**
-     Echo endpoint for debugging MongoDB queries Returns information about how REST API parameters translate into MongoDB queries
+     Echo query
      - GET /api/v4/debug/echo/{echo}
+     - Echo endpoint for debugging MongoDB queries Returns information about how REST API parameters translate into MongoDB queries
      - parameter echo: (path) Storage type to query (entries, treatments, devicestatus, activity) 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<JSONValue> 
@@ -49,7 +50,7 @@ open class DebugAPI {
     }
 
     /**
-     Echo endpoint for debugging MongoDB queries with model Returns information about how REST API parameters translate into MongoDB queries
+     Echo query with model
      
      - parameter echo: (path) Storage type to query (entries, treatments, devicestatus, activity) 
      - parameter model: (path) Model specification 
@@ -61,8 +62,9 @@ open class DebugAPI {
     }
 
     /**
-     Echo endpoint for debugging MongoDB queries with model Returns information about how REST API parameters translate into MongoDB queries
+     Echo query with model
      - GET /api/v4/debug/echo/{echo}/{model}
+     - Echo endpoint for debugging MongoDB queries with model Returns information about how REST API parameters translate into MongoDB queries
      - parameter echo: (path) Storage type to query (entries, treatments, devicestatus, activity) 
      - parameter model: (path) Model specification 
      - parameter apiConfiguration: The configuration for the http request.
@@ -93,7 +95,7 @@ open class DebugAPI {
     }
 
     /**
-     Echo endpoint for debugging MongoDB queries with model and spec Returns information about how REST API parameters translate into MongoDB queries
+     Echo query with model and spec
      
      - parameter echo: (path) Storage type to query (entries, treatments, devicestatus, activity) 
      - parameter model: (path) Model specification 
@@ -106,8 +108,9 @@ open class DebugAPI {
     }
 
     /**
-     Echo endpoint for debugging MongoDB queries with model and spec Returns information about how REST API parameters translate into MongoDB queries
+     Echo query with model and spec
      - GET /api/v4/debug/echo/{echo}/{model}/{spec}
+     - Echo endpoint for debugging MongoDB queries with model and spec Returns information about how REST API parameters translate into MongoDB queries
      - parameter echo: (path) Storage type to query (entries, treatments, devicestatus, activity) 
      - parameter model: (path) Model specification 
      - parameter spec: (path) Specification parameter 
@@ -142,7 +145,7 @@ open class DebugAPI {
     }
 
     /**
-     Preview endpoint for entry creation without persistence Allows previewing entry data without actually storing it in the database
+     Preview entries
      
      - parameter body: (body) Entry data to preview (single object or array) 
      - parameter apiConfiguration: The configuration for the http request.
@@ -153,8 +156,15 @@ open class DebugAPI {
     }
 
     /**
-     Preview endpoint for entry creation without persistence Allows previewing entry data without actually storing it in the database
+     Preview entries
      - POST /api/v4/debug/entries/preview
+     - Preview endpoint for entry creation without persistence Allows previewing entry data without actually storing it in the database
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter body: (body) Entry data to preview (single object or array) 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<JSONValue> 
@@ -174,6 +184,6 @@ open class DebugAPI {
 
         let localVariableRequestBuilder: RequestBuilder<JSONValue>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

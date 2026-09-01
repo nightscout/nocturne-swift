@@ -13,12 +13,19 @@ public struct ChannelStatusEntry: Sendable, Codable, Hashable {
     public var channelType: ChannelType?
     public var status: ChannelStatus?
     public var reason: ChannelUnavailableReason?
+    /** Whether the rule editor may add a channel of this type. */
+    public var offered: Bool?
+    /** Whether the user must supply this channel's destination for it to deliver. */
+    public var requiresDestination: Bool?
+    /** Whether this channel's destination comes from the caller's linked chat identity. */
     public var requiresLink: Bool?
 
-    public init(channelType: ChannelType? = nil, status: ChannelStatus? = nil, reason: ChannelUnavailableReason? = nil, requiresLink: Bool? = nil) {
+    public init(channelType: ChannelType? = nil, status: ChannelStatus? = nil, reason: ChannelUnavailableReason? = nil, offered: Bool? = nil, requiresDestination: Bool? = nil, requiresLink: Bool? = nil) {
         self.channelType = channelType
         self.status = status
         self.reason = reason
+        self.offered = offered
+        self.requiresDestination = requiresDestination
         self.requiresLink = requiresLink
     }
 
@@ -26,6 +33,8 @@ public struct ChannelStatusEntry: Sendable, Codable, Hashable {
         case channelType
         case status
         case reason
+        case offered
+        case requiresDestination
         case requiresLink
     }
 
@@ -36,6 +45,8 @@ public struct ChannelStatusEntry: Sendable, Codable, Hashable {
         try container.encodeIfPresent(channelType, forKey: .channelType)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(reason, forKey: .reason)
+        try container.encodeIfPresent(offered, forKey: .offered)
+        try container.encodeIfPresent(requiresDestination, forKey: .requiresDestination)
         try container.encodeIfPresent(requiresLink, forKey: .requiresLink)
     }
 }

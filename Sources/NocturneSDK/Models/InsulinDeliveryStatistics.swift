@@ -32,9 +32,11 @@ public struct InsulinDeliveryStatistics: Sendable, Codable, Hashable {
     public var carbBolusCount: Int?
     public var microBolusCount: Int?
     public var microBolusInsulin: Double?
+    public var basalInjectionInsulin: Double?
+    public var basalInjectionCount: Int?
     public var reliability: StatisticReliability?
 
-    public init(totalBolus: Double? = nil, totalBasal: Double? = nil, scheduledBasal: Double? = nil, additionalBasal: Double? = nil, totalInsulin: Double? = nil, totalCarbs: Double? = nil, bolusCount: Int? = nil, basalCount: Int? = nil, basalPercent: Double? = nil, bolusPercent: Double? = nil, tdd: Double? = nil, avgBolus: Double? = nil, mealBoluses: Int? = nil, correctionBoluses: Int? = nil, icRatio: Double? = nil, bolusesPerDay: Double? = nil, dayCount: Int? = nil, startDate: String? = nil, endDate: String? = nil, carbCount: Int? = nil, carbBolusCount: Int? = nil, microBolusCount: Int? = nil, microBolusInsulin: Double? = nil, reliability: StatisticReliability? = nil) {
+    public init(totalBolus: Double? = nil, totalBasal: Double? = nil, scheduledBasal: Double? = nil, additionalBasal: Double? = nil, totalInsulin: Double? = nil, totalCarbs: Double? = nil, bolusCount: Int? = nil, basalCount: Int? = nil, basalPercent: Double? = nil, bolusPercent: Double? = nil, tdd: Double? = nil, avgBolus: Double? = nil, mealBoluses: Int? = nil, correctionBoluses: Int? = nil, icRatio: Double? = nil, bolusesPerDay: Double? = nil, dayCount: Int? = nil, startDate: String? = nil, endDate: String? = nil, carbCount: Int? = nil, carbBolusCount: Int? = nil, microBolusCount: Int? = nil, microBolusInsulin: Double? = nil, basalInjectionInsulin: Double? = nil, basalInjectionCount: Int? = nil, reliability: StatisticReliability? = nil) {
         self.totalBolus = totalBolus
         self.totalBasal = totalBasal
         self.scheduledBasal = scheduledBasal
@@ -58,6 +60,8 @@ public struct InsulinDeliveryStatistics: Sendable, Codable, Hashable {
         self.carbBolusCount = carbBolusCount
         self.microBolusCount = microBolusCount
         self.microBolusInsulin = microBolusInsulin
+        self.basalInjectionInsulin = basalInjectionInsulin
+        self.basalInjectionCount = basalInjectionCount
         self.reliability = reliability
     }
 
@@ -85,6 +89,8 @@ public struct InsulinDeliveryStatistics: Sendable, Codable, Hashable {
         case carbBolusCount
         case microBolusCount
         case microBolusInsulin
+        case basalInjectionInsulin
+        case basalInjectionCount
         case reliability
     }
 
@@ -115,6 +121,8 @@ public struct InsulinDeliveryStatistics: Sendable, Codable, Hashable {
         try container.encodeIfPresent(carbBolusCount, forKey: .carbBolusCount)
         try container.encodeIfPresent(microBolusCount, forKey: .microBolusCount)
         try container.encodeIfPresent(microBolusInsulin, forKey: .microBolusInsulin)
+        try container.encodeIfPresent(basalInjectionInsulin, forKey: .basalInjectionInsulin)
+        try container.encodeIfPresent(basalInjectionCount, forKey: .basalInjectionCount)
         try container.encodeIfPresent(reliability, forKey: .reliability)
     }
 }

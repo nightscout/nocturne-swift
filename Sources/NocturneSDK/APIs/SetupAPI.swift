@@ -10,7 +10,7 @@ import Foundation
 open class SetupAPI {
 
     /**
-     Create the first tenant on a fresh install. Only succeeds when zero tenants exist.
+     Create tenant
      
      - parameter setupTenantRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,9 @@ open class SetupAPI {
     }
 
     /**
-     Create the first tenant on a fresh install. Only succeeds when zero tenants exist.
+     Create tenant
      - POST /api/v4/setup/tenant
+     - Create the first tenant on a fresh install. Only succeeds when zero tenants exist.
      - parameter setupTenantRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SetupTenantResponse> 
@@ -46,7 +47,7 @@ open class SetupAPI {
     }
 
     /**
-     OIDC callback for setup owner creation. Called by the OIDC provider after authentication. Links the identity, issues session cookies, and redirects to /setup.
+     Oidc callback
      
      - parameter code: (query)  (optional)
      - parameter state: (query)  (optional)
@@ -60,8 +61,9 @@ open class SetupAPI {
     }
 
     /**
-     OIDC callback for setup owner creation. Called by the OIDC provider after authentication. Links the identity, issues session cookies, and redirects to /setup.
+     Oidc callback
      - GET /api/v4/setup/oidc/callback
+     - OIDC callback for setup owner creation. Called by the OIDC provider after authentication. Links the identity, issues session cookies, and redirects to /setup.
      - parameter code: (query)  (optional)
      - parameter state: (query)  (optional)
      - parameter error: (query)  (optional)
@@ -94,7 +96,7 @@ open class SetupAPI {
     }
 
     /**
-     Complete passkey registration for the first owner account. Verifies attestation, generates recovery codes, issues a full JWT session.
+     Owner complete
      
      - parameter setupOwnerCompleteRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -105,8 +107,9 @@ open class SetupAPI {
     }
 
     /**
-     Complete passkey registration for the first owner account. Verifies attestation, generates recovery codes, issues a full JWT session.
+     Owner complete
      - POST /api/v4/setup/owner/complete
+     - Complete passkey registration for the first owner account. Verifies attestation, generates recovery codes, issues a full JWT session.
      - parameter setupOwnerCompleteRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SetupOwnerCompleteResponse> 
@@ -130,7 +133,7 @@ open class SetupAPI {
     }
 
     /**
-     Initiate OIDC-based owner creation. Creates the subject and owner role, then redirects to the OIDC provider to link an identity.
+     Owner oidc
      
      - parameter setupOwnerOidcRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -141,8 +144,9 @@ open class SetupAPI {
     }
 
     /**
-     Initiate OIDC-based owner creation. Creates the subject and owner role, then redirects to the OIDC provider to link an identity.
+     Owner oidc
      - POST /api/v4/setup/owner/oidc
+     - Initiate OIDC-based owner creation. Creates the subject and owner role, then redirects to the OIDC provider to link an identity.
      - parameter setupOwnerOidcRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SetupOwnerOidcResponse> 
@@ -166,7 +170,7 @@ open class SetupAPI {
     }
 
     /**
-     Generate passkey registration options for the first owner account. Guard: exactly one tenant must exist with zero non-system members.
+     Owner options
      
      - parameter setupOwnerOptionsRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -177,8 +181,9 @@ open class SetupAPI {
     }
 
     /**
-     Generate passkey registration options for the first owner account. Guard: exactly one tenant must exist with zero non-system members.
+     Owner options
      - POST /api/v4/setup/owner/options
+     - Generate passkey registration options for the first owner account. Guard: exactly one tenant must exist with zero non-system members.
      - parameter setupOwnerOptionsRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SetupOwnerOptionsResponse> 
@@ -202,7 +207,7 @@ open class SetupAPI {
     }
 
     /**
-     Check whether a username is available for the owner account.
+     Validate username
      
      - parameter username: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -213,8 +218,9 @@ open class SetupAPI {
     }
 
     /**
-     Check whether a username is available for the owner account.
+     Validate username
      - GET /api/v4/setup/validate-username
+     - Check whether a username is available for the owner account.
      - parameter username: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SlugValidationResult> 

@@ -10,27 +10,39 @@ import Foundation
 open class DeviceAgeAPI {
 
     /**
-     Get all device ages in a single call
+     Get all device ages
      
+     - parameter patientDeviceId: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func deviceAgeGetAllDeviceAges(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await deviceAgeGetAllDeviceAgesWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    open class func deviceAgeGetAllDeviceAges(patientDeviceId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
+        return try await deviceAgeGetAllDeviceAgesWithRequestBuilder(patientDeviceId: patientDeviceId, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
-     Get all device ages in a single call
+     Get all device ages
      - GET /api/v4/deviceage/all
+     - Get all device ages in a single call
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter patientDeviceId: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
      */
-    open class func deviceAgeGetAllDeviceAgesWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func deviceAgeGetAllDeviceAgesWithRequestBuilder(patientDeviceId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
         let localVariablePath = "/api/v4/deviceage/all"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "patientDeviceId": (wrappedValue: patientDeviceId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -40,36 +52,45 @@ open class DeviceAgeAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get pump battery age (BAGE)
+     Get battery age
      
      - parameter info: (query)  (optional)
      - parameter warn: (query)  (optional)
      - parameter urgent: (query)  (optional)
      - parameter display: (query)  (optional)
      - parameter enableAlerts: (query)  (optional)
+     - parameter patientDeviceId: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DeviceAgeInfo
      */
-    open class func deviceAgeGetBatteryAge(info: Int? = nil, warn: Int? = nil, urgent: Int? = nil, display: String? = nil, enableAlerts: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DeviceAgeInfo {
-        return try await deviceAgeGetBatteryAgeWithRequestBuilder(info: info, warn: warn, urgent: urgent, display: display, enableAlerts: enableAlerts, apiConfiguration: apiConfiguration).execute().body
+    open class func deviceAgeGetBatteryAge(info: Int? = nil, warn: Int? = nil, urgent: Int? = nil, display: String? = nil, enableAlerts: Bool? = nil, patientDeviceId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DeviceAgeInfo {
+        return try await deviceAgeGetBatteryAgeWithRequestBuilder(info: info, warn: warn, urgent: urgent, display: display, enableAlerts: enableAlerts, patientDeviceId: patientDeviceId, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
-     Get pump battery age (BAGE)
+     Get battery age
      - GET /api/v4/deviceage/battery
+     - Get pump battery age (BAGE)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter info: (query)  (optional)
      - parameter warn: (query)  (optional)
      - parameter urgent: (query)  (optional)
      - parameter display: (query)  (optional)
      - parameter enableAlerts: (query)  (optional)
+     - parameter patientDeviceId: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DeviceAgeInfo> 
      */
-    open class func deviceAgeGetBatteryAgeWithRequestBuilder(info: Int? = nil, warn: Int? = nil, urgent: Int? = nil, display: String? = nil, enableAlerts: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DeviceAgeInfo> {
+    open class func deviceAgeGetBatteryAgeWithRequestBuilder(info: Int? = nil, warn: Int? = nil, urgent: Int? = nil, display: String? = nil, enableAlerts: Bool? = nil, patientDeviceId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DeviceAgeInfo> {
         let localVariablePath = "/api/v4/deviceage/battery"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -81,6 +102,7 @@ open class DeviceAgeAPI {
             "urgent": (wrappedValue: urgent?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "display": (wrappedValue: display?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "enableAlerts": (wrappedValue: enableAlerts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "patientDeviceId": (wrappedValue: patientDeviceId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ]
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp1)
 
@@ -92,36 +114,45 @@ open class DeviceAgeAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DeviceAgeInfo>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get cannula/site age (CAGE)
+     Get cannula age
      
      - parameter info: (query)  (optional)
      - parameter warn: (query)  (optional)
      - parameter urgent: (query)  (optional)
      - parameter display: (query)  (optional)
      - parameter enableAlerts: (query)  (optional)
+     - parameter patientDeviceId: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DeviceAgeInfo
      */
-    open class func deviceAgeGetCannulaAge(info: Int? = nil, warn: Int? = nil, urgent: Int? = nil, display: String? = nil, enableAlerts: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DeviceAgeInfo {
-        return try await deviceAgeGetCannulaAgeWithRequestBuilder(info: info, warn: warn, urgent: urgent, display: display, enableAlerts: enableAlerts, apiConfiguration: apiConfiguration).execute().body
+    open class func deviceAgeGetCannulaAge(info: Int? = nil, warn: Int? = nil, urgent: Int? = nil, display: String? = nil, enableAlerts: Bool? = nil, patientDeviceId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DeviceAgeInfo {
+        return try await deviceAgeGetCannulaAgeWithRequestBuilder(info: info, warn: warn, urgent: urgent, display: display, enableAlerts: enableAlerts, patientDeviceId: patientDeviceId, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
-     Get cannula/site age (CAGE)
+     Get cannula age
      - GET /api/v4/deviceage/cannula
+     - Get cannula/site age (CAGE)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter info: (query)  (optional)
      - parameter warn: (query)  (optional)
      - parameter urgent: (query)  (optional)
      - parameter display: (query)  (optional)
      - parameter enableAlerts: (query)  (optional)
+     - parameter patientDeviceId: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DeviceAgeInfo> 
      */
-    open class func deviceAgeGetCannulaAgeWithRequestBuilder(info: Int? = nil, warn: Int? = nil, urgent: Int? = nil, display: String? = nil, enableAlerts: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DeviceAgeInfo> {
+    open class func deviceAgeGetCannulaAgeWithRequestBuilder(info: Int? = nil, warn: Int? = nil, urgent: Int? = nil, display: String? = nil, enableAlerts: Bool? = nil, patientDeviceId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DeviceAgeInfo> {
         let localVariablePath = "/api/v4/deviceage/cannula"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -133,6 +164,7 @@ open class DeviceAgeAPI {
             "urgent": (wrappedValue: urgent?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "display": (wrappedValue: display?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "enableAlerts": (wrappedValue: enableAlerts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "patientDeviceId": (wrappedValue: patientDeviceId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ]
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp2)
 
@@ -144,36 +176,45 @@ open class DeviceAgeAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DeviceAgeInfo>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get insulin reservoir age (IAGE)
+     Get insulin age
      
      - parameter info: (query)  (optional)
      - parameter warn: (query)  (optional)
      - parameter urgent: (query)  (optional)
      - parameter display: (query)  (optional)
      - parameter enableAlerts: (query)  (optional)
+     - parameter patientDeviceId: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DeviceAgeInfo
      */
-    open class func deviceAgeGetInsulinAge(info: Int? = nil, warn: Int? = nil, urgent: Int? = nil, display: String? = nil, enableAlerts: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DeviceAgeInfo {
-        return try await deviceAgeGetInsulinAgeWithRequestBuilder(info: info, warn: warn, urgent: urgent, display: display, enableAlerts: enableAlerts, apiConfiguration: apiConfiguration).execute().body
+    open class func deviceAgeGetInsulinAge(info: Int? = nil, warn: Int? = nil, urgent: Int? = nil, display: String? = nil, enableAlerts: Bool? = nil, patientDeviceId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DeviceAgeInfo {
+        return try await deviceAgeGetInsulinAgeWithRequestBuilder(info: info, warn: warn, urgent: urgent, display: display, enableAlerts: enableAlerts, patientDeviceId: patientDeviceId, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
-     Get insulin reservoir age (IAGE)
+     Get insulin age
      - GET /api/v4/deviceage/insulin
+     - Get insulin reservoir age (IAGE)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter info: (query)  (optional)
      - parameter warn: (query)  (optional)
      - parameter urgent: (query)  (optional)
      - parameter display: (query)  (optional)
      - parameter enableAlerts: (query)  (optional)
+     - parameter patientDeviceId: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DeviceAgeInfo> 
      */
-    open class func deviceAgeGetInsulinAgeWithRequestBuilder(info: Int? = nil, warn: Int? = nil, urgent: Int? = nil, display: String? = nil, enableAlerts: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DeviceAgeInfo> {
+    open class func deviceAgeGetInsulinAgeWithRequestBuilder(info: Int? = nil, warn: Int? = nil, urgent: Int? = nil, display: String? = nil, enableAlerts: Bool? = nil, patientDeviceId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DeviceAgeInfo> {
         let localVariablePath = "/api/v4/deviceage/insulin"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -185,6 +226,7 @@ open class DeviceAgeAPI {
             "urgent": (wrappedValue: urgent?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "display": (wrappedValue: display?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "enableAlerts": (wrappedValue: enableAlerts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "patientDeviceId": (wrappedValue: patientDeviceId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ]
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp3)
 
@@ -196,36 +238,45 @@ open class DeviceAgeAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DeviceAgeInfo>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get sensor age (SAGE) Returns both Sensor Start and Sensor Change events
+     Get sensor age
      
      - parameter info: (query)  (optional)
      - parameter warn: (query)  (optional)
      - parameter urgent: (query)  (optional)
      - parameter display: (query)  (optional)
      - parameter enableAlerts: (query)  (optional)
+     - parameter patientDeviceId: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: SensorAgeInfo
      */
-    open class func deviceAgeGetSensorAge(info: Int? = nil, warn: Int? = nil, urgent: Int? = nil, display: String? = nil, enableAlerts: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> SensorAgeInfo {
-        return try await deviceAgeGetSensorAgeWithRequestBuilder(info: info, warn: warn, urgent: urgent, display: display, enableAlerts: enableAlerts, apiConfiguration: apiConfiguration).execute().body
+    open class func deviceAgeGetSensorAge(info: Int? = nil, warn: Int? = nil, urgent: Int? = nil, display: String? = nil, enableAlerts: Bool? = nil, patientDeviceId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> SensorAgeInfo {
+        return try await deviceAgeGetSensorAgeWithRequestBuilder(info: info, warn: warn, urgent: urgent, display: display, enableAlerts: enableAlerts, patientDeviceId: patientDeviceId, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
-     Get sensor age (SAGE) Returns both Sensor Start and Sensor Change events
+     Get sensor age
      - GET /api/v4/deviceage/sensor
+     - Get sensor age (SAGE) Returns both Sensor Start and Sensor Change events
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter info: (query)  (optional)
      - parameter warn: (query)  (optional)
      - parameter urgent: (query)  (optional)
      - parameter display: (query)  (optional)
      - parameter enableAlerts: (query)  (optional)
+     - parameter patientDeviceId: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SensorAgeInfo> 
      */
-    open class func deviceAgeGetSensorAgeWithRequestBuilder(info: Int? = nil, warn: Int? = nil, urgent: Int? = nil, display: String? = nil, enableAlerts: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<SensorAgeInfo> {
+    open class func deviceAgeGetSensorAgeWithRequestBuilder(info: Int? = nil, warn: Int? = nil, urgent: Int? = nil, display: String? = nil, enableAlerts: Bool? = nil, patientDeviceId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<SensorAgeInfo> {
         let localVariablePath = "/api/v4/deviceage/sensor"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -237,6 +288,7 @@ open class DeviceAgeAPI {
             "urgent": (wrappedValue: urgent?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "display": (wrappedValue: display?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "enableAlerts": (wrappedValue: enableAlerts?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "patientDeviceId": (wrappedValue: patientDeviceId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ]
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp4)
 
@@ -248,6 +300,6 @@ open class DeviceAgeAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SensorAgeInfo>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

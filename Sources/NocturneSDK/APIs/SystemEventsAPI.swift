@@ -10,7 +10,7 @@ import Foundation
 open class SystemEventsAPI {
 
     /**
-     Create a new system event (manual entry or import).
+     Create system event
      
      - parameter createSystemEventRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class SystemEventsAPI {
     }
 
     /**
-     Create a new system event (manual entry or import).
+     Create system event
      - POST /api/v4/system-events
+     - Create a new system event (manual entry or import).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createSystemEventRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SystemEvent> 
@@ -42,11 +49,11 @@ open class SystemEventsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SystemEvent>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a system event.
+     Delete system event
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +64,15 @@ open class SystemEventsAPI {
     }
 
     /**
-     Delete a system event.
+     Delete system event
      - DELETE /api/v4/system-events/{id}
+     - Delete a system event.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<URL> 
@@ -81,11 +95,11 @@ open class SystemEventsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<URL>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a specific system event by ID.
+     Get system event
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -96,8 +110,15 @@ open class SystemEventsAPI {
     }
 
     /**
-     Get a specific system event by ID.
+     Get system event
      - GET /api/v4/system-events/{id}
+     - Get a specific system event by ID.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SystemEvent> 
@@ -120,11 +141,11 @@ open class SystemEventsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SystemEvent>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Query system events with optional filtering.
+     Get system events
      
      - parameter type: (query)  (optional)
      - parameter category: (query)  (optional)
@@ -141,8 +162,15 @@ open class SystemEventsAPI {
     }
 
     /**
-     Query system events with optional filtering.
+     Get system events
      - GET /api/v4/system-events
+     - Query system events with optional filtering.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter type: (query)  (optional)
      - parameter category: (query)  (optional)
      - parameter from: (query)  (optional)
@@ -178,6 +206,6 @@ open class SystemEventsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[SystemEvent]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

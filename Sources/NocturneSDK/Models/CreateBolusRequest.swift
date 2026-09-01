@@ -16,6 +16,8 @@ public struct CreateBolusRequest: Sendable, Codable, Hashable {
     public var utcOffset: Int?
     /** Identifier of the device that delivered the bolus (e.g. pump serial number). */
     public var device: String?
+    /** Optional reference to the registered PatientDevice that delivered the bolus. Must resolve to one of the caller's registered devices. When omitted, the server attempts attribution from Device and DataSource. Send the empty GUID (00000000-0000-0000-0000-000000000000) to state that the bolus came from no registered device: the link is cleared and server-side attribution is skipped for this request. */
+    public var patientDeviceId: String?
     /** Name of the application that submitted this record. */
     public var app: String?
     /** Upstream data source identifier; required when SyncIdentifier is supplied. */
@@ -47,10 +49,11 @@ public struct CreateBolusRequest: Sendable, Codable, Hashable {
     /** Correlation identifier for grouping related events (e.g. a meal bolus and carb intake). */
     public var correlationId: String?
 
-    public init(timestamp: Date? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, insulin: Double? = nil, programmed: Double? = nil, delivered: Double? = nil, bolusType: BolusType? = nil, kind: BolusKind? = nil, automatic: Bool? = nil, duration: Double? = nil, syncIdentifier: String? = nil, insulinType: String? = nil, patientInsulinId: String? = nil, unabsorbed: Double? = nil, bolusCalculationId: String? = nil, apsSnapshotId: String? = nil, correlationId: String? = nil) {
+    public init(timestamp: Date? = nil, utcOffset: Int? = nil, device: String? = nil, patientDeviceId: String? = nil, app: String? = nil, dataSource: String? = nil, insulin: Double? = nil, programmed: Double? = nil, delivered: Double? = nil, bolusType: BolusType? = nil, kind: BolusKind? = nil, automatic: Bool? = nil, duration: Double? = nil, syncIdentifier: String? = nil, insulinType: String? = nil, patientInsulinId: String? = nil, unabsorbed: Double? = nil, bolusCalculationId: String? = nil, apsSnapshotId: String? = nil, correlationId: String? = nil) {
         self.timestamp = timestamp
         self.utcOffset = utcOffset
         self.device = device
+        self.patientDeviceId = patientDeviceId
         self.app = app
         self.dataSource = dataSource
         self.insulin = insulin
@@ -73,6 +76,7 @@ public struct CreateBolusRequest: Sendable, Codable, Hashable {
         case timestamp
         case utcOffset
         case device
+        case patientDeviceId
         case app
         case dataSource
         case insulin
@@ -98,6 +102,7 @@ public struct CreateBolusRequest: Sendable, Codable, Hashable {
         try container.encodeIfPresent(timestamp, forKey: .timestamp)
         try container.encodeIfPresent(utcOffset, forKey: .utcOffset)
         try container.encodeIfPresent(device, forKey: .device)
+        try container.encodeIfPresent(patientDeviceId, forKey: .patientDeviceId)
         try container.encodeIfPresent(app, forKey: .app)
         try container.encodeIfPresent(dataSource, forKey: .dataSource)
         try container.encodeIfPresent(insulin, forKey: .insulin)

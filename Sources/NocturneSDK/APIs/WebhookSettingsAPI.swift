@@ -10,7 +10,7 @@ import Foundation
 open class WebhookSettingsAPI {
 
     /**
-     Gets the webhook notification settings for the current tenant.
+     Get webhook settings
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: WebhookNotificationSettings
@@ -20,8 +20,15 @@ open class WebhookSettingsAPI {
     }
 
     /**
-     Gets the webhook notification settings for the current tenant.
+     Get webhook settings
      - GET /api/v4/ui-settings/notifications/webhooks
+     - Gets the webhook notification settings for the current tenant.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<WebhookNotificationSettings> 
      */
@@ -40,11 +47,11 @@ open class WebhookSettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<WebhookNotificationSettings>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Saves webhook notification settings.
+     Save webhook settings
      
      - parameter webhookNotificationSettings: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -55,8 +62,15 @@ open class WebhookSettingsAPI {
     }
 
     /**
-     Saves webhook notification settings.
+     Save webhook settings
      - PUT /api/v4/ui-settings/notifications/webhooks
+     - Saves webhook notification settings.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter webhookNotificationSettings: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<WebhookNotificationSettings> 
@@ -76,11 +90,11 @@ open class WebhookSettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<WebhookNotificationSettings>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Tests webhook settings by sending test payloads to configured URLs.
+     Test webhook settings
      
      - parameter webhookTestRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -91,8 +105,15 @@ open class WebhookSettingsAPI {
     }
 
     /**
-     Tests webhook settings by sending test payloads to configured URLs.
+     Test webhook settings
      - POST /api/v4/ui-settings/notifications/webhooks/test
+     - Gated for the demo's shared visitor because the destination is caller-chosen: the server makes an outbound POST from its own address. OutboundDestination keeps it off private networks, so what remains is a relay to public hosts.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter webhookTestRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<WebhookTestResult> 
@@ -112,6 +133,6 @@ open class WebhookSettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<WebhookTestResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

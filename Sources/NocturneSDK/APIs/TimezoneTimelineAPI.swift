@@ -10,7 +10,7 @@ import Foundation
 open class TimezoneTimelineAPI {
 
     /**
-     Delete a timeline entry.
+     Delete
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class TimezoneTimelineAPI {
     }
 
     /**
-     Delete a timeline entry.
+     Delete
      - DELETE /api/v4/timezone-timeline/{id}
+     - Delete a timeline entry.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<URL> 
@@ -45,11 +52,11 @@ open class TimezoneTimelineAPI {
 
         let localVariableRequestBuilder: RequestBuilder<URL>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get the tenant's timezone timeline, ordered by effective date.
+     Get timeline
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [TimezoneTimelineEntry]
@@ -59,8 +66,15 @@ open class TimezoneTimelineAPI {
     }
 
     /**
-     Get the tenant's timezone timeline, ordered by effective date.
+     Get timeline
      - GET /api/v4/timezone-timeline
+     - Get the tenant's timezone timeline, ordered by effective date.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[TimezoneTimelineEntry]> 
      */
@@ -79,11 +93,11 @@ open class TimezoneTimelineAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[TimezoneTimelineEntry]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Re-correct already-imported data after a timeline change by re-pulling the affected window from Glooko. Records re-flow the normal publish path and upsert in place on their stable SyncIdentifier, so timestamps move without duplicating. Intended to be called after the user confirms the affected window. Runs synchronously; the window is bounded.
+     Recorrect
      
      - parameter recorrectRequest: (body) Optional lower bound (UTC). When null, the connector&#39;s default window is used. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -94,8 +108,15 @@ open class TimezoneTimelineAPI {
     }
 
     /**
-     Re-correct already-imported data after a timeline change by re-pulling the affected window from Glooko. Records re-flow the normal publish path and upsert in place on their stable SyncIdentifier, so timestamps move without duplicating. Intended to be called after the user confirms the affected window. Runs synchronously; the window is bounded.
+     Recorrect
      - POST /api/v4/timezone-timeline/recorrect
+     - Re-correct already-imported data after a timeline change by re-pulling the affected window from Glooko. Records re-flow the normal publish path and upsert in place on their stable SyncIdentifier, so timestamps move without duplicating. Intended to be called after the user confirms the affected window. Runs synchronously; the window is bounded.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter recorrectRequest: (body) Optional lower bound (UTC). When null, the connector&#39;s default window is used. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<RecorrectResult> 
@@ -115,11 +136,11 @@ open class TimezoneTimelineAPI {
 
         let localVariableRequestBuilder: RequestBuilder<RecorrectResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create or update a timeline entry. EffectiveFrom is a local wall-clock date/time (the moment, in local terms, that the zone took effect). A trip is two entries (out + return); a move is a single entry; the origin entry covers all earlier history.
+     Upsert
      
      - parameter upsertTimezoneEntryRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -130,8 +151,15 @@ open class TimezoneTimelineAPI {
     }
 
     /**
-     Create or update a timeline entry. EffectiveFrom is a local wall-clock date/time (the moment, in local terms, that the zone took effect). A trip is two entries (out + return); a move is a single entry; the origin entry covers all earlier history.
+     Upsert
      - PUT /api/v4/timezone-timeline
+     - Create or update a timeline entry. EffectiveFrom is a local wall-clock date/time (the moment, in local terms, that the zone took effect). A trip is two entries (out + return); a move is a single entry; the origin entry covers all earlier history.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter upsertTimezoneEntryRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TimezoneTimelineEntry> 
@@ -151,6 +179,6 @@ open class TimezoneTimelineAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TimezoneTimelineEntry>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

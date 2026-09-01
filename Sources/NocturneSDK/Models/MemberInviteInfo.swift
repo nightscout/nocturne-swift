@@ -25,8 +25,9 @@ public struct MemberInviteInfo: Sendable, Codable, Hashable {
     public var isRevoked: Bool?
     public var createdAt: Date?
     public var usedBy: [InviteUsageInfo]?
+    public var viewer: InviteViewer?
 
-    public init(id: String? = nil, tenantId: String? = nil, tenantName: String? = nil, createdByName: String? = nil, roleIds: [String]? = nil, directPermissions: [String]? = nil, label: String? = nil, limitTo24Hours: Bool? = nil, expiresAt: Date? = nil, maxUses: Int? = nil, useCount: Int? = nil, isValid: Bool? = nil, isExpired: Bool? = nil, isRevoked: Bool? = nil, createdAt: Date? = nil, usedBy: [InviteUsageInfo]? = nil) {
+    public init(id: String? = nil, tenantId: String? = nil, tenantName: String? = nil, createdByName: String? = nil, roleIds: [String]? = nil, directPermissions: [String]? = nil, label: String? = nil, limitTo24Hours: Bool? = nil, expiresAt: Date? = nil, maxUses: Int? = nil, useCount: Int? = nil, isValid: Bool? = nil, isExpired: Bool? = nil, isRevoked: Bool? = nil, createdAt: Date? = nil, usedBy: [InviteUsageInfo]? = nil, viewer: InviteViewer? = nil) {
         self.id = id
         self.tenantId = tenantId
         self.tenantName = tenantName
@@ -43,6 +44,7 @@ public struct MemberInviteInfo: Sendable, Codable, Hashable {
         self.isRevoked = isRevoked
         self.createdAt = createdAt
         self.usedBy = usedBy
+        self.viewer = viewer
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -62,6 +64,7 @@ public struct MemberInviteInfo: Sendable, Codable, Hashable {
         case isRevoked
         case createdAt
         case usedBy
+        case viewer
     }
 
     // Encodable protocol methods
@@ -84,6 +87,7 @@ public struct MemberInviteInfo: Sendable, Codable, Hashable {
         try container.encodeIfPresent(isRevoked, forKey: .isRevoked)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(usedBy, forKey: .usedBy)
+        try container.encodeIfPresent(viewer, forKey: .viewer)
     }
 }
 

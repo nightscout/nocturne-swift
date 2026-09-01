@@ -10,7 +10,7 @@ import Foundation
 open class AlertCustomSoundsAPI {
 
     /**
-     Delete a custom sound.
+     Delete sound
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class AlertCustomSoundsAPI {
     }
 
     /**
-     Delete a custom sound.
+     Delete sound
      - DELETE /api/v4/alert-sounds/{id}
+     - Delete a custom sound.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -45,11 +52,11 @@ open class AlertCustomSoundsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     List all custom sounds for the current tenant (metadata only, no audio data).
+     Get sounds
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [AlertCustomSoundResponse]
@@ -59,8 +66,15 @@ open class AlertCustomSoundsAPI {
     }
 
     /**
-     List all custom sounds for the current tenant (metadata only, no audio data).
+     Get sounds
      - GET /api/v4/alert-sounds
+     - List all custom sounds for the current tenant (metadata only, no audio data).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[AlertCustomSoundResponse]> 
      */
@@ -79,11 +93,11 @@ open class AlertCustomSoundsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[AlertCustomSoundResponse]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Stream the raw audio bytes for a custom sound.
+     Stream sound
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -94,8 +108,15 @@ open class AlertCustomSoundsAPI {
     }
 
     /**
-     Stream the raw audio bytes for a custom sound.
+     Stream sound
      - GET /api/v4/alert-sounds/{id}/stream
+     - Stream the raw audio bytes for a custom sound.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -118,11 +139,11 @@ open class AlertCustomSoundsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Upload a custom alert sound file.
+     Upload sound
      
      - parameter contentType: (form)  (optional)
      - parameter contentDisposition: (form)  (optional)
@@ -138,8 +159,15 @@ open class AlertCustomSoundsAPI {
     }
 
     /**
-     Upload a custom alert sound file.
+     Upload sound
      - POST /api/v4/alert-sounds
+     - Upload a custom alert sound file.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter contentType: (form)  (optional)
      - parameter contentDisposition: (form)  (optional)
      - parameter headers: (form)  (optional)
@@ -174,6 +202,6 @@ open class AlertCustomSoundsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AlertCustomSoundResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

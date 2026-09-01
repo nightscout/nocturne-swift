@@ -10,7 +10,8 @@ import Foundation
 open class GlucoseProcessingSettingsAPI {
 
     /**
-
+     Get preference
+     
      - parameter apiConfiguration: The configuration for the http request.
      - returns: GlucoseProcessingPreferenceResponse
      */
@@ -19,7 +20,14 @@ open class GlucoseProcessingSettingsAPI {
     }
 
     /**
+     Get preference
      - GET /api/v4/settings/glucose-processing/preference
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<GlucoseProcessingPreferenceResponse> 
      */
@@ -38,11 +46,12 @@ open class GlucoseProcessingSettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<GlucoseProcessingPreferenceResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get source defaults
+     
      - parameter apiConfiguration: The configuration for the http request.
      - returns: GlucoseProcessingSourceDefaultsResponse
      */
@@ -51,7 +60,14 @@ open class GlucoseProcessingSettingsAPI {
     }
 
     /**
+     Get source defaults
      - GET /api/v4/settings/glucose-processing/source-defaults
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<GlucoseProcessingSourceDefaultsResponse> 
      */
@@ -70,11 +86,12 @@ open class GlucoseProcessingSettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<GlucoseProcessingSourceDefaultsResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Set preference
+     
      - parameter setGlucoseProcessingPreferenceRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -84,7 +101,14 @@ open class GlucoseProcessingSettingsAPI {
     }
 
     /**
+     Set preference
      - PUT /api/v4/settings/glucose-processing/preference
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter setGlucoseProcessingPreferenceRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -104,11 +128,12 @@ open class GlucoseProcessingSettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Set source defaults
+     
      - parameter setGlucoseProcessingSourceDefaultsRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -118,7 +143,14 @@ open class GlucoseProcessingSettingsAPI {
     }
 
     /**
+     Set source defaults
      - PUT /api/v4/settings/glucose-processing/source-defaults
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter setGlucoseProcessingSourceDefaultsRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -138,6 +170,6 @@ open class GlucoseProcessingSettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

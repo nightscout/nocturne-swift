@@ -10,7 +10,7 @@ import Foundation
 open class ConnectorAdminAPI {
 
     /**
-     Request cancellation of a running connector cursor reset job. Connectors already re-pulled keep their committed data; the fan-out simply stops before the next connector.
+     Cancel reset job
      
      - parameter jobId: (path) The job id to cancel. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class ConnectorAdminAPI {
     }
 
     /**
-     Request cancellation of a running connector cursor reset job. Connectors already re-pulled keep their committed data; the fan-out simply stops before the next connector.
+     Cancel reset job
      - POST /api/v4/admin/connectors/jobs/{jobId}/cancel
+     - Request cancellation of a running connector cursor reset job. Connectors already re-pulled keep their committed data; the fan-out simply stops before the next connector.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter jobId: (path) The job id to cancel. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -45,11 +52,11 @@ open class ConnectorAdminAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get the progress of a connector cursor reset job, including per-connector outcomes as they land.
+     Get reset job status
      
      - parameter jobId: (path) The job id returned by ResetTenantCursors. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -60,8 +67,15 @@ open class ConnectorAdminAPI {
     }
 
     /**
-     Get the progress of a connector cursor reset job, including per-connector outcomes as they land.
+     Get reset job status
      - GET /api/v4/admin/connectors/jobs/{jobId}
+     - Get the progress of a connector cursor reset job, including per-connector outcomes as they land.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter jobId: (path) The job id returned by ResetTenantCursors. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ConnectorResetJobStatus> 
@@ -84,11 +98,11 @@ open class ConnectorAdminAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ConnectorResetJobStatus>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     List the connectors a target tenant has configured, with their last-sync and health state.
+     Get tenant connectors
      
      - parameter tenantId: (path) The target tenant. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -99,9 +113,15 @@ open class ConnectorAdminAPI {
     }
 
     /**
-     List the connectors a target tenant has configured, with their last-sync and health state.
+     Get tenant connectors
      - GET /api/v4/admin/connectors/{tenantId}
      - Lets an admin inspect the data gap (last successful sync, health, last error) before deciding to reset cursors.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter tenantId: (path) The target tenant. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TenantConnectorsDto> 
@@ -124,11 +144,11 @@ open class ConnectorAdminAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TenantConnectorsDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Enqueue a background reset of the sync cursor for every connector configured on a target tenant, forcing a re-pull of history. Use after fixing a connector bug to push corrected data to an affected tenant.
+     Reset tenant cursors
      
      - parameter tenantId: (path) The target tenant whose connectors should be re-pulled. 
      - parameter adminResetCursorsRequest: (body) Optional lower bound and data-type filter, mirroring the per-tenant reset endpoint. 
@@ -140,9 +160,15 @@ open class ConnectorAdminAPI {
     }
 
     /**
-     Enqueue a background reset of the sync cursor for every connector configured on a target tenant, forcing a re-pull of history. Use after fixing a connector bug to push corrected data to an affected tenant.
+     Reset tenant cursors
      - POST /api/v4/admin/connectors/{tenantId}/reset-cursors
      - A full re-pull can take minutes per connector — far longer than gateway/proxy/browser request timeouts — so the work runs on a background job that outlives the request. This returns 202 Accepted with a job id immediately; poll GetResetJobStatus for per-connector progress, and CancelResetJob to stop it.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter tenantId: (path) The target tenant whose connectors should be re-pulled. 
      - parameter adminResetCursorsRequest: (body) Optional lower bound and data-type filter, mirroring the per-tenant reset endpoint. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -166,6 +192,6 @@ open class ConnectorAdminAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ConnectorResetJobInfo>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

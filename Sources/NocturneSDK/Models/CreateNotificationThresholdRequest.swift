@@ -17,11 +17,9 @@ public struct CreateNotificationThresholdRequest: Sendable, Codable, Hashable {
     public var audioEnabled: Bool?
     public var audioSound: String?
     public var vibrateEnabled: Bool?
-    public var repeatIntervalMins: Int?
-    public var maxRepeats: Int?
     public var respectQuietHours: Bool?
 
-    public init(urgency: NotificationUrgency? = nil, hours: Int? = nil, description: String? = nil, displayOrder: Int? = nil, pushEnabled: Bool? = nil, audioEnabled: Bool? = nil, audioSound: String? = nil, vibrateEnabled: Bool? = nil, repeatIntervalMins: Int? = nil, maxRepeats: Int? = nil, respectQuietHours: Bool? = nil) {
+    public init(urgency: NotificationUrgency? = nil, hours: Int? = nil, description: String? = nil, displayOrder: Int? = nil, pushEnabled: Bool? = nil, audioEnabled: Bool? = nil, audioSound: String? = nil, vibrateEnabled: Bool? = nil, respectQuietHours: Bool? = nil) {
         self.urgency = urgency
         self.hours = hours
         self.description = description
@@ -30,8 +28,6 @@ public struct CreateNotificationThresholdRequest: Sendable, Codable, Hashable {
         self.audioEnabled = audioEnabled
         self.audioSound = audioSound
         self.vibrateEnabled = vibrateEnabled
-        self.repeatIntervalMins = repeatIntervalMins
-        self.maxRepeats = maxRepeats
         self.respectQuietHours = respectQuietHours
     }
 
@@ -44,8 +40,6 @@ public struct CreateNotificationThresholdRequest: Sendable, Codable, Hashable {
         case audioEnabled
         case audioSound
         case vibrateEnabled
-        case repeatIntervalMins
-        case maxRepeats
         case respectQuietHours
     }
 
@@ -61,8 +55,6 @@ public struct CreateNotificationThresholdRequest: Sendable, Codable, Hashable {
         try container.encodeIfPresent(audioEnabled, forKey: .audioEnabled)
         try container.encodeIfPresent(audioSound, forKey: .audioSound)
         try container.encodeIfPresent(vibrateEnabled, forKey: .vibrateEnabled)
-        try container.encodeIfPresent(repeatIntervalMins, forKey: .repeatIntervalMins)
-        try container.encodeIfPresent(maxRepeats, forKey: .maxRepeats)
         try container.encodeIfPresent(respectQuietHours, forKey: .respectQuietHours)
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 open class MealMatchingAPI {
 
     /**
-     Accept a meal match
+     Accept match
      
      - parameter acceptMatchRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class MealMatchingAPI {
     }
 
     /**
-     Accept a meal match
+     Accept match
      - POST /api/v4/meal-matching/accept
+     - Writes a treatment_foods row keyed by the carb intake, which NutritionController gates on treatments.readwrite, and marks the connector food entry matched. Gated on the treatments category rather than food because the carb breakdown is a COB input.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter acceptMatchRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -42,11 +49,11 @@ open class MealMatchingAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Dismiss a meal match
+     Dismiss match
      
      - parameter dismissMatchRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +64,15 @@ open class MealMatchingAPI {
     }
 
     /**
-     Dismiss a meal match
+     Dismiss match
      - POST /api/v4/meal-matching/dismiss
+     - Writes only the connector_food_entries status, which is the food category in GovernedTables, so this action is gated on the food category while AcceptMatch is gated on treatments.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter dismissMatchRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -78,11 +92,11 @@ open class MealMatchingAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a food entry for review
+     Get food entry
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -93,8 +107,15 @@ open class MealMatchingAPI {
     }
 
     /**
-     Get a food entry for review
+     Get food entry
      - GET /api/v4/meal-matching/food-entries/{id}
+     - Get a food entry for review
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ConnectorFoodEntry> 
@@ -117,11 +138,11 @@ open class MealMatchingAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ConnectorFoodEntry>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get suggested meal matches for a date range
+     Get suggestions
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -133,8 +154,15 @@ open class MealMatchingAPI {
     }
 
     /**
-     Get suggested meal matches for a date range
+     Get suggestions
      - GET /api/v4/meal-matching/suggestions
+     - Get suggested meal matches for a date range
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -159,6 +187,6 @@ open class MealMatchingAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[SuggestedMealMatch]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

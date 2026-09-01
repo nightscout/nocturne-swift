@@ -10,7 +10,7 @@ import Foundation
 open class PatientRecordAPI {
 
     /**
-     Create a new patient device
+     Create device
      
      - parameter patientDevice: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class PatientRecordAPI {
     }
 
     /**
-     Create a new patient device
+     Create device
      - POST /api/v4/patient-record/devices
+     - Create a new patient device
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter patientDevice: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PatientDevice> 
@@ -42,11 +49,11 @@ open class PatientRecordAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PatientDevice>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create a new patient insulin
+     Create insulin
      
      - parameter patientInsulin: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +64,15 @@ open class PatientRecordAPI {
     }
 
     /**
-     Create a new patient insulin
+     Create insulin
      - POST /api/v4/patient-record/insulins
+     - Create a new patient insulin
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter patientInsulin: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PatientInsulin> 
@@ -78,11 +92,11 @@ open class PatientRecordAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PatientInsulin>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a patient device
+     Delete device
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -93,8 +107,15 @@ open class PatientRecordAPI {
     }
 
     /**
-     Delete a patient device
+     Delete device
      - DELETE /api/v4/patient-record/devices/{id}
+     - Delete a patient device
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -117,11 +138,11 @@ open class PatientRecordAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a patient insulin
+     Delete insulin
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -132,8 +153,15 @@ open class PatientRecordAPI {
     }
 
     /**
-     Delete a patient insulin
+     Delete insulin
      - DELETE /api/v4/patient-record/insulins/{id}
+     - Delete a patient insulin
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -156,11 +184,11 @@ open class PatientRecordAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get all patient devices
+     Get devices
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [PatientDevice]
@@ -170,8 +198,15 @@ open class PatientRecordAPI {
     }
 
     /**
-     Get all patient devices
+     Get devices
      - GET /api/v4/patient-record/devices
+     - Get all patient devices
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[PatientDevice]> 
      */
@@ -190,11 +225,11 @@ open class PatientRecordAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[PatientDevice]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Lists distinct (DataSource, Device) combinations seen in recent unattributed readings — candidate streams the user can register as devices from the settings UI.
+     Get discovered sources
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [DiscoveredSource]
@@ -204,8 +239,15 @@ open class PatientRecordAPI {
     }
 
     /**
-     Lists distinct (DataSource, Device) combinations seen in recent unattributed readings — candidate streams the user can register as devices from the settings UI.
+     Get discovered sources
      - GET /api/v4/patient-record/devices/discovered-sources
+     - Lists distinct (DataSource, Device) combinations seen in recent unattributed readings — candidate streams the user can register as devices from the settings UI.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[DiscoveredSource]> 
      */
@@ -224,11 +266,11 @@ open class PatientRecordAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[DiscoveredSource]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get all patient insulins
+     Get insulins
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [PatientInsulin]
@@ -238,8 +280,15 @@ open class PatientRecordAPI {
     }
 
     /**
-     Get all patient insulins
+     Get insulins
      - GET /api/v4/patient-record/insulins
+     - Get all patient insulins
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[PatientInsulin]> 
      */
@@ -258,11 +307,11 @@ open class PatientRecordAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[PatientInsulin]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get or create the patient record
+     Get patient record
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PatientRecord
@@ -272,8 +321,15 @@ open class PatientRecordAPI {
     }
 
     /**
-     Get or create the patient record
+     Get patient record
      - GET /api/v4/patient-record
+     - Get or create the patient record
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PatientRecord> 
      */
@@ -292,11 +348,11 @@ open class PatientRecordAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PatientRecord>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Reassigns device priority in a single batch. Drag-to-reorder in the UI sends the full ordered list; each entry's position becomes its Rank. One round trip instead of one PUT per device. An imperative command (no HTML form), mirroring the delete/restore surface.
+     Reorder devices
      
      - parameter deviceRankAssignment: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -307,8 +363,15 @@ open class PatientRecordAPI {
     }
 
     /**
-     Reassigns device priority in a single batch. Drag-to-reorder in the UI sends the full ordered list; each entry's position becomes its Rank. One round trip instead of one PUT per device. An imperative command (no HTML form), mirroring the delete/restore surface.
+     Reorder devices
      - POST /api/v4/patient-record/devices/reorder
+     - Reassigns device priority in a single batch. Drag-to-reorder in the UI sends the full ordered list; each entry's position becomes its Rank. One round trip instead of one PUT per device. An imperative command (no HTML form), mirroring the delete/restore surface.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter deviceRankAssignment: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[PatientDevice]> 
@@ -328,11 +391,11 @@ open class PatientRecordAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[PatientDevice]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update a patient device
+     Update device
      
      - parameter id: (path)  
      - parameter patientDevice: (body)  
@@ -344,8 +407,15 @@ open class PatientRecordAPI {
     }
 
     /**
-     Update a patient device
+     Update device
      - PUT /api/v4/patient-record/devices/{id}
+     - Update a patient device
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter patientDevice: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -369,11 +439,11 @@ open class PatientRecordAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PatientDevice>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update a patient insulin
+     Update insulin
      
      - parameter id: (path)  
      - parameter patientInsulin: (body)  
@@ -385,8 +455,15 @@ open class PatientRecordAPI {
     }
 
     /**
-     Update a patient insulin
+     Update insulin
      - PUT /api/v4/patient-record/insulins/{id}
+     - Update a patient insulin
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter patientInsulin: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -410,11 +487,11 @@ open class PatientRecordAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PatientInsulin>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update the patient record
+     Update patient record
      
      - parameter patientRecord: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -425,8 +502,15 @@ open class PatientRecordAPI {
     }
 
     /**
-     Update the patient record
+     Update patient record
      - PUT /api/v4/patient-record
+     - Update the patient record
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter patientRecord: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PatientRecord> 
@@ -446,6 +530,6 @@ open class PatientRecordAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PatientRecord>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

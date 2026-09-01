@@ -10,7 +10,7 @@ import Foundation
 open class PumpSnapshotAPI {
 
     /**
-     Create or update pump snapshots in bulk (max 1000).
+     Create pump snapshots
      
      - parameter upsertPumpSnapshotRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,9 +21,15 @@ open class PumpSnapshotAPI {
     }
 
     /**
-     Create or update pump snapshots in bulk (max 1000).
+     Create pump snapshots
      - POST /api/v4/device-status/pump
      - Array semantics are per-item upsert, not all-or-nothing: each snapshot carrying both `dataSource` and `syncIdentifier` updates the row already matched by that pair; all others insert. Validation failures reject the whole request with `400 Bad Request` before anything is persisted. Omit `reservoir` when the level is unknown rather than sending a sentinel.              Device attribution is a deliberate scope cut: unlike the legacy decomposer path, records written here carry no Device/PatientDevice link (snapshots are not IDeviceAttributed, so the stamper can't take them). Reads that join by correlationId are unaffected.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter upsertPumpSnapshotRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[PumpSnapshot]> 
@@ -43,11 +49,11 @@ open class PumpSnapshotAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[PumpSnapshot]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Lists records with pagination, optional date range, device, and source filtering.
+     Get all
      
      - parameter from: (query) Inclusive start of the date range filter. (optional)
      - parameter to: (query) Inclusive end of the date range filter. (optional)
@@ -64,9 +70,15 @@ open class PumpSnapshotAPI {
     }
 
     /**
-     Lists records with pagination, optional date range, device, and source filtering.
+     Get all
      - GET /api/v4/device-status/pump
-     - The `sort` parameter accepts exactly two values: - `timestamp_asc` — oldest records first - `timestamp_desc` — newest records first (default)              Use `limit` and `offset` together for paginated access to large result sets.
+     - The `sort` parameter accepts exactly two values: - `timestamp_asc` — oldest records first - `timestamp_desc` — newest records first (default)              Use `limit` and `offset` together for paginated access to large result sets. `limit` is capped at MaxPageSize, and a `from`/`to` range wider than MaxDateSpanDays days is rejected with `400 Bad Request`.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query) Inclusive start of the date range filter. (optional)
      - parameter to: (query) Inclusive end of the date range filter. (optional)
      - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
@@ -102,11 +114,11 @@ open class PumpSnapshotAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfPumpSnapshot>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Retrieves a single record by its unique identifier.
+     Get by id
      
      - parameter id: (path) The unique identifier of the record. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -117,9 +129,15 @@ open class PumpSnapshotAPI {
     }
 
     /**
-     Retrieves a single record by its unique identifier.
+     Get by id
      - GET /api/v4/device-status/pump/{id}
      - Returns `404 Not Found` if no record with the given id exists.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The unique identifier of the record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PumpSnapshot> 
@@ -142,6 +160,6 @@ open class PumpSnapshotAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PumpSnapshot>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

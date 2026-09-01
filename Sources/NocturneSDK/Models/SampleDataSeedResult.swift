@@ -20,8 +20,13 @@ public struct SampleDataSeedResult: Sendable, Codable, Hashable {
     public var trackerInstances: Int?
     public var alertRules: Int?
     public var alertExcursions: Int?
+    public var deviceStatuses: Int?
+    public var profiles: Int?
+    public var foods: Int?
+    public var stateSpans: Int?
+    public var notifications: Int?
 
-    public init(entries: Int? = nil, treatments: Int? = nil, sleepSessions: Int? = nil, heartRates: Int? = nil, stepCounts: Int? = nil, deviceChanges: Int? = nil, trackerDefinitions: Int? = nil, trackerInstances: Int? = nil, alertRules: Int? = nil, alertExcursions: Int? = nil) {
+    public init(entries: Int? = nil, treatments: Int? = nil, sleepSessions: Int? = nil, heartRates: Int? = nil, stepCounts: Int? = nil, deviceChanges: Int? = nil, trackerDefinitions: Int? = nil, trackerInstances: Int? = nil, alertRules: Int? = nil, alertExcursions: Int? = nil, deviceStatuses: Int? = nil, profiles: Int? = nil, foods: Int? = nil, stateSpans: Int? = nil, notifications: Int? = nil) {
         self.entries = entries
         self.treatments = treatments
         self.sleepSessions = sleepSessions
@@ -32,6 +37,11 @@ public struct SampleDataSeedResult: Sendable, Codable, Hashable {
         self.trackerInstances = trackerInstances
         self.alertRules = alertRules
         self.alertExcursions = alertExcursions
+        self.deviceStatuses = deviceStatuses
+        self.profiles = profiles
+        self.foods = foods
+        self.stateSpans = stateSpans
+        self.notifications = notifications
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -45,6 +55,11 @@ public struct SampleDataSeedResult: Sendable, Codable, Hashable {
         case trackerInstances
         case alertRules
         case alertExcursions
+        case deviceStatuses
+        case profiles
+        case foods
+        case stateSpans
+        case notifications
     }
 
     // Encodable protocol methods
@@ -61,6 +76,11 @@ public struct SampleDataSeedResult: Sendable, Codable, Hashable {
         try container.encodeIfPresent(trackerInstances, forKey: .trackerInstances)
         try container.encodeIfPresent(alertRules, forKey: .alertRules)
         try container.encodeIfPresent(alertExcursions, forKey: .alertExcursions)
+        try container.encodeIfPresent(deviceStatuses, forKey: .deviceStatuses)
+        try container.encodeIfPresent(profiles, forKey: .profiles)
+        try container.encodeIfPresent(foods, forKey: .foods)
+        try container.encodeIfPresent(stateSpans, forKey: .stateSpans)
+        try container.encodeIfPresent(notifications, forKey: .notifications)
     }
 }
 

@@ -16,6 +16,8 @@ public struct UpsertDeviceEventRequest: Sendable, Codable, Hashable {
     public var utcOffset: Int?
     /** Identifier of the device involved in the event. */
     public var device: String?
+    /** Optional reference to the registered PatientDevice the event occurred on. Must resolve to one of the caller's registered devices. When omitted on create, the server attempts attribution from Device and DataSource; when omitted on update, the existing link is preserved. Send the empty GUID (00000000-0000-0000-0000-000000000000) to state that the event belongs to no registered device: the link is cleared and server-side attribution is skipped for this request. */
+    public var patientDeviceId: String?
     /** Name of the application that submitted this record. */
     public var app: String?
     /** Upstream data source identifier. */
@@ -26,10 +28,11 @@ public struct UpsertDeviceEventRequest: Sendable, Codable, Hashable {
     /** Upstream sync identifier for deduplication. */
     public var syncIdentifier: String?
 
-    public init(timestamp: Date? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, eventType: DeviceEventType? = nil, notes: String? = nil, syncIdentifier: String? = nil) {
+    public init(timestamp: Date? = nil, utcOffset: Int? = nil, device: String? = nil, patientDeviceId: String? = nil, app: String? = nil, dataSource: String? = nil, eventType: DeviceEventType? = nil, notes: String? = nil, syncIdentifier: String? = nil) {
         self.timestamp = timestamp
         self.utcOffset = utcOffset
         self.device = device
+        self.patientDeviceId = patientDeviceId
         self.app = app
         self.dataSource = dataSource
         self.eventType = eventType
@@ -41,6 +44,7 @@ public struct UpsertDeviceEventRequest: Sendable, Codable, Hashable {
         case timestamp
         case utcOffset
         case device
+        case patientDeviceId
         case app
         case dataSource
         case eventType
@@ -55,6 +59,7 @@ public struct UpsertDeviceEventRequest: Sendable, Codable, Hashable {
         try container.encodeIfPresent(timestamp, forKey: .timestamp)
         try container.encodeIfPresent(utcOffset, forKey: .utcOffset)
         try container.encodeIfPresent(device, forKey: .device)
+        try container.encodeIfPresent(patientDeviceId, forKey: .patientDeviceId)
         try container.encodeIfPresent(app, forKey: .app)
         try container.encodeIfPresent(dataSource, forKey: .dataSource)
         try container.encodeIfPresent(eventType, forKey: .eventType)

@@ -7,21 +7,33 @@
 
 import Foundation
 
-/** Snapshot of \&quot;right now\&quot; therapy state for the Halo Dial. */
+/** Snapshot of \&quot;right now\&quot; therapy state. */
 public struct CurrentTherapyStateResponse: Sendable, Codable, Hashable {
 
     public var currentPumpMode: PumpModeState?
     /** Current effective ISF as a percentage of the schedule baseline. 100 = at baseline. Below 100 = active CCP makes the pump more aggressive. Null when no CircadianPercentageProfile adjustment is active. */
     public var sensitivityPercent: Double?
+    /** Insulin remaining in the pump reservoir (units), from the most recent pump snapshot. Null when no pump has reported a reservoir value — e.g. Omnipod pods report no numeric reservoir until they drop below 50 U. */
+    public var reservoir: Double?
+    /** Pump battery level as a percentage (0–100) from the most recent pump snapshot, or null when the pump reports no battery percentage. */
+    public var pumpBatteryPercent: Int?
+    /** Pump battery voltage from the most recent pump snapshot, or null when the pump reports no battery voltage. */
+    public var pumpBatteryVoltage: Double?
 
-    public init(currentPumpMode: PumpModeState? = nil, sensitivityPercent: Double? = nil) {
+    public init(currentPumpMode: PumpModeState? = nil, sensitivityPercent: Double? = nil, reservoir: Double? = nil, pumpBatteryPercent: Int? = nil, pumpBatteryVoltage: Double? = nil) {
         self.currentPumpMode = currentPumpMode
         self.sensitivityPercent = sensitivityPercent
+        self.reservoir = reservoir
+        self.pumpBatteryPercent = pumpBatteryPercent
+        self.pumpBatteryVoltage = pumpBatteryVoltage
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case currentPumpMode
         case sensitivityPercent
+        case reservoir
+        case pumpBatteryPercent
+        case pumpBatteryVoltage
     }
 
     // Encodable protocol methods
@@ -30,6 +42,9 @@ public struct CurrentTherapyStateResponse: Sendable, Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(currentPumpMode, forKey: .currentPumpMode)
         try container.encodeIfPresent(sensitivityPercent, forKey: .sensitivityPercent)
+        try container.encodeIfPresent(reservoir, forKey: .reservoir)
+        try container.encodeIfPresent(pumpBatteryPercent, forKey: .pumpBatteryPercent)
+        try container.encodeIfPresent(pumpBatteryVoltage, forKey: .pumpBatteryVoltage)
     }
 }
 

@@ -18,11 +18,11 @@ public struct NotificationThresholdDto: Sendable, Codable, Hashable {
     public var audioEnabled: Bool?
     public var audioSound: String?
     public var vibrateEnabled: Bool?
-    public var repeatIntervalMins: Int?
-    public var maxRepeats: Int?
     public var respectQuietHours: Bool?
+    /** The managed alert rule that delivers this threshold. Null until the sync service has run, so callers must treat it as optional. */
+    public var alertRuleId: String?
 
-    public init(id: String? = nil, urgency: NotificationUrgency? = nil, hours: Int? = nil, description: String? = nil, displayOrder: Int? = nil, pushEnabled: Bool? = nil, audioEnabled: Bool? = nil, audioSound: String? = nil, vibrateEnabled: Bool? = nil, repeatIntervalMins: Int? = nil, maxRepeats: Int? = nil, respectQuietHours: Bool? = nil) {
+    public init(id: String? = nil, urgency: NotificationUrgency? = nil, hours: Int? = nil, description: String? = nil, displayOrder: Int? = nil, pushEnabled: Bool? = nil, audioEnabled: Bool? = nil, audioSound: String? = nil, vibrateEnabled: Bool? = nil, respectQuietHours: Bool? = nil, alertRuleId: String? = nil) {
         self.id = id
         self.urgency = urgency
         self.hours = hours
@@ -32,9 +32,8 @@ public struct NotificationThresholdDto: Sendable, Codable, Hashable {
         self.audioEnabled = audioEnabled
         self.audioSound = audioSound
         self.vibrateEnabled = vibrateEnabled
-        self.repeatIntervalMins = repeatIntervalMins
-        self.maxRepeats = maxRepeats
         self.respectQuietHours = respectQuietHours
+        self.alertRuleId = alertRuleId
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -47,9 +46,8 @@ public struct NotificationThresholdDto: Sendable, Codable, Hashable {
         case audioEnabled
         case audioSound
         case vibrateEnabled
-        case repeatIntervalMins
-        case maxRepeats
         case respectQuietHours
+        case alertRuleId
     }
 
     // Encodable protocol methods
@@ -65,9 +63,8 @@ public struct NotificationThresholdDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(audioEnabled, forKey: .audioEnabled)
         try container.encodeIfPresent(audioSound, forKey: .audioSound)
         try container.encodeIfPresent(vibrateEnabled, forKey: .vibrateEnabled)
-        try container.encodeIfPresent(repeatIntervalMins, forKey: .repeatIntervalMins)
-        try container.encodeIfPresent(maxRepeats, forKey: .maxRepeats)
         try container.encodeIfPresent(respectQuietHours, forKey: .respectQuietHours)
+        try container.encodeIfPresent(alertRuleId, forKey: .alertRuleId)
     }
 }
 

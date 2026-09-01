@@ -10,7 +10,7 @@ import Foundation
 open class DndWindowsAPI {
 
     /**
-     Clear a DND window (turn the mute off). Idempotent: a window already cleared (by the user or by supersede) is returned unchanged so a retry never rewrites the audit timestamp.
+     Clear
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class DndWindowsAPI {
     }
 
     /**
-     Clear a DND window (turn the mute off). Idempotent: a window already cleared (by the user or by supersede) is returned unchanged so a retry never rewrites the audit timestamp.
+     Clear
      - POST /api/v4/alerts/dnd/windows/{id}/clear
+     - Clear a DND window (turn the mute off). Idempotent: a window already cleared (by the user or by supersede) is returned unchanged so a retry never rewrites the audit timestamp.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DndWindowResponse> 
@@ -45,11 +52,11 @@ open class DndWindowsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DndWindowResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create (or idempotently return) a DND window. Supersedes any active window of the same scope so at most one is ever active per scope.
+     Create
      
      - parameter createDndWindowRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -60,8 +67,15 @@ open class DndWindowsAPI {
     }
 
     /**
-     Create (or idempotently return) a DND window. Supersedes any active window of the same scope so at most one is ever active per scope.
+     Create
      - POST /api/v4/alerts/dnd/windows
+     - Create (or idempotently return) a DND window. Supersedes any active window of the same scope so at most one is ever active per scope.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createDndWindowRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DndWindowResponse> 
@@ -81,11 +95,11 @@ open class DndWindowsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DndWindowResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     List the tenant's DND windows that are active right now (resolved on read).
+     Get active
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [DndWindowResponse]
@@ -95,8 +109,15 @@ open class DndWindowsAPI {
     }
 
     /**
-     List the tenant's DND windows that are active right now (resolved on read).
+     Get active
      - GET /api/v4/alerts/dnd/windows/active
+     - List the tenant's DND windows that are active right now (resolved on read).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[DndWindowResponse]> 
      */
@@ -115,6 +136,6 @@ open class DndWindowsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[DndWindowResponse]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

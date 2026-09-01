@@ -10,7 +10,7 @@ import Foundation
 open class SessionsAPI {
 
     /**
-     List the authenticated user's active login sessions, most recently active first.
+     List
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [SessionDto]
@@ -20,8 +20,15 @@ open class SessionsAPI {
     }
 
     /**
-     List the authenticated user's active login sessions, most recently active first.
+     List
      - GET /api/v4/account/sessions
+     - List the authenticated user's active login sessions, most recently active first.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[SessionDto]> 
      */
@@ -40,11 +47,11 @@ open class SessionsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[SessionDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Revoke a login session, logging that device out. Revoking the current session is allowed and acts as a logout.
+     Revoke
      
      - parameter sessionId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -55,8 +62,15 @@ open class SessionsAPI {
     }
 
     /**
-     Revoke a login session, logging that device out. Revoking the current session is allowed and acts as a logout.
+     Revoke
      - DELETE /api/v4/account/sessions/{sessionId}
+     - The demo's subject is shared, so these sessions belong to other visitors and revoking one logs a stranger out. A visitor ending their own session uses POST /api/auth/oidc/logout, which stays open.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter sessionId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -79,11 +93,11 @@ open class SessionsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Revoke every session except the current one (log out everywhere else).
+     Revoke others
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RevokeOthersResultDto
@@ -93,8 +107,15 @@ open class SessionsAPI {
     }
 
     /**
-     Revoke every session except the current one (log out everywhere else).
+     Revoke others
      - POST /api/v4/account/sessions/revoke-others
+     - On the shared demo subject, \"everything else\" is every other visitor currently using it.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<RevokeOthersResultDto> 
      */
@@ -113,6 +134,6 @@ open class SessionsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<RevokeOthersResultDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

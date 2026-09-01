@@ -16,6 +16,8 @@ public struct UpsertMeterGlucoseRequest: Sendable, Codable, Hashable {
     public var utcOffset: Int?
     /** Identifier of the glucose meter device. */
     public var device: String?
+    /** Optional reference to the registered PatientDevice that produced the reading. Must resolve to one of the caller's registered devices. When omitted on create, the server attempts attribution from Device and DataSource; when omitted on update, the existing link is preserved. Send the empty GUID (00000000-0000-0000-0000-000000000000) to state that the reading came from no registered device: the link is cleared and server-side attribution is skipped for this request. */
+    public var patientDeviceId: String?
     /** Name of the application that submitted this record. */
     public var app: String?
     /** Upstream data source identifier. */
@@ -23,10 +25,11 @@ public struct UpsertMeterGlucoseRequest: Sendable, Codable, Hashable {
     /** Glucose reading in mg/dL (validated 0-10,000). */
     public var mgdl: Double?
 
-    public init(timestamp: Date? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, mgdl: Double? = nil) {
+    public init(timestamp: Date? = nil, utcOffset: Int? = nil, device: String? = nil, patientDeviceId: String? = nil, app: String? = nil, dataSource: String? = nil, mgdl: Double? = nil) {
         self.timestamp = timestamp
         self.utcOffset = utcOffset
         self.device = device
+        self.patientDeviceId = patientDeviceId
         self.app = app
         self.dataSource = dataSource
         self.mgdl = mgdl
@@ -36,6 +39,7 @@ public struct UpsertMeterGlucoseRequest: Sendable, Codable, Hashable {
         case timestamp
         case utcOffset
         case device
+        case patientDeviceId
         case app
         case dataSource
         case mgdl
@@ -48,6 +52,7 @@ public struct UpsertMeterGlucoseRequest: Sendable, Codable, Hashable {
         try container.encodeIfPresent(timestamp, forKey: .timestamp)
         try container.encodeIfPresent(utcOffset, forKey: .utcOffset)
         try container.encodeIfPresent(device, forKey: .device)
+        try container.encodeIfPresent(patientDeviceId, forKey: .patientDeviceId)
         try container.encodeIfPresent(app, forKey: .app)
         try container.encodeIfPresent(dataSource, forKey: .dataSource)
         try container.encodeIfPresent(mgdl, forKey: .mgdl)

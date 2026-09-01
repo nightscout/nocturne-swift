@@ -16,14 +16,17 @@ public struct AlertRuleChannelResponse: Sendable, Codable, Hashable {
     public var sortOrder: Int?
     /** Channel-specific config (e.g. device_action capabilities). Null when unset. */
     public var metadata: JSONValue?
+    /** Whether a webhook signing secret is stored for this channel. The secret itself is             never returned. */
+    public var hasSecret: Bool?
 
-    public init(id: String? = nil, channelType: ChannelType? = nil, destination: String? = nil, destinationLabel: String? = nil, sortOrder: Int? = nil, metadata: JSONValue? = nil) {
+    public init(id: String? = nil, channelType: ChannelType? = nil, destination: String? = nil, destinationLabel: String? = nil, sortOrder: Int? = nil, metadata: JSONValue? = nil, hasSecret: Bool? = nil) {
         self.id = id
         self.channelType = channelType
         self.destination = destination
         self.destinationLabel = destinationLabel
         self.sortOrder = sortOrder
         self.metadata = metadata
+        self.hasSecret = hasSecret
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -33,6 +36,7 @@ public struct AlertRuleChannelResponse: Sendable, Codable, Hashable {
         case destinationLabel
         case sortOrder
         case metadata
+        case hasSecret
     }
 
     // Encodable protocol methods
@@ -45,6 +49,7 @@ public struct AlertRuleChannelResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(destinationLabel, forKey: .destinationLabel)
         try container.encodeIfPresent(sortOrder, forKey: .sortOrder)
         try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(hasSecret, forKey: .hasSecret)
     }
 }
 

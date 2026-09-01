@@ -10,7 +10,7 @@ import Foundation
 open class PlatformAPI {
 
     /**
-     Creates a new tenant with the authenticated subject as owner. Requires OperatorConfiguration.AllowSelfServiceCreation to be enabled.
+     Create tenant
      
      - parameter createPlatformTenantRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class PlatformAPI {
     }
 
     /**
-     Creates a new tenant with the authenticated subject as owner. Requires OperatorConfiguration.AllowSelfServiceCreation to be enabled.
+     Create tenant
      - POST /api/v4/platform/tenants
+     - Creates a new tenant with the authenticated subject as owner. Requires OperatorConfiguration.AllowSelfServiceCreation to be enabled.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createPlatformTenantRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TenantCreatedDto> 
@@ -42,11 +49,11 @@ open class PlatformAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TenantCreatedDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Returns all tenants the authenticated subject is a member of.
+     Get tenants
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [TenantDto]
@@ -56,8 +63,15 @@ open class PlatformAPI {
     }
 
     /**
-     Returns all tenants the authenticated subject is a member of.
+     Get tenants
      - GET /api/v4/platform/tenants
+     - Returns all tenants the authenticated subject is a member of.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[TenantDto]> 
      */
@@ -76,11 +90,11 @@ open class PlatformAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[TenantDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Returns the current multitenancy configuration status. Used by the frontend to display subdomain URLs and transition notices.
+     Get transition status
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: TransitionStatusDto
@@ -90,8 +104,15 @@ open class PlatformAPI {
     }
 
     /**
-     Returns the current multitenancy configuration status. Used by the frontend to display subdomain URLs and transition notices.
+     Get transition status
      - GET /api/v4/platform/transition-status
+     - Returns the current multitenancy configuration status. Used by the frontend to display subdomain URLs and transition notices.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TransitionStatusDto> 
      */
@@ -110,6 +131,6 @@ open class PlatformAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TransitionStatusDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

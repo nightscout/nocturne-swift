@@ -10,7 +10,7 @@ import Foundation
 open class AlertInvitesAPI {
 
     /**
-     Generate an invite link for a follower to attach to a rule channel.
+     Create invite
      
      - parameter createAlertInviteRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class AlertInvitesAPI {
     }
 
     /**
-     Generate an invite link for a follower to attach to a rule channel.
+     Create invite
      - POST /api/v4/alert-invites
+     - Generate an invite link for a follower to attach to a rule channel.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createAlertInviteRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<AlertInviteResponse> 
@@ -42,11 +49,11 @@ open class AlertInvitesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AlertInviteResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Redeem an invite token.
+     Redeem invite
      
      - parameter token: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +64,15 @@ open class AlertInvitesAPI {
     }
 
     /**
-     Redeem an invite token.
+     Redeem invite
      - POST /api/v4/alert-invites/{token}/redeem
+     - Redeem an invite token.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter token: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -81,11 +95,11 @@ open class AlertInvitesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Revoke an unredeemed invite.
+     Revoke invite
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -96,8 +110,15 @@ open class AlertInvitesAPI {
     }
 
     /**
-     Revoke an unredeemed invite.
+     Revoke invite
      - DELETE /api/v4/alert-invites/{id}
+     - Revoke an unredeemed invite.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -120,11 +141,11 @@ open class AlertInvitesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Validate an invite token (public endpoint for redemption flow).
+     Validate invite
      
      - parameter token: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -135,8 +156,9 @@ open class AlertInvitesAPI {
     }
 
     /**
-     Validate an invite token (public endpoint for redemption flow).
+     Validate invite
      - GET /api/v4/alert-invites/{token}
+     - Validate an invite token (public endpoint for redemption flow).
      - parameter token: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<AlertInviteResponse> 

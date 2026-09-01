@@ -10,7 +10,7 @@ import Foundation
 open class SensorGlucoseAPI {
 
     /**
-     Restores multiple soft-deleted records by their IDs.
+     Bulk restore
      
      - parameter requestBody: (body) The unique identifiers of the soft-deleted records. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,9 +21,15 @@ open class SensorGlucoseAPI {
     }
 
     /**
-     Restores multiple soft-deleted records by their IDs.
+     Bulk restore
      - POST /api/v4/glucose/sensor/restore
      - Returns `200 OK` with the restored records. IDs that don't match a soft-deleted record are silently ignored.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter requestBody: (body) The unique identifiers of the soft-deleted records. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[SensorGlucose]> 
@@ -43,11 +49,12 @@ open class SensorGlucoseAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[SensorGlucose]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Create
+     
      - parameter upsertSensorGlucoseRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: SensorGlucose
@@ -57,7 +64,14 @@ open class SensorGlucoseAPI {
     }
 
     /**
+     Create
      - POST /api/v4/glucose/sensor
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter upsertSensorGlucoseRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SensorGlucose> 
@@ -77,11 +91,11 @@ open class SensorGlucoseAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SensorGlucose>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create multiple sensor glucose readings in bulk (max 1000).
+     Create sensor glucose bulk
      
      - parameter upsertSensorGlucoseRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -92,8 +106,15 @@ open class SensorGlucoseAPI {
     }
 
     /**
-     Create multiple sensor glucose readings in bulk (max 1000).
+     Create sensor glucose bulk
      - POST /api/v4/glucose/sensor/bulk
+     - Create multiple sensor glucose readings in bulk (max 1000).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter upsertSensorGlucoseRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[SensorGlucose]> 
@@ -113,11 +134,11 @@ open class SensorGlucoseAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[SensorGlucose]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Deletes a record by ID.
+     Delete
      
      - parameter id: (path) The unique identifier of the record to delete. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -128,9 +149,15 @@ open class SensorGlucoseAPI {
     }
 
     /**
-     Deletes a record by ID.
+     Delete
      - DELETE /api/v4/glucose/sensor/{id}
      - Returns `204 No Content` on success, or `404 Not Found` if no record with the given id exists.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The unique identifier of the record to delete. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -153,11 +180,11 @@ open class SensorGlucoseAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Lists sensor glucose readings. Adds an optional patientDeviceId query filter on top of the base list surface: when set, results are that registered device's raw readings (canonical stream selection is bypassed); when unset, the caller sees every stored reading. Pagination totals match the base device/source behaviour (the count is unscoped by the device filters).
+     Get all
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -174,9 +201,15 @@ open class SensorGlucoseAPI {
     }
 
     /**
-     Lists sensor glucose readings. Adds an optional patientDeviceId query filter on top of the base list surface: when set, results are that registered device's raw readings (canonical stream selection is bypassed); when unset, the caller sees every stored reading. Pagination totals match the base device/source behaviour (the count is unscoped by the device filters).
+     Get all
      - GET /api/v4/glucose/sensor
-     - The patientDeviceId query parameter is read directly from the request because the base list signature (shared by every V4 read controller) has no device-attribution concept — binding it here keeps a single GET action while adding the sensor-glucose-only filter.
+     - The patientDeviceId query parameter is read directly from the request because the base list signature (shared by every V4 read controller) has no device-attribution concept — binding it here keeps a single GET action while adding the sensor-glucose-only filter. Never cached, per GetProfileSummary: a newly arrived or corrected reading must not be invisible until a cached list body expires.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -212,11 +245,11 @@ open class SensorGlucoseAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfSensorGlucose>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Retrieves a single record by its unique identifier.
+     Get by id
      
      - parameter id: (path) The unique identifier of the record. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -227,9 +260,15 @@ open class SensorGlucoseAPI {
     }
 
     /**
-     Retrieves a single record by its unique identifier.
+     Get by id
      - GET /api/v4/glucose/sensor/{id}
      - Returns `404 Not Found` if no record with the given id exists.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The unique identifier of the record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SensorGlucose> 
@@ -252,11 +291,11 @@ open class SensorGlucoseAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SensorGlucose>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Lists soft-deleted records available for restoration, ordered by deletion date (newest first).
+     List deleted
      
      - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
      - parameter offset: (query) Number of records to skip for pagination. Defaults to &#x60;0&#x60;. (optional, default to 0)
@@ -268,8 +307,15 @@ open class SensorGlucoseAPI {
     }
 
     /**
-     Lists soft-deleted records available for restoration, ordered by deletion date (newest first).
+     List deleted
      - GET /api/v4/glucose/sensor/deleted
+     - Gated on the write scope although it reads: the recycle bin exists to feed Restore, and records the owner deleted must not be enumerable by read-only credentials — in particular the anonymous public-share principal, which satisfies the class-level category read gate.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
      - parameter offset: (query) Number of records to skip for pagination. Defaults to &#x60;0&#x60;. (optional, default to 0)
      - parameter apiConfiguration: The configuration for the http request.
@@ -294,11 +340,11 @@ open class SensorGlucoseAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfSensorGlucose>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Restores a soft-deleted record by ID.
+     Restore
      
      - parameter id: (path) The unique identifier of the soft-deleted record. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -309,9 +355,15 @@ open class SensorGlucoseAPI {
     }
 
     /**
-     Restores a soft-deleted record by ID.
+     Restore
      - POST /api/v4/glucose/sensor/{id}/restore
      - Returns `200 OK` with the restored record, or `404 Not Found` if no soft-deleted record with the given id exists.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The unique identifier of the soft-deleted record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SensorGlucose> 
@@ -334,11 +386,12 @@ open class SensorGlucoseAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SensorGlucose>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Update
+     
      - parameter id: (path)  
      - parameter upsertSensorGlucoseRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -349,7 +402,14 @@ open class SensorGlucoseAPI {
     }
 
     /**
+     Update
      - PUT /api/v4/glucose/sensor/{id}
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter upsertSensorGlucoseRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -373,6 +433,6 @@ open class SensorGlucoseAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SensorGlucose>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

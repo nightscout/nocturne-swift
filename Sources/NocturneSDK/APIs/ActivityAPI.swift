@@ -10,7 +10,7 @@ import Foundation
 open class ActivityAPI {
 
     /**
-     Create one or more activity records
+     Create activities
      
      - parameter upsertActivityRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class ActivityAPI {
     }
 
     /**
-     Create one or more activity records
+     Create activities
      - POST /api/v4/Activity
+     - Create one or more activity records
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter upsertActivityRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[Activity]> 
@@ -42,11 +49,11 @@ open class ActivityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[Activity]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete an activity record by ID
+     Delete activity
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +64,15 @@ open class ActivityAPI {
     }
 
     /**
-     Delete an activity record by ID
+     Delete activity
      - DELETE /api/v4/Activity/{id}
+     - Delete an activity record by ID
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -81,11 +95,11 @@ open class ActivityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get activity records with pagination
+     Get activities
      
      - parameter limit: (query)  (optional, default to 100)
      - parameter offset: (query)  (optional, default to 0)
@@ -97,8 +111,15 @@ open class ActivityAPI {
     }
 
     /**
-     Get activity records with pagination
+     Get activities
      - GET /api/v4/Activity
+     - This read merges four sources in memory, so the page is bounded by ClampMergedPage rather than the plain page-size ceiling. The scope requirement is an OR over the four storages, and ActivityReadScopeGuard then drops the records whose category the caller does not hold — pagination happens in the service before that filter, so a caller holding a subset of the categories can receive fewer than limit records. The total is counted over only those same categories, both so it stays consistent with what the page can contain and so it cannot disclose how many records exist in a category the caller may not read.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter limit: (query)  (optional, default to 100)
      - parameter offset: (query)  (optional, default to 0)
      - parameter apiConfiguration: The configuration for the http request.
@@ -123,11 +144,11 @@ open class ActivityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfActivity>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a specific activity record by ID
+     Get activity
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -138,8 +159,15 @@ open class ActivityAPI {
     }
 
     /**
-     Get a specific activity record by ID
+     Get activity
      - GET /api/v4/Activity/{id}
+     - A record in a category the caller does not hold answers 404 rather than 403, so the response does not disclose that the record exists.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Activity> 
@@ -162,11 +190,11 @@ open class ActivityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Activity>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update an existing activity record
+     Update activity
      
      - parameter id: (path)  
      - parameter upsertActivityRequest: (body)  
@@ -178,8 +206,15 @@ open class ActivityAPI {
     }
 
     /**
-     Update an existing activity record
+     Update activity
      - PUT /api/v4/Activity/{id}
+     - Update an existing activity record
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter upsertActivityRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -203,6 +238,6 @@ open class ActivityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Activity>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

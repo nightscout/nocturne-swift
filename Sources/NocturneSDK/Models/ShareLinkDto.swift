@@ -12,7 +12,7 @@ public struct ShareLinkDto: Sendable, Codable, Hashable {
 
     /** Whether a public share link is currently active. */
     public var enabled: Bool?
-    /** The full share URL when enabled; null otherwise. The raw token is never returned separately. */
+    /** The full share URL, returned only by the call that generates the link. Null on every other call, including when Enabled is true: only the token's digest is stored, so the URL cannot be reproduced afterwards. Generating a new link is the only way to see one again. */
     public var url: String?
     /** When true the public view shows full history; when false, only the last 24 hours. */
     public var fullHistory: Bool?

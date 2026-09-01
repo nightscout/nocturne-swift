@@ -105,11 +105,10 @@ public struct Treatment: Sendable, Codable, Hashable {
     public var originalCustomizedName: String?
     public var originalEnd: Int64?
     public var canonicalId: String?
-    public var dbId: String?
     public var sources: [String]?
     public var insulinContext: TreatmentInsulinContext?
 
-    public init(id: String? = nil, createdAt: String? = nil, mills: Int64? = nil, utcOffset: Int? = nil, identifier: String? = nil, srvModified: Int64? = nil, srvCreated: Int64? = nil, eventType: String? = nil, reason: String? = nil, glucose: Double? = nil, glucoseType: String? = nil, carbs: Double? = nil, insulin: Double? = nil, protein: Double? = nil, fat: Double? = nil, foodType: String? = nil, units: String? = nil, duration: Double? = nil, percent: Double? = nil, absolute: Double? = nil, notes: String? = nil, enteredBy: String? = nil, targetTop: Double? = nil, targetBottom: Double? = nil, profile: String? = nil, split: String? = nil, date: Int64? = nil, carbTime: Int? = nil, boluscalc: [String: JSONValue]? = nil, timestamp: String? = nil, cuttedby: String? = nil, cutting: String? = nil, eventTime: String? = nil, preBolus: Double? = nil, rate: Double? = nil, mgdl: Double? = nil, mmol: Double? = nil, endmills: Int64? = nil, durationType: String? = nil, isAnnouncement: Bool? = nil, profileJson: String? = nil, endprofile: String? = nil, insulinNeedsScaleFactor: Double? = nil, absorptionTime: Int? = nil, enteredinsulin: Double? = nil, splitNow: Double? = nil, splitExt: Double? = nil, status: String? = nil, relative: Double? = nil, CR: Double? = nil, NSCLIENT_ID: String? = nil, first: Bool? = nil, end: Bool? = nil, circadianPercentageProfile: Bool? = nil, percentage: Double? = nil, timeshift: Double? = nil, transmitterId: String? = nil, remoteCarbs: Double? = nil, remoteAbsorption: Double? = nil, remoteBolus: Double? = nil, reasonDisplay: String? = nil, otp: String? = nil, syncIdentifier: String? = nil, insulinType: String? = nil, automatic: Bool? = nil, temp: String? = nil, amount: Double? = nil, programmed: Double? = nil, unabsorbed: Double? = nil, type: String? = nil, bolusType: String? = nil, dataSource: String? = nil, insulinRecommendationForCarbs: Double? = nil, insulinRecommendationForCorrection: Double? = nil, insulinProgrammed: Double? = nil, insulinDelivered: Double? = nil, insulinOnBoard: Double? = nil, bloodGlucoseInput: Double? = nil, bloodGlucoseInputSource: String? = nil, calculationType: CalculationType2? = nil, durationInMilliseconds: Int64? = nil, pumpId: Int64? = nil, pumpSerial: String? = nil, pumpType: String? = nil, endId: Int64? = nil, isValid: Bool? = nil, isReadOnly: Bool? = nil, isBasalInsulin: Bool? = nil, bolusCalculatorResult: String? = nil, originalDuration: Int? = nil, originalProfileName: String? = nil, originalPercentage: Int? = nil, originalTimeshift: Int? = nil, originalCustomizedName: String? = nil, originalEnd: Int64? = nil, canonicalId: String? = nil, dbId: String? = nil, sources: [String]? = nil, insulinContext: TreatmentInsulinContext? = nil) {
+    public init(id: String? = nil, createdAt: String? = nil, mills: Int64? = nil, utcOffset: Int? = nil, identifier: String? = nil, srvModified: Int64? = nil, srvCreated: Int64? = nil, eventType: String? = nil, reason: String? = nil, glucose: Double? = nil, glucoseType: String? = nil, carbs: Double? = nil, insulin: Double? = nil, protein: Double? = nil, fat: Double? = nil, foodType: String? = nil, units: String? = nil, duration: Double? = nil, percent: Double? = nil, absolute: Double? = nil, notes: String? = nil, enteredBy: String? = nil, targetTop: Double? = nil, targetBottom: Double? = nil, profile: String? = nil, split: String? = nil, date: Int64? = nil, carbTime: Int? = nil, boluscalc: [String: JSONValue]? = nil, timestamp: String? = nil, cuttedby: String? = nil, cutting: String? = nil, eventTime: String? = nil, preBolus: Double? = nil, rate: Double? = nil, mgdl: Double? = nil, mmol: Double? = nil, endmills: Int64? = nil, durationType: String? = nil, isAnnouncement: Bool? = nil, profileJson: String? = nil, endprofile: String? = nil, insulinNeedsScaleFactor: Double? = nil, absorptionTime: Int? = nil, enteredinsulin: Double? = nil, splitNow: Double? = nil, splitExt: Double? = nil, status: String? = nil, relative: Double? = nil, CR: Double? = nil, NSCLIENT_ID: String? = nil, first: Bool? = nil, end: Bool? = nil, circadianPercentageProfile: Bool? = nil, percentage: Double? = nil, timeshift: Double? = nil, transmitterId: String? = nil, remoteCarbs: Double? = nil, remoteAbsorption: Double? = nil, remoteBolus: Double? = nil, reasonDisplay: String? = nil, otp: String? = nil, syncIdentifier: String? = nil, insulinType: String? = nil, automatic: Bool? = nil, temp: String? = nil, amount: Double? = nil, programmed: Double? = nil, unabsorbed: Double? = nil, type: String? = nil, bolusType: String? = nil, dataSource: String? = nil, insulinRecommendationForCarbs: Double? = nil, insulinRecommendationForCorrection: Double? = nil, insulinProgrammed: Double? = nil, insulinDelivered: Double? = nil, insulinOnBoard: Double? = nil, bloodGlucoseInput: Double? = nil, bloodGlucoseInputSource: String? = nil, calculationType: CalculationType2? = nil, durationInMilliseconds: Int64? = nil, pumpId: Int64? = nil, pumpSerial: String? = nil, pumpType: String? = nil, endId: Int64? = nil, isValid: Bool? = nil, isReadOnly: Bool? = nil, isBasalInsulin: Bool? = nil, bolusCalculatorResult: String? = nil, originalDuration: Int? = nil, originalProfileName: String? = nil, originalPercentage: Int? = nil, originalTimeshift: Int? = nil, originalCustomizedName: String? = nil, originalEnd: Int64? = nil, canonicalId: String? = nil, sources: [String]? = nil, insulinContext: TreatmentInsulinContext? = nil) {
         self.id = id
         self.createdAt = createdAt
         self.mills = mills
@@ -206,7 +205,6 @@ public struct Treatment: Sendable, Codable, Hashable {
         self.originalCustomizedName = originalCustomizedName
         self.originalEnd = originalEnd
         self.canonicalId = canonicalId
-        self.dbId = dbId
         self.sources = sources
         self.insulinContext = insulinContext
     }
@@ -308,7 +306,6 @@ public struct Treatment: Sendable, Codable, Hashable {
         case originalCustomizedName
         case originalEnd
         case canonicalId
-        case dbId
         case sources
         case insulinContext
     }
@@ -413,7 +410,6 @@ public struct Treatment: Sendable, Codable, Hashable {
         try container.encodeIfPresent(originalCustomizedName, forKey: .originalCustomizedName)
         try container.encodeIfPresent(originalEnd, forKey: .originalEnd)
         try container.encodeIfPresent(canonicalId, forKey: .canonicalId)
-        try container.encodeIfPresent(dbId, forKey: .dbId)
         try container.encodeIfPresent(sources, forKey: .sources)
         try container.encodeIfPresent(insulinContext, forKey: .insulinContext)
     }

@@ -21,9 +21,10 @@ public struct ConnectorFoodEntryImport: Sendable, Codable, Hashable {
     public var energy: Double?
     public var servings: Double?
     public var servingDescription: String?
+    public var isTimeInferred: Bool?
     public var food: ConnectorFoodImport?
 
-    public init(connectorSource: String? = nil, externalEntryId: String? = nil, externalFoodId: String? = nil, consumedAt: Date? = nil, loggedAt: Date? = nil, mealName: String? = nil, carbs: Double? = nil, protein: Double? = nil, fat: Double? = nil, energy: Double? = nil, servings: Double? = nil, servingDescription: String? = nil, food: ConnectorFoodImport? = nil) {
+    public init(connectorSource: String? = nil, externalEntryId: String? = nil, externalFoodId: String? = nil, consumedAt: Date? = nil, loggedAt: Date? = nil, mealName: String? = nil, carbs: Double? = nil, protein: Double? = nil, fat: Double? = nil, energy: Double? = nil, servings: Double? = nil, servingDescription: String? = nil, isTimeInferred: Bool? = nil, food: ConnectorFoodImport? = nil) {
         self.connectorSource = connectorSource
         self.externalEntryId = externalEntryId
         self.externalFoodId = externalFoodId
@@ -36,6 +37,7 @@ public struct ConnectorFoodEntryImport: Sendable, Codable, Hashable {
         self.energy = energy
         self.servings = servings
         self.servingDescription = servingDescription
+        self.isTimeInferred = isTimeInferred
         self.food = food
     }
 
@@ -52,6 +54,7 @@ public struct ConnectorFoodEntryImport: Sendable, Codable, Hashable {
         case energy
         case servings
         case servingDescription
+        case isTimeInferred
         case food
     }
 
@@ -71,6 +74,7 @@ public struct ConnectorFoodEntryImport: Sendable, Codable, Hashable {
         try container.encodeIfPresent(energy, forKey: .energy)
         try container.encodeIfPresent(servings, forKey: .servings)
         try container.encodeIfPresent(servingDescription, forKey: .servingDescription)
+        try container.encodeIfPresent(isTimeInferred, forKey: .isTimeInferred)
         try container.encodeIfPresent(food, forKey: .food)
     }
 }

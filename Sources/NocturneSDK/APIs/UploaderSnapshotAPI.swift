@@ -10,7 +10,7 @@ import Foundation
 open class UploaderSnapshotAPI {
 
     /**
-     Create or update uploader snapshots in bulk (max 1000).
+     Create uploader snapshots
      
      - parameter upsertUploaderSnapshotRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,9 +21,15 @@ open class UploaderSnapshotAPI {
     }
 
     /**
-     Create or update uploader snapshots in bulk (max 1000).
+     Create uploader snapshots
      - POST /api/v4/device-status/uploader
      - Array semantics are per-item upsert, not all-or-nothing: each snapshot carrying both `dataSource` and `syncIdentifier` updates the row already matched by that pair; all others insert. Validation failures reject the whole request with `400 Bad Request` before anything is persisted.              Device attribution is a deliberate scope cut: unlike the legacy decomposer path, records written here carry no Device/PatientDevice link (snapshots are not IDeviceAttributed, so the stamper can't take them). Reads that join by correlationId are unaffected.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter upsertUploaderSnapshotRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[UploaderSnapshot]> 
@@ -43,11 +49,11 @@ open class UploaderSnapshotAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[UploaderSnapshot]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Lists records with pagination, optional date range, device, and source filtering.
+     Get all
      
      - parameter from: (query) Inclusive start of the date range filter. (optional)
      - parameter to: (query) Inclusive end of the date range filter. (optional)
@@ -64,9 +70,15 @@ open class UploaderSnapshotAPI {
     }
 
     /**
-     Lists records with pagination, optional date range, device, and source filtering.
+     Get all
      - GET /api/v4/device-status/uploader
-     - The `sort` parameter accepts exactly two values: - `timestamp_asc` — oldest records first - `timestamp_desc` — newest records first (default)              Use `limit` and `offset` together for paginated access to large result sets.
+     - The `sort` parameter accepts exactly two values: - `timestamp_asc` — oldest records first - `timestamp_desc` — newest records first (default)              Use `limit` and `offset` together for paginated access to large result sets. `limit` is capped at MaxPageSize, and a `from`/`to` range wider than MaxDateSpanDays days is rejected with `400 Bad Request`.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query) Inclusive start of the date range filter. (optional)
      - parameter to: (query) Inclusive end of the date range filter. (optional)
      - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
@@ -102,11 +114,11 @@ open class UploaderSnapshotAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfUploaderSnapshot>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Retrieves a single record by its unique identifier.
+     Get by id
      
      - parameter id: (path) The unique identifier of the record. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -117,9 +129,15 @@ open class UploaderSnapshotAPI {
     }
 
     /**
-     Retrieves a single record by its unique identifier.
+     Get by id
      - GET /api/v4/device-status/uploader/{id}
      - Returns `404 Not Found` if no record with the given id exists.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The unique identifier of the record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<UploaderSnapshot> 
@@ -142,6 +160,6 @@ open class UploaderSnapshotAPI {
 
         let localVariableRequestBuilder: RequestBuilder<UploaderSnapshot>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

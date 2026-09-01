@@ -26,8 +26,9 @@ public struct Activity: Sendable, Codable, Hashable {
     public var energy: Double?
     public var energyUnits: String?
     public var name: String?
+    public var dataSource: String?
 
-    public init(id: String? = nil, createdAt: String? = nil, mills: Int64? = nil, utcOffset: Int? = nil, timestamp: Int64? = nil, type: String? = nil, description: String? = nil, duration: Double? = nil, intensity: String? = nil, notes: String? = nil, enteredBy: String? = nil, dateString: String? = nil, distance: Double? = nil, distanceUnits: String? = nil, energy: Double? = nil, energyUnits: String? = nil, name: String? = nil) {
+    public init(id: String? = nil, createdAt: String? = nil, mills: Int64? = nil, utcOffset: Int? = nil, timestamp: Int64? = nil, type: String? = nil, description: String? = nil, duration: Double? = nil, intensity: String? = nil, notes: String? = nil, enteredBy: String? = nil, dateString: String? = nil, distance: Double? = nil, distanceUnits: String? = nil, energy: Double? = nil, energyUnits: String? = nil, name: String? = nil, dataSource: String? = nil) {
         self.id = id
         self.createdAt = createdAt
         self.mills = mills
@@ -45,6 +46,7 @@ public struct Activity: Sendable, Codable, Hashable {
         self.energy = energy
         self.energyUnits = energyUnits
         self.name = name
+        self.dataSource = dataSource
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -65,6 +67,7 @@ public struct Activity: Sendable, Codable, Hashable {
         case energy
         case energyUnits
         case name
+        case dataSource = "data_source"
     }
 
     // Encodable protocol methods
@@ -88,6 +91,7 @@ public struct Activity: Sendable, Codable, Hashable {
         try container.encodeIfPresent(energy, forKey: .energy)
         try container.encodeIfPresent(energyUnits, forKey: .energyUnits)
         try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(dataSource, forKey: .dataSource)
     }
 }
 

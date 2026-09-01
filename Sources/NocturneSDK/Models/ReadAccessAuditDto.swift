@@ -20,9 +20,9 @@ public struct ReadAccessAuditDto: Sendable, Codable, Hashable {
     public var subjectName: String?
     public var authType: String?
     public var ipAddress: String?
-    public var apiSecretHashPrefix: String?
+    public var credentialFingerprint: String?
 
-    public init(id: String? = nil, createdAt: Date? = nil, endpoint: String? = nil, entityType: String? = nil, recordCount: Int? = nil, statusCode: Int? = nil, queryParameters: String? = nil, subjectId: String? = nil, subjectName: String? = nil, authType: String? = nil, ipAddress: String? = nil, apiSecretHashPrefix: String? = nil) {
+    public init(id: String? = nil, createdAt: Date? = nil, endpoint: String? = nil, entityType: String? = nil, recordCount: Int? = nil, statusCode: Int? = nil, queryParameters: String? = nil, subjectId: String? = nil, subjectName: String? = nil, authType: String? = nil, ipAddress: String? = nil, credentialFingerprint: String? = nil) {
         self.id = id
         self.createdAt = createdAt
         self.endpoint = endpoint
@@ -34,7 +34,7 @@ public struct ReadAccessAuditDto: Sendable, Codable, Hashable {
         self.subjectName = subjectName
         self.authType = authType
         self.ipAddress = ipAddress
-        self.apiSecretHashPrefix = apiSecretHashPrefix
+        self.credentialFingerprint = credentialFingerprint
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -49,7 +49,7 @@ public struct ReadAccessAuditDto: Sendable, Codable, Hashable {
         case subjectName
         case authType
         case ipAddress
-        case apiSecretHashPrefix
+        case credentialFingerprint
     }
 
     // Encodable protocol methods
@@ -67,7 +67,7 @@ public struct ReadAccessAuditDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(subjectName, forKey: .subjectName)
         try container.encodeIfPresent(authType, forKey: .authType)
         try container.encodeIfPresent(ipAddress, forKey: .ipAddress)
-        try container.encodeIfPresent(apiSecretHashPrefix, forKey: .apiSecretHashPrefix)
+        try container.encodeIfPresent(credentialFingerprint, forKey: .credentialFingerprint)
     }
 }
 

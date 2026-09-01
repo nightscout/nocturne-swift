@@ -15,4 +15,5 @@ public enum MigrationJobState: Int, Sendable, Codable, CaseIterable {
     case _3 = 3
     case _4 = 4
     case _5 = 5
+    case _6 = 6
 }

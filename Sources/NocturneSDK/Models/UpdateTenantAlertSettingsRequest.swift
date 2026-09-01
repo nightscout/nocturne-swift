@@ -9,6 +9,7 @@ import Foundation
 
 public struct UpdateTenantAlertSettingsRequest: Sendable, Codable, Hashable {
 
+    /** Manual (scope=all) DND toggle. Omit to leave the tenant's manual mute untouched — the mute lives in dnd_windows, which devices write to independently, so a settings save that only changes the schedule must not disturb it. */
     public var dndManualActive: Bool?
     public var dndManualUntil: Date?
     public var dndScheduleEnabled: Bool?

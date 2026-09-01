@@ -10,7 +10,7 @@ import Foundation
 open class CompatibilityAPI {
 
     /**
-     Get list of analyses with filtering and pagination
+     Get analyses
      
      - parameter requestPath: (query)  (optional)
      - parameter overallMatch: (query)  (optional)
@@ -27,8 +27,15 @@ open class CompatibilityAPI {
     }
 
     /**
-     Get list of analyses with filtering and pagination
+     Get analyses
      - GET /api/v4/compatibility/analyses
+     - Get list of analyses with filtering and pagination
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter requestPath: (query)  (optional)
      - parameter overallMatch: (query)  (optional)
      - parameter requestMethod: (query)  (optional)
@@ -64,11 +71,11 @@ open class CompatibilityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AnalysesListResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get detailed analysis by ID
+     Get analysis detail
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -79,8 +86,15 @@ open class CompatibilityAPI {
     }
 
     /**
-     Get detailed analysis by ID
+     Get analysis detail
      - GET /api/v4/compatibility/analyses/{id}
+     - Get detailed analysis by ID
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<AnalysisDetailDto> 
@@ -103,11 +117,11 @@ open class CompatibilityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AnalysisDetailDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get current proxy configuration
+     Get configuration
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: ProxyConfigurationDto
@@ -117,8 +131,15 @@ open class CompatibilityAPI {
     }
 
     /**
-     Get current proxy configuration
+     Get configuration
      - GET /api/v4/compatibility/config
+     - Get current proxy configuration
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ProxyConfigurationDto> 
      */
@@ -137,11 +158,11 @@ open class CompatibilityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ProxyConfigurationDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get per-endpoint compatibility metrics
+     Get endpoint metrics
      
      - parameter fromDate: (query)  (optional)
      - parameter toDate: (query)  (optional)
@@ -153,8 +174,15 @@ open class CompatibilityAPI {
     }
 
     /**
-     Get per-endpoint compatibility metrics
+     Get endpoint metrics
      - GET /api/v4/compatibility/endpoints
+     - Get per-endpoint compatibility metrics
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter fromDate: (query)  (optional)
      - parameter toDate: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -179,11 +207,11 @@ open class CompatibilityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[EndpointMetrics]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get overall compatibility metrics
+     Get metrics
      
      - parameter fromDate: (query)  (optional)
      - parameter toDate: (query)  (optional)
@@ -195,8 +223,15 @@ open class CompatibilityAPI {
     }
 
     /**
-     Get overall compatibility metrics
+     Get metrics
      - GET /api/v4/compatibility/metrics
+     - Get overall compatibility metrics
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter fromDate: (query)  (optional)
      - parameter toDate: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -221,11 +256,11 @@ open class CompatibilityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CompatibilityMetrics>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Test API compatibility by comparing responses from Nightscout and Nocturne
+     Test api comparison
      
      - parameter manualTestRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -236,8 +271,15 @@ open class CompatibilityAPI {
     }
 
     /**
-     Test API compatibility by comparing responses from Nightscout and Nocturne
+     Test api comparison
      - POST /api/v4/compatibility/test
+     - Test API compatibility by comparing responses from Nightscout and Nocturne
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter manualTestRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ManualTestResult> 
@@ -257,6 +299,6 @@ open class CompatibilityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ManualTestResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

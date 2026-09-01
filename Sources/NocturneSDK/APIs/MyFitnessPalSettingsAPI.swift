@@ -10,7 +10,7 @@ import Foundation
 open class MyFitnessPalSettingsAPI {
 
     /**
-     Get global MyFitnessPal matching settings.
+     Get settings
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: MyFitnessPalMatchingSettings
@@ -20,8 +20,15 @@ open class MyFitnessPalSettingsAPI {
     }
 
     /**
-     Get global MyFitnessPal matching settings.
+     Get settings
      - GET /api/v4/connectors/myfitnesspal/settings
+     - Get global MyFitnessPal matching settings.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<MyFitnessPalMatchingSettings> 
      */
@@ -40,11 +47,11 @@ open class MyFitnessPalSettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<MyFitnessPalMatchingSettings>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update global MyFitnessPal matching settings.
+     Save settings
      
      - parameter myFitnessPalMatchingSettings: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -55,8 +62,15 @@ open class MyFitnessPalSettingsAPI {
     }
 
     /**
-     Update global MyFitnessPal matching settings.
+     Save settings
      - PUT /api/v4/connectors/myfitnesspal/settings
+     - Update global MyFitnessPal matching settings.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter myFitnessPalMatchingSettings: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<MyFitnessPalMatchingSettings> 
@@ -76,6 +90,6 @@ open class MyFitnessPalSettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<MyFitnessPalMatchingSettings>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

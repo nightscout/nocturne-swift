@@ -10,24 +10,31 @@ import Foundation
 open class FoodsAPI {
 
     /**
-     Add a food to favorites.
+     Add favorite
      
      - parameter foodId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: URL
+     - returns: Void
      */
-    open class func foodsAddFavorite(foodId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> URL {
+    open class func foodsAddFavorite(foodId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await foodsAddFavoriteWithRequestBuilder(foodId: foodId, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
-     Add a food to favorites.
+     Add favorite
      - POST /api/v4/foods/{foodId}/favorite
+     - Add a food to favorites.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter foodId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<URL> 
+     - returns: RequestBuilder<Void> 
      */
-    open class func foodsAddFavoriteWithRequestBuilder(foodId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<URL> {
+    open class func foodsAddFavoriteWithRequestBuilder(foodId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v4/foods/{foodId}/favorite"
         let foodIdPreEscape = "\(APIHelper.mapValueToPathItem(foodId))"
         let foodIdPostEscape = foodIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -43,13 +50,13 @@ open class FoodsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<URL>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create a new food record.
+     Create food
      
      - parameter food: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -60,8 +67,15 @@ open class FoodsAPI {
     }
 
     /**
-     Create a new food record.
+     Create food
      - POST /api/v4/foods
+     - Create a new food record.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter food: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Food> 
@@ -81,11 +95,11 @@ open class FoodsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Food>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a food from the database, handling any meal attributions that reference it.
+     Delete food
      
      - parameter foodId: (path) The food ID to delete. 
      - parameter attributionMode: (query) How to handle existing attributions: \&quot;clear\&quot; (default) sets them to Other, \&quot;remove\&quot; deletes them. (optional, default to "clear")
@@ -97,8 +111,15 @@ open class FoodsAPI {
     }
 
     /**
-     Delete a food from the database, handling any meal attributions that reference it.
+     Delete food
      - DELETE /api/v4/foods/{foodId}
+     - Delete a food from the database, handling any meal attributions that reference it.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter foodId: (path) The food ID to delete. 
      - parameter attributionMode: (query) How to handle existing attributions: \&quot;clear\&quot; (default) sets them to Other, \&quot;remove\&quot; deletes them. (optional, default to "clear")
      - parameter apiConfiguration: The configuration for the http request.
@@ -125,11 +146,11 @@ open class FoodsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get current user's favorite foods.
+     Get favorites
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [Food]
@@ -139,8 +160,15 @@ open class FoodsAPI {
     }
 
     /**
-     Get current user's favorite foods.
+     Get favorites
      - GET /api/v4/foods/favorites
+     - Get current user's favorite foods.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[Food]> 
      */
@@ -159,11 +187,11 @@ open class FoodsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[Food]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a single food by ID.
+     Get food
      
      - parameter foodId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -174,8 +202,15 @@ open class FoodsAPI {
     }
 
     /**
-     Get a single food by ID.
+     Get food
      - GET /api/v4/foods/{foodId}
+     - Get a single food by ID.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter foodId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Food> 
@@ -198,11 +233,11 @@ open class FoodsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Food>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get how many meal attributions reference a specific food.
+     Get food attribution count
      
      - parameter foodId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -213,8 +248,15 @@ open class FoodsAPI {
     }
 
     /**
-     Get how many meal attributions reference a specific food.
+     Get food attribution count
      - GET /api/v4/foods/{foodId}/attribution-count
+     - Get how many meal attributions reference a specific food.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter foodId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<FoodAttributionCount> 
@@ -237,11 +279,11 @@ open class FoodsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<FoodAttributionCount>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     List foods with optional filtering and pagination. This is a V4 endpoint (not Nightscout-legacy) used by the meal attribution UI.
+     Get foods
      
      - parameter find: (query)  (optional)
      - parameter count: (query)  (optional)
@@ -254,8 +296,15 @@ open class FoodsAPI {
     }
 
     /**
-     List foods with optional filtering and pagination. This is a V4 endpoint (not Nightscout-legacy) used by the meal attribution UI.
+     Get foods
      - GET /api/v4/foods
+     - The picker and the food page ask for no count and render the whole catalog, so an absent count reads up to MaxPageSize records rather than every row. find matches name, category, and subcategory.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter find: (query)  (optional)
      - parameter count: (query)  (optional)
      - parameter skip: (query)  (optional)
@@ -282,11 +331,11 @@ open class FoodsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[Food]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get recently used foods (excluding favorites).
+     Get recent foods
      
      - parameter limit: (query)  (optional, default to 20)
      - parameter apiConfiguration: The configuration for the http request.
@@ -297,8 +346,15 @@ open class FoodsAPI {
     }
 
     /**
-     Get recently used foods (excluding favorites).
+     Get recent foods
      - GET /api/v4/foods/recent
+     - Get recently used foods (excluding favorites).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter limit: (query)  (optional, default to 20)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[Food]> 
@@ -321,28 +377,35 @@ open class FoodsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[Food]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Remove a food from favorites.
+     Remove favorite
      
      - parameter foodId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: URL
+     - returns: Void
      */
-    open class func foodsRemoveFavorite(foodId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> URL {
+    open class func foodsRemoveFavorite(foodId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
         return try await foodsRemoveFavoriteWithRequestBuilder(foodId: foodId, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
-     Remove a food from favorites.
+     Remove favorite
      - DELETE /api/v4/foods/{foodId}/favorite
+     - Remove a food from favorites.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter foodId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<URL> 
+     - returns: RequestBuilder<Void> 
      */
-    open class func foodsRemoveFavoriteWithRequestBuilder(foodId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<URL> {
+    open class func foodsRemoveFavoriteWithRequestBuilder(foodId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v4/foods/{foodId}/favorite"
         let foodIdPreEscape = "\(APIHelper.mapValueToPathItem(foodId))"
         let foodIdPostEscape = foodIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -358,13 +421,13 @@ open class FoodsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<URL>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update an existing food record by ID.
+     Update food
      
      - parameter foodId: (path)  
      - parameter food: (body)  
@@ -376,8 +439,15 @@ open class FoodsAPI {
     }
 
     /**
-     Update an existing food record by ID.
+     Update food
      - PUT /api/v4/foods/{foodId}
+     - Update an existing food record by ID.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter foodId: (path)  
      - parameter food: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -401,6 +471,6 @@ open class FoodsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Food>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

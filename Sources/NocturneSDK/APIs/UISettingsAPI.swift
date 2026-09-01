@@ -10,7 +10,7 @@ import Foundation
 open class UISettingsAPI {
 
     /**
-     Save a specific alarm profile.
+     Add or update alarm profile
      
      - parameter alarmProfileConfiguration: (body) The alarm profile to save 
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class UISettingsAPI {
     }
 
     /**
-     Save a specific alarm profile.
+     Add or update alarm profile
      - POST /api/v4/ui-settings/notifications/alarms/profiles
+     - Save a specific alarm profile.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter alarmProfileConfiguration: (body) The alarm profile to save 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<UserAlarmConfiguration> 
@@ -42,11 +49,11 @@ open class UISettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<UserAlarmConfiguration>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete an alarm profile by ID.
+     Delete alarm profile
      
      - parameter profileId: (path) The profile ID to delete 
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +64,15 @@ open class UISettingsAPI {
     }
 
     /**
-     Delete an alarm profile by ID.
+     Delete alarm profile
      - DELETE /api/v4/ui-settings/notifications/alarms/profiles/{profileId}
+     - Delete an alarm profile by ID.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter profileId: (path) The profile ID to delete 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<UserAlarmConfiguration> 
@@ -81,11 +95,11 @@ open class UISettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<UserAlarmConfiguration>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get alarm profiles configuration (xDrip+-style).
+     Get alarm configuration
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: UserAlarmConfiguration
@@ -95,8 +109,15 @@ open class UISettingsAPI {
     }
 
     /**
-     Get alarm profiles configuration (xDrip+-style).
+     Get alarm configuration
      - GET /api/v4/ui-settings/notifications/alarms
+     - Get alarm profiles configuration (xDrip+-style).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<UserAlarmConfiguration> 
      */
@@ -115,13 +136,13 @@ open class UISettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<UserAlarmConfiguration>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get settings for a specific section.
+     Get section settings
      
-     - parameter section: (path) Section name: devices, therapy, algorithm, features, notifications, or services 
+     - parameter section: (path) Name of any UISettingsSections entry 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
@@ -130,9 +151,16 @@ open class UISettingsAPI {
     }
 
     /**
-     Get settings for a specific section.
+     Get section settings
      - GET /api/v4/ui-settings/{section}
-     - parameter section: (path) Section name: devices, therapy, algorithm, features, notifications, or services 
+     - Get settings for a specific section.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter section: (path) Name of any UISettingsSections entry 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
      */
@@ -154,11 +182,11 @@ open class UISettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get all UI settings configuration for frontend settings pages. In demo mode, this fetches from the demo service.
+     Get UI settings
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: UISettingsConfiguration
@@ -168,8 +196,15 @@ open class UISettingsAPI {
     }
 
     /**
-     Get all UI settings configuration for frontend settings pages. In demo mode, this fetches from the demo service.
+     Get UI settings
      - GET /api/v4/ui-settings
+     - Get all UI settings configuration for frontend settings pages. In demo mode, this fetches from the demo service.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<UISettingsConfiguration> 
      */
@@ -188,11 +223,11 @@ open class UISettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<UISettingsConfiguration>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Save alarm profiles configuration (xDrip+-style).
+     Save alarm configuration
      
      - parameter userAlarmConfiguration: (body) The alarm configuration to save 
      - parameter apiConfiguration: The configuration for the http request.
@@ -203,8 +238,15 @@ open class UISettingsAPI {
     }
 
     /**
-     Save alarm profiles configuration (xDrip+-style).
+     Save alarm configuration
      - PUT /api/v4/ui-settings/notifications/alarms
+     - Save alarm profiles configuration (xDrip+-style).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter userAlarmConfiguration: (body) The alarm configuration to save 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<UserAlarmConfiguration> 
@@ -224,11 +266,11 @@ open class UISettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<UserAlarmConfiguration>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Save notification settings including alarm configuration.
+     Save notification settings
      
      - parameter notificationSettings: (body) The notification settings to save 
      - parameter apiConfiguration: The configuration for the http request.
@@ -239,8 +281,15 @@ open class UISettingsAPI {
     }
 
     /**
-     Save notification settings including alarm configuration.
+     Save notification settings
      - PUT /api/v4/ui-settings/notifications
+     - Save notification settings including alarm configuration.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter notificationSettings: (body) The notification settings to save 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<NotificationSettings> 
@@ -260,11 +309,11 @@ open class UISettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<NotificationSettings>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Save complete UI settings configuration.
+     Save UI settings
      
      - parameter uISettingsConfiguration: (body) The complete settings to save 
      - parameter apiConfiguration: The configuration for the http request.
@@ -275,8 +324,15 @@ open class UISettingsAPI {
     }
 
     /**
-     Save complete UI settings configuration.
+     Save UI settings
      - PUT /api/v4/ui-settings
+     - Save complete UI settings configuration.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter uISettingsConfiguration: (body) The complete settings to save 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<UISettingsConfiguration> 
@@ -296,6 +352,6 @@ open class UISettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<UISettingsConfiguration>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

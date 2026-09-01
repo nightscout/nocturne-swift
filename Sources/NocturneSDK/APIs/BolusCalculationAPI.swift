@@ -10,7 +10,7 @@ import Foundation
 open class BolusCalculationAPI {
 
     /**
-     Restores multiple soft-deleted records by their IDs.
+     Bulk restore
      
      - parameter requestBody: (body) The unique identifiers of the soft-deleted records. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,9 +21,15 @@ open class BolusCalculationAPI {
     }
 
     /**
-     Restores multiple soft-deleted records by their IDs.
+     Bulk restore
      - POST /api/v4/insulin/calculations/restore
      - Returns `200 OK` with the restored records. IDs that don't match a soft-deleted record are silently ignored.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter requestBody: (body) The unique identifiers of the soft-deleted records. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[BolusCalculation]> 
@@ -43,11 +49,11 @@ open class BolusCalculationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[BolusCalculation]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Creates a new record and returns it with a `Location` header pointing to the created resource.
+     Create
      
      - parameter upsertBolusCalculationRequest: (body) The data used to create the record. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -58,9 +64,15 @@ open class BolusCalculationAPI {
     }
 
     /**
-     Creates a new record and returns it with a `Location` header pointing to the created resource.
+     Create
      - POST /api/v4/insulin/calculations
      - `Timestamp` must be set on the mapped model; requests that resolve to a default timestamp are rejected with `400 Bad Request`.              On success, responds with `201 Created` and a `Location` header containing the URL of the newly created record.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter upsertBolusCalculationRequest: (body) The data used to create the record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<BolusCalculation> 
@@ -80,11 +92,11 @@ open class BolusCalculationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BolusCalculation>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Deletes a record by ID.
+     Delete
      
      - parameter id: (path) The unique identifier of the record to delete. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -95,9 +107,15 @@ open class BolusCalculationAPI {
     }
 
     /**
-     Deletes a record by ID.
+     Delete
      - DELETE /api/v4/insulin/calculations/{id}
      - Returns `204 No Content` on success, or `404 Not Found` if no record with the given id exists.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The unique identifier of the record to delete. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -120,11 +138,11 @@ open class BolusCalculationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Lists records with pagination, optional date range, device, and source filtering.
+     Get all
      
      - parameter from: (query) Inclusive start of the date range filter. (optional)
      - parameter to: (query) Inclusive end of the date range filter. (optional)
@@ -141,9 +159,15 @@ open class BolusCalculationAPI {
     }
 
     /**
-     Lists records with pagination, optional date range, device, and source filtering.
+     Get all
      - GET /api/v4/insulin/calculations
-     - The `sort` parameter accepts exactly two values: - `timestamp_asc` — oldest records first - `timestamp_desc` — newest records first (default)              Use `limit` and `offset` together for paginated access to large result sets.
+     - The `sort` parameter accepts exactly two values: - `timestamp_asc` — oldest records first - `timestamp_desc` — newest records first (default)              Use `limit` and `offset` together for paginated access to large result sets. `limit` is capped at MaxPageSize, and a `from`/`to` range wider than MaxDateSpanDays days is rejected with `400 Bad Request`.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query) Inclusive start of the date range filter. (optional)
      - parameter to: (query) Inclusive end of the date range filter. (optional)
      - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
@@ -179,11 +203,11 @@ open class BolusCalculationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfBolusCalculation>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Retrieves a single record by its unique identifier.
+     Get by id
      
      - parameter id: (path) The unique identifier of the record. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -194,9 +218,15 @@ open class BolusCalculationAPI {
     }
 
     /**
-     Retrieves a single record by its unique identifier.
+     Get by id
      - GET /api/v4/insulin/calculations/{id}
      - Returns `404 Not Found` if no record with the given id exists.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The unique identifier of the record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<BolusCalculation> 
@@ -219,11 +249,11 @@ open class BolusCalculationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BolusCalculation>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Lists soft-deleted records available for restoration, ordered by deletion date (newest first).
+     List deleted
      
      - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
      - parameter offset: (query) Number of records to skip for pagination. Defaults to &#x60;0&#x60;. (optional, default to 0)
@@ -235,8 +265,15 @@ open class BolusCalculationAPI {
     }
 
     /**
-     Lists soft-deleted records available for restoration, ordered by deletion date (newest first).
+     List deleted
      - GET /api/v4/insulin/calculations/deleted
+     - Gated on the write scope although it reads: the recycle bin exists to feed Restore, and records the owner deleted must not be enumerable by read-only credentials — in particular the anonymous public-share principal, which satisfies the class-level category read gate.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
      - parameter offset: (query) Number of records to skip for pagination. Defaults to &#x60;0&#x60;. (optional, default to 0)
      - parameter apiConfiguration: The configuration for the http request.
@@ -261,11 +298,11 @@ open class BolusCalculationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfBolusCalculation>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Restores a soft-deleted record by ID.
+     Restore
      
      - parameter id: (path) The unique identifier of the soft-deleted record. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -276,9 +313,15 @@ open class BolusCalculationAPI {
     }
 
     /**
-     Restores a soft-deleted record by ID.
+     Restore
      - POST /api/v4/insulin/calculations/{id}/restore
      - Returns `200 OK` with the restored record, or `404 Not Found` if no soft-deleted record with the given id exists.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The unique identifier of the soft-deleted record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<BolusCalculation> 
@@ -301,11 +344,11 @@ open class BolusCalculationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BolusCalculation>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Updates an existing record by ID and returns the updated record.
+     Update
      
      - parameter id: (path) The unique identifier of the record to update. 
      - parameter upsertBolusCalculationRequest: (body) The data to apply to the existing record. 
@@ -317,9 +360,15 @@ open class BolusCalculationAPI {
     }
 
     /**
-     Updates an existing record by ID and returns the updated record.
+     Update
      - PUT /api/v4/insulin/calculations/{id}
      - Returns `404 Not Found` if no record with the given id exists.              `Timestamp` must be set on the mapped model; requests that resolve to a default timestamp are rejected with `400 Bad Request`.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The unique identifier of the record to update. 
      - parameter upsertBolusCalculationRequest: (body) The data to apply to the existing record. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -343,6 +392,6 @@ open class BolusCalculationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BolusCalculation>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

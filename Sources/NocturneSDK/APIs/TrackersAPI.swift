@@ -10,7 +10,7 @@ import Foundation
 open class TrackersAPI {
 
     /**
-     Acknowledge a tracker notification. SnoozeMins is stored on the instance (pill display/legacy clients); the alert-engine side is a plain acknowledgement of the managed rules' open excursions — re-notification is the threshold ladder's and alert_state escalation rules' job, not a snooze re-fire.
+     Ack instance
      
      - parameter id: (path)  
      - parameter ackTrackerRequest: (body)  
@@ -22,8 +22,15 @@ open class TrackersAPI {
     }
 
     /**
-     Acknowledge a tracker notification. SnoozeMins is stored on the instance (pill display/legacy clients); the alert-engine side is a plain acknowledgement of the managed rules' open excursions — re-notification is the threshold ladder's and alert_state escalation rules' job, not a snooze re-fire.
+     Ack instance
      - POST /api/v4/trackers/instances/{id}/ack
+     - Acknowledge a tracker notification. SnoozeMins is stored on the instance (pill display/legacy clients); the alert-engine side is a plain acknowledgement of the managed rules' open excursions — re-notification is the threshold ladder's and alert_state escalation rules' job, not a snooze re-fire.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter ackTrackerRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -47,11 +54,11 @@ open class TrackersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Apply a preset (starts a new instance)
+     Apply preset
      
      - parameter id: (path)  
      - parameter applyPresetRequest: (body)  (optional)
@@ -63,8 +70,15 @@ open class TrackersAPI {
     }
 
     /**
-     Apply a preset (starts a new instance)
+     Apply preset
      - POST /api/v4/trackers/presets/{id}/apply
+     - Apply a preset (starts a new instance)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter applyPresetRequest: (body)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -88,11 +102,11 @@ open class TrackersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TrackerInstanceDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Complete a tracker instance
+     Complete instance
      
      - parameter id: (path)  
      - parameter completeTrackerInstanceRequest: (body)  
@@ -104,8 +118,15 @@ open class TrackersAPI {
     }
 
     /**
-     Complete a tracker instance
+     Complete instance
      - PUT /api/v4/trackers/instances/{id}/complete
+     - Complete a tracker instance
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter completeTrackerInstanceRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -129,11 +150,11 @@ open class TrackersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TrackerInstanceDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create a new tracker definition
+     Create definition
      
      - parameter createTrackerDefinitionRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -144,8 +165,15 @@ open class TrackersAPI {
     }
 
     /**
-     Create a new tracker definition
+     Create definition
      - POST /api/v4/trackers/definitions
+     - Create a new tracker definition
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createTrackerDefinitionRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TrackerDefinitionDto> 
@@ -165,11 +193,11 @@ open class TrackersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TrackerDefinitionDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create a new preset
+     Create preset
      
      - parameter createTrackerPresetRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -180,8 +208,15 @@ open class TrackersAPI {
     }
 
     /**
-     Create a new preset
+     Create preset
      - POST /api/v4/trackers/presets
+     - Create a new preset
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createTrackerPresetRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TrackerPresetDto> 
@@ -201,11 +236,11 @@ open class TrackersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TrackerPresetDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a tracker definition
+     Delete definition
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -216,8 +251,15 @@ open class TrackersAPI {
     }
 
     /**
-     Delete a tracker definition
+     Delete definition
      - DELETE /api/v4/trackers/definitions/{id}
+     - Delete a tracker definition
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -240,11 +282,11 @@ open class TrackersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a tracker instance
+     Delete instance
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -255,8 +297,15 @@ open class TrackersAPI {
     }
 
     /**
-     Delete a tracker instance
+     Delete instance
      - DELETE /api/v4/trackers/instances/{id}
+     - Delete a tracker instance
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -279,11 +328,11 @@ open class TrackersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a preset
+     Delete preset
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -294,8 +343,15 @@ open class TrackersAPI {
     }
 
     /**
-     Delete a preset
+     Delete preset
      - DELETE /api/v4/trackers/presets/{id}
+     - Delete a preset
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -318,11 +374,11 @@ open class TrackersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get active tracker instances
+     Get active instances
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [TrackerInstanceDto]
@@ -332,8 +388,15 @@ open class TrackersAPI {
     }
 
     /**
-     Get active tracker instances
+     Get active instances
      - GET /api/v4/trackers/instances
+     - Get active tracker instances
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[TrackerInstanceDto]> 
      */
@@ -352,11 +415,11 @@ open class TrackersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[TrackerInstanceDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a specific tracker definition
+     Get definition
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -367,8 +430,15 @@ open class TrackersAPI {
     }
 
     /**
-     Get a specific tracker definition
+     Get definition
      - GET /api/v4/trackers/definitions/{id}
+     - Get a specific tracker definition
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TrackerDefinitionDto> 
@@ -391,11 +461,11 @@ open class TrackersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TrackerDefinitionDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get all tracker definitions. Returns public trackers for unauthenticated users, or all visible trackers for authenticated users.
+     Get definitions
      
      - parameter category: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -406,8 +476,15 @@ open class TrackersAPI {
     }
 
     /**
-     Get all tracker definitions. Returns public trackers for unauthenticated users, or all visible trackers for authenticated users.
+     Get definitions
      - GET /api/v4/trackers/definitions
+     - Get all tracker definitions: the caller's own plus any Public-visibility tracker. Gated by the fallback authorization policy (no [AllowAnonymous]): a bare unauthenticated request on a tenant subdomain carries an empty permission trie and is rejected, so a private tenant exposes no tracker anonymously. A public-share subject is admitted by the policy but reads nothing here — tracker tables are not in ShareDataCategories, so the share RLS policy hides them.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter category: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[TrackerDefinitionDto]> 
@@ -430,11 +507,11 @@ open class TrackersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[TrackerDefinitionDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get completed tracker instances (history)
+     Get instance history
      
      - parameter limit: (query)  (optional, default to 100)
      - parameter apiConfiguration: The configuration for the http request.
@@ -445,8 +522,15 @@ open class TrackersAPI {
     }
 
     /**
-     Get completed tracker instances (history)
+     Get instance history
      - GET /api/v4/trackers/instances/history
+     - Get completed tracker instances (history). Matches GetActiveInstances and GetUpcomingInstances: a caller carrying no subject reads the public-visibility instances only, and the fallback authorization policy (no [AllowAnonymous]) rejects a bare unauthenticated request, so a private tenant exposes no history anonymously. The public share subject is still admitted by the policy, so the calendar keeps rendering history alongside the active and upcoming instances — [Authorize] is what 401'd it.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter limit: (query)  (optional, default to 100)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[TrackerInstanceDto]> 
@@ -469,11 +553,11 @@ open class TrackersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[TrackerInstanceDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get all presets for the current user
+     Get presets
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [TrackerPresetDto]
@@ -483,8 +567,15 @@ open class TrackersAPI {
     }
 
     /**
-     Get all presets for the current user
+     Get presets
      - GET /api/v4/trackers/presets
+     - Get all presets for the current user
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[TrackerPresetDto]> 
      */
@@ -503,11 +594,11 @@ open class TrackersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[TrackerPresetDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get upcoming tracker expirations for calendar
+     Get upcoming instances
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -519,8 +610,15 @@ open class TrackersAPI {
     }
 
     /**
-     Get upcoming tracker expirations for calendar
+     Get upcoming instances
      - GET /api/v4/trackers/instances/upcoming
+     - Get upcoming tracker expirations for calendar
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -545,11 +643,11 @@ open class TrackersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[TrackerInstanceDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Start a new tracker instance
+     Start instance
      
      - parameter startTrackerInstanceRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -560,8 +658,15 @@ open class TrackersAPI {
     }
 
     /**
-     Start a new tracker instance
+     Start instance
      - POST /api/v4/trackers/instances
+     - Start a new tracker instance
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter startTrackerInstanceRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TrackerInstanceDto> 
@@ -581,11 +686,11 @@ open class TrackersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TrackerInstanceDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update a tracker definition
+     Update definition
      
      - parameter id: (path)  
      - parameter updateTrackerDefinitionRequest: (body)  
@@ -597,8 +702,15 @@ open class TrackersAPI {
     }
 
     /**
-     Update a tracker definition
+     Update definition
      - PUT /api/v4/trackers/definitions/{id}
+     - Update a tracker definition
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter updateTrackerDefinitionRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -622,6 +734,6 @@ open class TrackersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TrackerDefinitionDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

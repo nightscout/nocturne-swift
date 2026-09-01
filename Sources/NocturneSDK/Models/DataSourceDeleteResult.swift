@@ -14,13 +14,15 @@ public struct DataSourceDeleteResult: Sendable, Codable, Hashable {
     public var totalDeleted: Int64?
     public var dataSource: String?
     public var error: String?
+    public var errorCode: DataSourceDeleteError?
 
-    public init(success: Bool? = nil, deletedCounts: [String: Int64]? = nil, totalDeleted: Int64? = nil, dataSource: String? = nil, error: String? = nil) {
+    public init(success: Bool? = nil, deletedCounts: [String: Int64]? = nil, totalDeleted: Int64? = nil, dataSource: String? = nil, error: String? = nil, errorCode: DataSourceDeleteError? = nil) {
         self.success = success
         self.deletedCounts = deletedCounts
         self.totalDeleted = totalDeleted
         self.dataSource = dataSource
         self.error = error
+        self.errorCode = errorCode
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -29,6 +31,7 @@ public struct DataSourceDeleteResult: Sendable, Codable, Hashable {
         case totalDeleted
         case dataSource
         case error
+        case errorCode
     }
 
     // Encodable protocol methods
@@ -40,6 +43,7 @@ public struct DataSourceDeleteResult: Sendable, Codable, Hashable {
         try container.encodeIfPresent(totalDeleted, forKey: .totalDeleted)
         try container.encodeIfPresent(dataSource, forKey: .dataSource)
         try container.encodeIfPresent(error, forKey: .error)
+        try container.encodeIfPresent(errorCode, forKey: .errorCode)
     }
 }
 

@@ -10,7 +10,7 @@ import Foundation
 open class ChatIdentityAPI {
 
     /**
-     Claim a pending link token after /connect slash command auth.
+     Claim link
      
      - parameter claimChatIdentityLinkRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class ChatIdentityAPI {
     }
 
     /**
-     Claim a pending link token after /connect slash command auth.
+     Claim link
      - POST /api/v4/chat-identity/links/claim
+     - Claim a pending link token after /connect slash command auth.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter claimChatIdentityLinkRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ChatIdentityLinkResponse> 
@@ -42,11 +49,11 @@ open class ChatIdentityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ChatIdentityLinkResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Directly create a link for the current tenant (used by OAuth2 finalize hop).
+     Create direct link
      
      - parameter createDirectLinkRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +64,15 @@ open class ChatIdentityAPI {
     }
 
     /**
-     Directly create a link for the current tenant (used by OAuth2 finalize hop).
+     Create direct link
      - POST /api/v4/chat-identity/links/direct
+     - Directly create a link for the current tenant (used by OAuth2 finalize hop).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createDirectLinkRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ChatIdentityLinkResponse> 
@@ -78,11 +92,11 @@ open class ChatIdentityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ChatIdentityLinkResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     List active chat identity links for the current tenant.
+     Get links
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [ChatIdentityLinkResponse]
@@ -92,8 +106,15 @@ open class ChatIdentityAPI {
     }
 
     /**
-     List active chat identity links for the current tenant.
+     Get links
      - GET /api/v4/chat-identity
+     - The list stays tenant-scoped, so a chat account linked to several tenants shows a non-default row here while its default sits on a row this tenant cannot see. Naming that row's label closes the gap without widening the list, and it is filled in only for the caller's own links: a co-member's chat account may be linked to tenants the caller has no part in, and its label is that tenant's slug.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[ChatIdentityLinkResponse]> 
      */
@@ -112,11 +133,11 @@ open class ChatIdentityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[ChatIdentityLinkResponse]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Read-only lookup of a pending link token, used by the authorize page to validate and render the confirmation step.
+     Get pending
      
      - parameter token: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -127,8 +148,15 @@ open class ChatIdentityAPI {
     }
 
     /**
-     Read-only lookup of a pending link token, used by the authorize page to validate and render the confirmation step.
+     Get pending
      - GET /api/v4/chat-identity/links/pending/{token}
+     - Read-only lookup of a pending link token, used by the authorize page to validate and render the confirmation step.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter token: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PendingLinkViewResponse> 
@@ -151,11 +179,12 @@ open class ChatIdentityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PendingLinkViewResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Revoke link
+     
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -165,7 +194,14 @@ open class ChatIdentityAPI {
     }
 
     /**
+     Revoke link
      - DELETE /api/v4/chat-identity/links/{id}
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -188,11 +224,12 @@ open class ChatIdentityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Set default
+     
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -202,7 +239,14 @@ open class ChatIdentityAPI {
     }
 
     /**
+     Set default
      - POST /api/v4/chat-identity/links/{id}/set-default
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -225,11 +269,12 @@ open class ChatIdentityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Update link
+     
      - parameter id: (path)  
      - parameter updateChatIdentityLinkRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -240,7 +285,14 @@ open class ChatIdentityAPI {
     }
 
     /**
+     Update link
      - PATCH /api/v4/chat-identity/links/{id}
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter updateChatIdentityLinkRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -264,6 +316,6 @@ open class ChatIdentityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

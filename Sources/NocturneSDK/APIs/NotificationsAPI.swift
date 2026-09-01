@@ -10,7 +10,7 @@ import Foundation
 open class NotificationsAPI {
 
     /**
-     Create a notification programmatically (for integrations and services)
+     Create notification
      
      - parameter createNotificationRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class NotificationsAPI {
     }
 
     /**
-     Create a notification programmatically (for integrations and services)
+     Create notification
      - POST /api/v4/notifications
+     - Create a notification programmatically (for integrations and services)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createNotificationRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<InAppNotificationDto> 
@@ -42,11 +49,12 @@ open class NotificationsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<InAppNotificationDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Dismiss notification
+     
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -56,7 +64,14 @@ open class NotificationsAPI {
     }
 
     /**
+     Dismiss notification
      - DELETE /api/v4/notifications/{id}
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -79,11 +94,12 @@ open class NotificationsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Execute action
+     
      - parameter id: (path)  
      - parameter actionId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -94,7 +110,15 @@ open class NotificationsAPI {
     }
 
     /**
+     Execute action
      - POST /api/v4/notifications/{id}/actions/{actionId}
+     - Accepts DeviceNotify as well as AlertsReadWrite, because this is the second path to the excursion acknowledgement AcknowledgeExcursion serves: the Acknowledge action on an alert.firing in-app notification dispatches through ExecuteActionAsync to AlertActionHandler, which calls AcknowledgeExcursionAsync. The resolver grants device.notify to any member holding at least one permission, and the Clinician and Viewer seed roles hold it outright, so requiring alerts.readwrite alone gave those members an alert they could see but not stop. ExecuteActionAsync is a generic dispatcher, not an acknowledgement endpoint: past the built-in dismiss/navigate cases it hands the action to whichever INotificationActionHandler is registered for the notification's type, and those handlers mutate their own domains — the tracker handler's accept completes and restarts tracker instances, a write TrackersController gates on alerts.readwrite. So the capability arm is confined here to NotificationType: a caller holding only device.notify is refused any other notification type, and only a holder of alerts.readwrite reaches the rest of the dispatch table. Ownership is enforced downstream rather than by the scope: ExecuteActionAsync rejects the call unless notification.UserId equals the caller's subject, so the wider gate reaches only the caller's own notifications.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter actionId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -121,11 +145,12 @@ open class NotificationsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get notifications
+     
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [InAppNotificationDto]
      */
@@ -134,7 +159,14 @@ open class NotificationsAPI {
     }
 
     /**
+     Get notifications
      - GET /api/v4/notifications
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[InAppNotificationDto]> 
      */
@@ -153,11 +185,12 @@ open class NotificationsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[InAppNotificationDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Mark all as read
+     
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
@@ -166,7 +199,14 @@ open class NotificationsAPI {
     }
 
     /**
+     Mark all as read
      - POST /api/v4/notifications/read-all
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
      */
@@ -185,11 +225,12 @@ open class NotificationsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Mark as read
+     
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -199,7 +240,14 @@ open class NotificationsAPI {
     }
 
     /**
+     Mark as read
      - POST /api/v4/notifications/{id}/read
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -222,6 +270,6 @@ open class NotificationsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

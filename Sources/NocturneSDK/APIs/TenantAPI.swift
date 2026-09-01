@@ -10,7 +10,8 @@ import Foundation
 open class TenantAPI {
 
     /**
-
+     Add member
+     
      - parameter id: (path)  
      - parameter addMemberRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,7 +22,14 @@ open class TenantAPI {
     }
 
     /**
+     Add member
      - POST /api/v4/admin/tenants/{id}/members
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter addMemberRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -45,11 +53,11 @@ open class TenantAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Attaches an OIDC identity to a member subject.
+     Attach oidc identity
      
      - parameter id: (path)  
      - parameter subjectId: (path)  
@@ -62,8 +70,15 @@ open class TenantAPI {
     }
 
     /**
-     Attaches an OIDC identity to a member subject.
+     Attach oidc identity
      - POST /api/v4/admin/tenants/{id}/members/{subjectId}/credentials/oidc
+     - Attaches an OIDC identity to a member subject.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter subjectId: (path)  
      - parameter adminAttachOidcRequest: (body)  
@@ -91,11 +106,12 @@ open class TenantAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Create
+     
      - parameter createTenantRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: TenantCreatedDto
@@ -105,7 +121,14 @@ open class TenantAPI {
     }
 
     /**
+     Create
      - POST /api/v4/admin/tenants
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createTenantRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TenantCreatedDto> 
@@ -125,50 +148,12 @@ open class TenantAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TenantCreatedDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
-     - parameter id: (path)  
-     - parameter createMemberInviteRequest: (body)  
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: MemberInviteResult
-     */
-    open class func tenantCreateInvite(id: String, createMemberInviteRequest: CreateMemberInviteRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> MemberInviteResult {
-        return try await tenantCreateInviteWithRequestBuilder(id: id, createMemberInviteRequest: createMemberInviteRequest, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     - POST /api/v4/admin/tenants/{id}/invites
-     - parameter id: (path)  
-     - parameter createMemberInviteRequest: (body)  
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<MemberInviteResult> 
-     */
-    open class func tenantCreateInviteWithRequestBuilder(id: String, createMemberInviteRequest: CreateMemberInviteRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<MemberInviteResult> {
-        var localVariablePath = "/api/v4/admin/tenants/{id}/invites"
-        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
-        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createMemberInviteRequest, codableHelper: apiConfiguration.codableHelper)
-
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/json",
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<MemberInviteResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
-
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
-    }
-
-    /**
-
+     Delete
+     
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -178,7 +163,14 @@ open class TenantAPI {
     }
 
     /**
+     Delete
      - DELETE /api/v4/admin/tenants/{id}
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -201,11 +193,12 @@ open class TenantAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get all
+     
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [TenantDto]
      */
@@ -214,7 +207,14 @@ open class TenantAPI {
     }
 
     /**
+     Get all
      - GET /api/v4/admin/tenants
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[TenantDto]> 
      */
@@ -233,11 +233,12 @@ open class TenantAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[TenantDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get by id
+     
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: TenantDetailDto
@@ -247,7 +248,14 @@ open class TenantAPI {
     }
 
     /**
+     Get by id
      - GET /api/v4/admin/tenants/{id}
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TenantDetailDto> 
@@ -270,11 +278,11 @@ open class TenantAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TenantDetailDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Lists passkey credentials and OIDC identities for a member subject.
+     Get member credentials
      
      - parameter id: (path)  
      - parameter subjectId: (path)  
@@ -286,8 +294,15 @@ open class TenantAPI {
     }
 
     /**
-     Lists passkey credentials and OIDC identities for a member subject.
+     Get member credentials
      - GET /api/v4/admin/tenants/{id}/members/{subjectId}/credentials
+     - Lists passkey credentials and OIDC identities for a member subject.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter subjectId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -314,48 +329,12 @@ open class TenantAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SubjectCredentialsDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
-     - parameter id: (path)  
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: [MemberInviteInfo]
-     */
-    open class func tenantListInvites(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [MemberInviteInfo] {
-        return try await tenantListInvitesWithRequestBuilder(id: id, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     - GET /api/v4/admin/tenants/{id}/invites
-     - parameter id: (path)  
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<[MemberInviteInfo]> 
-     */
-    open class func tenantListInvitesWithRequestBuilder(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[MemberInviteInfo]> {
-        var localVariablePath = "/api/v4/admin/tenants/{id}/invites"
-        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
-        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters: [String: any Sendable]? = nil
-
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<[MemberInviteInfo]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
-
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
-    }
-
-    /**
-
+     Provision
+     
      - parameter provisionRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: ProvisionResult
@@ -365,7 +344,14 @@ open class TenantAPI {
     }
 
     /**
+     Provision
      - POST /api/v4/admin/tenants/provision
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter provisionRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ProvisionResult> 
@@ -385,11 +371,12 @@ open class TenantAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ProvisionResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Remove member
+     
      - parameter id: (path)  
      - parameter subjectId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -400,7 +387,14 @@ open class TenantAPI {
     }
 
     /**
+     Remove member
      - DELETE /api/v4/admin/tenants/{id}/members/{subjectId}
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter subjectId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -427,11 +421,11 @@ open class TenantAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Removes an OIDC identity from a member subject.
+     Remove oidc identity
      
      - parameter id: (path)  
      - parameter subjectId: (path)  
@@ -444,8 +438,15 @@ open class TenantAPI {
     }
 
     /**
-     Removes an OIDC identity from a member subject.
+     Remove oidc identity
      - DELETE /api/v4/admin/tenants/{id}/members/{subjectId}/credentials/oidc/{identityId}
+     - Removes an OIDC identity from a member subject.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter subjectId: (path)  
      - parameter identityId: (path)  
@@ -476,11 +477,11 @@ open class TenantAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Removes a passkey credential from a member subject.
+     Remove passkey credential
      
      - parameter id: (path)  
      - parameter subjectId: (path)  
@@ -493,8 +494,15 @@ open class TenantAPI {
     }
 
     /**
-     Removes a passkey credential from a member subject.
+     Remove passkey credential
      - DELETE /api/v4/admin/tenants/{id}/members/{subjectId}/credentials/passkey/{credentialId}
+     - Removes a passkey credential from a member subject.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter subjectId: (path)  
      - parameter credentialId: (path)  
@@ -525,53 +533,12 @@ open class TenantAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
-     - parameter id: (path)  
-     - parameter inviteId: (path)  
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: Void
-     */
-    open class func tenantRevokeInvite(id: String, inviteId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await tenantRevokeInviteWithRequestBuilder(id: id, inviteId: inviteId, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     - DELETE /api/v4/admin/tenants/{id}/invites/{inviteId}
-     - parameter id: (path)  
-     - parameter inviteId: (path)  
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
-     */
-    open class func tenantRevokeInviteWithRequestBuilder(id: String, inviteId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
-        var localVariablePath = "/api/v4/admin/tenants/{id}/invites/{inviteId}"
-        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
-        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
-        let inviteIdPreEscape = "\(APIHelper.mapValueToPathItem(inviteId))"
-        let inviteIdPostEscape = inviteIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{inviteId}", with: inviteIdPostEscape, options: .literal, range: nil)
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters: [String: any Sendable]? = nil
-
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
-
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
-    }
-
-    /**
-
+     Update
+     
      - parameter id: (path)  
      - parameter updateTenantRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -582,7 +549,14 @@ open class TenantAPI {
     }
 
     /**
+     Update
      - PUT /api/v4/admin/tenants/{id}
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter updateTenantRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -606,6 +580,6 @@ open class TenantAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TenantDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

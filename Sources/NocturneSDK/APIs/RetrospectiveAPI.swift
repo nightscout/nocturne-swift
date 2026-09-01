@@ -10,7 +10,7 @@ import Foundation
 open class RetrospectiveAPI {
 
     /**
-     Get basal rate timeline for a day Returns basal rate data points showing scheduled and temp basal changes
+     Get basal timeline
      
      - parameter date: (query) Date in YYYY-MM-DD format (optional)
      - parameter intervalMinutes: (query) Interval in minutes between data points (default: 5) (optional, default to 5)
@@ -22,8 +22,15 @@ open class RetrospectiveAPI {
     }
 
     /**
-     Get basal rate timeline for a day Returns basal rate data points showing scheduled and temp basal changes
+     Get basal timeline
      - GET /api/v4/Retrospective/basal-timeline
+     - Get basal rate timeline for a day Returns basal rate data points showing scheduled and temp basal changes
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter date: (query) Date in YYYY-MM-DD format (optional)
      - parameter intervalMinutes: (query) Interval in minutes between data points (default: 5) (optional, default to 5)
      - parameter apiConfiguration: The configuration for the http request.
@@ -48,11 +55,11 @@ open class RetrospectiveAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BasalTimelineResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get retrospective data at a specific point in time Returns IOB, COB, glucose, basal rate, and recent treatments
+     Get retrospective data
      
      - parameter time: (query) Unix timestamp in milliseconds for the retrospective point (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -63,8 +70,15 @@ open class RetrospectiveAPI {
     }
 
     /**
-     Get retrospective data at a specific point in time Returns IOB, COB, glucose, basal rate, and recent treatments
+     Get retrospective data
      - GET /api/v4/Retrospective/at
+     - Get retrospective data at a specific point in time Returns IOB, COB, glucose, basal rate, and recent treatments
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter time: (query) Unix timestamp in milliseconds for the retrospective point (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<RetrospectiveDataResponse> 
@@ -87,11 +101,11 @@ open class RetrospectiveAPI {
 
         let localVariableRequestBuilder: RequestBuilder<RetrospectiveDataResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get retrospective data for an entire day at specified interval Returns IOB, COB, glucose, and basal data for every interval throughout the day
+     Get retrospective timeline
      
      - parameter date: (query) Date in YYYY-MM-DD format (optional)
      - parameter intervalMinutes: (query) Interval in minutes between data points (default: 5) (optional, default to 5)
@@ -103,8 +117,15 @@ open class RetrospectiveAPI {
     }
 
     /**
-     Get retrospective data for an entire day at specified interval Returns IOB, COB, glucose, and basal data for every interval throughout the day
+     Get retrospective timeline
      - GET /api/v4/Retrospective/timeline
+     - Get retrospective data for an entire day at specified interval Returns IOB, COB, glucose, and basal data for every interval throughout the day
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter date: (query) Date in YYYY-MM-DD format (optional)
      - parameter intervalMinutes: (query) Interval in minutes between data points (default: 5) (optional, default to 5)
      - parameter apiConfiguration: The configuration for the http request.
@@ -129,6 +150,6 @@ open class RetrospectiveAPI {
 
         let localVariableRequestBuilder: RequestBuilder<RetrospectiveTimelineResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

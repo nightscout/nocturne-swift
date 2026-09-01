@@ -10,7 +10,7 @@ import Foundation
 open class NutritionAPI {
 
     /**
-     Add a food breakdown entry to a carb intake record.
+     Add carb intake food
      
      - parameter id: (path)  
      - parameter carbIntakeFoodRequest: (body)  
@@ -22,8 +22,15 @@ open class NutritionAPI {
     }
 
     /**
-     Add a food breakdown entry to a carb intake record.
+     Add carb intake food
      - POST /api/v4/nutrition/carbs/{id}/foods
+     - Add a food breakdown entry to a carb intake record.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter carbIntakeFoodRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -47,11 +54,11 @@ open class NutritionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TreatmentFoodBreakdown>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create a new carb intake
+     Create carb intake
      
      - parameter createCarbIntakeRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -62,8 +69,15 @@ open class NutritionAPI {
     }
 
     /**
-     Create a new carb intake
+     Create carb intake
      - POST /api/v4/nutrition/carbs
+     - Create a new carb intake
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createCarbIntakeRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<CarbIntake> 
@@ -83,11 +97,11 @@ open class NutritionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CarbIntake>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create or update carb intakes in bulk (max 1000).
+     Create carb intakes bulk
      
      - parameter createCarbIntakeRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -98,9 +112,15 @@ open class NutritionAPI {
     }
 
     /**
-     Create or update carb intakes in bulk (max 1000).
+     Create carb intakes bulk
      - POST /api/v4/nutrition/carbs/bulk
      - Array semantics are per-item upsert, not all-or-nothing: each intake carrying both `dataSource` and `syncIdentifier` updates the row already matched by that pair; all others insert. Validation failures reject the whole request with `400 Bad Request` before anything is persisted.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createCarbIntakeRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[CarbIntake]> 
@@ -120,11 +140,11 @@ open class NutritionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[CarbIntake]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Atomically create a correlated Bolus + CarbIntake for a meal event. Both records share a single CorrelationId and are persisted within a single transaction. When an existing row matches on (DataSource, SyncIdentifier), the idempotent upsert applies and the response returns 200 instead of 201.
+     Create meal
      
      - parameter createMealRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -135,8 +155,15 @@ open class NutritionAPI {
     }
 
     /**
-     Atomically create a correlated Bolus + CarbIntake for a meal event. Both records share a single CorrelationId and are persisted within a single transaction. When an existing row matches on (DataSource, SyncIdentifier), the idempotent upsert applies and the response returns 200 instead of 201.
+     Create meal
      - POST /api/v4/nutrition/meals
+     - Atomically create a correlated Bolus + CarbIntake for a meal event. Both records share a single CorrelationId and are persisted within a single transaction. When an existing row matches on (DataSource, SyncIdentifier), the idempotent upsert applies and the response returns 200 instead of 201.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createMealRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<CreateMealResponse> 
@@ -156,11 +183,11 @@ open class NutritionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CreateMealResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a carb intake
+     Delete carb intake
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -171,8 +198,15 @@ open class NutritionAPI {
     }
 
     /**
-     Delete a carb intake
+     Delete carb intake
      - DELETE /api/v4/nutrition/carbs/{id}
+     - Delete a carb intake
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -195,11 +229,11 @@ open class NutritionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a carb intake by its external sync identifier (dataSource + syncIdentifier pair).
+     Delete carb intake by sync identifier
      
      - parameter dataSource: (query)  (optional)
      - parameter syncIdentifier: (query)  (optional)
@@ -211,8 +245,15 @@ open class NutritionAPI {
     }
 
     /**
-     Delete a carb intake by its external sync identifier (dataSource + syncIdentifier pair).
+     Delete carb intake by sync identifier
      - DELETE /api/v4/nutrition/carbs/by-sync-id
+     - Delete a carb intake by its external sync identifier (dataSource + syncIdentifier pair).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter dataSource: (query)  (optional)
      - parameter syncIdentifier: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -237,11 +278,11 @@ open class NutritionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Remove a food breakdown entry.
+     Delete carb intake food
      
      - parameter id: (path)  
      - parameter foodEntryId: (path)  
@@ -253,8 +294,15 @@ open class NutritionAPI {
     }
 
     /**
-     Remove a food breakdown entry.
+     Delete carb intake food
      - DELETE /api/v4/nutrition/carbs/{id}/foods/{foodEntryId}
+     - Remove a food breakdown entry.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter foodEntryId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -281,11 +329,11 @@ open class NutritionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TreatmentFoodBreakdown>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a carb intake by ID
+     Get carb intake by id
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -296,8 +344,15 @@ open class NutritionAPI {
     }
 
     /**
-     Get a carb intake by ID
+     Get carb intake by id
      - GET /api/v4/nutrition/carbs/{id}
+     - Get a carb intake by ID
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<CarbIntake> 
@@ -320,11 +375,11 @@ open class NutritionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CarbIntake>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get food breakdown for a carb intake record.
+     Get carb intake foods
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -335,8 +390,15 @@ open class NutritionAPI {
     }
 
     /**
-     Get food breakdown for a carb intake record.
+     Get carb intake foods
      - GET /api/v4/nutrition/carbs/{id}/foods
+     - Get food breakdown for a carb intake record.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TreatmentFoodBreakdown> 
@@ -359,11 +421,11 @@ open class NutritionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TreatmentFoodBreakdown>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get carb intakes with optional filtering
+     Get carb intakes
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -380,8 +442,15 @@ open class NutritionAPI {
     }
 
     /**
-     Get carb intakes with optional filtering
+     Get carb intakes
      - GET /api/v4/nutrition/carbs
+     - Get carb intakes with optional filtering
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -417,11 +486,11 @@ open class NutritionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfCarbIntake>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get meal events grouped by CorrelationId. Each event carries its own carb intakes, correlated boluses, food attribution rows, and aggregated totals. Carb intakes with a null CorrelationId become single-member events on their own (they are NOT collapsed together).
+     Get meals
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -434,8 +503,15 @@ open class NutritionAPI {
     }
 
     /**
-     Get meal events grouped by CorrelationId. Each event carries its own carb intakes, correlated boluses, food attribution rows, and aggregated totals. Carb intakes with a null CorrelationId become single-member events on their own (they are NOT collapsed together).
+     Get meals
      - GET /api/v4/nutrition/meals
+     - Get meal events grouped by CorrelationId. Each event carries its own carb intakes, correlated boluses, food attribution rows, and aggregated totals. Carb intakes with a null CorrelationId become single-member events on their own (they are NOT collapsed together).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter attributed: (query)  (optional)
@@ -462,11 +538,11 @@ open class NutritionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[MealEvent]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update an existing carb intake
+     Update carb intake
      
      - parameter id: (path)  
      - parameter updateCarbIntakeRequest: (body)  
@@ -478,8 +554,15 @@ open class NutritionAPI {
     }
 
     /**
-     Update an existing carb intake
+     Update carb intake
      - PUT /api/v4/nutrition/carbs/{id}
+     - Update an existing carb intake
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter updateCarbIntakeRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -503,11 +586,11 @@ open class NutritionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CarbIntake>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update a food breakdown entry.
+     Update carb intake food
      
      - parameter id: (path)  
      - parameter foodEntryId: (path)  
@@ -520,8 +603,15 @@ open class NutritionAPI {
     }
 
     /**
-     Update a food breakdown entry.
+     Update carb intake food
      - PUT /api/v4/nutrition/carbs/{id}/foods/{foodEntryId}
+     - Update a food breakdown entry.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter foodEntryId: (path)  
      - parameter carbIntakeFoodRequest: (body)  
@@ -549,6 +639,6 @@ open class NutritionAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TreatmentFoodBreakdown>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

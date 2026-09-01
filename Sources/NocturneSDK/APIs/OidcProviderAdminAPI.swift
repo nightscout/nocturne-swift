@@ -10,7 +10,8 @@ import Foundation
 open class OidcProviderAdminAPI {
 
     /**
-
+     Create
+     
      - parameter createOidcProviderRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: OidcProviderResponse
@@ -20,7 +21,14 @@ open class OidcProviderAdminAPI {
     }
 
     /**
+     Create
      - POST /api/v4/admin/oidc-providers
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createOidcProviderRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<OidcProviderResponse> 
@@ -40,11 +48,12 @@ open class OidcProviderAdminAPI {
 
         let localVariableRequestBuilder: RequestBuilder<OidcProviderResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Delete
+     
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -54,7 +63,14 @@ open class OidcProviderAdminAPI {
     }
 
     /**
+     Delete
      - DELETE /api/v4/admin/oidc-providers/{id}
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -77,11 +93,12 @@ open class OidcProviderAdminAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Disable
+     
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -91,7 +108,14 @@ open class OidcProviderAdminAPI {
     }
 
     /**
+     Disable
      - POST /api/v4/admin/oidc-providers/{id}/disable
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -114,11 +138,12 @@ open class OidcProviderAdminAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Enable
+     
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -128,7 +153,14 @@ open class OidcProviderAdminAPI {
     }
 
     /**
+     Enable
      - POST /api/v4/admin/oidc-providers/{id}/enable
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -151,11 +183,12 @@ open class OidcProviderAdminAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get all
+     
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [OidcProviderResponse]
      */
@@ -164,7 +197,14 @@ open class OidcProviderAdminAPI {
     }
 
     /**
+     Get all
      - GET /api/v4/admin/oidc-providers
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[OidcProviderResponse]> 
      */
@@ -183,11 +223,12 @@ open class OidcProviderAdminAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[OidcProviderResponse]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get by id
+     
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: OidcProviderResponse
@@ -197,7 +238,14 @@ open class OidcProviderAdminAPI {
     }
 
     /**
+     Get by id
      - GET /api/v4/admin/oidc-providers/{id}
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<OidcProviderResponse> 
@@ -220,11 +268,12 @@ open class OidcProviderAdminAPI {
 
         let localVariableRequestBuilder: RequestBuilder<OidcProviderResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get config managed
+     
      - parameter apiConfiguration: The configuration for the http request.
      - returns: ConfigManagedResponse
      */
@@ -233,7 +282,14 @@ open class OidcProviderAdminAPI {
     }
 
     /**
+     Get config managed
      - GET /api/v4/admin/oidc-providers/config-managed
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ConfigManagedResponse> 
      */
@@ -252,11 +308,12 @@ open class OidcProviderAdminAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ConfigManagedResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Test existing
+     
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: OidcProviderTestResult
@@ -266,7 +323,14 @@ open class OidcProviderAdminAPI {
     }
 
     /**
+     Test existing
      - POST /api/v4/admin/oidc-providers/{id}/test
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<OidcProviderTestResult> 
@@ -289,11 +353,12 @@ open class OidcProviderAdminAPI {
 
         let localVariableRequestBuilder: RequestBuilder<OidcProviderTestResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Test unsaved
+     
      - parameter testProviderRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: OidcProviderTestResult
@@ -303,7 +368,14 @@ open class OidcProviderAdminAPI {
     }
 
     /**
+     Test unsaved
      - POST /api/v4/admin/oidc-providers/test
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter testProviderRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<OidcProviderTestResult> 
@@ -323,11 +395,12 @@ open class OidcProviderAdminAPI {
 
         let localVariableRequestBuilder: RequestBuilder<OidcProviderTestResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Update
+     
      - parameter id: (path)  
      - parameter updateOidcProviderRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -338,7 +411,14 @@ open class OidcProviderAdminAPI {
     }
 
     /**
+     Update
      - PUT /api/v4/admin/oidc-providers/{id}
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter updateOidcProviderRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -362,6 +442,6 @@ open class OidcProviderAdminAPI {
 
         let localVariableRequestBuilder: RequestBuilder<OidcProviderResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

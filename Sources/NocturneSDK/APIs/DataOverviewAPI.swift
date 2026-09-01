@@ -10,7 +10,7 @@ import Foundation
 open class DataOverviewAPI {
 
     /**
-     Gets the list of calendar years that contain glucose data and the available data sources.
+     Get available years
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DataOverviewYearsResponse
@@ -20,8 +20,15 @@ open class DataOverviewAPI {
     }
 
     /**
-     Gets the list of calendar years that contain glucose data and the available data sources.
+     Get available years
      - GET /api/v4/year-overview/years
+     - Gets the list of calendar years that contain glucose data and the available data sources.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DataOverviewYearsResponse> 
      */
@@ -40,11 +47,11 @@ open class DataOverviewAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DataOverviewYearsResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get day-level aggregated counts and average glucose for a given year
+     Get daily summary
      
      - parameter year: (query) The year to aggregate (optional)
      - parameter dataSources: (query) Optional data source filters (multiple allowed) (optional)
@@ -56,8 +63,15 @@ open class DataOverviewAPI {
     }
 
     /**
-     Get day-level aggregated counts and average glucose for a given year
+     Get daily summary
      - GET /api/v4/year-overview/daily-summary
+     - Get day-level aggregated counts and average glucose for a given year
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter year: (query) The year to aggregate (optional)
      - parameter dataSources: (query) Optional data source filters (multiple allowed) (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -82,11 +96,11 @@ open class DataOverviewAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DailySummaryResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get monthly GRI (Glycemic Risk Index) scores for a given year
+     Get gri timeline
      
      - parameter year: (query) The year to compute GRI timeline for (optional)
      - parameter dataSources: (query) Optional data source filters (multiple allowed) (optional)
@@ -98,8 +112,15 @@ open class DataOverviewAPI {
     }
 
     /**
-     Get monthly GRI (Glycemic Risk Index) scores for a given year
+     Get gri timeline
      - GET /api/v4/year-overview/gri-timeline
+     - Get monthly GRI (Glycemic Risk Index) scores for a given year
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter year: (query) The year to compute GRI timeline for (optional)
      - parameter dataSources: (query) Optional data source filters (multiple allowed) (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -124,6 +145,6 @@ open class DataOverviewAPI {
 
         let localVariableRequestBuilder: RequestBuilder<GriTimelineResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

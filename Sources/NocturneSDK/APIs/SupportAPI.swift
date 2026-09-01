@@ -10,7 +10,8 @@ import Foundation
 open class SupportAPI {
 
     /**
-
+     Create issue
+     
      - parameter template: (form)  (optional)
      - parameter title: (form)  (optional)
      - parameter description: (form)  (optional)
@@ -29,7 +30,14 @@ open class SupportAPI {
     }
 
     /**
+     Create issue
      - POST /api/v4/support/issues
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter template: (form)  (optional)
      - parameter title: (form)  (optional)
      - parameter description: (form)  (optional)
@@ -72,11 +80,11 @@ open class SupportAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CreateIssueResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Returns a pre-filled GitHub new-issue URL for fallback when the API is unavailable.
+     Get fallback url
      
      - parameter template: (query)  (optional)
      - parameter title: (query)  (optional)
@@ -89,8 +97,15 @@ open class SupportAPI {
     }
 
     /**
-     Returns a pre-filled GitHub new-issue URL for fallback when the API is unavailable.
+     Get fallback url
      - GET /api/v4/support/issues/fallback-url
+     - Returns a pre-filled GitHub new-issue URL for fallback when the API is unavailable.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter template: (query)  (optional)
      - parameter title: (query)  (optional)
      - parameter body: (query)  (optional)
@@ -117,11 +132,11 @@ open class SupportAPI {
 
         let localVariableRequestBuilder: RequestBuilder<FallbackUrlResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Returns operator support configuration for the frontend. When no operator is configured, accountBilling is null and the default GitHub flow applies.
+     Get support config
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: SupportConfigResponse
@@ -131,8 +146,15 @@ open class SupportAPI {
     }
 
     /**
-     Returns operator support configuration for the frontend. When no operator is configured, accountBilling is null and the default GitHub flow applies.
+     Get support config
      - GET /api/v4/support/config
+     - Returns operator support configuration for the frontend. When no operator is configured, accountBilling is null and the default GitHub flow applies.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SupportConfigResponse> 
      */
@@ -151,6 +173,6 @@ open class SupportAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SupportConfigResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

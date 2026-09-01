@@ -10,7 +10,7 @@ import Foundation
 open class DevAuthAPI {
 
     /**
-     Export registered passkeys as a dev identity fixture. Save the output to docs/seed/dev-identities.json (committable — WebAuthn public keys are not secret) and startup re-seeds it after every DB wipe, while seed-tenant adds each fixture subject as an owner of new tenants. Synthetic dev-seed credentials are excluded. Optional ?username= filters to one identity.
+     Export passkey fixture
      
      - parameter username: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,9 @@ open class DevAuthAPI {
     }
 
     /**
-     Export registered passkeys as a dev identity fixture. Save the output to docs/seed/dev-identities.json (committable — WebAuthn public keys are not secret) and startup re-seeds it after every DB wipe, while seed-tenant adds each fixture subject as an owner of new tenants. Synthetic dev-seed credentials are excluded. Optional ?username= filters to one identity.
+     Export passkey fixture
      - GET /api/v4/dev-only/auth/passkey-fixture
+     - Export registered passkeys as a dev identity fixture. Save the output to docs/seed/dev-identities.json (committable — WebAuthn public keys are not secret) and startup re-seeds it after every DB wipe, while seed-tenant adds each fixture subject as an owner of new tenants. Synthetic dev-seed credentials are excluded. Optional ?username= filters to one identity.
      - parameter username: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DevIdentityFixtureFile> 
@@ -49,7 +50,7 @@ open class DevAuthAPI {
     }
 
     /**
-     Log in as a tenant member without a WebAuthn ceremony and set the normal session cookies. Navigating a browser to this URL on a tenant subdomain (e.g. https://sleepy.nocturne.localhost:1612/api/v4/dev-only/auth/login) leaves it authenticated and redirects into the app. The tenant resolves from the ?tenant slug, else from the request host; the member from ?username, else the first owner-role member, else the first member. Add format=json to get the token pair instead of a redirect. A state-changing GET is deliberate — browser navigation is the use case — which makes it CSRF-able while a dev stack runs; acceptable only because the controller does not exist outside Development.
+     Login
      
      - parameter tenant: (query)  (optional)
      - parameter username: (query)  (optional)
@@ -63,8 +64,9 @@ open class DevAuthAPI {
     }
 
     /**
-     Log in as a tenant member without a WebAuthn ceremony and set the normal session cookies. Navigating a browser to this URL on a tenant subdomain (e.g. https://sleepy.nocturne.localhost:1612/api/v4/dev-only/auth/login) leaves it authenticated and redirects into the app. The tenant resolves from the ?tenant slug, else from the request host; the member from ?username, else the first owner-role member, else the first member. Add format=json to get the token pair instead of a redirect. A state-changing GET is deliberate — browser navigation is the use case — which makes it CSRF-able while a dev stack runs; acceptable only because the controller does not exist outside Development.
+     Login
      - GET /api/v4/dev-only/auth/login
+     - Log in as a tenant member without a WebAuthn ceremony and set the normal session cookies. Navigating a browser to this URL on a tenant subdomain (e.g. https://sleepy.nocturne.localhost:1612/api/v4/dev-only/auth/login) leaves it authenticated and redirects into the app. The tenant resolves from the ?tenant slug, else from the request host; the member from ?username, else the first owner-role member, else the first member. Add format=json to get the token pair instead of a redirect. A state-changing GET is deliberate — browser navigation is the use case — which makes it CSRF-able while a dev stack runs; acceptable only because the controller does not exist outside Development.
      - parameter tenant: (query)  (optional)
      - parameter username: (query)  (optional)
      - parameter redirect: (query)  (optional)
@@ -97,7 +99,7 @@ open class DevAuthAPI {
     }
 
     /**
-     JSON variant of Login for headless clients: returns the token pair (and also sets the session cookies on the response).
+     Login json
      
      - parameter devLoginRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -108,8 +110,9 @@ open class DevAuthAPI {
     }
 
     /**
-     JSON variant of Login for headless clients: returns the token pair (and also sets the session cookies on the response).
+     Login json
      - POST /api/v4/dev-only/auth/login
+     - JSON variant of Login for headless clients: returns the token pair (and also sets the session cookies on the response).
      - parameter devLoginRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DevLoginResponse> 

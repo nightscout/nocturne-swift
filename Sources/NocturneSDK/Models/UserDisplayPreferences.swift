@@ -11,33 +11,33 @@ public struct UserDisplayPreferences: Sendable, Codable, Hashable {
 
     public var glucoseUnits: String?
     public var timeFormat: String?
+    public var regionFormat: String?
     public var colorTheme: String?
     public var nightModeSchedule: Bool?
     public var prediction: PredictionPreferences?
     public var chart: ChartPreferences?
     public var dashboardTopWidgets: [WidgetId]?
-    public var sidebarWidget: String?
 
-    public init(glucoseUnits: String? = nil, timeFormat: String? = nil, colorTheme: String? = nil, nightModeSchedule: Bool? = nil, prediction: PredictionPreferences? = nil, chart: ChartPreferences? = nil, dashboardTopWidgets: [WidgetId]? = nil, sidebarWidget: String? = nil) {
+    public init(glucoseUnits: String? = nil, timeFormat: String? = nil, regionFormat: String? = nil, colorTheme: String? = nil, nightModeSchedule: Bool? = nil, prediction: PredictionPreferences? = nil, chart: ChartPreferences? = nil, dashboardTopWidgets: [WidgetId]? = nil) {
         self.glucoseUnits = glucoseUnits
         self.timeFormat = timeFormat
+        self.regionFormat = regionFormat
         self.colorTheme = colorTheme
         self.nightModeSchedule = nightModeSchedule
         self.prediction = prediction
         self.chart = chart
         self.dashboardTopWidgets = dashboardTopWidgets
-        self.sidebarWidget = sidebarWidget
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case glucoseUnits
         case timeFormat
+        case regionFormat
         case colorTheme
         case nightModeSchedule
         case prediction
         case chart
         case dashboardTopWidgets
-        case sidebarWidget
     }
 
     // Encodable protocol methods
@@ -46,12 +46,12 @@ public struct UserDisplayPreferences: Sendable, Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(glucoseUnits, forKey: .glucoseUnits)
         try container.encodeIfPresent(timeFormat, forKey: .timeFormat)
+        try container.encodeIfPresent(regionFormat, forKey: .regionFormat)
         try container.encodeIfPresent(colorTheme, forKey: .colorTheme)
         try container.encodeIfPresent(nightModeSchedule, forKey: .nightModeSchedule)
         try container.encodeIfPresent(prediction, forKey: .prediction)
         try container.encodeIfPresent(chart, forKey: .chart)
         try container.encodeIfPresent(dashboardTopWidgets, forKey: .dashboardTopWidgets)
-        try container.encodeIfPresent(sidebarWidget, forKey: .sidebarWidget)
     }
 }
 

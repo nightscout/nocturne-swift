@@ -10,6 +10,7 @@ import Foundation
 /** Request to create a DND window. Id is client-supplied for idempotency. */
 public struct CreateDndWindowRequest: Sendable, Codable, Hashable {
 
+    public static let sourceRule = StringRule(minLength: nil, maxLength: 128, pattern: nil)
     /** Client-generated UUID. Re-sending the same id is a no-op that returns the stored window. */
     public var id: String?
     public var scope: DndScope?

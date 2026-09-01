@@ -10,7 +10,7 @@ import Foundation
 open class SummaryAPI {
 
     /**
-     Get widget-friendly summary data including current glucose, IOB, COB, trackers, and alarm state.
+     Get summary
      
      - parameter hours: (query) Number of hours of glucose history to include (default 0 for current reading only) (optional, default to 0)
      - parameter includePredictions: (query) Whether to include predicted glucose values (default false) (optional, default to false)
@@ -22,8 +22,15 @@ open class SummaryAPI {
     }
 
     /**
-     Get widget-friendly summary data including current glucose, IOB, COB, trackers, and alarm state.
+     Get summary
      - GET /api/v4/summary
+     - Get widget-friendly summary data including current glucose, IOB, COB, trackers, and alarm state.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter hours: (query) Number of hours of glucose history to include (default 0 for current reading only) (optional, default to 0)
      - parameter includePredictions: (query) Whether to include predicted glucose values (default false) (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
@@ -48,6 +55,6 @@ open class SummaryAPI {
 
         let localVariableRequestBuilder: RequestBuilder<V4SummaryResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 open class ServicesAPI {
 
     /**
-     Delete all data from a specific connector. WARNING: This is a destructive operation that cannot be undone.
+     Delete connector data
      
      - parameter id: (path) Connector ID (e.g., \&quot;dexcom\&quot;) 
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class ServicesAPI {
     }
 
     /**
-     Delete all data from a specific connector. WARNING: This is a destructive operation that cannot be undone.
+     Delete connector data
      - DELETE /api/v4/services/connectors/{id}/data
+     - Delete all data from a specific connector. WARNING: This is a destructive operation that cannot be undone.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) Connector ID (e.g., \&quot;dexcom\&quot;) 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DataSourceDeleteResult> 
@@ -45,11 +52,11 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DataSourceDeleteResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete all data from a specific data source. WARNING: This is a destructive operation that cannot be undone.
+     Delete data source data
      
      - parameter id: (path) Data source ID or device ID 
      - parameter apiConfiguration: The configuration for the http request.
@@ -60,8 +67,15 @@ open class ServicesAPI {
     }
 
     /**
-     Delete all data from a specific data source. WARNING: This is a destructive operation that cannot be undone.
+     Delete data source data
      - DELETE /api/v4/services/data-sources/{id}
+     - Delete all data from a specific data source. WARNING: This is a destructive operation that cannot be undone.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) Data source ID or device ID 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DataSourceDeleteResult> 
@@ -84,11 +98,11 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DataSourceDeleteResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete all demo data. This operation is safe as demo data can be easily regenerated.
+     Delete demo data
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DataSourceDeleteResult
@@ -98,8 +112,15 @@ open class ServicesAPI {
     }
 
     /**
-     Delete all demo data. This operation is safe as demo data can be easily regenerated.
+     Delete demo data
      - DELETE /api/v4/services/data-sources/demo
+     - Delete all demo data. This operation is safe as demo data can be easily regenerated.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DataSourceDeleteResult> 
      */
@@ -118,11 +139,11 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DataSourceDeleteResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get all active data sources that have been sending data to this Nocturne instance. This includes CGM apps, AID systems, and any other uploaders.
+     Get active data sources
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [DataSourceInfo]
@@ -132,8 +153,15 @@ open class ServicesAPI {
     }
 
     /**
-     Get all active data sources that have been sending data to this Nocturne instance. This includes CGM apps, AID systems, and any other uploaders.
+     Get active data sources
      - GET /api/v4/services/data-sources
+     - Get all active data sources that have been sending data to this Nocturne instance. This includes CGM apps, AID systems, and any other uploaders.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[DataSourceInfo]> 
      */
@@ -152,11 +180,11 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[DataSourceInfo]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get API endpoint information for configuring external apps. This provides all the information needed to configure xDrip+, Loop, AAPS, etc.
+     Get api info
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: ApiEndpointInfo
@@ -166,8 +194,15 @@ open class ServicesAPI {
     }
 
     /**
-     Get API endpoint information for configuring external apps. This provides all the information needed to configure xDrip+, Loop, AAPS, etc.
+     Get api info
      - GET /api/v4/services/api-info
+     - Get API endpoint information for configuring external apps. This provides all the information needed to configure xDrip+, Loop, AAPS, etc.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ApiEndpointInfo> 
      */
@@ -186,11 +221,11 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ApiEndpointInfo>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get available connectors that can be configured to pull data into Nocturne.
+     Get available connectors
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [AvailableConnector]
@@ -200,8 +235,15 @@ open class ServicesAPI {
     }
 
     /**
-     Get available connectors that can be configured to pull data into Nocturne.
+     Get available connectors
      - GET /api/v4/services/connectors
+     - Get available connectors that can be configured to pull data into Nocturne.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[AvailableConnector]> 
      */
@@ -220,11 +262,11 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[AvailableConnector]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get capabilities for a specific connector.
+     Get connector capabilities
      
      - parameter id: (path) The connector ID (e.g., \&quot;dexcom\&quot;, \&quot;libre\&quot;) 
      - parameter apiConfiguration: The configuration for the http request.
@@ -235,8 +277,15 @@ open class ServicesAPI {
     }
 
     /**
-     Get capabilities for a specific connector.
+     Get connector capabilities
      - GET /api/v4/services/connectors/{id}/capabilities
+     - Get capabilities for a specific connector.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The connector ID (e.g., \&quot;dexcom\&quot;, \&quot;libre\&quot;) 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ConnectorCapabilities> 
@@ -259,11 +308,11 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ConnectorCapabilities>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a summary of data counts for a specific connector. Returns the number of entries, treatments, and device statuses synced by this connector.
+     Get connector data summary
      
      - parameter id: (path) Connector ID (e.g., \&quot;dexcom\&quot;) 
      - parameter apiConfiguration: The configuration for the http request.
@@ -274,8 +323,15 @@ open class ServicesAPI {
     }
 
     /**
-     Get a summary of data counts for a specific connector. Returns the number of entries, treatments, and device statuses synced by this connector.
+     Get connector data summary
      - GET /api/v4/services/connectors/{id}/data-summary
+     - Get a summary of data counts for a specific connector. Returns the number of entries, treatments, and device statuses synced by this connector.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) Connector ID (e.g., \&quot;dexcom\&quot;) 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ConnectorDataSummary> 
@@ -298,11 +354,11 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ConnectorDataSummary>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get sync status for a specific connector, including latest timestamps and connector state. Used by connectors on startup to determine where to resume syncing from.
+     Get connector sync status
      
      - parameter id: (path) The connector ID (e.g., \&quot;dexcom\&quot;, \&quot;libre\&quot;, \&quot;glooko\&quot;) 
      - parameter apiConfiguration: The configuration for the http request.
@@ -313,8 +369,15 @@ open class ServicesAPI {
     }
 
     /**
-     Get sync status for a specific connector, including latest timestamps and connector state. Used by connectors on startup to determine where to resume syncing from.
+     Get connector sync status
      - GET /api/v4/services/connectors/{id}/sync-status
+     - Get sync status for a specific connector, including latest timestamps and connector state. Used by connectors on startup to determine where to resume syncing from.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) The connector ID (e.g., \&quot;dexcom\&quot;, \&quot;libre\&quot;, \&quot;glooko\&quot;) 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ConnectorSyncStatus> 
@@ -337,11 +400,11 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ConnectorSyncStatus>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get detailed information about a specific data source.
+     Get data source
      
      - parameter id: (path) Data source ID or device ID 
      - parameter apiConfiguration: The configuration for the http request.
@@ -352,8 +415,15 @@ open class ServicesAPI {
     }
 
     /**
-     Get detailed information about a specific data source.
+     Get data source
      - GET /api/v4/services/data-sources/{id}
+     - Get detailed information about a specific data source.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) Data source ID or device ID 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DataSourceInfo> 
@@ -376,11 +446,11 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DataSourceInfo>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a complete overview of services, data sources, and available integrations.
+     Get services overview
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: ServicesOverview
@@ -390,8 +460,15 @@ open class ServicesAPI {
     }
 
     /**
-     Get a complete overview of services, data sources, and available integrations.
+     Get services overview
      - GET /api/v4/services
+     - Get a complete overview of services, data sources, and available integrations.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ServicesOverview> 
      */
@@ -410,11 +487,11 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ServicesOverview>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get uploader apps that can push data to Nocturne with setup instructions.
+     Get uploader apps
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [UploaderApp]
@@ -424,8 +501,15 @@ open class ServicesAPI {
     }
 
     /**
-     Get uploader apps that can push data to Nocturne with setup instructions.
+     Get uploader apps
      - GET /api/v4/services/uploaders
+     - Get uploader apps that can push data to Nocturne with setup instructions.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[UploaderApp]> 
      */
@@ -444,11 +528,11 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[UploaderApp]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get setup instructions for a specific uploader app.
+     Get uploader setup
      
      - parameter appId: (path) The uploader app ID (e.g., \&quot;xdrip\&quot;, \&quot;loop\&quot;, \&quot;aaps\&quot;) 
      - parameter apiConfiguration: The configuration for the http request.
@@ -459,8 +543,15 @@ open class ServicesAPI {
     }
 
     /**
-     Get setup instructions for a specific uploader app.
+     Get uploader setup
      - GET /api/v4/services/uploaders/{appId}/setup
+     - Get setup instructions for a specific uploader app.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter appId: (path) The uploader app ID (e.g., \&quot;xdrip\&quot;, \&quot;loop\&quot;, \&quot;aaps\&quot;) 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<UploaderSetupResponse> 
@@ -483,11 +574,11 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<UploaderSetupResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Reset a connector's sync cursor for the current tenant and re-pull historical data.
+     Reset connector cursor
      
      - parameter id: (path) Connector ID (e.g., \&quot;nightscout\&quot;, \&quot;dexcom\&quot;). 
      - parameter resetCursorRequest: (body) Optional lower bound and data-type filter. Omit from to re-pull all available history; omit dataTypes to reset every supported type. 
@@ -499,9 +590,15 @@ open class ServicesAPI {
     }
 
     /**
-     Reset a connector's sync cursor for the current tenant and re-pull historical data.
+     Reset connector cursor
      - POST /api/v4/services/connectors/{id}/reset-cursor
      - Nocturne does not persist a sync cursor — each data type resumes from the latest record already stored. This endpoint forces a fresh ingest of history by running an explicit-range sync (an upper bound of \"now\" bypasses the per-type catch-up cursors), so the effect is a cursor reset. Re-ingested records are deduplicated on their idempotency keys (see the \"Syncing\" guide), so it is safe to run after fixing a connector bug to push corrected data to a tenant.              Latency: this runs synchronously. A full-history re-pull with no lower bound re-ingests every data type over the connector's entire history (glucose can be tens of thousands of records), which is a multi-minute request and may approach or exceed reverse-proxy / browser timeouts. Scope it with from and/or dataTypes when possible. The cross-tenant equivalent (POST /api/v4/admin/connectors/{tenantId}/reset-cursors) runs as a background job to avoid this.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) Connector ID (e.g., \&quot;nightscout\&quot;, \&quot;dexcom\&quot;). 
      - parameter resetCursorRequest: (body) Optional lower bound and data-type filter. Omit from to re-pull all available history; omit dataTypes to reset every supported type. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -525,11 +622,11 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SyncResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Trigger a manual sync for a specific connector.
+     Trigger connector sync
      
      - parameter id: (path) Connector ID (e.g., \&quot;dexcom\&quot;, \&quot;tidepool\&quot;) 
      - parameter syncRequest: (body) Sync request parameters (date range and data types) 
@@ -541,8 +638,15 @@ open class ServicesAPI {
     }
 
     /**
-     Trigger a manual sync for a specific connector.
+     Trigger connector sync
      - POST /api/v4/services/connectors/{id}/sync
+     - Trigger a manual sync for a specific connector.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) Connector ID (e.g., \&quot;dexcom\&quot;, \&quot;tidepool\&quot;) 
      - parameter syncRequest: (body) Sync request parameters (date range and data types) 
      - parameter apiConfiguration: The configuration for the http request.
@@ -566,6 +670,6 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SyncResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 open class ProfileAPI {
 
     /**
-     Create a new basal schedule
+     Create basal schedule
      
      - parameter basalSchedule: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class ProfileAPI {
     }
 
     /**
-     Create a new basal schedule
+     Create basal schedule
      - POST /api/v4/profile/basal
+     - Create a new basal schedule
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter basalSchedule: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<BasalSchedule> 
@@ -42,11 +49,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BasalSchedule>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create a new carb ratio schedule
+     Create carb ratio schedule
      
      - parameter carbRatioSchedule: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +64,15 @@ open class ProfileAPI {
     }
 
     /**
-     Create a new carb ratio schedule
+     Create carb ratio schedule
      - POST /api/v4/profile/carb-ratio
+     - Create a new carb ratio schedule
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter carbRatioSchedule: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<CarbRatioSchedule> 
@@ -78,11 +92,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CarbRatioSchedule>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create a new sensitivity schedule
+     Create sensitivity schedule
      
      - parameter sensitivitySchedule: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -93,8 +107,15 @@ open class ProfileAPI {
     }
 
     /**
-     Create a new sensitivity schedule
+     Create sensitivity schedule
      - POST /api/v4/profile/sensitivity
+     - Create a new sensitivity schedule
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter sensitivitySchedule: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SensitivitySchedule> 
@@ -114,11 +135,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SensitivitySchedule>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create a new target range schedule
+     Create target range schedule
      
      - parameter targetRangeSchedule: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -129,8 +150,15 @@ open class ProfileAPI {
     }
 
     /**
-     Create a new target range schedule
+     Create target range schedule
      - POST /api/v4/profile/target-range
+     - Create a new target range schedule
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter targetRangeSchedule: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TargetRangeSchedule> 
@@ -150,11 +178,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TargetRangeSchedule>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create a new therapy settings record
+     Create therapy settings
      
      - parameter therapySettings: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -165,8 +193,15 @@ open class ProfileAPI {
     }
 
     /**
-     Create a new therapy settings record
+     Create therapy settings
      - POST /api/v4/profile/settings
+     - Create a new therapy settings record
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter therapySettings: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TherapySettings> 
@@ -186,11 +221,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TherapySettings>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a basal schedule
+     Delete basal schedule
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -201,8 +236,15 @@ open class ProfileAPI {
     }
 
     /**
-     Delete a basal schedule
+     Delete basal schedule
      - DELETE /api/v4/profile/basal/{id}
+     - Delete a basal schedule
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -225,11 +267,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a carb ratio schedule
+     Delete carb ratio schedule
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -240,8 +282,15 @@ open class ProfileAPI {
     }
 
     /**
-     Delete a carb ratio schedule
+     Delete carb ratio schedule
      - DELETE /api/v4/profile/carb-ratio/{id}
+     - Delete a carb ratio schedule
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -264,11 +313,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a sensitivity schedule
+     Delete sensitivity schedule
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -279,8 +328,15 @@ open class ProfileAPI {
     }
 
     /**
-     Delete a sensitivity schedule
+     Delete sensitivity schedule
      - DELETE /api/v4/profile/sensitivity/{id}
+     - Delete a sensitivity schedule
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -303,11 +359,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a target range schedule
+     Delete target range schedule
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -318,8 +374,15 @@ open class ProfileAPI {
     }
 
     /**
-     Delete a target range schedule
+     Delete target range schedule
      - DELETE /api/v4/profile/target-range/{id}
+     - Delete a target range schedule
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -342,11 +405,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a therapy settings record
+     Delete therapy settings
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -357,8 +420,15 @@ open class ProfileAPI {
     }
 
     /**
-     Delete a therapy settings record
+     Delete therapy settings
      - DELETE /api/v4/profile/settings/{id}
+     - Delete a therapy settings record
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -381,11 +451,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a basal schedule by ID
+     Get basal schedule by id
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -396,8 +466,15 @@ open class ProfileAPI {
     }
 
     /**
-     Get a basal schedule by ID
+     Get basal schedule by id
      - GET /api/v4/profile/basal/by-id/{id}
+     - Get a basal schedule by ID
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<BasalSchedule> 
@@ -420,11 +497,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BasalSchedule>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get basal schedules by profile name
+     Get basal schedules by name
      
      - parameter profileName: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -435,8 +512,15 @@ open class ProfileAPI {
     }
 
     /**
-     Get basal schedules by profile name
+     Get basal schedules by name
      - GET /api/v4/profile/basal/{profileName}
+     - Get basal schedules by profile name
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter profileName: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[BasalSchedule]> 
@@ -459,11 +543,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[BasalSchedule]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a carb ratio schedule by ID
+     Get carb ratio schedule by id
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -474,8 +558,15 @@ open class ProfileAPI {
     }
 
     /**
-     Get a carb ratio schedule by ID
+     Get carb ratio schedule by id
      - GET /api/v4/profile/carb-ratio/by-id/{id}
+     - Get a carb ratio schedule by ID
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<CarbRatioSchedule> 
@@ -498,11 +589,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CarbRatioSchedule>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get carb ratio schedules by profile name
+     Get carb ratio schedules by name
      
      - parameter profileName: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -513,8 +604,15 @@ open class ProfileAPI {
     }
 
     /**
-     Get carb ratio schedules by profile name
+     Get carb ratio schedules by name
      - GET /api/v4/profile/carb-ratio/{profileName}
+     - Get carb ratio schedules by profile name
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter profileName: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[CarbRatioSchedule]> 
@@ -537,11 +635,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[CarbRatioSchedule]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get legacy Nightscout-shaped profile records projected from V4 schedule data. Intended for connector consumption where the caller needs the monolithic Profile shape (store with basal/carbratio/sens/target arrays).
+     Get profile records
      
      - parameter limit: (query)  (optional, default to 100)
      - parameter offset: (query)  (optional, default to 0)
@@ -553,8 +651,15 @@ open class ProfileAPI {
     }
 
     /**
-     Get legacy Nightscout-shaped profile records projected from V4 schedule data. Intended for connector consumption where the caller needs the monolithic Profile shape (store with basal/carbratio/sens/target arrays).
+     Get profile records
      - GET /api/v4/profile/records
+     - Get legacy Nightscout-shaped profile records projected from V4 schedule data. Intended for connector consumption where the caller needs the monolithic Profile shape (store with basal/carbratio/sens/target arrays).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter limit: (query)  (optional, default to 100)
      - parameter offset: (query)  (optional, default to 0)
      - parameter apiConfiguration: The configuration for the http request.
@@ -579,11 +684,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfProfile>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a consolidated summary of all profile data across all profile names. Optionally provide a date range to include schedule change detection info.
+     Get profile summary
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -595,8 +700,15 @@ open class ProfileAPI {
     }
 
     /**
-     Get a consolidated summary of all profile data across all profile names. Optionally provide a date range to include schedule change detection info.
+     Get profile summary
      - GET /api/v4/profile/summary
+     - Get a consolidated summary of all profile data across all profile names. Optionally provide a date range to include schedule change detection info.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -621,11 +733,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ProfileSummary>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a sensitivity schedule by ID
+     Get sensitivity schedule by id
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -636,8 +748,15 @@ open class ProfileAPI {
     }
 
     /**
-     Get a sensitivity schedule by ID
+     Get sensitivity schedule by id
      - GET /api/v4/profile/sensitivity/by-id/{id}
+     - Get a sensitivity schedule by ID
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SensitivitySchedule> 
@@ -660,11 +779,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SensitivitySchedule>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get sensitivity schedules by profile name
+     Get sensitivity schedules by name
      
      - parameter profileName: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -675,8 +794,15 @@ open class ProfileAPI {
     }
 
     /**
-     Get sensitivity schedules by profile name
+     Get sensitivity schedules by name
      - GET /api/v4/profile/sensitivity/{profileName}
+     - Get sensitivity schedules by profile name
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter profileName: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[SensitivitySchedule]> 
@@ -699,11 +825,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[SensitivitySchedule]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a target range schedule by ID
+     Get target range schedule by id
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -714,8 +840,15 @@ open class ProfileAPI {
     }
 
     /**
-     Get a target range schedule by ID
+     Get target range schedule by id
      - GET /api/v4/profile/target-range/by-id/{id}
+     - Get a target range schedule by ID
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TargetRangeSchedule> 
@@ -738,11 +871,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TargetRangeSchedule>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get target range schedules by profile name
+     Get target range schedules by name
      
      - parameter profileName: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -753,8 +886,15 @@ open class ProfileAPI {
     }
 
     /**
-     Get target range schedules by profile name
+     Get target range schedules by name
      - GET /api/v4/profile/target-range/{profileName}
+     - Get target range schedules by profile name
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter profileName: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[TargetRangeSchedule]> 
@@ -777,11 +917,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[TargetRangeSchedule]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get all therapy settings with optional filtering
+     Get therapy settings
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -798,8 +938,15 @@ open class ProfileAPI {
     }
 
     /**
-     Get all therapy settings with optional filtering
+     Get therapy settings
      - GET /api/v4/profile/settings
+     - Get all therapy settings with optional filtering
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -835,11 +982,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfTherapySettings>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a therapy settings record by ID
+     Get therapy settings by id
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -850,8 +997,15 @@ open class ProfileAPI {
     }
 
     /**
-     Get a therapy settings record by ID
+     Get therapy settings by id
      - GET /api/v4/profile/settings/{id}
+     - Get a therapy settings record by ID
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TherapySettings> 
@@ -874,11 +1028,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TherapySettings>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get therapy settings by profile name
+     Get therapy settings by name
      
      - parameter profileName: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -889,8 +1043,15 @@ open class ProfileAPI {
     }
 
     /**
-     Get therapy settings by profile name
+     Get therapy settings by name
      - GET /api/v4/profile/settings/by-name/{profileName}
+     - Get therapy settings by profile name
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter profileName: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[TherapySettings]> 
@@ -913,11 +1074,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[TherapySettings]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Set a profile as the active (default) profile. Clears IsDefault on all other profiles.
+     Set default profile
      
      - parameter profileName: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -928,8 +1089,15 @@ open class ProfileAPI {
     }
 
     /**
-     Set a profile as the active (default) profile. Clears IsDefault on all other profiles.
+     Set default profile
      - POST /api/v4/profile/set-default/{profileName}
+     - Set a profile as the active (default) profile. Clears IsDefault on all other profiles.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter profileName: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -952,11 +1120,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update an existing basal schedule
+     Update basal schedule
      
      - parameter id: (path)  
      - parameter basalSchedule: (body)  
@@ -968,8 +1136,15 @@ open class ProfileAPI {
     }
 
     /**
-     Update an existing basal schedule
+     Update basal schedule
      - PUT /api/v4/profile/basal/{id}
+     - Update an existing basal schedule
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter basalSchedule: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -993,11 +1168,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BasalSchedule>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update an existing carb ratio schedule
+     Update carb ratio schedule
      
      - parameter id: (path)  
      - parameter carbRatioSchedule: (body)  
@@ -1009,8 +1184,15 @@ open class ProfileAPI {
     }
 
     /**
-     Update an existing carb ratio schedule
+     Update carb ratio schedule
      - PUT /api/v4/profile/carb-ratio/{id}
+     - Update an existing carb ratio schedule
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter carbRatioSchedule: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -1034,11 +1216,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CarbRatioSchedule>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update an existing sensitivity schedule
+     Update sensitivity schedule
      
      - parameter id: (path)  
      - parameter sensitivitySchedule: (body)  
@@ -1050,8 +1232,15 @@ open class ProfileAPI {
     }
 
     /**
-     Update an existing sensitivity schedule
+     Update sensitivity schedule
      - PUT /api/v4/profile/sensitivity/{id}
+     - Update an existing sensitivity schedule
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter sensitivitySchedule: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -1075,11 +1264,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SensitivitySchedule>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update an existing target range schedule
+     Update target range schedule
      
      - parameter id: (path)  
      - parameter targetRangeSchedule: (body)  
@@ -1091,8 +1280,15 @@ open class ProfileAPI {
     }
 
     /**
-     Update an existing target range schedule
+     Update target range schedule
      - PUT /api/v4/profile/target-range/{id}
+     - Update an existing target range schedule
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter targetRangeSchedule: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -1116,11 +1312,11 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TargetRangeSchedule>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update an existing therapy settings record
+     Update therapy settings
      
      - parameter id: (path)  
      - parameter therapySettings: (body)  
@@ -1132,8 +1328,15 @@ open class ProfileAPI {
     }
 
     /**
-     Update an existing therapy settings record
+     Update therapy settings
      - PUT /api/v4/profile/settings/{id}
+     - Update an existing therapy settings record
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter therapySettings: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -1157,6 +1360,6 @@ open class ProfileAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TherapySettings>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

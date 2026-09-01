@@ -10,7 +10,7 @@ import Foundation
 open class ClientDevicesAPI {
 
     /**
-     The actuation intents currently active for this device — the reconcile snapshot a push-mode device reads on (re)connect to start anything still active and drop anything resolved. Empty for a local-engine device or one the caller does not own.
+     Get active intents
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class ClientDevicesAPI {
     }
 
     /**
-     The actuation intents currently active for this device — the reconcile snapshot a push-mode device reads on (re)connect to start anything still active and drop anything resolved. Empty for a local-engine device or one the caller does not own.
+     Get active intents
      - GET /api/v4/client-devices/{id}/active-intents
+     - The actuation intents currently active for this device — the reconcile snapshot a push-mode device reads on (re)connect to start anything still active and drop anything resolved. Empty for a local-engine device or one the caller does not own.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[DeviceActionIntent]> 
@@ -45,11 +52,11 @@ open class ClientDevicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[DeviceActionIntent]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     The static device-action capability catalog (kinds + capabilities) that drives the rule builder's device-action authoring UI. Static metadata, so no device scope is required.
+     Get capability catalog
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DeviceCapabilityCatalog
@@ -59,8 +66,15 @@ open class ClientDevicesAPI {
     }
 
     /**
-     The static device-action capability catalog (kinds + capabilities) that drives the rule builder's device-action authoring UI. Static metadata, so no device scope is required.
+     Get capability catalog
      - GET /api/v4/client-devices/capabilities
+     - The static device-action capability catalog (kinds + capabilities) that drives the rule builder's device-action authoring UI. Static metadata, so no device scope is required.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DeviceCapabilityCatalog> 
      */
@@ -79,11 +93,11 @@ open class ClientDevicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DeviceCapabilityCatalog>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Lists the devices registered by the current user, most-recently-seen first.
+     Get devices
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [ClientDeviceDto]
@@ -93,8 +107,15 @@ open class ClientDevicesAPI {
     }
 
     /**
-     Lists the devices registered by the current user, most-recently-seen first.
+     Get devices
      - GET /api/v4/client-devices
+     - Lists the devices registered by the current user, most-recently-seen first.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[ClientDeviceDto]> 
      */
@@ -113,11 +134,11 @@ open class ClientDevicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[ClientDeviceDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Register or refresh this device. Idempotent upsert keyed on the install id — apps call it on every startup to keep their advertised capabilities and last-seen time current.
+     Register
      
      - parameter registerDeviceRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -128,8 +149,15 @@ open class ClientDevicesAPI {
     }
 
     /**
-     Register or refresh this device. Idempotent upsert keyed on the install id — apps call it on every startup to keep their advertised capabilities and last-seen time current.
+     Register
      - POST /api/v4/client-devices
+     - Register or refresh this device. Idempotent upsert keyed on the install id — apps call it on every startup to keep their advertised capabilities and last-seen time current.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter registerDeviceRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ClientDeviceDto> 
@@ -149,11 +177,11 @@ open class ClientDevicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ClientDeviceDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Rename a device you own.
+     Rename
      
      - parameter id: (path)  
      - parameter renameDeviceRequest: (body)  
@@ -165,8 +193,15 @@ open class ClientDevicesAPI {
     }
 
     /**
-     Rename a device you own.
+     Rename
      - PATCH /api/v4/client-devices/{id}
+     - Rename a device you own.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter renameDeviceRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -190,11 +225,11 @@ open class ClientDevicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ClientDeviceDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Revoke (remove) a device you own. Its future registrations start fresh.
+     Revoke
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -205,8 +240,15 @@ open class ClientDevicesAPI {
     }
 
     /**
-     Revoke (remove) a device you own. Its future registrations start fresh.
+     Revoke
      - DELETE /api/v4/client-devices/{id}
+     - Revoke (remove) a device you own. Its future registrations start fresh.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -229,6 +271,6 @@ open class ClientDevicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

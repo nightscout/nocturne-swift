@@ -10,7 +10,7 @@ import Foundation
 open class ConnectorStatusAPI {
 
     /**
-     Gets the current status and metrics for all registered connectors
+     Get status
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [ConnectorStatusDto]
@@ -20,8 +20,15 @@ open class ConnectorStatusAPI {
     }
 
     /**
-     Gets the current status and metrics for all registered connectors
+     Get status
      - GET /api/v4/connectors/status
+     - Gets the current status and metrics for all registered connectors
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[ConnectorStatusDto]> 
      */
@@ -40,6 +47,6 @@ open class ConnectorStatusAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[ConnectorStatusDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

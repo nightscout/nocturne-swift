@@ -10,7 +10,7 @@ import Foundation
 open class CorrelationAPI {
 
     /**
-     Retrieves all records that share the given correlation ID across every V4 data type.
+     Get correlated
      
      - parameter correlationId: (path) The shared correlation ID to look up. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class CorrelationAPI {
     }
 
     /**
-     Retrieves all records that share the given correlation ID across every V4 data type.
+     Get correlated
      - GET /api/v4/correlated/{correlationId}
+     - Retrieves all records that share the given correlation ID across every V4 data type.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter correlationId: (path) The shared correlation ID to look up. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -45,6 +52,6 @@ open class CorrelationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

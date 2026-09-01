@@ -10,7 +10,7 @@ import Foundation
 open class DiscrepancyAPI {
 
     /**
-     Get overall compatibility metrics for dashboard overview
+     Get compatibility metrics
      
      - parameter fromDate: (query) Start date for metrics (optional) (optional)
      - parameter toDate: (query) End date for metrics (optional) (optional)
@@ -22,8 +22,15 @@ open class DiscrepancyAPI {
     }
 
     /**
-     Get overall compatibility metrics for dashboard overview
+     Get compatibility metrics
      - GET /api/v4/Discrepancy/metrics
+     - Get overall compatibility metrics for dashboard overview
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter fromDate: (query) Start date for metrics (optional) (optional)
      - parameter toDate: (query) End date for metrics (optional) (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -48,11 +55,11 @@ open class DiscrepancyAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CompatibilityMetrics>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get real-time compatibility status summary
+     Get compatibility status
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: CompatibilityStatus
@@ -62,8 +69,15 @@ open class DiscrepancyAPI {
     }
 
     /**
-     Get real-time compatibility status summary
+     Get compatibility status
      - GET /api/v4/Discrepancy/status
+     - Get real-time compatibility status summary
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<CompatibilityStatus> 
      */
@@ -82,17 +96,17 @@ open class DiscrepancyAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CompatibilityStatus>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get detailed discrepancy analyses with filtering and pagination
+     Get discrepancy analyses
      
      - parameter requestPath: (query) Filter by request path (optional) (optional)
      - parameter overallMatch: (query) Filter by overall match type (optional) (optional)
      - parameter fromDate: (query) Start date for filter (optional) (optional)
      - parameter toDate: (query) End date for filter (optional) (optional)
-     - parameter count: (query) Number of results to return (default: 100, max: 1000) (optional, default to 100)
+     - parameter count: (query) Number of results to return (default: 100, capped at MaxPageSize) (optional, default to 100)
      - parameter skip: (query) Number of results to skip for pagination (default: 0) (optional, default to 0)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [DiscrepancyAnalysisDto]
@@ -102,13 +116,20 @@ open class DiscrepancyAPI {
     }
 
     /**
-     Get detailed discrepancy analyses with filtering and pagination
+     Get discrepancy analyses
      - GET /api/v4/Discrepancy/analyses
+     - Get detailed discrepancy analyses with filtering and pagination
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter requestPath: (query) Filter by request path (optional) (optional)
      - parameter overallMatch: (query) Filter by overall match type (optional) (optional)
      - parameter fromDate: (query) Start date for filter (optional) (optional)
      - parameter toDate: (query) End date for filter (optional) (optional)
-     - parameter count: (query) Number of results to return (default: 100, max: 1000) (optional, default to 100)
+     - parameter count: (query) Number of results to return (default: 100, capped at MaxPageSize) (optional, default to 100)
      - parameter skip: (query) Number of results to skip for pagination (default: 0) (optional, default to 0)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[DiscrepancyAnalysisDto]> 
@@ -137,11 +158,11 @@ open class DiscrepancyAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[DiscrepancyAnalysisDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a specific discrepancy analysis by ID
+     Get discrepancy analysis
      
      - parameter id: (path) Analysis ID 
      - parameter apiConfiguration: The configuration for the http request.
@@ -152,8 +173,15 @@ open class DiscrepancyAPI {
     }
 
     /**
-     Get a specific discrepancy analysis by ID
+     Get discrepancy analysis
      - GET /api/v4/Discrepancy/analyses/{id}
+     - Get a specific discrepancy analysis by ID
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) Analysis ID 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DiscrepancyAnalysisDto> 
@@ -176,11 +204,11 @@ open class DiscrepancyAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DiscrepancyAnalysisDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get per-endpoint compatibility metrics
+     Get endpoint metrics
      
      - parameter fromDate: (query) Start date for metrics (optional) (optional)
      - parameter toDate: (query) End date for metrics (optional) (optional)
@@ -192,8 +220,15 @@ open class DiscrepancyAPI {
     }
 
     /**
-     Get per-endpoint compatibility metrics
+     Get endpoint metrics
      - GET /api/v4/Discrepancy/endpoints
+     - Get per-endpoint compatibility metrics
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter fromDate: (query) Start date for metrics (optional) (optional)
      - parameter toDate: (query) End date for metrics (optional) (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -218,11 +253,11 @@ open class DiscrepancyAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[EndpointMetrics]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Receive forwarded discrepancies from remote Nocturne instances
+     Ingest discrepancy
      
      - parameter forwardedDiscrepancyDto: (body) The forwarded discrepancy data 
      - parameter apiConfiguration: The configuration for the http request.
@@ -233,8 +268,9 @@ open class DiscrepancyAPI {
     }
 
     /**
-     Receive forwarded discrepancies from remote Nocturne instances
+     Ingest discrepancy
      - POST /api/v4/Discrepancy/ingest
+     - Receive forwarded discrepancies from remote Nocturne instances
      - parameter forwardedDiscrepancyDto: (body) The forwarded discrepancy data 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<JSONValue> 

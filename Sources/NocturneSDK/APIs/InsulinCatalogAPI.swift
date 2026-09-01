@@ -10,7 +10,7 @@ import Foundation
 open class InsulinCatalogAPI {
 
     /**
-     Get all known insulin formulations.
+     Get catalog
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [InsulinFormulation]
@@ -20,8 +20,15 @@ open class InsulinCatalogAPI {
     }
 
     /**
-     Get all known insulin formulations.
+     Get catalog
      - GET /api/v4/insulins/catalog
+     - Get all known insulin formulations.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[InsulinFormulation]> 
      */
@@ -40,11 +47,11 @@ open class InsulinCatalogAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[InsulinFormulation]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get insulin formulations filtered by category.
+     Get catalog by category
      
      - parameter category: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -55,8 +62,15 @@ open class InsulinCatalogAPI {
     }
 
     /**
-     Get insulin formulations filtered by category.
+     Get catalog by category
      - GET /api/v4/insulins/catalog/{category}
+     - Get insulin formulations filtered by category.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter category: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[InsulinFormulation]> 
@@ -79,6 +93,6 @@ open class InsulinCatalogAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[InsulinFormulation]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

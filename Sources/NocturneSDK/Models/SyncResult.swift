@@ -14,16 +14,14 @@ public struct SyncResult: Sendable, Codable, Hashable {
     public var startTime: Date?
     public var endTime: Date?
     public var itemsSynced: [String: Int]?
-    public var lastEntryTimes: [String: Date]?
     public var errors: [String]?
 
-    public init(success: Bool? = nil, message: String? = nil, startTime: Date? = nil, endTime: Date? = nil, itemsSynced: [String: Int]? = nil, lastEntryTimes: [String: Date]? = nil, errors: [String]? = nil) {
+    public init(success: Bool? = nil, message: String? = nil, startTime: Date? = nil, endTime: Date? = nil, itemsSynced: [String: Int]? = nil, errors: [String]? = nil) {
         self.success = success
         self.message = message
         self.startTime = startTime
         self.endTime = endTime
         self.itemsSynced = itemsSynced
-        self.lastEntryTimes = lastEntryTimes
         self.errors = errors
     }
 
@@ -33,7 +31,6 @@ public struct SyncResult: Sendable, Codable, Hashable {
         case startTime
         case endTime
         case itemsSynced
-        case lastEntryTimes
         case errors
     }
 
@@ -46,7 +43,6 @@ public struct SyncResult: Sendable, Codable, Hashable {
         try container.encodeIfPresent(startTime, forKey: .startTime)
         try container.encodeIfPresent(endTime, forKey: .endTime)
         try container.encodeIfPresent(itemsSynced, forKey: .itemsSynced)
-        try container.encodeIfPresent(lastEntryTimes, forKey: .lastEntryTimes)
         try container.encodeIfPresent(errors, forKey: .errors)
     }
 }

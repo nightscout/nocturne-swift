@@ -10,7 +10,8 @@ import Foundation
 open class AlertsAPI {
 
     /**
-
+     Acknowledge
+     
      - parameter acknowledgeRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -20,7 +21,14 @@ open class AlertsAPI {
     }
 
     /**
+     Acknowledge
      - POST /api/v4/alerts/acknowledge
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter acknowledgeRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -40,11 +48,11 @@ open class AlertsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Acknowledge a single alert excursion, halting escalation delivery for its active instances. Acknowledging an excursion that is already acknowledged or already closed is a no-op. Returns 404 when the excursion does not exist for the current tenant.
+     Acknowledge excursion
      
      - parameter excursionId: (path)  
      - parameter acknowledgeRequest: (body)  
@@ -56,8 +64,15 @@ open class AlertsAPI {
     }
 
     /**
-     Acknowledge a single alert excursion, halting escalation delivery for its active instances. Acknowledging an excursion that is already acknowledged or already closed is a no-op. Returns 404 when the excursion does not exist for the current tenant.
+     Acknowledge excursion
      - POST /api/v4/alerts/excursions/{excursionId}/acknowledge
+     - Accepts DeviceNotify as well as AlertsReadWrite: this is the endpoint behind the Acknowledge action on a device toast, and a registered client device's grant carries the device capability scopes rather than the alert data scope. A scoped credential is intersected with membership (MemberScopeResolver), so even a tenant owner's Companion token resolves to device.notify without alerts.readwrite. A guest link reaches neither scope, its grant being capped at AllowedGuestScopes, but a member does: the Clinician and Viewer seed roles hold device.notify outright (and the resolver grants it to any member holding at least one permission), so both acknowledge here while holding no alerts.readwrite — Clinician holding alerts.read, Viewer no alert scope at all.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter excursionId: (path)  
      - parameter acknowledgeRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -81,11 +96,11 @@ open class AlertsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     List active (unresolved) excursions for the current tenant.
+     Get active alerts
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [ActiveExcursionResponse]
@@ -95,8 +110,15 @@ open class AlertsAPI {
     }
 
     /**
-     List active (unresolved) excursions for the current tenant.
+     Get active alerts
      - GET /api/v4/alerts/active
+     - List active (unresolved) excursions for the current tenant.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[ActiveExcursionResponse]> 
      */
@@ -115,11 +137,11 @@ open class AlertsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[ActiveExcursionResponse]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get paginated history of resolved excursions. Test fires are excluded by default; pass includeTest = true to include them.
+     Get alert history
      
      - parameter page: (query)  (optional, default to 1)
      - parameter pageSize: (query)  (optional, default to 20)
@@ -133,8 +155,15 @@ open class AlertsAPI {
     }
 
     /**
-     Get paginated history of resolved excursions. Test fires are excluded by default; pass includeTest = true to include them.
+     Get alert history
      - GET /api/v4/alerts/history
+     - pageSize is capped at MaxOrdinalPageSize and page at the page that reaches the last record within MaxPageSize; both are clamped rather than rejected.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter page: (query)  (optional, default to 1)
      - parameter pageSize: (query)  (optional, default to 20)
      - parameter alertRuleId: (query)  (optional)
@@ -163,11 +192,11 @@ open class AlertsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AlertHistoryResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get pending deliveries for the specified channel types. Used by bot/adapter services to poll for work.
+     Get pending deliveries
      
      - parameter channelType: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -178,8 +207,15 @@ open class AlertsAPI {
     }
 
     /**
-     Get pending deliveries for the specified channel types. Used by bot/adapter services to poll for work.
+     Get pending deliveries
      - GET /api/v4/alerts/deliveries/pending
+     - Get pending deliveries for the specified channel types. Used by bot/adapter services to poll for work.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter channelType: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[PendingDeliveryResponse]> 
@@ -202,11 +238,12 @@ open class AlertsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[PendingDeliveryResponse]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Mark delivered
+     
      - parameter deliveryId: (path)  
      - parameter markDeliveredRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -217,7 +254,14 @@ open class AlertsAPI {
     }
 
     /**
+     Mark delivered
      - POST /api/v4/alerts/deliveries/{deliveryId}/delivered
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter deliveryId: (path)  
      - parameter markDeliveredRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -241,11 +285,12 @@ open class AlertsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Mark failed
+     
      - parameter deliveryId: (path)  
      - parameter markFailedRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -256,7 +301,14 @@ open class AlertsAPI {
     }
 
     /**
+     Mark failed
      - POST /api/v4/alerts/deliveries/{deliveryId}/failed
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter deliveryId: (path)  
      - parameter markFailedRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -280,11 +332,11 @@ open class AlertsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Snooze an alert instance for the specified duration.
+     Snooze instance
      
      - parameter instanceId: (path)  
      - parameter snoozeRequest: (body)  
@@ -296,8 +348,15 @@ open class AlertsAPI {
     }
 
     /**
-     Snooze an alert instance for the specified duration.
+     Snooze instance
      - POST /api/v4/alerts/instances/{instanceId}/snooze
+     - Snooze an alert instance for the specified duration.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter instanceId: (path)  
      - parameter snoozeRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -321,6 +380,6 @@ open class AlertsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

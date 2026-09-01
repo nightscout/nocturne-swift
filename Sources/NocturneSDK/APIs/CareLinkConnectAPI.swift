@@ -10,7 +10,7 @@ import Foundation
 open class CareLinkConnectAPI {
 
     /**
-     Completes the connect flow: exchanges the pasted code for a refresh token and stores it as the connector secret. Returns the discovered username/country for auto-filling the config form.
+     Complete
      
      - parameter careLinkConnectCompleteRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class CareLinkConnectAPI {
     }
 
     /**
-     Completes the connect flow: exchanges the pasted code for a refresh token and stores it as the connector secret. Returns the discovered username/country for auto-filling the config form.
+     Complete
      - POST /api/v4/connectors/carelink/connect/complete
+     - Completes the connect flow: exchanges the pasted code for a refresh token and stores it as the connector secret. Returns the discovered username/country for auto-filling the config form.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter careLinkConnectCompleteRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<CareLinkConnectCompleteResponse> 
@@ -42,11 +49,11 @@ open class CareLinkConnectAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CareLinkConnectCompleteResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Mints a short-lived link code for the desktop companion app. The code carries the server URL plus a tenant-pinned bearer token scoped to this controller, so the app can drive start/complete for the user's tenant without a second login. The app intercepts the com.medtronic.carepartner:/sso redirect in its own webview, removing the manual code-paste step of the browser flow.
+     Desktop token
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: CareLinkDesktopTokenResponse
@@ -56,8 +63,15 @@ open class CareLinkConnectAPI {
     }
 
     /**
-     Mints a short-lived link code for the desktop companion app. The code carries the server URL plus a tenant-pinned bearer token scoped to this controller, so the app can drive start/complete for the user's tenant without a second login. The app intercepts the com.medtronic.carepartner:/sso redirect in its own webview, removing the manual code-paste step of the browser flow.
+     Desktop token
      - POST /api/v4/connectors/carelink/connect/desktop-token
+     - Mints a short-lived link code for the desktop companion app. The code carries the server URL plus a tenant-pinned bearer token scoped to this controller, so the app can drive start/complete for the user's tenant without a second login. The app intercepts the com.medtronic.carepartner:/sso redirect in its own webview, removing the manual code-paste step of the browser flow.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<CareLinkDesktopTokenResponse> 
      */
@@ -76,11 +90,11 @@ open class CareLinkConnectAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CareLinkDesktopTokenResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Begins the connect flow: builds the Auth0 authorize URL and stashes the PKCE verifier server-side. The client opens AuthorizeUrl in a new tab.
+     Start
      
      - parameter careLinkConnectStartRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -91,8 +105,15 @@ open class CareLinkConnectAPI {
     }
 
     /**
-     Begins the connect flow: builds the Auth0 authorize URL and stashes the PKCE verifier server-side. The client opens AuthorizeUrl in a new tab.
+     Start
      - POST /api/v4/connectors/carelink/connect/start
+     - Begins the connect flow: builds the Auth0 authorize URL and stashes the PKCE verifier server-side. The client opens AuthorizeUrl in a new tab.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter careLinkConnectStartRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<CareLinkConnectStartResponse> 
@@ -112,6 +133,6 @@ open class CareLinkConnectAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CareLinkConnectStartResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

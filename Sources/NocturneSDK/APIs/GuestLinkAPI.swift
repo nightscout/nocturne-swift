@@ -10,7 +10,7 @@ import Foundation
 open class GuestLinkAPI {
 
     /**
-     Activate a guest link by code and receive a session cookie.
+     Activate guest link
      
      - parameter activateGuestLinkRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,9 @@ open class GuestLinkAPI {
     }
 
     /**
-     Activate a guest link by code and receive a session cookie.
+     Activate guest link
      - POST /api/v4/guest-links/activate
+     - Activate a guest link by code and receive a session cookie.
      - parameter activateGuestLinkRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ActivateGuestLinkResponse> 
@@ -46,7 +47,7 @@ open class GuestLinkAPI {
     }
 
     /**
-     Create a new guest link for temporary read-only data sharing.
+     Create guest link
      
      - parameter createGuestLinkRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +58,15 @@ open class GuestLinkAPI {
     }
 
     /**
-     Create a new guest link for temporary read-only data sharing.
+     Create guest link
      - POST /api/v4/guest-links
+     - Create a new guest link for temporary read-only data sharing.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createGuestLinkRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<GuestLinkCreationResult> 
@@ -78,11 +86,11 @@ open class GuestLinkAPI {
 
         let localVariableRequestBuilder: RequestBuilder<GuestLinkCreationResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Dismiss a terminal (revoked or expired) guest link from the UI.
+     Dismiss guest link
      
      - parameter grantId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -93,8 +101,15 @@ open class GuestLinkAPI {
     }
 
     /**
-     Dismiss a terminal (revoked or expired) guest link from the UI.
+     Dismiss guest link
      - PATCH /api/v4/guest-links/{grantId}/dismiss
+     - Dismiss a terminal (revoked or expired) guest link from the UI.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter grantId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -117,11 +132,11 @@ open class GuestLinkAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     List guest links for the current user's effective subject.
+     Get guest links
      
      - parameter includeDismissed: (query)  (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
@@ -132,8 +147,15 @@ open class GuestLinkAPI {
     }
 
     /**
-     List guest links for the current user's effective subject.
+     Get guest links
      - GET /api/v4/guest-links
+     - List guest links for the current user's effective subject.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter includeDismissed: (query)  (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[GuestLinkInfo]> 
@@ -156,11 +178,11 @@ open class GuestLinkAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[GuestLinkInfo]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Revoke an active guest link.
+     Revoke guest link
      
      - parameter grantId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -171,8 +193,15 @@ open class GuestLinkAPI {
     }
 
     /**
-     Revoke an active guest link.
+     Revoke guest link
      - DELETE /api/v4/guest-links/{grantId}
+     - Revoke an active guest link.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter grantId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -195,6 +224,6 @@ open class GuestLinkAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

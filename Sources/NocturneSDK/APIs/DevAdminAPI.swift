@@ -10,7 +10,7 @@ import Foundation
 open class DevAdminAPI {
 
     /**
-     Create a new tenant without authentication (dev-only). Used by the Aspire dashboard \"Create Tenant\" command.
+     Create tenant
      
      - parameter devCreateTenantRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,9 @@ open class DevAdminAPI {
     }
 
     /**
-     Create a new tenant without authentication (dev-only). Used by the Aspire dashboard \"Create Tenant\" command.
+     Create tenant
      - POST /api/v4/dev-only/admin/tenants
+     - Create a new tenant without authentication (dev-only). Used by the Aspire dashboard \"Create Tenant\" command.
      - parameter devCreateTenantRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TenantCreatedDto> 
@@ -46,7 +47,7 @@ open class DevAdminAPI {
     }
 
     /**
-     Delete a tenant and all associated data without authentication (dev-only).
+     Delete tenant
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +58,9 @@ open class DevAdminAPI {
     }
 
     /**
-     Delete a tenant and all associated data without authentication (dev-only).
+     Delete tenant
      - DELETE /api/v4/dev-only/admin/tenants/{id}
+     - Delete a tenant and all associated data without authentication (dev-only).
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<URL> 
@@ -85,7 +87,7 @@ open class DevAdminAPI {
     }
 
     /**
-     Put a tenant into recovery mode in one call: strips the target subject's credentials (passkeys and OIDC identities — a global operation, so a fixture subject shared with other tenants loses them everywhere until the next startup re-seed) and, if no other credentialed member remains, creates a synthetic \"keeper\" member so the tenant reports recovery_mode_active instead of setup_required. Defaults to the first owner-role member.
+     Enter recovery mode
      
      - parameter id: (path)  
      - parameter devRecoveryModeRequest: (body)  (optional)
@@ -97,8 +99,9 @@ open class DevAdminAPI {
     }
 
     /**
-     Put a tenant into recovery mode in one call: strips the target subject's credentials (passkeys and OIDC identities — a global operation, so a fixture subject shared with other tenants loses them everywhere until the next startup re-seed) and, if no other credentialed member remains, creates a synthetic \"keeper\" member so the tenant reports recovery_mode_active instead of setup_required. Defaults to the first owner-role member.
+     Enter recovery mode
      - POST /api/v4/dev-only/admin/tenants/{id}/recovery-mode
+     - Put a tenant into recovery mode in one call: strips the target subject's credentials (passkeys and OIDC identities — a global operation, so a fixture subject shared with other tenants loses them everywhere until the next startup re-seed) and, if no other credentialed member remains, creates a synthetic \"keeper\" member so the tenant reports recovery_mode_active instead of setup_required. Defaults to the first owner-role member.
      - parameter id: (path)  
      - parameter devRecoveryModeRequest: (body)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -126,7 +129,7 @@ open class DevAdminAPI {
     }
 
     /**
-     Export a full snapshot of all tenants and their identity/config data. Secrets are decrypted to plaintext for portability.
+     Export snapshot
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DevSnapshotDto
@@ -136,8 +139,9 @@ open class DevAdminAPI {
     }
 
     /**
-     Export a full snapshot of all tenants and their identity/config data. Secrets are decrypted to plaintext for portability.
+     Export snapshot
      - GET /api/v4/dev-only/admin/snapshot
+     - Export a full snapshot of all tenants and their identity/config data. Secrets are decrypted to plaintext for portability.
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DevSnapshotDto> 
      */
@@ -160,7 +164,7 @@ open class DevAdminAPI {
     }
 
     /**
-     Import snapshot data for a single tenant, matched by slug in the provided snapshot. Upserts referenced subjects and passkeys without affecting other tenants.
+     Import scoped snapshot
      
      - parameter id: (path)  
      - parameter tenantSnapshotDto: (body)  
@@ -172,8 +176,9 @@ open class DevAdminAPI {
     }
 
     /**
-     Import snapshot data for a single tenant, matched by slug in the provided snapshot. Upserts referenced subjects and passkeys without affecting other tenants.
+     Import scoped snapshot
      - POST /api/v4/dev-only/admin/tenants/{id}/import-snapshot
+     - Import snapshot data for a single tenant, matched by slug in the provided snapshot. Upserts referenced subjects and passkeys without affecting other tenants.
      - parameter id: (path)  
      - parameter tenantSnapshotDto: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -201,7 +206,7 @@ open class DevAdminAPI {
     }
 
     /**
-     Import a snapshot, replacing all identity/config data. Wraps the entire operation in a transaction.
+     Import snapshot
      
      - parameter devSnapshotDto: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -212,8 +217,9 @@ open class DevAdminAPI {
     }
 
     /**
-     Import a snapshot, replacing all identity/config data. Wraps the entire operation in a transaction.
+     Import snapshot
      - POST /api/v4/dev-only/admin/snapshot
+     - Import a snapshot, replacing all identity/config data. Wraps the entire operation in a transaction.
      - parameter devSnapshotDto: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<URL> 
@@ -237,7 +243,7 @@ open class DevAdminAPI {
     }
 
     /**
-     List all tenants with record counts and connector health (dev-only). Used by the Aspire dashboard \"List Tenants\" command.
+     List tenants
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [DevTenantSummaryDto]
@@ -247,8 +253,9 @@ open class DevAdminAPI {
     }
 
     /**
-     List all tenants with record counts and connector health (dev-only). Used by the Aspire dashboard \"List Tenants\" command.
+     List tenants
      - GET /api/v4/dev-only/admin/tenants
+     - List all tenants with record counts and connector health (dev-only). Used by the Aspire dashboard \"List Tenants\" command.
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[DevTenantSummaryDto]> 
      */
@@ -271,7 +278,7 @@ open class DevAdminAPI {
     }
 
     /**
-     Populate an existing tenant with realistic sample data (oref-simulated CGM entries and treatments, device changes, sleep, heart rate, steps, trackers, and alert rules with alarm history), written through the normal ingestion services so device attribution and the v4 canonical stream are correct. Trackers are owned by the first owner-role member.
+     Seed sample data
      
      - parameter id: (path)  
      - parameter devSeedSampleDataRequest: (body)  (optional)
@@ -283,8 +290,9 @@ open class DevAdminAPI {
     }
 
     /**
-     Populate an existing tenant with realistic sample data (oref-simulated CGM entries and treatments, device changes, sleep, heart rate, steps, trackers, and alert rules with alarm history), written through the normal ingestion services so device attribution and the v4 canonical stream are correct. Trackers are owned by the first owner-role member.
+     Seed sample data
      - POST /api/v4/dev-only/admin/tenants/{id}/seed-sample-data
+     - Populate an existing tenant with realistic sample data (oref-simulated CGM entries and treatments, device changes, sleep, heart rate, steps, trackers, and alert rules with alarm history), written through the normal ingestion services so device attribution and the v4 canonical stream are correct. Trackers are owned by the first owner-role member.
      - parameter id: (path)  
      - parameter devSeedSampleDataRequest: (body)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -312,7 +320,7 @@ open class DevAdminAPI {
     }
 
     /**
-     Create a tenant, owner subject, synthetic passkey, owner membership, and a session in one call. The synthetic passkey satisfies the TenantSetupMiddleware credential check so the returned session can immediately call tenant APIs. Subjects from the committed dev identity fixture (docs/seed/dev-identities.json) are added as additional owners, so a developer's real passkey signs in too. With sampleData: true the tenant is populated with realistic history across the board — glucose/treatments, device changes, sleep, heart rate, steps, consumable trackers, and alert rules with alarm history — making the returned loginLink a browser tab with visible data on every dashboard. Used by E2E tests and headless dev tooling to bypass passkey/OIDC ceremonies.
+     Seed tenant
      
      - parameter devSeedTenantRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -323,8 +331,9 @@ open class DevAdminAPI {
     }
 
     /**
-     Create a tenant, owner subject, synthetic passkey, owner membership, and a session in one call. The synthetic passkey satisfies the TenantSetupMiddleware credential check so the returned session can immediately call tenant APIs. Subjects from the committed dev identity fixture (docs/seed/dev-identities.json) are added as additional owners, so a developer's real passkey signs in too. With sampleData: true the tenant is populated with realistic history across the board — glucose/treatments, device changes, sleep, heart rate, steps, consumable trackers, and alert rules with alarm history — making the returned loginLink a browser tab with visible data on every dashboard. Used by E2E tests and headless dev tooling to bypass passkey/OIDC ceremonies.
+     Seed tenant
      - POST /api/v4/dev-only/admin/seed-tenant
+     - Create a tenant, owner subject, synthetic passkey, owner membership, and a session in one call. The synthetic passkey satisfies the TenantSetupMiddleware credential check so the returned session can immediately call tenant APIs. Subjects from the committed dev identity fixture (docs/seed/dev-identities.json) are added as additional owners, so a developer's real passkey signs in too. With sampleData: true the tenant is populated with realistic history across the board — glucose/treatments, device changes, sleep, heart rate, steps, consumable trackers, and alert rules with alarm history — making the returned loginLink a browser tab with visible data on every dashboard. Used by E2E tests and headless dev tooling to bypass passkey/OIDC ceremonies.
      - parameter devSeedTenantRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DevSeedTenantResponse> 
@@ -348,7 +357,7 @@ open class DevAdminAPI {
     }
 
     /**
-     Trigger a sync for every configured connector across all tenants.
+     Sync all
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: URL
@@ -358,8 +367,9 @@ open class DevAdminAPI {
     }
 
     /**
-     Trigger a sync for every configured connector across all tenants.
+     Sync all
      - POST /api/v4/dev-only/admin/sync-all
+     - Trigger a sync for every configured connector across all tenants.
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<URL> 
      */

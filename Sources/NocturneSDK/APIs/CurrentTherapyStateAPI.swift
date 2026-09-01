@@ -10,7 +10,7 @@ import Foundation
 open class CurrentTherapyStateAPI {
 
     /**
-     Get the current pump mode and sensitivity adjustment for the active tenant.
+     Get current therapy state
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: CurrentTherapyStateResponse
@@ -20,8 +20,15 @@ open class CurrentTherapyStateAPI {
     }
 
     /**
-     Get the current pump mode and sensitivity adjustment for the active tenant.
+     Get current therapy state
      - GET /api/v4/current-therapy-state
+     - Get the current pump mode, sensitivity adjustment, and latest pump reservoir/battery reading for the active tenant.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<CurrentTherapyStateResponse> 
      */
@@ -40,6 +47,6 @@ open class CurrentTherapyStateAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CurrentTherapyStateResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

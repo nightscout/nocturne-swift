@@ -10,7 +10,7 @@ import Foundation
 open class StatisticsAPI {
 
     /**
-     Master glucose analytics function that calculates comprehensive metrics
+     Analyze glucose data
      
      - parameter glucoseAnalyticsRequest: (body) Request containing sensor glucose readings, boluses, carb intakes, and configuration 
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Master glucose analytics function that calculates comprehensive metrics
+     Analyze glucose data
      - POST /api/v4/Statistics/comprehensive-analytics
+     - Master glucose analytics function that calculates comprehensive metrics
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter glucoseAnalyticsRequest: (body) Request containing sensor glucose readings, boluses, carb intakes, and configuration 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<GlucoseAnalytics> 
@@ -42,11 +49,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<GlucoseAnalytics>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Extended glucose analytics including GMI, GRI, and clinical target assessment
+     Analyze glucose data extended
      
      - parameter extendedGlucoseAnalyticsRequest: (body) Request containing sensor glucose readings, boluses, carb intakes, population type, and configuration 
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +64,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Extended glucose analytics including GMI, GRI, and clinical target assessment
+     Analyze glucose data extended
      - POST /api/v4/Statistics/extended-analytics
+     - Extended glucose analytics including GMI, GRI, and clinical target assessment
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter extendedGlucoseAnalyticsRequest: (body) Request containing sensor glucose readings, boluses, carb intakes, population type, and configuration 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ExtendedGlucoseAnalytics> 
@@ -78,11 +92,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ExtendedGlucoseAnalytics>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Assess glucose data against clinical targets for a specific population
+     Assess against targets
      
      - parameter clinicalAssessmentRequest: (body) Request containing analytics and population type 
      - parameter apiConfiguration: The configuration for the http request.
@@ -93,8 +107,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Assess glucose data against clinical targets for a specific population
+     Assess against targets
      - POST /api/v4/Statistics/clinical-assessment
+     - Assess glucose data against clinical targets for a specific population
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter clinicalAssessmentRequest: (body) Request containing analytics and population type 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ClinicalTargetAssessment> 
@@ -114,11 +135,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ClinicalTargetAssessment>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Assess data sufficiency for a valid clinical report
+     Assess data sufficiency
      
      - parameter dataSufficiencyRequest: (body) Request containing entries and optional period settings 
      - parameter apiConfiguration: The configuration for the http request.
@@ -129,8 +150,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Assess data sufficiency for a valid clinical report
+     Assess data sufficiency
      - POST /api/v4/Statistics/data-sufficiency
+     - Assess data sufficiency for a valid clinical report
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter dataSufficiencyRequest: (body) Request containing entries and optional period settings 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DataSufficiencyAssessment> 
@@ -150,11 +178,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DataSufficiencyAssessment>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Calculate averaged statistics for each hour of the day (0-23)
+     Calculate averaged stats
      
      - parameter sensorGlucose: (body) Array of sensor glucose readings 
      - parameter apiConfiguration: The configuration for the http request.
@@ -165,8 +193,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Calculate averaged statistics for each hour of the day (0-23)
+     Calculate averaged stats
      - POST /api/v4/Statistics/averaged-stats
+     - Calculate averaged statistics for each hour of the day (0-23)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter sensorGlucose: (body) Array of sensor glucose readings 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[AveragedStats]> 
@@ -186,11 +221,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[AveragedStats]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Calculate basic glucose statistics from provided glucose values
+     Calculate basic stats
      
      - parameter requestBody: (body) Array of glucose values in mg/dL 
      - parameter apiConfiguration: The configuration for the http request.
@@ -201,8 +236,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Calculate basic glucose statistics from provided glucose values
+     Calculate basic stats
      - POST /api/v4/Statistics/basic-stats
+     - Calculate basic glucose statistics from provided glucose values
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter requestBody: (body) Array of glucose values in mg/dL 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<BasicGlucoseStats> 
@@ -222,11 +264,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BasicGlucoseStats>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Calculate estimated A1C from average glucose
+     Calculate estimated A1C
      
      - parameter averageGlucose: (path) Average glucose in mg/dL 
      - parameter apiConfiguration: The configuration for the http request.
@@ -237,8 +279,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Calculate estimated A1C from average glucose
+     Calculate estimated A1C
      - GET /api/v4/Statistics/estimated-a1c/{averageGlucose}
+     - Calculate estimated A1C from average glucose
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter averageGlucose: (path) Average glucose in mg/dL 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Double> 
@@ -261,11 +310,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Double>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Calculate Glucose Management Indicator (GMI)
+     Calculate GMI
      
      - parameter meanGlucose: (path) Mean glucose in mg/dL 
      - parameter apiConfiguration: The configuration for the http request.
@@ -276,8 +325,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Calculate Glucose Management Indicator (GMI)
+     Calculate GMI
      - GET /api/v4/Statistics/gmi/{meanGlucose}
+     - Calculate Glucose Management Indicator (GMI)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter meanGlucose: (path) Mean glucose in mg/dL 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<GlucoseManagementIndicator> 
@@ -300,11 +356,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<GlucoseManagementIndicator>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Calculate Glycemic Risk Index (GRI) from time in range metrics
+     Calculate GRI
      
      - parameter timeInRangeMetrics: (body) Time in range metrics 
      - parameter apiConfiguration: The configuration for the http request.
@@ -315,8 +371,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Calculate Glycemic Risk Index (GRI) from time in range metrics
+     Calculate GRI
      - POST /api/v4/Statistics/gri
+     - Calculate Glycemic Risk Index (GRI) from time in range metrics
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter timeInRangeMetrics: (body) Time in range metrics 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<GlycemicRiskIndex> 
@@ -336,11 +399,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<GlycemicRiskIndex>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Calculate glucose distribution across configurable bins
+     Calculate glucose distribution
      
      - parameter glucoseDistributionRequest: (body) Request containing entries and optional bins 
      - parameter apiConfiguration: The configuration for the http request.
@@ -351,8 +414,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Calculate glucose distribution across configurable bins
+     Calculate glucose distribution
      - POST /api/v4/Statistics/glucose-distribution
+     - Calculate glucose distribution across configurable bins
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter glucoseDistributionRequest: (body) Request containing entries and optional bins 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[DistributionDataPoint]> 
@@ -372,11 +442,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[DistributionDataPoint]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Calculate comprehensive glycemic variability metrics
+     Calculate glycemic variability
      
      - parameter glycemicVariabilityRequest: (body) Request containing glucose values and entries 
      - parameter apiConfiguration: The configuration for the http request.
@@ -387,8 +457,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Calculate comprehensive glycemic variability metrics
+     Calculate glycemic variability
      - POST /api/v4/Statistics/glycemic-variability
+     - Calculate comprehensive glycemic variability metrics
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter glycemicVariabilityRequest: (body) Request containing glucose values and entries 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<GlycemicVariability> 
@@ -408,11 +485,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<GlycemicVariability>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Calculate overall averages across multiple days
+     Calculate overall averages
      
      - parameter dayData: (body) Array of daily data points 
      - parameter apiConfiguration: The configuration for the http request.
@@ -423,8 +500,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Calculate overall averages across multiple days
+     Calculate overall averages
      - POST /api/v4/Statistics/overall-averages
+     - Calculate overall averages across multiple days
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter dayData: (body) Array of daily data points 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<OverallAverages> 
@@ -444,11 +528,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<OverallAverages>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Analyze glucose patterns around site changes to identify impact of site age on control
+     Calculate site change impact
      
      - parameter siteChangeImpactRequest: (body) Request containing sensor glucose readings, device events, and analysis parameters 
      - parameter apiConfiguration: The configuration for the http request.
@@ -459,8 +543,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Analyze glucose patterns around site changes to identify impact of site age on control
+     Calculate site change impact
      - POST /api/v4/Statistics/site-change-impact
+     - Analyze glucose patterns around site changes to identify impact of site age on control
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter siteChangeImpactRequest: (body) Request containing sensor glucose readings, device events, and analysis parameters 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SiteChangeImpactAnalysis> 
@@ -480,11 +571,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SiteChangeImpactAnalysis>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Calculate time in range metrics
+     Calculate time in range
      
      - parameter timeInRangeRequest: (body) Request containing entries and optional thresholds 
      - parameter apiConfiguration: The configuration for the http request.
@@ -495,8 +586,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Calculate time in range metrics
+     Calculate time in range
      - POST /api/v4/Statistics/time-in-range
+     - Calculate time in range metrics
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter timeInRangeRequest: (body) Request containing entries and optional thresholds 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TimeInRangeMetrics> 
@@ -516,11 +614,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TimeInRangeMetrics>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Calculate treatment summary for a collection of boluses and carb intakes
+     Calculate treatment summary
      
      - parameter treatmentSummaryRequest: (body) Request containing boluses and carb intakes 
      - parameter apiConfiguration: The configuration for the http request.
@@ -531,8 +629,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Calculate treatment summary for a collection of boluses and carb intakes
+     Calculate treatment summary
      - POST /api/v4/Statistics/treatment-summary
+     - Calculate treatment summary for a collection of boluses and carb intakes
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter treatmentSummaryRequest: (body) Request containing boluses and carb intakes 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TreatmentSummary> 
@@ -552,11 +657,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TreatmentSummary>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Clean and filter treatment data
+     Clean treatment data
      
      - parameter treatment: (body) Array of treatments to clean 
      - parameter apiConfiguration: The configuration for the http request.
@@ -567,8 +672,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Clean and filter treatment data
+     Clean treatment data
      - POST /api/v4/Statistics/clean/treatments
+     - Clean and filter treatment data
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter treatment: (body) Array of treatments to clean 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[Treatment]> 
@@ -588,11 +700,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[Treatment]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Format carb value for display
+     Format carb display
      
      - parameter value: (path) Carb value 
      - parameter apiConfiguration: The configuration for the http request.
@@ -603,8 +715,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Format carb value for display
+     Format carb display
      - GET /api/v4/Statistics/format/carb/{value}
+     - Format carb value for display
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter value: (path) Carb value 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<String> 
@@ -627,11 +746,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<String>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Format insulin value for display
+     Format insulin display
      
      - parameter value: (path) Insulin value 
      - parameter apiConfiguration: The configuration for the http request.
@@ -642,8 +761,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Format insulin value for display
+     Format insulin display
      - GET /api/v4/Statistics/format/insulin/{value}
+     - Format insulin value for display
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter value: (path) Insulin value 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<String> 
@@ -666,11 +792,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<String>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Calculates AID (Automated Insulin Delivery) system metrics for a date range. Uses patient device records to segment the period by algorithm and compute time-weighted metrics via IAidMetricsService.
+     Get aid system metrics
      
      - parameter startDate: (query) Inclusive start of the analysis period (UTC). (optional)
      - parameter endDate: (query) Inclusive end of the analysis period (UTC). (optional)
@@ -682,9 +808,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Calculates AID (Automated Insulin Delivery) system metrics for a date range. Uses patient device records to segment the period by algorithm and compute time-weighted metrics via IAidMetricsService.
+     Get aid system metrics
      - GET /api/v4/Statistics/aid-system-metrics
      - Fetches APS snapshots, temp basals, device events, glucose readings, and target-range schedules from their respective repositories. CGM metrics are derived from AnalyzeGlucoseData. Target range is optional; the method continues without it if the repository throws.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter startDate: (query) Inclusive start of the analysis period (UTC). (optional)
      - parameter endDate: (query) Inclusive end of the analysis period (UTC). (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -709,11 +841,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AidSystemMetrics>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Calculate comprehensive basal analysis statistics for a date range
+     Get basal analysis
      
      - parameter startDate: (query) Start date of the analysis period (optional)
      - parameter endDate: (query) End date of the analysis period (optional)
@@ -725,8 +857,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Calculate comprehensive basal analysis statistics for a date range
+     Get basal analysis
      - GET /api/v4/Statistics/basal-analysis
+     - Calculate comprehensive basal analysis statistics for a date range
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter startDate: (query) Start date of the analysis period (optional)
      - parameter endDate: (query) End date of the analysis period (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -751,11 +890,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BasalAnalysisResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get clinical targets for a specific diabetes population
+     Get clinical targets
      
      - parameter population: (path) Population type (Type1Adult, Type2Adult, Elderly, Pregnancy, etc.) 
      - parameter apiConfiguration: The configuration for the http request.
@@ -766,8 +905,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Get clinical targets for a specific diabetes population
+     Get clinical targets
      - GET /api/v4/Statistics/clinical-targets/{population}
+     - Get clinical targets for a specific diabetes population
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter population: (path) Population type (Type1Adult, Type2Adult, Elderly, Pregnancy, etc.) 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ClinicalTargets> 
@@ -790,11 +936,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ClinicalTargets>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Calculate daily basal/bolus ratio statistics for a date range
+     Get daily basal bolus ratios
      
      - parameter startDate: (query) Start date of the analysis period (optional)
      - parameter endDate: (query) End date of the analysis period (optional)
@@ -806,8 +952,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Calculate daily basal/bolus ratio statistics for a date range
+     Get daily basal bolus ratios
      - GET /api/v4/Statistics/daily-basal-bolus-ratios
+     - Calculate daily basal/bolus ratio statistics for a date range
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter startDate: (query) Start date of the analysis period (optional)
      - parameter endDate: (query) End date of the analysis period (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -832,11 +985,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DailyBasalBolusRatioResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Calculates the average insulin delivered per hour of day, split by scheduled basal, temp adjustments, and boluses, from pump-confirmed delivery records. Basal insulin is duration-weighted across the user-local hours each TempBasal overlaps, and averages are taken over the days that have delivery data — a window that extends before the first record does not distort the pattern.
+     Get hourly insulin delivery
      
      - parameter startDate: (query) Start date of the analysis period (UTC) (optional)
      - parameter endDate: (query) End date of the analysis period (UTC) (optional)
@@ -848,8 +1001,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Calculates the average insulin delivered per hour of day, split by scheduled basal, temp adjustments, and boluses, from pump-confirmed delivery records. Basal insulin is duration-weighted across the user-local hours each TempBasal overlaps, and averages are taken over the days that have delivery data — a window that extends before the first record does not distort the pattern.
+     Get hourly insulin delivery
      - GET /api/v4/Statistics/hourly-insulin-delivery
+     - Calculates the average insulin delivered per hour of day, split by scheduled basal, temp adjustments, and boluses, from pump-confirmed delivery records. Basal insulin is duration-weighted across the user-local hours each TempBasal overlaps, and averages are taken over the days that have delivery data — a window that extends before the first record does not distort the pattern.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter startDate: (query) Start date of the analysis period (UTC) (optional)
      - parameter endDate: (query) End date of the analysis period (UTC) (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -874,11 +1034,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<HourlyInsulinDeliveryResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Calculate comprehensive insulin delivery statistics for a date range
+     Get insulin delivery statistics
      
      - parameter startDate: (query) Start date of the analysis period (optional)
      - parameter endDate: (query) End date of the analysis period (optional)
@@ -890,8 +1050,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Calculate comprehensive insulin delivery statistics for a date range
+     Get insulin delivery statistics
      - GET /api/v4/Statistics/insulin-delivery-stats
+     - Calculate comprehensive insulin delivery statistics for a date range
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter startDate: (query) Start date of the analysis period (optional)
      - parameter endDate: (query) End date of the analysis period (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -916,11 +1083,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<InsulinDeliveryStatistics>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Gets comprehensive statistics for multiple time periods (1, 3, 7, 30, and 90 days). Fetches sensor glucose, bolus, carb, and temp-basal data from the database for each period, computes GlucoseAnalytics, TreatmentSummary, and InsulinDeliveryStatistics, and caches the result for 5 minutes.
+     Get multi period statistics
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: MultiPeriodStatistics
@@ -930,9 +1097,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Gets comprehensive statistics for multiple time periods (1, 3, 7, 30, and 90 days). Fetches sensor glucose, bolus, carb, and temp-basal data from the database for each period, computes GlucoseAnalytics, TreatmentSummary, and InsulinDeliveryStatistics, and caches the result for 5 minutes.
+     Get multi period statistics
      - GET /api/v4/Statistics/periods
      - When no TempBasal or algorithm bolus records are found but a profile is loaded, the method falls back to integrating scheduled basal across the period via IBasalSegmentService. GMI reliability is assessed per-period using context-appropriate recommended-day minimums (e.g., 1-day periods cannot require 14 days of data).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<MultiPeriodStatistics> 
      */
@@ -951,11 +1124,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<MultiPeriodStatistics>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Pre-aggregated month-by-day statistics for the calendar punch-card view. Fetches glucose, boluses, carb intakes, and daily basal totals in a single batch, then computes per-day TIR and treatment summaries inline (no per-day round-trips). Replaces a frontend orchestrator that was issuing ~62 sequential HTTP calls per 31-day month.
+     Get punch card data
      
      - parameter startDate: (query) Inclusive start of the date range. (optional)
      - parameter endDate: (query) Inclusive end of the date range. (optional)
@@ -967,8 +1140,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Pre-aggregated month-by-day statistics for the calendar punch-card view. Fetches glucose, boluses, carb intakes, and daily basal totals in a single batch, then computes per-day TIR and treatment summaries inline (no per-day round-trips). Replaces a frontend orchestrator that was issuing ~62 sequential HTTP calls per 31-day month.
+     Get punch card data
      - GET /api/v4/Statistics/punch-card
+     - Pre-aggregated month-by-day statistics for the calendar punch-card view. Fetches glucose, boluses, carb intakes, and daily basal totals in a single batch, then computes per-day TIR and treatment summaries inline (no per-day round-trips). Replaces a frontend orchestrator that was issuing ~62 sequential HTTP calls per 31-day month.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter startDate: (query) Inclusive start of the date range. (optional)
      - parameter endDate: (query) Inclusive end of the date range. (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -993,11 +1173,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PunchCardResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Extended glucose analytics for a date range, computed server-side. Fetches glucose, manual boluses, and carb intakes for the window from the database and runs AnalyzeGlucoseDataExtended plus CalculateAveragedStats.
+     Get range analytics
      
      - parameter startDate: (query) Start of the window (inclusive, UTC). (optional)
      - parameter endDate: (query) End of the window (exclusive, UTC). (optional)
@@ -1011,8 +1191,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Extended glucose analytics for a date range, computed server-side. Fetches glucose, manual boluses, and carb intakes for the window from the database and runs AnalyzeGlucoseDataExtended plus CalculateAveragedStats.
+     Get range analytics
      - GET /api/v4/Statistics/range-analytics
+     - Extended glucose analytics for a date range, computed server-side. Fetches glucose, manual boluses, and carb intakes for the window from the database and runs AnalyzeGlucoseDataExtended plus CalculateAveragedStats.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter startDate: (query) Start of the window (inclusive, UTC). (optional)
      - parameter endDate: (query) End of the window (exclusive, UTC). (optional)
      - parameter population: (query) Diabetes population for clinical target assessment. Defaults to Type 1 adult. (optional)
@@ -1041,11 +1228,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ReportAnalysisResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Convert mg/dL to mmol/L
+     Mgdl to MMOL
      
      - parameter mgdl: (path) Glucose value in mg/dL 
      - parameter apiConfiguration: The configuration for the http request.
@@ -1056,8 +1243,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Convert mg/dL to mmol/L
+     Mgdl to MMOL
      - GET /api/v4/Statistics/convert/mgdl-to-mmol/{mgdl}
+     - Convert mg/dL to mmol/L
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter mgdl: (path) Glucose value in mg/dL 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Double> 
@@ -1080,11 +1274,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Double>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Convert mmol/L to mg/dL
+     Mmol to MGDL
      
      - parameter mmol: (path) Glucose value in mmol/L 
      - parameter apiConfiguration: The configuration for the http request.
@@ -1095,8 +1289,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Convert mmol/L to mg/dL
+     Mmol to MGDL
      - GET /api/v4/Statistics/convert/mmol-to-mgdl/{mmol}
+     - Convert mmol/L to mg/dL
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter mmol: (path) Glucose value in mmol/L 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Double> 
@@ -1119,11 +1320,11 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Double>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Validate treatment data for completeness and consistency
+     Validate treatment data
      
      - parameter treatment: (body) Treatment to validate 
      - parameter apiConfiguration: The configuration for the http request.
@@ -1134,8 +1335,15 @@ open class StatisticsAPI {
     }
 
     /**
-     Validate treatment data for completeness and consistency
+     Validate treatment data
      - POST /api/v4/Statistics/validate/treatment
+     - Validate treatment data for completeness and consistency
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter treatment: (body) Treatment to validate 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Bool> 
@@ -1155,6 +1363,6 @@ open class StatisticsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Bool>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

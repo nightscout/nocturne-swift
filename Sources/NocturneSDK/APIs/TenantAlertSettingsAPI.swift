@@ -10,7 +10,7 @@ import Foundation
 open class TenantAlertSettingsAPI {
 
     /**
-     Get the current tenant's alert settings, creating a default row if one does not exist.
+     Get
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: TenantAlertSettingsResponse
@@ -20,8 +20,15 @@ open class TenantAlertSettingsAPI {
     }
 
     /**
-     Get the current tenant's alert settings, creating a default row if one does not exist.
+     Get
      - GET /api/v4/tenant-alert-settings
+     - The get-or-create is a write, but of server-defined defaults and idempotently, so it carries no AlertsReadWrite gate: a read-only caller cannot choose what it stores and a repeat call stores nothing further.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TenantAlertSettingsResponse> 
      */
@@ -40,11 +47,11 @@ open class TenantAlertSettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TenantAlertSettingsResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Replace the current tenant's alert settings. Upserts on first call. The manual-DND toggle creates/clears the tenant's scope=all window; scheduled fields persist on the row.
+     Update
      
      - parameter updateTenantAlertSettingsRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -55,8 +62,15 @@ open class TenantAlertSettingsAPI {
     }
 
     /**
-     Replace the current tenant's alert settings. Upserts on first call. The manual-DND toggle creates/clears the tenant's scope=all window; scheduled fields persist on the row.
+     Update
      - PUT /api/v4/tenant-alert-settings
+     - Requires AlertsReadWrite: this toggles tenant-wide Do Not Disturb, which suppresses delivery of every non-critical alert. The class-level [Authorize] alone is satisfied by read-only credentials such as a guest-link session, which holds alerts.read.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter updateTenantAlertSettingsRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TenantAlertSettingsResponse> 
@@ -76,6 +90,6 @@ open class TenantAlertSettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TenantAlertSettingsResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 open class AlertRulesAPI {
 
     /**
-     Create an alert rule with a flat channel list.
+     Create rule
      
      - parameter createAlertRuleRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class AlertRulesAPI {
     }
 
     /**
-     Create an alert rule with a flat channel list.
+     Create rule
      - POST /api/v4/alert-rules
+     - Create an alert rule with a flat channel list.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createAlertRuleRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<AlertRuleResponse> 
@@ -42,11 +49,11 @@ open class AlertRulesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AlertRuleResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete an alert rule (cascades to its channels).
+     Delete rule
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +64,15 @@ open class AlertRulesAPI {
     }
 
     /**
-     Delete an alert rule (cascades to its channels).
+     Delete rule
      - DELETE /api/v4/alert-rules/{id}
+     - Delete an alert rule (cascades to its channels).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -81,11 +95,11 @@ open class AlertRulesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a single alert rule with its flat channel list.
+     Get rule
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -96,8 +110,15 @@ open class AlertRulesAPI {
     }
 
     /**
-     Get a single alert rule with its flat channel list.
+     Get rule
      - GET /api/v4/alert-rules/{id}
+     - Get a single alert rule with its flat channel list.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<AlertRuleResponse> 
@@ -120,11 +141,11 @@ open class AlertRulesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AlertRuleResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     List all alert rules for the current tenant with their flat channel list.
+     Get rules
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [AlertRuleResponse]
@@ -134,8 +155,15 @@ open class AlertRulesAPI {
     }
 
     /**
-     List all alert rules for the current tenant with their flat channel list.
+     Get rules
      - GET /api/v4/alert-rules
+     - List all alert rules for the current tenant with their flat channel list.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[AlertRuleResponse]> 
      */
@@ -154,11 +182,11 @@ open class AlertRulesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[AlertRuleResponse]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Fire a saved rule through its real channel list as a test. Writes a is_test=true instance + delivery rows so the user can verify their channels without polluting the active-alerts surface.
+     Test fire
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -169,8 +197,15 @@ open class AlertRulesAPI {
     }
 
     /**
-     Fire a saved rule through its real channel list as a test. Writes a is_test=true instance + delivery rows so the user can verify their channels without polluting the active-alerts surface.
+     Test fire
      - POST /api/v4/alert-rules/{id}/test-fire
+     - Fire a saved rule through its real channel list as a test. Writes a is_test=true instance + delivery rows so the user can verify their channels without polluting the active-alerts surface.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -193,11 +228,11 @@ open class AlertRulesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Test-fire variant for the editor on an unsaved rule. Same provider chain, no rule lookup — channels and metadata come straight from the request body.
+     Test fire dry run
      
      - parameter testFireDryRunRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -208,8 +243,15 @@ open class AlertRulesAPI {
     }
 
     /**
-     Test-fire variant for the editor on an unsaved rule. Same provider chain, no rule lookup — channels and metadata come straight from the request body.
+     Test fire dry run
      - POST /api/v4/alert-rules/test-fire-dry-run
+     - Test-fire variant for the editor on an unsaved rule. Same provider chain, no rule lookup — channels and metadata come straight from the request body.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter testFireDryRunRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -229,11 +271,11 @@ open class AlertRulesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Toggle an alert rule enabled/disabled.
+     Toggle rule
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -244,8 +286,15 @@ open class AlertRulesAPI {
     }
 
     /**
-     Toggle an alert rule enabled/disabled.
+     Toggle rule
      - PATCH /api/v4/alert-rules/{id}/toggle
+     - Toggle an alert rule enabled/disabled.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<AlertRuleResponse> 
@@ -268,11 +317,11 @@ open class AlertRulesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AlertRuleResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update an alert rule.
+     Update rule
      
      - parameter id: (path)  
      - parameter updateAlertRuleRequest: (body)  
@@ -284,8 +333,15 @@ open class AlertRulesAPI {
     }
 
     /**
-     Update an alert rule.
+     Update rule
      - PUT /api/v4/alert-rules/{id}
+     - Update an alert rule.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter updateAlertRuleRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -309,6 +365,6 @@ open class AlertRulesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AlertRuleResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

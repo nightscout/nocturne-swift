@@ -10,7 +10,7 @@ import Foundation
 open class RoleAPI {
 
     /**
-     Create a custom role.
+     Create role
      
      - parameter createRoleRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class RoleAPI {
     }
 
     /**
-     Create a custom role.
+     Create role
      - POST /api/v4/roles
+     - Create a custom role.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createRoleRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TenantRoleDto> 
@@ -42,11 +49,11 @@ open class RoleAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TenantRoleDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a role.
+     Delete role
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +64,15 @@ open class RoleAPI {
     }
 
     /**
-     Delete a role.
+     Delete role
      - DELETE /api/v4/roles/{id}
+     - Delete a role.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -81,11 +95,11 @@ open class RoleAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     List roles for the current tenant.
+     Get roles
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [TenantRoleDto]
@@ -95,8 +109,15 @@ open class RoleAPI {
     }
 
     /**
-     List roles for the current tenant.
+     Get roles
      - GET /api/v4/roles
+     - List roles for the current tenant.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[TenantRoleDto]> 
      */
@@ -115,11 +136,11 @@ open class RoleAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[TenantRoleDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update a role.
+     Update role
      
      - parameter id: (path)  
      - parameter updateRoleRequest: (body)  
@@ -131,8 +152,15 @@ open class RoleAPI {
     }
 
     /**
-     Update a role.
+     Update role
      - PUT /api/v4/roles/{id}
+     - Update a role.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter updateRoleRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -156,6 +184,6 @@ open class RoleAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TenantRoleDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

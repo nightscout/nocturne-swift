@@ -10,7 +10,7 @@ import Foundation
 open class PlatformSettingsAPI {
 
     /**
-     Deletes platform settings for a category, removing all stored credentials.
+     Delete
      
      - parameter category: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class PlatformSettingsAPI {
     }
 
     /**
-     Deletes platform settings for a category, removing all stored credentials.
+     Delete
      - DELETE /api/v4/admin/platform-settings/{category}
+     - Deletes platform settings for a category, removing all stored credentials.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter category: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -45,11 +52,11 @@ open class PlatformSettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Returns a single platform setting category.
+     Get
      
      - parameter category: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -60,8 +67,15 @@ open class PlatformSettingsAPI {
     }
 
     /**
-     Returns a single platform setting category.
+     Get
      - GET /api/v4/admin/platform-settings/{category}
+     - Returns a single platform setting category.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter category: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PlatformSettingsSummary> 
@@ -84,11 +98,11 @@ open class PlatformSettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PlatformSettingsSummary>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Returns all platform setting categories with enabled status and configured field names. Secrets are never returned — only which fields have been set.
+     Get all
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [PlatformSettingsSummary]
@@ -98,8 +112,15 @@ open class PlatformSettingsAPI {
     }
 
     /**
-     Returns all platform setting categories with enabled status and configured field names. Secrets are never returned — only which fields have been set.
+     Get all
      - GET /api/v4/admin/platform-settings
+     - Returns all platform setting categories with enabled status and configured field names. Secrets are never returned — only which fields have been set.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[PlatformSettingsSummary]> 
      */
@@ -118,11 +139,11 @@ open class PlatformSettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[PlatformSettingsSummary]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Returns decrypted credentials for all configured platforms. Restricted to instance-key authentication only (server-to-server).
+     Get all decrypted
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [PlatformCredentials]
@@ -132,8 +153,15 @@ open class PlatformSettingsAPI {
     }
 
     /**
-     Returns decrypted credentials for all configured platforms. Restricted to instance-key authentication only (server-to-server).
+     Get all decrypted
      - GET /api/v4/admin/platform-settings/decrypted
+     - Returns decrypted credentials for all configured platforms. Restricted to instance-key authentication only (server-to-server).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[PlatformCredentials]> 
      */
@@ -152,11 +180,11 @@ open class PlatformSettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[PlatformCredentials]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Upserts platform settings for a category. Blank fields preserve existing values. Returns restartRequired: true — the SvelteKit frontend must be restarted for changes to take effect.
+     Upsert
      
      - parameter category: (path)  
      - parameter upsertPlatformSettingsRequest: (body)  
@@ -168,8 +196,15 @@ open class PlatformSettingsAPI {
     }
 
     /**
-     Upserts platform settings for a category. Blank fields preserve existing values. Returns restartRequired: true — the SvelteKit frontend must be restarted for changes to take effect.
+     Upsert
      - PUT /api/v4/admin/platform-settings/{category}
+     - Upserts platform settings for a category. Blank fields preserve existing values. Returns restartRequired: true — the SvelteKit frontend must be restarted for changes to take effect.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter category: (path)  
      - parameter upsertPlatformSettingsRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -193,6 +228,6 @@ open class PlatformSettingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

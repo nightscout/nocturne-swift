@@ -10,7 +10,7 @@ import Foundation
 open class UserPreferencesAPI {
 
     /**
-     Get the current user's preferences
+     Get preferences
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: UserPreferencesResponse
@@ -20,8 +20,15 @@ open class UserPreferencesAPI {
     }
 
     /**
-     Get the current user's preferences
+     Get preferences
      - GET /api/v4/user/preferences
+     - Get the current user's preferences
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<UserPreferencesResponse> 
      */
@@ -40,11 +47,11 @@ open class UserPreferencesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<UserPreferencesResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update the current user's preferences
+     Update preferences
      
      - parameter updateUserPreferencesRequest: (body) The preferences to update 
      - parameter apiConfiguration: The configuration for the http request.
@@ -55,8 +62,15 @@ open class UserPreferencesAPI {
     }
 
     /**
-     Update the current user's preferences
+     Update preferences
      - PATCH /api/v4/user/preferences
+     - Update the current user's preferences
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter updateUserPreferencesRequest: (body) The preferences to update 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<UserPreferencesResponse> 
@@ -76,6 +90,6 @@ open class UserPreferencesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<UserPreferencesResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

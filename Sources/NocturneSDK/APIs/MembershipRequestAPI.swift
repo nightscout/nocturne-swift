@@ -10,7 +10,7 @@ import Foundation
 open class MembershipRequestAPI {
 
     /**
-     Approve a membership request and add the user as a tenant member.
+     Approve request
      
      - parameter id: (path)  
      - parameter approveMembershipRequestRequest: (body)  
@@ -22,8 +22,15 @@ open class MembershipRequestAPI {
     }
 
     /**
-     Approve a membership request and add the user as a tenant member.
+     Approve request
      - POST /api/v4/membership-requests/{id}/approve
+     - Approve a membership request and add the user as a tenant member.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter approveMembershipRequestRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -47,11 +54,11 @@ open class MembershipRequestAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DecideMembershipRequestResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Submit a request to join the current tenant.
+     Create request
      
      - parameter createMembershipRequestRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -62,8 +69,15 @@ open class MembershipRequestAPI {
     }
 
     /**
-     Submit a request to join the current tenant.
+     Create request
      - POST /api/v4/membership-requests
+     - Submit a request to join the current tenant.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createMembershipRequestRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<CreateMembershipRequestResult> 
@@ -83,11 +97,11 @@ open class MembershipRequestAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CreateMembershipRequestResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Deny a membership request.
+     Deny request
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -98,8 +112,15 @@ open class MembershipRequestAPI {
     }
 
     /**
-     Deny a membership request.
+     Deny request
      - POST /api/v4/membership-requests/{id}/deny
+     - Deny a membership request.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DecideMembershipRequestResult> 
@@ -122,11 +143,11 @@ open class MembershipRequestAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DecideMembershipRequestResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get whether this tenant currently lets people request to become a member.
+     Get membership request settings
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: MembershipRequestSettingsDto
@@ -136,8 +157,15 @@ open class MembershipRequestAPI {
     }
 
     /**
-     Get whether this tenant currently lets people request to become a member.
+     Get membership request settings
      - GET /api/v4/membership-requests/settings
+     - Get whether this tenant currently lets people request to become a member.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<MembershipRequestSettingsDto> 
      */
@@ -156,11 +184,11 @@ open class MembershipRequestAPI {
 
         let localVariableRequestBuilder: RequestBuilder<MembershipRequestSettingsDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get the current user's membership request for this tenant, if any.
+     Get my request
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: MembershipRequestDto
@@ -170,8 +198,15 @@ open class MembershipRequestAPI {
     }
 
     /**
-     Get the current user's membership request for this tenant, if any.
+     Get my request
      - GET /api/v4/membership-requests/mine
+     - Get the current user's membership request for this tenant, if any.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<MembershipRequestDto> 
      */
@@ -190,11 +225,11 @@ open class MembershipRequestAPI {
 
         let localVariableRequestBuilder: RequestBuilder<MembershipRequestDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     List all pending membership requests for the current tenant.
+     Get pending requests
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [MembershipRequestDto]
@@ -204,8 +239,15 @@ open class MembershipRequestAPI {
     }
 
     /**
-     List all pending membership requests for the current tenant.
+     Get pending requests
      - GET /api/v4/membership-requests
+     - List all pending membership requests for the current tenant.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[MembershipRequestDto]> 
      */
@@ -224,11 +266,11 @@ open class MembershipRequestAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[MembershipRequestDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Enable or disable whether people can request to become a member. Independent of public access.
+     Set membership request settings
      
      - parameter updateMembershipRequestSettingsRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -239,8 +281,15 @@ open class MembershipRequestAPI {
     }
 
     /**
-     Enable or disable whether people can request to become a member. Independent of public access.
+     Set membership request settings
      - PUT /api/v4/membership-requests/settings
+     - Enable or disable whether people can request to become a member. Independent of public access.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter updateMembershipRequestSettingsRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<MembershipRequestSettingsDto> 
@@ -260,6 +309,6 @@ open class MembershipRequestAPI {
 
         let localVariableRequestBuilder: RequestBuilder<MembershipRequestSettingsDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

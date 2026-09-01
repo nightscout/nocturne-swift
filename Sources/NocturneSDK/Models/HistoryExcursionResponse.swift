@@ -13,6 +13,7 @@ public struct HistoryExcursionResponse: Sendable, Codable, Hashable {
     public var alertRuleId: String?
     public var ruleName: String?
     public var conditionType: AlertConditionType?
+    public var severity: AlertRuleSeverity?
     public var startedAt: Date?
     public var endedAt: Date?
     public var acknowledgedAt: Date?
@@ -20,11 +21,12 @@ public struct HistoryExcursionResponse: Sendable, Codable, Hashable {
     /** True when every instance of this excursion was a test fire. */
     public var isTest: Bool?
 
-    public init(id: String? = nil, alertRuleId: String? = nil, ruleName: String? = nil, conditionType: AlertConditionType? = nil, startedAt: Date? = nil, endedAt: Date? = nil, acknowledgedAt: Date? = nil, acknowledgedBy: String? = nil, isTest: Bool? = nil) {
+    public init(id: String? = nil, alertRuleId: String? = nil, ruleName: String? = nil, conditionType: AlertConditionType? = nil, severity: AlertRuleSeverity? = nil, startedAt: Date? = nil, endedAt: Date? = nil, acknowledgedAt: Date? = nil, acknowledgedBy: String? = nil, isTest: Bool? = nil) {
         self.id = id
         self.alertRuleId = alertRuleId
         self.ruleName = ruleName
         self.conditionType = conditionType
+        self.severity = severity
         self.startedAt = startedAt
         self.endedAt = endedAt
         self.acknowledgedAt = acknowledgedAt
@@ -37,6 +39,7 @@ public struct HistoryExcursionResponse: Sendable, Codable, Hashable {
         case alertRuleId
         case ruleName
         case conditionType
+        case severity
         case startedAt
         case endedAt
         case acknowledgedAt
@@ -52,6 +55,7 @@ public struct HistoryExcursionResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(alertRuleId, forKey: .alertRuleId)
         try container.encodeIfPresent(ruleName, forKey: .ruleName)
         try container.encodeIfPresent(conditionType, forKey: .conditionType)
+        try container.encodeIfPresent(severity, forKey: .severity)
         try container.encodeIfPresent(startedAt, forKey: .startedAt)
         try container.encodeIfPresent(endedAt, forKey: .endedAt)
         try container.encodeIfPresent(acknowledgedAt, forKey: .acknowledgedAt)

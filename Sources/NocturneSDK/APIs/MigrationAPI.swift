@@ -10,7 +10,8 @@ import Foundation
 open class MigrationAPI {
 
     /**
-
+     Cancel migration
+     
      - parameter jobId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -20,7 +21,14 @@ open class MigrationAPI {
     }
 
     /**
+     Cancel migration
      - POST /api/v4/migration/{jobId}/cancel
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter jobId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -43,11 +51,12 @@ open class MigrationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get history
+     
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [MigrationJobInfo]
      */
@@ -56,7 +65,14 @@ open class MigrationAPI {
     }
 
     /**
+     Get history
      - GET /api/v4/migration/history
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[MigrationJobInfo]> 
      */
@@ -75,11 +91,12 @@ open class MigrationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[MigrationJobInfo]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get pending config
+     
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PendingMigrationConfig
      */
@@ -88,7 +105,14 @@ open class MigrationAPI {
     }
 
     /**
+     Get pending config
      - GET /api/v4/migration/pending-config
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PendingMigrationConfig> 
      */
@@ -107,11 +131,12 @@ open class MigrationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PendingMigrationConfig>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get sources
+     
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [MigrationSourceDto]
      */
@@ -120,7 +145,14 @@ open class MigrationAPI {
     }
 
     /**
+     Get sources
      - GET /api/v4/migration/sources
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[MigrationSourceDto]> 
      */
@@ -139,11 +171,12 @@ open class MigrationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[MigrationSourceDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get status
+     
      - parameter jobId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: MigrationJobStatus
@@ -153,7 +186,14 @@ open class MigrationAPI {
     }
 
     /**
+     Get status
      - GET /api/v4/migration/{jobId}/status
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter jobId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<MigrationJobStatus> 
@@ -176,11 +216,11 @@ open class MigrationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<MigrationJobStatus>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Start a migration using saved connector credentials (e.g., after Nightscout connector setup).
+     Start from connector
      
      - parameter connectorName: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -191,8 +231,15 @@ open class MigrationAPI {
     }
 
     /**
-     Start a migration using saved connector credentials (e.g., after Nightscout connector setup).
+     Start from connector
      - POST /api/v4/migration/start-from-connector/{connectorName}
+     - Start a migration using saved connector credentials (e.g., after Nightscout connector setup).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter connectorName: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<MigrationJobInfo> 
@@ -215,11 +262,12 @@ open class MigrationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<MigrationJobInfo>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Start migration
+     
      - parameter startMigrationRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: MigrationJobInfo
@@ -229,7 +277,14 @@ open class MigrationAPI {
     }
 
     /**
+     Start migration
      - POST /api/v4/migration/start
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter startMigrationRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<MigrationJobInfo> 
@@ -249,11 +304,12 @@ open class MigrationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<MigrationJobInfo>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Test connection
+     
      - parameter testMigrationConnectionRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: TestMigrationConnectionResult
@@ -263,7 +319,14 @@ open class MigrationAPI {
     }
 
     /**
+     Test connection
      - POST /api/v4/migration/test
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter testMigrationConnectionRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<TestMigrationConnectionResult> 
@@ -283,6 +346,6 @@ open class MigrationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TestMigrationConnectionResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

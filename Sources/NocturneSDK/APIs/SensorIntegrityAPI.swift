@@ -10,7 +10,7 @@ import Foundation
 open class SensorIntegrityAPI {
 
     /**
-     Analyze a UTC window for sensor-integrity clusters and cluster-linked hypo events.
+     Analyze
      
      - parameter startDate: (query) Inclusive UTC start of the window. (optional)
      - parameter endDate: (query) Exclusive UTC end of the window. (optional)
@@ -28,8 +28,15 @@ open class SensorIntegrityAPI {
     }
 
     /**
-     Analyze a UTC window for sensor-integrity clusters and cluster-linked hypo events.
+     Analyze
      - GET /api/v4/sensor-integrity
+     - Analyze a UTC window for sensor-integrity clusters and cluster-linked hypo events.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter startDate: (query) Inclusive UTC start of the window. (optional)
      - parameter endDate: (query) Exclusive UTC end of the window. (optional)
      - parameter source: (query) Optional data source filter; omitted analyzes the combined stream. (optional)
@@ -67,6 +74,6 @@ open class SensorIntegrityAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SensorIntegrityReport>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

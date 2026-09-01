@@ -10,7 +10,7 @@ import Foundation
 open class ChartDataAPI {
 
     /**
-     Gets the basal delivery series for a time window without running the full IOB/COB compute pipeline. Fetches only temp basals and profile data, making it significantly cheaper than the dashboard endpoint.
+     Get basal series
      
      - parameter startTime: (query) Start of the requested window as a Unix timestamp in milliseconds. (optional)
      - parameter endTime: (query) End of the requested window as a Unix timestamp in milliseconds.             Must be greater than startTime. (optional)
@@ -22,8 +22,15 @@ open class ChartDataAPI {
     }
 
     /**
-     Gets the basal delivery series for a time window without running the full IOB/COB compute pipeline. Fetches only temp basals and profile data, making it significantly cheaper than the dashboard endpoint.
+     Get basal series
      - GET /api/v4/ChartData/basal-series
+     - Gets the basal delivery series for a time window without running the full IOB/COB compute pipeline. Fetches only temp basals and profile data, making it significantly cheaper than the dashboard endpoint.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter startTime: (query) Start of the requested window as a Unix timestamp in milliseconds. (optional)
      - parameter endTime: (query) End of the requested window as a Unix timestamp in milliseconds.             Must be greater than startTime. (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -48,11 +55,11 @@ open class ChartDataAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[BasalPoint]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Gets complete dashboard chart data in a single call. Returns pre-calculated IOB, COB, basal series, categorized treatment markers, state spans, system events, tracker markers, and glucose readings.
+     Get dashboard chart data
      
      - parameter startTime: (query) Start of the requested window as a Unix timestamp in milliseconds. (optional)
      - parameter endTime: (query) End of the requested window as a Unix timestamp in milliseconds.             Must be greater than startTime. (optional)
@@ -65,8 +72,15 @@ open class ChartDataAPI {
     }
 
     /**
-     Gets complete dashboard chart data in a single call. Returns pre-calculated IOB, COB, basal series, categorized treatment markers, state spans, system events, tracker markers, and glucose readings.
+     Get dashboard chart data
      - GET /api/v4/ChartData/dashboard
+     - Gets complete dashboard chart data in a single call. Returns pre-calculated IOB, COB, basal series, categorized treatment markers, state spans, system events, tracker markers, and glucose readings.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter startTime: (query) Start of the requested window as a Unix timestamp in milliseconds. (optional)
      - parameter endTime: (query) End of the requested window as a Unix timestamp in milliseconds.             Must be greater than startTime. (optional)
      - parameter intervalMinutes: (query) Granularity of the returned series in minutes (1–60, default 5). (optional, default to 5)
@@ -93,6 +107,6 @@ open class ChartDataAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DashboardChartData>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

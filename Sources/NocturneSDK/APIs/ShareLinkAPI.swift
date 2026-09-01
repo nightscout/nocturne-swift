@@ -10,7 +10,7 @@ import Foundation
 open class ShareLinkAPI {
 
     /**
-     Disable public sharing and invalidate the current link.
+     Disable share link
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: ShareLinkDto
@@ -20,8 +20,15 @@ open class ShareLinkAPI {
     }
 
     /**
-     Disable public sharing and invalidate the current link.
+     Disable share link
      - DELETE /api/v4/share
+     - Disable public sharing and invalidate the current link.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ShareLinkDto> 
      */
@@ -40,11 +47,11 @@ open class ShareLinkAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ShareLinkDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get the current public share link state.
+     Get share link
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: ShareLinkDto
@@ -54,8 +61,15 @@ open class ShareLinkAPI {
     }
 
     /**
-     Get the current public share link state.
+     Get share link
      - GET /api/v4/share
+     - Get the current public share link state.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ShareLinkDto> 
      */
@@ -74,11 +88,11 @@ open class ShareLinkAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ShareLinkDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Mint a new share token — enables sharing, or rotates an existing link. The previous link stops working immediately.
+     Rotate share link
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: ShareLinkDto
@@ -88,8 +102,15 @@ open class ShareLinkAPI {
     }
 
     /**
-     Mint a new share token — enables sharing, or rotates an existing link. The previous link stops working immediately.
+     Rotate share link
      - POST /api/v4/share/rotate
+     - Mint a new share token — enables sharing, or rotates an existing link. The previous link stops working immediately.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ShareLinkDto> 
      */
@@ -108,11 +129,11 @@ open class ShareLinkAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ShareLinkDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Choose whether the public view shows full history or only the last 24 hours.
+     Set share link full history
      
      - parameter setShareFullHistoryRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -123,8 +144,15 @@ open class ShareLinkAPI {
     }
 
     /**
-     Choose whether the public view shows full history or only the last 24 hours.
+     Set share link full history
      - PUT /api/v4/share/full-history
+     - Choose whether the public view shows full history or only the last 24 hours.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter setShareFullHistoryRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ShareLinkDto> 
@@ -144,11 +172,11 @@ open class ShareLinkAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ShareLinkDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Set which data categories anonymous viewers can see. Scopes must be read-permission atoms drawn from TenantPermissions.PublicShareScopes; an empty list keeps the link live but shares nothing.
+     Set share link scopes
      
      - parameter setShareScopesRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -159,8 +187,15 @@ open class ShareLinkAPI {
     }
 
     /**
-     Set which data categories anonymous viewers can see. Scopes must be read-permission atoms drawn from TenantPermissions.PublicShareScopes; an empty list keeps the link live but shares nothing.
+     Set share link scopes
      - PUT /api/v4/share/scopes
+     - Set which data categories anonymous viewers can see. Scopes must be read-permission atoms drawn from Scope.PublicShareScopes; an empty list keeps the link live but shares nothing.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter setShareScopesRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ShareLinkDto> 
@@ -180,6 +215,6 @@ open class ShareLinkAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ShareLinkDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

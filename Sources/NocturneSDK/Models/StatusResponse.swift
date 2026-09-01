@@ -29,8 +29,9 @@ public struct StatusResponse: Sendable, Codable, Hashable {
     public var isDemo: Bool?
     public var nextResetAt: Date?
     public var anonymousReadAccess: Bool?
+    public var tenantSlug: String?
 
-    public init(status: String? = nil, name: String? = nil, version: String? = nil, apiVersion: String? = nil, serverTime: Date? = nil, serverTimeEpoch: Int64? = nil, enabled: [String]? = nil, apiEnabled: Bool? = nil, roles: [String]? = nil, settings: [String: JSONValue]? = nil, extendedSettings: [String: JSONValue]? = nil, careportalEnabled: Bool? = nil, boluscalcEnabled: Bool? = nil, authorized: JSONValue? = nil, runtimeState: String? = nil, head: String? = nil, build: String? = nil, isDemo: Bool? = nil, nextResetAt: Date? = nil, anonymousReadAccess: Bool? = nil) {
+    public init(status: String? = nil, name: String? = nil, version: String? = nil, apiVersion: String? = nil, serverTime: Date? = nil, serverTimeEpoch: Int64? = nil, enabled: [String]? = nil, apiEnabled: Bool? = nil, roles: [String]? = nil, settings: [String: JSONValue]? = nil, extendedSettings: [String: JSONValue]? = nil, careportalEnabled: Bool? = nil, boluscalcEnabled: Bool? = nil, authorized: JSONValue? = nil, runtimeState: String? = nil, head: String? = nil, build: String? = nil, isDemo: Bool? = nil, nextResetAt: Date? = nil, anonymousReadAccess: Bool? = nil, tenantSlug: String? = nil) {
         self.status = status
         self.name = name
         self.version = version
@@ -51,6 +52,7 @@ public struct StatusResponse: Sendable, Codable, Hashable {
         self.isDemo = isDemo
         self.nextResetAt = nextResetAt
         self.anonymousReadAccess = anonymousReadAccess
+        self.tenantSlug = tenantSlug
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -74,6 +76,7 @@ public struct StatusResponse: Sendable, Codable, Hashable {
         case isDemo
         case nextResetAt
         case anonymousReadAccess
+        case tenantSlug
     }
 
     // Encodable protocol methods
@@ -100,6 +103,7 @@ public struct StatusResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(isDemo, forKey: .isDemo)
         try container.encodeIfPresent(nextResetAt, forKey: .nextResetAt)
         try container.encodeIfPresent(anonymousReadAccess, forKey: .anonymousReadAccess)
+        try container.encodeIfPresent(tenantSlug, forKey: .tenantSlug)
     }
 }
 

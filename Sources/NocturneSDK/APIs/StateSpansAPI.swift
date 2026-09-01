@@ -10,7 +10,7 @@ import Foundation
 open class StateSpansAPI {
 
     /**
-     Create a new state span (manual entry)
+     Create state span
      
      - parameter createStateSpanRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class StateSpansAPI {
     }
 
     /**
-     Create a new state span (manual entry)
+     Create state span
      - POST /api/v4/state-spans
+     - Create a new state span (manual entry)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createStateSpanRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<StateSpan> 
@@ -42,11 +49,11 @@ open class StateSpansAPI {
 
         let localVariableRequestBuilder: RequestBuilder<StateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a state span
+     Delete state span
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +64,15 @@ open class StateSpansAPI {
     }
 
     /**
-     Delete a state span
+     Delete state span
      - DELETE /api/v4/state-spans/{id}
+     - Delete a state span
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -81,11 +95,11 @@ open class StateSpansAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get all activity state spans (exercise, illness, travel)
+     Get activities
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -100,8 +114,15 @@ open class StateSpansAPI {
     }
 
     /**
-     Get all activity state spans (exercise, illness, travel)
+     Get activities
      - GET /api/v4/state-spans/activities
+     - This read merges three categories in memory before it paginates, so the page is bounded by ClampMergedPage rather than the plain page-size ceiling, and each category is fetched only as deep as the requested page reaches.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -133,11 +154,11 @@ open class StateSpansAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfStateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get connectivity state spans
+     Get connectivity
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -152,8 +173,15 @@ open class StateSpansAPI {
     }
 
     /**
-     Get connectivity state spans
+     Get connectivity
      - GET /api/v4/state-spans/connectivity
+     - Get connectivity state spans
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -185,11 +213,11 @@ open class StateSpansAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfStateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get exercise state spans (user-annotated activity periods)
+     Get exercise
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -204,8 +232,15 @@ open class StateSpansAPI {
     }
 
     /**
-     Get exercise state spans (user-annotated activity periods)
+     Get exercise
      - GET /api/v4/state-spans/exercise
+     - Get exercise state spans (user-annotated activity periods)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -237,11 +272,11 @@ open class StateSpansAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfStateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get illness state spans (user-annotated illness periods)
+     Get illness
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -256,8 +291,15 @@ open class StateSpansAPI {
     }
 
     /**
-     Get illness state spans (user-annotated illness periods)
+     Get illness
      - GET /api/v4/state-spans/illness
+     - Get illness state spans (user-annotated illness periods)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -289,11 +331,11 @@ open class StateSpansAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfStateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get override state spans
+     Get overrides
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -308,8 +350,15 @@ open class StateSpansAPI {
     }
 
     /**
-     Get override state spans
+     Get overrides
      - GET /api/v4/state-spans/overrides
+     - Get override state spans
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -341,11 +390,11 @@ open class StateSpansAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfStateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get profile state spans
+     Get profiles
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -360,8 +409,15 @@ open class StateSpansAPI {
     }
 
     /**
-     Get profile state spans
+     Get profiles
      - GET /api/v4/state-spans/profiles
+     - Get profile state spans
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -393,11 +449,11 @@ open class StateSpansAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfStateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get pump mode state spans
+     Get pump modes
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -412,8 +468,15 @@ open class StateSpansAPI {
     }
 
     /**
-     Get pump mode state spans
+     Get pump modes
      - GET /api/v4/state-spans/pump-modes
+     - Get pump mode state spans
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -445,11 +508,11 @@ open class StateSpansAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfStateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a specific state span by ID
+     Get state span
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -460,8 +523,15 @@ open class StateSpansAPI {
     }
 
     /**
-     Get a specific state span by ID
+     Get state span
      - GET /api/v4/state-spans/{id}
+     - Get a specific state span by ID
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<StateSpan> 
@@ -484,11 +554,11 @@ open class StateSpansAPI {
 
         let localVariableRequestBuilder: RequestBuilder<StateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Query all state spans with optional filtering
+     Get state spans
      
      - parameter category: (query)  (optional)
      - parameter state: (query)  (optional)
@@ -507,8 +577,15 @@ open class StateSpansAPI {
     }
 
     /**
-     Query all state spans with optional filtering
+     Get state spans
      - GET /api/v4/state-spans
+     - Never cached, per GetProfileSummary: a temporary target, override, or data-exclusion window the caller just set must not be invisible until a cached list body expires — and an exclusion window decides whether readings count towards analytics, so a stale one silently changes reported statistics.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter category: (query)  (optional)
      - parameter state: (query)  (optional)
      - parameter from: (query)  (optional)
@@ -548,11 +625,11 @@ open class StateSpansAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfStateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get temporary target state spans (AAPS temporary glucose targets)
+     Get temporary targets
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -567,8 +644,15 @@ open class StateSpansAPI {
     }
 
     /**
-     Get temporary target state spans (AAPS temporary glucose targets)
+     Get temporary targets
      - GET /api/v4/state-spans/temporary-targets
+     - Get temporary target state spans (AAPS temporary glucose targets)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -600,11 +684,11 @@ open class StateSpansAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfStateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get travel state spans (user-annotated travel/timezone change periods)
+     Get travel
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -619,8 +703,15 @@ open class StateSpansAPI {
     }
 
     /**
-     Get travel state spans (user-annotated travel/timezone change periods)
+     Get travel
      - GET /api/v4/state-spans/travel
+     - Get travel state spans (user-annotated travel/timezone change periods)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -652,11 +743,11 @@ open class StateSpansAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfStateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update an existing state span
+     Update state span
      
      - parameter id: (path)  
      - parameter updateStateSpanRequest: (body)  
@@ -668,8 +759,15 @@ open class StateSpansAPI {
     }
 
     /**
-     Update an existing state span
+     Update state span
      - PUT /api/v4/state-spans/{id}
+     - Update an existing state span
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter updateStateSpanRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -693,6 +791,6 @@ open class StateSpansAPI {
 
         let localVariableRequestBuilder: RequestBuilder<StateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

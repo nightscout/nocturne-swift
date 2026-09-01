@@ -10,7 +10,7 @@ import Foundation
 open class ConnectedAppsAPI {
 
     /**
-     List all connected apps (OAuth app grants) for the authenticated user on the current tenant.
+     List
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [ConnectedAppDto]
@@ -20,8 +20,15 @@ open class ConnectedAppsAPI {
     }
 
     /**
-     List all connected apps (OAuth app grants) for the authenticated user on the current tenant.
+     List
      - GET /api/v4/account/connected-apps
+     - List all connected apps (OAuth app grants) for the authenticated user on the current tenant.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[ConnectedAppDto]> 
      */
@@ -40,11 +47,11 @@ open class ConnectedAppsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[ConnectedAppDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Revoke a connected app. Soft-deletes the grant and invalidates all associated refresh tokens; previously-issued access tokens become unusable on next request via the revocation cache.
+     Revoke
      
      - parameter grantId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -55,8 +62,15 @@ open class ConnectedAppsAPI {
     }
 
     /**
-     Revoke a connected app. Soft-deletes the grant and invalidates all associated refresh tokens; previously-issued access tokens become unusable on next request via the revocation cache.
+     Revoke
      - DELETE /api/v4/account/connected-apps/{grantId}
+     - Revoke a connected app. Soft-deletes the grant and invalidates all associated refresh tokens. Previously-issued access tokens carry the grant id and are rejected on their next request, so no residual access survives the revocation. Access tokens minted before the grant id was added to them are not covered and remain usable until they expire.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter grantId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -79,6 +93,6 @@ open class ConnectedAppsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

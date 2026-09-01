@@ -10,7 +10,7 @@ import Foundation
 open class TlsAuthorizationAPI {
 
     /**
-     Returns 200 when a certificate should be issued for domain (the apex domain or an active tenant subdomain), 404 otherwise.
+     Authorize
      
      - parameter domain: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,9 @@ open class TlsAuthorizationAPI {
     }
 
     /**
-     Returns 200 when a certificate should be issued for domain (the apex domain or an active tenant subdomain), 404 otherwise.
+     Authorize
      - GET /api/v4/platform/tls-authorize
+     - Returns 200 when a certificate should be issued for domain (the apex domain, an active tenant subdomain, or a share host whose token is live), 404 otherwise.
      - parameter domain: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 

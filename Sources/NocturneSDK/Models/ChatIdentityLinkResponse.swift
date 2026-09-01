@@ -18,11 +18,13 @@ public struct ChatIdentityLinkResponse: Sendable, Codable, Hashable {
     public var label: String?
     public var displayName: String?
     public var isDefault: Bool?
+    /** Label of the link a bare bot invocation from this chat account resolves to, which may be a link in another tenant. Null when the chat account has no default, and on links belonging to another subject. */
+    public var defaultLabel: String?
     public var displayUnit: String?
     public var isActive: Bool?
     public var createdAt: Date?
 
-    public init(id: String? = nil, tenantId: String? = nil, nocturneUserId: String? = nil, platform: String? = nil, platformUserId: String? = nil, platformChannelId: String? = nil, label: String? = nil, displayName: String? = nil, isDefault: Bool? = nil, displayUnit: String? = nil, isActive: Bool? = nil, createdAt: Date? = nil) {
+    public init(id: String? = nil, tenantId: String? = nil, nocturneUserId: String? = nil, platform: String? = nil, platformUserId: String? = nil, platformChannelId: String? = nil, label: String? = nil, displayName: String? = nil, isDefault: Bool? = nil, defaultLabel: String? = nil, displayUnit: String? = nil, isActive: Bool? = nil, createdAt: Date? = nil) {
         self.id = id
         self.tenantId = tenantId
         self.nocturneUserId = nocturneUserId
@@ -32,6 +34,7 @@ public struct ChatIdentityLinkResponse: Sendable, Codable, Hashable {
         self.label = label
         self.displayName = displayName
         self.isDefault = isDefault
+        self.defaultLabel = defaultLabel
         self.displayUnit = displayUnit
         self.isActive = isActive
         self.createdAt = createdAt
@@ -47,6 +50,7 @@ public struct ChatIdentityLinkResponse: Sendable, Codable, Hashable {
         case label
         case displayName
         case isDefault
+        case defaultLabel
         case displayUnit
         case isActive
         case createdAt
@@ -65,6 +69,7 @@ public struct ChatIdentityLinkResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(label, forKey: .label)
         try container.encodeIfPresent(displayName, forKey: .displayName)
         try container.encodeIfPresent(isDefault, forKey: .isDefault)
+        try container.encodeIfPresent(defaultLabel, forKey: .defaultLabel)
         try container.encodeIfPresent(displayUnit, forKey: .displayUnit)
         try container.encodeIfPresent(isActive, forKey: .isActive)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)

@@ -10,7 +10,7 @@ import Foundation
 open class AuditAPI {
 
     /**
-     Get the audit configuration for the current tenant.
+     Get audit config
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: AuditConfigDto
@@ -20,8 +20,15 @@ open class AuditAPI {
     }
 
     /**
-     Get the audit configuration for the current tenant.
+     Get audit config
      - GET /api/v4/audit/config
+     - Get the audit configuration for the current tenant.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<AuditConfigDto> 
      */
@@ -40,11 +47,11 @@ open class AuditAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AuditConfigDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Query mutation audit log entries for the current tenant.
+     Get mutation audit log
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -63,8 +70,15 @@ open class AuditAPI {
     }
 
     /**
-     Query mutation audit log entries for the current tenant.
+     Get mutation audit log
      - GET /api/v4/audit/mutations
+     - Query mutation audit log entries for the current tenant.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -104,11 +118,11 @@ open class AuditAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfMutationAuditDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Query read access audit log entries for the current tenant.
+     Get read access audit log
      
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
@@ -127,8 +141,15 @@ open class AuditAPI {
     }
 
     /**
-     Query read access audit log entries for the current tenant.
+     Get read access audit log
      - GET /api/v4/audit/reads
+     - Query read access audit log entries for the current tenant.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query)  (optional)
      - parameter to: (query)  (optional)
      - parameter limit: (query)  (optional, default to 100)
@@ -168,11 +189,11 @@ open class AuditAPI {
 
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfReadAccessAuditDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Create or update the audit configuration for the current tenant.
+     Update audit config
      
      - parameter auditConfigDto: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -183,8 +204,15 @@ open class AuditAPI {
     }
 
     /**
-     Create or update the audit configuration for the current tenant.
+     Update audit config
      - PUT /api/v4/audit/config
+     - Create or update the audit configuration for the current tenant.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter auditConfigDto: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<AuditConfigDto> 
@@ -204,6 +232,6 @@ open class AuditAPI {
 
         let localVariableRequestBuilder: RequestBuilder<AuditConfigDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

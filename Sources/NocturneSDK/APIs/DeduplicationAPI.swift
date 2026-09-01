@@ -10,7 +10,8 @@ import Foundation
 open class DeduplicationAPI {
 
     /**
-
+     Cancel job
+     
      - parameter jobId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: CancelJobResponse
@@ -20,7 +21,14 @@ open class DeduplicationAPI {
     }
 
     /**
+     Cancel job
      - POST /api/v4/admin/deduplication/cancel/{jobId}
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter jobId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<CancelJobResponse> 
@@ -43,11 +51,12 @@ open class DeduplicationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CancelJobResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get entry linked records
+     
      - parameter entryId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: LinkedRecordsResponse
@@ -57,7 +66,14 @@ open class DeduplicationAPI {
     }
 
     /**
+     Get entry linked records
      - GET /api/v4/admin/deduplication/entries/{entryId}/sources
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter entryId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<LinkedRecordsResponse> 
@@ -80,11 +96,12 @@ open class DeduplicationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<LinkedRecordsResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get job status
+     
      - parameter jobId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DeduplicationJobStatus
@@ -94,7 +111,14 @@ open class DeduplicationAPI {
     }
 
     /**
+     Get job status
      - GET /api/v4/admin/deduplication/status/{jobId}
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter jobId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DeduplicationJobStatus> 
@@ -117,11 +141,12 @@ open class DeduplicationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DeduplicationJobStatus>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get record linked records
+     
      - parameter recordType: (path)  
      - parameter recordId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -132,7 +157,14 @@ open class DeduplicationAPI {
     }
 
     /**
+     Get record linked records
      - GET /api/v4/admin/deduplication/records/{recordType}/{recordId}/sources
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter recordType: (path)  
      - parameter recordId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -159,11 +191,12 @@ open class DeduplicationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<LinkedRecordsResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get state span linked records
+     
      - parameter stateSpanId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: LinkedRecordsResponse
@@ -173,7 +206,14 @@ open class DeduplicationAPI {
     }
 
     /**
+     Get state span linked records
      - GET /api/v4/admin/deduplication/state-spans/{stateSpanId}/sources
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter stateSpanId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<LinkedRecordsResponse> 
@@ -196,11 +236,12 @@ open class DeduplicationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<LinkedRecordsResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get treatment linked records
+     
      - parameter treatmentId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: LinkedRecordsResponse
@@ -210,7 +251,14 @@ open class DeduplicationAPI {
     }
 
     /**
+     Get treatment linked records
      - GET /api/v4/admin/deduplication/treatments/{treatmentId}/sources
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter treatmentId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<LinkedRecordsResponse> 
@@ -233,11 +281,12 @@ open class DeduplicationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<LinkedRecordsResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Start deduplication job
+     
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DeduplicationJobResponse
      */
@@ -246,7 +295,14 @@ open class DeduplicationAPI {
     }
 
     /**
+     Start deduplication job
      - POST /api/v4/admin/deduplication/run
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DeduplicationJobResponse> 
      */
@@ -265,6 +321,6 @@ open class DeduplicationAPI {
 
         let localVariableRequestBuilder: RequestBuilder<DeduplicationJobResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

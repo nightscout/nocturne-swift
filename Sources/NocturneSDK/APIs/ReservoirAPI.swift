@@ -10,7 +10,7 @@ import Foundation
 open class ReservoirAPI {
 
     /**
-     Get the current reservoir estimate.
+     Get estimate
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: ReservoirEstimateResponse
@@ -20,8 +20,15 @@ open class ReservoirAPI {
     }
 
     /**
-     Get the current reservoir estimate.
+     Get estimate
      - GET /api/v4/reservoir
+     - Get the current reservoir estimate.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ReservoirEstimateResponse> 
      */
@@ -40,6 +47,6 @@ open class ReservoirAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ReservoirEstimateResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

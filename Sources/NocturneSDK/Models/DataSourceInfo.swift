@@ -12,6 +12,7 @@ public struct DataSourceInfo: Sendable, Codable, Hashable {
     public var id: String?
     public var name: String?
     public var deviceId: String?
+    public var deviceIdHandle: SourceHandle?
     public var category: String?
     public var sourceType: String?
     public var description: String?
@@ -26,10 +27,11 @@ public struct DataSourceInfo: Sendable, Codable, Hashable {
     public var lastSuccessfulSync: Date?
     public var isHealthy: Bool?
 
-    public init(id: String? = nil, name: String? = nil, deviceId: String? = nil, category: String? = nil, sourceType: String? = nil, description: String? = nil, lastSeen: Date? = nil, firstSeen: Date? = nil, entriesLast24h: Int? = nil, totalEntries: Int64? = nil, status: String? = nil, minutesSinceLastData: Int? = nil, icon: String? = nil, connectorId: String? = nil, lastSuccessfulSync: Date? = nil, isHealthy: Bool? = nil) {
+    public init(id: String? = nil, name: String? = nil, deviceId: String? = nil, deviceIdHandle: SourceHandle? = nil, category: String? = nil, sourceType: String? = nil, description: String? = nil, lastSeen: Date? = nil, firstSeen: Date? = nil, entriesLast24h: Int? = nil, totalEntries: Int64? = nil, status: String? = nil, minutesSinceLastData: Int? = nil, icon: String? = nil, connectorId: String? = nil, lastSuccessfulSync: Date? = nil, isHealthy: Bool? = nil) {
         self.id = id
         self.name = name
         self.deviceId = deviceId
+        self.deviceIdHandle = deviceIdHandle
         self.category = category
         self.sourceType = sourceType
         self.description = description
@@ -49,6 +51,7 @@ public struct DataSourceInfo: Sendable, Codable, Hashable {
         case id
         case name
         case deviceId
+        case deviceIdHandle
         case category
         case sourceType
         case description
@@ -71,6 +74,7 @@ public struct DataSourceInfo: Sendable, Codable, Hashable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(deviceId, forKey: .deviceId)
+        try container.encodeIfPresent(deviceIdHandle, forKey: .deviceIdHandle)
         try container.encodeIfPresent(category, forKey: .category)
         try container.encodeIfPresent(sourceType, forKey: .sourceType)
         try container.encodeIfPresent(description, forKey: .description)

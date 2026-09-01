@@ -10,7 +10,7 @@ import Foundation
 open class StepCountAPI {
 
     /**
-     Create one or more step count records
+     Create step counts
      
      - parameter upsertStepCountRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class StepCountAPI {
     }
 
     /**
-     Create one or more step count records
+     Create step counts
      - POST /api/v4/StepCount
+     - Create one or more step count records
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter upsertStepCountRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[StepCount]> 
@@ -42,11 +49,11 @@ open class StepCountAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[StepCount]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a step count record by ID
+     Delete step count
      
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +64,15 @@ open class StepCountAPI {
     }
 
     /**
-     Delete a step count record by ID
+     Delete step count
      - DELETE /api/v4/StepCount/{id}
+     - Delete a step count record by ID
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -81,11 +95,11 @@ open class StepCountAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a specific step count record by ID
+     Get step count
      
      - parameter id: (path) Record ID 
      - parameter apiConfiguration: The configuration for the http request.
@@ -96,8 +110,15 @@ open class StepCountAPI {
     }
 
     /**
-     Get a specific step count record by ID
+     Get step count
      - GET /api/v4/StepCount/{id}
+     - Get a specific step count record by ID
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) Record ID 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<StepCount> 
@@ -120,16 +141,16 @@ open class StepCountAPI {
 
         let localVariableRequestBuilder: RequestBuilder<StepCount>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get step count records with optional pagination and date filtering
+     Get step counts
      
-     - parameter count: (query) Maximum number of records to return (default: 10, ignored when from/to are specified) (optional, default to 10)
-     - parameter skip: (query) Number of records to skip for pagination (default: 0, ignored when from/to are specified) (optional, default to 0)
-     - parameter from: (query) Start of date range (inclusive). When specified with &#39;to&#39;, returns all records in range. (optional)
-     - parameter to: (query) End of date range (exclusive). When specified with &#39;from&#39;, returns all records in range. (optional)
+     - parameter count: (query) Maximum number of records to return (default: 10, or up to the ceiling when from/to are specified) (optional)
+     - parameter skip: (query) Number of records to skip for pagination (default: 0) (optional, default to 0)
+     - parameter from: (query) Start of date range (inclusive). (optional)
+     - parameter to: (query) End of date range (exclusive). (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [StepCount]
      */
@@ -138,12 +159,19 @@ open class StepCountAPI {
     }
 
     /**
-     Get step count records with optional pagination and date filtering
+     Get step counts
      - GET /api/v4/StepCount
-     - parameter count: (query) Maximum number of records to return (default: 10, ignored when from/to are specified) (optional, default to 10)
-     - parameter skip: (query) Number of records to skip for pagination (default: 0, ignored when from/to are specified) (optional, default to 0)
-     - parameter from: (query) Start of date range (inclusive). When specified with &#39;to&#39;, returns all records in range. (optional)
-     - parameter to: (query) End of date range (exclusive). When specified with &#39;from&#39;, returns all records in range. (optional)
+     - A date range without a count reads up to MaxPageSize records rather than the whole range, so a wide range cannot load the table into memory. Page through the rest with skip.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter count: (query) Maximum number of records to return (default: 10, or up to the ceiling when from/to are specified) (optional)
+     - parameter skip: (query) Number of records to skip for pagination (default: 0) (optional, default to 0)
+     - parameter from: (query) Start of date range (inclusive). (optional)
+     - parameter to: (query) End of date range (exclusive). (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[StepCount]> 
      */
@@ -168,11 +196,11 @@ open class StepCountAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[StepCount]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update an existing step count record
+     Update step count
      
      - parameter id: (path)  
      - parameter upsertStepCountRequest: (body)  
@@ -184,8 +212,15 @@ open class StepCountAPI {
     }
 
     /**
-     Update an existing step count record
+     Update step count
      - PUT /api/v4/StepCount/{id}
+     - Update an existing step count record
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter upsertStepCountRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -209,6 +244,6 @@ open class StepCountAPI {
 
         let localVariableRequestBuilder: RequestBuilder<StepCount>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

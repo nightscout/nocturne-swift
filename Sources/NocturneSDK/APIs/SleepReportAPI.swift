@@ -10,7 +10,7 @@ import Foundation
 open class SleepReportAPI {
 
     /**
-     Get the full single-night report for a sleep session, including stage breakdown, overnight TIR, hypo events, dawn phenomenon, and wake events.
+     Get single night
      
      - parameter sessionId: (path) The sleep session identifier. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class SleepReportAPI {
     }
 
     /**
-     Get the full single-night report for a sleep session, including stage breakdown, overnight TIR, hypo events, dawn phenomenon, and wake events.
+     Get single night
      - GET /api/v4/sleep/report/single-night/{sessionId}
+     - Get the full single-night report for a sleep session, including stage breakdown, overnight TIR, hypo events, dawn phenomenon, and wake events.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter sessionId: (path) The sleep session identifier. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SleepSingleNightReport> 
@@ -45,11 +52,11 @@ open class SleepReportAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SleepSingleNightReport>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get the single-night report for the night that falls on a calendar date, resolving the date to a session via the same noon-rule bucketing and one-per-night deduplication the trends report uses. Lets reports deep-link a night by date rather than session id.
+     Get single night by date
      
      - parameter date: (path) The display-night date (YYYY-MM-DD). 
      - parameter apiConfiguration: The configuration for the http request.
@@ -60,8 +67,15 @@ open class SleepReportAPI {
     }
 
     /**
-     Get the single-night report for the night that falls on a calendar date, resolving the date to a session via the same noon-rule bucketing and one-per-night deduplication the trends report uses. Lets reports deep-link a night by date rather than session id.
+     Get single night by date
      - GET /api/v4/sleep/report/single-night/by-date/{date}
+     - Get the single-night report for the night that falls on a calendar date, resolving the date to a session via the same noon-rule bucketing and one-per-night deduplication the trends report uses. Lets reports deep-link a night by date rather than session id.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter date: (path) The display-night date (YYYY-MM-DD). 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SleepSingleNightReport> 
@@ -84,11 +98,11 @@ open class SleepReportAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SleepSingleNightReport>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a multi-night trends report. Maximum date range is 90 days. When source is omitted, sessions are deduplicated to one per calendar night (longest sleep wins; source priority as tie-breaker).
+     Get trends
      
      - parameter from: (query) Start of the date range (inclusive). (optional)
      - parameter to: (query) End of the date range (inclusive). (optional)
@@ -101,8 +115,15 @@ open class SleepReportAPI {
     }
 
     /**
-     Get a multi-night trends report. Maximum date range is 90 days. When source is omitted, sessions are deduplicated to one per calendar night (longest sleep wins; source priority as tie-breaker).
+     Get trends
      - GET /api/v4/sleep/report/trends
+     - Get a multi-night trends report. Maximum date range is 90 days. When source is omitted, sessions are deduplicated to one per calendar night (longest sleep wins; source priority as tie-breaker).
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter from: (query) Start of the date range (inclusive). (optional)
      - parameter to: (query) End of the date range (inclusive). (optional)
      - parameter source: (query) Optional source filter. When provided, deduplication is skipped. (optional)
@@ -129,6 +150,6 @@ open class SleepReportAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SleepTrendsReport>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

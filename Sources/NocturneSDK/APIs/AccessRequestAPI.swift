@@ -10,7 +10,8 @@ import Foundation
 open class AccessRequestAPI {
 
     /**
-
+     Approve
+     
      - parameter subjectId: (path)  
      - parameter approveAccessRequestRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,7 +22,14 @@ open class AccessRequestAPI {
     }
 
     /**
+     Approve
      - POST /api/v4/admin/access-requests/{subjectId}/approve
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter subjectId: (path)  
      - parameter approveAccessRequestRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -45,11 +53,12 @@ open class AccessRequestAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Deny
+     
      - parameter subjectId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
@@ -59,7 +68,14 @@ open class AccessRequestAPI {
     }
 
     /**
+     Deny
      - POST /api/v4/admin/access-requests/{subjectId}/deny
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter subjectId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -82,11 +98,12 @@ open class AccessRequestAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Get pending requests
+     
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [AccessRequestDto]
      */
@@ -95,7 +112,14 @@ open class AccessRequestAPI {
     }
 
     /**
+     Get pending requests
      - GET /api/v4/admin/access-requests
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[AccessRequestDto]> 
      */
@@ -114,6 +138,6 @@ open class AccessRequestAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[AccessRequestDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

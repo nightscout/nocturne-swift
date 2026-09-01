@@ -10,7 +10,7 @@ import Foundation
 open class StatusAPI {
 
     /**
-     Get a simple health check status
+     Get health status
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: JSONValue
@@ -20,8 +20,9 @@ open class StatusAPI {
     }
 
     /**
-     Get a simple health check status
+     Get health status
      - GET /api/v4/Status/health
+     - Get a simple health check status
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<JSONValue> 
      */
@@ -44,7 +45,7 @@ open class StatusAPI {
     }
 
     /**
-     Get detailed system status information
+     Get status
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: StatusResponse
@@ -54,8 +55,9 @@ open class StatusAPI {
     }
 
     /**
-     Get detailed system status information
+     Get status
      - GET /api/v4/Status
+     - Get detailed system status information
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<StatusResponse> 
      */

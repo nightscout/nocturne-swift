@@ -15,18 +15,14 @@ public struct UISettingsConfiguration: Sendable, Codable, Hashable {
     public var notifications: NotificationSettings?
     public var services: ServicesSettings?
     public var dataQuality: DataQualitySettings?
-    public var security: SecuritySettings?
-    public var haloDial: HaloDialConfig?
 
-    public init(devices: DeviceSettings? = nil, algorithm: AlgorithmSettings? = nil, features: FeatureSettings? = nil, notifications: NotificationSettings? = nil, services: ServicesSettings? = nil, dataQuality: DataQualitySettings? = nil, security: SecuritySettings? = nil, haloDial: HaloDialConfig? = nil) {
+    public init(devices: DeviceSettings? = nil, algorithm: AlgorithmSettings? = nil, features: FeatureSettings? = nil, notifications: NotificationSettings? = nil, services: ServicesSettings? = nil, dataQuality: DataQualitySettings? = nil) {
         self.devices = devices
         self.algorithm = algorithm
         self.features = features
         self.notifications = notifications
         self.services = services
         self.dataQuality = dataQuality
-        self.security = security
-        self.haloDial = haloDial
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -36,8 +32,6 @@ public struct UISettingsConfiguration: Sendable, Codable, Hashable {
         case notifications
         case services
         case dataQuality
-        case security
-        case haloDial
     }
 
     // Encodable protocol methods
@@ -50,8 +44,6 @@ public struct UISettingsConfiguration: Sendable, Codable, Hashable {
         try container.encodeIfPresent(notifications, forKey: .notifications)
         try container.encodeIfPresent(services, forKey: .services)
         try container.encodeIfPresent(dataQuality, forKey: .dataQuality)
-        try container.encodeIfPresent(security, forKey: .security)
-        try container.encodeIfPresent(haloDial, forKey: .haloDial)
     }
 }
 

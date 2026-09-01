@@ -10,7 +10,8 @@ import Foundation
 open class ProcessingAPI {
 
     /**
-
+     Get processing status
+     
      - parameter correlationId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: ProcessingStatusResponse
@@ -20,7 +21,14 @@ open class ProcessingAPI {
     }
 
     /**
+     Get processing status
      - GET /api/v4/processing/status/{correlationId}
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter correlationId: (path)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ProcessingStatusResponse> 
@@ -43,11 +51,12 @@ open class ProcessingAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ProcessingStatusResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-
+     Wait for completion
+     
      - parameter correlationId: (path)  
      - parameter timeoutSeconds: (query)  (optional, default to 30)
      - parameter apiConfiguration: The configuration for the http request.
@@ -58,7 +67,14 @@ open class ProcessingAPI {
     }
 
     /**
+     Wait for completion
      - GET /api/v4/processing/status/{correlationId}/wait
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter correlationId: (path)  
      - parameter timeoutSeconds: (query)  (optional, default to 30)
      - parameter apiConfiguration: The configuration for the http request.
@@ -85,6 +101,6 @@ open class ProcessingAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ProcessingStatusResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

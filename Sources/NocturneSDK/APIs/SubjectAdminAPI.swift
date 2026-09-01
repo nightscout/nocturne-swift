@@ -10,7 +10,7 @@ import Foundation
 open class SubjectAdminAPI {
 
     /**
-     Grant or revoke platform admin for a subject. Blocks self-demotion if the caller is the last platform admin.
+     Set platform admin
      
      - parameter id: (path)  
      - parameter setPlatformAdminRequest: (body)  
@@ -22,8 +22,15 @@ open class SubjectAdminAPI {
     }
 
     /**
-     Grant or revoke platform admin for a subject. Blocks self-demotion if the caller is the last platform admin.
+     Set platform admin
      - PUT /api/v4/admin/subjects/{id}/platform-admin
+     - Grant or revoke platform admin for a subject. Blocks self-demotion if the caller is the last platform admin.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path)  
      - parameter setPlatformAdminRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
@@ -47,6 +54,6 @@ open class SubjectAdminAPI {
 
         let localVariableRequestBuilder: RequestBuilder<URL>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

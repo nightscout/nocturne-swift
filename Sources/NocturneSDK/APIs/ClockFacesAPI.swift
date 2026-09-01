@@ -10,7 +10,7 @@ import Foundation
 open class ClockFacesAPI {
 
     /**
-     Create a new clock face
+     Create
      
      - parameter createClockFaceRequest: (body) Clock face creation request 
      - parameter apiConfiguration: The configuration for the http request.
@@ -21,8 +21,15 @@ open class ClockFacesAPI {
     }
 
     /**
-     Create a new clock face
+     Create
      - POST /api/v4/clockfaces
+     - Create a new clock face
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter createClockFaceRequest: (body) Clock face creation request 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ClockFace> 
@@ -42,11 +49,11 @@ open class ClockFacesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ClockFace>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Delete a clock face (owner only)
+     Delete
      
      - parameter id: (path) Clock face UUID 
      - parameter apiConfiguration: The configuration for the http request.
@@ -57,8 +64,15 @@ open class ClockFacesAPI {
     }
 
     /**
-     Delete a clock face (owner only)
+     Delete
      - DELETE /api/v4/clockfaces/{id}
+     - Delete a clock face (owner only)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) Clock face UUID 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
@@ -81,11 +95,11 @@ open class ClockFacesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get a clock face configuration by ID (public, no authentication required)
+     Get by id
      
      - parameter id: (path) Clock face UUID 
      - parameter apiConfiguration: The configuration for the http request.
@@ -96,8 +110,9 @@ open class ClockFacesAPI {
     }
 
     /**
-     Get a clock face configuration by ID (public, no authentication required)
+     Get by id
      - GET /api/v4/clockfaces/{id}
+     - Get a clock face configuration by ID (public, no authentication required)
      - parameter id: (path) Clock face UUID 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ClockFacePublicDto> 
@@ -124,7 +139,7 @@ open class ClockFacesAPI {
     }
 
     /**
-     Get the latest glucose readings a public clock face displays (public, no authentication required).
+     Get glucose
      
      - parameter id: (path) Clock face UUID 
      - parameter apiConfiguration: The configuration for the http request.
@@ -135,7 +150,7 @@ open class ClockFacesAPI {
     }
 
     /**
-     Get the latest glucose readings a public clock face displays (public, no authentication required).
+     Get glucose
      - GET /api/v4/clockfaces/{id}/glucose
      - The clock UUID is the capability: a caller must hold a valid clock id for the host-resolved tenant to get any data, and tenant-isolation RLS scopes the read to that tenant. This endpoint only ever reads sensor glucose — never treatments, device status, or any other category — so a clock link grants exactly what the clock shows and nothing more. It is deliberately independent of the tenant's global anonymous-read setting.
      - parameter id: (path) Clock face UUID 
@@ -164,7 +179,7 @@ open class ClockFacesAPI {
     }
 
     /**
-     List all clock faces for the current user
+     List
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [ClockFaceListItem]
@@ -174,8 +189,15 @@ open class ClockFacesAPI {
     }
 
     /**
-     List all clock faces for the current user
+     List
      - GET /api/v4/clockfaces
+     - List all clock faces for the current user
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[ClockFaceListItem]> 
      */
@@ -194,11 +216,11 @@ open class ClockFacesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[ClockFaceListItem]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update an existing clock face (owner only)
+     Update
      
      - parameter id: (path) Clock face UUID 
      - parameter updateClockFaceRequest: (body) Update request 
@@ -210,8 +232,15 @@ open class ClockFacesAPI {
     }
 
     /**
-     Update an existing clock face (owner only)
+     Update
      - PUT /api/v4/clockfaces/{id}
+     - Update an existing clock face (owner only)
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter id: (path) Clock face UUID 
      - parameter updateClockFaceRequest: (body) Update request 
      - parameter apiConfiguration: The configuration for the http request.
@@ -235,6 +264,6 @@ open class ClockFacesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ClockFace>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

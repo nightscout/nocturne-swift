@@ -14,4 +14,5 @@ public enum ConnectorResetJobState: String, Sendable, Codable, CaseIterable {
     case completed = "Completed"
     case failed = "Failed"
     case cancelled = "Cancelled"
+    case interrupted = "Interrupted"
 }

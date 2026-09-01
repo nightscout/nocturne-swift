@@ -10,7 +10,7 @@ import Foundation
 open class CoachMarkAPI {
 
     /**
-     Delete all coach mark states for the current user, resetting all tutorials.
+     Delete all
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: URL
@@ -20,8 +20,15 @@ open class CoachMarkAPI {
     }
 
     /**
-     Delete all coach mark states for the current user, resetting all tutorials.
+     Delete all
      - DELETE /api/v4/coach-marks
+     - Delete all coach mark states for the current user, resetting all tutorials.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<URL> 
      */
@@ -40,11 +47,11 @@ open class CoachMarkAPI {
 
         let localVariableRequestBuilder: RequestBuilder<URL>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Get all coach mark states for the current user.
+     Get all
      
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [CoachMarkState]
@@ -54,8 +61,15 @@ open class CoachMarkAPI {
     }
 
     /**
-     Get all coach mark states for the current user.
+     Get all
      - GET /api/v4/coach-marks
+     - Get all coach mark states for the current user.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[CoachMarkState]> 
      */
@@ -74,11 +88,11 @@ open class CoachMarkAPI {
 
         let localVariableRequestBuilder: RequestBuilder<[CoachMarkState]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
-     Update a coach mark's status.
+     Update status
      
      - parameter key: (path) The coach mark key to update. 
      - parameter updateCoachMarkRequest: (body) The new status value. 
@@ -90,8 +104,15 @@ open class CoachMarkAPI {
     }
 
     /**
-     Update a coach mark's status.
+     Update status
      - PATCH /api/v4/coach-marks/{key}
+     - Update a coach mark's status.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
      - parameter key: (path) The coach mark key to update. 
      - parameter updateCoachMarkRequest: (body) The new status value. 
      - parameter apiConfiguration: The configuration for the http request.
@@ -115,6 +136,6 @@ open class CoachMarkAPI {
 
         let localVariableRequestBuilder: RequestBuilder<CoachMarkState>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }
