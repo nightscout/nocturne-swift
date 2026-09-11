@@ -12,8 +12,8 @@ open class SensorIntegrityAPI {
     /**
      Analyze
      
-     - parameter startDate: (query) Inclusive UTC start of the window. (optional)
-     - parameter endDate: (query) Exclusive UTC end of the window. (optional)
+     - parameter startDate: (query) Inclusive UTC start of the window. 
+     - parameter endDate: (query) Exclusive UTC end of the window. 
      - parameter source: (query) Optional data source filter; omitted analyzes the combined stream. (optional)
      - parameter bySource: (query) When true, also return a per-data-source breakdown. (optional, default to false)
      - parameter minConfidence: (query) Minimum cluster confidence for a hypo event to be reported. (optional)
@@ -23,7 +23,7 @@ open class SensorIntegrityAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: SensorIntegrityReport
      */
-    open class func sensorIntegrityAnalyze(startDate: Date? = nil, endDate: Date? = nil, source: String? = nil, bySource: Bool? = nil, minConfidence: ClusterConfidence? = nil, requireInsulin: Bool? = nil, hypoThresholdMgdl: Double? = nil, windowHours: Double? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> SensorIntegrityReport {
+    open class func sensorIntegrityAnalyze(startDate: Date, endDate: Date, source: String? = nil, bySource: Bool? = nil, minConfidence: ClusterConfidence? = nil, requireInsulin: Bool? = nil, hypoThresholdMgdl: Double? = nil, windowHours: Double? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> SensorIntegrityReport {
         return try await sensorIntegrityAnalyzeWithRequestBuilder(startDate: startDate, endDate: endDate, source: source, bySource: bySource, minConfidence: minConfidence, requireInsulin: requireInsulin, hypoThresholdMgdl: hypoThresholdMgdl, windowHours: windowHours, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -37,8 +37,8 @@ open class SensorIntegrityAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter startDate: (query) Inclusive UTC start of the window. (optional)
-     - parameter endDate: (query) Exclusive UTC end of the window. (optional)
+     - parameter startDate: (query) Inclusive UTC start of the window. 
+     - parameter endDate: (query) Exclusive UTC end of the window. 
      - parameter source: (query) Optional data source filter; omitted analyzes the combined stream. (optional)
      - parameter bySource: (query) When true, also return a per-data-source breakdown. (optional, default to false)
      - parameter minConfidence: (query) Minimum cluster confidence for a hypo event to be reported. (optional)
@@ -48,15 +48,15 @@ open class SensorIntegrityAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SensorIntegrityReport> 
      */
-    open class func sensorIntegrityAnalyzeWithRequestBuilder(startDate: Date? = nil, endDate: Date? = nil, source: String? = nil, bySource: Bool? = nil, minConfidence: ClusterConfidence? = nil, requireInsulin: Bool? = nil, hypoThresholdMgdl: Double? = nil, windowHours: Double? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<SensorIntegrityReport> {
+    open class func sensorIntegrityAnalyzeWithRequestBuilder(startDate: Date, endDate: Date, source: String? = nil, bySource: Bool? = nil, minConfidence: ClusterConfidence? = nil, requireInsulin: Bool? = nil, hypoThresholdMgdl: Double? = nil, windowHours: Double? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<SensorIntegrityReport> {
         let localVariablePath = "/api/v4/sensor-integrity"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         let _qp1: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
-            "startDate": (wrappedValue: startDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "endDate": (wrappedValue: endDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "startDate": (wrappedValue: startDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endDate": (wrappedValue: endDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "source": (wrappedValue: source?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "bySource": (wrappedValue: bySource?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "minConfidence": (wrappedValue: minConfidence?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),

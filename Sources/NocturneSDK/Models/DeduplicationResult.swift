@@ -14,8 +14,6 @@ public struct DeduplicationResult: Sendable, Codable, Hashable {
     public var recordsLinked: Int?
     public var duplicateGroupsFound: Int?
     public var duration: String?
-    public var entriesProcessed: Int?
-    public var treatmentsProcessed: Int?
     public var stateSpansProcessed: Int?
     public var sensorGlucoseProcessed: Int?
     public var bolusesProcessed: Int?
@@ -28,14 +26,12 @@ public struct DeduplicationResult: Sendable, Codable, Hashable {
     public var success: Bool?
     public var errorMessage: String?
 
-    public init(totalRecordsProcessed: Int? = nil, canonicalGroupsCreated: Int? = nil, recordsLinked: Int? = nil, duplicateGroupsFound: Int? = nil, duration: String? = nil, entriesProcessed: Int? = nil, treatmentsProcessed: Int? = nil, stateSpansProcessed: Int? = nil, sensorGlucoseProcessed: Int? = nil, bolusesProcessed: Int? = nil, carbIntakesProcessed: Int? = nil, bgChecksProcessed: Int? = nil, deviceEventsProcessed: Int? = nil, notesProcessed: Int? = nil, bolusCalculationsProcessed: Int? = nil, tempBasalsProcessed: Int? = nil, success: Bool? = nil, errorMessage: String? = nil) {
+    public init(totalRecordsProcessed: Int? = nil, canonicalGroupsCreated: Int? = nil, recordsLinked: Int? = nil, duplicateGroupsFound: Int? = nil, duration: String? = nil, stateSpansProcessed: Int? = nil, sensorGlucoseProcessed: Int? = nil, bolusesProcessed: Int? = nil, carbIntakesProcessed: Int? = nil, bgChecksProcessed: Int? = nil, deviceEventsProcessed: Int? = nil, notesProcessed: Int? = nil, bolusCalculationsProcessed: Int? = nil, tempBasalsProcessed: Int? = nil, success: Bool? = nil, errorMessage: String? = nil) {
         self.totalRecordsProcessed = totalRecordsProcessed
         self.canonicalGroupsCreated = canonicalGroupsCreated
         self.recordsLinked = recordsLinked
         self.duplicateGroupsFound = duplicateGroupsFound
         self.duration = duration
-        self.entriesProcessed = entriesProcessed
-        self.treatmentsProcessed = treatmentsProcessed
         self.stateSpansProcessed = stateSpansProcessed
         self.sensorGlucoseProcessed = sensorGlucoseProcessed
         self.bolusesProcessed = bolusesProcessed
@@ -55,8 +51,6 @@ public struct DeduplicationResult: Sendable, Codable, Hashable {
         case recordsLinked
         case duplicateGroupsFound
         case duration
-        case entriesProcessed
-        case treatmentsProcessed
         case stateSpansProcessed
         case sensorGlucoseProcessed
         case bolusesProcessed
@@ -79,8 +73,6 @@ public struct DeduplicationResult: Sendable, Codable, Hashable {
         try container.encodeIfPresent(recordsLinked, forKey: .recordsLinked)
         try container.encodeIfPresent(duplicateGroupsFound, forKey: .duplicateGroupsFound)
         try container.encodeIfPresent(duration, forKey: .duration)
-        try container.encodeIfPresent(entriesProcessed, forKey: .entriesProcessed)
-        try container.encodeIfPresent(treatmentsProcessed, forKey: .treatmentsProcessed)
         try container.encodeIfPresent(stateSpansProcessed, forKey: .stateSpansProcessed)
         try container.encodeIfPresent(sensorGlucoseProcessed, forKey: .sensorGlucoseProcessed)
         try container.encodeIfPresent(bolusesProcessed, forKey: .bolusesProcessed)

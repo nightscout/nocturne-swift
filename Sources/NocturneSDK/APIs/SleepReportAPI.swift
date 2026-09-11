@@ -104,13 +104,13 @@ open class SleepReportAPI {
     /**
      Get trends
      
-     - parameter from: (query) Start of the date range (inclusive). (optional)
-     - parameter to: (query) End of the date range (inclusive). (optional)
+     - parameter from: (query) Start of the date range (inclusive). 
+     - parameter to: (query) End of the date range (inclusive). 
      - parameter source: (query) Optional source filter. When provided, deduplication is skipped. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: SleepTrendsReport
      */
-    open class func sleepReportGetTrends(from: Date? = nil, to: Date? = nil, source: SleepSource? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> SleepTrendsReport {
+    open class func sleepReportGetTrends(from: Date, to: Date, source: SleepSource? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> SleepTrendsReport {
         return try await sleepReportGetTrendsWithRequestBuilder(from: from, to: to, source: source, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -124,21 +124,21 @@ open class SleepReportAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter from: (query) Start of the date range (inclusive). (optional)
-     - parameter to: (query) End of the date range (inclusive). (optional)
+     - parameter from: (query) Start of the date range (inclusive). 
+     - parameter to: (query) End of the date range (inclusive). 
      - parameter source: (query) Optional source filter. When provided, deduplication is skipped. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SleepTrendsReport> 
      */
-    open class func sleepReportGetTrendsWithRequestBuilder(from: Date? = nil, to: Date? = nil, source: SleepSource? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<SleepTrendsReport> {
+    open class func sleepReportGetTrendsWithRequestBuilder(from: Date, to: Date, source: SleepSource? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<SleepTrendsReport> {
         let localVariablePath = "/api/v4/sleep/report/trends"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "from": (wrappedValue: from.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "to": (wrappedValue: to.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "source": (wrappedValue: source?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 

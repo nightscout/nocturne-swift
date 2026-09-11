@@ -148,13 +148,7 @@ open class SupportAPI {
     /**
      Get support config
      - GET /api/v4/support/config
-     - Returns operator support configuration for the frontend. When no operator is configured, accountBilling is null and the default GitHub flow applies.
-     - Bearer Token:
-       - type: http
-       - name: bearer
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
+     - Anonymous because the hosts that most need the operator's address — an inactive tenant's, and the apex with no tenant — are the ones no session can be established on.
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SupportConfigResponse> 
      */
@@ -172,6 +166,47 @@ open class SupportAPI {
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
         let localVariableRequestBuilder: RequestBuilder<SupportConfigResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Get support diagnostics
+     
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: SupportDiagnosticsResponse
+     */
+    open class func supportGetSupportDiagnostics(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> SupportDiagnosticsResponse {
+        return try await supportGetSupportDiagnosticsWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get support diagnostics
+     - GET /api/v4/support/diagnostics
+     - Gated like ConnectorStatusController, whose connector health this reports a subset of: reaching it with a narrower credential than that endpoint requires would make support the way to read connector state without tenant_settings.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<SupportDiagnosticsResponse> 
+     */
+    open class func supportGetSupportDiagnosticsWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<SupportDiagnosticsResponse> {
+        let localVariablePath = "/api/v4/support/diagnostics"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<SupportDiagnosticsResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }

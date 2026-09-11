@@ -20,6 +20,7 @@ public struct BolusCalculation: Sendable, Codable, Hashable {
     public var legacyId: String?
     public var createdAt: Date?
     public var modifiedAt: Date?
+    public var additionalProperties: [String: JSONValue]?
     public var bloodGlucoseInput: Double?
     public var bloodGlucoseInputSource: String?
     public var carbInput: Double?
@@ -33,9 +34,8 @@ public struct BolusCalculation: Sendable, Codable, Hashable {
     public var splitNow: Double?
     public var splitExt: Double?
     public var preBolus: Double?
-    public var additionalProperties: [String: JSONValue]?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, bloodGlucoseInput: Double? = nil, bloodGlucoseInputSource: String? = nil, carbInput: Double? = nil, insulinOnBoard: Double? = nil, insulinRecommendation: Double? = nil, carbRatio: Double? = nil, calculationType: CalculationType? = nil, insulinRecommendationForCarbs: Double? = nil, insulinProgrammed: Double? = nil, enteredInsulin: Double? = nil, splitNow: Double? = nil, splitExt: Double? = nil, preBolus: Double? = nil, additionalProperties: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, bloodGlucoseInput: Double? = nil, bloodGlucoseInputSource: String? = nil, carbInput: Double? = nil, insulinOnBoard: Double? = nil, insulinRecommendation: Double? = nil, carbRatio: Double? = nil, calculationType: CalculationType? = nil, insulinRecommendationForCarbs: Double? = nil, insulinProgrammed: Double? = nil, enteredInsulin: Double? = nil, splitNow: Double? = nil, splitExt: Double? = nil, preBolus: Double? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -47,6 +47,7 @@ public struct BolusCalculation: Sendable, Codable, Hashable {
         self.legacyId = legacyId
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
+        self.additionalProperties = additionalProperties
         self.bloodGlucoseInput = bloodGlucoseInput
         self.bloodGlucoseInputSource = bloodGlucoseInputSource
         self.carbInput = carbInput
@@ -60,7 +61,6 @@ public struct BolusCalculation: Sendable, Codable, Hashable {
         self.splitNow = splitNow
         self.splitExt = splitExt
         self.preBolus = preBolus
-        self.additionalProperties = additionalProperties
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -75,6 +75,7 @@ public struct BolusCalculation: Sendable, Codable, Hashable {
         case legacyId
         case createdAt
         case modifiedAt
+        case additionalProperties
         case bloodGlucoseInput
         case bloodGlucoseInputSource
         case carbInput
@@ -88,7 +89,6 @@ public struct BolusCalculation: Sendable, Codable, Hashable {
         case splitNow
         case splitExt
         case preBolus
-        case additionalProperties
     }
 
     // Encodable protocol methods
@@ -106,6 +106,7 @@ public struct BolusCalculation: Sendable, Codable, Hashable {
         try container.encodeIfPresent(legacyId, forKey: .legacyId)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
         try container.encodeIfPresent(bloodGlucoseInput, forKey: .bloodGlucoseInput)
         try container.encodeIfPresent(bloodGlucoseInputSource, forKey: .bloodGlucoseInputSource)
         try container.encodeIfPresent(carbInput, forKey: .carbInput)
@@ -119,7 +120,6 @@ public struct BolusCalculation: Sendable, Codable, Hashable {
         try container.encodeIfPresent(splitNow, forKey: .splitNow)
         try container.encodeIfPresent(splitExt, forKey: .splitExt)
         try container.encodeIfPresent(preBolus, forKey: .preBolus)
-        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
     }
 }
 

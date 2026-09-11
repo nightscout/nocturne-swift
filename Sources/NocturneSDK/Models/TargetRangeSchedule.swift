@@ -20,11 +20,11 @@ public struct TargetRangeSchedule: Sendable, Codable, Hashable {
     public var legacyId: String?
     public var createdAt: Date?
     public var modifiedAt: Date?
+    public var additionalProperties: [String: JSONValue]?
     public var profileName: String?
     public var entries: [TargetRangeEntry]?
-    public var additionalProperties: [String: JSONValue]?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, profileName: String? = nil, entries: [TargetRangeEntry]? = nil, additionalProperties: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, profileName: String? = nil, entries: [TargetRangeEntry]? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -36,9 +36,9 @@ public struct TargetRangeSchedule: Sendable, Codable, Hashable {
         self.legacyId = legacyId
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
+        self.additionalProperties = additionalProperties
         self.profileName = profileName
         self.entries = entries
-        self.additionalProperties = additionalProperties
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -53,9 +53,9 @@ public struct TargetRangeSchedule: Sendable, Codable, Hashable {
         case legacyId
         case createdAt
         case modifiedAt
+        case additionalProperties
         case profileName
         case entries
-        case additionalProperties
     }
 
     // Encodable protocol methods
@@ -73,9 +73,9 @@ public struct TargetRangeSchedule: Sendable, Codable, Hashable {
         try container.encodeIfPresent(legacyId, forKey: .legacyId)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
         try container.encodeIfPresent(profileName, forKey: .profileName)
         try container.encodeIfPresent(entries, forKey: .entries)
-        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
     }
 }
 

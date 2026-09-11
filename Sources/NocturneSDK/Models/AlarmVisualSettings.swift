@@ -14,13 +14,17 @@ public struct AlarmVisualSettings: Sendable, Codable, Hashable {
     public var flashIntervalMs: Int?
     public var persistentBanner: Bool?
     public var wakeScreen: Bool?
+    public var showEmergencyContacts: Bool?
+    public var emergencyInstructions: String?
 
-    public init(screenFlash: Bool? = nil, flashColor: String? = nil, flashIntervalMs: Int? = nil, persistentBanner: Bool? = nil, wakeScreen: Bool? = nil) {
+    public init(screenFlash: Bool? = nil, flashColor: String? = nil, flashIntervalMs: Int? = nil, persistentBanner: Bool? = nil, wakeScreen: Bool? = nil, showEmergencyContacts: Bool? = nil, emergencyInstructions: String? = nil) {
         self.screenFlash = screenFlash
         self.flashColor = flashColor
         self.flashIntervalMs = flashIntervalMs
         self.persistentBanner = persistentBanner
         self.wakeScreen = wakeScreen
+        self.showEmergencyContacts = showEmergencyContacts
+        self.emergencyInstructions = emergencyInstructions
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -29,6 +33,8 @@ public struct AlarmVisualSettings: Sendable, Codable, Hashable {
         case flashIntervalMs
         case persistentBanner
         case wakeScreen
+        case showEmergencyContacts
+        case emergencyInstructions
     }
 
     // Encodable protocol methods
@@ -40,6 +46,8 @@ public struct AlarmVisualSettings: Sendable, Codable, Hashable {
         try container.encodeIfPresent(flashIntervalMs, forKey: .flashIntervalMs)
         try container.encodeIfPresent(persistentBanner, forKey: .persistentBanner)
         try container.encodeIfPresent(wakeScreen, forKey: .wakeScreen)
+        try container.encodeIfPresent(showEmergencyContacts, forKey: .showEmergencyContacts)
+        try container.encodeIfPresent(emergencyInstructions, forKey: .emergencyInstructions)
     }
 }
 

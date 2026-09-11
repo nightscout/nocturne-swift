@@ -18,14 +18,10 @@ public struct ExtendedGlucoseAnalytics: Sendable, Codable, Hashable {
     public var clinicalAssessment: ClinicalTargetAssessment?
     public var gmi: GlucoseManagementIndicator?
     public var gri: GlycemicRiskIndex?
-    public var timeOfDayPatterns: TimeOfDayAnalysis?
-    public var dayOfWeekPatterns: DayOfWeekAnalysis?
-    public var hypoglycemiaAnalysis: HypoglycemiaAnalysis?
-    public var hyperglycemiaAnalysis: HyperglycemiaAnalysis?
     public var dataSufficiency: DataSufficiencyAssessment?
     public var treatmentSummary: TreatmentSummary?
 
-    public init(basicStats: BasicGlucoseStats? = nil, timeInRange: TimeInRangeMetrics? = nil, glycemicVariability: GlycemicVariability? = nil, dataQuality: DataQuality? = nil, reliability: StatisticReliability? = nil, time: AnalysisTime? = nil, clinicalAssessment: ClinicalTargetAssessment? = nil, gmi: GlucoseManagementIndicator? = nil, gri: GlycemicRiskIndex? = nil, timeOfDayPatterns: TimeOfDayAnalysis? = nil, dayOfWeekPatterns: DayOfWeekAnalysis? = nil, hypoglycemiaAnalysis: HypoglycemiaAnalysis? = nil, hyperglycemiaAnalysis: HyperglycemiaAnalysis? = nil, dataSufficiency: DataSufficiencyAssessment? = nil, treatmentSummary: TreatmentSummary? = nil) {
+    public init(basicStats: BasicGlucoseStats? = nil, timeInRange: TimeInRangeMetrics? = nil, glycemicVariability: GlycemicVariability? = nil, dataQuality: DataQuality? = nil, reliability: StatisticReliability? = nil, time: AnalysisTime? = nil, clinicalAssessment: ClinicalTargetAssessment? = nil, gmi: GlucoseManagementIndicator? = nil, gri: GlycemicRiskIndex? = nil, dataSufficiency: DataSufficiencyAssessment? = nil, treatmentSummary: TreatmentSummary? = nil) {
         self.basicStats = basicStats
         self.timeInRange = timeInRange
         self.glycemicVariability = glycemicVariability
@@ -35,10 +31,6 @@ public struct ExtendedGlucoseAnalytics: Sendable, Codable, Hashable {
         self.clinicalAssessment = clinicalAssessment
         self.gmi = gmi
         self.gri = gri
-        self.timeOfDayPatterns = timeOfDayPatterns
-        self.dayOfWeekPatterns = dayOfWeekPatterns
-        self.hypoglycemiaAnalysis = hypoglycemiaAnalysis
-        self.hyperglycemiaAnalysis = hyperglycemiaAnalysis
         self.dataSufficiency = dataSufficiency
         self.treatmentSummary = treatmentSummary
     }
@@ -53,10 +45,6 @@ public struct ExtendedGlucoseAnalytics: Sendable, Codable, Hashable {
         case clinicalAssessment
         case gmi
         case gri
-        case timeOfDayPatterns
-        case dayOfWeekPatterns
-        case hypoglycemiaAnalysis
-        case hyperglycemiaAnalysis
         case dataSufficiency
         case treatmentSummary
     }
@@ -74,10 +62,6 @@ public struct ExtendedGlucoseAnalytics: Sendable, Codable, Hashable {
         try container.encodeIfPresent(clinicalAssessment, forKey: .clinicalAssessment)
         try container.encodeIfPresent(gmi, forKey: .gmi)
         try container.encodeIfPresent(gri, forKey: .gri)
-        try container.encodeIfPresent(timeOfDayPatterns, forKey: .timeOfDayPatterns)
-        try container.encodeIfPresent(dayOfWeekPatterns, forKey: .dayOfWeekPatterns)
-        try container.encodeIfPresent(hypoglycemiaAnalysis, forKey: .hypoglycemiaAnalysis)
-        try container.encodeIfPresent(hyperglycemiaAnalysis, forKey: .hyperglycemiaAnalysis)
         try container.encodeIfPresent(dataSufficiency, forKey: .dataSufficiency)
         try container.encodeIfPresent(treatmentSummary, forKey: .treatmentSummary)
     }

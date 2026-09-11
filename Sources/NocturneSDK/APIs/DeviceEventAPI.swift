@@ -55,7 +55,7 @@ open class DeviceEventAPI {
     /**
      Create
      
-     - parameter upsertDeviceEventRequest: (body)  
+     - parameter upsertDeviceEventRequest: (body) The data used to create the record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DeviceEvent
      */
@@ -66,13 +66,14 @@ open class DeviceEventAPI {
     /**
      Create
      - POST /api/v4/observations/device-events
+     - `Timestamp` must be set on the mapped model; requests that resolve to a default timestamp are rejected with `400 Bad Request`.              On success, responds with `201 Created` and a `Location` header containing the URL of the newly created record.              A record whose `(dataSource, syncIdentifier)` is held by a record the owner deleted is refused with `409 Conflict` — deleting a record stops that record's source from re-uploading it. Restore it from `GET deleted` instead.
      - Bearer Token:
        - type: http
        - name: bearer
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter upsertDeviceEventRequest: (body)  
+     - parameter upsertDeviceEventRequest: (body) The data used to create the record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DeviceEvent> 
      */
@@ -90,6 +91,49 @@ open class DeviceEventAPI {
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
         let localVariableRequestBuilder: RequestBuilder<DeviceEvent>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Create bulk
+     
+     - parameter upsertDeviceEventRequest: (body) The records to write, at most 1000 of them. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [DeviceEvent]
+     */
+    open class func deviceEventCreateBulk(upsertDeviceEventRequest: [UpsertDeviceEventRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [DeviceEvent] {
+        return try await deviceEventCreateBulkWithRequestBuilder(upsertDeviceEventRequest: upsertDeviceEventRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Create bulk
+     - POST /api/v4/observations/device-events/bulk
+     - Array semantics are per-item, not all-or-nothing. Of the types reachable here, boluses, basal injections and sensor glucose upsert on the sync key: an item carrying both `dataSource` and `syncIdentifier` updates in place the row already matched by that pair. Every other type — notes, device events, BG checks, calibrations, meter readings and bolus calculations — inserts, as does any item not carrying both halves of the pair.              The payload is validated as a whole — an empty body, more than the cap, an item with an unset `timestamp`, an item supplying `syncIdentifier` without `dataSource`, or an item any registered validator rejects, all fail the request with `400 Bad Request` before anything is persisted.              On success, responds with `201 Created` and the written records.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter upsertDeviceEventRequest: (body) The records to write, at most 1000 of them. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[DeviceEvent]> 
+     */
+    open class func deviceEventCreateBulkWithRequestBuilder(upsertDeviceEventRequest: [UpsertDeviceEventRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[DeviceEvent]> {
+        let localVariablePath = "/api/v4/observations/device-events/bulk"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: upsertDeviceEventRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[DeviceEvent]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
@@ -398,8 +442,8 @@ open class DeviceEventAPI {
     /**
      Update
      
-     - parameter id: (path)  
-     - parameter upsertDeviceEventRequest: (body)  
+     - parameter id: (path) The unique identifier of the record to update. 
+     - parameter upsertDeviceEventRequest: (body) The data to apply to the existing record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DeviceEvent
      */
@@ -410,14 +454,15 @@ open class DeviceEventAPI {
     /**
      Update
      - PUT /api/v4/observations/device-events/{id}
+     - Returns `404 Not Found` if no record with the given id exists.              `Timestamp` must be set on the mapped model; requests that resolve to a default timestamp are rejected with `400 Bad Request`.
      - Bearer Token:
        - type: http
        - name: bearer
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter id: (path)  
-     - parameter upsertDeviceEventRequest: (body)  
+     - parameter id: (path) The unique identifier of the record to update. 
+     - parameter upsertDeviceEventRequest: (body) The data to apply to the existing record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DeviceEvent> 
      */

@@ -55,32 +55,32 @@ open class BodyWeightAPI {
     /**
      Create body weights
      
-     - parameter body: (body)  
+     - parameter bodyWeight: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [BodyWeight]
      */
-    open class func bodyWeightCreateBodyWeights(body: JSONValue, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [BodyWeight] {
-        return try await bodyWeightCreateBodyWeightsWithRequestBuilder(body: body, apiConfiguration: apiConfiguration).execute().body
+    open class func bodyWeightCreateBodyWeights(bodyWeight: [BodyWeight], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [BodyWeight] {
+        return try await bodyWeightCreateBodyWeightsWithRequestBuilder(bodyWeight: bodyWeight, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Create body weights
      - POST /api/v4/body-weight/batch
-     - Create one or more body weight records (single object or array)
+     - Create one or more body weight records
      - Bearer Token:
        - type: http
        - name: bearer
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter body: (body)  
+     - parameter bodyWeight: (body)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[BodyWeight]> 
      */
-    open class func bodyWeightCreateBodyWeightsWithRequestBuilder(body: JSONValue, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[BodyWeight]> {
+    open class func bodyWeightCreateBodyWeightsWithRequestBuilder(bodyWeight: [BodyWeight], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[BodyWeight]> {
         let localVariablePath = "/api/v4/body-weight/batch"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body, codableHelper: apiConfiguration.codableHelper)
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: bodyWeight, codableHelper: apiConfiguration.codableHelper)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 

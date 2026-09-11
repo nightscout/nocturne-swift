@@ -53,8 +53,8 @@ open class AuditAPI {
     /**
      Get mutation audit log
      
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
+     - parameter from: (query)  
+     - parameter to: (query)  
      - parameter limit: (query)  (optional, default to 100)
      - parameter offset: (query)  (optional, default to 0)
      - parameter sort: (query)  (optional, default to "created_at_desc")
@@ -65,7 +65,7 @@ open class AuditAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedResponseOfMutationAuditDto
      */
-    open class func auditGetMutationAuditLog(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, subjectId: String? = nil, entityType: String? = nil, action: String? = nil, entityId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfMutationAuditDto {
+    open class func auditGetMutationAuditLog(from: Date, to: Date, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, subjectId: String? = nil, entityType: String? = nil, action: String? = nil, entityId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfMutationAuditDto {
         return try await auditGetMutationAuditLogWithRequestBuilder(from: from, to: to, limit: limit, offset: offset, sort: sort, subjectId: subjectId, entityType: entityType, action: action, entityId: entityId, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -79,8 +79,8 @@ open class AuditAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
+     - parameter from: (query)  
+     - parameter to: (query)  
      - parameter limit: (query)  (optional, default to 100)
      - parameter offset: (query)  (optional, default to 0)
      - parameter sort: (query)  (optional, default to "created_at_desc")
@@ -91,15 +91,15 @@ open class AuditAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedResponseOfMutationAuditDto> 
      */
-    open class func auditGetMutationAuditLogWithRequestBuilder(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, subjectId: String? = nil, entityType: String? = nil, action: String? = nil, entityId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfMutationAuditDto> {
+    open class func auditGetMutationAuditLogWithRequestBuilder(from: Date, to: Date, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, subjectId: String? = nil, entityType: String? = nil, action: String? = nil, entityId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfMutationAuditDto> {
         let localVariablePath = "/api/v4/audit/mutations"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         let _qp1: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
-            "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "from": (wrappedValue: from.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "to": (wrappedValue: to.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
@@ -124,8 +124,8 @@ open class AuditAPI {
     /**
      Get read access audit log
      
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
+     - parameter from: (query)  
+     - parameter to: (query)  
      - parameter limit: (query)  (optional, default to 100)
      - parameter offset: (query)  (optional, default to 0)
      - parameter sort: (query)  (optional, default to "created_at_desc")
@@ -136,7 +136,7 @@ open class AuditAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedResponseOfReadAccessAuditDto
      */
-    open class func auditGetReadAccessAuditLog(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, subjectId: String? = nil, entityType: String? = nil, endpoint: String? = nil, statusCode: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfReadAccessAuditDto {
+    open class func auditGetReadAccessAuditLog(from: Date, to: Date, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, subjectId: String? = nil, entityType: String? = nil, endpoint: String? = nil, statusCode: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfReadAccessAuditDto {
         return try await auditGetReadAccessAuditLogWithRequestBuilder(from: from, to: to, limit: limit, offset: offset, sort: sort, subjectId: subjectId, entityType: entityType, endpoint: endpoint, statusCode: statusCode, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -150,8 +150,8 @@ open class AuditAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
+     - parameter from: (query)  
+     - parameter to: (query)  
      - parameter limit: (query)  (optional, default to 100)
      - parameter offset: (query)  (optional, default to 0)
      - parameter sort: (query)  (optional, default to "created_at_desc")
@@ -162,15 +162,15 @@ open class AuditAPI {
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedResponseOfReadAccessAuditDto> 
      */
-    open class func auditGetReadAccessAuditLogWithRequestBuilder(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, subjectId: String? = nil, entityType: String? = nil, endpoint: String? = nil, statusCode: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfReadAccessAuditDto> {
+    open class func auditGetReadAccessAuditLogWithRequestBuilder(from: Date, to: Date, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, subjectId: String? = nil, entityType: String? = nil, endpoint: String? = nil, statusCode: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfReadAccessAuditDto> {
         let localVariablePath = "/api/v4/audit/reads"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         let _qp2: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
-            "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "from": (wrappedValue: from.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "to": (wrappedValue: to.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),

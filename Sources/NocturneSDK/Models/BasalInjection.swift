@@ -16,18 +16,18 @@ public struct BasalInjection: Sendable, Codable, Hashable {
     public var device: String?
     public var app: String?
     public var dataSource: String?
-    public var syncIdentifier: String?
     public var correlationId: String?
     public var legacyId: String?
-    public var patientDeviceId: String?
     public var createdAt: Date?
     public var modifiedAt: Date?
+    public var additionalProperties: [String: JSONValue]?
+    public var syncIdentifier: String?
+    public var patientDeviceId: String?
     public var units: Double?
     public var notes: String?
     public var insulinContext: TreatmentInsulinContext?
-    public var additionalProperties: [String: JSONValue]?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, syncIdentifier: String? = nil, correlationId: String? = nil, legacyId: String? = nil, patientDeviceId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, units: Double? = nil, notes: String? = nil, insulinContext: TreatmentInsulinContext? = nil, additionalProperties: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, syncIdentifier: String? = nil, patientDeviceId: String? = nil, units: Double? = nil, notes: String? = nil, insulinContext: TreatmentInsulinContext? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -35,16 +35,16 @@ public struct BasalInjection: Sendable, Codable, Hashable {
         self.device = device
         self.app = app
         self.dataSource = dataSource
-        self.syncIdentifier = syncIdentifier
         self.correlationId = correlationId
         self.legacyId = legacyId
-        self.patientDeviceId = patientDeviceId
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
+        self.additionalProperties = additionalProperties
+        self.syncIdentifier = syncIdentifier
+        self.patientDeviceId = patientDeviceId
         self.units = units
         self.notes = notes
         self.insulinContext = insulinContext
-        self.additionalProperties = additionalProperties
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -55,16 +55,16 @@ public struct BasalInjection: Sendable, Codable, Hashable {
         case device
         case app
         case dataSource
-        case syncIdentifier
         case correlationId
         case legacyId
-        case patientDeviceId
         case createdAt
         case modifiedAt
+        case additionalProperties
+        case syncIdentifier
+        case patientDeviceId
         case units
         case notes
         case insulinContext
-        case additionalProperties
     }
 
     // Encodable protocol methods
@@ -78,16 +78,16 @@ public struct BasalInjection: Sendable, Codable, Hashable {
         try container.encodeIfPresent(device, forKey: .device)
         try container.encodeIfPresent(app, forKey: .app)
         try container.encodeIfPresent(dataSource, forKey: .dataSource)
-        try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
         try container.encodeIfPresent(correlationId, forKey: .correlationId)
         try container.encodeIfPresent(legacyId, forKey: .legacyId)
-        try container.encodeIfPresent(patientDeviceId, forKey: .patientDeviceId)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
+        try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
+        try container.encodeIfPresent(patientDeviceId, forKey: .patientDeviceId)
         try container.encodeIfPresent(units, forKey: .units)
         try container.encodeIfPresent(notes, forKey: .notes)
         try container.encodeIfPresent(insulinContext, forKey: .insulinContext)
-        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
     }
 }
 

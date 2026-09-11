@@ -7,17 +7,28 @@
 
 import Foundation
 
-/** 409 response body returned by DELETE /api/v4/alert-rules/{id} when other rules reference the target via alert_state. The FE uses this to either link to those rules or offer a cascade-delete confirmation. */
+/** 409 response body returned by DELETE /api/v4/alert-rules/{id}. Either other rules reference the target via alert_state (ReferencingRuleIds is non-empty, and the FE can link to them or offer a cascade-delete confirmation), or the rule is owned by a source feature (ManagedBy is non-null) and must be deleted there. */
 public struct ReferencingRulesResponse: Sendable, Codable, Hashable {
 
     public var referencingRuleIds: [String]?
+    public var managedBy: String?
+    /** The status this body is returned with. */
+    public var status: Int?
+    /** The reason, worded for the person who asked for the deletion. */
+    public var message: String?
 
-    public init(referencingRuleIds: [String]? = nil) {
+    public init(referencingRuleIds: [String]? = nil, managedBy: String? = nil, status: Int? = nil, message: String? = nil) {
         self.referencingRuleIds = referencingRuleIds
+        self.managedBy = managedBy
+        self.status = status
+        self.message = message
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case referencingRuleIds
+        case managedBy
+        case status
+        case message
     }
 
     // Encodable protocol methods
@@ -25,6 +36,9 @@ public struct ReferencingRulesResponse: Sendable, Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(referencingRuleIds, forKey: .referencingRuleIds)
+        try container.encodeIfPresent(managedBy, forKey: .managedBy)
+        try container.encodeIfPresent(status, forKey: .status)
+        try container.encodeIfPresent(message, forKey: .message)
     }
 }
 

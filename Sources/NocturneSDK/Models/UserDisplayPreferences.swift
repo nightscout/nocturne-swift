@@ -16,9 +16,10 @@ public struct UserDisplayPreferences: Sendable, Codable, Hashable {
     public var nightModeSchedule: Bool?
     public var prediction: PredictionPreferences?
     public var chart: ChartPreferences?
+    public var yearOverviewColors: YearOverviewColorPreferences?
     public var dashboardTopWidgets: [WidgetId]?
 
-    public init(glucoseUnits: String? = nil, timeFormat: String? = nil, regionFormat: String? = nil, colorTheme: String? = nil, nightModeSchedule: Bool? = nil, prediction: PredictionPreferences? = nil, chart: ChartPreferences? = nil, dashboardTopWidgets: [WidgetId]? = nil) {
+    public init(glucoseUnits: String? = nil, timeFormat: String? = nil, regionFormat: String? = nil, colorTheme: String? = nil, nightModeSchedule: Bool? = nil, prediction: PredictionPreferences? = nil, chart: ChartPreferences? = nil, yearOverviewColors: YearOverviewColorPreferences? = nil, dashboardTopWidgets: [WidgetId]? = nil) {
         self.glucoseUnits = glucoseUnits
         self.timeFormat = timeFormat
         self.regionFormat = regionFormat
@@ -26,6 +27,7 @@ public struct UserDisplayPreferences: Sendable, Codable, Hashable {
         self.nightModeSchedule = nightModeSchedule
         self.prediction = prediction
         self.chart = chart
+        self.yearOverviewColors = yearOverviewColors
         self.dashboardTopWidgets = dashboardTopWidgets
     }
 
@@ -37,6 +39,7 @@ public struct UserDisplayPreferences: Sendable, Codable, Hashable {
         case nightModeSchedule
         case prediction
         case chart
+        case yearOverviewColors
         case dashboardTopWidgets
     }
 
@@ -51,6 +54,7 @@ public struct UserDisplayPreferences: Sendable, Codable, Hashable {
         try container.encodeIfPresent(nightModeSchedule, forKey: .nightModeSchedule)
         try container.encodeIfPresent(prediction, forKey: .prediction)
         try container.encodeIfPresent(chart, forKey: .chart)
+        try container.encodeIfPresent(yearOverviewColors, forKey: .yearOverviewColors)
         try container.encodeIfPresent(dashboardTopWidgets, forKey: .dashboardTopWidgets)
     }
 }

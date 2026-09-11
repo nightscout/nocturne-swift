@@ -20,15 +20,15 @@ public struct CarbIntake: Sendable, Codable, Hashable {
     public var legacyId: String?
     public var createdAt: Date?
     public var modifiedAt: Date?
+    public var additionalProperties: [String: JSONValue]?
     public var carbs: Double?
     public var syncIdentifier: String?
     public var carbTime: Double?
     public var absorptionTime: Int?
     public var fatGrams: Double?
     public var proteinGrams: Double?
-    public var additionalProperties: [String: JSONValue]?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, carbs: Double? = nil, syncIdentifier: String? = nil, carbTime: Double? = nil, absorptionTime: Int? = nil, fatGrams: Double? = nil, proteinGrams: Double? = nil, additionalProperties: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, carbs: Double? = nil, syncIdentifier: String? = nil, carbTime: Double? = nil, absorptionTime: Int? = nil, fatGrams: Double? = nil, proteinGrams: Double? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -40,13 +40,13 @@ public struct CarbIntake: Sendable, Codable, Hashable {
         self.legacyId = legacyId
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
+        self.additionalProperties = additionalProperties
         self.carbs = carbs
         self.syncIdentifier = syncIdentifier
         self.carbTime = carbTime
         self.absorptionTime = absorptionTime
         self.fatGrams = fatGrams
         self.proteinGrams = proteinGrams
-        self.additionalProperties = additionalProperties
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -61,13 +61,13 @@ public struct CarbIntake: Sendable, Codable, Hashable {
         case legacyId
         case createdAt
         case modifiedAt
+        case additionalProperties
         case carbs
         case syncIdentifier
         case carbTime
         case absorptionTime
         case fatGrams
         case proteinGrams
-        case additionalProperties
     }
 
     // Encodable protocol methods
@@ -85,13 +85,13 @@ public struct CarbIntake: Sendable, Codable, Hashable {
         try container.encodeIfPresent(legacyId, forKey: .legacyId)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
         try container.encodeIfPresent(carbs, forKey: .carbs)
         try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
         try container.encodeIfPresent(carbTime, forKey: .carbTime)
         try container.encodeIfPresent(absorptionTime, forKey: .absorptionTime)
         try container.encodeIfPresent(fatGrams, forKey: .fatGrams)
         try container.encodeIfPresent(proteinGrams, forKey: .proteinGrams)
-        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
     }
 }
 

@@ -20,15 +20,15 @@ public struct BGCheck: Sendable, Codable, Hashable {
     public var legacyId: String?
     public var createdAt: Date?
     public var modifiedAt: Date?
+    public var additionalProperties: [String: JSONValue]?
     public var glucose: Double?
     public var glucoseType: GlucoseType?
     public var units: GlucoseUnit?
     public var mgdl: Double?
     public var mmol: Double?
     public var syncIdentifier: String?
-    public var additionalProperties: [String: JSONValue]?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, glucose: Double? = nil, glucoseType: GlucoseType? = nil, units: GlucoseUnit? = nil, mgdl: Double? = nil, mmol: Double? = nil, syncIdentifier: String? = nil, additionalProperties: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, glucose: Double? = nil, glucoseType: GlucoseType? = nil, units: GlucoseUnit? = nil, mgdl: Double? = nil, mmol: Double? = nil, syncIdentifier: String? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -40,13 +40,13 @@ public struct BGCheck: Sendable, Codable, Hashable {
         self.legacyId = legacyId
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
+        self.additionalProperties = additionalProperties
         self.glucose = glucose
         self.glucoseType = glucoseType
         self.units = units
         self.mgdl = mgdl
         self.mmol = mmol
         self.syncIdentifier = syncIdentifier
-        self.additionalProperties = additionalProperties
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -61,13 +61,13 @@ public struct BGCheck: Sendable, Codable, Hashable {
         case legacyId
         case createdAt
         case modifiedAt
+        case additionalProperties
         case glucose
         case glucoseType
         case units
         case mgdl
         case mmol
         case syncIdentifier
-        case additionalProperties
     }
 
     // Encodable protocol methods
@@ -85,13 +85,13 @@ public struct BGCheck: Sendable, Codable, Hashable {
         try container.encodeIfPresent(legacyId, forKey: .legacyId)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
         try container.encodeIfPresent(glucose, forKey: .glucose)
         try container.encodeIfPresent(glucoseType, forKey: .glucoseType)
         try container.encodeIfPresent(units, forKey: .units)
         try container.encodeIfPresent(mgdl, forKey: .mgdl)
         try container.encodeIfPresent(mmol, forKey: .mmol)
         try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
-        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
     }
 }
 

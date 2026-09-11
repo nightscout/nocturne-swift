@@ -13,12 +13,14 @@ public struct TimeInRangeEpisodes: Sendable, Codable, Hashable {
     public var low: Int?
     public var high: Int?
     public var veryHigh: Int?
+    public var aboveRange: Int?
 
-    public init(veryLow: Int? = nil, low: Int? = nil, high: Int? = nil, veryHigh: Int? = nil) {
+    public init(veryLow: Int? = nil, low: Int? = nil, high: Int? = nil, veryHigh: Int? = nil, aboveRange: Int? = nil) {
         self.veryLow = veryLow
         self.low = low
         self.high = high
         self.veryHigh = veryHigh
+        self.aboveRange = aboveRange
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -26,6 +28,7 @@ public struct TimeInRangeEpisodes: Sendable, Codable, Hashable {
         case low
         case high
         case veryHigh
+        case aboveRange
     }
 
     // Encodable protocol methods
@@ -36,6 +39,7 @@ public struct TimeInRangeEpisodes: Sendable, Codable, Hashable {
         try container.encodeIfPresent(low, forKey: .low)
         try container.encodeIfPresent(high, forKey: .high)
         try container.encodeIfPresent(veryHigh, forKey: .veryHigh)
+        try container.encodeIfPresent(aboveRange, forKey: .aboveRange)
     }
 }
 

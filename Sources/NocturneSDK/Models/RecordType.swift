@@ -9,8 +9,6 @@ import Foundation
 
 /**  */
 public enum RecordType: String, Sendable, Codable, CaseIterable {
-    case entry = "Entry"
-    case treatment = "Treatment"
     case stateSpan = "StateSpan"
     case sensorGlucose = "SensorGlucose"
     case bolus = "Bolus"

@@ -9,8 +9,12 @@ import Foundation
 
 public struct AuditConfigDto: Sendable, Codable, Hashable {
 
+    public static let readAuditRetentionDaysRule = NumericRule<Int>(minimum: 1, exclusiveMinimum: false, maximum: 3650, exclusiveMaximum: false, multipleOf: nil)
+    public static let mutationAuditRetentionDaysRule = NumericRule<Int>(minimum: 1, exclusiveMinimum: false, maximum: 3650, exclusiveMaximum: false, multipleOf: nil)
     public var readAuditEnabled: Bool?
+    /** Days of read-access audit to keep, or null for the platform default. Bounded below because a zero or negative window puts the purge cutoff at or after now, which deletes the access record for reads that just happened. */
     public var readAuditRetentionDays: Int?
+    /** Days of mutation audit to keep, or null for the platform default. Additionally floored at the tenant's effective soft-delete window by AuditController.UpdateAuditConfig. */
     public var mutationAuditRetentionDays: Int?
 
     public init(readAuditEnabled: Bool? = nil, readAuditRetentionDays: Int? = nil, mutationAuditRetentionDays: Int? = nil) {

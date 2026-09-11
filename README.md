@@ -81,6 +81,7 @@ Class | Method | HTTP request | Description
 *AvatarAPI* | [**avatarUpload**](docs/AvatarAPI.md#avatarupload) | **POST** /api/v4/me/avatar | Upload
 *BGCheckAPI* | [**bGCheckBulkRestore**](docs/BGCheckAPI.md#bgcheckbulkrestore) | **POST** /api/v4/observations/bg-checks/restore | Bulk restore
 *BGCheckAPI* | [**bGCheckCreate**](docs/BGCheckAPI.md#bgcheckcreate) | **POST** /api/v4/observations/bg-checks | Create
+*BGCheckAPI* | [**bGCheckCreateBulk**](docs/BGCheckAPI.md#bgcheckcreatebulk) | **POST** /api/v4/observations/bg-checks/bulk | Create bulk
 *BGCheckAPI* | [**bGCheckDelete**](docs/BGCheckAPI.md#bgcheckdelete) | **DELETE** /api/v4/observations/bg-checks/{id} | Delete
 *BGCheckAPI* | [**bGCheckGetAll**](docs/BGCheckAPI.md#bgcheckgetall) | **GET** /api/v4/observations/bg-checks | Get all
 *BGCheckAPI* | [**bGCheckGetById**](docs/BGCheckAPI.md#bgcheckgetbyid) | **GET** /api/v4/observations/bg-checks/{id} | Get by id
@@ -89,7 +90,7 @@ Class | Method | HTTP request | Description
 *BGCheckAPI* | [**bGCheckUpdate**](docs/BGCheckAPI.md#bgcheckupdate) | **PUT** /api/v4/observations/bg-checks/{id} | Update
 *BasalInjectionAPI* | [**basalInjectionBulkRestore**](docs/BasalInjectionAPI.md#basalinjectionbulkrestore) | **POST** /api/v4/insulin/basal-injections/restore | Bulk restore
 *BasalInjectionAPI* | [**basalInjectionCreate**](docs/BasalInjectionAPI.md#basalinjectioncreate) | **POST** /api/v4/insulin/basal-injections | Create
-*BasalInjectionAPI* | [**basalInjectionCreateBasalInjectionsBulk**](docs/BasalInjectionAPI.md#basalinjectioncreatebasalinjectionsbulk) | **POST** /api/v4/insulin/basal-injections/bulk | Create basal injections bulk
+*BasalInjectionAPI* | [**basalInjectionCreateBulk**](docs/BasalInjectionAPI.md#basalinjectioncreatebulk) | **POST** /api/v4/insulin/basal-injections/bulk | Create bulk
 *BasalInjectionAPI* | [**basalInjectionDelete**](docs/BasalInjectionAPI.md#basalinjectiondelete) | **DELETE** /api/v4/insulin/basal-injections/{id} | Delete
 *BasalInjectionAPI* | [**basalInjectionDeleteBySyncIdentifier**](docs/BasalInjectionAPI.md#basalinjectiondeletebysyncidentifier) | **DELETE** /api/v4/insulin/basal-injections/by-sync-id | Delete by sync identifier
 *BasalInjectionAPI* | [**basalInjectionGetAll**](docs/BasalInjectionAPI.md#basalinjectiongetall) | **GET** /api/v4/insulin/basal-injections | Get all
@@ -110,7 +111,7 @@ Class | Method | HTTP request | Description
 *BodyWeightAPI* | [**bodyWeightUpdateBodyWeight**](docs/BodyWeightAPI.md#bodyweightupdatebodyweight) | **PUT** /api/v4/body-weight/{id} | Update body weight
 *BolusAPI* | [**bolusBulkRestore**](docs/BolusAPI.md#bolusbulkrestore) | **POST** /api/v4/insulin/boluses/restore | Bulk restore
 *BolusAPI* | [**bolusCreate**](docs/BolusAPI.md#boluscreate) | **POST** /api/v4/insulin/boluses | Create
-*BolusAPI* | [**bolusCreateBolusesBulk**](docs/BolusAPI.md#boluscreatebolusesbulk) | **POST** /api/v4/insulin/boluses/bulk | Create boluses bulk
+*BolusAPI* | [**bolusCreateBulk**](docs/BolusAPI.md#boluscreatebulk) | **POST** /api/v4/insulin/boluses/bulk | Create bulk
 *BolusAPI* | [**bolusDelete**](docs/BolusAPI.md#bolusdelete) | **DELETE** /api/v4/insulin/boluses/{id} | Delete
 *BolusAPI* | [**bolusDeleteBySyncIdentifier**](docs/BolusAPI.md#bolusdeletebysyncidentifier) | **DELETE** /api/v4/insulin/boluses/by-sync-id | Delete by sync identifier
 *BolusAPI* | [**bolusGetAll**](docs/BolusAPI.md#bolusgetall) | **GET** /api/v4/insulin/boluses | Get all
@@ -120,6 +121,7 @@ Class | Method | HTTP request | Description
 *BolusAPI* | [**bolusUpdate**](docs/BolusAPI.md#bolusupdate) | **PUT** /api/v4/insulin/boluses/{id} | Update
 *BolusCalculationAPI* | [**bolusCalculationBulkRestore**](docs/BolusCalculationAPI.md#boluscalculationbulkrestore) | **POST** /api/v4/insulin/calculations/restore | Bulk restore
 *BolusCalculationAPI* | [**bolusCalculationCreate**](docs/BolusCalculationAPI.md#boluscalculationcreate) | **POST** /api/v4/insulin/calculations | Create
+*BolusCalculationAPI* | [**bolusCalculationCreateBulk**](docs/BolusCalculationAPI.md#boluscalculationcreatebulk) | **POST** /api/v4/insulin/calculations/bulk | Create bulk
 *BolusCalculationAPI* | [**bolusCalculationDelete**](docs/BolusCalculationAPI.md#boluscalculationdelete) | **DELETE** /api/v4/insulin/calculations/{id} | Delete
 *BolusCalculationAPI* | [**bolusCalculationGetAll**](docs/BolusCalculationAPI.md#boluscalculationgetall) | **GET** /api/v4/insulin/calculations | Get all
 *BolusCalculationAPI* | [**bolusCalculationGetById**](docs/BolusCalculationAPI.md#boluscalculationgetbyid) | **GET** /api/v4/insulin/calculations/{id} | Get by id
@@ -128,6 +130,7 @@ Class | Method | HTTP request | Description
 *BolusCalculationAPI* | [**bolusCalculationUpdate**](docs/BolusCalculationAPI.md#boluscalculationupdate) | **PUT** /api/v4/insulin/calculations/{id} | Update
 *CalibrationAPI* | [**calibrationBulkRestore**](docs/CalibrationAPI.md#calibrationbulkrestore) | **POST** /api/v4/glucose/calibrations/restore | Bulk restore
 *CalibrationAPI* | [**calibrationCreate**](docs/CalibrationAPI.md#calibrationcreate) | **POST** /api/v4/glucose/calibrations | Create
+*CalibrationAPI* | [**calibrationCreateBulk**](docs/CalibrationAPI.md#calibrationcreatebulk) | **POST** /api/v4/glucose/calibrations/bulk | Create bulk
 *CalibrationAPI* | [**calibrationDelete**](docs/CalibrationAPI.md#calibrationdelete) | **DELETE** /api/v4/glucose/calibrations/{id} | Delete
 *CalibrationAPI* | [**calibrationGetAll**](docs/CalibrationAPI.md#calibrationgetall) | **GET** /api/v4/glucose/calibrations | Get all
 *CalibrationAPI* | [**calibrationGetById**](docs/CalibrationAPI.md#calibrationgetbyid) | **GET** /api/v4/glucose/calibrations/{id} | Get by id
@@ -141,7 +144,6 @@ Class | Method | HTTP request | Description
 *ChartDataAPI* | [**chartDataGetBasalSeries**](docs/ChartDataAPI.md#chartdatagetbasalseries) | **GET** /api/v4/ChartData/basal-series | Get basal series
 *ChartDataAPI* | [**chartDataGetDashboardChartData**](docs/ChartDataAPI.md#chartdatagetdashboardchartdata) | **GET** /api/v4/ChartData/dashboard | Get dashboard chart data
 *ChatIdentityAPI* | [**chatIdentityClaimLink**](docs/ChatIdentityAPI.md#chatidentityclaimlink) | **POST** /api/v4/chat-identity/links/claim | Claim link
-*ChatIdentityAPI* | [**chatIdentityCreateDirectLink**](docs/ChatIdentityAPI.md#chatidentitycreatedirectlink) | **POST** /api/v4/chat-identity/links/direct | Create direct link
 *ChatIdentityAPI* | [**chatIdentityGetLinks**](docs/ChatIdentityAPI.md#chatidentitygetlinks) | **GET** /api/v4/chat-identity | Get links
 *ChatIdentityAPI* | [**chatIdentityGetPending**](docs/ChatIdentityAPI.md#chatidentitygetpending) | **GET** /api/v4/chat-identity/links/pending/{token} | Get pending
 *ChatIdentityAPI* | [**chatIdentityRevokeLink**](docs/ChatIdentityAPI.md#chatidentityrevokelink) | **DELETE** /api/v4/chat-identity/links/{id} | Revoke link
@@ -203,11 +205,8 @@ Class | Method | HTTP request | Description
 *DebugAPI* | [**debugEchoQueryWithModelAndSpec**](docs/DebugAPI.md#debugechoquerywithmodelandspec) | **GET** /api/v4/debug/echo/{echo}/{model}/{spec} | Echo query with model and spec
 *DebugAPI* | [**debugPreviewEntries**](docs/DebugAPI.md#debugpreviewentries) | **POST** /api/v4/debug/entries/preview | Preview entries
 *DeduplicationAPI* | [**deduplicationCancelJob**](docs/DeduplicationAPI.md#deduplicationcanceljob) | **POST** /api/v4/admin/deduplication/cancel/{jobId} | Cancel job
-*DeduplicationAPI* | [**deduplicationGetEntryLinkedRecords**](docs/DeduplicationAPI.md#deduplicationgetentrylinkedrecords) | **GET** /api/v4/admin/deduplication/entries/{entryId}/sources | Get entry linked records
 *DeduplicationAPI* | [**deduplicationGetJobStatus**](docs/DeduplicationAPI.md#deduplicationgetjobstatus) | **GET** /api/v4/admin/deduplication/status/{jobId} | Get job status
 *DeduplicationAPI* | [**deduplicationGetRecordLinkedRecords**](docs/DeduplicationAPI.md#deduplicationgetrecordlinkedrecords) | **GET** /api/v4/admin/deduplication/records/{recordType}/{recordId}/sources | Get record linked records
-*DeduplicationAPI* | [**deduplicationGetStateSpanLinkedRecords**](docs/DeduplicationAPI.md#deduplicationgetstatespanlinkedrecords) | **GET** /api/v4/admin/deduplication/state-spans/{stateSpanId}/sources | Get state span linked records
-*DeduplicationAPI* | [**deduplicationGetTreatmentLinkedRecords**](docs/DeduplicationAPI.md#deduplicationgettreatmentlinkedrecords) | **GET** /api/v4/admin/deduplication/treatments/{treatmentId}/sources | Get treatment linked records
 *DeduplicationAPI* | [**deduplicationStartDeduplicationJob**](docs/DeduplicationAPI.md#deduplicationstartdeduplicationjob) | **POST** /api/v4/admin/deduplication/run | Start deduplication job
 *DevAdminAPI* | [**devAdminCreateTenant**](docs/DevAdminAPI.md#devadmincreatetenant) | **POST** /api/v4/dev-only/admin/tenants | Create tenant
 *DevAdminAPI* | [**devAdminDeleteTenant**](docs/DevAdminAPI.md#devadmindeletetenant) | **DELETE** /api/v4/dev-only/admin/tenants/{id} | Delete tenant
@@ -231,6 +230,7 @@ Class | Method | HTTP request | Description
 *DeviceCatalogAPI* | [**deviceCatalogGetCatalogByCategory**](docs/DeviceCatalogAPI.md#devicecataloggetcatalogbycategory) | **GET** /api/v4/devices/catalog/{category} | Get catalog by category
 *DeviceEventAPI* | [**deviceEventBulkRestore**](docs/DeviceEventAPI.md#deviceeventbulkrestore) | **POST** /api/v4/observations/device-events/restore | Bulk restore
 *DeviceEventAPI* | [**deviceEventCreate**](docs/DeviceEventAPI.md#deviceeventcreate) | **POST** /api/v4/observations/device-events | Create
+*DeviceEventAPI* | [**deviceEventCreateBulk**](docs/DeviceEventAPI.md#deviceeventcreatebulk) | **POST** /api/v4/observations/device-events/bulk | Create bulk
 *DeviceEventAPI* | [**deviceEventDelete**](docs/DeviceEventAPI.md#deviceeventdelete) | **DELETE** /api/v4/observations/device-events/{id} | Delete
 *DeviceEventAPI* | [**deviceEventDeleteBySyncIdentifier**](docs/DeviceEventAPI.md#deviceeventdeletebysyncidentifier) | **DELETE** /api/v4/observations/device-events/by-sync-id | Delete by sync identifier
 *DeviceEventAPI* | [**deviceEventGetAll**](docs/DeviceEventAPI.md#deviceeventgetall) | **GET** /api/v4/observations/device-events | Get all
@@ -299,6 +299,7 @@ Class | Method | HTTP request | Description
 *MembershipRequestAPI* | [**membershipRequestSetMembershipRequestSettings**](docs/MembershipRequestAPI.md#membershiprequestsetmembershiprequestsettings) | **PUT** /api/v4/membership-requests/settings | Set membership request settings
 *MeterGlucoseAPI* | [**meterGlucoseBulkRestore**](docs/MeterGlucoseAPI.md#meterglucosebulkrestore) | **POST** /api/v4/glucose/meter/restore | Bulk restore
 *MeterGlucoseAPI* | [**meterGlucoseCreate**](docs/MeterGlucoseAPI.md#meterglucosecreate) | **POST** /api/v4/glucose/meter | Create
+*MeterGlucoseAPI* | [**meterGlucoseCreateBulk**](docs/MeterGlucoseAPI.md#meterglucosecreatebulk) | **POST** /api/v4/glucose/meter/bulk | Create bulk
 *MeterGlucoseAPI* | [**meterGlucoseDelete**](docs/MeterGlucoseAPI.md#meterglucosedelete) | **DELETE** /api/v4/glucose/meter/{id} | Delete
 *MeterGlucoseAPI* | [**meterGlucoseGetAll**](docs/MeterGlucoseAPI.md#meterglucosegetall) | **GET** /api/v4/glucose/meter | Get all
 *MeterGlucoseAPI* | [**meterGlucoseGetById**](docs/MeterGlucoseAPI.md#meterglucosegetbyid) | **GET** /api/v4/glucose/meter/{id} | Get by id
@@ -323,6 +324,7 @@ Class | Method | HTTP request | Description
 *NightscoutTransitionAPI* | [**nightscoutTransitionGetTransitionStatus**](docs/NightscoutTransitionAPI.md#nightscouttransitiongettransitionstatus) | **GET** /api/v4/nightscout-transition/status | Get transition status
 *NoteAPI* | [**noteBulkRestore**](docs/NoteAPI.md#notebulkrestore) | **POST** /api/v4/observations/notes/restore | Bulk restore
 *NoteAPI* | [**noteCreate**](docs/NoteAPI.md#notecreate) | **POST** /api/v4/observations/notes | Create
+*NoteAPI* | [**noteCreateBulk**](docs/NoteAPI.md#notecreatebulk) | **POST** /api/v4/observations/notes/bulk | Create bulk
 *NoteAPI* | [**noteDelete**](docs/NoteAPI.md#notedelete) | **DELETE** /api/v4/observations/notes/{id} | Delete
 *NoteAPI* | [**noteDeleteBySyncIdentifier**](docs/NoteAPI.md#notedeletebysyncidentifier) | **DELETE** /api/v4/observations/notes/by-sync-id | Delete by sync identifier
 *NoteAPI* | [**noteGetAll**](docs/NoteAPI.md#notegetall) | **GET** /api/v4/observations/notes | Get all
@@ -440,7 +442,7 @@ Class | Method | HTTP request | Description
 *RoleAPI* | [**roleUpdateRole**](docs/RoleAPI.md#roleupdaterole) | **PUT** /api/v4/roles/{id} | Update role
 *SensorGlucoseAPI* | [**sensorGlucoseBulkRestore**](docs/SensorGlucoseAPI.md#sensorglucosebulkrestore) | **POST** /api/v4/glucose/sensor/restore | Bulk restore
 *SensorGlucoseAPI* | [**sensorGlucoseCreate**](docs/SensorGlucoseAPI.md#sensorglucosecreate) | **POST** /api/v4/glucose/sensor | Create
-*SensorGlucoseAPI* | [**sensorGlucoseCreateSensorGlucoseBulk**](docs/SensorGlucoseAPI.md#sensorglucosecreatesensorglucosebulk) | **POST** /api/v4/glucose/sensor/bulk | Create sensor glucose bulk
+*SensorGlucoseAPI* | [**sensorGlucoseCreateBulk**](docs/SensorGlucoseAPI.md#sensorglucosecreatebulk) | **POST** /api/v4/glucose/sensor/bulk | Create bulk
 *SensorGlucoseAPI* | [**sensorGlucoseDelete**](docs/SensorGlucoseAPI.md#sensorglucosedelete) | **DELETE** /api/v4/glucose/sensor/{id} | Delete
 *SensorGlucoseAPI* | [**sensorGlucoseGetAll**](docs/SensorGlucoseAPI.md#sensorglucosegetall) | **GET** /api/v4/glucose/sensor | Get all
 *SensorGlucoseAPI* | [**sensorGlucoseGetById**](docs/SensorGlucoseAPI.md#sensorglucosegetbyid) | **GET** /api/v4/glucose/sensor/{id} | Get by id
@@ -472,6 +474,7 @@ Class | Method | HTTP request | Description
 *SetupAPI* | [**setupOwnerOidc**](docs/SetupAPI.md#setupowneroidc) | **POST** /api/v4/setup/owner/oidc | Owner oidc
 *SetupAPI* | [**setupOwnerOptions**](docs/SetupAPI.md#setupowneroptions) | **POST** /api/v4/setup/owner/options | Owner options
 *SetupAPI* | [**setupValidateUsername**](docs/SetupAPI.md#setupvalidateusername) | **GET** /api/v4/setup/validate-username | Validate username
+*ShareAppearanceAPI* | [**shareAppearanceGetShareAppearance**](docs/ShareAppearanceAPI.md#shareappearancegetshareappearance) | **GET** /api/v4/share/appearance | Get share appearance
 *ShareLinkAPI* | [**shareLinkDisableShareLink**](docs/ShareLinkAPI.md#sharelinkdisablesharelink) | **DELETE** /api/v4/share | Disable share link
 *ShareLinkAPI* | [**shareLinkGetShareLink**](docs/ShareLinkAPI.md#sharelinkgetsharelink) | **GET** /api/v4/share | Get share link
 *ShareLinkAPI* | [**shareLinkRotateShareLink**](docs/ShareLinkAPI.md#sharelinkrotatesharelink) | **POST** /api/v4/share/rotate | Rotate share link
@@ -516,8 +519,6 @@ Class | Method | HTTP request | Description
 *StatisticsAPI* | [**statisticsCalculateTimeInRange**](docs/StatisticsAPI.md#statisticscalculatetimeinrange) | **POST** /api/v4/Statistics/time-in-range | Calculate time in range
 *StatisticsAPI* | [**statisticsCalculateTreatmentSummary**](docs/StatisticsAPI.md#statisticscalculatetreatmentsummary) | **POST** /api/v4/Statistics/treatment-summary | Calculate treatment summary
 *StatisticsAPI* | [**statisticsCleanTreatmentData**](docs/StatisticsAPI.md#statisticscleantreatmentdata) | **POST** /api/v4/Statistics/clean/treatments | Clean treatment data
-*StatisticsAPI* | [**statisticsFormatCarbDisplay**](docs/StatisticsAPI.md#statisticsformatcarbdisplay) | **GET** /api/v4/Statistics/format/carb/{value} | Format carb display
-*StatisticsAPI* | [**statisticsFormatInsulinDisplay**](docs/StatisticsAPI.md#statisticsformatinsulindisplay) | **GET** /api/v4/Statistics/format/insulin/{value} | Format insulin display
 *StatisticsAPI* | [**statisticsGetAidSystemMetrics**](docs/StatisticsAPI.md#statisticsgetaidsystemmetrics) | **GET** /api/v4/Statistics/aid-system-metrics | Get aid system metrics
 *StatisticsAPI* | [**statisticsGetBasalAnalysis**](docs/StatisticsAPI.md#statisticsgetbasalanalysis) | **GET** /api/v4/Statistics/basal-analysis | Get basal analysis
 *StatisticsAPI* | [**statisticsGetClinicalTargets**](docs/StatisticsAPI.md#statisticsgetclinicaltargets) | **GET** /api/v4/Statistics/clinical-targets/{population} | Get clinical targets
@@ -527,6 +528,7 @@ Class | Method | HTTP request | Description
 *StatisticsAPI* | [**statisticsGetMultiPeriodStatistics**](docs/StatisticsAPI.md#statisticsgetmultiperiodstatistics) | **GET** /api/v4/Statistics/periods | Get multi period statistics
 *StatisticsAPI* | [**statisticsGetPunchCardData**](docs/StatisticsAPI.md#statisticsgetpunchcarddata) | **GET** /api/v4/Statistics/punch-card | Get punch card data
 *StatisticsAPI* | [**statisticsGetRangeAnalytics**](docs/StatisticsAPI.md#statisticsgetrangeanalytics) | **GET** /api/v4/Statistics/range-analytics | Get range analytics
+*StatisticsAPI* | [**statisticsGetWeekdayAverages**](docs/StatisticsAPI.md#statisticsgetweekdayaverages) | **GET** /api/v4/Statistics/weekday-averages | Get weekday averages
 *StatisticsAPI* | [**statisticsMgdlToMMOL**](docs/StatisticsAPI.md#statisticsmgdltommol) | **GET** /api/v4/Statistics/convert/mgdl-to-mmol/{mgdl} | Mgdl to MMOL
 *StatisticsAPI* | [**statisticsMmolToMGDL**](docs/StatisticsAPI.md#statisticsmmoltomgdl) | **GET** /api/v4/Statistics/convert/mmol-to-mgdl/{mmol} | Mmol to MGDL
 *StatisticsAPI* | [**statisticsValidateTreatmentData**](docs/StatisticsAPI.md#statisticsvalidatetreatmentdata) | **POST** /api/v4/Statistics/validate/treatment | Validate treatment data
@@ -542,6 +544,7 @@ Class | Method | HTTP request | Description
 *SupportAPI* | [**supportCreateIssue**](docs/SupportAPI.md#supportcreateissue) | **POST** /api/v4/support/issues | Create issue
 *SupportAPI* | [**supportGetFallbackUrl**](docs/SupportAPI.md#supportgetfallbackurl) | **GET** /api/v4/support/issues/fallback-url | Get fallback url
 *SupportAPI* | [**supportGetSupportConfig**](docs/SupportAPI.md#supportgetsupportconfig) | **GET** /api/v4/support/config | Get support config
+*SupportAPI* | [**supportGetSupportDiagnostics**](docs/SupportAPI.md#supportgetsupportdiagnostics) | **GET** /api/v4/support/diagnostics | Get support diagnostics
 *SystemAPI* | [**systemGetChannelStatuses**](docs/SystemAPI.md#systemgetchannelstatuses) | **GET** /api/v4/system/channels | Get channel statuses
 *SystemAPI* | [**systemHeartbeat**](docs/SystemAPI.md#systemheartbeat) | **POST** /api/v4/system/heartbeat | Heartbeat
 *SystemEventsAPI* | [**systemEventsCreateSystemEvent**](docs/SystemEventsAPI.md#systemeventscreatesystemevent) | **POST** /api/v4/system-events | Create system event
@@ -558,6 +561,7 @@ Class | Method | HTTP request | Description
 *TenantAPI* | [**tenantGetAll**](docs/TenantAPI.md#tenantgetall) | **GET** /api/v4/admin/tenants | Get all
 *TenantAPI* | [**tenantGetById**](docs/TenantAPI.md#tenantgetbyid) | **GET** /api/v4/admin/tenants/{id} | Get by id
 *TenantAPI* | [**tenantGetMemberCredentials**](docs/TenantAPI.md#tenantgetmembercredentials) | **GET** /api/v4/admin/tenants/{id}/members/{subjectId}/credentials | Get member credentials
+*TenantAPI* | [**tenantIssueLoginCode**](docs/TenantAPI.md#tenantissuelogincode) | **POST** /api/v4/admin/tenants/{id}/members/{subjectId}/login-code | Issue login code
 *TenantAPI* | [**tenantProvision**](docs/TenantAPI.md#tenantprovision) | **POST** /api/v4/admin/tenants/provision | Provision
 *TenantAPI* | [**tenantRemoveMember**](docs/TenantAPI.md#tenantremovemember) | **DELETE** /api/v4/admin/tenants/{id}/members/{subjectId} | Remove member
 *TenantAPI* | [**tenantRemoveOidcIdentity**](docs/TenantAPI.md#tenantremoveoidcidentity) | **DELETE** /api/v4/admin/tenants/{id}/members/{subjectId}/credentials/oidc/{identityId} | Remove oidc identity
@@ -615,6 +619,7 @@ Class | Method | HTTP request | Description
  - [AcceptMemberInviteResult](docs/AcceptMemberInviteResult.md)
  - [AcceptSuggestionRequest](docs/AcceptSuggestionRequest.md)
  - [AccessRequestDto](docs/AccessRequestDto.md)
+ - [AccountPortalConfig](docs/AccountPortalConfig.md)
  - [AckTrackerRequest](docs/AckTrackerRequest.md)
  - [AcknowledgeRequest](docs/AcknowledgeRequest.md)
  - [ActivateGuestLinkRequest](docs/ActivateGuestLinkRequest.md)
@@ -793,7 +798,6 @@ Class | Method | HTTP request | Description
  - [CreateClockFaceRequest](docs/CreateClockFaceRequest.md)
  - [CreateDirectGrantRequest](docs/CreateDirectGrantRequest.md)
  - [CreateDirectGrantResponse](docs/CreateDirectGrantResponse.md)
- - [CreateDirectLinkRequest](docs/CreateDirectLinkRequest.md)
  - [CreateDndWindowRequest](docs/CreateDndWindowRequest.md)
  - [CreateGuestLinkRequest](docs/CreateGuestLinkRequest.md)
  - [CreateIssueResponse](docs/CreateIssueResponse.md)
@@ -836,9 +840,7 @@ Class | Method | HTTP request | Description
  - [DataSufficiencyRequest](docs/DataSufficiencyRequest.md)
  - [DataSufficiencyStatus](docs/DataSufficiencyStatus.md)
  - [DayData](docs/DayData.md)
- - [DayMetrics](docs/DayMetrics.md)
  - [DayOfWeek](docs/DayOfWeek.md)
- - [DayOfWeekAnalysis](docs/DayOfWeekAnalysis.md)
  - [DecideMembershipRequestResult](docs/DecideMembershipRequestResult.md)
  - [DeduplicationJobResponse](docs/DeduplicationJobResponse.md)
  - [DeduplicationJobState](docs/DeduplicationJobState.md)
@@ -945,11 +947,7 @@ Class | Method | HTTP request | Description
  - [HourlyBasalPercentileData](docs/HourlyBasalPercentileData.md)
  - [HourlyInsulinDeliveryPoint](docs/HourlyInsulinDeliveryPoint.md)
  - [HourlyInsulinDeliveryResponse](docs/HourlyInsulinDeliveryResponse.md)
- - [HyperglycemiaAnalysis](docs/HyperglycemiaAnalysis.md)
- - [HyperglycemiaEpisode](docs/HyperglycemiaEpisode.md)
  - [HypoEvent](docs/HypoEvent.md)
- - [HypoglycemiaAnalysis](docs/HypoglycemiaAnalysis.md)
- - [HypoglycemiaEpisode](docs/HypoglycemiaEpisode.md)
  - [InAppNotificationDto](docs/InAppNotificationDto.md)
  - [InsightKey](docs/InsightKey.md)
  - [InsulinCategory](docs/InsulinCategory.md)
@@ -968,6 +966,7 @@ Class | Method | HTTP request | Description
  - [LinkedRecord](docs/LinkedRecord.md)
  - [LinkedRecordsResponse](docs/LinkedRecordsResponse.md)
  - [LocalizedInsight](docs/LocalizedInsight.md)
+ - [LoginCode](docs/LoginCode.md)
  - [LoopOverridePreset](docs/LoopOverridePreset.md)
  - [LoopProfileSettings](docs/LoopProfileSettings.md)
  - [LoopSettings](docs/LoopSettings.md)
@@ -1053,7 +1052,6 @@ Class | Method | HTTP request | Description
  - [PlatformSettingsSummary](docs/PlatformSettingsSummary.md)
  - [PluginSettings](docs/PluginSettings.md)
  - [PredictionCurves](docs/PredictionCurves.md)
- - [PredictionErrorResponse](docs/PredictionErrorResponse.md)
  - [PredictionPreferences](docs/PredictionPreferences.md)
  - [PredictionSettings](docs/PredictionSettings.md)
  - [PredictionStatusResponse](docs/PredictionStatusResponse.md)
@@ -1178,6 +1176,8 @@ Class | Method | HTTP request | Description
  - [SuggestedMealMatch](docs/SuggestedMealMatch.md)
  - [SupportChannelConfig](docs/SupportChannelConfig.md)
  - [SupportConfigResponse](docs/SupportConfigResponse.md)
+ - [SupportConnectorSummary](docs/SupportConnectorSummary.md)
+ - [SupportDiagnosticsResponse](docs/SupportDiagnosticsResponse.md)
  - [SyncDataType](docs/SyncDataType.md)
  - [SyncRequest](docs/SyncRequest.md)
  - [SyncResult](docs/SyncResult.md)
@@ -1224,7 +1224,6 @@ Class | Method | HTTP request | Description
  - [TimeInRangeMetrics](docs/TimeInRangeMetrics.md)
  - [TimeInRangePercentages](docs/TimeInRangePercentages.md)
  - [TimeInRangeRequest](docs/TimeInRangeRequest.md)
- - [TimeOfDayAnalysis](docs/TimeOfDayAnalysis.md)
  - [TimeRange](docs/TimeRange.md)
  - [TimeSeriesPoint](docs/TimeSeriesPoint.md)
  - [TimeValue](docs/TimeValue.md)
@@ -1297,11 +1296,13 @@ Class | Method | HTTP request | Description
  - [WebhookNotificationSettings](docs/WebhookNotificationSettings.md)
  - [WebhookTestRequest](docs/WebhookTestRequest.md)
  - [WebhookTestResult](docs/WebhookTestResult.md)
+ - [WeekdayGlucoseSlot](docs/WeekdayGlucoseSlot.md)
  - [WidgetConfig](docs/WidgetConfig.md)
  - [WidgetId](docs/WidgetId.md)
  - [WidgetPlacement](docs/WidgetPlacement.md)
  - [WidgetSize](docs/WidgetSize.md)
  - [WriteBackHealthInfo](docs/WriteBackHealthInfo.md)
+ - [YearOverviewColorPreferences](docs/YearOverviewColorPreferences.md)
 
 
 <a id="documentation-for-authorization"></a>

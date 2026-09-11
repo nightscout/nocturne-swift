@@ -10,13 +10,16 @@ import Foundation
 public struct SupportConfigResponse: Sendable, Codable, Hashable {
 
     public var accountBilling: SupportChannelConfig?
+    public var accountPortal: AccountPortalConfig?
 
-    public init(accountBilling: SupportChannelConfig? = nil) {
+    public init(accountBilling: SupportChannelConfig? = nil, accountPortal: AccountPortalConfig? = nil) {
         self.accountBilling = accountBilling
+        self.accountPortal = accountPortal
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case accountBilling
+        case accountPortal
     }
 
     // Encodable protocol methods
@@ -24,6 +27,7 @@ public struct SupportConfigResponse: Sendable, Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(accountBilling, forKey: .accountBilling)
+        try container.encodeIfPresent(accountPortal, forKey: .accountPortal)
     }
 }
 

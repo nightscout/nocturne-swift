@@ -7,20 +7,17 @@
 
 import Foundation
 
-/** Response from guest link activation. */
+/** Response from a successful guest link activation. A refusal answers with ProblemDetails, so the caller reads the status rather than sniffing this shape for an error field. */
 public struct ActivateGuestLinkResponse: Sendable, Codable, Hashable {
 
     public var expiresAt: Date?
-    public var error: String?
 
-    public init(expiresAt: Date? = nil, error: String? = nil) {
+    public init(expiresAt: Date? = nil) {
         self.expiresAt = expiresAt
-        self.error = error
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case expiresAt
-        case error
     }
 
     // Encodable protocol methods
@@ -28,7 +25,6 @@ public struct ActivateGuestLinkResponse: Sendable, Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
-        try container.encodeIfPresent(error, forKey: .error)
     }
 }
 

@@ -157,7 +157,7 @@ open class NutritionAPI {
     /**
      Create meal
      - POST /api/v4/nutrition/meals
-     - Atomically create a correlated Bolus + CarbIntake for a meal event. Both records share a single CorrelationId and are persisted within a single transaction. When an existing row matches on (DataSource, SyncIdentifier), the idempotent upsert applies and the response returns 200 instead of 201.
+     - Create a correlated Bolus + CarbIntake for a meal event, sharing a single CorrelationId. When an existing row matches on (DataSource, SyncIdentifier), the idempotent upsert applies and the response returns 200 instead of 201. Either half being held by a record the owner deleted refuses the whole meal with 409 before anything is written; see GuardRecreationAsync for why that check is what makes the pair all-or-nothing.
      - Bearer Token:
        - type: http
        - name: bearer

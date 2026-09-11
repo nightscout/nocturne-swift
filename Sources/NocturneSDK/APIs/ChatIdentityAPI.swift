@@ -23,7 +23,7 @@ open class ChatIdentityAPI {
     /**
      Claim link
      - POST /api/v4/chat-identity/links/claim
-     - Claim a pending link token after /connect slash command auth.
+     - A token carries no subject, and a chat account already linked to this tenant keeps the link it has, so the row this returns may belong to another subject and predate the claim.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -53,49 +53,6 @@ open class ChatIdentityAPI {
     }
 
     /**
-     Create direct link
-     
-     - parameter createDirectLinkRequest: (body)  
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: ChatIdentityLinkResponse
-     */
-    open class func chatIdentityCreateDirectLink(createDirectLinkRequest: CreateDirectLinkRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> ChatIdentityLinkResponse {
-        return try await chatIdentityCreateDirectLinkWithRequestBuilder(createDirectLinkRequest: createDirectLinkRequest, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     Create direct link
-     - POST /api/v4/chat-identity/links/direct
-     - Directly create a link for the current tenant (used by OAuth2 finalize hop).
-     - Bearer Token:
-       - type: http
-       - name: bearer
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter createDirectLinkRequest: (body)  
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<ChatIdentityLinkResponse> 
-     */
-    open class func chatIdentityCreateDirectLinkWithRequestBuilder(createDirectLinkRequest: CreateDirectLinkRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<ChatIdentityLinkResponse> {
-        let localVariablePath = "/api/v4/chat-identity/links/direct"
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createDirectLinkRequest, codableHelper: apiConfiguration.codableHelper)
-
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/json",
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<ChatIdentityLinkResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
-
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
-    }
-
-    /**
      Get links
      
      - parameter apiConfiguration: The configuration for the http request.
@@ -108,7 +65,7 @@ open class ChatIdentityAPI {
     /**
      Get links
      - GET /api/v4/chat-identity
-     - The list stays tenant-scoped, so a chat account linked to several tenants shows a non-default row here while its default sits on a row this tenant cannot see. Naming that row's label closes the gap without widening the list, and it is filled in only for the caller's own links: a co-member's chat account may be linked to tenants the caller has no part in, and its label is that tenant's slug.
+     - The list stays tenant-scoped, so a chat account linked to several tenants shows a non-default row here while its default sits on a row this tenant cannot see. Naming that row's label closes the gap without widening the list, and it is filled in only for the caller's own links: a co-member's chat account may be linked to tenants the caller has no part in, and its label is that tenant's slug. A co-member's row is listed so the tenant's bot routing is legible, but the chat account behind it is the co-member's and not this tenant's to hand out, so PlatformUserId is withheld on the same terms.
      - Bearer Token:
        - type: http
        - name: bearer

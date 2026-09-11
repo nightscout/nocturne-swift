@@ -333,6 +333,57 @@ open class TenantAPI {
     }
 
     /**
+     Issue login code
+     
+     - parameter id: (path)  
+     - parameter subjectId: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: LoginCode
+     */
+    open class func tenantIssueLoginCode(id: String, subjectId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> LoginCode {
+        return try await tenantIssueLoginCodeWithRequestBuilder(id: id, subjectId: subjectId, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Issue login code
+     - POST /api/v4/admin/tenants/{id}/members/{subjectId}/login-code
+     - The code is redeemed at POST /api/auth/handoff on that host. It grants no more than the direct grant TenantDirectGrantController already mints for the same member, and like that one it names the platform-admin caller as the actor in the audit trail rather than the member.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter id: (path)  
+     - parameter subjectId: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<LoginCode> 
+     */
+    open class func tenantIssueLoginCodeWithRequestBuilder(id: String, subjectId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<LoginCode> {
+        var localVariablePath = "/api/v4/admin/tenants/{id}/members/{subjectId}/login-code"
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let subjectIdPreEscape = "\(APIHelper.mapValueToPathItem(subjectId))"
+        let subjectIdPostEscape = subjectIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{subjectId}", with: subjectIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<LoginCode>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Provision
      
      - parameter provisionRequest: (body)  

@@ -15,13 +15,19 @@ public struct CollectionProgress: Sendable, Codable, Hashable {
     public var documentsMigrated: Int64?
     public var documentsFailed: Int64?
     public var isComplete: Bool?
+    /** Why this collection stopped short, in the words shown to whoever ran the import; null when it finished. A collection can end complete and failed at the same time — IsComplete only means nothing more will be attempted for it. */
+    public var failureReason: String?
+    /** Why this collection was passed over, or null when it was attempted. */
+    public var skippedReason: String?
 
-    public init(collectionName: String? = nil, totalDocuments: Int64? = nil, documentsMigrated: Int64? = nil, documentsFailed: Int64? = nil, isComplete: Bool? = nil) {
+    public init(collectionName: String? = nil, totalDocuments: Int64? = nil, documentsMigrated: Int64? = nil, documentsFailed: Int64? = nil, isComplete: Bool? = nil, failureReason: String? = nil, skippedReason: String? = nil) {
         self.collectionName = collectionName
         self.totalDocuments = totalDocuments
         self.documentsMigrated = documentsMigrated
         self.documentsFailed = documentsFailed
         self.isComplete = isComplete
+        self.failureReason = failureReason
+        self.skippedReason = skippedReason
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -30,6 +36,8 @@ public struct CollectionProgress: Sendable, Codable, Hashable {
         case documentsMigrated
         case documentsFailed
         case isComplete
+        case failureReason
+        case skippedReason
     }
 
     // Encodable protocol methods
@@ -41,6 +49,8 @@ public struct CollectionProgress: Sendable, Codable, Hashable {
         try container.encodeIfPresent(documentsMigrated, forKey: .documentsMigrated)
         try container.encodeIfPresent(documentsFailed, forKey: .documentsFailed)
         try container.encodeIfPresent(isComplete, forKey: .isComplete)
+        try container.encodeIfPresent(failureReason, forKey: .failureReason)
+        try container.encodeIfPresent(skippedReason, forKey: .skippedReason)
     }
 }
 

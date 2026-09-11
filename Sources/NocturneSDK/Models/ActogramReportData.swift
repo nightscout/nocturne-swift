@@ -13,13 +13,15 @@ public struct ActogramReportData: Sendable, Codable, Hashable {
     public var thresholds: ChartThresholdsDto?
     public var heartRates: [HeartRatePointDto]?
     public var stepCounts: [StepBubbleDto]?
+    public var stepDayTotals: [String: Int]?
     public var sleepSpans: [ActogramSleepSpan]?
 
-    public init(glucose: [GlucosePointDto]? = nil, thresholds: ChartThresholdsDto? = nil, heartRates: [HeartRatePointDto]? = nil, stepCounts: [StepBubbleDto]? = nil, sleepSpans: [ActogramSleepSpan]? = nil) {
+    public init(glucose: [GlucosePointDto]? = nil, thresholds: ChartThresholdsDto? = nil, heartRates: [HeartRatePointDto]? = nil, stepCounts: [StepBubbleDto]? = nil, stepDayTotals: [String: Int]? = nil, sleepSpans: [ActogramSleepSpan]? = nil) {
         self.glucose = glucose
         self.thresholds = thresholds
         self.heartRates = heartRates
         self.stepCounts = stepCounts
+        self.stepDayTotals = stepDayTotals
         self.sleepSpans = sleepSpans
     }
 
@@ -28,6 +30,7 @@ public struct ActogramReportData: Sendable, Codable, Hashable {
         case thresholds
         case heartRates
         case stepCounts
+        case stepDayTotals
         case sleepSpans
     }
 
@@ -39,6 +42,7 @@ public struct ActogramReportData: Sendable, Codable, Hashable {
         try container.encodeIfPresent(thresholds, forKey: .thresholds)
         try container.encodeIfPresent(heartRates, forKey: .heartRates)
         try container.encodeIfPresent(stepCounts, forKey: .stepCounts)
+        try container.encodeIfPresent(stepDayTotals, forKey: .stepDayTotals)
         try container.encodeIfPresent(sleepSpans, forKey: .sleepSpans)
     }
 }

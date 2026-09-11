@@ -13,6 +13,7 @@ public struct ChatIdentityLinkResponse: Sendable, Codable, Hashable {
     public var tenantId: String?
     public var nocturneUserId: String?
     public var platform: String?
+    /** The chat account this link routes, or null on a link belonging to another subject. */
     public var platformUserId: String?
     public var platformChannelId: String?
     public var label: String?
@@ -20,11 +21,13 @@ public struct ChatIdentityLinkResponse: Sendable, Codable, Hashable {
     public var isDefault: Bool?
     /** Label of the link a bare bot invocation from this chat account resolves to, which may be a link in another tenant. Null when the chat account has no default, and on links belonging to another subject. */
     public var defaultLabel: String?
+    /** Whether the caller's own subject owns this link, and so whether the by-id endpoints on ChatIdentityController will act on it rather than answering 404. */
+    public var isOwnedByCaller: Bool?
     public var displayUnit: String?
     public var isActive: Bool?
     public var createdAt: Date?
 
-    public init(id: String? = nil, tenantId: String? = nil, nocturneUserId: String? = nil, platform: String? = nil, platformUserId: String? = nil, platformChannelId: String? = nil, label: String? = nil, displayName: String? = nil, isDefault: Bool? = nil, defaultLabel: String? = nil, displayUnit: String? = nil, isActive: Bool? = nil, createdAt: Date? = nil) {
+    public init(id: String? = nil, tenantId: String? = nil, nocturneUserId: String? = nil, platform: String? = nil, platformUserId: String? = nil, platformChannelId: String? = nil, label: String? = nil, displayName: String? = nil, isDefault: Bool? = nil, defaultLabel: String? = nil, isOwnedByCaller: Bool? = nil, displayUnit: String? = nil, isActive: Bool? = nil, createdAt: Date? = nil) {
         self.id = id
         self.tenantId = tenantId
         self.nocturneUserId = nocturneUserId
@@ -35,6 +38,7 @@ public struct ChatIdentityLinkResponse: Sendable, Codable, Hashable {
         self.displayName = displayName
         self.isDefault = isDefault
         self.defaultLabel = defaultLabel
+        self.isOwnedByCaller = isOwnedByCaller
         self.displayUnit = displayUnit
         self.isActive = isActive
         self.createdAt = createdAt
@@ -51,6 +55,7 @@ public struct ChatIdentityLinkResponse: Sendable, Codable, Hashable {
         case displayName
         case isDefault
         case defaultLabel
+        case isOwnedByCaller
         case displayUnit
         case isActive
         case createdAt
@@ -70,6 +75,7 @@ public struct ChatIdentityLinkResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(displayName, forKey: .displayName)
         try container.encodeIfPresent(isDefault, forKey: .isDefault)
         try container.encodeIfPresent(defaultLabel, forKey: .defaultLabel)
+        try container.encodeIfPresent(isOwnedByCaller, forKey: .isOwnedByCaller)
         try container.encodeIfPresent(displayUnit, forKey: .displayUnit)
         try container.encodeIfPresent(isActive, forKey: .isActive)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)

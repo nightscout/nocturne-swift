@@ -704,133 +704,41 @@ open class StatisticsAPI {
     }
 
     /**
-     Format carb display
-     
-     - parameter value: (path) Carb value 
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: String
-     */
-    open class func statisticsFormatCarbDisplay(value: Double, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> String {
-        return try await statisticsFormatCarbDisplayWithRequestBuilder(value: value, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     Format carb display
-     - GET /api/v4/Statistics/format/carb/{value}
-     - Format carb value for display
-     - Bearer Token:
-       - type: http
-       - name: bearer
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter value: (path) Carb value 
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<String> 
-     */
-    open class func statisticsFormatCarbDisplayWithRequestBuilder(value: Double, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<String> {
-        var localVariablePath = "/api/v4/Statistics/format/carb/{value}"
-        let valuePreEscape = "\(APIHelper.mapValueToPathItem(value))"
-        let valuePostEscape = valuePreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{value}", with: valuePostEscape, options: .literal, range: nil)
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters: [String: any Sendable]? = nil
-
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<String>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
-
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
-    }
-
-    /**
-     Format insulin display
-     
-     - parameter value: (path) Insulin value 
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: String
-     */
-    open class func statisticsFormatInsulinDisplay(value: Double, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> String {
-        return try await statisticsFormatInsulinDisplayWithRequestBuilder(value: value, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     Format insulin display
-     - GET /api/v4/Statistics/format/insulin/{value}
-     - Format insulin value for display
-     - Bearer Token:
-       - type: http
-       - name: bearer
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter value: (path) Insulin value 
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<String> 
-     */
-    open class func statisticsFormatInsulinDisplayWithRequestBuilder(value: Double, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<String> {
-        var localVariablePath = "/api/v4/Statistics/format/insulin/{value}"
-        let valuePreEscape = "\(APIHelper.mapValueToPathItem(value))"
-        let valuePostEscape = valuePreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{value}", with: valuePostEscape, options: .literal, range: nil)
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters: [String: any Sendable]? = nil
-
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<String>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
-
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
-    }
-
-    /**
      Get aid system metrics
      
-     - parameter startDate: (query) Inclusive start of the analysis period (UTC). (optional)
-     - parameter endDate: (query) Inclusive end of the analysis period (UTC). (optional)
+     - parameter startDate: (query) Inclusive start of the analysis period (UTC). 
+     - parameter endDate: (query) Inclusive end of the analysis period (UTC). 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: AidSystemMetrics
      */
-    open class func statisticsGetAidSystemMetrics(startDate: Date? = nil, endDate: Date? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> AidSystemMetrics {
+    open class func statisticsGetAidSystemMetrics(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> AidSystemMetrics {
         return try await statisticsGetAidSystemMetricsWithRequestBuilder(startDate: startDate, endDate: endDate, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get aid system metrics
      - GET /api/v4/Statistics/aid-system-metrics
-     - Fetches APS snapshots, temp basals, device events, glucose readings, and target-range schedules from their respective repositories. CGM metrics are derived from AnalyzeGlucoseData. Target range is optional; the method continues without it if the repository throws.
+     - Fetches APS snapshots, temp basals, device events, glucose readings, and target-range schedules from their respective repositories. CGM active time comes from CalculateCgmActivePercent, measured against the registered CGMs' windows where the tenant has registered any. Target range is optional; the method continues without it if the repository throws.
      - Bearer Token:
        - type: http
        - name: bearer
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter startDate: (query) Inclusive start of the analysis period (UTC). (optional)
-     - parameter endDate: (query) Inclusive end of the analysis period (UTC). (optional)
+     - parameter startDate: (query) Inclusive start of the analysis period (UTC). 
+     - parameter endDate: (query) Inclusive end of the analysis period (UTC). 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<AidSystemMetrics> 
      */
-    open class func statisticsGetAidSystemMetricsWithRequestBuilder(startDate: Date? = nil, endDate: Date? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<AidSystemMetrics> {
+    open class func statisticsGetAidSystemMetricsWithRequestBuilder(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<AidSystemMetrics> {
         let localVariablePath = "/api/v4/Statistics/aid-system-metrics"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "startDate": (wrappedValue: startDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "endDate": (wrappedValue: endDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "startDate": (wrappedValue: startDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endDate": (wrappedValue: endDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
@@ -847,12 +755,12 @@ open class StatisticsAPI {
     /**
      Get basal analysis
      
-     - parameter startDate: (query) Start date of the analysis period (optional)
-     - parameter endDate: (query) End date of the analysis period (optional)
+     - parameter startDate: (query) Start date of the analysis period 
+     - parameter endDate: (query) End date of the analysis period 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: BasalAnalysisResponse
      */
-    open class func statisticsGetBasalAnalysis(startDate: Date? = nil, endDate: Date? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> BasalAnalysisResponse {
+    open class func statisticsGetBasalAnalysis(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> BasalAnalysisResponse {
         return try await statisticsGetBasalAnalysisWithRequestBuilder(startDate: startDate, endDate: endDate, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -866,20 +774,20 @@ open class StatisticsAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter startDate: (query) Start date of the analysis period (optional)
-     - parameter endDate: (query) End date of the analysis period (optional)
+     - parameter startDate: (query) Start date of the analysis period 
+     - parameter endDate: (query) End date of the analysis period 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<BasalAnalysisResponse> 
      */
-    open class func statisticsGetBasalAnalysisWithRequestBuilder(startDate: Date? = nil, endDate: Date? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<BasalAnalysisResponse> {
+    open class func statisticsGetBasalAnalysisWithRequestBuilder(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<BasalAnalysisResponse> {
         let localVariablePath = "/api/v4/Statistics/basal-analysis"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "startDate": (wrappedValue: startDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "endDate": (wrappedValue: endDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "startDate": (wrappedValue: startDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endDate": (wrappedValue: endDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
@@ -942,12 +850,12 @@ open class StatisticsAPI {
     /**
      Get daily basal bolus ratios
      
-     - parameter startDate: (query) Start date of the analysis period (optional)
-     - parameter endDate: (query) End date of the analysis period (optional)
+     - parameter startDate: (query) Start date of the analysis period 
+     - parameter endDate: (query) End date of the analysis period 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DailyBasalBolusRatioResponse
      */
-    open class func statisticsGetDailyBasalBolusRatios(startDate: Date? = nil, endDate: Date? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DailyBasalBolusRatioResponse {
+    open class func statisticsGetDailyBasalBolusRatios(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DailyBasalBolusRatioResponse {
         return try await statisticsGetDailyBasalBolusRatiosWithRequestBuilder(startDate: startDate, endDate: endDate, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -961,20 +869,20 @@ open class StatisticsAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter startDate: (query) Start date of the analysis period (optional)
-     - parameter endDate: (query) End date of the analysis period (optional)
+     - parameter startDate: (query) Start date of the analysis period 
+     - parameter endDate: (query) End date of the analysis period 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DailyBasalBolusRatioResponse> 
      */
-    open class func statisticsGetDailyBasalBolusRatiosWithRequestBuilder(startDate: Date? = nil, endDate: Date? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DailyBasalBolusRatioResponse> {
+    open class func statisticsGetDailyBasalBolusRatiosWithRequestBuilder(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DailyBasalBolusRatioResponse> {
         let localVariablePath = "/api/v4/Statistics/daily-basal-bolus-ratios"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "startDate": (wrappedValue: startDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "endDate": (wrappedValue: endDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "startDate": (wrappedValue: startDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endDate": (wrappedValue: endDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
@@ -991,12 +899,12 @@ open class StatisticsAPI {
     /**
      Get hourly insulin delivery
      
-     - parameter startDate: (query) Start date of the analysis period (UTC) (optional)
-     - parameter endDate: (query) End date of the analysis period (UTC) (optional)
+     - parameter startDate: (query) Start date of the analysis period (UTC) 
+     - parameter endDate: (query) End date of the analysis period (UTC) 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: HourlyInsulinDeliveryResponse
      */
-    open class func statisticsGetHourlyInsulinDelivery(startDate: Date? = nil, endDate: Date? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> HourlyInsulinDeliveryResponse {
+    open class func statisticsGetHourlyInsulinDelivery(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> HourlyInsulinDeliveryResponse {
         return try await statisticsGetHourlyInsulinDeliveryWithRequestBuilder(startDate: startDate, endDate: endDate, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -1010,20 +918,20 @@ open class StatisticsAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter startDate: (query) Start date of the analysis period (UTC) (optional)
-     - parameter endDate: (query) End date of the analysis period (UTC) (optional)
+     - parameter startDate: (query) Start date of the analysis period (UTC) 
+     - parameter endDate: (query) End date of the analysis period (UTC) 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<HourlyInsulinDeliveryResponse> 
      */
-    open class func statisticsGetHourlyInsulinDeliveryWithRequestBuilder(startDate: Date? = nil, endDate: Date? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<HourlyInsulinDeliveryResponse> {
+    open class func statisticsGetHourlyInsulinDeliveryWithRequestBuilder(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<HourlyInsulinDeliveryResponse> {
         let localVariablePath = "/api/v4/Statistics/hourly-insulin-delivery"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "startDate": (wrappedValue: startDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "endDate": (wrappedValue: endDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "startDate": (wrappedValue: startDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endDate": (wrappedValue: endDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
@@ -1040,12 +948,12 @@ open class StatisticsAPI {
     /**
      Get insulin delivery statistics
      
-     - parameter startDate: (query) Start date of the analysis period (optional)
-     - parameter endDate: (query) End date of the analysis period (optional)
+     - parameter startDate: (query) Start date of the analysis period 
+     - parameter endDate: (query) End date of the analysis period 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: InsulinDeliveryStatistics
      */
-    open class func statisticsGetInsulinDeliveryStatistics(startDate: Date? = nil, endDate: Date? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> InsulinDeliveryStatistics {
+    open class func statisticsGetInsulinDeliveryStatistics(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> InsulinDeliveryStatistics {
         return try await statisticsGetInsulinDeliveryStatisticsWithRequestBuilder(startDate: startDate, endDate: endDate, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -1059,20 +967,20 @@ open class StatisticsAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter startDate: (query) Start date of the analysis period (optional)
-     - parameter endDate: (query) End date of the analysis period (optional)
+     - parameter startDate: (query) Start date of the analysis period 
+     - parameter endDate: (query) End date of the analysis period 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<InsulinDeliveryStatistics> 
      */
-    open class func statisticsGetInsulinDeliveryStatisticsWithRequestBuilder(startDate: Date? = nil, endDate: Date? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<InsulinDeliveryStatistics> {
+    open class func statisticsGetInsulinDeliveryStatisticsWithRequestBuilder(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<InsulinDeliveryStatistics> {
         let localVariablePath = "/api/v4/Statistics/insulin-delivery-stats"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "startDate": (wrappedValue: startDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "endDate": (wrappedValue: endDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "startDate": (wrappedValue: startDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endDate": (wrappedValue: endDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
@@ -1130,12 +1038,12 @@ open class StatisticsAPI {
     /**
      Get punch card data
      
-     - parameter startDate: (query) Inclusive start of the date range. (optional)
-     - parameter endDate: (query) Inclusive end of the date range. (optional)
+     - parameter startDate: (query) Inclusive start of the date range. 
+     - parameter endDate: (query) Inclusive end of the date range. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PunchCardResponse
      */
-    open class func statisticsGetPunchCardData(startDate: Date? = nil, endDate: Date? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PunchCardResponse {
+    open class func statisticsGetPunchCardData(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PunchCardResponse {
         return try await statisticsGetPunchCardDataWithRequestBuilder(startDate: startDate, endDate: endDate, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -1149,20 +1057,20 @@ open class StatisticsAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter startDate: (query) Inclusive start of the date range. (optional)
-     - parameter endDate: (query) Inclusive end of the date range. (optional)
+     - parameter startDate: (query) Inclusive start of the date range. 
+     - parameter endDate: (query) Inclusive end of the date range. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PunchCardResponse> 
      */
-    open class func statisticsGetPunchCardDataWithRequestBuilder(startDate: Date? = nil, endDate: Date? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PunchCardResponse> {
+    open class func statisticsGetPunchCardDataWithRequestBuilder(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PunchCardResponse> {
         let localVariablePath = "/api/v4/Statistics/punch-card"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "startDate": (wrappedValue: startDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "endDate": (wrappedValue: endDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "startDate": (wrappedValue: startDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endDate": (wrappedValue: endDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
@@ -1179,14 +1087,14 @@ open class StatisticsAPI {
     /**
      Get range analytics
      
-     - parameter startDate: (query) Start of the window (inclusive, UTC). (optional)
-     - parameter endDate: (query) End of the window (exclusive, UTC). (optional)
+     - parameter startDate: (query) Start of the window (inclusive, UTC). 
+     - parameter endDate: (query) End of the window (exclusive, UTC). 
      - parameter population: (query) Diabetes population for clinical target assessment. Defaults to Type 1 adult. (optional)
      - parameter patientDeviceId: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: ReportAnalysisResult
      */
-    open class func statisticsGetRangeAnalytics(startDate: Date? = nil, endDate: Date? = nil, population: DiabetesPopulation? = nil, patientDeviceId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> ReportAnalysisResult {
+    open class func statisticsGetRangeAnalytics(startDate: Date, endDate: Date, population: DiabetesPopulation? = nil, patientDeviceId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> ReportAnalysisResult {
         return try await statisticsGetRangeAnalyticsWithRequestBuilder(startDate: startDate, endDate: endDate, population: population, patientDeviceId: patientDeviceId, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -1200,22 +1108,22 @@ open class StatisticsAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter startDate: (query) Start of the window (inclusive, UTC). (optional)
-     - parameter endDate: (query) End of the window (exclusive, UTC). (optional)
+     - parameter startDate: (query) Start of the window (inclusive, UTC). 
+     - parameter endDate: (query) End of the window (exclusive, UTC). 
      - parameter population: (query) Diabetes population for clinical target assessment. Defaults to Type 1 adult. (optional)
      - parameter patientDeviceId: (query)  (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ReportAnalysisResult> 
      */
-    open class func statisticsGetRangeAnalyticsWithRequestBuilder(startDate: Date? = nil, endDate: Date? = nil, population: DiabetesPopulation? = nil, patientDeviceId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<ReportAnalysisResult> {
+    open class func statisticsGetRangeAnalyticsWithRequestBuilder(startDate: Date, endDate: Date, population: DiabetesPopulation? = nil, patientDeviceId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<ReportAnalysisResult> {
         let localVariablePath = "/api/v4/Statistics/range-analytics"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "startDate": (wrappedValue: startDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "endDate": (wrappedValue: endDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "startDate": (wrappedValue: startDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endDate": (wrappedValue: endDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "population": (wrappedValue: population?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "patientDeviceId": (wrappedValue: patientDeviceId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
@@ -1227,6 +1135,55 @@ open class StatisticsAPI {
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
         let localVariableRequestBuilder: RequestBuilder<ReportAnalysisResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Get weekday averages
+     
+     - parameter startDate: (query) Start of the window (inclusive, UTC). 
+     - parameter endDate: (query) End of the window (exclusive, UTC). 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [WeekdayGlucoseSlot]
+     */
+    open class func statisticsGetWeekdayAverages(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [WeekdayGlucoseSlot] {
+        return try await statisticsGetWeekdayAveragesWithRequestBuilder(startDate: startDate, endDate: endDate, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get weekday averages
+     - GET /api/v4/Statistics/weekday-averages
+     - Mean glucose per weekday in each five-minute slot of the day for a date range, bucketed on the tenant's local clock. Backs the week-to-week report.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter startDate: (query) Start of the window (inclusive, UTC). 
+     - parameter endDate: (query) End of the window (exclusive, UTC). 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[WeekdayGlucoseSlot]> 
+     */
+    open class func statisticsGetWeekdayAveragesWithRequestBuilder(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[WeekdayGlucoseSlot]> {
+        let localVariablePath = "/api/v4/Statistics/weekday-averages"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "startDate": (wrappedValue: startDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endDate": (wrappedValue: endDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[WeekdayGlucoseSlot]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }

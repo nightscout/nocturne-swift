@@ -12,12 +12,12 @@ open class ActogramAPI {
     /**
      Get actogram
      
-     - parameter startTime: (query) Start of the window as Unix milliseconds (inclusive). (optional)
-     - parameter endTime: (query) End of the window as Unix milliseconds (exclusive).             Must be greater than startTime. (optional)
+     - parameter startTime: (query) Start of the window as Unix milliseconds (inclusive). 
+     - parameter endTime: (query) End of the window as Unix milliseconds (exclusive).             Must be greater than startTime. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: ActogramReportData
      */
-    open class func actogramGetActogram(startTime: Int64? = nil, endTime: Int64? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> ActogramReportData {
+    open class func actogramGetActogram(startTime: Int64, endTime: Int64, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> ActogramReportData {
         return try await actogramGetActogramWithRequestBuilder(startTime: startTime, endTime: endTime, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -31,20 +31,20 @@ open class ActogramAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter startTime: (query) Start of the window as Unix milliseconds (inclusive). (optional)
-     - parameter endTime: (query) End of the window as Unix milliseconds (exclusive).             Must be greater than startTime. (optional)
+     - parameter startTime: (query) Start of the window as Unix milliseconds (inclusive). 
+     - parameter endTime: (query) End of the window as Unix milliseconds (exclusive).             Must be greater than startTime. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ActogramReportData> 
      */
-    open class func actogramGetActogramWithRequestBuilder(startTime: Int64? = nil, endTime: Int64? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<ActogramReportData> {
+    open class func actogramGetActogramWithRequestBuilder(startTime: Int64, endTime: Int64, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<ActogramReportData> {
         let localVariablePath = "/api/v4/Actogram"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "startTime": (wrappedValue: startTime?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "endTime": (wrappedValue: endTime?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "startTime": (wrappedValue: startTime.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endTime": (wrappedValue: endTime.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [

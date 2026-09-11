@@ -14,15 +14,16 @@ public struct ApsSnapshot: Sendable, Codable, Hashable {
     public var mills: Int64?
     public var utcOffset: Int?
     public var device: String?
-    public var deviceId: String?
-    public var patientDeviceId: String?
     public var app: String?
     public var dataSource: String?
-    public var syncIdentifier: String?
     public var correlationId: String?
     public var legacyId: String?
     public var createdAt: Date?
     public var modifiedAt: Date?
+    public var additionalProperties: [String: JSONValue]?
+    public var deviceId: String?
+    public var patientDeviceId: String?
+    public var syncIdentifier: String?
     public var aidAlgorithm: AidAlgorithm?
     public var iob: Double?
     public var basalIob: Double?
@@ -48,23 +49,23 @@ public struct ApsSnapshot: Sendable, Codable, Hashable {
     public var predictedStartMills: Int64?
     public var loopJson: String?
     public var aidVersion: String?
-    public var additionalProperties: [String: JSONValue]?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, deviceId: String? = nil, patientDeviceId: String? = nil, app: String? = nil, dataSource: String? = nil, syncIdentifier: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, aidAlgorithm: AidAlgorithm? = nil, iob: Double? = nil, basalIob: Double? = nil, bolusIob: Double? = nil, cob: Double? = nil, currentBg: Double? = nil, eventualBg: Double? = nil, targetBg: Double? = nil, recommendedBolus: Double? = nil, sensitivityRatio: Double? = nil, enacted: Bool? = nil, enactedRate: Double? = nil, enactedDuration: Int? = nil, enactedBolusVolume: Double? = nil, suggestedJson: String? = nil, enactedJson: String? = nil, predictedDefaultJson: String? = nil, predictedIobJson: String? = nil, predictedZtJson: String? = nil, predictedCobJson: String? = nil, predictedUamJson: String? = nil, predictedStartTimestamp: Date? = nil, predictedStartMills: Int64? = nil, loopJson: String? = nil, aidVersion: String? = nil, additionalProperties: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, deviceId: String? = nil, patientDeviceId: String? = nil, syncIdentifier: String? = nil, aidAlgorithm: AidAlgorithm? = nil, iob: Double? = nil, basalIob: Double? = nil, bolusIob: Double? = nil, cob: Double? = nil, currentBg: Double? = nil, eventualBg: Double? = nil, targetBg: Double? = nil, recommendedBolus: Double? = nil, sensitivityRatio: Double? = nil, enacted: Bool? = nil, enactedRate: Double? = nil, enactedDuration: Int? = nil, enactedBolusVolume: Double? = nil, suggestedJson: String? = nil, enactedJson: String? = nil, predictedDefaultJson: String? = nil, predictedIobJson: String? = nil, predictedZtJson: String? = nil, predictedCobJson: String? = nil, predictedUamJson: String? = nil, predictedStartTimestamp: Date? = nil, predictedStartMills: Int64? = nil, loopJson: String? = nil, aidVersion: String? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
         self.utcOffset = utcOffset
         self.device = device
-        self.deviceId = deviceId
-        self.patientDeviceId = patientDeviceId
         self.app = app
         self.dataSource = dataSource
-        self.syncIdentifier = syncIdentifier
         self.correlationId = correlationId
         self.legacyId = legacyId
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
+        self.additionalProperties = additionalProperties
+        self.deviceId = deviceId
+        self.patientDeviceId = patientDeviceId
+        self.syncIdentifier = syncIdentifier
         self.aidAlgorithm = aidAlgorithm
         self.iob = iob
         self.basalIob = basalIob
@@ -90,7 +91,6 @@ public struct ApsSnapshot: Sendable, Codable, Hashable {
         self.predictedStartMills = predictedStartMills
         self.loopJson = loopJson
         self.aidVersion = aidVersion
-        self.additionalProperties = additionalProperties
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -99,15 +99,16 @@ public struct ApsSnapshot: Sendable, Codable, Hashable {
         case mills
         case utcOffset
         case device
-        case deviceId
-        case patientDeviceId
         case app
         case dataSource
-        case syncIdentifier
         case correlationId
         case legacyId
         case createdAt
         case modifiedAt
+        case additionalProperties
+        case deviceId
+        case patientDeviceId
+        case syncIdentifier
         case aidAlgorithm
         case iob
         case basalIob
@@ -133,7 +134,6 @@ public struct ApsSnapshot: Sendable, Codable, Hashable {
         case predictedStartMills
         case loopJson
         case aidVersion
-        case additionalProperties
     }
 
     // Encodable protocol methods
@@ -145,15 +145,16 @@ public struct ApsSnapshot: Sendable, Codable, Hashable {
         try container.encodeIfPresent(mills, forKey: .mills)
         try container.encodeIfPresent(utcOffset, forKey: .utcOffset)
         try container.encodeIfPresent(device, forKey: .device)
-        try container.encodeIfPresent(deviceId, forKey: .deviceId)
-        try container.encodeIfPresent(patientDeviceId, forKey: .patientDeviceId)
         try container.encodeIfPresent(app, forKey: .app)
         try container.encodeIfPresent(dataSource, forKey: .dataSource)
-        try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
         try container.encodeIfPresent(correlationId, forKey: .correlationId)
         try container.encodeIfPresent(legacyId, forKey: .legacyId)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
+        try container.encodeIfPresent(deviceId, forKey: .deviceId)
+        try container.encodeIfPresent(patientDeviceId, forKey: .patientDeviceId)
+        try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
         try container.encodeIfPresent(aidAlgorithm, forKey: .aidAlgorithm)
         try container.encodeIfPresent(iob, forKey: .iob)
         try container.encodeIfPresent(basalIob, forKey: .basalIob)
@@ -179,7 +180,6 @@ public struct ApsSnapshot: Sendable, Codable, Hashable {
         try container.encodeIfPresent(predictedStartMills, forKey: .predictedStartMills)
         try container.encodeIfPresent(loopJson, forKey: .loopJson)
         try container.encodeIfPresent(aidVersion, forKey: .aidVersion)
-        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
     }
 }
 

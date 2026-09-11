@@ -55,7 +55,7 @@ open class SensorGlucoseAPI {
     /**
      Create
      
-     - parameter upsertSensorGlucoseRequest: (body)  
+     - parameter upsertSensorGlucoseRequest: (body) The data used to create the record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: SensorGlucose
      */
@@ -66,13 +66,14 @@ open class SensorGlucoseAPI {
     /**
      Create
      - POST /api/v4/glucose/sensor
+     - `Timestamp` must be set on the mapped model; requests that resolve to a default timestamp are rejected with `400 Bad Request`.              On success, responds with `201 Created` and a `Location` header containing the URL of the newly created record.              A record whose `(dataSource, syncIdentifier)` is held by a record the owner deleted is refused with `409 Conflict` — deleting a record stops that record's source from re-uploading it. Restore it from `GET deleted` instead.
      - Bearer Token:
        - type: http
        - name: bearer
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter upsertSensorGlucoseRequest: (body)  
+     - parameter upsertSensorGlucoseRequest: (body) The data used to create the record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SensorGlucose> 
      */
@@ -95,31 +96,31 @@ open class SensorGlucoseAPI {
     }
 
     /**
-     Create sensor glucose bulk
+     Create bulk
      
-     - parameter upsertSensorGlucoseRequest: (body)  
+     - parameter upsertSensorGlucoseRequest: (body) The records to write, at most 1000 of them. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [SensorGlucose]
      */
-    open class func sensorGlucoseCreateSensorGlucoseBulk(upsertSensorGlucoseRequest: [UpsertSensorGlucoseRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [SensorGlucose] {
-        return try await sensorGlucoseCreateSensorGlucoseBulkWithRequestBuilder(upsertSensorGlucoseRequest: upsertSensorGlucoseRequest, apiConfiguration: apiConfiguration).execute().body
+    open class func sensorGlucoseCreateBulk(upsertSensorGlucoseRequest: [UpsertSensorGlucoseRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [SensorGlucose] {
+        return try await sensorGlucoseCreateBulkWithRequestBuilder(upsertSensorGlucoseRequest: upsertSensorGlucoseRequest, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
-     Create sensor glucose bulk
+     Create bulk
      - POST /api/v4/glucose/sensor/bulk
-     - Create multiple sensor glucose readings in bulk (max 1000).
+     - Array semantics are per-item, not all-or-nothing. Of the types reachable here, boluses, basal injections and sensor glucose upsert on the sync key: an item carrying both `dataSource` and `syncIdentifier` updates in place the row already matched by that pair. Every other type — notes, device events, BG checks, calibrations, meter readings and bolus calculations — inserts, as does any item not carrying both halves of the pair.              The payload is validated as a whole — an empty body, more than the cap, an item with an unset `timestamp`, an item supplying `syncIdentifier` without `dataSource`, or an item any registered validator rejects, all fail the request with `400 Bad Request` before anything is persisted.              On success, responds with `201 Created` and the written records.
      - Bearer Token:
        - type: http
        - name: bearer
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter upsertSensorGlucoseRequest: (body)  
+     - parameter upsertSensorGlucoseRequest: (body) The records to write, at most 1000 of them. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[SensorGlucose]> 
      */
-    open class func sensorGlucoseCreateSensorGlucoseBulkWithRequestBuilder(upsertSensorGlucoseRequest: [UpsertSensorGlucoseRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[SensorGlucose]> {
+    open class func sensorGlucoseCreateBulkWithRequestBuilder(upsertSensorGlucoseRequest: [UpsertSensorGlucoseRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[SensorGlucose]> {
         let localVariablePath = "/api/v4/glucose/sensor/bulk"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: upsertSensorGlucoseRequest, codableHelper: apiConfiguration.codableHelper)
@@ -392,8 +393,8 @@ open class SensorGlucoseAPI {
     /**
      Update
      
-     - parameter id: (path)  
-     - parameter upsertSensorGlucoseRequest: (body)  
+     - parameter id: (path) The unique identifier of the record to update. 
+     - parameter upsertSensorGlucoseRequest: (body) The data to apply to the existing record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: SensorGlucose
      */
@@ -404,14 +405,15 @@ open class SensorGlucoseAPI {
     /**
      Update
      - PUT /api/v4/glucose/sensor/{id}
+     - Returns `404 Not Found` if no record with the given id exists.              `Timestamp` must be set on the mapped model; requests that resolve to a default timestamp are rejected with `400 Bad Request`.
      - Bearer Token:
        - type: http
        - name: bearer
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter id: (path)  
-     - parameter upsertSensorGlucoseRequest: (body)  
+     - parameter id: (path) The unique identifier of the record to update. 
+     - parameter upsertSensorGlucoseRequest: (body) The data to apply to the existing record. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SensorGlucose> 
      */

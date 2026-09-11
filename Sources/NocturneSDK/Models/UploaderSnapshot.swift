@@ -16,11 +16,12 @@ public struct UploaderSnapshot: Sendable, Codable, Hashable {
     public var device: String?
     public var app: String?
     public var dataSource: String?
-    public var syncIdentifier: String?
     public var correlationId: String?
     public var legacyId: String?
     public var createdAt: Date?
     public var modifiedAt: Date?
+    public var additionalProperties: [String: JSONValue]?
+    public var syncIdentifier: String?
     public var name: String?
     public var battery: Int?
     public var batteryVoltage: Double?
@@ -28,9 +29,8 @@ public struct UploaderSnapshot: Sendable, Codable, Hashable {
     public var temperature: Double?
     public var type: String?
     public var deviceId: String?
-    public var additionalProperties: [String: JSONValue]?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, syncIdentifier: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, name: String? = nil, battery: Int? = nil, batteryVoltage: Double? = nil, isCharging: Bool? = nil, temperature: Double? = nil, type: String? = nil, deviceId: String? = nil, additionalProperties: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, syncIdentifier: String? = nil, name: String? = nil, battery: Int? = nil, batteryVoltage: Double? = nil, isCharging: Bool? = nil, temperature: Double? = nil, type: String? = nil, deviceId: String? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -38,11 +38,12 @@ public struct UploaderSnapshot: Sendable, Codable, Hashable {
         self.device = device
         self.app = app
         self.dataSource = dataSource
-        self.syncIdentifier = syncIdentifier
         self.correlationId = correlationId
         self.legacyId = legacyId
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
+        self.additionalProperties = additionalProperties
+        self.syncIdentifier = syncIdentifier
         self.name = name
         self.battery = battery
         self.batteryVoltage = batteryVoltage
@@ -50,7 +51,6 @@ public struct UploaderSnapshot: Sendable, Codable, Hashable {
         self.temperature = temperature
         self.type = type
         self.deviceId = deviceId
-        self.additionalProperties = additionalProperties
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -61,11 +61,12 @@ public struct UploaderSnapshot: Sendable, Codable, Hashable {
         case device
         case app
         case dataSource
-        case syncIdentifier
         case correlationId
         case legacyId
         case createdAt
         case modifiedAt
+        case additionalProperties
+        case syncIdentifier
         case name
         case battery
         case batteryVoltage
@@ -73,7 +74,6 @@ public struct UploaderSnapshot: Sendable, Codable, Hashable {
         case temperature
         case type
         case deviceId
-        case additionalProperties
     }
 
     // Encodable protocol methods
@@ -87,11 +87,12 @@ public struct UploaderSnapshot: Sendable, Codable, Hashable {
         try container.encodeIfPresent(device, forKey: .device)
         try container.encodeIfPresent(app, forKey: .app)
         try container.encodeIfPresent(dataSource, forKey: .dataSource)
-        try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
         try container.encodeIfPresent(correlationId, forKey: .correlationId)
         try container.encodeIfPresent(legacyId, forKey: .legacyId)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
+        try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(battery, forKey: .battery)
         try container.encodeIfPresent(batteryVoltage, forKey: .batteryVoltage)
@@ -99,7 +100,6 @@ public struct UploaderSnapshot: Sendable, Codable, Hashable {
         try container.encodeIfPresent(temperature, forKey: .temperature)
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(deviceId, forKey: .deviceId)
-        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
     }
 }
 

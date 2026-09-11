@@ -20,6 +20,7 @@ public struct TherapySettings: Sendable, Codable, Hashable {
     public var legacyId: String?
     public var createdAt: Date?
     public var modifiedAt: Date?
+    public var additionalProperties: [String: JSONValue]?
     public var profileName: String?
     public var timezone: String?
     public var units: String?
@@ -38,9 +39,8 @@ public struct TherapySettings: Sendable, Codable, Hashable {
     public var enteredBy: String?
     public var isExternallyManaged: Bool?
     public var startDate: String?
-    public var additionalProperties: [String: JSONValue]?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, profileName: String? = nil, timezone: String? = nil, units: String? = nil, dia: Double? = nil, carbsHr: Int? = nil, delay: Int? = nil, perGIValues: Bool? = nil, carbsHrHigh: Int? = nil, carbsHrMedium: Int? = nil, carbsHrLow: Int? = nil, delayHigh: Int? = nil, delayMedium: Int? = nil, delayLow: Int? = nil, loopSettings: LoopProfileSettings? = nil, isDefault: Bool? = nil, enteredBy: String? = nil, isExternallyManaged: Bool? = nil, startDate: String? = nil, additionalProperties: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, profileName: String? = nil, timezone: String? = nil, units: String? = nil, dia: Double? = nil, carbsHr: Int? = nil, delay: Int? = nil, perGIValues: Bool? = nil, carbsHrHigh: Int? = nil, carbsHrMedium: Int? = nil, carbsHrLow: Int? = nil, delayHigh: Int? = nil, delayMedium: Int? = nil, delayLow: Int? = nil, loopSettings: LoopProfileSettings? = nil, isDefault: Bool? = nil, enteredBy: String? = nil, isExternallyManaged: Bool? = nil, startDate: String? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -52,6 +52,7 @@ public struct TherapySettings: Sendable, Codable, Hashable {
         self.legacyId = legacyId
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
+        self.additionalProperties = additionalProperties
         self.profileName = profileName
         self.timezone = timezone
         self.units = units
@@ -70,7 +71,6 @@ public struct TherapySettings: Sendable, Codable, Hashable {
         self.enteredBy = enteredBy
         self.isExternallyManaged = isExternallyManaged
         self.startDate = startDate
-        self.additionalProperties = additionalProperties
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -85,6 +85,7 @@ public struct TherapySettings: Sendable, Codable, Hashable {
         case legacyId
         case createdAt
         case modifiedAt
+        case additionalProperties
         case profileName
         case timezone
         case units
@@ -103,7 +104,6 @@ public struct TherapySettings: Sendable, Codable, Hashable {
         case enteredBy
         case isExternallyManaged
         case startDate
-        case additionalProperties
     }
 
     // Encodable protocol methods
@@ -121,6 +121,7 @@ public struct TherapySettings: Sendable, Codable, Hashable {
         try container.encodeIfPresent(legacyId, forKey: .legacyId)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
         try container.encodeIfPresent(profileName, forKey: .profileName)
         try container.encodeIfPresent(timezone, forKey: .timezone)
         try container.encodeIfPresent(units, forKey: .units)
@@ -139,7 +140,6 @@ public struct TherapySettings: Sendable, Codable, Hashable {
         try container.encodeIfPresent(enteredBy, forKey: .enteredBy)
         try container.encodeIfPresent(isExternallyManaged, forKey: .isExternallyManaged)
         try container.encodeIfPresent(startDate, forKey: .startDate)
-        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
     }
 }
 

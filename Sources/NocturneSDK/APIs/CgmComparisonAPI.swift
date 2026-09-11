@@ -12,15 +12,15 @@ open class CgmComparisonAPI {
     /**
      Compare
      
-     - parameter deviceAId: (query) Registered CGM compared as A. (optional)
-     - parameter deviceBId: (query) Registered CGM compared as B, the reference for relative measures. (optional)
-     - parameter startDate: (query) Inclusive UTC start of the window. (optional)
-     - parameter endDate: (query) Inclusive UTC end of the window. (optional)
+     - parameter deviceAId: (query) Registered CGM compared as A. 
+     - parameter deviceBId: (query) Registered CGM compared as B, the reference for relative measures. 
+     - parameter startDate: (query) Inclusive UTC start of the window. 
+     - parameter endDate: (query) Inclusive UTC end of the window. 
      - parameter toleranceMinutes: (query) Maximum time difference at which two readings are matched. (optional, default to 5)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: CgmComparisonResult
      */
-    open class func cgmComparisonCompare(deviceAId: String? = nil, deviceBId: String? = nil, startDate: Date? = nil, endDate: Date? = nil, toleranceMinutes: Double? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> CgmComparisonResult {
+    open class func cgmComparisonCompare(deviceAId: String, deviceBId: String, startDate: Date, endDate: Date, toleranceMinutes: Double? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> CgmComparisonResult {
         return try await cgmComparisonCompareWithRequestBuilder(deviceAId: deviceAId, deviceBId: deviceBId, startDate: startDate, endDate: endDate, toleranceMinutes: toleranceMinutes, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -34,25 +34,25 @@ open class CgmComparisonAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter deviceAId: (query) Registered CGM compared as A. (optional)
-     - parameter deviceBId: (query) Registered CGM compared as B, the reference for relative measures. (optional)
-     - parameter startDate: (query) Inclusive UTC start of the window. (optional)
-     - parameter endDate: (query) Inclusive UTC end of the window. (optional)
+     - parameter deviceAId: (query) Registered CGM compared as A. 
+     - parameter deviceBId: (query) Registered CGM compared as B, the reference for relative measures. 
+     - parameter startDate: (query) Inclusive UTC start of the window. 
+     - parameter endDate: (query) Inclusive UTC end of the window. 
      - parameter toleranceMinutes: (query) Maximum time difference at which two readings are matched. (optional, default to 5)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<CgmComparisonResult> 
      */
-    open class func cgmComparisonCompareWithRequestBuilder(deviceAId: String? = nil, deviceBId: String? = nil, startDate: Date? = nil, endDate: Date? = nil, toleranceMinutes: Double? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<CgmComparisonResult> {
+    open class func cgmComparisonCompareWithRequestBuilder(deviceAId: String, deviceBId: String, startDate: Date, endDate: Date, toleranceMinutes: Double? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<CgmComparisonResult> {
         let localVariablePath = "/api/v4/cgm-comparison"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         let _qp1: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
-            "deviceAId": (wrappedValue: deviceAId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "deviceBId": (wrappedValue: deviceBId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "startDate": (wrappedValue: startDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "endDate": (wrappedValue: endDate?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "deviceAId": (wrappedValue: deviceAId.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "deviceBId": (wrappedValue: deviceBId.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "startDate": (wrappedValue: startDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endDate": (wrappedValue: endDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "toleranceMinutes": (wrappedValue: toleranceMinutes?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ]
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp1)

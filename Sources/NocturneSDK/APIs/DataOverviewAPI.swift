@@ -53,12 +53,12 @@ open class DataOverviewAPI {
     /**
      Get daily summary
      
-     - parameter year: (query) The year to aggregate (optional)
+     - parameter year: (query) The year to aggregate 
      - parameter dataSources: (query) Optional data source filters (multiple allowed) (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DailySummaryResponse
      */
-    open class func dataOverviewGetDailySummary(year: Int? = nil, dataSources: [String]? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DailySummaryResponse {
+    open class func dataOverviewGetDailySummary(year: Int, dataSources: [String]? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DailySummaryResponse {
         return try await dataOverviewGetDailySummaryWithRequestBuilder(year: year, dataSources: dataSources, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -72,19 +72,19 @@ open class DataOverviewAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter year: (query) The year to aggregate (optional)
+     - parameter year: (query) The year to aggregate 
      - parameter dataSources: (query) Optional data source filters (multiple allowed) (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DailySummaryResponse> 
      */
-    open class func dataOverviewGetDailySummaryWithRequestBuilder(year: Int? = nil, dataSources: [String]? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DailySummaryResponse> {
+    open class func dataOverviewGetDailySummaryWithRequestBuilder(year: Int, dataSources: [String]? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DailySummaryResponse> {
         let localVariablePath = "/api/v4/year-overview/daily-summary"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "year": (wrappedValue: year?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "year": (wrappedValue: year.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "dataSources": (wrappedValue: dataSources?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 
@@ -102,12 +102,12 @@ open class DataOverviewAPI {
     /**
      Get gri timeline
      
-     - parameter year: (query) The year to compute GRI timeline for (optional)
+     - parameter year: (query) The year to compute GRI timeline for 
      - parameter dataSources: (query) Optional data source filters (multiple allowed) (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: GriTimelineResponse
      */
-    open class func dataOverviewGetGriTimeline(year: Int? = nil, dataSources: [String]? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> GriTimelineResponse {
+    open class func dataOverviewGetGriTimeline(year: Int, dataSources: [String]? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> GriTimelineResponse {
         return try await dataOverviewGetGriTimelineWithRequestBuilder(year: year, dataSources: dataSources, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -121,19 +121,19 @@ open class DataOverviewAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter year: (query) The year to compute GRI timeline for (optional)
+     - parameter year: (query) The year to compute GRI timeline for 
      - parameter dataSources: (query) Optional data source filters (multiple allowed) (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<GriTimelineResponse> 
      */
-    open class func dataOverviewGetGriTimelineWithRequestBuilder(year: Int? = nil, dataSources: [String]? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<GriTimelineResponse> {
+    open class func dataOverviewGetGriTimelineWithRequestBuilder(year: Int, dataSources: [String]? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<GriTimelineResponse> {
         let localVariablePath = "/api/v4/year-overview/gri-timeline"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "year": (wrappedValue: year?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "year": (wrappedValue: year.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "dataSources": (wrappedValue: dataSources?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 

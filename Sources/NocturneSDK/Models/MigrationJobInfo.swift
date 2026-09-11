@@ -18,8 +18,10 @@ public struct MigrationJobInfo: Sendable, Codable, Hashable {
     public var startedAt: Date?
     public var completedAt: Date?
     public var errorMessage: String?
+    /** Whether ErrorMessage reports a fault. A run that completed carrying only a skip — a read-only API secret cannot list sign-ins, which is the ordinary setup — has a message to show and nothing to warn about, and history has no per-collection detail of its own to tell the two apart with. */
+    public var hasFailures: Bool?
 
-    public init(id: String? = nil, mode: MigrationMode? = nil, createdAt: Date? = nil, sourceDescription: String? = nil, state: MigrationJobState? = nil, startedAt: Date? = nil, completedAt: Date? = nil, errorMessage: String? = nil) {
+    public init(id: String? = nil, mode: MigrationMode? = nil, createdAt: Date? = nil, sourceDescription: String? = nil, state: MigrationJobState? = nil, startedAt: Date? = nil, completedAt: Date? = nil, errorMessage: String? = nil, hasFailures: Bool? = nil) {
         self.id = id
         self.mode = mode
         self.createdAt = createdAt
@@ -28,6 +30,7 @@ public struct MigrationJobInfo: Sendable, Codable, Hashable {
         self.startedAt = startedAt
         self.completedAt = completedAt
         self.errorMessage = errorMessage
+        self.hasFailures = hasFailures
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -39,6 +42,7 @@ public struct MigrationJobInfo: Sendable, Codable, Hashable {
         case startedAt
         case completedAt
         case errorMessage
+        case hasFailures
     }
 
     // Encodable protocol methods
@@ -53,6 +57,7 @@ public struct MigrationJobInfo: Sendable, Codable, Hashable {
         try container.encodeIfPresent(startedAt, forKey: .startedAt)
         try container.encodeIfPresent(completedAt, forKey: .completedAt)
         try container.encodeIfPresent(errorMessage, forKey: .errorMessage)
+        try container.encodeIfPresent(hasFailures, forKey: .hasFailures)
     }
 }
 

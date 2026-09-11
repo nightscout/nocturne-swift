@@ -61,11 +61,11 @@ open class RetrospectiveAPI {
     /**
      Get retrospective data
      
-     - parameter time: (query) Unix timestamp in milliseconds for the retrospective point (optional)
+     - parameter time: (query) Unix timestamp in milliseconds for the retrospective point 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RetrospectiveDataResponse
      */
-    open class func retrospectiveGetRetrospectiveData(time: Int64? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> RetrospectiveDataResponse {
+    open class func retrospectiveGetRetrospectiveData(time: Int64, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> RetrospectiveDataResponse {
         return try await retrospectiveGetRetrospectiveDataWithRequestBuilder(time: time, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -79,18 +79,18 @@ open class RetrospectiveAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter time: (query) Unix timestamp in milliseconds for the retrospective point (optional)
+     - parameter time: (query) Unix timestamp in milliseconds for the retrospective point 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<RetrospectiveDataResponse> 
      */
-    open class func retrospectiveGetRetrospectiveDataWithRequestBuilder(time: Int64? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<RetrospectiveDataResponse> {
+    open class func retrospectiveGetRetrospectiveDataWithRequestBuilder(time: Int64, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<RetrospectiveDataResponse> {
         let localVariablePath = "/api/v4/Retrospective/at"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "time": (wrappedValue: time?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "time": (wrappedValue: time.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [

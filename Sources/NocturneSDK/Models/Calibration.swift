@@ -20,12 +20,12 @@ public struct Calibration: Sendable, Codable, Hashable {
     public var legacyId: String?
     public var createdAt: Date?
     public var modifiedAt: Date?
+    public var additionalProperties: [String: JSONValue]?
     public var slope: Double?
     public var intercept: Double?
     public var scale: Double?
-    public var additionalProperties: [String: JSONValue]?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, slope: Double? = nil, intercept: Double? = nil, scale: Double? = nil, additionalProperties: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, slope: Double? = nil, intercept: Double? = nil, scale: Double? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -37,10 +37,10 @@ public struct Calibration: Sendable, Codable, Hashable {
         self.legacyId = legacyId
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
+        self.additionalProperties = additionalProperties
         self.slope = slope
         self.intercept = intercept
         self.scale = scale
-        self.additionalProperties = additionalProperties
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -55,10 +55,10 @@ public struct Calibration: Sendable, Codable, Hashable {
         case legacyId
         case createdAt
         case modifiedAt
+        case additionalProperties
         case slope
         case intercept
         case scale
-        case additionalProperties
     }
 
     // Encodable protocol methods
@@ -76,10 +76,10 @@ public struct Calibration: Sendable, Codable, Hashable {
         try container.encodeIfPresent(legacyId, forKey: .legacyId)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
         try container.encodeIfPresent(slope, forKey: .slope)
         try container.encodeIfPresent(intercept, forKey: .intercept)
         try container.encodeIfPresent(scale, forKey: .scale)
-        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
     }
 }
 

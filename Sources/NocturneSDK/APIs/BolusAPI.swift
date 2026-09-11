@@ -66,7 +66,7 @@ open class BolusAPI {
     /**
      Create
      - POST /api/v4/insulin/boluses
-     - `Timestamp` must be set on the mapped model; requests that resolve to a default timestamp are rejected with `400 Bad Request`.              On success, responds with `201 Created` and a `Location` header containing the URL of the newly created record.
+     - `Timestamp` must be set on the mapped model; requests that resolve to a default timestamp are rejected with `400 Bad Request`.              On success, responds with `201 Created` and a `Location` header containing the URL of the newly created record.              A record whose `(dataSource, syncIdentifier)` is held by a record the owner deleted is refused with `409 Conflict` — deleting a record stops that record's source from re-uploading it. Restore it from `GET deleted` instead.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -96,31 +96,31 @@ open class BolusAPI {
     }
 
     /**
-     Create boluses bulk
+     Create bulk
      
-     - parameter createBolusRequest: (body)  
+     - parameter createBolusRequest: (body) The records to write, at most 1000 of them. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [Bolus]
      */
-    open class func bolusCreateBolusesBulk(createBolusRequest: [CreateBolusRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [Bolus] {
-        return try await bolusCreateBolusesBulkWithRequestBuilder(createBolusRequest: createBolusRequest, apiConfiguration: apiConfiguration).execute().body
+    open class func bolusCreateBulk(createBolusRequest: [CreateBolusRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [Bolus] {
+        return try await bolusCreateBulkWithRequestBuilder(createBolusRequest: createBolusRequest, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
-     Create boluses bulk
+     Create bulk
      - POST /api/v4/insulin/boluses/bulk
-     - Array semantics are per-item upsert, not all-or-nothing: each bolus carrying both `dataSource` and `syncIdentifier` updates the row already matched by that pair; all others insert. Validation failures reject the whole request with `400 Bad Request` before anything is persisted.
+     - Array semantics are per-item, not all-or-nothing. Of the types reachable here, boluses, basal injections and sensor glucose upsert on the sync key: an item carrying both `dataSource` and `syncIdentifier` updates in place the row already matched by that pair. Every other type — notes, device events, BG checks, calibrations, meter readings and bolus calculations — inserts, as does any item not carrying both halves of the pair.              The payload is validated as a whole — an empty body, more than the cap, an item with an unset `timestamp`, an item supplying `syncIdentifier` without `dataSource`, or an item any registered validator rejects, all fail the request with `400 Bad Request` before anything is persisted.              On success, responds with `201 Created` and the written records.
      - Bearer Token:
        - type: http
        - name: bearer
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter createBolusRequest: (body)  
+     - parameter createBolusRequest: (body) The records to write, at most 1000 of them. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[Bolus]> 
      */
-    open class func bolusCreateBolusesBulkWithRequestBuilder(createBolusRequest: [CreateBolusRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[Bolus]> {
+    open class func bolusCreateBulkWithRequestBuilder(createBolusRequest: [CreateBolusRequest], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[Bolus]> {
         let localVariablePath = "/api/v4/insulin/boluses/bulk"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createBolusRequest, codableHelper: apiConfiguration.codableHelper)

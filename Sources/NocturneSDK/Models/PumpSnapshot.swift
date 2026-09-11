@@ -16,11 +16,12 @@ public struct PumpSnapshot: Sendable, Codable, Hashable {
     public var device: String?
     public var app: String?
     public var dataSource: String?
-    public var syncIdentifier: String?
     public var correlationId: String?
     public var legacyId: String?
     public var createdAt: Date?
     public var modifiedAt: Date?
+    public var additionalProperties: [String: JSONValue]?
+    public var syncIdentifier: String?
     public var manufacturer: String?
     public var model: String?
     public var reservoir: Double?
@@ -36,9 +37,8 @@ public struct PumpSnapshot: Sendable, Codable, Hashable {
     public var patientDeviceId: String?
     public var iob: Double?
     public var bolusIob: Double?
-    public var additionalProperties: [String: JSONValue]?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, syncIdentifier: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, manufacturer: String? = nil, model: String? = nil, reservoir: Double? = nil, reservoirDisplay: String? = nil, batteryPercent: Int? = nil, batteryVoltage: Double? = nil, bolusing: Bool? = nil, suspended: Bool? = nil, pumpStatus: String? = nil, pumpMode: String? = nil, clock: String? = nil, deviceId: String? = nil, patientDeviceId: String? = nil, iob: Double? = nil, bolusIob: Double? = nil, additionalProperties: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, syncIdentifier: String? = nil, manufacturer: String? = nil, model: String? = nil, reservoir: Double? = nil, reservoirDisplay: String? = nil, batteryPercent: Int? = nil, batteryVoltage: Double? = nil, bolusing: Bool? = nil, suspended: Bool? = nil, pumpStatus: String? = nil, pumpMode: String? = nil, clock: String? = nil, deviceId: String? = nil, patientDeviceId: String? = nil, iob: Double? = nil, bolusIob: Double? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -46,11 +46,12 @@ public struct PumpSnapshot: Sendable, Codable, Hashable {
         self.device = device
         self.app = app
         self.dataSource = dataSource
-        self.syncIdentifier = syncIdentifier
         self.correlationId = correlationId
         self.legacyId = legacyId
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
+        self.additionalProperties = additionalProperties
+        self.syncIdentifier = syncIdentifier
         self.manufacturer = manufacturer
         self.model = model
         self.reservoir = reservoir
@@ -66,7 +67,6 @@ public struct PumpSnapshot: Sendable, Codable, Hashable {
         self.patientDeviceId = patientDeviceId
         self.iob = iob
         self.bolusIob = bolusIob
-        self.additionalProperties = additionalProperties
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -77,11 +77,12 @@ public struct PumpSnapshot: Sendable, Codable, Hashable {
         case device
         case app
         case dataSource
-        case syncIdentifier
         case correlationId
         case legacyId
         case createdAt
         case modifiedAt
+        case additionalProperties
+        case syncIdentifier
         case manufacturer
         case model
         case reservoir
@@ -97,7 +98,6 @@ public struct PumpSnapshot: Sendable, Codable, Hashable {
         case patientDeviceId
         case iob
         case bolusIob
-        case additionalProperties
     }
 
     // Encodable protocol methods
@@ -111,11 +111,12 @@ public struct PumpSnapshot: Sendable, Codable, Hashable {
         try container.encodeIfPresent(device, forKey: .device)
         try container.encodeIfPresent(app, forKey: .app)
         try container.encodeIfPresent(dataSource, forKey: .dataSource)
-        try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
         try container.encodeIfPresent(correlationId, forKey: .correlationId)
         try container.encodeIfPresent(legacyId, forKey: .legacyId)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
+        try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
         try container.encodeIfPresent(manufacturer, forKey: .manufacturer)
         try container.encodeIfPresent(model, forKey: .model)
         try container.encodeIfPresent(reservoir, forKey: .reservoir)
@@ -131,7 +132,6 @@ public struct PumpSnapshot: Sendable, Codable, Hashable {
         try container.encodeIfPresent(patientDeviceId, forKey: .patientDeviceId)
         try container.encodeIfPresent(iob, forKey: .iob)
         try container.encodeIfPresent(bolusIob, forKey: .bolusIob)
-        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
     }
 }
 

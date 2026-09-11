@@ -20,6 +20,7 @@ public struct Bolus: Sendable, Codable, Hashable {
     public var legacyId: String?
     public var createdAt: Date?
     public var modifiedAt: Date?
+    public var additionalProperties: [String: JSONValue]?
     public var insulin: Double?
     public var programmed: Double?
     public var delivered: Double?
@@ -36,9 +37,8 @@ public struct Bolus: Sendable, Codable, Hashable {
     public var pumpRecordId: String?
     public var bolusCalculationId: String?
     public var apsSnapshotId: String?
-    public var additionalProperties: [String: JSONValue]?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, insulin: Double? = nil, programmed: Double? = nil, delivered: Double? = nil, bolusType: BolusType? = nil, automatic: Bool? = nil, kind: BolusKind? = nil, duration: Double? = nil, syncIdentifier: String? = nil, insulinType: String? = nil, insulinContext: TreatmentInsulinContext? = nil, unabsorbed: Double? = nil, deviceId: String? = nil, patientDeviceId: String? = nil, pumpRecordId: String? = nil, bolusCalculationId: String? = nil, apsSnapshotId: String? = nil, additionalProperties: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, insulin: Double? = nil, programmed: Double? = nil, delivered: Double? = nil, bolusType: BolusType? = nil, automatic: Bool? = nil, kind: BolusKind? = nil, duration: Double? = nil, syncIdentifier: String? = nil, insulinType: String? = nil, insulinContext: TreatmentInsulinContext? = nil, unabsorbed: Double? = nil, deviceId: String? = nil, patientDeviceId: String? = nil, pumpRecordId: String? = nil, bolusCalculationId: String? = nil, apsSnapshotId: String? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -50,6 +50,7 @@ public struct Bolus: Sendable, Codable, Hashable {
         self.legacyId = legacyId
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
+        self.additionalProperties = additionalProperties
         self.insulin = insulin
         self.programmed = programmed
         self.delivered = delivered
@@ -66,7 +67,6 @@ public struct Bolus: Sendable, Codable, Hashable {
         self.pumpRecordId = pumpRecordId
         self.bolusCalculationId = bolusCalculationId
         self.apsSnapshotId = apsSnapshotId
-        self.additionalProperties = additionalProperties
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -81,6 +81,7 @@ public struct Bolus: Sendable, Codable, Hashable {
         case legacyId
         case createdAt
         case modifiedAt
+        case additionalProperties
         case insulin
         case programmed
         case delivered
@@ -97,7 +98,6 @@ public struct Bolus: Sendable, Codable, Hashable {
         case pumpRecordId
         case bolusCalculationId
         case apsSnapshotId
-        case additionalProperties
     }
 
     // Encodable protocol methods
@@ -115,6 +115,7 @@ public struct Bolus: Sendable, Codable, Hashable {
         try container.encodeIfPresent(legacyId, forKey: .legacyId)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
         try container.encodeIfPresent(insulin, forKey: .insulin)
         try container.encodeIfPresent(programmed, forKey: .programmed)
         try container.encodeIfPresent(delivered, forKey: .delivered)
@@ -131,7 +132,6 @@ public struct Bolus: Sendable, Codable, Hashable {
         try container.encodeIfPresent(pumpRecordId, forKey: .pumpRecordId)
         try container.encodeIfPresent(bolusCalculationId, forKey: .bolusCalculationId)
         try container.encodeIfPresent(apsSnapshotId, forKey: .apsSnapshotId)
-        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
     }
 }
 

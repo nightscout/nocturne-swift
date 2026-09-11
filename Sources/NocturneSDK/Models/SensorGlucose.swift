@@ -17,11 +17,12 @@ public struct SensorGlucose: Sendable, Codable, Hashable {
     public var app: String?
     public var dataSource: String?
     public var correlationId: String?
-    public var patientDeviceId: String?
     public var legacyId: String?
-    public var syncIdentifier: String?
     public var createdAt: Date?
     public var modifiedAt: Date?
+    public var additionalProperties: [String: JSONValue]?
+    public var patientDeviceId: String?
+    public var syncIdentifier: String?
     public var mgdl: Double?
     public var mmol: Double?
     public var direction: GlucoseDirection?
@@ -36,9 +37,8 @@ public struct SensorGlucose: Sendable, Codable, Hashable {
     public var smoothedMmol: Double?
     public var unsmoothedMgdl: Double?
     public var unsmoothedMmol: Double?
-    public var additionalProperties: [String: JSONValue]?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, patientDeviceId: String? = nil, legacyId: String? = nil, syncIdentifier: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, mgdl: Double? = nil, mmol: Double? = nil, direction: GlucoseDirection? = nil, trend: GlucoseTrend? = nil, trendRate: Double? = nil, noise: Int? = nil, filtered: Double? = nil, unfiltered: Double? = nil, delta: Double? = nil, glucoseProcessing: GlucoseProcessing? = nil, smoothedMgdl: Double? = nil, smoothedMmol: Double? = nil, unsmoothedMgdl: Double? = nil, unsmoothedMmol: Double? = nil, additionalProperties: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, patientDeviceId: String? = nil, syncIdentifier: String? = nil, mgdl: Double? = nil, mmol: Double? = nil, direction: GlucoseDirection? = nil, trend: GlucoseTrend? = nil, trendRate: Double? = nil, noise: Int? = nil, filtered: Double? = nil, unfiltered: Double? = nil, delta: Double? = nil, glucoseProcessing: GlucoseProcessing? = nil, smoothedMgdl: Double? = nil, smoothedMmol: Double? = nil, unsmoothedMgdl: Double? = nil, unsmoothedMmol: Double? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -47,11 +47,12 @@ public struct SensorGlucose: Sendable, Codable, Hashable {
         self.app = app
         self.dataSource = dataSource
         self.correlationId = correlationId
-        self.patientDeviceId = patientDeviceId
         self.legacyId = legacyId
-        self.syncIdentifier = syncIdentifier
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
+        self.additionalProperties = additionalProperties
+        self.patientDeviceId = patientDeviceId
+        self.syncIdentifier = syncIdentifier
         self.mgdl = mgdl
         self.mmol = mmol
         self.direction = direction
@@ -66,7 +67,6 @@ public struct SensorGlucose: Sendable, Codable, Hashable {
         self.smoothedMmol = smoothedMmol
         self.unsmoothedMgdl = unsmoothedMgdl
         self.unsmoothedMmol = unsmoothedMmol
-        self.additionalProperties = additionalProperties
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -78,11 +78,12 @@ public struct SensorGlucose: Sendable, Codable, Hashable {
         case app
         case dataSource
         case correlationId
-        case patientDeviceId
         case legacyId
-        case syncIdentifier
         case createdAt
         case modifiedAt
+        case additionalProperties
+        case patientDeviceId
+        case syncIdentifier
         case mgdl
         case mmol
         case direction
@@ -97,7 +98,6 @@ public struct SensorGlucose: Sendable, Codable, Hashable {
         case smoothedMmol
         case unsmoothedMgdl
         case unsmoothedMmol
-        case additionalProperties
     }
 
     // Encodable protocol methods
@@ -112,11 +112,12 @@ public struct SensorGlucose: Sendable, Codable, Hashable {
         try container.encodeIfPresent(app, forKey: .app)
         try container.encodeIfPresent(dataSource, forKey: .dataSource)
         try container.encodeIfPresent(correlationId, forKey: .correlationId)
-        try container.encodeIfPresent(patientDeviceId, forKey: .patientDeviceId)
         try container.encodeIfPresent(legacyId, forKey: .legacyId)
-        try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
+        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
+        try container.encodeIfPresent(patientDeviceId, forKey: .patientDeviceId)
+        try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
         try container.encodeIfPresent(mgdl, forKey: .mgdl)
         try container.encodeIfPresent(mmol, forKey: .mmol)
         try container.encodeIfPresent(direction, forKey: .direction)
@@ -131,7 +132,6 @@ public struct SensorGlucose: Sendable, Codable, Hashable {
         try container.encodeIfPresent(smoothedMmol, forKey: .smoothedMmol)
         try container.encodeIfPresent(unsmoothedMgdl, forKey: .unsmoothedMgdl)
         try container.encodeIfPresent(unsmoothedMmol, forKey: .unsmoothedMmol)
-        try container.encodeIfPresent(additionalProperties, forKey: .additionalProperties)
     }
 }
 
