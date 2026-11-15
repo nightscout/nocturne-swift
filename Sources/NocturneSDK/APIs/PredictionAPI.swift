@@ -69,7 +69,7 @@ open class PredictionAPI {
     /**
      Get profile snapshot
      - GET /api/v4/predictions/profile-snapshot
-     - Unlike GetPredictions, this action is intentionally available regardless of Predictions:Source: the client runs oref on-device and needs its therapy profile precisely when server-side prediction is off (the offline case). It depends only on the unconditionally-registered profile resolvers, not on IPredictionService, so it carries no _predictionService/_source guard.              Clients must additionally apply the fixed oref constants max_iob=10, max_basal=4, max_daily_basal=2 (which PredictionService.GetProfileAsync hardcodes) to match a server-side oref run; they are not part of this payload.
+     - Get the pre-resolved therapy profile for the next 24 hours, flattened into contiguous absolute-time segments, for an offline on-device oref prediction run. Available even when server-side prediction is off. The payload omits the oref constants max_iob=10, max_basal=4 and max_daily_basal=2; a client matching a server-side run applies them itself.
      - Bearer Token:
        - type: http
        - name: bearer

@@ -8,7 +8,8 @@
 import Foundation
 
 /**  */
-public enum SleepScoreSource: String, Sendable, Codable, CaseIterable {
+public enum SleepScoreSource: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case device = "Device"
     case computed = "Computed"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

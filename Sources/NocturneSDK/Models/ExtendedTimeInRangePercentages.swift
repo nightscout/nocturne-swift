@@ -11,16 +11,16 @@ public struct ExtendedTimeInRangePercentages: Sendable, Codable, Hashable {
 
     public var veryLow: Double?
     public var low: Double?
-    public var normal: Double?
-    public var aboveTarget: Double?
+    public var tightTarget: Double?
+    public var aboveTightTarget: Double?
     public var high: Double?
     public var veryHigh: Double?
 
-    public init(veryLow: Double? = nil, low: Double? = nil, normal: Double? = nil, aboveTarget: Double? = nil, high: Double? = nil, veryHigh: Double? = nil) {
+    public init(veryLow: Double? = nil, low: Double? = nil, tightTarget: Double? = nil, aboveTightTarget: Double? = nil, high: Double? = nil, veryHigh: Double? = nil) {
         self.veryLow = veryLow
         self.low = low
-        self.normal = normal
-        self.aboveTarget = aboveTarget
+        self.tightTarget = tightTarget
+        self.aboveTightTarget = aboveTightTarget
         self.high = high
         self.veryHigh = veryHigh
     }
@@ -28,8 +28,8 @@ public struct ExtendedTimeInRangePercentages: Sendable, Codable, Hashable {
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case veryLow
         case low
-        case normal
-        case aboveTarget
+        case tightTarget
+        case aboveTightTarget
         case high
         case veryHigh
     }
@@ -40,8 +40,8 @@ public struct ExtendedTimeInRangePercentages: Sendable, Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(veryLow, forKey: .veryLow)
         try container.encodeIfPresent(low, forKey: .low)
-        try container.encodeIfPresent(normal, forKey: .normal)
-        try container.encodeIfPresent(aboveTarget, forKey: .aboveTarget)
+        try container.encodeIfPresent(tightTarget, forKey: .tightTarget)
+        try container.encodeIfPresent(aboveTightTarget, forKey: .aboveTightTarget)
         try container.encodeIfPresent(high, forKey: .high)
         try container.encodeIfPresent(veryHigh, forKey: .veryHigh)
     }

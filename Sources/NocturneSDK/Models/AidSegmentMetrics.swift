@@ -13,12 +13,14 @@ public struct AidSegmentMetrics: Sendable, Codable, Hashable {
     public var pumpUsePercent: Double?
     public var loopCycleCount: Int?
     public var enactedCount: Int?
+    public var closedLoopCount: Int?
 
-    public init(aidActivePercent: Double? = nil, pumpUsePercent: Double? = nil, loopCycleCount: Int? = nil, enactedCount: Int? = nil) {
+    public init(aidActivePercent: Double? = nil, pumpUsePercent: Double? = nil, loopCycleCount: Int? = nil, enactedCount: Int? = nil, closedLoopCount: Int? = nil) {
         self.aidActivePercent = aidActivePercent
         self.pumpUsePercent = pumpUsePercent
         self.loopCycleCount = loopCycleCount
         self.enactedCount = enactedCount
+        self.closedLoopCount = closedLoopCount
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -26,6 +28,7 @@ public struct AidSegmentMetrics: Sendable, Codable, Hashable {
         case pumpUsePercent
         case loopCycleCount
         case enactedCount
+        case closedLoopCount
     }
 
     // Encodable protocol methods
@@ -36,6 +39,7 @@ public struct AidSegmentMetrics: Sendable, Codable, Hashable {
         try container.encodeIfPresent(pumpUsePercent, forKey: .pumpUsePercent)
         try container.encodeIfPresent(loopCycleCount, forKey: .loopCycleCount)
         try container.encodeIfPresent(enactedCount, forKey: .enactedCount)
+        try container.encodeIfPresent(closedLoopCount, forKey: .closedLoopCount)
     }
 }
 

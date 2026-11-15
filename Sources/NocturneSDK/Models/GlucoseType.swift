@@ -8,7 +8,8 @@
 import Foundation
 
 /**  */
-public enum GlucoseType: String, Sendable, Codable, CaseIterable {
+public enum GlucoseType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case finger = "Finger"
     case sensor = "Sensor"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

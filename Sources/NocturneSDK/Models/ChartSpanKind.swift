@@ -8,7 +8,8 @@
 import Foundation
 
 /**  */
-public enum ChartSpanKind: String, Sendable, Codable, CaseIterable {
+public enum ChartSpanKind: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case stateSpan = "StateSpan"
     case sleep = "Sleep"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

@@ -10,22 +10,13 @@ import Foundation
 public struct InsulinTotals: Sendable, Codable, Hashable {
 
     public var bolus: Double?
-    public var basal: Double?
-    public var scheduledBasal: Double?
-    public var additionalBasal: Double?
 
-    public init(bolus: Double? = nil, basal: Double? = nil, scheduledBasal: Double? = nil, additionalBasal: Double? = nil) {
+    public init(bolus: Double? = nil) {
         self.bolus = bolus
-        self.basal = basal
-        self.scheduledBasal = scheduledBasal
-        self.additionalBasal = additionalBasal
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case bolus
-        case basal
-        case scheduledBasal
-        case additionalBasal
     }
 
     // Encodable protocol methods
@@ -33,9 +24,6 @@ public struct InsulinTotals: Sendable, Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(bolus, forKey: .bolus)
-        try container.encodeIfPresent(basal, forKey: .basal)
-        try container.encodeIfPresent(scheduledBasal, forKey: .scheduledBasal)
-        try container.encodeIfPresent(additionalBasal, forKey: .additionalBasal)
     }
 }
 

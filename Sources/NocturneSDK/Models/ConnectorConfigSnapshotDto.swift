@@ -18,6 +18,7 @@ public struct ConnectorConfigSnapshotDto: Sendable, Codable, Hashable {
     public var schemaVersion: Int?
     public var lastModified: Date?
     public var modifiedBy: String?
+    /** Export-only; see DevSnapshotDto. */
     public var sysCreatedAt: Date?
     public var sysUpdatedAt: Date?
     public var lastSyncAttempt: Date?

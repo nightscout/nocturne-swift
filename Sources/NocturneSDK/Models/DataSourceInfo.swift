@@ -20,6 +20,7 @@ public struct DataSourceInfo: Sendable, Codable, Hashable {
     public var firstSeen: Date?
     public var entriesLast24h: Int?
     public var totalEntries: Int64?
+    public var totalEntriesWindowDays: Int?
     public var status: String?
     public var minutesSinceLastData: Int?
     public var icon: String?
@@ -27,7 +28,7 @@ public struct DataSourceInfo: Sendable, Codable, Hashable {
     public var lastSuccessfulSync: Date?
     public var isHealthy: Bool?
 
-    public init(id: String? = nil, name: String? = nil, deviceId: String? = nil, deviceIdHandle: SourceHandle? = nil, category: String? = nil, sourceType: String? = nil, description: String? = nil, lastSeen: Date? = nil, firstSeen: Date? = nil, entriesLast24h: Int? = nil, totalEntries: Int64? = nil, status: String? = nil, minutesSinceLastData: Int? = nil, icon: String? = nil, connectorId: String? = nil, lastSuccessfulSync: Date? = nil, isHealthy: Bool? = nil) {
+    public init(id: String? = nil, name: String? = nil, deviceId: String? = nil, deviceIdHandle: SourceHandle? = nil, category: String? = nil, sourceType: String? = nil, description: String? = nil, lastSeen: Date? = nil, firstSeen: Date? = nil, entriesLast24h: Int? = nil, totalEntries: Int64? = nil, totalEntriesWindowDays: Int? = nil, status: String? = nil, minutesSinceLastData: Int? = nil, icon: String? = nil, connectorId: String? = nil, lastSuccessfulSync: Date? = nil, isHealthy: Bool? = nil) {
         self.id = id
         self.name = name
         self.deviceId = deviceId
@@ -39,6 +40,7 @@ public struct DataSourceInfo: Sendable, Codable, Hashable {
         self.firstSeen = firstSeen
         self.entriesLast24h = entriesLast24h
         self.totalEntries = totalEntries
+        self.totalEntriesWindowDays = totalEntriesWindowDays
         self.status = status
         self.minutesSinceLastData = minutesSinceLastData
         self.icon = icon
@@ -59,6 +61,7 @@ public struct DataSourceInfo: Sendable, Codable, Hashable {
         case firstSeen
         case entriesLast24h
         case totalEntries
+        case totalEntriesWindowDays
         case status
         case minutesSinceLastData
         case icon
@@ -82,6 +85,7 @@ public struct DataSourceInfo: Sendable, Codable, Hashable {
         try container.encodeIfPresent(firstSeen, forKey: .firstSeen)
         try container.encodeIfPresent(entriesLast24h, forKey: .entriesLast24h)
         try container.encodeIfPresent(totalEntries, forKey: .totalEntries)
+        try container.encodeIfPresent(totalEntriesWindowDays, forKey: .totalEntriesWindowDays)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(minutesSinceLastData, forKey: .minutesSinceLastData)
         try container.encodeIfPresent(icon, forKey: .icon)

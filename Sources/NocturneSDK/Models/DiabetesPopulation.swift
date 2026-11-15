@@ -8,11 +8,12 @@
 import Foundation
 
 /**  */
-public enum DiabetesPopulation: Int, Sendable, Codable, CaseIterable {
+public enum DiabetesPopulation: Int, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case _0 = 0
     case _1 = 1
     case _2 = 2
     case _3 = 3
     case _4 = 4
     case _5 = 5
+    case unknownDefaultOpenApi = 11184809
 }

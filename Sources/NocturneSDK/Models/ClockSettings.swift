@@ -15,14 +15,22 @@ public struct ClockSettings: Sendable, Codable, Hashable {
     public var backgroundImage: String?
     public var backgroundOpacity: Int?
     public var screensaverMode: Bool?
+    public var glucoseUnits: String?
+    public var timeFormat: String?
+    public var showAlerts: Bool?
+    public var allowMarkSeen: Bool?
 
-    public init(bgColor: Bool? = nil, staleMinutes: Int? = nil, alwaysShowTime: Bool? = nil, backgroundImage: String? = nil, backgroundOpacity: Int? = nil, screensaverMode: Bool? = nil) {
+    public init(bgColor: Bool? = nil, staleMinutes: Int? = nil, alwaysShowTime: Bool? = nil, backgroundImage: String? = nil, backgroundOpacity: Int? = nil, screensaverMode: Bool? = nil, glucoseUnits: String? = nil, timeFormat: String? = nil, showAlerts: Bool? = nil, allowMarkSeen: Bool? = nil) {
         self.bgColor = bgColor
         self.staleMinutes = staleMinutes
         self.alwaysShowTime = alwaysShowTime
         self.backgroundImage = backgroundImage
         self.backgroundOpacity = backgroundOpacity
         self.screensaverMode = screensaverMode
+        self.glucoseUnits = glucoseUnits
+        self.timeFormat = timeFormat
+        self.showAlerts = showAlerts
+        self.allowMarkSeen = allowMarkSeen
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -32,6 +40,10 @@ public struct ClockSettings: Sendable, Codable, Hashable {
         case backgroundImage
         case backgroundOpacity
         case screensaverMode
+        case glucoseUnits
+        case timeFormat
+        case showAlerts
+        case allowMarkSeen
     }
 
     // Encodable protocol methods
@@ -44,6 +56,10 @@ public struct ClockSettings: Sendable, Codable, Hashable {
         try container.encodeIfPresent(backgroundImage, forKey: .backgroundImage)
         try container.encodeIfPresent(backgroundOpacity, forKey: .backgroundOpacity)
         try container.encodeIfPresent(screensaverMode, forKey: .screensaverMode)
+        try container.encodeIfPresent(glucoseUnits, forKey: .glucoseUnits)
+        try container.encodeIfPresent(timeFormat, forKey: .timeFormat)
+        try container.encodeIfPresent(showAlerts, forKey: .showAlerts)
+        try container.encodeIfPresent(allowMarkSeen, forKey: .allowMarkSeen)
     }
 }
 

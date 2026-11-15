@@ -16,13 +16,13 @@ public struct ReadAccessAuditDto: Sendable, Codable, Hashable {
     public var recordCount: Int?
     public var statusCode: Int?
     public var queryParameters: String?
-    public var subjectId: String?
-    public var subjectName: String?
+    public var actorSubjectId: String?
+    public var actorName: String?
     public var authType: String?
     public var ipAddress: String?
     public var credentialFingerprint: String?
 
-    public init(id: String? = nil, createdAt: Date? = nil, endpoint: String? = nil, entityType: String? = nil, recordCount: Int? = nil, statusCode: Int? = nil, queryParameters: String? = nil, subjectId: String? = nil, subjectName: String? = nil, authType: String? = nil, ipAddress: String? = nil, credentialFingerprint: String? = nil) {
+    public init(id: String? = nil, createdAt: Date? = nil, endpoint: String? = nil, entityType: String? = nil, recordCount: Int? = nil, statusCode: Int? = nil, queryParameters: String? = nil, actorSubjectId: String? = nil, actorName: String? = nil, authType: String? = nil, ipAddress: String? = nil, credentialFingerprint: String? = nil) {
         self.id = id
         self.createdAt = createdAt
         self.endpoint = endpoint
@@ -30,8 +30,8 @@ public struct ReadAccessAuditDto: Sendable, Codable, Hashable {
         self.recordCount = recordCount
         self.statusCode = statusCode
         self.queryParameters = queryParameters
-        self.subjectId = subjectId
-        self.subjectName = subjectName
+        self.actorSubjectId = actorSubjectId
+        self.actorName = actorName
         self.authType = authType
         self.ipAddress = ipAddress
         self.credentialFingerprint = credentialFingerprint
@@ -45,8 +45,8 @@ public struct ReadAccessAuditDto: Sendable, Codable, Hashable {
         case recordCount
         case statusCode
         case queryParameters
-        case subjectId
-        case subjectName
+        case actorSubjectId
+        case actorName
         case authType
         case ipAddress
         case credentialFingerprint
@@ -63,8 +63,8 @@ public struct ReadAccessAuditDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(recordCount, forKey: .recordCount)
         try container.encodeIfPresent(statusCode, forKey: .statusCode)
         try container.encodeIfPresent(queryParameters, forKey: .queryParameters)
-        try container.encodeIfPresent(subjectId, forKey: .subjectId)
-        try container.encodeIfPresent(subjectName, forKey: .subjectName)
+        try container.encodeIfPresent(actorSubjectId, forKey: .actorSubjectId)
+        try container.encodeIfPresent(actorName, forKey: .actorName)
         try container.encodeIfPresent(authType, forKey: .authType)
         try container.encodeIfPresent(ipAddress, forKey: .ipAddress)
         try container.encodeIfPresent(credentialFingerprint, forKey: .credentialFingerprint)

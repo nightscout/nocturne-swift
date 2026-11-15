@@ -13,6 +13,7 @@ public struct TenantMemberRoleEntityDto: Sendable, Codable, Hashable {
     public var id: String?
     public var tenantMemberId: String?
     public var tenantRoleId: String?
+    /** Export-only; see DevSnapshotDto. */
     public var sysCreatedAt: Date?
 
     public init(id: String? = nil, tenantMemberId: String? = nil, tenantRoleId: String? = nil, sysCreatedAt: Date? = nil) {

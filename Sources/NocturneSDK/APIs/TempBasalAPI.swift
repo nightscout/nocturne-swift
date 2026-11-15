@@ -23,7 +23,7 @@ open class TempBasalAPI {
     /**
      Create temp basals
      - POST /api/v4/insulin/temp-basals
-     - Items are processed in timestamp order, one at a time, so a batch may start a temp basal and cancel it later in the same request. Semantics are per-item, not all-or-nothing:              - A regular item carrying both `dataSource` and `syncIdentifier` updates the row already   matched by that pair; all others insert. - A cancel (`isCancel: true`) truncates the temp basal active at its timestamp by setting   the span end to that instant; with no active temp basal it is a no-op.              Validation failures reject the whole request with `400 Bad Request` before anything is persisted. The response contains every record written or truncated, in processing order.
+     - Write temp basal spans and cancels in bulk (max 1000). Items are processed in timestamp order, so a batch may start a temp basal and cancel it later in the same request. Processing is per item, not all-or-nothing. A regular item with both `dataSource` and `syncIdentifier` updates the existing row matching that pair; any other item is inserted. A regular item whose pair belongs to a span the owner deleted is skipped and left out of the response, even in a one-item array, which returns `201 Created` with an empty array. A cancel (`isCancel: true`) ends the temp basal active at its timestamp at that instant; with none active it does nothing. A validation failure rejects the whole request with `400 Bad Request` and stores nothing. The response lists every record written or truncated, in processing order.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -55,41 +55,43 @@ open class TempBasalAPI {
     /**
      Get all
      
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
-     - parameter limit: (query)  (optional, default to 100)
-     - parameter offset: (query)  (optional, default to 0)
-     - parameter sort: (query)  (optional, default to "timestamp_desc")
-     - parameter device: (query)  (optional)
-     - parameter source: (query)  (optional)
+     - parameter from: (query) Start of the time range to list. Unbounded when omitted. (optional)
+     - parameter to: (query) End of the time range to list. Unbounded when omitted. (optional)
+     - parameter limit: (query) Maximum number of spans to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
+     - parameter offset: (query) Number of spans to skip before the first one returned. Defaults to &#x60;0&#x60;. (optional, default to 0)
+     - parameter sort: (query) Order by span time: &#x60;timestamp_desc&#x60; or &#x60;timestamp_asc&#x60;. Defaults to &#x60;timestamp_desc&#x60;. (optional, default to "timestamp_desc")
+     - parameter device: (query) Return only spans from this device. (optional)
+     - parameter source: (query) Return only spans from this data source. (optional)
+     - parameter includeTotal: (query) Count every record in the range and return it as &#x60;pagination.total&#x60;. Defaults to &#x60;false&#x60;. (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedResponseOfTempBasal
      */
-    open class func tempBasalGetAll(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfTempBasal {
-        return try await tempBasalGetAllWithRequestBuilder(from: from, to: to, limit: limit, offset: offset, sort: sort, device: device, source: source, apiConfiguration: apiConfiguration).execute().body
+    open class func tempBasalGetAll(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, includeTotal: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfTempBasal {
+        return try await tempBasalGetAllWithRequestBuilder(from: from, to: to, limit: limit, offset: offset, sort: sort, device: device, source: source, includeTotal: includeTotal, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get all
      - GET /api/v4/insulin/temp-basals
-     - Never cached, per GetProfileSummary: a just-started or just-cancelled span must not be invisible until a cached list body expires.
+     - Lists temp basal spans, newest-first by default. Responses are never cached, so a just-started or just-cancelled span appears at once.
      - Bearer Token:
        - type: http
        - name: bearer
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
-     - parameter limit: (query)  (optional, default to 100)
-     - parameter offset: (query)  (optional, default to 0)
-     - parameter sort: (query)  (optional, default to "timestamp_desc")
-     - parameter device: (query)  (optional)
-     - parameter source: (query)  (optional)
+     - parameter from: (query) Start of the time range to list. Unbounded when omitted. (optional)
+     - parameter to: (query) End of the time range to list. Unbounded when omitted. (optional)
+     - parameter limit: (query) Maximum number of spans to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
+     - parameter offset: (query) Number of spans to skip before the first one returned. Defaults to &#x60;0&#x60;. (optional, default to 0)
+     - parameter sort: (query) Order by span time: &#x60;timestamp_desc&#x60; or &#x60;timestamp_asc&#x60;. Defaults to &#x60;timestamp_desc&#x60;. (optional, default to "timestamp_desc")
+     - parameter device: (query) Return only spans from this device. (optional)
+     - parameter source: (query) Return only spans from this data source. (optional)
+     - parameter includeTotal: (query) Count every record in the range and return it as &#x60;pagination.total&#x60;. Defaults to &#x60;false&#x60;. (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedResponseOfTempBasal> 
      */
-    open class func tempBasalGetAllWithRequestBuilder(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfTempBasal> {
+    open class func tempBasalGetAllWithRequestBuilder(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, includeTotal: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfTempBasal> {
         let localVariablePath = "/api/v4/insulin/temp-basals"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -103,6 +105,7 @@ open class TempBasalAPI {
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "device": (wrappedValue: device?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "source": (wrappedValue: source?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "includeTotal": (wrappedValue: includeTotal?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ]
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp1)
 

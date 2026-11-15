@@ -14,26 +14,19 @@ public struct NotificationThresholdDto: Sendable, Codable, Hashable {
     public var hours: Int?
     public var description: String?
     public var displayOrder: Int?
-    public var pushEnabled: Bool?
-    public var audioEnabled: Bool?
-    public var audioSound: String?
-    public var vibrateEnabled: Bool?
-    public var respectQuietHours: Bool?
     /** The managed alert rule that delivers this threshold. Null until the sync service has run, so callers must treat it as optional. */
     public var alertRuleId: String?
+    /** Minutes from a run's reference time (start, or the scheduled time for an Event tracker) at which this threshold fires, resolved by OffsetMinutes. Null when it can never fire. Hours is what the user typed; this is what it means. */
+    public var offsetMinutes: Int?
 
-    public init(id: String? = nil, urgency: NotificationUrgency? = nil, hours: Int? = nil, description: String? = nil, displayOrder: Int? = nil, pushEnabled: Bool? = nil, audioEnabled: Bool? = nil, audioSound: String? = nil, vibrateEnabled: Bool? = nil, respectQuietHours: Bool? = nil, alertRuleId: String? = nil) {
+    public init(id: String? = nil, urgency: NotificationUrgency? = nil, hours: Int? = nil, description: String? = nil, displayOrder: Int? = nil, alertRuleId: String? = nil, offsetMinutes: Int? = nil) {
         self.id = id
         self.urgency = urgency
         self.hours = hours
         self.description = description
         self.displayOrder = displayOrder
-        self.pushEnabled = pushEnabled
-        self.audioEnabled = audioEnabled
-        self.audioSound = audioSound
-        self.vibrateEnabled = vibrateEnabled
-        self.respectQuietHours = respectQuietHours
         self.alertRuleId = alertRuleId
+        self.offsetMinutes = offsetMinutes
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -42,12 +35,8 @@ public struct NotificationThresholdDto: Sendable, Codable, Hashable {
         case hours
         case description
         case displayOrder
-        case pushEnabled
-        case audioEnabled
-        case audioSound
-        case vibrateEnabled
-        case respectQuietHours
         case alertRuleId
+        case offsetMinutes
     }
 
     // Encodable protocol methods
@@ -59,12 +48,8 @@ public struct NotificationThresholdDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(hours, forKey: .hours)
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(displayOrder, forKey: .displayOrder)
-        try container.encodeIfPresent(pushEnabled, forKey: .pushEnabled)
-        try container.encodeIfPresent(audioEnabled, forKey: .audioEnabled)
-        try container.encodeIfPresent(audioSound, forKey: .audioSound)
-        try container.encodeIfPresent(vibrateEnabled, forKey: .vibrateEnabled)
-        try container.encodeIfPresent(respectQuietHours, forKey: .respectQuietHours)
         try container.encodeIfPresent(alertRuleId, forKey: .alertRuleId)
+        try container.encodeIfPresent(offsetMinutes, forKey: .offsetMinutes)
     }
 }
 

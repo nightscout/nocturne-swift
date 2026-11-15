@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum StateSpanCategory: String, Sendable, Codable, CaseIterable {
+public enum StateSpanCategory: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case pumpMode = "PumpMode"
     case pumpConnectivity = "PumpConnectivity"
     case _override = "Override"
@@ -18,4 +18,6 @@ public enum StateSpanCategory: String, Sendable, Codable, CaseIterable {
     case travel = "Travel"
     case dataExclusion = "DataExclusion"
     case temporaryTarget = "TemporaryTarget"
+    case motion = "Motion"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

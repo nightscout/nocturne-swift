@@ -8,9 +8,10 @@
 import Foundation
 
 /**  */
-public enum SleepSessionType: String, Sendable, Codable, CaseIterable {
+public enum SleepSessionType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case overnight = "Overnight"
     case nap = "Nap"
     case rest = "Rest"
     case unknown = "Unknown"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

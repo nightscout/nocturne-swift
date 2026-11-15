@@ -15,22 +15,22 @@ public struct MutationAuditDto: Sendable, Codable, Hashable {
     public var entityId: String?
     public var action: String?
     public var changes: String?
-    public var subjectId: String?
-    public var subjectName: String?
+    public var actorSubjectId: String?
+    public var actorName: String?
     public var authType: String?
     public var ipAddress: String?
     public var endpoint: String?
     public var reason: String?
 
-    public init(id: String? = nil, createdAt: Date? = nil, entityType: String? = nil, entityId: String? = nil, action: String? = nil, changes: String? = nil, subjectId: String? = nil, subjectName: String? = nil, authType: String? = nil, ipAddress: String? = nil, endpoint: String? = nil, reason: String? = nil) {
+    public init(id: String? = nil, createdAt: Date? = nil, entityType: String? = nil, entityId: String? = nil, action: String? = nil, changes: String? = nil, actorSubjectId: String? = nil, actorName: String? = nil, authType: String? = nil, ipAddress: String? = nil, endpoint: String? = nil, reason: String? = nil) {
         self.id = id
         self.createdAt = createdAt
         self.entityType = entityType
         self.entityId = entityId
         self.action = action
         self.changes = changes
-        self.subjectId = subjectId
-        self.subjectName = subjectName
+        self.actorSubjectId = actorSubjectId
+        self.actorName = actorName
         self.authType = authType
         self.ipAddress = ipAddress
         self.endpoint = endpoint
@@ -44,8 +44,8 @@ public struct MutationAuditDto: Sendable, Codable, Hashable {
         case entityId
         case action
         case changes
-        case subjectId
-        case subjectName
+        case actorSubjectId
+        case actorName
         case authType
         case ipAddress
         case endpoint
@@ -62,8 +62,8 @@ public struct MutationAuditDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(entityId, forKey: .entityId)
         try container.encodeIfPresent(action, forKey: .action)
         try container.encodeIfPresent(changes, forKey: .changes)
-        try container.encodeIfPresent(subjectId, forKey: .subjectId)
-        try container.encodeIfPresent(subjectName, forKey: .subjectName)
+        try container.encodeIfPresent(actorSubjectId, forKey: .actorSubjectId)
+        try container.encodeIfPresent(actorName, forKey: .actorName)
         try container.encodeIfPresent(authType, forKey: .authType)
         try container.encodeIfPresent(ipAddress, forKey: .ipAddress)
         try container.encodeIfPresent(endpoint, forKey: .endpoint)

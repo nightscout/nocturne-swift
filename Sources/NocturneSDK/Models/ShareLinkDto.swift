@@ -12,28 +12,40 @@ public struct ShareLinkDto: Sendable, Codable, Hashable {
 
     /** Whether a public share link is currently active. */
     public var enabled: Bool?
-    /** The full share URL, returned only by the call that generates the link. Null on every other call, including when Enabled is true: only the token's digest is stored, so the URL cannot be reproduced afterwards. Generating a new link is the only way to see one again. */
+    /** The full share URL, carrying the token in the clear. Returned only by the calls that generate and reveal the link, never by the plain read, so it does not ride along on every page load of the sharing settings. */
     public var url: String?
+    /** The share URL with the token replaced by bullets, e.g. https://••••••••••••••••.share.example.com. Null when no link is active. Shows the owner that a link exists, and its shape, without the secret crossing the wire. */
+    public var redactedUrl: String?
+    /** Whether Url can be produced for this link. A reveal reports this from what it actually found; every other call can only read the columns, which cannot see the changed-key case, so a true here is a guess until a reveal settles it. The cases are listed on TenantRecord.ShareTokenEncrypted. */
+    public var canReveal: Bool?
     /** When true the public view shows full history; when false, only the last 24 hours. */
     public var fullHistory: Bool?
     /** The data categories anonymous viewers can see, as read-permission atoms (e.g. glucose.read). A subset of PublicShareScopes. Empty means the link is live but nothing is shared yet. */
     public var scopes: [String]?
+    /** Every category a public link may share: PublicShareScopes. */
+    public var shareableScopes: [String]?
     /** When the share link was last accessed, or null if never (or not yet recorded). */
     public var lastAccessedAt: Date?
 
-    public init(enabled: Bool? = nil, url: String? = nil, fullHistory: Bool? = nil, scopes: [String]? = nil, lastAccessedAt: Date? = nil) {
+    public init(enabled: Bool? = nil, url: String? = nil, redactedUrl: String? = nil, canReveal: Bool? = nil, fullHistory: Bool? = nil, scopes: [String]? = nil, shareableScopes: [String]? = nil, lastAccessedAt: Date? = nil) {
         self.enabled = enabled
         self.url = url
+        self.redactedUrl = redactedUrl
+        self.canReveal = canReveal
         self.fullHistory = fullHistory
         self.scopes = scopes
+        self.shareableScopes = shareableScopes
         self.lastAccessedAt = lastAccessedAt
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case enabled
         case url
+        case redactedUrl
+        case canReveal
         case fullHistory
         case scopes
+        case shareableScopes
         case lastAccessedAt
     }
 
@@ -43,8 +55,11 @@ public struct ShareLinkDto: Sendable, Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(enabled, forKey: .enabled)
         try container.encodeIfPresent(url, forKey: .url)
+        try container.encodeIfPresent(redactedUrl, forKey: .redactedUrl)
+        try container.encodeIfPresent(canReveal, forKey: .canReveal)
         try container.encodeIfPresent(fullHistory, forKey: .fullHistory)
         try container.encodeIfPresent(scopes, forKey: .scopes)
+        try container.encodeIfPresent(shareableScopes, forKey: .shareableScopes)
         try container.encodeIfPresent(lastAccessedAt, forKey: .lastAccessedAt)
     }
 }

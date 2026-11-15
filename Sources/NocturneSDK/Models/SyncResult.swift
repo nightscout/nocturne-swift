@@ -11,27 +11,33 @@ public struct SyncResult: Sendable, Codable, Hashable {
 
     public var success: Bool?
     public var message: String?
-    public var startTime: Date?
-    public var endTime: Date?
+    public var alreadyRunning: Bool?
     public var itemsSynced: [String: Int]?
+    public var itemsSkipped: Int?
+    public var itemsRefused: Int?
     public var errors: [String]?
+    public var durationMs: Int64?
 
-    public init(success: Bool? = nil, message: String? = nil, startTime: Date? = nil, endTime: Date? = nil, itemsSynced: [String: Int]? = nil, errors: [String]? = nil) {
+    public init(success: Bool? = nil, message: String? = nil, alreadyRunning: Bool? = nil, itemsSynced: [String: Int]? = nil, itemsSkipped: Int? = nil, itemsRefused: Int? = nil, errors: [String]? = nil, durationMs: Int64? = nil) {
         self.success = success
         self.message = message
-        self.startTime = startTime
-        self.endTime = endTime
+        self.alreadyRunning = alreadyRunning
         self.itemsSynced = itemsSynced
+        self.itemsSkipped = itemsSkipped
+        self.itemsRefused = itemsRefused
         self.errors = errors
+        self.durationMs = durationMs
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case success
         case message
-        case startTime
-        case endTime
+        case alreadyRunning
         case itemsSynced
+        case itemsSkipped
+        case itemsRefused
         case errors
+        case durationMs
     }
 
     // Encodable protocol methods
@@ -40,10 +46,12 @@ public struct SyncResult: Sendable, Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(success, forKey: .success)
         try container.encodeIfPresent(message, forKey: .message)
-        try container.encodeIfPresent(startTime, forKey: .startTime)
-        try container.encodeIfPresent(endTime, forKey: .endTime)
+        try container.encodeIfPresent(alreadyRunning, forKey: .alreadyRunning)
         try container.encodeIfPresent(itemsSynced, forKey: .itemsSynced)
+        try container.encodeIfPresent(itemsSkipped, forKey: .itemsSkipped)
+        try container.encodeIfPresent(itemsRefused, forKey: .itemsRefused)
         try container.encodeIfPresent(errors, forKey: .errors)
+        try container.encodeIfPresent(durationMs, forKey: .durationMs)
     }
 }
 

@@ -8,9 +8,10 @@
 import Foundation
 
 /**  */
-public enum UploaderPlatform: String, Sendable, Codable, CaseIterable {
+public enum UploaderPlatform: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case android = "android"
     case ios = "ios"
     case desktop = "desktop"
     case web = "web"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

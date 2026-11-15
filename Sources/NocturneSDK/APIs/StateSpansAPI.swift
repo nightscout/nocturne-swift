@@ -10,6 +10,49 @@ import Foundation
 open class StateSpansAPI {
 
     /**
+     Bulk restore state spans
+     
+     - parameter requestBody: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: StateSpanBulkRestoreResult
+     */
+    open class func stateSpansBulkRestoreStateSpans(requestBody: [String], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> StateSpanBulkRestoreResult {
+        return try await stateSpansBulkRestoreStateSpansWithRequestBuilder(requestBody: requestBody, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Bulk restore state spans
+     - POST /api/v4/state-spans/restore
+     - Restore soft-deleted state spans by the IDs reads return for them. IDs that match no soft-deleted span are ignored. A span left deleted because a live span holds its original id is listed in conflicts by the ID sent; the rest of the batch is still restored. Needs write access to the category of every span restored.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter requestBody: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<StateSpanBulkRestoreResult> 
+     */
+    open class func stateSpansBulkRestoreStateSpansWithRequestBuilder(requestBody: [String], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<StateSpanBulkRestoreResult> {
+        let localVariablePath = "/api/v4/state-spans/restore"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: requestBody, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<StateSpanBulkRestoreResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Create state span
      
      - parameter createStateSpanRequest: (body)  
@@ -116,7 +159,7 @@ open class StateSpansAPI {
     /**
      Get activities
      - GET /api/v4/state-spans/activities
-     - This read merges three categories in memory before it paginates, so the page is bounded by ClampMergedPage rather than the plain page-size ceiling, and each category is fetched only as deep as the requested page reaches.
+     - Get all activity state spans (exercise, illness, travel). The three categories are merged before paging, so offset plus limit is capped at a lower ceiling than on other lists, and a page near it can hold fewer spans than asked for.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -394,65 +437,6 @@ open class StateSpansAPI {
     }
 
     /**
-     Get profiles
-     
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
-     - parameter limit: (query)  (optional, default to 100)
-     - parameter offset: (query)  (optional, default to 0)
-     - parameter sort: (query)  (optional, default to "timestamp_desc")
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: PaginatedResponseOfStateSpan
-     */
-    open class func stateSpansGetProfiles(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfStateSpan {
-        return try await stateSpansGetProfilesWithRequestBuilder(from: from, to: to, limit: limit, offset: offset, sort: sort, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     Get profiles
-     - GET /api/v4/state-spans/profiles
-     - Get profile state spans
-     - Bearer Token:
-       - type: http
-       - name: bearer
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
-     - parameter limit: (query)  (optional, default to 100)
-     - parameter offset: (query)  (optional, default to 0)
-     - parameter sort: (query)  (optional, default to "timestamp_desc")
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<PaginatedResponseOfStateSpan> 
-     */
-    open class func stateSpansGetProfilesWithRequestBuilder(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfStateSpan> {
-        let localVariablePath = "/api/v4/state-spans/profiles"
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters: [String: any Sendable]? = nil
-
-        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        let _qp6: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
-            "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-            "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
-        ]
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp6)
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfStateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
-
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
-    }
-
-    /**
      Get pump modes
      
      - parameter from: (query)  (optional)
@@ -491,14 +475,14 @@ open class StateSpansAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        let _qp7: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
+        let _qp6: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ]
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp7)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp6)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -579,7 +563,7 @@ open class StateSpansAPI {
     /**
      Get state spans
      - GET /api/v4/state-spans
-     - Never cached, per GetProfileSummary: a temporary target, override, or data-exclusion window the caller just set must not be invisible until a cached list body expires — and an exclusion window decides whether readings count towards analytics, so a stale one silently changes reported statistics.
+     - Query all state spans with optional filtering. Returns only categories the caller may read: asking for one it may not read is refused, and omitting the category returns every one it may read. The response is never cached.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -604,7 +588,7 @@ open class StateSpansAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        let _qp8: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
+        let _qp7: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "category": (wrappedValue: category?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "state": (wrappedValue: state?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
@@ -615,7 +599,7 @@ open class StateSpansAPI {
             "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ]
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp8)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp7)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -667,14 +651,14 @@ open class StateSpansAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        let _qp9: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
+        let _qp8: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ]
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp9)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp8)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -726,14 +710,14 @@ open class StateSpansAPI {
         let localVariableParameters: [String: any Sendable]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        let _qp10: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
+        let _qp9: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
             "from": (wrappedValue: from?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "to": (wrappedValue: to?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "limit": (wrappedValue: limit?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "offset": (wrappedValue: offset?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ]
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp10)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp9)
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -744,6 +728,52 @@ open class StateSpansAPI {
         let localVariableRequestBuilder: RequestBuilder<PaginatedResponseOfStateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Restore state span
+     
+     - parameter id: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: StateSpan
+     */
+    open class func stateSpansRestoreStateSpan(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> StateSpan {
+        return try await stateSpansRestoreStateSpanWithRequestBuilder(id: id, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Restore state span
+     - POST /api/v4/state-spans/{id}/restore
+     - Restore a soft-deleted state span by the ID reads return for it. Returns 404 Not Found when no soft-deleted span has the ID, and 409 Conflict (the span stays deleted) when a live span holds its original id.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter id: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<StateSpan> 
+     */
+    open class func stateSpansRestoreStateSpanWithRequestBuilder(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<StateSpan> {
+        var localVariablePath = "/api/v4/state-spans/{id}/restore"
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<StateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**

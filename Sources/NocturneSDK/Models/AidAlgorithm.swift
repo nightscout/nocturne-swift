@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum AidAlgorithm: String, Sendable, Codable, CaseIterable {
+public enum AidAlgorithm: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case openAps = "OpenAps"
     case androidAps = "AndroidAps"
     case loop = "Loop"
@@ -20,4 +20,5 @@ public enum AidAlgorithm: String, Sendable, Codable, CaseIterable {
     case medtronicSmartGuard = "MedtronicSmartGuard"
     case _none = "None"
     case unknown = "Unknown"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

@@ -9,10 +9,10 @@ import Foundation
 
 public struct Activity: Sendable, Codable, Hashable {
 
-    public var id: String?
-    public var createdAt: String?
     public var mills: Int64?
     public var utcOffset: Int?
+    public var id: String?
+    public var createdAt: String?
     public var timestamp: Int64?
     public var type: String?
     public var description: String?
@@ -28,11 +28,11 @@ public struct Activity: Sendable, Codable, Hashable {
     public var name: String?
     public var dataSource: String?
 
-    public init(id: String? = nil, createdAt: String? = nil, mills: Int64? = nil, utcOffset: Int? = nil, timestamp: Int64? = nil, type: String? = nil, description: String? = nil, duration: Double? = nil, intensity: String? = nil, notes: String? = nil, enteredBy: String? = nil, dateString: String? = nil, distance: Double? = nil, distanceUnits: String? = nil, energy: Double? = nil, energyUnits: String? = nil, name: String? = nil, dataSource: String? = nil) {
-        self.id = id
-        self.createdAt = createdAt
+    public init(mills: Int64? = nil, utcOffset: Int? = nil, id: String? = nil, createdAt: String? = nil, timestamp: Int64? = nil, type: String? = nil, description: String? = nil, duration: Double? = nil, intensity: String? = nil, notes: String? = nil, enteredBy: String? = nil, dateString: String? = nil, distance: Double? = nil, distanceUnits: String? = nil, energy: Double? = nil, energyUnits: String? = nil, name: String? = nil, dataSource: String? = nil) {
         self.mills = mills
         self.utcOffset = utcOffset
+        self.id = id
+        self.createdAt = createdAt
         self.timestamp = timestamp
         self.type = type
         self.description = description
@@ -50,10 +50,10 @@ public struct Activity: Sendable, Codable, Hashable {
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
-        case id
-        case createdAt
         case mills
         case utcOffset
+        case id = "_id"
+        case createdAt = "created_at"
         case timestamp
         case type
         case description
@@ -74,10 +74,10 @@ public struct Activity: Sendable, Codable, Hashable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(mills, forKey: .mills)
         try container.encodeIfPresent(utcOffset, forKey: .utcOffset)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(timestamp, forKey: .timestamp)
         try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(description, forKey: .description)
@@ -95,5 +95,3 @@ public struct Activity: Sendable, Codable, Hashable {
     }
 }
 
-
-extension Activity: Identifiable {}

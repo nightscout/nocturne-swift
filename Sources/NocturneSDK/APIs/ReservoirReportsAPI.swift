@@ -23,7 +23,7 @@ open class ReservoirReportsAPI {
     /**
      Create
      - POST /api/v4/reservoir/reports
-     - Writes pump_snapshots and, for a fill, device_events — both the devices category in GovernedTables, matching the scope PumpSnapshotController and DeviceEventController require. The class-level [Authorize] alone is satisfied by read-only credentials such as a guest-link session.
+     - Report a known reservoir value: a spot reading of the pump's current level, or the amount just filled into a fresh reservoir/pod. A fill report also records a reservoir-change device event, which resets reservoir-age (IAGE) tracking. Requires the devices read-write scope.
      - Bearer Token:
        - type: http
        - name: bearer

@@ -16,12 +16,13 @@ public struct ExtendedGlucoseAnalytics: Sendable, Codable, Hashable {
     public var reliability: StatisticReliability?
     public var time: AnalysisTime?
     public var clinicalAssessment: ClinicalTargetAssessment?
+    public var timeZoneUnavailableReason: TimeZoneUnavailableReason?
     public var gmi: GlucoseManagementIndicator?
     public var gri: GlycemicRiskIndex?
     public var dataSufficiency: DataSufficiencyAssessment?
     public var treatmentSummary: TreatmentSummary?
 
-    public init(basicStats: BasicGlucoseStats? = nil, timeInRange: TimeInRangeMetrics? = nil, glycemicVariability: GlycemicVariability? = nil, dataQuality: DataQuality? = nil, reliability: StatisticReliability? = nil, time: AnalysisTime? = nil, clinicalAssessment: ClinicalTargetAssessment? = nil, gmi: GlucoseManagementIndicator? = nil, gri: GlycemicRiskIndex? = nil, dataSufficiency: DataSufficiencyAssessment? = nil, treatmentSummary: TreatmentSummary? = nil) {
+    public init(basicStats: BasicGlucoseStats? = nil, timeInRange: TimeInRangeMetrics? = nil, glycemicVariability: GlycemicVariability? = nil, dataQuality: DataQuality? = nil, reliability: StatisticReliability? = nil, time: AnalysisTime? = nil, clinicalAssessment: ClinicalTargetAssessment? = nil, timeZoneUnavailableReason: TimeZoneUnavailableReason? = nil, gmi: GlucoseManagementIndicator? = nil, gri: GlycemicRiskIndex? = nil, dataSufficiency: DataSufficiencyAssessment? = nil, treatmentSummary: TreatmentSummary? = nil) {
         self.basicStats = basicStats
         self.timeInRange = timeInRange
         self.glycemicVariability = glycemicVariability
@@ -29,6 +30,7 @@ public struct ExtendedGlucoseAnalytics: Sendable, Codable, Hashable {
         self.reliability = reliability
         self.time = time
         self.clinicalAssessment = clinicalAssessment
+        self.timeZoneUnavailableReason = timeZoneUnavailableReason
         self.gmi = gmi
         self.gri = gri
         self.dataSufficiency = dataSufficiency
@@ -43,6 +45,7 @@ public struct ExtendedGlucoseAnalytics: Sendable, Codable, Hashable {
         case reliability
         case time
         case clinicalAssessment
+        case timeZoneUnavailableReason
         case gmi
         case gri
         case dataSufficiency
@@ -60,6 +63,7 @@ public struct ExtendedGlucoseAnalytics: Sendable, Codable, Hashable {
         try container.encodeIfPresent(reliability, forKey: .reliability)
         try container.encodeIfPresent(time, forKey: .time)
         try container.encodeIfPresent(clinicalAssessment, forKey: .clinicalAssessment)
+        try container.encodeIfPresent(timeZoneUnavailableReason, forKey: .timeZoneUnavailableReason)
         try container.encodeIfPresent(gmi, forKey: .gmi)
         try container.encodeIfPresent(gri, forKey: .gri)
         try container.encodeIfPresent(dataSufficiency, forKey: .dataSufficiency)

@@ -14,6 +14,7 @@ public struct GlycemicVariability: Sendable, Codable, Hashable {
     public var meanAmplitudeGlycemicExcursions: Double?
     public var continuousOverlappingNetGlycemicAction: Double?
     public var averageDailyRiskRange: Double?
+    public var timeZoneUnavailableReason: TimeZoneUnavailableReason?
     public var labilityIndex: Double?
     public var jIndex: Double?
     public var highBloodGlucoseIndex: Double?
@@ -21,16 +22,22 @@ public struct GlycemicVariability: Sendable, Codable, Hashable {
     public var glycemicVariabilityIndex: Double?
     public var patientGlycemicStatus: Double?
     public var estimatedA1c: Double?
+    public var estimatedA1cDisplay: A1cDisplayValue?
+    public var a1cTarget: A1cDisplayValue?
+    public var estimatedA1cMeetsTarget: A1cTargetState?
+    public var coefficientOfVariationTarget: Double?
+    public var coefficientOfVariationStatus: GlycemicVariabilityStatus?
     public var gmi: GlucoseManagementIndicator?
     public var meanTotalDailyChange: Double?
     public var timeInFluctuation: Double?
 
-    public init(coefficientOfVariation: Double? = nil, standardDeviation: Double? = nil, meanAmplitudeGlycemicExcursions: Double? = nil, continuousOverlappingNetGlycemicAction: Double? = nil, averageDailyRiskRange: Double? = nil, labilityIndex: Double? = nil, jIndex: Double? = nil, highBloodGlucoseIndex: Double? = nil, lowBloodGlucoseIndex: Double? = nil, glycemicVariabilityIndex: Double? = nil, patientGlycemicStatus: Double? = nil, estimatedA1c: Double? = nil, gmi: GlucoseManagementIndicator? = nil, meanTotalDailyChange: Double? = nil, timeInFluctuation: Double? = nil) {
+    public init(coefficientOfVariation: Double? = nil, standardDeviation: Double? = nil, meanAmplitudeGlycemicExcursions: Double? = nil, continuousOverlappingNetGlycemicAction: Double? = nil, averageDailyRiskRange: Double? = nil, timeZoneUnavailableReason: TimeZoneUnavailableReason? = nil, labilityIndex: Double? = nil, jIndex: Double? = nil, highBloodGlucoseIndex: Double? = nil, lowBloodGlucoseIndex: Double? = nil, glycemicVariabilityIndex: Double? = nil, patientGlycemicStatus: Double? = nil, estimatedA1c: Double? = nil, estimatedA1cDisplay: A1cDisplayValue? = nil, a1cTarget: A1cDisplayValue? = nil, estimatedA1cMeetsTarget: A1cTargetState? = nil, coefficientOfVariationTarget: Double? = nil, coefficientOfVariationStatus: GlycemicVariabilityStatus? = nil, gmi: GlucoseManagementIndicator? = nil, meanTotalDailyChange: Double? = nil, timeInFluctuation: Double? = nil) {
         self.coefficientOfVariation = coefficientOfVariation
         self.standardDeviation = standardDeviation
         self.meanAmplitudeGlycemicExcursions = meanAmplitudeGlycemicExcursions
         self.continuousOverlappingNetGlycemicAction = continuousOverlappingNetGlycemicAction
         self.averageDailyRiskRange = averageDailyRiskRange
+        self.timeZoneUnavailableReason = timeZoneUnavailableReason
         self.labilityIndex = labilityIndex
         self.jIndex = jIndex
         self.highBloodGlucoseIndex = highBloodGlucoseIndex
@@ -38,6 +45,11 @@ public struct GlycemicVariability: Sendable, Codable, Hashable {
         self.glycemicVariabilityIndex = glycemicVariabilityIndex
         self.patientGlycemicStatus = patientGlycemicStatus
         self.estimatedA1c = estimatedA1c
+        self.estimatedA1cDisplay = estimatedA1cDisplay
+        self.a1cTarget = a1cTarget
+        self.estimatedA1cMeetsTarget = estimatedA1cMeetsTarget
+        self.coefficientOfVariationTarget = coefficientOfVariationTarget
+        self.coefficientOfVariationStatus = coefficientOfVariationStatus
         self.gmi = gmi
         self.meanTotalDailyChange = meanTotalDailyChange
         self.timeInFluctuation = timeInFluctuation
@@ -49,6 +61,7 @@ public struct GlycemicVariability: Sendable, Codable, Hashable {
         case meanAmplitudeGlycemicExcursions
         case continuousOverlappingNetGlycemicAction
         case averageDailyRiskRange
+        case timeZoneUnavailableReason
         case labilityIndex
         case jIndex
         case highBloodGlucoseIndex
@@ -56,6 +69,11 @@ public struct GlycemicVariability: Sendable, Codable, Hashable {
         case glycemicVariabilityIndex
         case patientGlycemicStatus
         case estimatedA1c
+        case estimatedA1cDisplay
+        case a1cTarget
+        case estimatedA1cMeetsTarget
+        case coefficientOfVariationTarget
+        case coefficientOfVariationStatus
         case gmi
         case meanTotalDailyChange
         case timeInFluctuation
@@ -70,6 +88,7 @@ public struct GlycemicVariability: Sendable, Codable, Hashable {
         try container.encodeIfPresent(meanAmplitudeGlycemicExcursions, forKey: .meanAmplitudeGlycemicExcursions)
         try container.encodeIfPresent(continuousOverlappingNetGlycemicAction, forKey: .continuousOverlappingNetGlycemicAction)
         try container.encodeIfPresent(averageDailyRiskRange, forKey: .averageDailyRiskRange)
+        try container.encodeIfPresent(timeZoneUnavailableReason, forKey: .timeZoneUnavailableReason)
         try container.encodeIfPresent(labilityIndex, forKey: .labilityIndex)
         try container.encodeIfPresent(jIndex, forKey: .jIndex)
         try container.encodeIfPresent(highBloodGlucoseIndex, forKey: .highBloodGlucoseIndex)
@@ -77,6 +96,11 @@ public struct GlycemicVariability: Sendable, Codable, Hashable {
         try container.encodeIfPresent(glycemicVariabilityIndex, forKey: .glycemicVariabilityIndex)
         try container.encodeIfPresent(patientGlycemicStatus, forKey: .patientGlycemicStatus)
         try container.encodeIfPresent(estimatedA1c, forKey: .estimatedA1c)
+        try container.encodeIfPresent(estimatedA1cDisplay, forKey: .estimatedA1cDisplay)
+        try container.encodeIfPresent(a1cTarget, forKey: .a1cTarget)
+        try container.encodeIfPresent(estimatedA1cMeetsTarget, forKey: .estimatedA1cMeetsTarget)
+        try container.encodeIfPresent(coefficientOfVariationTarget, forKey: .coefficientOfVariationTarget)
+        try container.encodeIfPresent(coefficientOfVariationStatus, forKey: .coefficientOfVariationStatus)
         try container.encodeIfPresent(gmi, forKey: .gmi)
         try container.encodeIfPresent(meanTotalDailyChange, forKey: .meanTotalDailyChange)
         try container.encodeIfPresent(timeInFluctuation, forKey: .timeInFluctuation)

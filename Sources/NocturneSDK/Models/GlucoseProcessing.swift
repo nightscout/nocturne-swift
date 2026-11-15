@@ -8,7 +8,8 @@
 import Foundation
 
 /**  */
-public enum GlucoseProcessing: String, Sendable, Codable, CaseIterable {
+public enum GlucoseProcessing: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case smoothed = "Smoothed"
     case unsmoothed = "Unsmoothed"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

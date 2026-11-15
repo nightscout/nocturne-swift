@@ -8,11 +8,12 @@
 import Foundation
 
 /**  */
-public enum GlucoseManagementIndicatorLevel: String, Sendable, Codable, CaseIterable {
+public enum GlucoseManagementIndicatorLevel: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case nonDiabetic = "NonDiabetic"
     case prediabetes = "Prediabetes"
     case wellControlled = "WellControlled"
     case moderateControl = "ModerateControl"
     case suboptimalControl = "SuboptimalControl"
     case poorControl = "PoorControl"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

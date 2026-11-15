@@ -10,13 +10,22 @@ import Foundation
 public struct TenantSettingsDto: Sendable, Codable, Hashable {
 
     public var allowPublicDocs: Bool?
+    public var slug: String?
+    public var displayName: String?
+    public var sysCreatedAt: Date?
 
-    public init(allowPublicDocs: Bool? = nil) {
+    public init(allowPublicDocs: Bool? = nil, slug: String? = nil, displayName: String? = nil, sysCreatedAt: Date? = nil) {
         self.allowPublicDocs = allowPublicDocs
+        self.slug = slug
+        self.displayName = displayName
+        self.sysCreatedAt = sysCreatedAt
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case allowPublicDocs
+        case slug
+        case displayName
+        case sysCreatedAt
     }
 
     // Encodable protocol methods
@@ -24,6 +33,9 @@ public struct TenantSettingsDto: Sendable, Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(allowPublicDocs, forKey: .allowPublicDocs)
+        try container.encodeIfPresent(slug, forKey: .slug)
+        try container.encodeIfPresent(displayName, forKey: .displayName)
+        try container.encodeIfPresent(sysCreatedAt, forKey: .sysCreatedAt)
     }
 }
 

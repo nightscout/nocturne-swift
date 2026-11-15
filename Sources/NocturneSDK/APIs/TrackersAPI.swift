@@ -24,7 +24,7 @@ open class TrackersAPI {
     /**
      Ack instance
      - POST /api/v4/trackers/instances/{id}/ack
-     - Acknowledge a tracker notification. SnoozeMins is stored on the instance (pill display/legacy clients); the alert-engine side is a plain acknowledgement of the managed rules' open excursions — re-notification is the threshold ladder's and alert_state escalation rules' job, not a snooze re-fire.
+     - Acknowledge a tracker notification. SnoozeMins is stored on the instance and broadcast to the tenant's clients; the alert-engine side is a plain acknowledgement of the managed rules' open excursions — re-notification is the threshold ladder's and alert_state escalation rules' job, not a snooze re-fire.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -390,7 +390,7 @@ open class TrackersAPI {
     /**
      Get active instances
      - GET /api/v4/trackers/instances
-     - Get active tracker instances
+     - Get the tenant's active tracker instances, empty for a caller that ReadsNoTrackers.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -478,7 +478,7 @@ open class TrackersAPI {
     /**
      Get definitions
      - GET /api/v4/trackers/definitions
-     - Get all tracker definitions: the caller's own plus any Public-visibility tracker. Gated by the fallback authorization policy (no [AllowAnonymous]): a bare unauthenticated request on a tenant subdomain carries an empty permission trie and is rejected, so a private tenant exposes no tracker anonymously. A public-share subject is admitted by the policy but reads nothing here — tracker tables are not in ShareDataCategories, so the share RLS policy hides them.
+     - Get the tenant's tracker definitions. Gated by the fallback authorization policy (no [AllowAnonymous]), and empty for a caller that ReadsNoTrackers.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -511,6 +511,88 @@ open class TrackersAPI {
     }
 
     /**
+     Get device event types
+     
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [String]
+     */
+    open class func trackersGetDeviceEventTypes(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [String] {
+        return try await trackersGetDeviceEventTypesWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get device event types
+     - GET /api/v4/trackers/device-event-types
+     - The device event types a definition can create when a run starts or completes: the Nightscout names that map to a device event.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[String]> 
+     */
+    open class func trackersGetDeviceEventTypesWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[String]> {
+        let localVariablePath = "/api/v4/trackers/device-event-types"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[String]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Get end event types
+     
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [String]
+     */
+    open class func trackersGetEndEventTypes(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [String] {
+        return try await trackersGetEndEventTypesWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get end event types
+     - GET /api/v4/trackers/end-event-types
+     - The device event types a tracker can be set to end on, completing its run without starting another.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[String]> 
+     */
+    open class func trackersGetEndEventTypesWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[String]> {
+        let localVariablePath = "/api/v4/trackers/end-event-types"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[String]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Get instance history
      
      - parameter limit: (query)  (optional, default to 100)
@@ -524,7 +606,7 @@ open class TrackersAPI {
     /**
      Get instance history
      - GET /api/v4/trackers/instances/history
-     - Get completed tracker instances (history). Matches GetActiveInstances and GetUpcomingInstances: a caller carrying no subject reads the public-visibility instances only, and the fallback authorization policy (no [AllowAnonymous]) rejects a bare unauthenticated request, so a private tenant exposes no history anonymously. The public share subject is still admitted by the policy, so the calendar keeps rendering history alongside the active and upcoming instances — [Authorize] is what 401'd it.
+     - Get completed tracker instances (history), empty for a caller that ReadsNoTrackers. Gated by the fallback policy rather than [Authorize], as GetActiveInstances and GetUpcomingInstances are, so a share's calendar reads an empty list rather than a 401.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -569,7 +651,7 @@ open class TrackersAPI {
     /**
      Get presets
      - GET /api/v4/trackers/presets
-     - Get all presets for the current user
+     - Get the tenant's presets, empty for a caller that ReadsNoTrackers.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -598,6 +680,47 @@ open class TrackersAPI {
     }
 
     /**
+     Get trigger event types
+     
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [String]
+     */
+    open class func trackersGetTriggerEventTypes(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [String] {
+        return try await trackersGetTriggerEventTypesWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get trigger event types
+     - GET /api/v4/trackers/trigger-event-types
+     - The device event types a tracker can be set to restart on.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[String]> 
+     */
+    open class func trackersGetTriggerEventTypesWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[String]> {
+        let localVariablePath = "/api/v4/trackers/trigger-event-types"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[String]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Get upcoming instances
      
      - parameter from: (query)  (optional)
@@ -612,7 +735,7 @@ open class TrackersAPI {
     /**
      Get upcoming instances
      - GET /api/v4/trackers/instances/upcoming
-     - Get upcoming tracker expirations for calendar
+     - Get upcoming tracker expirations for calendar, empty for a caller that ReadsNoTrackers.
      - Bearer Token:
        - type: http
        - name: bearer

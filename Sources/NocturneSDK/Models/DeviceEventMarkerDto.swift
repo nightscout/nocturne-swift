@@ -14,13 +14,15 @@ public struct DeviceEventMarkerDto: Sendable, Codable, Hashable {
     public var notes: String?
     public var treatmentId: String?
     public var color: ChartColor?
+    public var isInferred: Bool?
 
-    public init(time: Int64? = nil, eventType: DeviceEventType? = nil, notes: String? = nil, treatmentId: String? = nil, color: ChartColor? = nil) {
+    public init(time: Int64? = nil, eventType: DeviceEventType? = nil, notes: String? = nil, treatmentId: String? = nil, color: ChartColor? = nil, isInferred: Bool? = nil) {
         self.time = time
         self.eventType = eventType
         self.notes = notes
         self.treatmentId = treatmentId
         self.color = color
+        self.isInferred = isInferred
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -29,6 +31,7 @@ public struct DeviceEventMarkerDto: Sendable, Codable, Hashable {
         case notes
         case treatmentId
         case color
+        case isInferred
     }
 
     // Encodable protocol methods
@@ -40,6 +43,7 @@ public struct DeviceEventMarkerDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(notes, forKey: .notes)
         try container.encodeIfPresent(treatmentId, forKey: .treatmentId)
         try container.encodeIfPresent(color, forKey: .color)
+        try container.encodeIfPresent(isInferred, forKey: .isInferred)
     }
 }
 

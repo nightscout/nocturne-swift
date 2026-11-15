@@ -14,13 +14,15 @@ public struct DeviceCatalogEntry: Sendable, Codable, Hashable {
     public var manufacturer: String?
     public var category: DeviceCategory?
     public var cgm: CgmProperties?
+    public var pump: PumpProperties?
 
-    public init(id: String? = nil, name: String? = nil, manufacturer: String? = nil, category: DeviceCategory? = nil, cgm: CgmProperties? = nil) {
+    public init(id: String? = nil, name: String? = nil, manufacturer: String? = nil, category: DeviceCategory? = nil, cgm: CgmProperties? = nil, pump: PumpProperties? = nil) {
         self.id = id
         self.name = name
         self.manufacturer = manufacturer
         self.category = category
         self.cgm = cgm
+        self.pump = pump
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -29,6 +31,7 @@ public struct DeviceCatalogEntry: Sendable, Codable, Hashable {
         case manufacturer
         case category
         case cgm
+        case pump
     }
 
     // Encodable protocol methods
@@ -40,6 +43,7 @@ public struct DeviceCatalogEntry: Sendable, Codable, Hashable {
         try container.encodeIfPresent(manufacturer, forKey: .manufacturer)
         try container.encodeIfPresent(category, forKey: .category)
         try container.encodeIfPresent(cgm, forKey: .cgm)
+        try container.encodeIfPresent(pump, forKey: .pump)
     }
 }
 

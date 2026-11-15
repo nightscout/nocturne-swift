@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum SleepDetectionMethod: String, Sendable, Codable, CaseIterable {
+public enum SleepDetectionMethod: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case auto = "Auto"
     case manual = "Manual"
     case autoTentative = "AutoTentative"
@@ -17,4 +17,5 @@ public enum SleepDetectionMethod: String, Sendable, Codable, CaseIterable {
     case enhancedFinal = "EnhancedFinal"
     case device = "Device"
     case unknown = "Unknown"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

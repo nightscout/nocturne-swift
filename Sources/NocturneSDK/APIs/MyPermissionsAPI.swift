@@ -13,16 +13,16 @@ open class MyPermissionsAPI {
      Get my permissions
      
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: [String]
+     - returns: MyPermissionsResponse
      */
-    open class func myPermissionsGetMyPermissions(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [String] {
+    open class func myPermissionsGetMyPermissions(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> MyPermissionsResponse {
         return try await myPermissionsGetMyPermissionsWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get my permissions
      - GET /api/v4/me/permissions
-     - Get the caller's effective granted scopes for the current tenant.
+     - Get the caller's effective granted scopes and history window for the current tenant.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -30,9 +30,9 @@ open class MyPermissionsAPI {
        - type: oauth2
        - name: oauth2
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<[String]> 
+     - returns: RequestBuilder<MyPermissionsResponse> 
      */
-    open class func myPermissionsGetMyPermissionsWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[String]> {
+    open class func myPermissionsGetMyPermissionsWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<MyPermissionsResponse> {
         let localVariablePath = "/api/v4/me/permissions"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -45,7 +45,7 @@ open class MyPermissionsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<[String]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<MyPermissionsResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }

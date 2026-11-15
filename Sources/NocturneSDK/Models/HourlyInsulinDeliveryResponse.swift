@@ -10,22 +10,31 @@ import Foundation
 public struct HourlyInsulinDeliveryResponse: Sendable, Codable, Hashable {
 
     public var hours: [HourlyInsulinDeliveryPoint]?
-    public var dayCount: Int?
+    public var totalDeliveryPeriods: InsulinDeliveryPeriodBreakdown?
+    public var basalPeriods: InsulinDeliveryPeriodBreakdown?
+    public var daysWithData: Int?
     public var startDate: String?
     public var endDate: String?
+    public var timeZoneUnavailableReason: TimeZoneUnavailableReason?
 
-    public init(hours: [HourlyInsulinDeliveryPoint]? = nil, dayCount: Int? = nil, startDate: String? = nil, endDate: String? = nil) {
+    public init(hours: [HourlyInsulinDeliveryPoint]? = nil, totalDeliveryPeriods: InsulinDeliveryPeriodBreakdown? = nil, basalPeriods: InsulinDeliveryPeriodBreakdown? = nil, daysWithData: Int? = nil, startDate: String? = nil, endDate: String? = nil, timeZoneUnavailableReason: TimeZoneUnavailableReason? = nil) {
         self.hours = hours
-        self.dayCount = dayCount
+        self.totalDeliveryPeriods = totalDeliveryPeriods
+        self.basalPeriods = basalPeriods
+        self.daysWithData = daysWithData
         self.startDate = startDate
         self.endDate = endDate
+        self.timeZoneUnavailableReason = timeZoneUnavailableReason
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case hours
-        case dayCount
+        case totalDeliveryPeriods
+        case basalPeriods
+        case daysWithData
         case startDate
         case endDate
+        case timeZoneUnavailableReason
     }
 
     // Encodable protocol methods
@@ -33,9 +42,12 @@ public struct HourlyInsulinDeliveryResponse: Sendable, Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(hours, forKey: .hours)
-        try container.encodeIfPresent(dayCount, forKey: .dayCount)
+        try container.encodeIfPresent(totalDeliveryPeriods, forKey: .totalDeliveryPeriods)
+        try container.encodeIfPresent(basalPeriods, forKey: .basalPeriods)
+        try container.encodeIfPresent(daysWithData, forKey: .daysWithData)
         try container.encodeIfPresent(startDate, forKey: .startDate)
         try container.encodeIfPresent(endDate, forKey: .endDate)
+        try container.encodeIfPresent(timeZoneUnavailableReason, forKey: .timeZoneUnavailableReason)
     }
 }
 

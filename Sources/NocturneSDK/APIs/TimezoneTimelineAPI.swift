@@ -56,6 +56,47 @@ open class TimezoneTimelineAPI {
     }
 
     /**
+     Get device clock
+     
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: DeviceClockDiagnostics
+     */
+    open class func timezoneTimelineGetDeviceClock(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DeviceClockDiagnostics {
+        return try await timezoneTimelineGetDeviceClockWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get device clock
+     - GET /api/v4/timezone-timeline/device-clock
+     - Diagnostic view of the device-clock evidence behind automatic corrections: the stored observations and the deviation segments they currently derive. Read-only; segments are a pure function of the observations, so this never changes anything.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<DeviceClockDiagnostics> 
+     */
+    open class func timezoneTimelineGetDeviceClockWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DeviceClockDiagnostics> {
+        let localVariablePath = "/api/v4/timezone-timeline/device-clock"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<DeviceClockDiagnostics>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Get timeline
      
      - parameter apiConfiguration: The configuration for the http request.

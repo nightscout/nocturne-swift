@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum DiscrepancyType: Int, Sendable, Codable, CaseIterable {
+public enum DiscrepancyType: Int, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case _0 = 0
     case _1 = 1
     case _2 = 2
@@ -19,4 +19,5 @@ public enum DiscrepancyType: Int, Sendable, Codable, CaseIterable {
     case _7 = 7
     case _8 = 8
     case _9 = 9
+    case unknownDefaultOpenApi = 11184809
 }

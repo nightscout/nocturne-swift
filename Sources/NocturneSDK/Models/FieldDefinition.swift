@@ -12,17 +12,20 @@ public struct FieldDefinition: Sendable, Codable, Hashable {
     public var name: String?
     public var label: String?
     public var _required: Bool?
+    public var defaultValue: String?
 
-    public init(name: String? = nil, label: String? = nil, _required: Bool? = nil) {
+    public init(name: String? = nil, label: String? = nil, _required: Bool? = nil, defaultValue: String? = nil) {
         self.name = name
         self.label = label
         self._required = _required
+        self.defaultValue = defaultValue
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case name
         case label
         case _required = "required"
+        case defaultValue
     }
 
     // Encodable protocol methods
@@ -32,6 +35,7 @@ public struct FieldDefinition: Sendable, Codable, Hashable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(label, forKey: .label)
         try container.encodeIfPresent(_required, forKey: ._required)
+        try container.encodeIfPresent(defaultValue, forKey: .defaultValue)
     }
 }
 

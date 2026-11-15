@@ -13,22 +13,12 @@ public struct CreateNotificationThresholdRequest: Sendable, Codable, Hashable {
     public var hours: Int?
     public var description: String?
     public var displayOrder: Int?
-    public var pushEnabled: Bool?
-    public var audioEnabled: Bool?
-    public var audioSound: String?
-    public var vibrateEnabled: Bool?
-    public var respectQuietHours: Bool?
 
-    public init(urgency: NotificationUrgency? = nil, hours: Int? = nil, description: String? = nil, displayOrder: Int? = nil, pushEnabled: Bool? = nil, audioEnabled: Bool? = nil, audioSound: String? = nil, vibrateEnabled: Bool? = nil, respectQuietHours: Bool? = nil) {
+    public init(urgency: NotificationUrgency? = nil, hours: Int? = nil, description: String? = nil, displayOrder: Int? = nil) {
         self.urgency = urgency
         self.hours = hours
         self.description = description
         self.displayOrder = displayOrder
-        self.pushEnabled = pushEnabled
-        self.audioEnabled = audioEnabled
-        self.audioSound = audioSound
-        self.vibrateEnabled = vibrateEnabled
-        self.respectQuietHours = respectQuietHours
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -36,11 +26,6 @@ public struct CreateNotificationThresholdRequest: Sendable, Codable, Hashable {
         case hours
         case description
         case displayOrder
-        case pushEnabled
-        case audioEnabled
-        case audioSound
-        case vibrateEnabled
-        case respectQuietHours
     }
 
     // Encodable protocol methods
@@ -51,11 +36,6 @@ public struct CreateNotificationThresholdRequest: Sendable, Codable, Hashable {
         try container.encodeIfPresent(hours, forKey: .hours)
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(displayOrder, forKey: .displayOrder)
-        try container.encodeIfPresent(pushEnabled, forKey: .pushEnabled)
-        try container.encodeIfPresent(audioEnabled, forKey: .audioEnabled)
-        try container.encodeIfPresent(audioSound, forKey: .audioSound)
-        try container.encodeIfPresent(vibrateEnabled, forKey: .vibrateEnabled)
-        try container.encodeIfPresent(respectQuietHours, forKey: .respectQuietHours)
     }
 }
 

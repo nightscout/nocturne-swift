@@ -8,8 +8,9 @@
 import Foundation
 
 /**  */
-public enum ChannelStatus: String, Sendable, Codable, CaseIterable {
+public enum ChannelStatus: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case available = "available"
     case degraded = "degraded"
     case unavailable = "unavailable"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

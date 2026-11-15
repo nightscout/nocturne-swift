@@ -16,14 +16,16 @@ public struct CreateDirectGrantResponse: Sendable, Codable, Hashable {
     public var scopes: [String]?
     public var createdAt: Date?
     public var expiresAt: Date?
+    public var limitTo24Hours: Bool?
 
-    public init(id: String? = nil, token: String? = nil, label: String? = nil, scopes: [String]? = nil, createdAt: Date? = nil, expiresAt: Date? = nil) {
+    public init(id: String? = nil, token: String? = nil, label: String? = nil, scopes: [String]? = nil, createdAt: Date? = nil, expiresAt: Date? = nil, limitTo24Hours: Bool? = nil) {
         self.id = id
         self.token = token
         self.label = label
         self.scopes = scopes
         self.createdAt = createdAt
         self.expiresAt = expiresAt
+        self.limitTo24Hours = limitTo24Hours
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -33,6 +35,7 @@ public struct CreateDirectGrantResponse: Sendable, Codable, Hashable {
         case scopes
         case createdAt
         case expiresAt
+        case limitTo24Hours
     }
 
     // Encodable protocol methods
@@ -45,6 +48,7 @@ public struct CreateDirectGrantResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(scopes, forKey: .scopes)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
+        try container.encodeIfPresent(limitTo24Hours, forKey: .limitTo24Hours)
     }
 }
 

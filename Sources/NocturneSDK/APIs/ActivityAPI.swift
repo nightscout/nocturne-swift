@@ -113,7 +113,7 @@ open class ActivityAPI {
     /**
      Get activities
      - GET /api/v4/Activity
-     - This read merges four sources in memory, so the page is bounded by ClampMergedPage rather than the plain page-size ceiling. The scope requirement is an OR over the four storages, and ActivityReadScopeGuard then drops the records whose category the caller does not hold — pagination happens in the service before that filter, so a caller holding a subset of the categories can receive fewer than limit records. The total is counted over only those same categories, both so it stays consistent with what the page can contain and so it cannot disclose how many records exist in a category the caller may not read.
+     - Get activity records with pagination. The page size is clamped. Records in categories the caller cannot read are left out after paging, so a page can hold fewer than limit records; the total counts only categories the caller can read.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -161,7 +161,7 @@ open class ActivityAPI {
     /**
      Get activity
      - GET /api/v4/Activity/{id}
-     - A record in a category the caller does not hold answers 404 rather than 403, so the response does not disclose that the record exists.
+     - Get a specific activity record by ID. A record in a category the caller cannot read returns 404, not 403.
      - Bearer Token:
        - type: http
        - name: bearer

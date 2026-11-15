@@ -16,7 +16,6 @@ public struct ClockElement: Sendable, Codable, Hashable {
     public var width: Int?
     public var height: Int?
     public var minutesAhead: Int?
-    public var format: String?
     public var definitionId: String?
     public var show: [String]?
     public var categories: [String]?
@@ -25,7 +24,7 @@ public struct ClockElement: Sendable, Codable, Hashable {
     public var style: ClockElementStyle?
     public var chartConfig: ClockChartConfig?
 
-    public init(type: String? = nil, size: Int? = nil, showUnits: Bool? = nil, hours: Int? = nil, width: Int? = nil, height: Int? = nil, minutesAhead: Int? = nil, format: String? = nil, definitionId: String? = nil, show: [String]? = nil, categories: [String]? = nil, visibilityThreshold: String? = nil, text: String? = nil, style: ClockElementStyle? = nil, chartConfig: ClockChartConfig? = nil) {
+    public init(type: String? = nil, size: Int? = nil, showUnits: Bool? = nil, hours: Int? = nil, width: Int? = nil, height: Int? = nil, minutesAhead: Int? = nil, definitionId: String? = nil, show: [String]? = nil, categories: [String]? = nil, visibilityThreshold: String? = nil, text: String? = nil, style: ClockElementStyle? = nil, chartConfig: ClockChartConfig? = nil) {
         self.type = type
         self.size = size
         self.showUnits = showUnits
@@ -33,7 +32,6 @@ public struct ClockElement: Sendable, Codable, Hashable {
         self.width = width
         self.height = height
         self.minutesAhead = minutesAhead
-        self.format = format
         self.definitionId = definitionId
         self.show = show
         self.categories = categories
@@ -51,7 +49,6 @@ public struct ClockElement: Sendable, Codable, Hashable {
         case width
         case height
         case minutesAhead
-        case format
         case definitionId
         case show
         case categories
@@ -72,7 +69,6 @@ public struct ClockElement: Sendable, Codable, Hashable {
         try container.encodeIfPresent(width, forKey: .width)
         try container.encodeIfPresent(height, forKey: .height)
         try container.encodeIfPresent(minutesAhead, forKey: .minutesAhead)
-        try container.encodeIfPresent(format, forKey: .format)
         try container.encodeIfPresent(definitionId, forKey: .definitionId)
         try container.encodeIfPresent(show, forKey: .show)
         try container.encodeIfPresent(categories, forKey: .categories)

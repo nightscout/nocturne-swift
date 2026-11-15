@@ -16,13 +16,15 @@ public struct Profile: Sendable, Codable, Hashable {
     public var srvModified: Int64?
     public var srvCreated: Int64?
     public var createdAt: String?
+    public var isValid: Bool?
     public var units: String?
     public var store: [String: ProfileData]?
     public var enteredBy: String?
     public var loopSettings: LoopProfileSettings?
+    public var isAPNSProduction: Bool?
     public var isExternallyManaged: Bool?
 
-    public init(id: String? = nil, defaultProfile: String? = nil, startDate: String? = nil, mills: Int64? = nil, srvModified: Int64? = nil, srvCreated: Int64? = nil, createdAt: String? = nil, units: String? = nil, store: [String: ProfileData]? = nil, enteredBy: String? = nil, loopSettings: LoopProfileSettings? = nil, isExternallyManaged: Bool? = nil) {
+    public init(id: String? = nil, defaultProfile: String? = nil, startDate: String? = nil, mills: Int64? = nil, srvModified: Int64? = nil, srvCreated: Int64? = nil, createdAt: String? = nil, isValid: Bool? = nil, units: String? = nil, store: [String: ProfileData]? = nil, enteredBy: String? = nil, loopSettings: LoopProfileSettings? = nil, isAPNSProduction: Bool? = nil, isExternallyManaged: Bool? = nil) {
         self.id = id
         self.defaultProfile = defaultProfile
         self.startDate = startDate
@@ -30,10 +32,12 @@ public struct Profile: Sendable, Codable, Hashable {
         self.srvModified = srvModified
         self.srvCreated = srvCreated
         self.createdAt = createdAt
+        self.isValid = isValid
         self.units = units
         self.store = store
         self.enteredBy = enteredBy
         self.loopSettings = loopSettings
+        self.isAPNSProduction = isAPNSProduction
         self.isExternallyManaged = isExternallyManaged
     }
 
@@ -45,10 +49,12 @@ public struct Profile: Sendable, Codable, Hashable {
         case srvModified
         case srvCreated
         case createdAt = "created_at"
+        case isValid
         case units
         case store
         case enteredBy
         case loopSettings
+        case isAPNSProduction
         case isExternallyManaged
     }
 
@@ -63,10 +69,12 @@ public struct Profile: Sendable, Codable, Hashable {
         try container.encodeIfPresent(srvModified, forKey: .srvModified)
         try container.encodeIfPresent(srvCreated, forKey: .srvCreated)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        try container.encodeIfPresent(isValid, forKey: .isValid)
         try container.encodeIfPresent(units, forKey: .units)
         try container.encodeIfPresent(store, forKey: .store)
         try container.encodeIfPresent(enteredBy, forKey: .enteredBy)
         try container.encodeIfPresent(loopSettings, forKey: .loopSettings)
+        try container.encodeIfPresent(isAPNSProduction, forKey: .isAPNSProduction)
         try container.encodeIfPresent(isExternallyManaged, forKey: .isExternallyManaged)
     }
 }

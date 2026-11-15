@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum BolusType2: String, Sendable, Codable, CaseIterable {
+public enum BolusType2: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case bolus = "Bolus"
     case mealBolus = "MealBolus"
     case correctionBolus = "CorrectionBolus"
@@ -17,4 +17,5 @@ public enum BolusType2: String, Sendable, Codable, CaseIterable {
     case comboBolus = "ComboBolus"
     case smb = "Smb"
     case automaticBolus = "AutomaticBolus"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

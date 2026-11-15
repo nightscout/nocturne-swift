@@ -8,10 +8,11 @@
 import Foundation
 
 /**  */
-public enum BasalDeliveryOrigin: String, Sendable, Codable, CaseIterable {
+public enum BasalDeliveryOrigin: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case algorithm = "Algorithm"
     case scheduled = "Scheduled"
     case manual = "Manual"
     case suspended = "Suspended"
     case inferred = "Inferred"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

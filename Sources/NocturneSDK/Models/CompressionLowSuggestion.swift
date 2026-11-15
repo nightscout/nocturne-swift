@@ -13,6 +13,7 @@ public struct CompressionLowSuggestion: Sendable, Codable, Hashable {
     public var startMills: Int64?
     public var endMills: Int64?
     public var confidence: Double?
+    public var confidenceBand: CompressionLowConfidenceBand?
     public var status: CompressionLowStatus?
     public var nightOf: Date?
     public var createdAt: Int64?
@@ -22,11 +23,12 @@ public struct CompressionLowSuggestion: Sendable, Codable, Hashable {
     public var dropRate: Double?
     public var recoveryMinutes: Int?
 
-    public init(id: String? = nil, startMills: Int64? = nil, endMills: Int64? = nil, confidence: Double? = nil, status: CompressionLowStatus? = nil, nightOf: Date? = nil, createdAt: Int64? = nil, reviewedAt: Int64? = nil, stateSpanId: String? = nil, lowestGlucose: Double? = nil, dropRate: Double? = nil, recoveryMinutes: Int? = nil) {
+    public init(id: String? = nil, startMills: Int64? = nil, endMills: Int64? = nil, confidence: Double? = nil, confidenceBand: CompressionLowConfidenceBand? = nil, status: CompressionLowStatus? = nil, nightOf: Date? = nil, createdAt: Int64? = nil, reviewedAt: Int64? = nil, stateSpanId: String? = nil, lowestGlucose: Double? = nil, dropRate: Double? = nil, recoveryMinutes: Int? = nil) {
         self.id = id
         self.startMills = startMills
         self.endMills = endMills
         self.confidence = confidence
+        self.confidenceBand = confidenceBand
         self.status = status
         self.nightOf = nightOf
         self.createdAt = createdAt
@@ -42,6 +44,7 @@ public struct CompressionLowSuggestion: Sendable, Codable, Hashable {
         case startMills
         case endMills
         case confidence
+        case confidenceBand
         case status
         case nightOf
         case createdAt
@@ -60,6 +63,7 @@ public struct CompressionLowSuggestion: Sendable, Codable, Hashable {
         try container.encodeIfPresent(startMills, forKey: .startMills)
         try container.encodeIfPresent(endMills, forKey: .endMills)
         try container.encodeIfPresent(confidence, forKey: .confidence)
+        try container.encodeIfPresent(confidenceBand, forKey: .confidenceBand)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(nightOf, forKey: .nightOf)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)

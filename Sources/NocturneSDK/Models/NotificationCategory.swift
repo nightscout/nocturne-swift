@@ -8,9 +8,10 @@
 import Foundation
 
 /**  */
-public enum NotificationCategory: String, Sendable, Codable, CaseIterable {
+public enum NotificationCategory: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case informational = "Informational"
     case alert = "Alert"
     case actionRequired = "ActionRequired"
     case reminder = "Reminder"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

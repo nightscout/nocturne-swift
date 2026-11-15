@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum SleepStageType: String, Sendable, Codable, CaseIterable {
+public enum SleepStageType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case unknown = "Unknown"
     case inBed = "InBed"
     case awake = "Awake"
@@ -20,4 +20,5 @@ public enum SleepStageType: String, Sendable, Codable, CaseIterable {
     case asleep = "Asleep"
     case restless = "Restless"
     case unmeasurable = "Unmeasurable"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

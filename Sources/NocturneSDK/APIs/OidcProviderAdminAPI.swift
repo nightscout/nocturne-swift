@@ -55,11 +55,12 @@ open class OidcProviderAdminAPI {
      Delete
      
      - parameter id: (path)  
+     - parameter force: (query)  (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func oidcProviderAdminDelete(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await oidcProviderAdminDeleteWithRequestBuilder(id: id, apiConfiguration: apiConfiguration).execute().body
+    open class func oidcProviderAdminDelete(id: String, force: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
+        return try await oidcProviderAdminDeleteWithRequestBuilder(id: id, force: force, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -72,10 +73,11 @@ open class OidcProviderAdminAPI {
        - type: oauth2
        - name: oauth2
      - parameter id: (path)  
+     - parameter force: (query)  (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
      */
-    open class func oidcProviderAdminDeleteWithRequestBuilder(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func oidcProviderAdminDeleteWithRequestBuilder(id: String, force: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v4/admin/oidc-providers/{id}"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -83,7 +85,10 @@ open class OidcProviderAdminAPI {
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "force": (wrappedValue: force?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -100,11 +105,12 @@ open class OidcProviderAdminAPI {
      Disable
      
      - parameter id: (path)  
+     - parameter force: (query)  (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
-    open class func oidcProviderAdminDisable(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await oidcProviderAdminDisableWithRequestBuilder(id: id, apiConfiguration: apiConfiguration).execute().body
+    open class func oidcProviderAdminDisable(id: String, force: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
+        return try await oidcProviderAdminDisableWithRequestBuilder(id: id, force: force, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -117,10 +123,11 @@ open class OidcProviderAdminAPI {
        - type: oauth2
        - name: oauth2
      - parameter id: (path)  
+     - parameter force: (query)  (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
      */
-    open class func oidcProviderAdminDisableWithRequestBuilder(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func oidcProviderAdminDisableWithRequestBuilder(id: String, force: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
         var localVariablePath = "/api/v4/admin/oidc-providers/{id}/disable"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -128,7 +135,10 @@ open class OidcProviderAdminAPI {
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "force": (wrappedValue: force?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -403,11 +413,12 @@ open class OidcProviderAdminAPI {
      
      - parameter id: (path)  
      - parameter updateOidcProviderRequest: (body)  
+     - parameter force: (query)  (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: OidcProviderResponse
      */
-    open class func oidcProviderAdminUpdate(id: String, updateOidcProviderRequest: UpdateOidcProviderRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> OidcProviderResponse {
-        return try await oidcProviderAdminUpdateWithRequestBuilder(id: id, updateOidcProviderRequest: updateOidcProviderRequest, apiConfiguration: apiConfiguration).execute().body
+    open class func oidcProviderAdminUpdate(id: String, updateOidcProviderRequest: UpdateOidcProviderRequest, force: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> OidcProviderResponse {
+        return try await oidcProviderAdminUpdateWithRequestBuilder(id: id, updateOidcProviderRequest: updateOidcProviderRequest, force: force, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -421,10 +432,11 @@ open class OidcProviderAdminAPI {
        - name: oauth2
      - parameter id: (path)  
      - parameter updateOidcProviderRequest: (body)  
+     - parameter force: (query)  (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<OidcProviderResponse> 
      */
-    open class func oidcProviderAdminUpdateWithRequestBuilder(id: String, updateOidcProviderRequest: UpdateOidcProviderRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<OidcProviderResponse> {
+    open class func oidcProviderAdminUpdateWithRequestBuilder(id: String, updateOidcProviderRequest: UpdateOidcProviderRequest, force: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<OidcProviderResponse> {
         var localVariablePath = "/api/v4/admin/oidc-providers/{id}"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -432,7 +444,10 @@ open class OidcProviderAdminAPI {
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateOidcProviderRequest, codableHelper: apiConfiguration.codableHelper)
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "force": (wrappedValue: force?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             "Content-Type": "application/json",

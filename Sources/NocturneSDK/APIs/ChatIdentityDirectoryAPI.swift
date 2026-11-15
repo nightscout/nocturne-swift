@@ -10,6 +10,54 @@ import Foundation
 open class ChatIdentityDirectoryAPI {
 
     /**
+     Acknowledge as linked member
+     
+     - parameter id: (path)  
+     - parameter chatAcknowledgeRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: ChatAcknowledgeResponse
+     */
+    open class func chatIdentityDirectoryAcknowledgeAsLinkedMember(id: String, chatAcknowledgeRequest: ChatAcknowledgeRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> ChatAcknowledgeResponse {
+        return try await chatIdentityDirectoryAcknowledgeAsLinkedMemberWithRequestBuilder(id: id, chatAcknowledgeRequest: chatAcknowledgeRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Acknowledge as linked member
+     - POST /api/v4/chat-identity/directory/links/{id}/acknowledge
+     - Acknowledges an alert from chat as the member the link belongs to, not as the bot. The instance key holds *, so handing it to AcknowledgeExcursionAsync would let every linked chat user acknowledge for everyone. The authority carries the linked subject and no scopes of its own, so the decision rests on that member's membership: with alerts.readwrite the excursion is acknowledged for everyone, otherwise it is muted for that member alone. Must be called on the link's tenant host. Without an excursion ID, the decision applies to every active excursion of the tenant, and the outcome is muted if any was muted, else acknowledged if any was, else closed. If someone else had already acknowledged the excursion, the response names them rather than the chat user.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter id: (path)  
+     - parameter chatAcknowledgeRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<ChatAcknowledgeResponse> 
+     */
+    open class func chatIdentityDirectoryAcknowledgeAsLinkedMemberWithRequestBuilder(id: String, chatAcknowledgeRequest: ChatAcknowledgeRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<ChatAcknowledgeResponse> {
+        var localVariablePath = "/api/v4/chat-identity/directory/links/{id}/acknowledge"
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: chatAcknowledgeRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ChatAcknowledgeResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Create pending
      
      - parameter createPendingLinkRequest: (body)  

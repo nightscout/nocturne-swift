@@ -17,16 +17,19 @@ public struct TenantAlertSettingsResponse: Sendable, Codable, Hashable {
     public var dndManualStartedAt: Date?
     /** True when a recurring scheduled DND window is configured. */
     public var dndScheduleEnabled: Bool?
+    /** True when the scheduled window is in effect at this instant, evaluated in the             patient's timezone by Resolve, the rule the alert             engine suppresses by. */
+    public var dndScheduleActiveNow: Bool?
     /** Local-time start of the scheduled DND window, interpreted in the patient's timezone. */
     public var dndScheduleStart: String?
     /** Local-time end of the scheduled DND window. Cross-midnight windows allowed. */
     public var dndScheduleEnd: String?
 
-    public init(dndManualActive: Bool? = nil, dndManualUntil: Date? = nil, dndManualStartedAt: Date? = nil, dndScheduleEnabled: Bool? = nil, dndScheduleStart: String? = nil, dndScheduleEnd: String? = nil) {
+    public init(dndManualActive: Bool? = nil, dndManualUntil: Date? = nil, dndManualStartedAt: Date? = nil, dndScheduleEnabled: Bool? = nil, dndScheduleActiveNow: Bool? = nil, dndScheduleStart: String? = nil, dndScheduleEnd: String? = nil) {
         self.dndManualActive = dndManualActive
         self.dndManualUntil = dndManualUntil
         self.dndManualStartedAt = dndManualStartedAt
         self.dndScheduleEnabled = dndScheduleEnabled
+        self.dndScheduleActiveNow = dndScheduleActiveNow
         self.dndScheduleStart = dndScheduleStart
         self.dndScheduleEnd = dndScheduleEnd
     }
@@ -36,6 +39,7 @@ public struct TenantAlertSettingsResponse: Sendable, Codable, Hashable {
         case dndManualUntil
         case dndManualStartedAt
         case dndScheduleEnabled
+        case dndScheduleActiveNow
         case dndScheduleStart
         case dndScheduleEnd
     }
@@ -48,6 +52,7 @@ public struct TenantAlertSettingsResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(dndManualUntil, forKey: .dndManualUntil)
         try container.encodeIfPresent(dndManualStartedAt, forKey: .dndManualStartedAt)
         try container.encodeIfPresent(dndScheduleEnabled, forKey: .dndScheduleEnabled)
+        try container.encodeIfPresent(dndScheduleActiveNow, forKey: .dndScheduleActiveNow)
         try container.encodeIfPresent(dndScheduleStart, forKey: .dndScheduleStart)
         try container.encodeIfPresent(dndScheduleEnd, forKey: .dndScheduleEnd)
     }

@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum InsightKey: String, Sendable, Codable, CaseIterable {
+public enum InsightKey: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case timeInRangeExcellent = "TimeInRangeExcellent"
     case noSevereHypoglycemia = "NoSevereHypoglycemia"
     case variabilityControlled = "VariabilityControlled"
@@ -24,4 +24,5 @@ public enum InsightKey: String, Sendable, Codable, CaseIterable {
     case timeVeryHigh = "TimeVeryHigh"
     case variability = "Variability"
     case allTargetsAchieved = "AllTargetsAchieved"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

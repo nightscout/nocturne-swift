@@ -18,8 +18,7 @@ public struct OAuthGrantDto: Sendable, Codable, Hashable {
     public var clientId: String?
     /** Human-readable display name of the client application. */
     public var clientDisplayName: String?
-    /** Whether the associated client is a recognized/trusted application. */
-    public var isKnownClient: Bool?
+    public var clientIdentity: OAuthClientIdentity?
     /** OAuth scopes authorized by this grant. */
     public var scopes: [String]?
     /** User-supplied label for identifying the grant (e.g. \"My phone token\"). */
@@ -31,12 +30,12 @@ public struct OAuthGrantDto: Sendable, Codable, Hashable {
     /** User-Agent header from the most recent request using this grant. */
     public var lastUsedUserAgent: String?
 
-    public init(id: String? = nil, grantType: String? = nil, clientId: String? = nil, clientDisplayName: String? = nil, isKnownClient: Bool? = nil, scopes: [String]? = nil, label: String? = nil, createdAt: Date? = nil, lastUsedAt: Date? = nil, lastUsedUserAgent: String? = nil) {
+    public init(id: String? = nil, grantType: String? = nil, clientId: String? = nil, clientDisplayName: String? = nil, clientIdentity: OAuthClientIdentity? = nil, scopes: [String]? = nil, label: String? = nil, createdAt: Date? = nil, lastUsedAt: Date? = nil, lastUsedUserAgent: String? = nil) {
         self.id = id
         self.grantType = grantType
         self.clientId = clientId
         self.clientDisplayName = clientDisplayName
-        self.isKnownClient = isKnownClient
+        self.clientIdentity = clientIdentity
         self.scopes = scopes
         self.label = label
         self.createdAt = createdAt
@@ -49,7 +48,7 @@ public struct OAuthGrantDto: Sendable, Codable, Hashable {
         case grantType
         case clientId
         case clientDisplayName
-        case isKnownClient
+        case clientIdentity
         case scopes
         case label
         case createdAt
@@ -65,7 +64,7 @@ public struct OAuthGrantDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(grantType, forKey: .grantType)
         try container.encodeIfPresent(clientId, forKey: .clientId)
         try container.encodeIfPresent(clientDisplayName, forKey: .clientDisplayName)
-        try container.encodeIfPresent(isKnownClient, forKey: .isKnownClient)
+        try container.encodeIfPresent(clientIdentity, forKey: .clientIdentity)
         try container.encodeIfPresent(scopes, forKey: .scopes)
         try container.encodeIfPresent(label, forKey: .label)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)

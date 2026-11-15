@@ -8,8 +8,9 @@
 import Foundation
 
 /**  */
-public enum UploaderCategory: String, Sendable, Codable, CaseIterable {
+public enum UploaderCategory: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case cgm = "cgm"
     case aidSystem = "aid-system"
     case uploader = "uploader"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

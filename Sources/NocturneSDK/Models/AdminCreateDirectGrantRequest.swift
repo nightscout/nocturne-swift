@@ -12,13 +12,16 @@ public struct AdminCreateDirectGrantRequest: Sendable, Codable, Hashable {
     public var label: String?
     public var scopes: [String]?
     public var expiresAt: Date?
+    /** Whether the grant may read only the last 24 hours of time-series data. */
+    public var limitTo24Hours: Bool?
     /** The tenant member the grant is issued to. */
     public var subjectId: String?
 
-    public init(label: String? = nil, scopes: [String]? = nil, expiresAt: Date? = nil, subjectId: String? = nil) {
+    public init(label: String? = nil, scopes: [String]? = nil, expiresAt: Date? = nil, limitTo24Hours: Bool? = nil, subjectId: String? = nil) {
         self.label = label
         self.scopes = scopes
         self.expiresAt = expiresAt
+        self.limitTo24Hours = limitTo24Hours
         self.subjectId = subjectId
     }
 
@@ -26,6 +29,7 @@ public struct AdminCreateDirectGrantRequest: Sendable, Codable, Hashable {
         case label
         case scopes
         case expiresAt
+        case limitTo24Hours
         case subjectId
     }
 
@@ -36,6 +40,7 @@ public struct AdminCreateDirectGrantRequest: Sendable, Codable, Hashable {
         try container.encodeIfPresent(label, forKey: .label)
         try container.encodeIfPresent(scopes, forKey: .scopes)
         try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
+        try container.encodeIfPresent(limitTo24Hours, forKey: .limitTo24Hours)
         try container.encodeIfPresent(subjectId, forKey: .subjectId)
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum Direction: String, Sendable, Codable, CaseIterable {
+public enum Direction: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case _none = "NONE"
     case tripleUp = "TripleUp"
     case doubleUp = "DoubleUp"
@@ -22,4 +22,5 @@ public enum Direction: String, Sendable, Codable, CaseIterable {
     case notComputable = "NotComputable"
     case rateOutOfRange = "RateOutOfRange"
     case cgmError = "CgmError"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

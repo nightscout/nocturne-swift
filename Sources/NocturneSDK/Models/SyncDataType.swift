@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum SyncDataType: String, Sendable, Codable, CaseIterable {
+public enum SyncDataType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case glucose = "Glucose"
     case manualBG = "ManualBG"
     case calibrations = "Calibrations"
@@ -25,4 +25,9 @@ public enum SyncDataType: String, Sendable, Codable, CaseIterable {
     case deviceStatus = "DeviceStatus"
     case activity = "Activity"
     case food = "Food"
+    case steps = "Steps"
+    case heartRate = "HeartRate"
+    case bodyWeight = "BodyWeight"
+    case sleep = "Sleep"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

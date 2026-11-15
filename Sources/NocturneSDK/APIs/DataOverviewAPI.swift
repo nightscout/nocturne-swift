@@ -100,6 +100,55 @@ open class DataOverviewAPI {
     }
 
     /**
+     Get e hb a1c timeline
+     
+     - parameter year: (query) The year to compute the eHbA1c timeline for 
+     - parameter dataSources: (query) Optional data source filters (multiple allowed) (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: EHbA1cTimelineResponse
+     */
+    open class func dataOverviewGetEHbA1cTimeline(year: Int, dataSources: [String]? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> EHbA1cTimelineResponse {
+        return try await dataOverviewGetEHbA1cTimelineWithRequestBuilder(year: year, dataSources: dataSources, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get e hb a1c timeline
+     - GET /api/v4/year-overview/ehba1c-timeline
+     - Get the estimated-HbA1c timeline for a given year: one point per day whose trailing 90-day glucose window has enough readings, weighted by recency.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter year: (query) The year to compute the eHbA1c timeline for 
+     - parameter dataSources: (query) Optional data source filters (multiple allowed) (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<EHbA1cTimelineResponse> 
+     */
+    open class func dataOverviewGetEHbA1cTimelineWithRequestBuilder(year: Int, dataSources: [String]? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<EHbA1cTimelineResponse> {
+        let localVariablePath = "/api/v4/year-overview/ehba1c-timeline"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "year": (wrappedValue: year.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "dataSources": (wrappedValue: dataSources?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<EHbA1cTimelineResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Get gri timeline
      
      - parameter year: (query) The year to compute GRI timeline for 
@@ -144,6 +193,54 @@ open class DataOverviewAPI {
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
         let localVariableRequestBuilder: RequestBuilder<GriTimelineResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Get year summary
+     
+     - parameter year: (query)  
+     - parameter dataSources: (query)  (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: YearSummaryResponse
+     */
+    open class func dataOverviewGetYearSummary(year: Int, dataSources: [String]? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> YearSummaryResponse {
+        return try await dataOverviewGetYearSummaryWithRequestBuilder(year: year, dataSources: dataSources, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get year summary
+     - GET /api/v4/year-overview/summary
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter year: (query)  
+     - parameter dataSources: (query)  (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<YearSummaryResponse> 
+     */
+    open class func dataOverviewGetYearSummaryWithRequestBuilder(year: Int, dataSources: [String]? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<YearSummaryResponse> {
+        let localVariablePath = "/api/v4/year-overview/summary"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "year": (wrappedValue: year.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "dataSources": (wrappedValue: dataSources?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<YearSummaryResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }

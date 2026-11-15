@@ -21,6 +21,7 @@ public struct OAuthClientEntityDto: Sendable, Codable, Hashable {
     public var displayName: String?
     public var isKnown: Bool?
     public var redirectUris: String?
+    /** Export-only; see DevSnapshotDto. */
     public var createdAt: Date?
     public var updatedAt: Date?
 

@@ -22,7 +22,7 @@ open class TenantAlertSettingsAPI {
     /**
      Get
      - GET /api/v4/tenant-alert-settings
-     - The get-or-create is a write, but of server-defined defaults and idempotently, so it carries no AlertsReadWrite gate: a read-only caller cannot choose what it stores and a repeat call stores nothing further.
+     - Get the current tenant's alert settings, creating a default row if one does not exist. Read-only credentials may call it; a repeat call stores nothing further.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -64,7 +64,7 @@ open class TenantAlertSettingsAPI {
     /**
      Update
      - PUT /api/v4/tenant-alert-settings
-     - Requires AlertsReadWrite: this toggles tenant-wide Do Not Disturb, which suppresses delivery of every non-critical alert. The class-level [Authorize] alone is satisfied by read-only credentials such as a guest-link session, which holds alerts.read.
+     - Replace the current tenant's alert settings. Upserts on first call. The manual-DND toggle creates/clears the tenant's scope=all window; scheduled fields persist on the row. Needs alerts.readwrite: the toggle suppresses delivery of every non-critical alert tenant-wide, and read-only credentials such as a guest-link session are refused.
      - Bearer Token:
        - type: http
        - name: bearer

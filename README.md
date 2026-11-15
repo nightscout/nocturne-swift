@@ -47,6 +47,7 @@ Class | Method | HTTP request | Description
 *AlertReplayAPI* | [**alertReplayReplayDryRun**](docs/AlertReplayAPI.md#alertreplayreplaydryrun) | **POST** /api/v4/alerts/replay/dry-run | Replay dry run
 *AlertRulesAPI* | [**alertRulesCreateRule**](docs/AlertRulesAPI.md#alertrulescreaterule) | **POST** /api/v4/alert-rules | Create rule
 *AlertRulesAPI* | [**alertRulesDeleteRule**](docs/AlertRulesAPI.md#alertrulesdeleterule) | **DELETE** /api/v4/alert-rules/{id} | Delete rule
+*AlertRulesAPI* | [**alertRulesGetInAppRecipients**](docs/AlertRulesAPI.md#alertrulesgetinapprecipients) | **GET** /api/v4/alert-rules/in-app-recipients | Get in app recipients
 *AlertRulesAPI* | [**alertRulesGetRule**](docs/AlertRulesAPI.md#alertrulesgetrule) | **GET** /api/v4/alert-rules/{id} | Get rule
 *AlertRulesAPI* | [**alertRulesGetRules**](docs/AlertRulesAPI.md#alertrulesgetrules) | **GET** /api/v4/alert-rules | Get rules
 *AlertRulesAPI* | [**alertRulesTestFire**](docs/AlertRulesAPI.md#alertrulestestfire) | **POST** /api/v4/alert-rules/{id}/test-fire | Test fire
@@ -60,6 +61,7 @@ Class | Method | HTTP request | Description
 *AlertsAPI* | [**alertsGetPendingDeliveries**](docs/AlertsAPI.md#alertsgetpendingdeliveries) | **GET** /api/v4/alerts/deliveries/pending | Get pending deliveries
 *AlertsAPI* | [**alertsMarkDelivered**](docs/AlertsAPI.md#alertsmarkdelivered) | **POST** /api/v4/alerts/deliveries/{deliveryId}/delivered | Mark delivered
 *AlertsAPI* | [**alertsMarkFailed**](docs/AlertsAPI.md#alertsmarkfailed) | **POST** /api/v4/alerts/deliveries/{deliveryId}/failed | Mark failed
+*AlertsAPI* | [**alertsMarkSeen**](docs/AlertsAPI.md#alertsmarkseen) | **POST** /api/v4/alerts/excursions/{excursionId}/seen | Mark seen
 *AlertsAPI* | [**alertsSnoozeInstance**](docs/AlertsAPI.md#alertssnoozeinstance) | **POST** /api/v4/alerts/instances/{instanceId}/snooze | Snooze instance
 *AnalyticsAPI* | [**analyticsClearAnalyticsData**](docs/AnalyticsAPI.md#analyticsclearanalyticsdata) | **DELETE** /api/v4/Analytics/data | Clear analytics data
 *AnalyticsAPI* | [**analyticsGetAnalyticsStatus**](docs/AnalyticsAPI.md#analyticsgetanalyticsstatus) | **GET** /api/v4/Analytics/status | Get analytics status
@@ -88,6 +90,7 @@ Class | Method | HTTP request | Description
 *BGCheckAPI* | [**bGCheckListDeleted**](docs/BGCheckAPI.md#bgchecklistdeleted) | **GET** /api/v4/observations/bg-checks/deleted | List deleted
 *BGCheckAPI* | [**bGCheckRestore**](docs/BGCheckAPI.md#bgcheckrestore) | **POST** /api/v4/observations/bg-checks/{id}/restore | Restore
 *BGCheckAPI* | [**bGCheckUpdate**](docs/BGCheckAPI.md#bgcheckupdate) | **PUT** /api/v4/observations/bg-checks/{id} | Update
+*BackupSignInPromptAPI* | [**backupSignInPromptGetBackupSignInPrompt**](docs/BackupSignInPromptAPI.md#backupsigninpromptgetbackupsigninprompt) | **GET** /api/v4/me/backup-sign-in-prompt | Get backup sign in prompt
 *BasalInjectionAPI* | [**basalInjectionBulkRestore**](docs/BasalInjectionAPI.md#basalinjectionbulkrestore) | **POST** /api/v4/insulin/basal-injections/restore | Bulk restore
 *BasalInjectionAPI* | [**basalInjectionCreate**](docs/BasalInjectionAPI.md#basalinjectioncreate) | **POST** /api/v4/insulin/basal-injections | Create
 *BasalInjectionAPI* | [**basalInjectionCreateBulk**](docs/BasalInjectionAPI.md#basalinjectioncreatebulk) | **POST** /api/v4/insulin/basal-injections/bulk | Create bulk
@@ -141,6 +144,7 @@ Class | Method | HTTP request | Description
 *CareLinkConnectAPI* | [**careLinkConnectDesktopToken**](docs/CareLinkConnectAPI.md#carelinkconnectdesktoptoken) | **POST** /api/v4/connectors/carelink/connect/desktop-token | Desktop token
 *CareLinkConnectAPI* | [**careLinkConnectStart**](docs/CareLinkConnectAPI.md#carelinkconnectstart) | **POST** /api/v4/connectors/carelink/connect/start | Start
 *CgmComparisonAPI* | [**cgmComparisonCompare**](docs/CgmComparisonAPI.md#cgmcomparisoncompare) | **GET** /api/v4/cgm-comparison | Compare
+*ChartDataAPI* | [**chartDataGetBasalDeliverySpans**](docs/ChartDataAPI.md#chartdatagetbasaldeliveryspans) | **GET** /api/v4/ChartData/basal-delivery-spans | Get basal delivery spans
 *ChartDataAPI* | [**chartDataGetBasalSeries**](docs/ChartDataAPI.md#chartdatagetbasalseries) | **GET** /api/v4/ChartData/basal-series | Get basal series
 *ChartDataAPI* | [**chartDataGetDashboardChartData**](docs/ChartDataAPI.md#chartdatagetdashboardchartdata) | **GET** /api/v4/ChartData/dashboard | Get dashboard chart data
 *ChatIdentityAPI* | [**chatIdentityClaimLink**](docs/ChatIdentityAPI.md#chatidentityclaimlink) | **POST** /api/v4/chat-identity/links/claim | Claim link
@@ -149,6 +153,7 @@ Class | Method | HTTP request | Description
 *ChatIdentityAPI* | [**chatIdentityRevokeLink**](docs/ChatIdentityAPI.md#chatidentityrevokelink) | **DELETE** /api/v4/chat-identity/links/{id} | Revoke link
 *ChatIdentityAPI* | [**chatIdentitySetDefault**](docs/ChatIdentityAPI.md#chatidentitysetdefault) | **POST** /api/v4/chat-identity/links/{id}/set-default | Set default
 *ChatIdentityAPI* | [**chatIdentityUpdateLink**](docs/ChatIdentityAPI.md#chatidentityupdatelink) | **PATCH** /api/v4/chat-identity/links/{id} | Update link
+*ChatIdentityDirectoryAPI* | [**chatIdentityDirectoryAcknowledgeAsLinkedMember**](docs/ChatIdentityDirectoryAPI.md#chatidentitydirectoryacknowledgeaslinkedmember) | **POST** /api/v4/chat-identity/directory/links/{id}/acknowledge | Acknowledge as linked member
 *ChatIdentityDirectoryAPI* | [**chatIdentityDirectoryCreatePending**](docs/ChatIdentityDirectoryAPI.md#chatidentitydirectorycreatepending) | **POST** /api/v4/chat-identity/directory/pending-links | Create pending
 *ChatIdentityDirectoryAPI* | [**chatIdentityDirectoryResolve**](docs/ChatIdentityDirectoryAPI.md#chatidentitydirectoryresolve) | **GET** /api/v4/chat-identity/directory/resolve | Resolve
 *ChatIdentityDirectoryAPI* | [**chatIdentityDirectoryRevokeByPlatformUser**](docs/ChatIdentityDirectoryAPI.md#chatidentitydirectoryrevokebyplatformuser) | **DELETE** /api/v4/chat-identity/directory/links/{id} | Revoke by platform user
@@ -158,10 +163,13 @@ Class | Method | HTTP request | Description
 *ClientDevicesAPI* | [**clientDevicesRegister**](docs/ClientDevicesAPI.md#clientdevicesregister) | **POST** /api/v4/client-devices | Register
 *ClientDevicesAPI* | [**clientDevicesRename**](docs/ClientDevicesAPI.md#clientdevicesrename) | **PATCH** /api/v4/client-devices/{id} | Rename
 *ClientDevicesAPI* | [**clientDevicesRevoke**](docs/ClientDevicesAPI.md#clientdevicesrevoke) | **DELETE** /api/v4/client-devices/{id} | Revoke
+*ClockFaceAlertsAPI* | [**clockFaceAlertsGetClockAlerts**](docs/ClockFaceAlertsAPI.md#clockfacealertsgetclockalerts) | **GET** /api/v4/clockfaces/{id}/alerts | Get clock alerts
+*ClockFaceAlertsAPI* | [**clockFaceAlertsMarkClockAlertSeen**](docs/ClockFaceAlertsAPI.md#clockfacealertsmarkclockalertseen) | **POST** /api/v4/clockfaces/{id}/alerts/{excursionId}/seen | Mark clock alert seen
 *ClockFacesAPI* | [**clockFacesCreate**](docs/ClockFacesAPI.md#clockfacescreate) | **POST** /api/v4/clockfaces | Create
 *ClockFacesAPI* | [**clockFacesDelete**](docs/ClockFacesAPI.md#clockfacesdelete) | **DELETE** /api/v4/clockfaces/{id} | Delete
 *ClockFacesAPI* | [**clockFacesGetById**](docs/ClockFacesAPI.md#clockfacesgetbyid) | **GET** /api/v4/clockfaces/{id} | Get by id
 *ClockFacesAPI* | [**clockFacesGetGlucose**](docs/ClockFacesAPI.md#clockfacesgetglucose) | **GET** /api/v4/clockfaces/{id}/glucose | Get glucose
+*ClockFacesAPI* | [**clockFacesGetStarter**](docs/ClockFacesAPI.md#clockfacesgetstarter) | **GET** /api/v4/clockfaces/starter | Get starter
 *ClockFacesAPI* | [**clockFacesList**](docs/ClockFacesAPI.md#clockfaceslist) | **GET** /api/v4/clockfaces | List
 *ClockFacesAPI* | [**clockFacesUpdate**](docs/ClockFacesAPI.md#clockfacesupdate) | **PUT** /api/v4/clockfaces/{id} | Update
 *CoachMarkAPI* | [**coachMarkDeleteAll**](docs/CoachMarkAPI.md#coachmarkdeleteall) | **DELETE** /api/v4/coach-marks | Delete all
@@ -173,11 +181,9 @@ Class | Method | HTTP request | Description
 *CompatibilityAPI* | [**compatibilityGetEndpointMetrics**](docs/CompatibilityAPI.md#compatibilitygetendpointmetrics) | **GET** /api/v4/compatibility/endpoints | Get endpoint metrics
 *CompatibilityAPI* | [**compatibilityGetMetrics**](docs/CompatibilityAPI.md#compatibilitygetmetrics) | **GET** /api/v4/compatibility/metrics | Get metrics
 *CompatibilityAPI* | [**compatibilityTestApiComparison**](docs/CompatibilityAPI.md#compatibilitytestapicomparison) | **POST** /api/v4/compatibility/test | Test api comparison
-*CompressionLowAPI* | [**compressionLowAcceptSuggestion**](docs/CompressionLowAPI.md#compressionlowacceptsuggestion) | **POST** /api/v4/compression-lows/suggestions/{id}/accept | Accept suggestion
-*CompressionLowAPI* | [**compressionLowDeleteSuggestion**](docs/CompressionLowAPI.md#compressionlowdeletesuggestion) | **DELETE** /api/v4/compression-lows/suggestions/{id} | Delete suggestion
-*CompressionLowAPI* | [**compressionLowDismissSuggestion**](docs/CompressionLowAPI.md#compressionlowdismisssuggestion) | **POST** /api/v4/compression-lows/suggestions/{id}/dismiss | Dismiss suggestion
 *CompressionLowAPI* | [**compressionLowGetSuggestion**](docs/CompressionLowAPI.md#compressionlowgetsuggestion) | **GET** /api/v4/compression-lows/suggestions/{id} | Get suggestion
 *CompressionLowAPI* | [**compressionLowGetSuggestions**](docs/CompressionLowAPI.md#compressionlowgetsuggestions) | **GET** /api/v4/compression-lows/suggestions | Get suggestions
+*CompressionLowAPI* | [**compressionLowReviewSuggestions**](docs/CompressionLowAPI.md#compressionlowreviewsuggestions) | **POST** /api/v4/compression-lows/suggestions/review | Review suggestions
 *CompressionLowAPI* | [**compressionLowTriggerDetection**](docs/CompressionLowAPI.md#compressionlowtriggerdetection) | **POST** /api/v4/compression-lows/detect | Trigger detection
 *ConfigurationAPI* | [**configurationDeleteConfiguration**](docs/ConfigurationAPI.md#configurationdeleteconfiguration) | **DELETE** /api/v4/connectors/config/{connectorName} | Delete configuration
 *ConfigurationAPI* | [**configurationGetAllConnectorStatus**](docs/ConfigurationAPI.md#configurationgetallconnectorstatus) | **GET** /api/v4/connectors/config | Get all connector status
@@ -187,6 +193,7 @@ Class | Method | HTTP request | Description
 *ConfigurationAPI* | [**configurationSaveConfiguration**](docs/ConfigurationAPI.md#configurationsaveconfiguration) | **PUT** /api/v4/connectors/config/{connectorName} | Save configuration
 *ConfigurationAPI* | [**configurationSaveSecrets**](docs/ConfigurationAPI.md#configurationsavesecrets) | **PUT** /api/v4/connectors/config/{connectorName}/secrets | Save secrets
 *ConfigurationAPI* | [**configurationSetActive**](docs/ConfigurationAPI.md#configurationsetactive) | **PATCH** /api/v4/connectors/config/{connectorName}/active | Set active
+*ConfigurationAPI* | [**configurationVerifyCredentials**](docs/ConfigurationAPI.md#configurationverifycredentials) | **POST** /api/v4/connectors/config/{connectorName}/verify | Verify credentials
 *ConnectedAppsAPI* | [**connectedAppsList**](docs/ConnectedAppsAPI.md#connectedappslist) | **GET** /api/v4/account/connected-apps | List
 *ConnectedAppsAPI* | [**connectedAppsRevoke**](docs/ConnectedAppsAPI.md#connectedappsrevoke) | **DELETE** /api/v4/account/connected-apps/{grantId} | Revoke
 *ConnectorAdminAPI* | [**connectorAdminCancelResetJob**](docs/ConnectorAdminAPI.md#connectoradmincancelresetjob) | **POST** /api/v4/admin/connectors/jobs/{jobId}/cancel | Cancel reset job
@@ -195,11 +202,15 @@ Class | Method | HTTP request | Description
 *ConnectorAdminAPI* | [**connectorAdminResetTenantCursors**](docs/ConnectorAdminAPI.md#connectoradminresettenantcursors) | **POST** /api/v4/admin/connectors/{tenantId}/reset-cursors | Reset tenant cursors
 *ConnectorFoodEntriesAPI* | [**connectorFoodEntriesImportEntries**](docs/ConnectorFoodEntriesAPI.md#connectorfoodentriesimportentries) | **POST** /api/v4/connector-food-entries/import | Import entries
 *ConnectorStatusAPI* | [**connectorStatusGetStatus**](docs/ConnectorStatusAPI.md#connectorstatusgetstatus) | **GET** /api/v4/connectors/status | Get status
+*ContentContributionsAPI* | [**contentContributionsSubmitContribution**](docs/ContentContributionsAPI.md#contentcontributionssubmitcontribution) | **POST** /api/v4/content/contributions | Submit contribution
 *CorrelationAPI* | [**correlationGetCorrelated**](docs/CorrelationAPI.md#correlationgetcorrelated) | **GET** /api/v4/correlated/{correlationId} | Get correlated
 *CurrentTherapyStateAPI* | [**currentTherapyStateGetCurrentTherapyState**](docs/CurrentTherapyStateAPI.md#currenttherapystategetcurrenttherapystate) | **GET** /api/v4/current-therapy-state | Get current therapy state
 *DataOverviewAPI* | [**dataOverviewGetAvailableYears**](docs/DataOverviewAPI.md#dataoverviewgetavailableyears) | **GET** /api/v4/year-overview/years | Get available years
 *DataOverviewAPI* | [**dataOverviewGetDailySummary**](docs/DataOverviewAPI.md#dataoverviewgetdailysummary) | **GET** /api/v4/year-overview/daily-summary | Get daily summary
+*DataOverviewAPI* | [**dataOverviewGetEHbA1cTimeline**](docs/DataOverviewAPI.md#dataoverviewgetehba1ctimeline) | **GET** /api/v4/year-overview/ehba1c-timeline | Get e hb a1c timeline
 *DataOverviewAPI* | [**dataOverviewGetGriTimeline**](docs/DataOverviewAPI.md#dataoverviewgetgritimeline) | **GET** /api/v4/year-overview/gri-timeline | Get gri timeline
+*DataOverviewAPI* | [**dataOverviewGetYearSummary**](docs/DataOverviewAPI.md#dataoverviewgetyearsummary) | **GET** /api/v4/year-overview/summary | Get year summary
+*DatabaseCapacityAPI* | [**databaseCapacityGet**](docs/DatabaseCapacityAPI.md#databasecapacityget) | **GET** /api/v4/admin/database-capacity | Get
 *DebugAPI* | [**debugEchoQuery**](docs/DebugAPI.md#debugechoquery) | **GET** /api/v4/debug/echo/{echo} | Echo query
 *DebugAPI* | [**debugEchoQueryWithModel**](docs/DebugAPI.md#debugechoquerywithmodel) | **GET** /api/v4/debug/echo/{echo}/{model} | Echo query with model
 *DebugAPI* | [**debugEchoQueryWithModelAndSpec**](docs/DebugAPI.md#debugechoquerywithmodelandspec) | **GET** /api/v4/debug/echo/{echo}/{model}/{spec} | Echo query with model and spec
@@ -261,9 +272,19 @@ Class | Method | HTTP request | Description
 *GlucoseProcessingSettingsAPI* | [**glucoseProcessingSettingsGetSourceDefaults**](docs/GlucoseProcessingSettingsAPI.md#glucoseprocessingsettingsgetsourcedefaults) | **GET** /api/v4/settings/glucose-processing/source-defaults | Get source defaults
 *GlucoseProcessingSettingsAPI* | [**glucoseProcessingSettingsSetPreference**](docs/GlucoseProcessingSettingsAPI.md#glucoseprocessingsettingssetpreference) | **PUT** /api/v4/settings/glucose-processing/preference | Set preference
 *GlucoseProcessingSettingsAPI* | [**glucoseProcessingSettingsSetSourceDefaults**](docs/GlucoseProcessingSettingsAPI.md#glucoseprocessingsettingssetsourcedefaults) | **PUT** /api/v4/settings/glucose-processing/source-defaults | Set source defaults
+*GoogleHealthAPI* | [**googleHealthCompleteGoogleHealth**](docs/GoogleHealthAPI.md#googlehealthcompletegooglehealth) | **POST** /api/v4/google-health/complete | Complete google health
+*GoogleHealthAPI* | [**googleHealthDisconnectGoogleHealth**](docs/GoogleHealthAPI.md#googlehealthdisconnectgooglehealth) | **POST** /api/v4/google-health/disconnect | Disconnect google health
+*GoogleHealthAPI* | [**googleHealthGetGoogleHealth**](docs/GoogleHealthAPI.md#googlehealthgetgooglehealth) | **GET** /api/v4/google-health | Get google health
+*GoogleHealthAPI* | [**googleHealthPreviewGoogleHealth**](docs/GoogleHealthAPI.md#googlehealthpreviewgooglehealth) | **POST** /api/v4/google-health/preview | Preview google health
+*GoogleHealthAPI* | [**googleHealthPurgeGoogleHealth**](docs/GoogleHealthAPI.md#googlehealthpurgegooglehealth) | **DELETE** /api/v4/google-health/readings | Purge google health
+*GoogleHealthAPI* | [**googleHealthSaveGoogleHealth**](docs/GoogleHealthAPI.md#googlehealthsavegooglehealth) | **PUT** /api/v4/google-health/options | Save google health
+*GoogleHealthAPI* | [**googleHealthStartGoogleHealth**](docs/GoogleHealthAPI.md#googlehealthstartgooglehealth) | **POST** /api/v4/google-health/start | Start google health
+*GoogleHealthAPI* | [**googleHealthSyncGoogleHealth**](docs/GoogleHealthAPI.md#googlehealthsyncgooglehealth) | **POST** /api/v4/google-health/sync | Sync google health
 *GuestLinkAPI* | [**guestLinkActivateGuestLink**](docs/GuestLinkAPI.md#guestlinkactivateguestlink) | **POST** /api/v4/guest-links/activate | Activate guest link
 *GuestLinkAPI* | [**guestLinkCreateGuestLink**](docs/GuestLinkAPI.md#guestlinkcreateguestlink) | **POST** /api/v4/guest-links | Create guest link
 *GuestLinkAPI* | [**guestLinkDismissGuestLink**](docs/GuestLinkAPI.md#guestlinkdismissguestlink) | **PATCH** /api/v4/guest-links/{grantId}/dismiss | Dismiss guest link
+*GuestLinkAPI* | [**guestLinkGetGuestCodePending**](docs/GuestLinkAPI.md#guestlinkgetguestcodepending) | **GET** /api/v4/guest-links/pending | Get guest code pending
+*GuestLinkAPI* | [**guestLinkGetGuestLinkScopeOptions**](docs/GuestLinkAPI.md#guestlinkgetguestlinkscopeoptions) | **GET** /api/v4/guest-links/scope-options | Get guest link scope options
 *GuestLinkAPI* | [**guestLinkGetGuestLinks**](docs/GuestLinkAPI.md#guestlinkgetguestlinks) | **GET** /api/v4/guest-links | Get guest links
 *GuestLinkAPI* | [**guestLinkRevokeGuestLink**](docs/GuestLinkAPI.md#guestlinkrevokeguestlink) | **DELETE** /api/v4/guest-links/{grantId} | Revoke guest link
 *HeartRateAPI* | [**heartRateCreateHeartRates**](docs/HeartRateAPI.md#heartratecreateheartrates) | **POST** /api/v4/HeartRate | Create heart rates
@@ -273,7 +294,17 @@ Class | Method | HTTP request | Description
 *HeartRateAPI* | [**heartRateUpdateHeartRate**](docs/HeartRateAPI.md#heartrateupdateheartrate) | **PUT** /api/v4/HeartRate/{id} | Update heart rate
 *InsulinCatalogAPI* | [**insulinCatalogGetCatalog**](docs/InsulinCatalogAPI.md#insulincataloggetcatalog) | **GET** /api/v4/insulins/catalog | Get catalog
 *InsulinCatalogAPI* | [**insulinCatalogGetCatalogByCategory**](docs/InsulinCatalogAPI.md#insulincataloggetcatalogbycategory) | **GET** /api/v4/insulins/catalog/{category} | Get catalog by category
+*JobLedgerAPI* | [**jobLedgerList**](docs/JobLedgerAPI.md#jobledgerlist) | **GET** /api/v4/admin/jobs | List
+*LabHbA1cAPI* | [**labHbA1cCreate**](docs/LabHbA1cAPI.md#labhba1ccreate) | **POST** /api/v4/lab-results/hba1c | Create
+*LabHbA1cAPI* | [**labHbA1cDelete**](docs/LabHbA1cAPI.md#labhba1cdelete) | **DELETE** /api/v4/lab-results/hba1c/{id} | Delete
+*LabHbA1cAPI* | [**labHbA1cGetAll**](docs/LabHbA1cAPI.md#labhba1cgetall) | **GET** /api/v4/lab-results/hba1c | Get all
 *LinkedPlatformsAPI* | [**linkedPlatformsGetLinkedPlatforms**](docs/LinkedPlatformsAPI.md#linkedplatformsgetlinkedplatforms) | **GET** /api/v4/chat-identity/linked-platforms | Get linked platforms
+*LoopAnalysisAPI* | [**loopAnalysisGetDailyProfile**](docs/LoopAnalysisAPI.md#loopanalysisgetdailyprofile) | **GET** /api/v4/loop-analysis/daily-profile | Get daily profile
+*LoopAnalysisAPI* | [**loopAnalysisGetEnvelope**](docs/LoopAnalysisAPI.md#loopanalysisgetenvelope) | **GET** /api/v4/loop-analysis/envelope | Get envelope
+*LoopAnalysisAPI* | [**loopAnalysisGetEventResponse**](docs/LoopAnalysisAPI.md#loopanalysisgeteventresponse) | **GET** /api/v4/loop-analysis/event-response | Get event response
+*LoopAnalysisAPI* | [**loopAnalysisGetLoopHealth**](docs/LoopAnalysisAPI.md#loopanalysisgetloophealth) | **GET** /api/v4/loop-analysis/loop-health | Get loop health
+*LoopAnalysisAPI* | [**loopAnalysisGetPredictionAccuracy**](docs/LoopAnalysisAPI.md#loopanalysisgetpredictionaccuracy) | **GET** /api/v4/loop-analysis/prediction-accuracy | Get prediction accuracy
+*LoopAnalysisAPI* | [**loopAnalysisGetSettingsEvidence**](docs/LoopAnalysisAPI.md#loopanalysisgetsettingsevidence) | **GET** /api/v4/loop-analysis/settings-evidence | Get settings evidence
 *MealMatchingAPI* | [**mealMatchingAcceptMatch**](docs/MealMatchingAPI.md#mealmatchingacceptmatch) | **POST** /api/v4/meal-matching/accept | Accept match
 *MealMatchingAPI* | [**mealMatchingDismissMatch**](docs/MealMatchingAPI.md#mealmatchingdismissmatch) | **POST** /api/v4/meal-matching/dismiss | Dismiss match
 *MealMatchingAPI* | [**mealMatchingGetFoodEntry**](docs/MealMatchingAPI.md#mealmatchinggetfoodentry) | **GET** /api/v4/meal-matching/food-entries/{id} | Get food entry
@@ -281,7 +312,6 @@ Class | Method | HTTP request | Description
 *MemberInviteAPI* | [**memberInviteAcceptInvite**](docs/MemberInviteAPI.md#memberinviteacceptinvite) | **POST** /api/v4/member-invites/{token}/accept | Accept invite
 *MemberInviteAPI* | [**memberInviteCreateInvite**](docs/MemberInviteAPI.md#memberinvitecreateinvite) | **POST** /api/v4/member-invites | Create invite
 *MemberInviteAPI* | [**memberInviteGetEffectivePermissions**](docs/MemberInviteAPI.md#memberinvitegeteffectivepermissions) | **GET** /api/v4/member-invites/members/{id}/effective-permissions | Get effective permissions
-*MemberInviteAPI* | [**memberInviteGetFollowers**](docs/MemberInviteAPI.md#memberinvitegetfollowers) | **GET** /api/v4/member-invites/members/followers | Get followers
 *MemberInviteAPI* | [**memberInviteGetInviteInfo**](docs/MemberInviteAPI.md#memberinvitegetinviteinfo) | **GET** /api/v4/member-invites/{token}/info | Get invite info
 *MemberInviteAPI* | [**memberInviteGetMembers**](docs/MemberInviteAPI.md#memberinvitegetmembers) | **GET** /api/v4/member-invites/members | Get members
 *MemberInviteAPI* | [**memberInviteListInvites**](docs/MemberInviteAPI.md#memberinvitelistinvites) | **GET** /api/v4/member-invites | List invites
@@ -290,6 +320,9 @@ Class | Method | HTTP request | Description
 *MemberInviteAPI* | [**memberInviteSetMemberLimitTo24Hours**](docs/MemberInviteAPI.md#memberinvitesetmemberlimitto24hours) | **PUT** /api/v4/member-invites/members/{id}/limit-to-24-hours | Set member limit to24hours
 *MemberInviteAPI* | [**memberInviteSetMemberPermissions**](docs/MemberInviteAPI.md#memberinvitesetmemberpermissions) | **PUT** /api/v4/member-invites/members/{id}/permissions | Set member permissions
 *MemberInviteAPI* | [**memberInviteSetMemberRoles**](docs/MemberInviteAPI.md#memberinvitesetmemberroles) | **PUT** /api/v4/member-invites/members/{id}/roles | Set member roles
+*MemberInviteAPI* | [**memberInviteStepDown**](docs/MemberInviteAPI.md#memberinvitestepdown) | **POST** /api/v4/member-invites/members/self/step-down | Step down
+*MemberRecoveryAPI* | [**memberRecoveryGetLockedOutMembers**](docs/MemberRecoveryAPI.md#memberrecoverygetlockedoutmembers) | **GET** /api/v4/member-recovery | Get locked out members
+*MemberRecoveryAPI* | [**memberRecoveryIssueRecoveryCode**](docs/MemberRecoveryAPI.md#memberrecoveryissuerecoverycode) | **POST** /api/v4/member-recovery/{subjectId}/code | Issue recovery code
 *MembershipRequestAPI* | [**membershipRequestApproveRequest**](docs/MembershipRequestAPI.md#membershiprequestapproverequest) | **POST** /api/v4/membership-requests/{id}/approve | Approve request
 *MembershipRequestAPI* | [**membershipRequestCreateRequest**](docs/MembershipRequestAPI.md#membershiprequestcreaterequest) | **POST** /api/v4/membership-requests | Create request
 *MembershipRequestAPI* | [**membershipRequestDenyRequest**](docs/MembershipRequestAPI.md#membershiprequestdenyrequest) | **POST** /api/v4/membership-requests/{id}/deny | Deny request
@@ -382,6 +415,7 @@ Class | Method | HTTP request | Description
 *PatientRecordAPI* | [**patientRecordGetDiscoveredSources**](docs/PatientRecordAPI.md#patientrecordgetdiscoveredsources) | **GET** /api/v4/patient-record/devices/discovered-sources | Get discovered sources
 *PatientRecordAPI* | [**patientRecordGetInsulins**](docs/PatientRecordAPI.md#patientrecordgetinsulins) | **GET** /api/v4/patient-record/insulins | Get insulins
 *PatientRecordAPI* | [**patientRecordGetPatientRecord**](docs/PatientRecordAPI.md#patientrecordgetpatientrecord) | **GET** /api/v4/patient-record | Get patient record
+*PatientRecordAPI* | [**patientRecordGetPatientTimezone**](docs/PatientRecordAPI.md#patientrecordgetpatienttimezone) | **GET** /api/v4/patient-record/timezone | Get patient timezone
 *PatientRecordAPI* | [**patientRecordReorderDevices**](docs/PatientRecordAPI.md#patientrecordreorderdevices) | **POST** /api/v4/patient-record/devices/reorder | Reorder devices
 *PatientRecordAPI* | [**patientRecordUpdateDevice**](docs/PatientRecordAPI.md#patientrecordupdatedevice) | **PUT** /api/v4/patient-record/devices/{id} | Update device
 *PatientRecordAPI* | [**patientRecordUpdateInsulin**](docs/PatientRecordAPI.md#patientrecordupdateinsulin) | **PUT** /api/v4/patient-record/insulins/{id} | Update insulin
@@ -389,6 +423,8 @@ Class | Method | HTTP request | Description
 *PlatformAPI* | [**platformCreateTenant**](docs/PlatformAPI.md#platformcreatetenant) | **POST** /api/v4/platform/tenants | Create tenant
 *PlatformAPI* | [**platformGetTenants**](docs/PlatformAPI.md#platformgettenants) | **GET** /api/v4/platform/tenants | Get tenants
 *PlatformAPI* | [**platformGetTransitionStatus**](docs/PlatformAPI.md#platformgettransitionstatus) | **GET** /api/v4/platform/transition-status | Get transition status
+*PlatformPolicyAPI* | [**platformPolicyGetPolicy**](docs/PlatformPolicyAPI.md#platformpolicygetpolicy) | **GET** /api/v4/admin/platform-policy | Get policy
+*PlatformPolicyAPI* | [**platformPolicySetPolicy**](docs/PlatformPolicyAPI.md#platformpolicysetpolicy) | **PUT** /api/v4/admin/platform-policy | Set policy
 *PlatformSettingsAPI* | [**platformSettingsDelete**](docs/PlatformSettingsAPI.md#platformsettingsdelete) | **DELETE** /api/v4/admin/platform-settings/{category} | Delete
 *PlatformSettingsAPI* | [**platformSettingsGet**](docs/PlatformSettingsAPI.md#platformsettingsget) | **GET** /api/v4/admin/platform-settings/{category} | Get
 *PlatformSettingsAPI* | [**platformSettingsGetAll**](docs/PlatformSettingsAPI.md#platformsettingsgetall) | **GET** /api/v4/admin/platform-settings | Get all
@@ -397,8 +433,6 @@ Class | Method | HTTP request | Description
 *PredictionAPI* | [**predictionGetPredictions**](docs/PredictionAPI.md#predictiongetpredictions) | **GET** /api/v4/predictions | Get predictions
 *PredictionAPI* | [**predictionGetProfileSnapshot**](docs/PredictionAPI.md#predictiongetprofilesnapshot) | **GET** /api/v4/predictions/profile-snapshot | Get profile snapshot
 *PredictionAPI* | [**predictionGetStatus**](docs/PredictionAPI.md#predictiongetstatus) | **GET** /api/v4/predictions/status | Get status
-*ProcessingAPI* | [**processingGetProcessingStatus**](docs/ProcessingAPI.md#processinggetprocessingstatus) | **GET** /api/v4/processing/status/{correlationId} | Get processing status
-*ProcessingAPI* | [**processingWaitForCompletion**](docs/ProcessingAPI.md#processingwaitforcompletion) | **GET** /api/v4/processing/status/{correlationId}/wait | Wait for completion
 *ProfileAPI* | [**profileCreateBasalSchedule**](docs/ProfileAPI.md#profilecreatebasalschedule) | **POST** /api/v4/profile/basal | Create basal schedule
 *ProfileAPI* | [**profileCreateCarbRatioSchedule**](docs/ProfileAPI.md#profilecreatecarbratioschedule) | **POST** /api/v4/profile/carb-ratio | Create carb ratio schedule
 *ProfileAPI* | [**profileCreateSensitivitySchedule**](docs/ProfileAPI.md#profilecreatesensitivityschedule) | **POST** /api/v4/profile/sensitivity | Create sensitivity schedule
@@ -406,9 +440,11 @@ Class | Method | HTTP request | Description
 *ProfileAPI* | [**profileCreateTherapySettings**](docs/ProfileAPI.md#profilecreatetherapysettings) | **POST** /api/v4/profile/settings | Create therapy settings
 *ProfileAPI* | [**profileDeleteBasalSchedule**](docs/ProfileAPI.md#profiledeletebasalschedule) | **DELETE** /api/v4/profile/basal/{id} | Delete basal schedule
 *ProfileAPI* | [**profileDeleteCarbRatioSchedule**](docs/ProfileAPI.md#profiledeletecarbratioschedule) | **DELETE** /api/v4/profile/carb-ratio/{id} | Delete carb ratio schedule
+*ProfileAPI* | [**profileDeleteProfileByName**](docs/ProfileAPI.md#profiledeleteprofilebyname) | **DELETE** /api/v4/profile/by-name/{profileName} | Delete profile by name
 *ProfileAPI* | [**profileDeleteSensitivitySchedule**](docs/ProfileAPI.md#profiledeletesensitivityschedule) | **DELETE** /api/v4/profile/sensitivity/{id} | Delete sensitivity schedule
 *ProfileAPI* | [**profileDeleteTargetRangeSchedule**](docs/ProfileAPI.md#profiledeletetargetrangeschedule) | **DELETE** /api/v4/profile/target-range/{id} | Delete target range schedule
 *ProfileAPI* | [**profileDeleteTherapySettings**](docs/ProfileAPI.md#profiledeletetherapysettings) | **DELETE** /api/v4/profile/settings/{id} | Delete therapy settings
+*ProfileAPI* | [**profileGetActiveSchedules**](docs/ProfileAPI.md#profilegetactiveschedules) | **GET** /api/v4/profile/active-schedules | Get active schedules
 *ProfileAPI* | [**profileGetBasalScheduleById**](docs/ProfileAPI.md#profilegetbasalschedulebyid) | **GET** /api/v4/profile/basal/by-id/{id} | Get basal schedule by id
 *ProfileAPI* | [**profileGetBasalSchedulesByName**](docs/ProfileAPI.md#profilegetbasalschedulesbyname) | **GET** /api/v4/profile/basal/{profileName} | Get basal schedules by name
 *ProfileAPI* | [**profileGetCarbRatioScheduleById**](docs/ProfileAPI.md#profilegetcarbratioschedulebyid) | **GET** /api/v4/profile/carb-ratio/by-id/{id} | Get carb ratio schedule by id
@@ -428,9 +464,24 @@ Class | Method | HTTP request | Description
 *ProfileAPI* | [**profileUpdateSensitivitySchedule**](docs/ProfileAPI.md#profileupdatesensitivityschedule) | **PUT** /api/v4/profile/sensitivity/{id} | Update sensitivity schedule
 *ProfileAPI* | [**profileUpdateTargetRangeSchedule**](docs/ProfileAPI.md#profileupdatetargetrangeschedule) | **PUT** /api/v4/profile/target-range/{id} | Update target range schedule
 *ProfileAPI* | [**profileUpdateTherapySettings**](docs/ProfileAPI.md#profileupdatetherapysettings) | **PUT** /api/v4/profile/settings/{id} | Update therapy settings
+*ProfileActivationsAPI* | [**profileActivationsCreateActivation**](docs/ProfileActivationsAPI.md#profileactivationscreateactivation) | **POST** /api/v4/profile/activations | Create activation
+*ProfileActivationsAPI* | [**profileActivationsDeleteActivation**](docs/ProfileActivationsAPI.md#profileactivationsdeleteactivation) | **DELETE** /api/v4/profile/activations/{id} | Delete activation
+*ProfileActivationsAPI* | [**profileActivationsEndActivation**](docs/ProfileActivationsAPI.md#profileactivationsendactivation) | **POST** /api/v4/profile/activations/{id}/end | End activation
+*ProfileActivationsAPI* | [**profileActivationsGetActivationStatus**](docs/ProfileActivationsAPI.md#profileactivationsgetactivationstatus) | **GET** /api/v4/profile/activations/status | Get activation status
+*ProfileActivationsAPI* | [**profileActivationsGetActivations**](docs/ProfileActivationsAPI.md#profileactivationsgetactivations) | **GET** /api/v4/profile/activations | Get activations
+*ProfileActivationsAPI* | [**profileActivationsGetActiveActivation**](docs/ProfileActivationsAPI.md#profileactivationsgetactiveactivation) | **GET** /api/v4/profile/activations/active | Get active activation
+*ProfileActivationsAPI* | [**profileActivationsRenewActivation**](docs/ProfileActivationsAPI.md#profileactivationsrenewactivation) | **POST** /api/v4/profile/activations/{id}/renew | Renew activation
+*ProfileHistoryAPI* | [**profileHistoryGetGlucoseAroundChange**](docs/ProfileHistoryAPI.md#profilehistorygetglucosearoundchange) | **GET** /api/v4/profile/history/glucose-around | Get glucose around change
+*ProfileHistoryAPI* | [**profileHistoryGetGlucoseTrace**](docs/ProfileHistoryAPI.md#profilehistorygetglucosetrace) | **GET** /api/v4/profile/history/glucose | Get glucose trace
+*ProfileHistoryAPI* | [**profileHistoryGetProfileHistory**](docs/ProfileHistoryAPI.md#profilehistorygetprofilehistory) | **GET** /api/v4/profile/history | Get profile history
+*ProfileHistoryAPI* | [**profileHistoryGetProfileLanes**](docs/ProfileHistoryAPI.md#profilehistorygetprofilelanes) | **GET** /api/v4/profile/history/lanes | Get profile lanes
 *PumpSnapshotAPI* | [**pumpSnapshotCreatePumpSnapshots**](docs/PumpSnapshotAPI.md#pumpsnapshotcreatepumpsnapshots) | **POST** /api/v4/device-status/pump | Create pump snapshots
 *PumpSnapshotAPI* | [**pumpSnapshotGetAll**](docs/PumpSnapshotAPI.md#pumpsnapshotgetall) | **GET** /api/v4/device-status/pump | Get all
 *PumpSnapshotAPI* | [**pumpSnapshotGetById**](docs/PumpSnapshotAPI.md#pumpsnapshotgetbyid) | **GET** /api/v4/device-status/pump/{id} | Get by id
+*RealtimeAdmissionAPI* | [**realtimeAdmissionGetRealtimeAdmission**](docs/RealtimeAdmissionAPI.md#realtimeadmissiongetrealtimeadmission) | **GET** /api/v4/me/realtime-admission | Get realtime admission
+*RejectedUploadsAPI* | [**rejectedUploadsClearRejectedUploads**](docs/RejectedUploadsAPI.md#rejecteduploadsclearrejecteduploads) | **POST** /api/v4/rejected-uploads/clear | Clear rejected uploads
+*RejectedUploadsAPI* | [**rejectedUploadsGetRejectedUploads**](docs/RejectedUploadsAPI.md#rejecteduploadsgetrejecteduploads) | **GET** /api/v4/rejected-uploads | Get rejected uploads
+*ReleasesAPI* | [**releasesGetReleaseStatus**](docs/ReleasesAPI.md#releasesgetreleasestatus) | **GET** /api/v4/releases/status | Get release status
 *ReservoirAPI* | [**reservoirGetEstimate**](docs/ReservoirAPI.md#reservoirgetestimate) | **GET** /api/v4/reservoir | Get estimate
 *ReservoirReportsAPI* | [**reservoirReportsCreate**](docs/ReservoirReportsAPI.md#reservoirreportscreate) | **POST** /api/v4/reservoir/reports | Create
 *RetrospectiveAPI* | [**retrospectiveGetBasalTimeline**](docs/RetrospectiveAPI.md#retrospectivegetbasaltimeline) | **GET** /api/v4/Retrospective/basal-timeline | Get basal timeline
@@ -474,9 +525,30 @@ Class | Method | HTTP request | Description
 *SetupAPI* | [**setupOwnerOidc**](docs/SetupAPI.md#setupowneroidc) | **POST** /api/v4/setup/owner/oidc | Owner oidc
 *SetupAPI* | [**setupOwnerOptions**](docs/SetupAPI.md#setupowneroptions) | **POST** /api/v4/setup/owner/options | Owner options
 *SetupAPI* | [**setupValidateUsername**](docs/SetupAPI.md#setupvalidateusername) | **GET** /api/v4/setup/validate-username | Validate username
-*ShareAppearanceAPI* | [**shareAppearanceGetShareAppearance**](docs/ShareAppearanceAPI.md#shareappearancegetshareappearance) | **GET** /api/v4/share/appearance | Get share appearance
+*SetupAlertsAPI* | [**setupAlertsConfirmSetupTestAlertReceived**](docs/SetupAlertsAPI.md#setupalertsconfirmsetuptestalertreceived) | **POST** /api/v4/setup-hub/alerts/test/{instanceId}/received | Confirm setup test alert received
+*SetupAlertsAPI* | [**setupAlertsGetAlertSetup**](docs/SetupAlertsAPI.md#setupalertsgetalertsetup) | **GET** /api/v4/setup-hub/alerts | Get alert setup
+*SetupAlertsAPI* | [**setupAlertsGetSetupTestAlert**](docs/SetupAlertsAPI.md#setupalertsgetsetuptestalert) | **GET** /api/v4/setup-hub/alerts/test/{instanceId} | Get setup test alert
+*SetupAlertsAPI* | [**setupAlertsSaveAlertSetup**](docs/SetupAlertsAPI.md#setupalertssavealertsetup) | **PUT** /api/v4/setup-hub/alerts | Save alert setup
+*SetupAlertsAPI* | [**setupAlertsSendSetupTestAlert**](docs/SetupAlertsAPI.md#setupalertssendsetuptestalert) | **POST** /api/v4/setup-hub/alerts/test | Send setup test alert
+*SetupAlertsAPI* | [**setupAlertsSetUrgentLowRecipient**](docs/SetupAlertsAPI.md#setupalertsseturgentlowrecipient) | **PUT** /api/v4/setup-hub/alerts/urgent-low-recipients/{subjectId} | Set urgent low recipient
+*SetupDevicesAPI* | [**setupDevicesAddSetupInsulin**](docs/SetupDevicesAPI.md#setupdevicesaddsetupinsulin) | **POST** /api/v4/setup-hub/devices/insulins | Add setup insulin
+*SetupDevicesAPI* | [**setupDevicesAddSetupTracker**](docs/SetupDevicesAPI.md#setupdevicesaddsetuptracker) | **POST** /api/v4/setup-hub/devices/trackers | Add setup tracker
+*SetupDevicesAPI* | [**setupDevicesConfirmSetupDevice**](docs/SetupDevicesAPI.md#setupdevicesconfirmsetupdevice) | **POST** /api/v4/setup-hub/devices/confirm | Confirm setup device
+*SetupDevicesAPI* | [**setupDevicesGetDeviceSetup**](docs/SetupDevicesAPI.md#setupdevicesgetdevicesetup) | **GET** /api/v4/setup-hub/devices | Get device setup
+*SetupDevicesAPI* | [**setupDevicesGetInsulinActionTime**](docs/SetupDevicesAPI.md#setupdevicesgetinsulinactiontime) | **GET** /api/v4/setup-hub/devices/action-time | Get insulin action time
+*SetupDevicesAPI* | [**setupDevicesRemoveSetupInsulin**](docs/SetupDevicesAPI.md#setupdevicesremovesetupinsulin) | **DELETE** /api/v4/setup-hub/devices/insulins/{formulationId} | Remove setup insulin
+*SetupDevicesAPI* | [**setupDevicesRemoveSetupTracker**](docs/SetupDevicesAPI.md#setupdevicesremovesetuptracker) | **DELETE** /api/v4/setup-hub/devices/trackers/{kind} | Remove setup tracker
+*SetupDevicesAPI* | [**setupDevicesSetTakesNoInsulin**](docs/SetupDevicesAPI.md#setupdevicessettakesnoinsulin) | **PUT** /api/v4/setup-hub/devices/no-insulin | Set takes no insulin
+*SetupHubAPI* | [**setupHubConfirmAboutSetupItem**](docs/SetupHubAPI.md#setuphubconfirmaboutsetupitem) | **POST** /api/v4/setup-hub/items/about/confirm | Confirm about setup item
+*SetupHubAPI* | [**setupHubDismissSetupStrip**](docs/SetupHubAPI.md#setuphubdismisssetupstrip) | **POST** /api/v4/setup-hub/strip/dismiss | Dismiss setup strip
+*SetupHubAPI* | [**setupHubGetSetupHub**](docs/SetupHubAPI.md#setuphubgetsetuphub) | **GET** /api/v4/setup-hub | Get setup hub
+*SetupHubAPI* | [**setupHubSetSetupHubItemState**](docs/SetupHubAPI.md#setuphubsetsetuphubitemstate) | **PUT** /api/v4/setup-hub/items/{key} | Set setup hub item state
+*SetupTherapyAPI* | [**setupTherapyConfirmTherapySettings**](docs/SetupTherapyAPI.md#setuptherapyconfirmtherapysettings) | **POST** /api/v4/setup-hub/therapy/confirm | Confirm therapy settings
+*SetupTherapyAPI* | [**setupTherapyEnterTherapySettings**](docs/SetupTherapyAPI.md#setuptherapyentertherapysettings) | **POST** /api/v4/setup-hub/therapy/entry | Enter therapy settings
+*SetupTherapyAPI* | [**setupTherapyGetTherapyReview**](docs/SetupTherapyAPI.md#setuptherapygettherapyreview) | **GET** /api/v4/setup-hub/therapy | Get therapy review
 *ShareLinkAPI* | [**shareLinkDisableShareLink**](docs/ShareLinkAPI.md#sharelinkdisablesharelink) | **DELETE** /api/v4/share | Disable share link
 *ShareLinkAPI* | [**shareLinkGetShareLink**](docs/ShareLinkAPI.md#sharelinkgetsharelink) | **GET** /api/v4/share | Get share link
+*ShareLinkAPI* | [**shareLinkRevealShareLink**](docs/ShareLinkAPI.md#sharelinkrevealsharelink) | **POST** /api/v4/share/reveal | Reveal share link
 *ShareLinkAPI* | [**shareLinkRotateShareLink**](docs/ShareLinkAPI.md#sharelinkrotatesharelink) | **POST** /api/v4/share/rotate | Rotate share link
 *ShareLinkAPI* | [**shareLinkSetShareLinkFullHistory**](docs/ShareLinkAPI.md#sharelinksetsharelinkfullhistory) | **PUT** /api/v4/share/full-history | Set share link full history
 *ShareLinkAPI* | [**shareLinkSetShareLinkScopes**](docs/ShareLinkAPI.md#sharelinksetsharelinkscopes) | **PUT** /api/v4/share/scopes | Set share link scopes
@@ -489,6 +561,7 @@ Class | Method | HTTP request | Description
 *SleepReportAPI* | [**sleepReportGetSingleNight**](docs/SleepReportAPI.md#sleepreportgetsinglenight) | **GET** /api/v4/sleep/report/single-night/{sessionId} | Get single night
 *SleepReportAPI* | [**sleepReportGetSingleNightByDate**](docs/SleepReportAPI.md#sleepreportgetsinglenightbydate) | **GET** /api/v4/sleep/report/single-night/by-date/{date} | Get single night by date
 *SleepReportAPI* | [**sleepReportGetTrends**](docs/SleepReportAPI.md#sleepreportgettrends) | **GET** /api/v4/sleep/report/trends | Get trends
+*StateSpansAPI* | [**stateSpansBulkRestoreStateSpans**](docs/StateSpansAPI.md#statespansbulkrestorestatespans) | **POST** /api/v4/state-spans/restore | Bulk restore state spans
 *StateSpansAPI* | [**stateSpansCreateStateSpan**](docs/StateSpansAPI.md#statespanscreatestatespan) | **POST** /api/v4/state-spans | Create state span
 *StateSpansAPI* | [**stateSpansDeleteStateSpan**](docs/StateSpansAPI.md#statespansdeletestatespan) | **DELETE** /api/v4/state-spans/{id} | Delete state span
 *StateSpansAPI* | [**stateSpansGetActivities**](docs/StateSpansAPI.md#statespansgetactivities) | **GET** /api/v4/state-spans/activities | Get activities
@@ -496,12 +569,12 @@ Class | Method | HTTP request | Description
 *StateSpansAPI* | [**stateSpansGetExercise**](docs/StateSpansAPI.md#statespansgetexercise) | **GET** /api/v4/state-spans/exercise | Get exercise
 *StateSpansAPI* | [**stateSpansGetIllness**](docs/StateSpansAPI.md#statespansgetillness) | **GET** /api/v4/state-spans/illness | Get illness
 *StateSpansAPI* | [**stateSpansGetOverrides**](docs/StateSpansAPI.md#statespansgetoverrides) | **GET** /api/v4/state-spans/overrides | Get overrides
-*StateSpansAPI* | [**stateSpansGetProfiles**](docs/StateSpansAPI.md#statespansgetprofiles) | **GET** /api/v4/state-spans/profiles | Get profiles
 *StateSpansAPI* | [**stateSpansGetPumpModes**](docs/StateSpansAPI.md#statespansgetpumpmodes) | **GET** /api/v4/state-spans/pump-modes | Get pump modes
 *StateSpansAPI* | [**stateSpansGetStateSpan**](docs/StateSpansAPI.md#statespansgetstatespan) | **GET** /api/v4/state-spans/{id} | Get state span
 *StateSpansAPI* | [**stateSpansGetStateSpans**](docs/StateSpansAPI.md#statespansgetstatespans) | **GET** /api/v4/state-spans | Get state spans
 *StateSpansAPI* | [**stateSpansGetTemporaryTargets**](docs/StateSpansAPI.md#statespansgettemporarytargets) | **GET** /api/v4/state-spans/temporary-targets | Get temporary targets
 *StateSpansAPI* | [**stateSpansGetTravel**](docs/StateSpansAPI.md#statespansgettravel) | **GET** /api/v4/state-spans/travel | Get travel
+*StateSpansAPI* | [**stateSpansRestoreStateSpan**](docs/StateSpansAPI.md#statespansrestorestatespan) | **POST** /api/v4/state-spans/{id}/restore | Restore state span
 *StateSpansAPI* | [**stateSpansUpdateStateSpan**](docs/StateSpansAPI.md#statespansupdatestatespan) | **PUT** /api/v4/state-spans/{id} | Update state span
 *StatisticsAPI* | [**statisticsAnalyzeGlucoseData**](docs/StatisticsAPI.md#statisticsanalyzeglucosedata) | **POST** /api/v4/Statistics/comprehensive-analytics | Analyze glucose data
 *StatisticsAPI* | [**statisticsAnalyzeGlucoseDataExtended**](docs/StatisticsAPI.md#statisticsanalyzeglucosedataextended) | **POST** /api/v4/Statistics/extended-analytics | Analyze glucose data extended
@@ -524,8 +597,10 @@ Class | Method | HTTP request | Description
 *StatisticsAPI* | [**statisticsGetClinicalTargets**](docs/StatisticsAPI.md#statisticsgetclinicaltargets) | **GET** /api/v4/Statistics/clinical-targets/{population} | Get clinical targets
 *StatisticsAPI* | [**statisticsGetDailyBasalBolusRatios**](docs/StatisticsAPI.md#statisticsgetdailybasalbolusratios) | **GET** /api/v4/Statistics/daily-basal-bolus-ratios | Get daily basal bolus ratios
 *StatisticsAPI* | [**statisticsGetHourlyInsulinDelivery**](docs/StatisticsAPI.md#statisticsgethourlyinsulindelivery) | **GET** /api/v4/Statistics/hourly-insulin-delivery | Get hourly insulin delivery
+*StatisticsAPI* | [**statisticsGetHourlyPatterns**](docs/StatisticsAPI.md#statisticsgethourlypatterns) | **GET** /api/v4/Statistics/hourly-patterns | Get hourly patterns
 *StatisticsAPI* | [**statisticsGetInsulinDeliveryStatistics**](docs/StatisticsAPI.md#statisticsgetinsulindeliverystatistics) | **GET** /api/v4/Statistics/insulin-delivery-stats | Get insulin delivery statistics
 *StatisticsAPI* | [**statisticsGetMultiPeriodStatistics**](docs/StatisticsAPI.md#statisticsgetmultiperiodstatistics) | **GET** /api/v4/Statistics/periods | Get multi period statistics
+*StatisticsAPI* | [**statisticsGetPeriodComparison**](docs/StatisticsAPI.md#statisticsgetperiodcomparison) | **GET** /api/v4/Statistics/period-comparison | Get period comparison
 *StatisticsAPI* | [**statisticsGetPunchCardData**](docs/StatisticsAPI.md#statisticsgetpunchcarddata) | **GET** /api/v4/Statistics/punch-card | Get punch card data
 *StatisticsAPI* | [**statisticsGetRangeAnalytics**](docs/StatisticsAPI.md#statisticsgetrangeanalytics) | **GET** /api/v4/Statistics/range-analytics | Get range analytics
 *StatisticsAPI* | [**statisticsGetWeekdayAverages**](docs/StatisticsAPI.md#statisticsgetweekdayaverages) | **GET** /api/v4/Statistics/weekday-averages | Get weekday averages
@@ -562,6 +637,7 @@ Class | Method | HTTP request | Description
 *TenantAPI* | [**tenantGetById**](docs/TenantAPI.md#tenantgetbyid) | **GET** /api/v4/admin/tenants/{id} | Get by id
 *TenantAPI* | [**tenantGetMemberCredentials**](docs/TenantAPI.md#tenantgetmembercredentials) | **GET** /api/v4/admin/tenants/{id}/members/{subjectId}/credentials | Get member credentials
 *TenantAPI* | [**tenantIssueLoginCode**](docs/TenantAPI.md#tenantissuelogincode) | **POST** /api/v4/admin/tenants/{id}/members/{subjectId}/login-code | Issue login code
+*TenantAPI* | [**tenantIssueRecoveryCode**](docs/TenantAPI.md#tenantissuerecoverycode) | **POST** /api/v4/admin/tenants/{id}/members/{subjectId}/recovery-code | Issue recovery code
 *TenantAPI* | [**tenantProvision**](docs/TenantAPI.md#tenantprovision) | **POST** /api/v4/admin/tenants/provision | Provision
 *TenantAPI* | [**tenantRemoveMember**](docs/TenantAPI.md#tenantremovemember) | **DELETE** /api/v4/admin/tenants/{id}/members/{subjectId} | Remove member
 *TenantAPI* | [**tenantRemoveOidcIdentity**](docs/TenantAPI.md#tenantremoveoidcidentity) | **DELETE** /api/v4/admin/tenants/{id}/members/{subjectId}/credentials/oidc/{identityId} | Remove oidc identity
@@ -569,16 +645,33 @@ Class | Method | HTTP request | Description
 *TenantAPI* | [**tenantUpdate**](docs/TenantAPI.md#tenantupdate) | **PUT** /api/v4/admin/tenants/{id} | Update
 *TenantAlertSettingsAPI* | [**tenantAlertSettingsGet**](docs/TenantAlertSettingsAPI.md#tenantalertsettingsget) | **GET** /api/v4/tenant-alert-settings | Get
 *TenantAlertSettingsAPI* | [**tenantAlertSettingsUpdate**](docs/TenantAlertSettingsAPI.md#tenantalertsettingsupdate) | **PUT** /api/v4/tenant-alert-settings | Update
+*TenantAppearanceAPI* | [**tenantAppearanceGetTenantAppearance**](docs/TenantAppearanceAPI.md#tenantappearancegettenantappearance) | **GET** /api/v4/tenant/appearance | Get tenant appearance
+*TenantCreationInviteAPI* | [**tenantCreationInviteGetInfo**](docs/TenantCreationInviteAPI.md#tenantcreationinvitegetinfo) | **GET** /api/v4/tenant-invites/{token}/info | Get info
+*TenantCreationInviteAPI* | [**tenantCreationInviteRedeem**](docs/TenantCreationInviteAPI.md#tenantcreationinviteredeem) | **POST** /api/v4/tenant-invites/{token}/redeem | Redeem
+*TenantCreationInviteAPI* | [**tenantCreationInviteValidateSlug**](docs/TenantCreationInviteAPI.md#tenantcreationinvitevalidateslug) | **GET** /api/v4/tenant-invites/{token}/validate-slug | Validate slug
+*TenantCreationInviteAdminAPI* | [**tenantCreationInviteAdminCreate**](docs/TenantCreationInviteAdminAPI.md#tenantcreationinviteadmincreate) | **POST** /api/v4/admin/tenant-invites | Create
+*TenantCreationInviteAdminAPI* | [**tenantCreationInviteAdminGetOverview**](docs/TenantCreationInviteAdminAPI.md#tenantcreationinviteadmingetoverview) | **GET** /api/v4/admin/tenant-invites | Get overview
+*TenantCreationInviteAdminAPI* | [**tenantCreationInviteAdminRevoke**](docs/TenantCreationInviteAdminAPI.md#tenantcreationinviteadminrevoke) | **DELETE** /api/v4/admin/tenant-invites/{id} | Revoke
 *TenantDirectGrantAPI* | [**tenantDirectGrantCreate**](docs/TenantDirectGrantAPI.md#tenantdirectgrantcreate) | **POST** /api/v4/admin/tenants/{tenantId}/direct-grants | Create
 *TenantDirectGrantAPI* | [**tenantDirectGrantList**](docs/TenantDirectGrantAPI.md#tenantdirectgrantlist) | **GET** /api/v4/admin/tenants/{tenantId}/direct-grants | List
 *TenantDirectGrantAPI* | [**tenantDirectGrantRevoke**](docs/TenantDirectGrantAPI.md#tenantdirectgrantrevoke) | **DELETE** /api/v4/admin/tenants/{tenantId}/direct-grants/{grantId} | Revoke
+*TenantSettingsAPI* | [**tenantSettingsChangeSubdomain**](docs/TenantSettingsAPI.md#tenantsettingschangesubdomain) | **PUT** /api/v4/tenant-settings/subdomain | Change subdomain
+*TenantSettingsAPI* | [**tenantSettingsGetPatientRelationship**](docs/TenantSettingsAPI.md#tenantsettingsgetpatientrelationship) | **GET** /api/v4/tenant-settings/patient-relationship | Get patient relationship
+*TenantSettingsAPI* | [**tenantSettingsGetSubdomain**](docs/TenantSettingsAPI.md#tenantsettingsgetsubdomain) | **GET** /api/v4/tenant-settings/subdomain | Get subdomain
 *TenantSettingsAPI* | [**tenantSettingsGetTenantSettings**](docs/TenantSettingsAPI.md#tenantsettingsgettenantsettings) | **GET** /api/v4/tenant-settings | Get tenant settings
+*TenantSettingsAPI* | [**tenantSettingsGetUnitsAndTimezone**](docs/TenantSettingsAPI.md#tenantsettingsgetunitsandtimezone) | **GET** /api/v4/tenant-settings/units-and-timezone | Get units and timezone
+*TenantSettingsAPI* | [**tenantSettingsSetDisplayName**](docs/TenantSettingsAPI.md#tenantsettingssetdisplayname) | **PUT** /api/v4/tenant-settings/display-name | Set display name
+*TenantSettingsAPI* | [**tenantSettingsSetPatientRelationship**](docs/TenantSettingsAPI.md#tenantsettingssetpatientrelationship) | **PUT** /api/v4/tenant-settings/patient-relationship | Set patient relationship
 *TenantSettingsAPI* | [**tenantSettingsSetPublicDocs**](docs/TenantSettingsAPI.md#tenantsettingssetpublicdocs) | **PUT** /api/v4/tenant-settings/public-docs | Set public docs
+*TenantSettingsAPI* | [**tenantSettingsSetUnitsAndTimezone**](docs/TenantSettingsAPI.md#tenantsettingssetunitsandtimezone) | **PUT** /api/v4/tenant-settings/units-and-timezone | Set units and timezone
 *TimezoneTimelineAPI* | [**timezoneTimelineDelete**](docs/TimezoneTimelineAPI.md#timezonetimelinedelete) | **DELETE** /api/v4/timezone-timeline/{id} | Delete
+*TimezoneTimelineAPI* | [**timezoneTimelineGetDeviceClock**](docs/TimezoneTimelineAPI.md#timezonetimelinegetdeviceclock) | **GET** /api/v4/timezone-timeline/device-clock | Get device clock
 *TimezoneTimelineAPI* | [**timezoneTimelineGetTimeline**](docs/TimezoneTimelineAPI.md#timezonetimelinegettimeline) | **GET** /api/v4/timezone-timeline | Get timeline
 *TimezoneTimelineAPI* | [**timezoneTimelineRecorrect**](docs/TimezoneTimelineAPI.md#timezonetimelinerecorrect) | **POST** /api/v4/timezone-timeline/recorrect | Recorrect
 *TimezoneTimelineAPI* | [**timezoneTimelineUpsert**](docs/TimezoneTimelineAPI.md#timezonetimelineupsert) | **PUT** /api/v4/timezone-timeline | Upsert
 *TlsAuthorizationAPI* | [**tlsAuthorizationAuthorize**](docs/TlsAuthorizationAPI.md#tlsauthorizationauthorize) | **GET** /api/v4/platform/tls-authorize | Authorize
+*TrackerLegacyFallbacksAPI* | [**trackerLegacyFallbacksCreateFromLegacy**](docs/TrackerLegacyFallbacksAPI.md#trackerlegacyfallbackscreatefromlegacy) | **POST** /api/v4/trackers/from-legacy | Create from legacy
+*TrackerLegacyFallbacksAPI* | [**trackerLegacyFallbacksGetLegacyFallbacks**](docs/TrackerLegacyFallbacksAPI.md#trackerlegacyfallbacksgetlegacyfallbacks) | **GET** /api/v4/trackers/legacy-fallbacks | Get legacy fallbacks
 *TrackersAPI* | [**trackersAckInstance**](docs/TrackersAPI.md#trackersackinstance) | **POST** /api/v4/trackers/instances/{id}/ack | Ack instance
 *TrackersAPI* | [**trackersApplyPreset**](docs/TrackersAPI.md#trackersapplypreset) | **POST** /api/v4/trackers/presets/{id}/apply | Apply preset
 *TrackersAPI* | [**trackersCompleteInstance**](docs/TrackersAPI.md#trackerscompleteinstance) | **PUT** /api/v4/trackers/instances/{id}/complete | Complete instance
@@ -590,18 +683,30 @@ Class | Method | HTTP request | Description
 *TrackersAPI* | [**trackersGetActiveInstances**](docs/TrackersAPI.md#trackersgetactiveinstances) | **GET** /api/v4/trackers/instances | Get active instances
 *TrackersAPI* | [**trackersGetDefinition**](docs/TrackersAPI.md#trackersgetdefinition) | **GET** /api/v4/trackers/definitions/{id} | Get definition
 *TrackersAPI* | [**trackersGetDefinitions**](docs/TrackersAPI.md#trackersgetdefinitions) | **GET** /api/v4/trackers/definitions | Get definitions
+*TrackersAPI* | [**trackersGetDeviceEventTypes**](docs/TrackersAPI.md#trackersgetdeviceeventtypes) | **GET** /api/v4/trackers/device-event-types | Get device event types
+*TrackersAPI* | [**trackersGetEndEventTypes**](docs/TrackersAPI.md#trackersgetendeventtypes) | **GET** /api/v4/trackers/end-event-types | Get end event types
 *TrackersAPI* | [**trackersGetInstanceHistory**](docs/TrackersAPI.md#trackersgetinstancehistory) | **GET** /api/v4/trackers/instances/history | Get instance history
 *TrackersAPI* | [**trackersGetPresets**](docs/TrackersAPI.md#trackersgetpresets) | **GET** /api/v4/trackers/presets | Get presets
+*TrackersAPI* | [**trackersGetTriggerEventTypes**](docs/TrackersAPI.md#trackersgettriggereventtypes) | **GET** /api/v4/trackers/trigger-event-types | Get trigger event types
 *TrackersAPI* | [**trackersGetUpcomingInstances**](docs/TrackersAPI.md#trackersgetupcominginstances) | **GET** /api/v4/trackers/instances/upcoming | Get upcoming instances
 *TrackersAPI* | [**trackersStartInstance**](docs/TrackersAPI.md#trackersstartinstance) | **POST** /api/v4/trackers/instances | Start instance
 *TrackersAPI* | [**trackersUpdateDefinition**](docs/TrackersAPI.md#trackersupdatedefinition) | **PUT** /api/v4/trackers/definitions/{id} | Update definition
+*TranslationsAPI* | [**translationsClearDrafts**](docs/TranslationsAPI.md#translationscleardrafts) | **DELETE** /api/v4/translations/drafts | Clear drafts
+*TranslationsAPI* | [**translationsGetCatalogSource**](docs/TranslationsAPI.md#translationsgetcatalogsource) | **GET** /api/v4/translations/catalog-source | Get catalog source
+*TranslationsAPI* | [**translationsGetDrafts**](docs/TranslationsAPI.md#translationsgetdrafts) | **GET** /api/v4/translations/drafts | Get drafts
+*TranslationsAPI* | [**translationsSubmitContribution**](docs/TranslationsAPI.md#translationssubmitcontribution) | **POST** /api/v4/translations/contributions | Submit contribution
+*TranslationsAPI* | [**translationsSubmitDrafts**](docs/TranslationsAPI.md#translationssubmitdrafts) | **POST** /api/v4/translations/drafts/submit | Submit drafts
+*TranslationsAPI* | [**translationsUpsertDrafts**](docs/TranslationsAPI.md#translationsupsertdrafts) | **PUT** /api/v4/translations/drafts | Upsert drafts
+*TreatmentLogAPI* | [**treatmentLogGetStats**](docs/TreatmentLogAPI.md#treatmentloggetstats) | **GET** /api/v4/treatment-log/stats | Get stats
 *UISettingsAPI* | [**uISettingsAddOrUpdateAlarmProfile**](docs/UISettingsAPI.md#uisettingsaddorupdatealarmprofile) | **POST** /api/v4/ui-settings/notifications/alarms/profiles | Add or update alarm profile
 *UISettingsAPI* | [**uISettingsDeleteAlarmProfile**](docs/UISettingsAPI.md#uisettingsdeletealarmprofile) | **DELETE** /api/v4/ui-settings/notifications/alarms/profiles/{profileId} | Delete alarm profile
 *UISettingsAPI* | [**uISettingsGetAlarmConfiguration**](docs/UISettingsAPI.md#uisettingsgetalarmconfiguration) | **GET** /api/v4/ui-settings/notifications/alarms | Get alarm configuration
 *UISettingsAPI* | [**uISettingsGetSectionSettings**](docs/UISettingsAPI.md#uisettingsgetsectionsettings) | **GET** /api/v4/ui-settings/{section} | Get section settings
 *UISettingsAPI* | [**uISettingsGetUISettings**](docs/UISettingsAPI.md#uisettingsgetuisettings) | **GET** /api/v4/ui-settings | Get UI settings
+*UISettingsAPI* | [**uISettingsPatchDataQualitySettings**](docs/UISettingsAPI.md#uisettingspatchdataqualitysettings) | **PATCH** /api/v4/ui-settings/dataQuality | Patch data quality settings
+*UISettingsAPI* | [**uISettingsPatchFeatureSettings**](docs/UISettingsAPI.md#uisettingspatchfeaturesettings) | **PATCH** /api/v4/ui-settings/features | Patch feature settings
+*UISettingsAPI* | [**uISettingsPatchNotificationSettings**](docs/UISettingsAPI.md#uisettingspatchnotificationsettings) | **PATCH** /api/v4/ui-settings/notifications | Patch notification settings
 *UISettingsAPI* | [**uISettingsSaveAlarmConfiguration**](docs/UISettingsAPI.md#uisettingssavealarmconfiguration) | **PUT** /api/v4/ui-settings/notifications/alarms | Save alarm configuration
-*UISettingsAPI* | [**uISettingsSaveNotificationSettings**](docs/UISettingsAPI.md#uisettingssavenotificationsettings) | **PUT** /api/v4/ui-settings/notifications | Save notification settings
 *UISettingsAPI* | [**uISettingsSaveUISettings**](docs/UISettingsAPI.md#uisettingssaveuisettings) | **PUT** /api/v4/ui-settings | Save UI settings
 *UploaderSnapshotAPI* | [**uploaderSnapshotCreateUploaderSnapshots**](docs/UploaderSnapshotAPI.md#uploadersnapshotcreateuploadersnapshots) | **POST** /api/v4/device-status/uploader | Create uploader snapshots
 *UploaderSnapshotAPI* | [**uploaderSnapshotGetAll**](docs/UploaderSnapshotAPI.md#uploadersnapshotgetall) | **GET** /api/v4/device-status/uploader | Get all
@@ -615,21 +720,30 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [A1cDisplayReferences](docs/A1cDisplayReferences.md)
+ - [A1cDisplayValue](docs/A1cDisplayValue.md)
+ - [A1cTargetState](docs/A1cTargetState.md)
  - [AcceptMatchRequest](docs/AcceptMatchRequest.md)
  - [AcceptMemberInviteResult](docs/AcceptMemberInviteResult.md)
- - [AcceptSuggestionRequest](docs/AcceptSuggestionRequest.md)
  - [AccessRequestDto](docs/AccessRequestDto.md)
  - [AccountPortalConfig](docs/AccountPortalConfig.md)
  - [AckTrackerRequest](docs/AckTrackerRequest.md)
+ - [AcknowledgeExcursionResponse](docs/AcknowledgeExcursionResponse.md)
  - [AcknowledgeRequest](docs/AcknowledgeRequest.md)
  - [ActivateGuestLinkRequest](docs/ActivateGuestLinkRequest.md)
  - [ActivateGuestLinkResponse](docs/ActivateGuestLinkResponse.md)
  - [ActiveExcursionResponse](docs/ActiveExcursionResponse.md)
  - [ActiveInstanceResponse](docs/ActiveInstanceResponse.md)
+ - [ActiveProfileSchedules](docs/ActiveProfileSchedules.md)
  - [Activity](docs/Activity.md)
+ - [ActogramDay](docs/ActogramDay.md)
+ - [ActogramHeartRateSummary](docs/ActogramHeartRateSummary.md)
  - [ActogramReportData](docs/ActogramReportData.md)
  - [ActogramSleepSpan](docs/ActogramSleepSpan.md)
+ - [ActogramStepSummary](docs/ActogramStepSummary.md)
  - [AddMemberRequest](docs/AddMemberRequest.md)
+ - [AddSetupInsulinRequest](docs/AddSetupInsulinRequest.md)
+ - [AddSetupTrackerRequest](docs/AddSetupTrackerRequest.md)
  - [AdminAttachOidcRequest](docs/AdminAttachOidcRequest.md)
  - [AdminCreateDirectGrantRequest](docs/AdminCreateDirectGrantRequest.md)
  - [AdminResetCursorsRequest](docs/AdminResetCursorsRequest.md)
@@ -646,18 +760,28 @@ Class | Method | HTTP request | Description
  - [AlarmTriggerType](docs/AlarmTriggerType.md)
  - [AlarmVibrationSettings](docs/AlarmVibrationSettings.md)
  - [AlarmVisualSettings](docs/AlarmVisualSettings.md)
+ - [AlertAcknowledgementOutcome](docs/AlertAcknowledgementOutcome.md)
  - [AlertConditionType](docs/AlertConditionType.md)
  - [AlertCustomSoundResponse](docs/AlertCustomSoundResponse.md)
  - [AlertHistoryResponse](docs/AlertHistoryResponse.md)
  - [AlertInviteResponse](docs/AlertInviteResponse.md)
+ - [AlertReceiptActorKind](docs/AlertReceiptActorKind.md)
+ - [AlertReceiptResponse](docs/AlertReceiptResponse.md)
  - [AlertReplayDryRunRequest](docs/AlertReplayDryRunRequest.md)
  - [AlertReplayEvent](docs/AlertReplayEvent.md)
  - [AlertReplayEventKind](docs/AlertReplayEventKind.md)
  - [AlertReplayRequest](docs/AlertReplayRequest.md)
  - [AlertReplayResult](docs/AlertReplayResult.md)
+ - [AlertRouting](docs/AlertRouting.md)
  - [AlertRuleChannelResponse](docs/AlertRuleChannelResponse.md)
  - [AlertRuleResponse](docs/AlertRuleResponse.md)
  - [AlertRuleSeverity](docs/AlertRuleSeverity.md)
+ - [AlertSetupDelivery](docs/AlertSetupDelivery.md)
+ - [AlertSetupMember](docs/AlertSetupMember.md)
+ - [AlertSetupStatus](docs/AlertSetupStatus.md)
+ - [AlertSetupTest](docs/AlertSetupTest.md)
+ - [AlertThresholdSource](docs/AlertThresholdSource.md)
+ - [AlgorithmGuess](docs/AlgorithmGuess.md)
  - [AlgorithmSettings](docs/AlgorithmSettings.md)
  - [AnalysesListResponse](docs/AnalysesListResponse.md)
  - [AnalysisDetailDto](docs/AnalysisDetailDto.md)
@@ -672,17 +796,24 @@ Class | Method | HTTP request | Description
  - [ApproveMembershipRequestRequest](docs/ApproveMembershipRequestRequest.md)
  - [ApsSnapshot](docs/ApsSnapshot.md)
  - [AuditConfigDto](docs/AuditConfigDto.md)
+ - [AutoUpdateMode](docs/AutoUpdateMode.md)
+ - [AutoUpdateStatusDto](docs/AutoUpdateStatusDto.md)
  - [AutosensSettings](docs/AutosensSettings.md)
  - [AvailableConnector](docs/AvailableConnector.md)
  - [AvailableService](docs/AvailableService.md)
  - [AvatarUploadResponse](docs/AvatarUploadResponse.md)
+ - [AverageDailyEpisodes](docs/AverageDailyEpisodes.md)
+ - [AverageDailyMinutes](docs/AverageDailyMinutes.md)
  - [AveragedStats](docs/AveragedStats.md)
  - [BGCheck](docs/BGCheck.md)
+ - [BackupSignInPromptResponse](docs/BackupSignInPromptResponse.md)
  - [BasalAnalysisResponse](docs/BasalAnalysisResponse.md)
  - [BasalData](docs/BasalData.md)
  - [BasalDataPoint](docs/BasalDataPoint.md)
  - [BasalDeliveryOrigin](docs/BasalDeliveryOrigin.md)
  - [BasalDeliverySpanDto](docs/BasalDeliverySpanDto.md)
+ - [BasalEvidenceBlock](docs/BasalEvidenceBlock.md)
+ - [BasalEvidenceDay](docs/BasalEvidenceDay.md)
  - [BasalInjection](docs/BasalInjection.md)
  - [BasalInjectionMarkerDto](docs/BasalInjectionMarkerDto.md)
  - [BasalPoint](docs/BasalPoint.md)
@@ -702,6 +833,15 @@ Class | Method | HTTP request | Description
  - [BolusMarkerDto](docs/BolusMarkerDto.md)
  - [BolusType](docs/BolusType.md)
  - [BolusType2](docs/BolusType2.md)
+ - [BulkRestoreResultOfBGCheck](docs/BulkRestoreResultOfBGCheck.md)
+ - [BulkRestoreResultOfBasalInjection](docs/BulkRestoreResultOfBasalInjection.md)
+ - [BulkRestoreResultOfBolus](docs/BulkRestoreResultOfBolus.md)
+ - [BulkRestoreResultOfBolusCalculation](docs/BulkRestoreResultOfBolusCalculation.md)
+ - [BulkRestoreResultOfCalibration](docs/BulkRestoreResultOfCalibration.md)
+ - [BulkRestoreResultOfDeviceEvent](docs/BulkRestoreResultOfDeviceEvent.md)
+ - [BulkRestoreResultOfMeterGlucose](docs/BulkRestoreResultOfMeterGlucose.md)
+ - [BulkRestoreResultOfNote](docs/BulkRestoreResultOfNote.md)
+ - [BulkRestoreResultOfSensorGlucose](docs/BulkRestoreResultOfSensorGlucose.md)
  - [CalculationType](docs/CalculationType.md)
  - [CalculationType2](docs/CalculationType2.md)
  - [Calibration](docs/Calibration.md)
@@ -711,6 +851,8 @@ Class | Method | HTTP request | Description
  - [CarbIntakeFoodInputMode](docs/CarbIntakeFoodInputMode.md)
  - [CarbIntakeFoodRequest](docs/CarbIntakeFoodRequest.md)
  - [CarbMarkerDto](docs/CarbMarkerDto.md)
+ - [CarbRatioEvidenceBlock](docs/CarbRatioEvidenceBlock.md)
+ - [CarbRatioEvidenceEpisode](docs/CarbRatioEvidenceEpisode.md)
  - [CarbRatioSchedule](docs/CarbRatioSchedule.md)
  - [CareLinkConnectCompleteRequest](docs/CareLinkConnectCompleteRequest.md)
  - [CareLinkConnectCompleteResponse](docs/CareLinkConnectCompleteResponse.md)
@@ -722,7 +864,7 @@ Class | Method | HTTP request | Description
  - [CgmConfiguration](docs/CgmConfiguration.md)
  - [CgmPairedReading](docs/CgmPairedReading.md)
  - [CgmProperties](docs/CgmProperties.md)
- - [ChannelConfig](docs/ChannelConfig.md)
+ - [ChangeSubdomainRequest](docs/ChangeSubdomainRequest.md)
  - [ChannelStatus](docs/ChannelStatus.md)
  - [ChannelStatusEntry](docs/ChannelStatusEntry.md)
  - [ChannelStatusResponse](docs/ChannelStatusResponse.md)
@@ -734,8 +876,11 @@ Class | Method | HTTP request | Description
  - [ChartSpanKind](docs/ChartSpanKind.md)
  - [ChartStateSpanDto](docs/ChartStateSpanDto.md)
  - [ChartThresholdsDto](docs/ChartThresholdsDto.md)
+ - [ChatAcknowledgeRequest](docs/ChatAcknowledgeRequest.md)
+ - [ChatAcknowledgeResponse](docs/ChatAcknowledgeResponse.md)
  - [ChatIdentityLinkResponse](docs/ChatIdentityLinkResponse.md)
  - [ClaimChatIdentityLinkRequest](docs/ClaimChatIdentityLinkRequest.md)
+ - [ClearRejectedUploadsRequest](docs/ClearRejectedUploadsRequest.md)
  - [ClientDeviceDto](docs/ClientDeviceDto.md)
  - [ClientRegistrationRequest](docs/ClientRegistrationRequest.md)
  - [ClientRegistrationResponse](docs/ClientRegistrationResponse.md)
@@ -743,6 +888,7 @@ Class | Method | HTTP request | Description
  - [ClinicalAssessmentRequest](docs/ClinicalAssessmentRequest.md)
  - [ClinicalTargetAssessment](docs/ClinicalTargetAssessment.md)
  - [ClinicalTargets](docs/ClinicalTargets.md)
+ - [ClockAlertDto](docs/ClockAlertDto.md)
  - [ClockChartConfig](docs/ClockChartConfig.md)
  - [ClockElement](docs/ClockElement.md)
  - [ClockElementStyle](docs/ClockElementStyle.md)
@@ -758,16 +904,25 @@ Class | Method | HTTP request | Description
  - [CoachMarkState](docs/CoachMarkState.md)
  - [CobData](docs/CobData.md)
  - [CollectionProgress](docs/CollectionProgress.md)
+ - [ComparedPeriod](docs/ComparedPeriod.md)
  - [CompatibilityInfo](docs/CompatibilityInfo.md)
  - [CompatibilityMetrics](docs/CompatibilityMetrics.md)
  - [CompatibilityStatus](docs/CompatibilityStatus.md)
  - [CompleteTrackerInstanceRequest](docs/CompleteTrackerInstanceRequest.md)
  - [CompletionReason](docs/CompletionReason.md)
+ - [ComponentLifecycle](docs/ComponentLifecycle.md)
+ - [ComponentPower](docs/ComponentPower.md)
+ - [CompressionLowBatchAction](docs/CompressionLowBatchAction.md)
+ - [CompressionLowBatchItem](docs/CompressionLowBatchItem.md)
+ - [CompressionLowBatchRequest](docs/CompressionLowBatchRequest.md)
+ - [CompressionLowConfidenceBand](docs/CompressionLowConfidenceBand.md)
  - [CompressionLowDetectionSettings](docs/CompressionLowDetectionSettings.md)
  - [CompressionLowStatus](docs/CompressionLowStatus.md)
  - [CompressionLowSuggestion](docs/CompressionLowSuggestion.md)
  - [CompressionLowSuggestionWithEntries](docs/CompressionLowSuggestionWithEntries.md)
  - [ConfigManagedResponse](docs/ConfigManagedResponse.md)
+ - [ConfirmSetupDeviceRequest](docs/ConfirmSetupDeviceRequest.md)
+ - [ConfirmSetupTestAlertRequest](docs/ConfirmSetupTestAlertRequest.md)
  - [ConnectedAppDto](docs/ConnectedAppDto.md)
  - [ConnectedDevice](docs/ConnectedDevice.md)
  - [ConnectedService](docs/ConnectedService.md)
@@ -775,6 +930,7 @@ Class | Method | HTTP request | Description
  - [ConnectorConfigField](docs/ConnectorConfigField.md)
  - [ConnectorConfigSnapshotDto](docs/ConnectorConfigSnapshotDto.md)
  - [ConnectorConfigurationResponse](docs/ConnectorConfigurationResponse.md)
+ - [ConnectorCredentialVerificationResult](docs/ConnectorCredentialVerificationResult.md)
  - [ConnectorDataSummary](docs/ConnectorDataSummary.md)
  - [ConnectorFoodEntry](docs/ConnectorFoodEntry.md)
  - [ConnectorFoodEntryImport](docs/ConnectorFoodEntryImport.md)
@@ -788,7 +944,10 @@ Class | Method | HTTP request | Description
  - [ConnectorStatusDto](docs/ConnectorStatusDto.md)
  - [ConnectorStatusInfo](docs/ConnectorStatusInfo.md)
  - [ConnectorSyncStatus](docs/ConnectorSyncStatus.md)
+ - [ContentContributionRequest](docs/ContentContributionRequest.md)
+ - [ContentContributionResponse](docs/ContentContributionResponse.md)
  - [ContributingDevice](docs/ContributingDevice.md)
+ - [ContributionContributorDto](docs/ContributionContributorDto.md)
  - [CreateAlertInviteRequest](docs/CreateAlertInviteRequest.md)
  - [CreateAlertRuleChannelRequest](docs/CreateAlertRuleChannelRequest.md)
  - [CreateAlertRuleRequest](docs/CreateAlertRuleRequest.md)
@@ -801,6 +960,7 @@ Class | Method | HTTP request | Description
  - [CreateDndWindowRequest](docs/CreateDndWindowRequest.md)
  - [CreateGuestLinkRequest](docs/CreateGuestLinkRequest.md)
  - [CreateIssueResponse](docs/CreateIssueResponse.md)
+ - [CreateLabHbA1cResultRequest](docs/CreateLabHbA1cResultRequest.md)
  - [CreateMealRequest](docs/CreateMealRequest.md)
  - [CreateMealResponse](docs/CreateMealResponse.md)
  - [CreateMemberInviteRequest](docs/CreateMemberInviteRequest.md)
@@ -812,22 +972,34 @@ Class | Method | HTTP request | Description
  - [CreateOidcProviderRequest](docs/CreateOidcProviderRequest.md)
  - [CreatePendingLinkRequest](docs/CreatePendingLinkRequest.md)
  - [CreatePlatformTenantRequest](docs/CreatePlatformTenantRequest.md)
+ - [CreateProfileActivationRequest](docs/CreateProfileActivationRequest.md)
  - [CreateReservoirReportRequest](docs/CreateReservoirReportRequest.md)
  - [CreateRoleRequest](docs/CreateRoleRequest.md)
  - [CreateStateSpanRequest](docs/CreateStateSpanRequest.md)
  - [CreateSystemEventRequest](docs/CreateSystemEventRequest.md)
  - [CreateTempBasalRequest](docs/CreateTempBasalRequest.md)
+ - [CreateTenantCreationInviteRequest](docs/CreateTenantCreationInviteRequest.md)
  - [CreateTenantRequest](docs/CreateTenantRequest.md)
  - [CreateTrackerDefinitionRequest](docs/CreateTrackerDefinitionRequest.md)
  - [CreateTrackerPresetRequest](docs/CreateTrackerPresetRequest.md)
+ - [CreateTrackersFromLegacyRequest](docs/CreateTrackersFromLegacyRequest.md)
  - [CurrentBatteryStatus](docs/CurrentBatteryStatus.md)
  - [CurrentTherapyStateResponse](docs/CurrentTherapyStateResponse.md)
  - [CustomSoundReference](docs/CustomSoundReference.md)
  - [DailyBasalBolusRatioData](docs/DailyBasalBolusRatioData.md)
  - [DailyBasalBolusRatioResponse](docs/DailyBasalBolusRatioResponse.md)
+ - [DailyInsulinSummary](docs/DailyInsulinSummary.md)
+ - [DailyProfileDay](docs/DailyProfileDay.md)
+ - [DailyProfileDayCoverage](docs/DailyProfileDayCoverage.md)
+ - [DailyProfileEventSeries](docs/DailyProfileEventSeries.md)
+ - [DailyProfileRange](docs/DailyProfileRange.md)
+ - [DailyProfileResponse](docs/DailyProfileResponse.md)
+ - [DailyProfileSlot](docs/DailyProfileSlot.md)
+ - [DailyProfileSummary](docs/DailyProfileSummary.md)
  - [DailySummaryDay](docs/DailySummaryDay.md)
  - [DailySummaryResponse](docs/DailySummaryResponse.md)
  - [DashboardChartData](docs/DashboardChartData.md)
+ - [DashboardRailPreference](docs/DashboardRailPreference.md)
  - [DashboardVisibility](docs/DashboardVisibility.md)
  - [DataGap](docs/DataGap.md)
  - [DataOverviewYearsResponse](docs/DataOverviewYearsResponse.md)
@@ -839,6 +1011,7 @@ Class | Method | HTTP request | Description
  - [DataSufficiencyAssessment](docs/DataSufficiencyAssessment.md)
  - [DataSufficiencyRequest](docs/DataSufficiencyRequest.md)
  - [DataSufficiencyStatus](docs/DataSufficiencyStatus.md)
+ - [DatabaseCapacityDto](docs/DatabaseCapacityDto.md)
  - [DayData](docs/DayData.md)
  - [DayOfWeek](docs/DayOfWeek.md)
  - [DecideMembershipRequestResult](docs/DecideMembershipRequestResult.md)
@@ -869,12 +1042,20 @@ Class | Method | HTTP request | Description
  - [DeviceCapabilityInfo](docs/DeviceCapabilityInfo.md)
  - [DeviceCatalogEntry](docs/DeviceCatalogEntry.md)
  - [DeviceCategory](docs/DeviceCategory.md)
+ - [DeviceClockDiagnostics](docs/DeviceClockDiagnostics.md)
+ - [DeviceClockObservation](docs/DeviceClockObservation.md)
+ - [DeviceClockObservationSource](docs/DeviceClockObservationSource.md)
+ - [DeviceClockSegment](docs/DeviceClockSegment.md)
  - [DeviceCodeInfo](docs/DeviceCodeInfo.md)
  - [DeviceEvent](docs/DeviceEvent.md)
  - [DeviceEventMarkerDto](docs/DeviceEventMarkerDto.md)
  - [DeviceEventType](docs/DeviceEventType.md)
+ - [DeviceEvidence](docs/DeviceEvidence.md)
+ - [DeviceEvidenceSource](docs/DeviceEvidenceSource.md)
  - [DeviceRankAssignment](docs/DeviceRankAssignment.md)
  - [DeviceSettings](docs/DeviceSettings.md)
+ - [DeviceSetup](docs/DeviceSetup.md)
+ - [DeviceSlot](docs/DeviceSlot.md)
  - [DiabetesPopulation](docs/DiabetesPopulation.md)
  - [DiabetesType](docs/DiabetesType.md)
  - [DirectGrantDto](docs/DirectGrantDto.md)
@@ -888,14 +1069,31 @@ Class | Method | HTTP request | Description
  - [DiscrepancySeverity](docs/DiscrepancySeverity.md)
  - [DiscrepancyType](docs/DiscrepancyType.md)
  - [DismissMatchRequest](docs/DismissMatchRequest.md)
+ - [DismissSetupStripRequest](docs/DismissSetupStripRequest.md)
  - [DisplaySettings](docs/DisplaySettings.md)
  - [DistributionBin](docs/DistributionBin.md)
  - [DistributionDataPoint](docs/DistributionDataPoint.md)
  - [DndScope](docs/DndScope.md)
  - [DndWindowResponse](docs/DndWindowResponse.md)
+ - [EHbA1cPoint](docs/EHbA1cPoint.md)
+ - [EHbA1cTimelineResponse](docs/EHbA1cTimelineResponse.md)
  - [EmergencyContactConfig](docs/EmergencyContactConfig.md)
  - [EndpointMetrics](docs/EndpointMetrics.md)
+ - [EnterTherapySettingsRequest](docs/EnterTherapySettingsRequest.md)
  - [Entry](docs/Entry.md)
+ - [EventAnchorKind](docs/EventAnchorKind.md)
+ - [EventCohortDefinition](docs/EventCohortDefinition.md)
+ - [EventCohortResult](docs/EventCohortResult.md)
+ - [EventMetrics](docs/EventMetrics.md)
+ - [EventMetricsSummary](docs/EventMetricsSummary.md)
+ - [EventResponseDefinition](docs/EventResponseDefinition.md)
+ - [EventResponseEvent](docs/EventResponseEvent.md)
+ - [EventResponseKind](docs/EventResponseKind.md)
+ - [EventResponseLimits](docs/EventResponseLimits.md)
+ - [EventResponseRange](docs/EventResponseRange.md)
+ - [EventResponseReport](docs/EventResponseReport.md)
+ - [EventResponseSlot](docs/EventResponseSlot.md)
+ - [EventUnavailableAnchor](docs/EventUnavailableAnchor.md)
  - [ExtendedAnalysisConfig](docs/ExtendedAnalysisConfig.md)
  - [ExtendedGlucoseAnalytics](docs/ExtendedGlucoseAnalytics.md)
  - [ExtendedGlucoseAnalyticsRequest](docs/ExtendedGlucoseAnalyticsRequest.md)
@@ -912,6 +1110,7 @@ Class | Method | HTTP request | Description
  - [GapAnalysis](docs/GapAnalysis.md)
  - [GlucoseAnalytics](docs/GlucoseAnalytics.md)
  - [GlucoseAnalyticsRequest](docs/GlucoseAnalyticsRequest.md)
+ - [GlucoseAroundChange](docs/GlucoseAroundChange.md)
  - [GlucoseCluster](docs/GlucoseCluster.md)
  - [GlucoseCondition](docs/GlucoseCondition.md)
  - [GlucoseData](docs/GlucoseData.md)
@@ -927,46 +1126,116 @@ Class | Method | HTTP request | Description
  - [GlucoseProcessingSourceDefault](docs/GlucoseProcessingSourceDefault.md)
  - [GlucoseProcessingSourceDefaultsResponse](docs/GlucoseProcessingSourceDefaultsResponse.md)
  - [GlucoseStatus](docs/GlucoseStatus.md)
+ - [GlucoseTracePoint](docs/GlucoseTracePoint.md)
  - [GlucoseTrend](docs/GlucoseTrend.md)
  - [GlucoseType](docs/GlucoseType.md)
  - [GlucoseUnit](docs/GlucoseUnit.md)
+ - [GlucoseWindowSummary](docs/GlucoseWindowSummary.md)
  - [GlycemicRiskIndex](docs/GlycemicRiskIndex.md)
  - [GlycemicThresholds](docs/GlycemicThresholds.md)
  - [GlycemicVariability](docs/GlycemicVariability.md)
  - [GlycemicVariabilityRequest](docs/GlycemicVariabilityRequest.md)
+ - [GlycemicVariabilityStatus](docs/GlycemicVariabilityStatus.md)
  - [GlycomicRiskInterpretation](docs/GlycomicRiskInterpretation.md)
+ - [GoogleHealthAuthorize](docs/GoogleHealthAuthorize.md)
+ - [GoogleHealthCallback](docs/GoogleHealthCallback.md)
+ - [GoogleHealthCategory](docs/GoogleHealthCategory.md)
+ - [GoogleHealthCategoryKind](docs/GoogleHealthCategoryKind.md)
+ - [GoogleHealthConnectionState](docs/GoogleHealthConnectionState.md)
+ - [GoogleHealthDataTypeStatus](docs/GoogleHealthDataTypeStatus.md)
+ - [GoogleHealthFound](docs/GoogleHealthFound.md)
+ - [GoogleHealthOptions](docs/GoogleHealthOptions.md)
+ - [GoogleHealthStatus](docs/GoogleHealthStatus.md)
+ - [GoogleHealthSyncPhase](docs/GoogleHealthSyncPhase.md)
+ - [GoogleHealthTypeState](docs/GoogleHealthTypeState.md)
  - [GriTimelinePeriod](docs/GriTimelinePeriod.md)
  - [GriTimelineResponse](docs/GriTimelineResponse.md)
+ - [GuestCodePendingResponse](docs/GuestCodePendingResponse.md)
  - [GuestLinkCreationResult](docs/GuestLinkCreationResult.md)
  - [GuestLinkInfo](docs/GuestLinkInfo.md)
+ - [GuestLinkScopeOptions](docs/GuestLinkScopeOptions.md)
  - [GuestLinkStatus](docs/GuestLinkStatus.md)
  - [HeartRate](docs/HeartRate.md)
  - [HeartRatePointDto](docs/HeartRatePointDto.md)
  - [HeartbeatRequest](docs/HeartbeatRequest.md)
  - [HistoryExcursionResponse](docs/HistoryExcursionResponse.md)
  - [HourlyBasalPercentileData](docs/HourlyBasalPercentileData.md)
+ - [HourlyClockBasis](docs/HourlyClockBasis.md)
+ - [HourlyComparison](docs/HourlyComparison.md)
+ - [HourlyExcursion](docs/HourlyExcursion.md)
  - [HourlyInsulinDeliveryPoint](docs/HourlyInsulinDeliveryPoint.md)
  - [HourlyInsulinDeliveryResponse](docs/HourlyInsulinDeliveryResponse.md)
+ - [HourlyPattern](docs/HourlyPattern.md)
+ - [HourlyPatterns](docs/HourlyPatterns.md)
  - [HypoEvent](docs/HypoEvent.md)
  - [InAppNotificationDto](docs/InAppNotificationDto.md)
+ - [InAppRecipientResponse](docs/InAppRecipientResponse.md)
  - [InsightKey](docs/InsightKey.md)
+ - [InsulinActedEpisode](docs/InsulinActedEpisode.md)
+ - [InsulinActedFigure](docs/InsulinActedFigure.md)
+ - [InsulinActionTime](docs/InsulinActionTime.md)
+ - [InsulinActionTimeSource](docs/InsulinActionTimeSource.md)
  - [InsulinCategory](docs/InsulinCategory.md)
+ - [InsulinChoice](docs/InsulinChoice.md)
+ - [InsulinChoiceGroup](docs/InsulinChoiceGroup.md)
+ - [InsulinDeliveryPeriodBreakdown](docs/InsulinDeliveryPeriodBreakdown.md)
+ - [InsulinDeliveryPeriodTotal](docs/InsulinDeliveryPeriodTotal.md)
  - [InsulinDeliveryStatistics](docs/InsulinDeliveryStatistics.md)
  - [InsulinDose](docs/InsulinDose.md)
  - [InsulinFormulation](docs/InsulinFormulation.md)
+ - [InsulinGroup](docs/InsulinGroup.md)
  - [InsulinRole](docs/InsulinRole.md)
  - [InsulinTotals](docs/InsulinTotals.md)
  - [InviteUsageInfo](docs/InviteUsageInfo.md)
  - [InviteViewer](docs/InviteViewer.md)
+ - [IobCobSource](docs/IobCobSource.md)
  - [IobData](docs/IobData.md)
+ - [IsfEvidenceBlock](docs/IsfEvidenceBlock.md)
+ - [IsfEvidenceEpisode](docs/IsfEvidenceEpisode.md)
+ - [JobLedgerEntry](docs/JobLedgerEntry.md)
+ - [JobLedgerListing](docs/JobLedgerListing.md)
+ - [JoinInviteInfo](docs/JoinInviteInfo.md)
  - [JsonDocument](docs/JsonDocument.md)
+ - [LabHbA1cResult](docs/LabHbA1cResult.md)
  - [LeafTransitionLog](docs/LeafTransitionLog.md)
  - [LeafTransitionPoint](docs/LeafTransitionPoint.md)
+ - [LegacyConsumableKind](docs/LegacyConsumableKind.md)
+ - [LegacyConversionDto](docs/LegacyConversionDto.md)
+ - [LegacyCoverageDto](docs/LegacyCoverageDto.md)
+ - [LegacyFallbackDto](docs/LegacyFallbackDto.md)
+ - [LegacyFallbackSpecDto](docs/LegacyFallbackSpecDto.md)
+ - [LegacyFallbacksDto](docs/LegacyFallbacksDto.md)
  - [LinkedPlatformsResponse](docs/LinkedPlatformsResponse.md)
  - [LinkedRecord](docs/LinkedRecord.md)
  - [LinkedRecordsResponse](docs/LinkedRecordsResponse.md)
  - [LocalizedInsight](docs/LocalizedInsight.md)
+ - [LockedOutMember](docs/LockedOutMember.md)
  - [LoginCode](docs/LoginCode.md)
+ - [LoopAnalysisAggregate](docs/LoopAnalysisAggregate.md)
+ - [LoopAnalysisComparison](docs/LoopAnalysisComparison.md)
+ - [LoopAnalysisHourlyValue](docs/LoopAnalysisHourlyValue.md)
+ - [LoopAnalysisMasks](docs/LoopAnalysisMasks.md)
+ - [LoopAnalysisResolvedRange](docs/LoopAnalysisResolvedRange.md)
+ - [LoopAnalysisResponse](docs/LoopAnalysisResponse.md)
+ - [LoopAnalysisSeries](docs/LoopAnalysisSeries.md)
+ - [LoopAnalysisUnavailableFilter](docs/LoopAnalysisUnavailableFilter.md)
+ - [LoopHealthActivity](docs/LoopHealthActivity.md)
+ - [LoopHealthAutomaticBoluses](docs/LoopHealthAutomaticBoluses.md)
+ - [LoopHealthCadence](docs/LoopHealthCadence.md)
+ - [LoopHealthDay](docs/LoopHealthDay.md)
+ - [LoopHealthDistribution](docs/LoopHealthDistribution.md)
+ - [LoopHealthGap](docs/LoopHealthGap.md)
+ - [LoopHealthGaps](docs/LoopHealthGaps.md)
+ - [LoopHealthHourValue](docs/LoopHealthHourValue.md)
+ - [LoopHealthLimits](docs/LoopHealthLimits.md)
+ - [LoopHealthMaxBasal](docs/LoopHealthMaxBasal.md)
+ - [LoopHealthRange](docs/LoopHealthRange.md)
+ - [LoopHealthResponse](docs/LoopHealthResponse.md)
+ - [LoopHealthShare](docs/LoopHealthShare.md)
+ - [LoopHealthShareHour](docs/LoopHealthShareHour.md)
+ - [LoopHealthUnknown](docs/LoopHealthUnknown.md)
+ - [LoopHealthUnknownReason](docs/LoopHealthUnknownReason.md)
+ - [LoopHealthZeroDelivery](docs/LoopHealthZeroDelivery.md)
  - [LoopOverridePreset](docs/LoopOverridePreset.md)
  - [LoopProfileSettings](docs/LoopProfileSettings.md)
  - [LoopSettings](docs/LoopSettings.md)
@@ -976,31 +1245,37 @@ Class | Method | HTTP request | Description
  - [MarkDeliveredRequest](docs/MarkDeliveredRequest.md)
  - [MarkFailedRequest](docs/MarkFailedRequest.md)
  - [MealEvent](docs/MealEvent.md)
+ - [MealPeriod](docs/MealPeriod.md)
  - [MemberInviteInfo](docs/MemberInviteInfo.md)
  - [MemberInviteResult](docs/MemberInviteResult.md)
  - [MembershipRequestDto](docs/MembershipRequestDto.md)
  - [MembershipRequestSettingsDto](docs/MembershipRequestSettingsDto.md)
  - [MeterGlucose](docs/MeterGlucose.md)
+ - [MetricComparison](docs/MetricComparison.md)
  - [MigrationJobInfo](docs/MigrationJobInfo.md)
  - [MigrationJobState](docs/MigrationJobState.md)
  - [MigrationJobStatus](docs/MigrationJobStatus.md)
  - [MigrationMode](docs/MigrationMode.md)
+ - [MigrationPhase](docs/MigrationPhase.md)
  - [MigrationSourceDto](docs/MigrationSourceDto.md)
  - [MigrationStatusInfo](docs/MigrationStatusInfo.md)
  - [MultiPeriodStatistics](docs/MultiPeriodStatistics.md)
  - [MutationAuditDto](docs/MutationAuditDto.md)
  - [MyFitnessPalMatchingSettings](docs/MyFitnessPalMatchingSettings.md)
+ - [MyPermissionsResponse](docs/MyPermissionsResponse.md)
+ - [NetLoopCorrectionAggregate](docs/NetLoopCorrectionAggregate.md)
  - [NightDetectionResult](docs/NightDetectionResult.md)
+ - [NightscoutDisplaySettings](docs/NightscoutDisplaySettings.md)
  - [NightscoutTransitionStatus](docs/NightscoutTransitionStatus.md)
  - [Note](docs/Note.md)
  - [NotificationActionDto](docs/NotificationActionDto.md)
  - [NotificationCategory](docs/NotificationCategory.md)
- - [NotificationChannelsConfig](docs/NotificationChannelsConfig.md)
  - [NotificationSettings](docs/NotificationSettings.md)
  - [NotificationThresholdDto](docs/NotificationThresholdDto.md)
  - [NotificationUrgency](docs/NotificationUrgency.md)
  - [OAuth2ProviderSettings](docs/OAuth2ProviderSettings.md)
  - [OAuthClientEntityDto](docs/OAuthClientEntityDto.md)
+ - [OAuthClientIdentity](docs/OAuthClientIdentity.md)
  - [OAuthClientInfoResponse](docs/OAuthClientInfoResponse.md)
  - [OAuthDeviceAuthorizationResponse](docs/OAuthDeviceAuthorizationResponse.md)
  - [OAuthError](docs/OAuthError.md)
@@ -1028,6 +1303,7 @@ Class | Method | HTTP request | Description
  - [PaginatedResponseOfProfile](docs/PaginatedResponseOfProfile.md)
  - [PaginatedResponseOfPumpSnapshot](docs/PaginatedResponseOfPumpSnapshot.md)
  - [PaginatedResponseOfReadAccessAuditDto](docs/PaginatedResponseOfReadAccessAuditDto.md)
+ - [PaginatedResponseOfRejectedUpload](docs/PaginatedResponseOfRejectedUpload.md)
  - [PaginatedResponseOfSensorGlucose](docs/PaginatedResponseOfSensorGlucose.md)
  - [PaginatedResponseOfSleepSession](docs/PaginatedResponseOfSleepSession.md)
  - [PaginatedResponseOfStateSpan](docs/PaginatedResponseOfStateSpan.md)
@@ -1040,36 +1316,66 @@ Class | Method | HTTP request | Description
  - [PatientDevice](docs/PatientDevice.md)
  - [PatientInsulin](docs/PatientInsulin.md)
  - [PatientRecord](docs/PatientRecord.md)
+ - [PatientRelationship](docs/PatientRelationship.md)
+ - [PatientRelationshipDto](docs/PatientRelationshipDto.md)
+ - [PatientTimezoneResponse](docs/PatientTimezoneResponse.md)
  - [PendingDeliveryResponse](docs/PendingDeliveryResponse.md)
  - [PendingLinkResponse](docs/PendingLinkResponse.md)
  - [PendingLinkViewResponse](docs/PendingLinkViewResponse.md)
  - [PendingMigrationConfig](docs/PendingMigrationConfig.md)
  - [PerformanceMetrics](docs/PerformanceMetrics.md)
+ - [PeriodComparison](docs/PeriodComparison.md)
+ - [PeriodComparisonMetric](docs/PeriodComparisonMetric.md)
  - [PeriodMetrics](docs/PeriodMetrics.md)
  - [PeriodStatistics](docs/PeriodStatistics.md)
  - [PersonalRangeTimeInRange](docs/PersonalRangeTimeInRange.md)
  - [PlatformCredentials](docs/PlatformCredentials.md)
+ - [PlatformPolicy](docs/PlatformPolicy.md)
  - [PlatformSettingsSummary](docs/PlatformSettingsSummary.md)
  - [PluginSettings](docs/PluginSettings.md)
+ - [PredictionAccuracyRange](docs/PredictionAccuracyRange.md)
+ - [PredictionAccuracyResponse](docs/PredictionAccuracyResponse.md)
+ - [PredictionContext](docs/PredictionContext.md)
+ - [PredictionContextAccuracy](docs/PredictionContextAccuracy.md)
+ - [PredictionCurve](docs/PredictionCurve.md)
+ - [PredictionCurveAccuracy](docs/PredictionCurveAccuracy.md)
  - [PredictionCurves](docs/PredictionCurves.md)
+ - [PredictionHorizonAccuracy](docs/PredictionHorizonAccuracy.md)
+ - [PredictionHourAccuracy](docs/PredictionHourAccuracy.md)
  - [PredictionPreferences](docs/PredictionPreferences.md)
  - [PredictionSettings](docs/PredictionSettings.md)
  - [PredictionStatusResponse](docs/PredictionStatusResponse.md)
  - [ProblemDetails](docs/ProblemDetails.md)
  - [ProcessableDocumentBase](docs/ProcessableDocumentBase.md)
- - [ProcessingStatus](docs/ProcessingStatus.md)
- - [ProcessingStatusResponse](docs/ProcessingStatusResponse.md)
  - [Profile](docs/Profile.md)
+ - [ProfileActivationDto](docs/ProfileActivationDto.md)
+ - [ProfileActivationOrigin](docs/ProfileActivationOrigin.md)
+ - [ProfileActivationPhase](docs/ProfileActivationPhase.md)
+ - [ProfileActivationStatus](docs/ProfileActivationStatus.md)
+ - [ProfileAttribute](docs/ProfileAttribute.md)
+ - [ProfileAttributeChange](docs/ProfileAttributeChange.md)
+ - [ProfileChange](docs/ProfileChange.md)
+ - [ProfileChangeRow](docs/ProfileChangeRow.md)
  - [ProfileData](docs/ProfileData.md)
+ - [ProfileHistory](docs/ProfileHistory.md)
+ - [ProfileHistoryEntry](docs/ProfileHistoryEntry.md)
+ - [ProfileLaneStep](docs/ProfileLaneStep.md)
+ - [ProfileLanes](docs/ProfileLanes.md)
+ - [ProfileLoopPoint](docs/ProfileLoopPoint.md)
  - [ProfileSnapshotResponse](docs/ProfileSnapshotResponse.md)
  - [ProfileSnapshotSegment](docs/ProfileSnapshotSegment.md)
  - [ProfileSummary](docs/ProfileSummary.md)
+ - [ProfileVersion](docs/ProfileVersion.md)
  - [ProvisionCredentialData](docs/ProvisionCredentialData.md)
  - [ProvisionOidcIdentityData](docs/ProvisionOidcIdentityData.md)
  - [ProvisionRequest](docs/ProvisionRequest.md)
  - [ProvisionResult](docs/ProvisionResult.md)
  - [ProxyConfigurationDto](docs/ProxyConfigurationDto.md)
+ - [PumpCapability](docs/PumpCapability.md)
+ - [PumpComponent](docs/PumpComponent.md)
+ - [PumpComponentKind](docs/PumpComponentKind.md)
  - [PumpModeState](docs/PumpModeState.md)
+ - [PumpProperties](docs/PumpProperties.md)
  - [PumpSnapshot](docs/PumpSnapshot.md)
  - [PunchCardDateRange](docs/PunchCardDateRange.md)
  - [PunchCardDay](docs/PunchCardDay.md)
@@ -1077,14 +1383,19 @@ Class | Method | HTTP request | Description
  - [PunchCardMonth](docs/PunchCardMonth.md)
  - [PunchCardMonthSummary](docs/PunchCardMonthSummary.md)
  - [PunchCardResponse](docs/PunchCardResponse.md)
- - [PushoverChannelConfig](docs/PushoverChannelConfig.md)
  - [QuickPickFood](docs/QuickPickFood.md)
+ - [RailItemId](docs/RailItemId.md)
  - [ReadAccessAuditDto](docs/ReadAccessAuditDto.md)
+ - [RealtimeAdmission](docs/RealtimeAdmission.md)
  - [RecordType](docs/RecordType.md)
  - [RecorrectRequest](docs/RecorrectRequest.md)
  - [RecorrectResult](docs/RecorrectResult.md)
+ - [RedeemTenantCreationInviteRequest](docs/RedeemTenantCreationInviteRequest.md)
  - [ReferencingRulesResponse](docs/ReferencingRulesResponse.md)
  - [RegisterDeviceRequest](docs/RegisterDeviceRequest.md)
+ - [RejectedUpload](docs/RejectedUpload.md)
+ - [ReleaseNotesDto](docs/ReleaseNotesDto.md)
+ - [ReleaseStatusDto](docs/ReleaseStatusDto.md)
  - [RenameDeviceRequest](docs/RenameDeviceRequest.md)
  - [ReplayRuleDefinition](docs/ReplayRuleDefinition.md)
  - [ReportAnalysisResult](docs/ReportAnalysisResult.md)
@@ -1098,11 +1409,15 @@ Class | Method | HTTP request | Description
  - [RetrospectiveTimelineResponse](docs/RetrospectiveTimelineResponse.md)
  - [RevokeByPlatformUserRequest](docs/RevokeByPlatformUserRequest.md)
  - [RevokeOthersResultDto](docs/RevokeOthersResultDto.md)
+ - [RoleAccessLevel](docs/RoleAccessLevel.md)
  - [RuleScopeClass](docs/RuleScopeClass.md)
+ - [RustValidationIssue](docs/RustValidationIssue.md)
  - [SafetyLimits](docs/SafetyLimits.md)
  - [SampleDataSeedResult](docs/SampleDataSeedResult.md)
+ - [SaveAlertSetupRequest](docs/SaveAlertSetupRequest.md)
  - [ScheduleChangeInfo](docs/ScheduleChangeInfo.md)
  - [ScheduleEntry](docs/ScheduleEntry.md)
+ - [ScopeDeletionAccess](docs/ScopeDeletionAccess.md)
  - [SelectOption](docs/SelectOption.md)
  - [SensitivitySchedule](docs/SensitivitySchedule.md)
  - [SensorAgeInfo](docs/SensorAgeInfo.md)
@@ -1115,15 +1430,38 @@ Class | Method | HTTP request | Description
  - [ServicesSettings](docs/ServicesSettings.md)
  - [SessionDto](docs/SessionDto.md)
  - [SetActiveRequest](docs/SetActiveRequest.md)
+ - [SetDisplayNameRequest](docs/SetDisplayNameRequest.md)
  - [SetGlucoseProcessingPreferenceRequest](docs/SetGlucoseProcessingPreferenceRequest.md)
  - [SetGlucoseProcessingSourceDefaultsRequest](docs/SetGlucoseProcessingSourceDefaultsRequest.md)
  - [SetMemberLimitTo24HoursRequest](docs/SetMemberLimitTo24HoursRequest.md)
  - [SetMemberPermissionsRequest](docs/SetMemberPermissionsRequest.md)
  - [SetMemberRolesRequest](docs/SetMemberRolesRequest.md)
+ - [SetPatientRelationshipRequest](docs/SetPatientRelationshipRequest.md)
  - [SetPlatformAdminRequest](docs/SetPlatformAdminRequest.md)
  - [SetPublicDocsRequest](docs/SetPublicDocsRequest.md)
+ - [SetSetupHubItemStateRequest](docs/SetSetupHubItemStateRequest.md)
  - [SetShareFullHistoryRequest](docs/SetShareFullHistoryRequest.md)
  - [SetShareScopesRequest](docs/SetShareScopesRequest.md)
+ - [SetTakesNoInsulinRequest](docs/SetTakesNoInsulinRequest.md)
+ - [SetUnitsAndTimezoneRequest](docs/SetUnitsAndTimezoneRequest.md)
+ - [SetUrgentLowRecipientRequest](docs/SetUrgentLowRecipientRequest.md)
+ - [SettingsEvidenceBlock](docs/SettingsEvidenceBlock.md)
+ - [SettingsEvidenceConfidence](docs/SettingsEvidenceConfidence.md)
+ - [SettingsEvidenceConfidenceReason](docs/SettingsEvidenceConfidenceReason.md)
+ - [SettingsEvidenceEpisode](docs/SettingsEvidenceEpisode.md)
+ - [SettingsEvidenceFigure](docs/SettingsEvidenceFigure.md)
+ - [SettingsEvidenceRange](docs/SettingsEvidenceRange.md)
+ - [SettingsEvidenceRejection](docs/SettingsEvidenceRejection.md)
+ - [SettingsEvidenceReport](docs/SettingsEvidenceReport.md)
+ - [SettingsEvidenceRule](docs/SettingsEvidenceRule.md)
+ - [SettingsEvidenceRules](docs/SettingsEvidenceRules.md)
+ - [SettingsEvidenceUnavailableReason](docs/SettingsEvidenceUnavailableReason.md)
+ - [SettingsEvidenceWithheldReason](docs/SettingsEvidenceWithheldReason.md)
+ - [SetupHubHandover](docs/SetupHubHandover.md)
+ - [SetupHubItem](docs/SetupHubItem.md)
+ - [SetupHubItemKey](docs/SetupHubItemKey.md)
+ - [SetupHubItemState](docs/SetupHubItemState.md)
+ - [SetupHubStatus](docs/SetupHubStatus.md)
  - [SetupOwnerCompleteRequest](docs/SetupOwnerCompleteRequest.md)
  - [SetupOwnerCompleteResponse](docs/SetupOwnerCompleteResponse.md)
  - [SetupOwnerOidcRequest](docs/SetupOwnerOidcRequest.md)
@@ -1160,19 +1498,24 @@ Class | Method | HTTP request | Description
  - [SleepWakeEvent](docs/SleepWakeEvent.md)
  - [SleepWeekSummary](docs/SleepWeekSummary.md)
  - [SlugValidationResult](docs/SlugValidationResult.md)
- - [SmartSnoozeSettings](docs/SmartSnoozeSettings.md)
  - [SnoozeRequest](docs/SnoozeRequest.md)
  - [SourceHandle](docs/SourceHandle.md)
  - [StartMigrationRequest](docs/StartMigrationRequest.md)
  - [StartTrackerInstanceRequest](docs/StartTrackerInstanceRequest.md)
+ - [StarterAlertKind](docs/StarterAlertKind.md)
+ - [StarterAlertRule](docs/StarterAlertRule.md)
+ - [StarterAlertRuleRequest](docs/StarterAlertRuleRequest.md)
  - [StateSpan](docs/StateSpan.md)
+ - [StateSpanBulkRestoreResult](docs/StateSpanBulkRestoreResult.md)
  - [StateSpanCategory](docs/StateSpanCategory.md)
  - [StatisticReliability](docs/StatisticReliability.md)
  - [StatusResponse](docs/StatusResponse.md)
  - [StepBubbleDto](docs/StepBubbleDto.md)
  - [StepCount](docs/StepCount.md)
+ - [SubdomainNotice](docs/SubdomainNotice.md)
  - [SubjectCredentialsDto](docs/SubjectCredentialsDto.md)
  - [SubjectEntityDto](docs/SubjectEntityDto.md)
+ - [SubmitTranslationDraftsRequest](docs/SubmitTranslationDraftsRequest.md)
  - [SuggestedMealMatch](docs/SuggestedMealMatch.md)
  - [SupportChannelConfig](docs/SupportChannelConfig.md)
  - [SupportConfigResponse](docs/SupportConfigResponse.md)
@@ -1188,16 +1531,26 @@ Class | Method | HTTP request | Description
  - [SystemEventType](docs/SystemEventType.md)
  - [SystemInfo](docs/SystemInfo.md)
  - [TargetAssessment](docs/TargetAssessment.md)
+ - [TargetEntryInput](docs/TargetEntryInput.md)
  - [TargetRangeEntry](docs/TargetRangeEntry.md)
  - [TargetRangeSchedule](docs/TargetRangeSchedule.md)
  - [TargetStatus](docs/TargetStatus.md)
  - [TempBasal](docs/TempBasal.md)
  - [TempBasalInfo](docs/TempBasalInfo.md)
  - [TempBasalOrigin](docs/TempBasalOrigin.md)
+ - [TempBasalOriginEvidence](docs/TempBasalOriginEvidence.md)
  - [TenantAlertSettingsResponse](docs/TenantAlertSettingsResponse.md)
  - [TenantConnectorSummary](docs/TenantConnectorSummary.md)
  - [TenantConnectorsDto](docs/TenantConnectorsDto.md)
  - [TenantCreatedDto](docs/TenantCreatedDto.md)
+ - [TenantCreationInviteCreated](docs/TenantCreationInviteCreated.md)
+ - [TenantCreationInviteDto](docs/TenantCreationInviteDto.md)
+ - [TenantCreationInviteInfo](docs/TenantCreationInviteInfo.md)
+ - [TenantCreationInviteOverview](docs/TenantCreationInviteOverview.md)
+ - [TenantCreationInviteRedeemed](docs/TenantCreationInviteRedeemed.md)
+ - [TenantCreationInviteStatus](docs/TenantCreationInviteStatus.md)
+ - [TenantCreationInviteUseDto](docs/TenantCreationInviteUseDto.md)
+ - [TenantCreationInviteViewInfo](docs/TenantCreationInviteViewInfo.md)
  - [TenantDetailDto](docs/TenantDetailDto.md)
  - [TenantDto](docs/TenantDto.md)
  - [TenantEntityDto](docs/TenantEntityDto.md)
@@ -1213,11 +1566,17 @@ Class | Method | HTTP request | Description
  - [TenantRoleEntityDto](docs/TenantRoleEntityDto.md)
  - [TenantSettingsDto](docs/TenantSettingsDto.md)
  - [TenantSnapshotDto](docs/TenantSnapshotDto.md)
+ - [TenantStoreSizeDto](docs/TenantStoreSizeDto.md)
+ - [TenantSubdomainDto](docs/TenantSubdomainDto.md)
  - [TestFireDryRunRequest](docs/TestFireDryRunRequest.md)
  - [TestMigrationConnectionRequest](docs/TestMigrationConnectionRequest.md)
  - [TestMigrationConnectionResult](docs/TestMigrationConnectionResult.md)
  - [TestProviderRequest](docs/TestProviderRequest.md)
+ - [TherapyEntryInput](docs/TherapyEntryInput.md)
+ - [TherapyGlucoseField](docs/TherapyGlucoseField.md)
+ - [TherapyReview](docs/TherapyReview.md)
  - [TherapySettings](docs/TherapySettings.md)
+ - [TherapySource](docs/TherapySource.md)
  - [TimeInRangeDetailedStats](docs/TimeInRangeDetailedStats.md)
  - [TimeInRangeDurations](docs/TimeInRangeDurations.md)
  - [TimeInRangeEpisodes](docs/TimeInRangeEpisodes.md)
@@ -1227,6 +1586,7 @@ Class | Method | HTTP request | Description
  - [TimeRange](docs/TimeRange.md)
  - [TimeSeriesPoint](docs/TimeSeriesPoint.md)
  - [TimeValue](docs/TimeValue.md)
+ - [TimeZoneUnavailableReason](docs/TimeZoneUnavailableReason.md)
  - [TimezoneTimelineEntry](docs/TimezoneTimelineEntry.md)
  - [TokenIntrospectionResponse](docs/TokenIntrospectionResponse.md)
  - [TrackerCategory](docs/TrackerCategory.md)
@@ -1234,20 +1594,34 @@ Class | Method | HTTP request | Description
  - [TrackerInstanceDto](docs/TrackerInstanceDto.md)
  - [TrackerMarkerDto](docs/TrackerMarkerDto.md)
  - [TrackerMode](docs/TrackerMode.md)
+ - [TrackerOffer](docs/TrackerOffer.md)
+ - [TrackerOfferKind](docs/TrackerOfferKind.md)
+ - [TrackerOfferState](docs/TrackerOfferState.md)
  - [TrackerPillsSettings](docs/TrackerPillsSettings.md)
  - [TrackerPresetDto](docs/TrackerPresetDto.md)
- - [TrackerVisibility](docs/TrackerVisibility.md)
+ - [TrackerThresholdTimeDto](docs/TrackerThresholdTimeDto.md)
  - [TransitionStatusDto](docs/TransitionStatusDto.md)
+ - [TranslationCatalogSourceResponse](docs/TranslationCatalogSourceResponse.md)
+ - [TranslationContributionRequest](docs/TranslationContributionRequest.md)
+ - [TranslationContributionResponse](docs/TranslationContributionResponse.md)
+ - [TranslationDraft](docs/TranslationDraft.md)
+ - [TranslationDraftSubmitResult](docs/TranslationDraftSubmitResult.md)
+ - [TranslationEntryDto](docs/TranslationEntryDto.md)
+ - [TranslationUnmatchedEntry](docs/TranslationUnmatchedEntry.md)
  - [Treatment](docs/Treatment.md)
  - [TreatmentFood](docs/TreatmentFood.md)
  - [TreatmentFoodBreakdown](docs/TreatmentFoodBreakdown.md)
  - [TreatmentInsulinContext](docs/TreatmentInsulinContext.md)
+ - [TreatmentLogCategory](docs/TreatmentLogCategory.md)
+ - [TreatmentLogCounts](docs/TreatmentLogCounts.md)
+ - [TreatmentLogStats](docs/TreatmentLogStats.md)
  - [TreatmentSummary](docs/TreatmentSummary.md)
  - [TreatmentSummaryData](docs/TreatmentSummaryData.md)
  - [TreatmentSummaryRequest](docs/TreatmentSummaryRequest.md)
  - [TreatmentTotals](docs/TreatmentTotals.md)
  - [TriggerDetectionRequest](docs/TriggerDetectionRequest.md)
  - [UISettingsConfiguration](docs/UISettingsConfiguration.md)
+ - [UnitsAndTimezoneDto](docs/UnitsAndTimezoneDto.md)
  - [UpdateAlertRuleRequest](docs/UpdateAlertRuleRequest.md)
  - [UpdateBasalInjectionRequest](docs/UpdateBasalInjectionRequest.md)
  - [UpdateBolusRequest](docs/UpdateBolusRequest.md)
@@ -1283,6 +1657,7 @@ Class | Method | HTTP request | Description
  - [UpsertSensorGlucoseRequest](docs/UpsertSensorGlucoseRequest.md)
  - [UpsertStepCountRequest](docs/UpsertStepCountRequest.md)
  - [UpsertTimezoneEntryRequest](docs/UpsertTimezoneEntryRequest.md)
+ - [UpsertTranslationDraftsRequest](docs/UpsertTranslationDraftsRequest.md)
  - [UpsertUploaderSnapshotRequest](docs/UpsertUploaderSnapshotRequest.md)
  - [UsageStatistics](docs/UsageStatistics.md)
  - [UserAlarmConfiguration](docs/UserAlarmConfiguration.md)
@@ -1293,16 +1668,20 @@ Class | Method | HTTP request | Description
  - [V4Predictions](docs/V4Predictions.md)
  - [V4SummaryResponse](docs/V4SummaryResponse.md)
  - [V4TrackerStatus](docs/V4TrackerStatus.md)
+ - [VerifyConnectorCredentialsRequest](docs/VerifyConnectorCredentialsRequest.md)
  - [WebhookNotificationSettings](docs/WebhookNotificationSettings.md)
  - [WebhookTestRequest](docs/WebhookTestRequest.md)
  - [WebhookTestResult](docs/WebhookTestResult.md)
+ - [WeekdayAveragesResponse](docs/WeekdayAveragesResponse.md)
  - [WeekdayGlucoseSlot](docs/WeekdayGlucoseSlot.md)
  - [WidgetConfig](docs/WidgetConfig.md)
  - [WidgetId](docs/WidgetId.md)
  - [WidgetPlacement](docs/WidgetPlacement.md)
- - [WidgetSize](docs/WidgetSize.md)
  - [WriteBackHealthInfo](docs/WriteBackHealthInfo.md)
+ - [WrongUnitRule](docs/WrongUnitRule.md)
+ - [YearOverviewColorBoundary](docs/YearOverviewColorBoundary.md)
  - [YearOverviewColorPreferences](docs/YearOverviewColorPreferences.md)
+ - [YearSummaryResponse](docs/YearSummaryResponse.md)
 
 
 <a id="documentation-for-authorization"></a>
@@ -1329,6 +1708,7 @@ Authentication schemes defined for the API:
  - **therapy.readwrite**: Read and write therapy settings
  - **alerts.read**: Read alert configuration
  - **alerts.readwrite**: Read and write alert configuration
+ - **alerts.acknowledge**: Silence an alarm for everyone for a time
  - **reports.read**: Read reports
  - **identity.read**: Read identity information
  - **sharing.readwrite**: Manage sharing settings

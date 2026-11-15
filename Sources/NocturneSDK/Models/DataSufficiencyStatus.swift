@@ -8,8 +8,9 @@
 import Foundation
 
 /**  */
-public enum DataSufficiencyStatus: String, Sendable, Codable, CaseIterable {
+public enum DataSufficiencyStatus: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case sufficient = "Sufficient"
     case insufficientCoverage = "InsufficientCoverage"
     case largeGaps = "LargeGaps"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

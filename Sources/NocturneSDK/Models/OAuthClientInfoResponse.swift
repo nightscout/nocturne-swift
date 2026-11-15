@@ -20,13 +20,15 @@ public struct OAuthClientInfoResponse: Sendable, Codable, Hashable {
     public var homepage: String?
     /** URL of the client application's logo image. */
     public var logoUri: String?
+    public var deletionAccess: ScopeDeletionAccess?
 
-    public init(clientId: String? = nil, displayName: String? = nil, isKnown: Bool? = nil, homepage: String? = nil, logoUri: String? = nil) {
+    public init(clientId: String? = nil, displayName: String? = nil, isKnown: Bool? = nil, homepage: String? = nil, logoUri: String? = nil, deletionAccess: ScopeDeletionAccess? = nil) {
         self.clientId = clientId
         self.displayName = displayName
         self.isKnown = isKnown
         self.homepage = homepage
         self.logoUri = logoUri
+        self.deletionAccess = deletionAccess
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -35,6 +37,7 @@ public struct OAuthClientInfoResponse: Sendable, Codable, Hashable {
         case isKnown
         case homepage
         case logoUri
+        case deletionAccess
     }
 
     // Encodable protocol methods
@@ -46,6 +49,7 @@ public struct OAuthClientInfoResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(isKnown, forKey: .isKnown)
         try container.encodeIfPresent(homepage, forKey: .homepage)
         try container.encodeIfPresent(logoUri, forKey: .logoUri)
+        try container.encodeIfPresent(deletionAccess, forKey: .deletionAccess)
     }
 }
 

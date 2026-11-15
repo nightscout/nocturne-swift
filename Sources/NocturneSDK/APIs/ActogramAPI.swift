@@ -14,11 +14,13 @@ open class ActogramAPI {
      
      - parameter startTime: (query) Start of the window as Unix milliseconds (inclusive). 
      - parameter endTime: (query) End of the window as Unix milliseconds (exclusive).             Must be greater than startTime. 
+     - parameter summaryStartTime: (query) Start of the range the heart-rate and step summaries cover, as             Unix milliseconds (inclusive); startTime when omitted. (optional)
+     - parameter summaryEndTime: (query) End of the summary range (exclusive); endTime             when omitted. The summary range must be non-empty and lie within the window. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: ActogramReportData
      */
-    open class func actogramGetActogram(startTime: Int64, endTime: Int64, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> ActogramReportData {
-        return try await actogramGetActogramWithRequestBuilder(startTime: startTime, endTime: endTime, apiConfiguration: apiConfiguration).execute().body
+    open class func actogramGetActogram(startTime: Int64, endTime: Int64, summaryStartTime: Int64? = nil, summaryEndTime: Int64? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> ActogramReportData {
+        return try await actogramGetActogramWithRequestBuilder(startTime: startTime, endTime: endTime, summaryStartTime: summaryStartTime, summaryEndTime: summaryEndTime, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -33,10 +35,12 @@ open class ActogramAPI {
        - name: oauth2
      - parameter startTime: (query) Start of the window as Unix milliseconds (inclusive). 
      - parameter endTime: (query) End of the window as Unix milliseconds (exclusive).             Must be greater than startTime. 
+     - parameter summaryStartTime: (query) Start of the range the heart-rate and step summaries cover, as             Unix milliseconds (inclusive); startTime when omitted. (optional)
+     - parameter summaryEndTime: (query) End of the summary range (exclusive); endTime             when omitted. The summary range must be non-empty and lie within the window. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ActogramReportData> 
      */
-    open class func actogramGetActogramWithRequestBuilder(startTime: Int64, endTime: Int64, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<ActogramReportData> {
+    open class func actogramGetActogramWithRequestBuilder(startTime: Int64, endTime: Int64, summaryStartTime: Int64? = nil, summaryEndTime: Int64? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<ActogramReportData> {
         let localVariablePath = "/api/v4/Actogram"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -45,6 +49,8 @@ open class ActogramAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "startTime": (wrappedValue: startTime.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "endTime": (wrappedValue: endTime.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "summaryStartTime": (wrappedValue: summaryStartTime?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "summaryEndTime": (wrappedValue: summaryEndTime?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [

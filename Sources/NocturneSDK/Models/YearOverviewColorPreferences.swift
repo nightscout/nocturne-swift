@@ -9,41 +9,117 @@ import Foundation
 
 public struct YearOverviewColorPreferences: Sendable, Codable, Hashable {
 
-    public var avgGlucose: [Double]?
-    public var tir: [Double]?
-    public var bolus: [Double]?
-    public var basal: [Double]?
-    public var tdd: [Double]?
-    public var carbs: [Double]?
+    public var outOfBandTransparency: Double?
+    public var avgGlucoseBand: [Double]?
+    public var avgGlucoseBoundaries: [YearOverviewColorBoundary]?
+    public var avgGlucoseLowColor: String?
+    public var avgGlucoseHighColor: String?
+    public var tirBand: [Double]?
+    public var tirBoundaries: [YearOverviewColorBoundary]?
+    public var tirLowColor: String?
+    public var tirHighColor: String?
+    public var bolusBand: [Double]?
+    public var bolusBoundaries: [YearOverviewColorBoundary]?
+    public var bolusLowColor: String?
+    public var bolusHighColor: String?
+    public var basalBand: [Double]?
+    public var basalBoundaries: [YearOverviewColorBoundary]?
+    public var basalLowColor: String?
+    public var basalHighColor: String?
+    public var tddBand: [Double]?
+    public var tddBoundaries: [YearOverviewColorBoundary]?
+    public var tddLowColor: String?
+    public var tddHighColor: String?
+    public var carbsBand: [Double]?
+    public var carbsBoundaries: [YearOverviewColorBoundary]?
+    public var carbsLowColor: String?
+    public var carbsHighColor: String?
 
-    public init(avgGlucose: [Double]? = nil, tir: [Double]? = nil, bolus: [Double]? = nil, basal: [Double]? = nil, tdd: [Double]? = nil, carbs: [Double]? = nil) {
-        self.avgGlucose = avgGlucose
-        self.tir = tir
-        self.bolus = bolus
-        self.basal = basal
-        self.tdd = tdd
-        self.carbs = carbs
+    public init(outOfBandTransparency: Double? = nil, avgGlucoseBand: [Double]? = nil, avgGlucoseBoundaries: [YearOverviewColorBoundary]? = nil, avgGlucoseLowColor: String? = nil, avgGlucoseHighColor: String? = nil, tirBand: [Double]? = nil, tirBoundaries: [YearOverviewColorBoundary]? = nil, tirLowColor: String? = nil, tirHighColor: String? = nil, bolusBand: [Double]? = nil, bolusBoundaries: [YearOverviewColorBoundary]? = nil, bolusLowColor: String? = nil, bolusHighColor: String? = nil, basalBand: [Double]? = nil, basalBoundaries: [YearOverviewColorBoundary]? = nil, basalLowColor: String? = nil, basalHighColor: String? = nil, tddBand: [Double]? = nil, tddBoundaries: [YearOverviewColorBoundary]? = nil, tddLowColor: String? = nil, tddHighColor: String? = nil, carbsBand: [Double]? = nil, carbsBoundaries: [YearOverviewColorBoundary]? = nil, carbsLowColor: String? = nil, carbsHighColor: String? = nil) {
+        self.outOfBandTransparency = outOfBandTransparency
+        self.avgGlucoseBand = avgGlucoseBand
+        self.avgGlucoseBoundaries = avgGlucoseBoundaries
+        self.avgGlucoseLowColor = avgGlucoseLowColor
+        self.avgGlucoseHighColor = avgGlucoseHighColor
+        self.tirBand = tirBand
+        self.tirBoundaries = tirBoundaries
+        self.tirLowColor = tirLowColor
+        self.tirHighColor = tirHighColor
+        self.bolusBand = bolusBand
+        self.bolusBoundaries = bolusBoundaries
+        self.bolusLowColor = bolusLowColor
+        self.bolusHighColor = bolusHighColor
+        self.basalBand = basalBand
+        self.basalBoundaries = basalBoundaries
+        self.basalLowColor = basalLowColor
+        self.basalHighColor = basalHighColor
+        self.tddBand = tddBand
+        self.tddBoundaries = tddBoundaries
+        self.tddLowColor = tddLowColor
+        self.tddHighColor = tddHighColor
+        self.carbsBand = carbsBand
+        self.carbsBoundaries = carbsBoundaries
+        self.carbsLowColor = carbsLowColor
+        self.carbsHighColor = carbsHighColor
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
-        case avgGlucose
-        case tir
-        case bolus
-        case basal
-        case tdd
-        case carbs
+        case outOfBandTransparency
+        case avgGlucoseBand
+        case avgGlucoseBoundaries
+        case avgGlucoseLowColor
+        case avgGlucoseHighColor
+        case tirBand
+        case tirBoundaries
+        case tirLowColor
+        case tirHighColor
+        case bolusBand
+        case bolusBoundaries
+        case bolusLowColor
+        case bolusHighColor
+        case basalBand
+        case basalBoundaries
+        case basalLowColor
+        case basalHighColor
+        case tddBand
+        case tddBoundaries
+        case tddLowColor
+        case tddHighColor
+        case carbsBand
+        case carbsBoundaries
+        case carbsLowColor
+        case carbsHighColor
     }
 
     // Encodable protocol methods
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(avgGlucose, forKey: .avgGlucose)
-        try container.encodeIfPresent(tir, forKey: .tir)
-        try container.encodeIfPresent(bolus, forKey: .bolus)
-        try container.encodeIfPresent(basal, forKey: .basal)
-        try container.encodeIfPresent(tdd, forKey: .tdd)
-        try container.encodeIfPresent(carbs, forKey: .carbs)
+        try container.encodeIfPresent(outOfBandTransparency, forKey: .outOfBandTransparency)
+        try container.encodeIfPresent(avgGlucoseBand, forKey: .avgGlucoseBand)
+        try container.encodeIfPresent(avgGlucoseBoundaries, forKey: .avgGlucoseBoundaries)
+        try container.encodeIfPresent(avgGlucoseLowColor, forKey: .avgGlucoseLowColor)
+        try container.encodeIfPresent(avgGlucoseHighColor, forKey: .avgGlucoseHighColor)
+        try container.encodeIfPresent(tirBand, forKey: .tirBand)
+        try container.encodeIfPresent(tirBoundaries, forKey: .tirBoundaries)
+        try container.encodeIfPresent(tirLowColor, forKey: .tirLowColor)
+        try container.encodeIfPresent(tirHighColor, forKey: .tirHighColor)
+        try container.encodeIfPresent(bolusBand, forKey: .bolusBand)
+        try container.encodeIfPresent(bolusBoundaries, forKey: .bolusBoundaries)
+        try container.encodeIfPresent(bolusLowColor, forKey: .bolusLowColor)
+        try container.encodeIfPresent(bolusHighColor, forKey: .bolusHighColor)
+        try container.encodeIfPresent(basalBand, forKey: .basalBand)
+        try container.encodeIfPresent(basalBoundaries, forKey: .basalBoundaries)
+        try container.encodeIfPresent(basalLowColor, forKey: .basalLowColor)
+        try container.encodeIfPresent(basalHighColor, forKey: .basalHighColor)
+        try container.encodeIfPresent(tddBand, forKey: .tddBand)
+        try container.encodeIfPresent(tddBoundaries, forKey: .tddBoundaries)
+        try container.encodeIfPresent(tddLowColor, forKey: .tddLowColor)
+        try container.encodeIfPresent(tddHighColor, forKey: .tddHighColor)
+        try container.encodeIfPresent(carbsBand, forKey: .carbsBand)
+        try container.encodeIfPresent(carbsBoundaries, forKey: .carbsBoundaries)
+        try container.encodeIfPresent(carbsLowColor, forKey: .carbsLowColor)
+        try container.encodeIfPresent(carbsHighColor, forKey: .carbsHighColor)
     }
 }
 

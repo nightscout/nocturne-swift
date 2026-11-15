@@ -12,23 +12,17 @@ public struct WidgetConfig: Sendable, Codable, Hashable {
     public var id: WidgetId?
     public var enabled: Bool?
     public var placement: WidgetPlacement?
-    public var size: WidgetSize?
-    public var settings: [String: JSONValue]?
 
-    public init(id: WidgetId? = nil, enabled: Bool? = nil, placement: WidgetPlacement? = nil, size: WidgetSize? = nil, settings: [String: JSONValue]? = nil) {
+    public init(id: WidgetId? = nil, enabled: Bool? = nil, placement: WidgetPlacement? = nil) {
         self.id = id
         self.enabled = enabled
         self.placement = placement
-        self.size = size
-        self.settings = settings
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case id
         case enabled
         case placement
-        case size
-        case settings
     }
 
     // Encodable protocol methods
@@ -38,8 +32,6 @@ public struct WidgetConfig: Sendable, Codable, Hashable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(enabled, forKey: .enabled)
         try container.encodeIfPresent(placement, forKey: .placement)
-        try container.encodeIfPresent(size, forKey: .size)
-        try container.encodeIfPresent(settings, forKey: .settings)
     }
 }
 

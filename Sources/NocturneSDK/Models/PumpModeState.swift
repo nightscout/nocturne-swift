@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum PumpModeState: String, Sendable, Codable, CaseIterable {
+public enum PumpModeState: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case automatic = "Automatic"
     case limited = "Limited"
     case manual = "Manual"
@@ -19,4 +19,5 @@ public enum PumpModeState: String, Sendable, Codable, CaseIterable {
     case liberty = "Liberty"
     case suspended = "Suspended"
     case off = "Off"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

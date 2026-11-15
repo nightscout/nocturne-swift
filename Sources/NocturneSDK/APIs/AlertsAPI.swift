@@ -57,16 +57,16 @@ open class AlertsAPI {
      - parameter excursionId: (path)  
      - parameter acknowledgeRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: Void
+     - returns: AcknowledgeExcursionResponse
      */
-    open class func alertsAcknowledgeExcursion(excursionId: String, acknowledgeRequest: AcknowledgeRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
+    open class func alertsAcknowledgeExcursion(excursionId: String, acknowledgeRequest: AcknowledgeRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> AcknowledgeExcursionResponse {
         return try await alertsAcknowledgeExcursionWithRequestBuilder(excursionId: excursionId, acknowledgeRequest: acknowledgeRequest, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Acknowledge excursion
      - POST /api/v4/alerts/excursions/{excursionId}/acknowledge
-     - Accepts DeviceNotify as well as AlertsReadWrite: this is the endpoint behind the Acknowledge action on a device toast, and a registered client device's grant carries the device capability scopes rather than the alert data scope. A scoped credential is intersected with membership (MemberScopeResolver), so even a tenant owner's Companion token resolves to device.notify without alerts.readwrite. A guest link reaches neither scope, its grant being capped at AllowedGuestScopes, but a member does: the Clinician and Viewer seed roles hold device.notify outright (and the resolver grants it to any member holding at least one permission), so both acknowledge here while holding no alerts.readwrite — Clinician holding alerts.read, Viewer no alert scope at all.
+     - Acknowledge a single alert excursion. A caller with alerts.readwrite acknowledges it for everyone; anyone else mutes it for themselves. The response says which applied. Returns 404 when the excursion does not exist for the current tenant. Also accepts device.notify, which a registered client device and every member holding a permission has, but not a guest link.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -76,9 +76,9 @@ open class AlertsAPI {
      - parameter excursionId: (path)  
      - parameter acknowledgeRequest: (body)  
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
+     - returns: RequestBuilder<AcknowledgeExcursionResponse> 
      */
-    open class func alertsAcknowledgeExcursionWithRequestBuilder(excursionId: String, acknowledgeRequest: AcknowledgeRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
+    open class func alertsAcknowledgeExcursionWithRequestBuilder(excursionId: String, acknowledgeRequest: AcknowledgeRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<AcknowledgeExcursionResponse> {
         var localVariablePath = "/api/v4/alerts/excursions/{excursionId}/acknowledge"
         let excursionIdPreEscape = "\(APIHelper.mapValueToPathItem(excursionId))"
         let excursionIdPostEscape = excursionIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -94,7 +94,7 @@ open class AlertsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+        let localVariableRequestBuilder: RequestBuilder<AcknowledgeExcursionResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
@@ -157,7 +157,7 @@ open class AlertsAPI {
     /**
      Get alert history
      - GET /api/v4/alerts/history
-     - pageSize is capped at MaxOrdinalPageSize and page at the page that reaches the last record within MaxPageSize; both are clamped rather than rejected.
+     - Get paginated history of resolved excursions. Test fires are excluded by default; pass includeTest = true to include them. An oversized pageSize or page is clamped to the largest allowed value rather than rejected.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -336,6 +336,52 @@ open class AlertsAPI {
     }
 
     /**
+     Mark seen
+     
+     - parameter excursionId: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: Void
+     */
+    open class func alertsMarkSeen(excursionId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
+        return try await alertsMarkSeenWithRequestBuilder(excursionId: excursionId, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Mark seen
+     - POST /api/v4/alerts/excursions/{excursionId}/seen
+     - Record that the caller saw an alarm that is firing. It changes nothing about the alert: it is not an acknowledgement and mutes nothing, for the caller or anyone else, and recording it again keeps the first. Members with an account see who recorded one, and when. It is the one write a public share link may make, when the link shares alerts; who recorded it comes from the credential, not the request.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter excursionId: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<Void> 
+     */
+    open class func alertsMarkSeenWithRequestBuilder(excursionId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
+        var localVariablePath = "/api/v4/alerts/excursions/{excursionId}/seen"
+        let excursionIdPreEscape = "\(APIHelper.mapValueToPathItem(excursionId))"
+        let excursionIdPostEscape = excursionIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{excursionId}", with: excursionIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Snooze instance
      
      - parameter instanceId: (path)  
@@ -350,7 +396,7 @@ open class AlertsAPI {
     /**
      Snooze instance
      - POST /api/v4/alerts/instances/{instanceId}/snooze
-     - Snooze an alert instance for the specified duration.
+     - Snooze an alert instance: no notification is sent for it, on any channel, until Minutes from now. The alert stays active and unacknowledged, and re-notifies when the snooze lapses if it is still firing. Snoozing again replaces the window. Returns 409 when the instance is already resolved or has used the rule's snooze.maxCount (SmartSnoozeConfig), a count shared with the sweep's smart-snooze extensions. Also accepts alerts.acknowledge, which a Nightscout token holding notifications:*:ack carries.
      - Bearer Token:
        - type: http
        - name: bearer

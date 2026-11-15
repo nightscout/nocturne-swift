@@ -8,8 +8,9 @@
 import Foundation
 
 /**  */
-public enum AlertReplayEventKind: String, Sendable, Codable, CaseIterable {
+public enum AlertReplayEventKind: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case fired = "fired"
     case autoResolved = "auto_resolved"
     case suppressedByDnd = "suppressed_by_dnd"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

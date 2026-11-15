@@ -14,13 +14,15 @@ public struct PunchCardResponse: Sendable, Codable, Hashable {
     public var globalMaxCarbs: Double?
     public var globalMaxInsulin: Double?
     public var globalMaxCarbInsulinDiff: Double?
+    public var timeZoneUnavailableReason: TimeZoneUnavailableReason?
 
-    public init(months: [PunchCardMonth]? = nil, dateRange: PunchCardDateRange? = nil, globalMaxCarbs: Double? = nil, globalMaxInsulin: Double? = nil, globalMaxCarbInsulinDiff: Double? = nil) {
+    public init(months: [PunchCardMonth]? = nil, dateRange: PunchCardDateRange? = nil, globalMaxCarbs: Double? = nil, globalMaxInsulin: Double? = nil, globalMaxCarbInsulinDiff: Double? = nil, timeZoneUnavailableReason: TimeZoneUnavailableReason? = nil) {
         self.months = months
         self.dateRange = dateRange
         self.globalMaxCarbs = globalMaxCarbs
         self.globalMaxInsulin = globalMaxInsulin
         self.globalMaxCarbInsulinDiff = globalMaxCarbInsulinDiff
+        self.timeZoneUnavailableReason = timeZoneUnavailableReason
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -29,6 +31,7 @@ public struct PunchCardResponse: Sendable, Codable, Hashable {
         case globalMaxCarbs
         case globalMaxInsulin
         case globalMaxCarbInsulinDiff
+        case timeZoneUnavailableReason
     }
 
     // Encodable protocol methods
@@ -40,6 +43,7 @@ public struct PunchCardResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(globalMaxCarbs, forKey: .globalMaxCarbs)
         try container.encodeIfPresent(globalMaxInsulin, forKey: .globalMaxInsulin)
         try container.encodeIfPresent(globalMaxCarbInsulinDiff, forKey: .globalMaxCarbInsulinDiff)
+        try container.encodeIfPresent(timeZoneUnavailableReason, forKey: .timeZoneUnavailableReason)
     }
 }
 

@@ -178,7 +178,7 @@ open class DevAdminAPI {
     /**
      Import scoped snapshot
      - POST /api/v4/dev-only/admin/tenants/{id}/import-snapshot
-     - Import snapshot data for a single tenant, matched by slug in the provided snapshot. Upserts referenced subjects and passkeys without affecting other tenants.
+     - Import a tenant snapshot into the tenant named on the route, which need not be the tenant the snapshot was exported from. Upserts referenced subjects and passkeys without affecting other tenants.
      - parameter id: (path)  
      - parameter tenantSnapshotDto: (body)  
      - parameter apiConfiguration: The configuration for the http request.

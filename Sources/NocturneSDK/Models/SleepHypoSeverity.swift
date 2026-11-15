@@ -8,7 +8,8 @@
 import Foundation
 
 /**  */
-public enum SleepHypoSeverity: String, Sendable, Codable, CaseIterable {
+public enum SleepHypoSeverity: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case low = "Low"
     case veryLow = "VeryLow"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

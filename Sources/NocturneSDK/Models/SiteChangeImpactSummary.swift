@@ -11,16 +11,14 @@ public struct SiteChangeImpactSummary: Sendable, Codable, Hashable {
 
     public var avgGlucoseBeforeChange: Double?
     public var avgGlucoseAfterChange: Double?
-    public var percentImprovement: Double?
     public var timeInRangeBeforeChange: Double?
     public var timeInRangeAfterChange: Double?
     public var cvBeforeChange: Double?
     public var cvAfterChange: Double?
 
-    public init(avgGlucoseBeforeChange: Double? = nil, avgGlucoseAfterChange: Double? = nil, percentImprovement: Double? = nil, timeInRangeBeforeChange: Double? = nil, timeInRangeAfterChange: Double? = nil, cvBeforeChange: Double? = nil, cvAfterChange: Double? = nil) {
+    public init(avgGlucoseBeforeChange: Double? = nil, avgGlucoseAfterChange: Double? = nil, timeInRangeBeforeChange: Double? = nil, timeInRangeAfterChange: Double? = nil, cvBeforeChange: Double? = nil, cvAfterChange: Double? = nil) {
         self.avgGlucoseBeforeChange = avgGlucoseBeforeChange
         self.avgGlucoseAfterChange = avgGlucoseAfterChange
-        self.percentImprovement = percentImprovement
         self.timeInRangeBeforeChange = timeInRangeBeforeChange
         self.timeInRangeAfterChange = timeInRangeAfterChange
         self.cvBeforeChange = cvBeforeChange
@@ -30,7 +28,6 @@ public struct SiteChangeImpactSummary: Sendable, Codable, Hashable {
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case avgGlucoseBeforeChange
         case avgGlucoseAfterChange
-        case percentImprovement
         case timeInRangeBeforeChange
         case timeInRangeAfterChange
         case cvBeforeChange
@@ -43,7 +40,6 @@ public struct SiteChangeImpactSummary: Sendable, Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(avgGlucoseBeforeChange, forKey: .avgGlucoseBeforeChange)
         try container.encodeIfPresent(avgGlucoseAfterChange, forKey: .avgGlucoseAfterChange)
-        try container.encodeIfPresent(percentImprovement, forKey: .percentImprovement)
         try container.encodeIfPresent(timeInRangeBeforeChange, forKey: .timeInRangeBeforeChange)
         try container.encodeIfPresent(timeInRangeAfterChange, forKey: .timeInRangeAfterChange)
         try container.encodeIfPresent(cvBeforeChange, forKey: .cvBeforeChange)

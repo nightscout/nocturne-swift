@@ -41,12 +41,12 @@ public struct TokenIntrospectionResponse: Sendable, Codable, Hashable {
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case active
         case scope
-        case clientId
+        case clientId = "client_id"
         case sub
         case exp
         case iat
         case jti
-        case tokenType
+        case tokenType = "token_type"
     }
 
     // Encodable protocol methods

@@ -152,7 +152,7 @@ open class ClockFacesAPI {
     /**
      Get glucose
      - GET /api/v4/clockfaces/{id}/glucose
-     - The clock UUID is the capability: a caller must hold a valid clock id for the host-resolved tenant to get any data, and tenant-isolation RLS scopes the read to that tenant. This endpoint only ever reads sensor glucose — never treatments, device status, or any other category — so a clock link grants exactly what the clock shows and nothing more. It is deliberately independent of the tenant's global anonymous-read setting.
+     - Get the latest glucose readings a public clock face displays (public, no authentication required). The clock id acts as the credential. Only sensor glucose is returned, whatever the tenant's anonymous-read setting.
      - parameter id: (path) Clock face UUID 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[ClockGlucoseDto]> 
@@ -176,6 +176,47 @@ open class ClockFacesAPI {
         let localVariableRequestBuilder: RequestBuilder<[ClockGlucoseDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Get starter
+     
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: ClockFaceConfig
+     */
+    open class func clockFacesGetStarter(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> ClockFaceConfig {
+        return try await clockFacesGetStarterWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get starter
+     - GET /api/v4/clockfaces/starter
+     - The layout a new face starts from, with the current user's units and time format
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<ClockFaceConfig> 
+     */
+    open class func clockFacesGetStarterWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<ClockFaceConfig> {
+        let localVariablePath = "/api/v4/clockfaces/starter"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ClockFaceConfig>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**

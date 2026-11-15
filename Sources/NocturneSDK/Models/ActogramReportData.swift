@@ -13,16 +13,24 @@ public struct ActogramReportData: Sendable, Codable, Hashable {
     public var thresholds: ChartThresholdsDto?
     public var heartRates: [HeartRatePointDto]?
     public var stepCounts: [StepBubbleDto]?
+    public var days: [ActogramDay]?
     public var stepDayTotals: [String: Int]?
+    public var timeZoneUnavailableReason: TimeZoneUnavailableReason?
     public var sleepSpans: [ActogramSleepSpan]?
+    public var heartRateSummary: ActogramHeartRateSummary?
+    public var stepSummary: ActogramStepSummary?
 
-    public init(glucose: [GlucosePointDto]? = nil, thresholds: ChartThresholdsDto? = nil, heartRates: [HeartRatePointDto]? = nil, stepCounts: [StepBubbleDto]? = nil, stepDayTotals: [String: Int]? = nil, sleepSpans: [ActogramSleepSpan]? = nil) {
+    public init(glucose: [GlucosePointDto]? = nil, thresholds: ChartThresholdsDto? = nil, heartRates: [HeartRatePointDto]? = nil, stepCounts: [StepBubbleDto]? = nil, days: [ActogramDay]? = nil, stepDayTotals: [String: Int]? = nil, timeZoneUnavailableReason: TimeZoneUnavailableReason? = nil, sleepSpans: [ActogramSleepSpan]? = nil, heartRateSummary: ActogramHeartRateSummary? = nil, stepSummary: ActogramStepSummary? = nil) {
         self.glucose = glucose
         self.thresholds = thresholds
         self.heartRates = heartRates
         self.stepCounts = stepCounts
+        self.days = days
         self.stepDayTotals = stepDayTotals
+        self.timeZoneUnavailableReason = timeZoneUnavailableReason
         self.sleepSpans = sleepSpans
+        self.heartRateSummary = heartRateSummary
+        self.stepSummary = stepSummary
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -30,8 +38,12 @@ public struct ActogramReportData: Sendable, Codable, Hashable {
         case thresholds
         case heartRates
         case stepCounts
+        case days
         case stepDayTotals
+        case timeZoneUnavailableReason
         case sleepSpans
+        case heartRateSummary
+        case stepSummary
     }
 
     // Encodable protocol methods
@@ -42,8 +54,12 @@ public struct ActogramReportData: Sendable, Codable, Hashable {
         try container.encodeIfPresent(thresholds, forKey: .thresholds)
         try container.encodeIfPresent(heartRates, forKey: .heartRates)
         try container.encodeIfPresent(stepCounts, forKey: .stepCounts)
+        try container.encodeIfPresent(days, forKey: .days)
         try container.encodeIfPresent(stepDayTotals, forKey: .stepDayTotals)
+        try container.encodeIfPresent(timeZoneUnavailableReason, forKey: .timeZoneUnavailableReason)
         try container.encodeIfPresent(sleepSpans, forKey: .sleepSpans)
+        try container.encodeIfPresent(heartRateSummary, forKey: .heartRateSummary)
+        try container.encodeIfPresent(stepSummary, forKey: .stepSummary)
     }
 }
 

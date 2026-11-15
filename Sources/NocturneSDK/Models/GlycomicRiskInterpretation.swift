@@ -8,11 +8,12 @@
 import Foundation
 
 /**  */
-public enum GlycomicRiskInterpretation: String, Sendable, Codable, CaseIterable {
+public enum GlycomicRiskInterpretation: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case excellent = "Excellent"
     case good = "Good"
     case moderate = "Moderate"
     case suboptimal = "Suboptimal"
     case poor = "Poor"
     case unknown = "Unknown"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

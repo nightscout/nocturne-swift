@@ -107,7 +107,7 @@ open class WebhookSettingsAPI {
     /**
      Test webhook settings
      - POST /api/v4/ui-settings/notifications/webhooks/test
-     - Gated for the demo's shared visitor because the destination is caller-chosen: the server makes an outbound POST from its own address. OutboundDestination keeps it off private networks, so what remains is a relay to public hosts.
+     - Tests webhook settings by sending test payloads to configured URLs. The server makes the outbound POST; a destination on a private network is not called and is listed in failedUrls. The demo's shared visitor cannot call it.
      - Bearer Token:
        - type: http
        - name: bearer

@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum TrackerCategory: String, Sendable, Codable, CaseIterable {
+public enum TrackerCategory: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case consumable = "Consumable"
     case reservoir = "Reservoir"
     case appointment = "Appointment"
@@ -17,4 +17,6 @@ public enum TrackerCategory: String, Sendable, Codable, CaseIterable {
     case sensor = "Sensor"
     case cannula = "Cannula"
     case battery = "Battery"
+    case pod = "Pod"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

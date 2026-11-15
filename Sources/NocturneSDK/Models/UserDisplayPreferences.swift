@@ -10,37 +10,64 @@ import Foundation
 public struct UserDisplayPreferences: Sendable, Codable, Hashable {
 
     public var glucoseUnits: String?
+    public var a1cName: String?
+    public var a1cUnits: String?
+    public var carbRatioFormat: String?
     public var timeFormat: String?
     public var regionFormat: String?
+    public var energyUnit: String?
+    public var effectiveEnergyUnit: String?
     public var colorTheme: String?
+    public var glucoseRangePalette: String?
     public var nightModeSchedule: Bool?
+    public var calendarShowTirPercent: Bool?
     public var prediction: PredictionPreferences?
     public var chart: ChartPreferences?
     public var yearOverviewColors: YearOverviewColorPreferences?
     public var dashboardTopWidgets: [WidgetId]?
+    public var dashboardRail: DashboardRailPreference?
+    public var hiddenLegacyFallbacks: [LegacyConsumableKind]?
 
-    public init(glucoseUnits: String? = nil, timeFormat: String? = nil, regionFormat: String? = nil, colorTheme: String? = nil, nightModeSchedule: Bool? = nil, prediction: PredictionPreferences? = nil, chart: ChartPreferences? = nil, yearOverviewColors: YearOverviewColorPreferences? = nil, dashboardTopWidgets: [WidgetId]? = nil) {
+    public init(glucoseUnits: String? = nil, a1cName: String? = nil, a1cUnits: String? = nil, carbRatioFormat: String? = nil, timeFormat: String? = nil, regionFormat: String? = nil, energyUnit: String? = nil, effectiveEnergyUnit: String? = nil, colorTheme: String? = nil, glucoseRangePalette: String? = nil, nightModeSchedule: Bool? = nil, calendarShowTirPercent: Bool? = nil, prediction: PredictionPreferences? = nil, chart: ChartPreferences? = nil, yearOverviewColors: YearOverviewColorPreferences? = nil, dashboardTopWidgets: [WidgetId]? = nil, dashboardRail: DashboardRailPreference? = nil, hiddenLegacyFallbacks: [LegacyConsumableKind]? = nil) {
         self.glucoseUnits = glucoseUnits
+        self.a1cName = a1cName
+        self.a1cUnits = a1cUnits
+        self.carbRatioFormat = carbRatioFormat
         self.timeFormat = timeFormat
         self.regionFormat = regionFormat
+        self.energyUnit = energyUnit
+        self.effectiveEnergyUnit = effectiveEnergyUnit
         self.colorTheme = colorTheme
+        self.glucoseRangePalette = glucoseRangePalette
         self.nightModeSchedule = nightModeSchedule
+        self.calendarShowTirPercent = calendarShowTirPercent
         self.prediction = prediction
         self.chart = chart
         self.yearOverviewColors = yearOverviewColors
         self.dashboardTopWidgets = dashboardTopWidgets
+        self.dashboardRail = dashboardRail
+        self.hiddenLegacyFallbacks = hiddenLegacyFallbacks
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case glucoseUnits
+        case a1cName
+        case a1cUnits
+        case carbRatioFormat
         case timeFormat
         case regionFormat
+        case energyUnit
+        case effectiveEnergyUnit
         case colorTheme
+        case glucoseRangePalette
         case nightModeSchedule
+        case calendarShowTirPercent
         case prediction
         case chart
         case yearOverviewColors
         case dashboardTopWidgets
+        case dashboardRail
+        case hiddenLegacyFallbacks
     }
 
     // Encodable protocol methods
@@ -48,14 +75,23 @@ public struct UserDisplayPreferences: Sendable, Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(glucoseUnits, forKey: .glucoseUnits)
+        try container.encodeIfPresent(a1cName, forKey: .a1cName)
+        try container.encodeIfPresent(a1cUnits, forKey: .a1cUnits)
+        try container.encodeIfPresent(carbRatioFormat, forKey: .carbRatioFormat)
         try container.encodeIfPresent(timeFormat, forKey: .timeFormat)
         try container.encodeIfPresent(regionFormat, forKey: .regionFormat)
+        try container.encodeIfPresent(energyUnit, forKey: .energyUnit)
+        try container.encodeIfPresent(effectiveEnergyUnit, forKey: .effectiveEnergyUnit)
         try container.encodeIfPresent(colorTheme, forKey: .colorTheme)
+        try container.encodeIfPresent(glucoseRangePalette, forKey: .glucoseRangePalette)
         try container.encodeIfPresent(nightModeSchedule, forKey: .nightModeSchedule)
+        try container.encodeIfPresent(calendarShowTirPercent, forKey: .calendarShowTirPercent)
         try container.encodeIfPresent(prediction, forKey: .prediction)
         try container.encodeIfPresent(chart, forKey: .chart)
         try container.encodeIfPresent(yearOverviewColors, forKey: .yearOverviewColors)
         try container.encodeIfPresent(dashboardTopWidgets, forKey: .dashboardTopWidgets)
+        try container.encodeIfPresent(dashboardRail, forKey: .dashboardRail)
+        try container.encodeIfPresent(hiddenLegacyFallbacks, forKey: .hiddenLegacyFallbacks)
     }
 }
 

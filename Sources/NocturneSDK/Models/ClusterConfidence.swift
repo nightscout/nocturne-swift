@@ -8,8 +8,9 @@
 import Foundation
 
 /**  */
-public enum ClusterConfidence: String, Sendable, Codable, CaseIterable {
+public enum ClusterConfidence: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case low = "Low"
     case medium = "Medium"
     case high = "High"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

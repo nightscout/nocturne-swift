@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum RecordType: String, Sendable, Codable, CaseIterable {
+public enum RecordType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case stateSpan = "StateSpan"
     case sensorGlucose = "SensorGlucose"
     case bolus = "Bolus"
@@ -18,4 +18,5 @@ public enum RecordType: String, Sendable, Codable, CaseIterable {
     case note = "Note"
     case bolusCalculation = "BolusCalculation"
     case tempBasal = "TempBasal"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

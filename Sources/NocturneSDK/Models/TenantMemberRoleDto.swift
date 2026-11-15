@@ -12,17 +12,20 @@ public struct TenantMemberRoleDto: Sendable, Codable, Hashable {
     public var roleId: String?
     public var name: String?
     public var slug: String?
+    public var permissions: [String]?
 
-    public init(roleId: String? = nil, name: String? = nil, slug: String? = nil) {
+    public init(roleId: String? = nil, name: String? = nil, slug: String? = nil, permissions: [String]? = nil) {
         self.roleId = roleId
         self.name = name
         self.slug = slug
+        self.permissions = permissions
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case roleId
         case name
         case slug
+        case permissions
     }
 
     // Encodable protocol methods
@@ -32,6 +35,7 @@ public struct TenantMemberRoleDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(roleId, forKey: .roleId)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(slug, forKey: .slug)
+        try container.encodeIfPresent(permissions, forKey: .permissions)
     }
 }
 

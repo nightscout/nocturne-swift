@@ -9,26 +9,28 @@ import Foundation
 
 public struct HeartRate: Sendable, Codable, Hashable {
 
-    public var id: String?
-    public var createdAt: String?
     public var mills: Int64?
     public var utcOffset: Int?
+    public var id: String?
+    public var createdAt: String?
     public var timestamp: Date?
     public var bpm: Int?
     public var accuracy: Int?
+    public var type: String?
     public var device: String?
     public var enteredBy: String?
     public var dataSource: String?
     public var syncIdentifier: String?
 
-    public init(id: String? = nil, createdAt: String? = nil, mills: Int64? = nil, utcOffset: Int? = nil, timestamp: Date? = nil, bpm: Int? = nil, accuracy: Int? = nil, device: String? = nil, enteredBy: String? = nil, dataSource: String? = nil, syncIdentifier: String? = nil) {
-        self.id = id
-        self.createdAt = createdAt
+    public init(mills: Int64? = nil, utcOffset: Int? = nil, id: String? = nil, createdAt: String? = nil, timestamp: Date? = nil, bpm: Int? = nil, accuracy: Int? = nil, type: String? = nil, device: String? = nil, enteredBy: String? = nil, dataSource: String? = nil, syncIdentifier: String? = nil) {
         self.mills = mills
         self.utcOffset = utcOffset
+        self.id = id
+        self.createdAt = createdAt
         self.timestamp = timestamp
         self.bpm = bpm
         self.accuracy = accuracy
+        self.type = type
         self.device = device
         self.enteredBy = enteredBy
         self.dataSource = dataSource
@@ -36,13 +38,14 @@ public struct HeartRate: Sendable, Codable, Hashable {
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
-        case id
-        case createdAt
         case mills
         case utcOffset
+        case id = "_id"
+        case createdAt = "created_at"
         case timestamp
         case bpm
         case accuracy
+        case type
         case device
         case enteredBy
         case dataSource = "data_source"
@@ -53,13 +56,14 @@ public struct HeartRate: Sendable, Codable, Hashable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(mills, forKey: .mills)
         try container.encodeIfPresent(utcOffset, forKey: .utcOffset)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(timestamp, forKey: .timestamp)
         try container.encodeIfPresent(bpm, forKey: .bpm)
         try container.encodeIfPresent(accuracy, forKey: .accuracy)
+        try container.encodeIfPresent(type, forKey: .type)
         try container.encodeIfPresent(device, forKey: .device)
         try container.encodeIfPresent(enteredBy, forKey: .enteredBy)
         try container.encodeIfPresent(dataSource, forKey: .dataSource)
@@ -67,5 +71,3 @@ public struct HeartRate: Sendable, Codable, Hashable {
     }
 }
 
-
-extension HeartRate: Identifiable {}

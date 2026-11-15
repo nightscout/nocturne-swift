@@ -8,11 +8,12 @@
 import Foundation
 
 /**  */
-public enum DiabetesType: String, Sendable, Codable, CaseIterable {
+public enum DiabetesType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case type1 = "Type1"
     case type2 = "Type2"
     case lada = "LADA"
     case mody = "MODY"
     case gestational = "Gestational"
     case other = "Other"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

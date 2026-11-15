@@ -8,9 +8,10 @@
 import Foundation
 
 /**  */
-public enum SystemEventType: String, Sendable, Codable, CaseIterable {
+public enum SystemEventType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case alarm = "Alarm"
     case hazard = "Hazard"
     case warning = "Warning"
     case info = "Info"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

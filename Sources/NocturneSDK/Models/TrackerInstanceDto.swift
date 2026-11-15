@@ -25,8 +25,10 @@ public struct TrackerInstanceDto: Sendable, Codable, Hashable {
     public var isActive: Bool?
     public var lastAckedAt: Date?
     public var ackSnoozeMins: Int?
+    /** When each of the definition's notification thresholds fires for this run, resolved by TrackerSchedule with the rule the threshold's alert rule uses. The alert follows only a definition's newest run, so for an Event tracker with several bookings an older one's schedule has no alert behind it. A client finds the level a running tracker has reached by comparing these against the clock, never by re-deriving them from the thresholds' hours. Thresholds that can never fire are omitted. */
+    public var schedule: [TrackerThresholdTimeDto]?
 
-    public init(id: String? = nil, definitionId: String? = nil, definitionName: String? = nil, category: TrackerCategory? = nil, icon: String? = nil, startedAt: Date? = nil, completedAt: Date? = nil, expectedEndAt: Date? = nil, scheduledAt: Date? = nil, startNotes: String? = nil, completionNotes: String? = nil, completionReason: CompletionReason? = nil, ageHours: Double? = nil, isActive: Bool? = nil, lastAckedAt: Date? = nil, ackSnoozeMins: Int? = nil) {
+    public init(id: String? = nil, definitionId: String? = nil, definitionName: String? = nil, category: TrackerCategory? = nil, icon: String? = nil, startedAt: Date? = nil, completedAt: Date? = nil, expectedEndAt: Date? = nil, scheduledAt: Date? = nil, startNotes: String? = nil, completionNotes: String? = nil, completionReason: CompletionReason? = nil, ageHours: Double? = nil, isActive: Bool? = nil, lastAckedAt: Date? = nil, ackSnoozeMins: Int? = nil, schedule: [TrackerThresholdTimeDto]? = nil) {
         self.id = id
         self.definitionId = definitionId
         self.definitionName = definitionName
@@ -43,6 +45,7 @@ public struct TrackerInstanceDto: Sendable, Codable, Hashable {
         self.isActive = isActive
         self.lastAckedAt = lastAckedAt
         self.ackSnoozeMins = ackSnoozeMins
+        self.schedule = schedule
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -62,6 +65,7 @@ public struct TrackerInstanceDto: Sendable, Codable, Hashable {
         case isActive
         case lastAckedAt
         case ackSnoozeMins
+        case schedule
     }
 
     // Encodable protocol methods
@@ -84,6 +88,7 @@ public struct TrackerInstanceDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(isActive, forKey: .isActive)
         try container.encodeIfPresent(lastAckedAt, forKey: .lastAckedAt)
         try container.encodeIfPresent(ackSnoozeMins, forKey: .ackSnoozeMins)
+        try container.encodeIfPresent(schedule, forKey: .schedule)
     }
 }
 

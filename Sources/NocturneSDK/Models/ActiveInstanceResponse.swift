@@ -14,12 +14,17 @@ public struct ActiveInstanceResponse: Sendable, Codable, Hashable {
     public var triggeredAt: Date?
     /** One of \"dnd\" when delivery was suppressed at fire time, otherwise null. */
     public var suppressionReason: String?
+    /** End of the snooze in force, or null when the instance is not snoozed — including a snooze that has lapsed and not yet been swept (ActiveUntil). */
+    public var snoozedUntil: Date?
+    public var snoozeCount: Int?
 
-    public init(id: String? = nil, status: String? = nil, triggeredAt: Date? = nil, suppressionReason: String? = nil) {
+    public init(id: String? = nil, status: String? = nil, triggeredAt: Date? = nil, suppressionReason: String? = nil, snoozedUntil: Date? = nil, snoozeCount: Int? = nil) {
         self.id = id
         self.status = status
         self.triggeredAt = triggeredAt
         self.suppressionReason = suppressionReason
+        self.snoozedUntil = snoozedUntil
+        self.snoozeCount = snoozeCount
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -27,6 +32,8 @@ public struct ActiveInstanceResponse: Sendable, Codable, Hashable {
         case status
         case triggeredAt
         case suppressionReason
+        case snoozedUntil
+        case snoozeCount
     }
 
     // Encodable protocol methods
@@ -37,6 +44,8 @@ public struct ActiveInstanceResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(triggeredAt, forKey: .triggeredAt)
         try container.encodeIfPresent(suppressionReason, forKey: .suppressionReason)
+        try container.encodeIfPresent(snoozedUntil, forKey: .snoozedUntil)
+        try container.encodeIfPresent(snoozeCount, forKey: .snoozeCount)
     }
 }
 

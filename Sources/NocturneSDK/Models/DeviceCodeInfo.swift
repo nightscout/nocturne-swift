@@ -13,19 +13,19 @@ public struct DeviceCodeInfo: Sendable, Codable, Hashable {
     public var userCode: String?
     public var clientId: String?
     public var clientDisplayName: String?
-    public var isKnownClient: Bool?
     public var scopes: [String]?
+    public var deletionAccess: ScopeDeletionAccess?
     public var isExpired: Bool?
     public var isApproved: Bool?
     public var isDenied: Bool?
 
-    public init(id: String? = nil, userCode: String? = nil, clientId: String? = nil, clientDisplayName: String? = nil, isKnownClient: Bool? = nil, scopes: [String]? = nil, isExpired: Bool? = nil, isApproved: Bool? = nil, isDenied: Bool? = nil) {
+    public init(id: String? = nil, userCode: String? = nil, clientId: String? = nil, clientDisplayName: String? = nil, scopes: [String]? = nil, deletionAccess: ScopeDeletionAccess? = nil, isExpired: Bool? = nil, isApproved: Bool? = nil, isDenied: Bool? = nil) {
         self.id = id
         self.userCode = userCode
         self.clientId = clientId
         self.clientDisplayName = clientDisplayName
-        self.isKnownClient = isKnownClient
         self.scopes = scopes
+        self.deletionAccess = deletionAccess
         self.isExpired = isExpired
         self.isApproved = isApproved
         self.isDenied = isDenied
@@ -36,8 +36,8 @@ public struct DeviceCodeInfo: Sendable, Codable, Hashable {
         case userCode
         case clientId
         case clientDisplayName
-        case isKnownClient
         case scopes
+        case deletionAccess
         case isExpired
         case isApproved
         case isDenied
@@ -51,8 +51,8 @@ public struct DeviceCodeInfo: Sendable, Codable, Hashable {
         try container.encodeIfPresent(userCode, forKey: .userCode)
         try container.encodeIfPresent(clientId, forKey: .clientId)
         try container.encodeIfPresent(clientDisplayName, forKey: .clientDisplayName)
-        try container.encodeIfPresent(isKnownClient, forKey: .isKnownClient)
         try container.encodeIfPresent(scopes, forKey: .scopes)
+        try container.encodeIfPresent(deletionAccess, forKey: .deletionAccess)
         try container.encodeIfPresent(isExpired, forKey: .isExpired)
         try container.encodeIfPresent(isApproved, forKey: .isApproved)
         try container.encodeIfPresent(isDenied, forKey: .isDenied)

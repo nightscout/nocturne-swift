@@ -352,6 +352,47 @@ open class PatientRecordAPI {
     }
 
     /**
+     Get patient timezone
+     
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: PatientTimezoneResponse
+     */
+    open class func patientRecordGetPatientTimezone(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PatientTimezoneResponse {
+        return try await patientRecordGetPatientTimezoneWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get patient timezone
+     - GET /api/v4/patient-record/timezone
+     - The patient's timezone, which every report cuts its days on.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<PatientTimezoneResponse> 
+     */
+    open class func patientRecordGetPatientTimezoneWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PatientTimezoneResponse> {
+        let localVariablePath = "/api/v4/patient-record/timezone"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<PatientTimezoneResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Reorder devices
      
      - parameter deviceRankAssignment: (body)  

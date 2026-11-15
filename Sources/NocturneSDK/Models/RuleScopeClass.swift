@@ -8,9 +8,10 @@
 import Foundation
 
 /**  */
-public enum RuleScopeClass: String, Sendable, Codable, CaseIterable {
+public enum RuleScopeClass: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case low = "low"
     case high = "high"
     case composite = "composite"
     case undirected = "undirected"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

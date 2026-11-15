@@ -8,8 +8,9 @@
 import Foundation
 
 /**  */
-public enum CalculationType: String, Sendable, Codable, CaseIterable {
+public enum CalculationType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case suggested = "Suggested"
     case manual = "Manual"
     case automatic = "Automatic"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

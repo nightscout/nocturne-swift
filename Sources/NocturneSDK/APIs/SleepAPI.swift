@@ -66,7 +66,7 @@ open class SleepAPI {
     /**
      Create sessions bulk
      - POST /api/v4/sleep/sessions/bulk
-     - Sessions are upserted one by one with the same dedup semantics as the single create, so a retried batch is idempotent. On a concurrent-insert conflict the request stops with `409 Conflict`; sessions upserted before the conflict remain persisted, and retrying the whole batch is safe.
+     - Create or upsert sleep sessions in bulk (max 100). Sessions are upserted one by one, so a retried batch is idempotent. A session matching one the user deleted is left out of the write and of the response, where the single create answers `409 Conflict`. On a concurrent insert conflict the request fails with `409 Conflict`; sessions upserted before it stay saved, and retrying the whole batch is safe.
      - Bearer Token:
        - type: http
        - name: bearer

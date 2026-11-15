@@ -11,15 +11,21 @@ public struct DataOverviewYearsResponse: Sendable, Codable, Hashable {
 
     public var years: [Int]?
     public var availableDataSources: [String]?
+    public var thresholds: GlycemicThresholds?
+    public var timeZoneUnavailableReason: TimeZoneUnavailableReason?
 
-    public init(years: [Int]? = nil, availableDataSources: [String]? = nil) {
+    public init(years: [Int]? = nil, availableDataSources: [String]? = nil, thresholds: GlycemicThresholds? = nil, timeZoneUnavailableReason: TimeZoneUnavailableReason? = nil) {
         self.years = years
         self.availableDataSources = availableDataSources
+        self.thresholds = thresholds
+        self.timeZoneUnavailableReason = timeZoneUnavailableReason
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case years
         case availableDataSources
+        case thresholds
+        case timeZoneUnavailableReason
     }
 
     // Encodable protocol methods
@@ -28,6 +34,8 @@ public struct DataOverviewYearsResponse: Sendable, Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(years, forKey: .years)
         try container.encodeIfPresent(availableDataSources, forKey: .availableDataSources)
+        try container.encodeIfPresent(thresholds, forKey: .thresholds)
+        try container.encodeIfPresent(timeZoneUnavailableReason, forKey: .timeZoneUnavailableReason)
     }
 }
 

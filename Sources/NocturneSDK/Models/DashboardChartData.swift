@@ -14,6 +14,7 @@ public struct DashboardChartData: Sendable, Codable, Hashable {
     public var basalSeries: [BasalPoint]?
     public var defaultBasalRate: Double?
     public var maxBasalRate: Double?
+    public var minIob: Double?
     public var maxIob: Double?
     public var maxCob: Double?
     public var glucoseData: [GlucosePointDto]?
@@ -28,18 +29,20 @@ public struct DashboardChartData: Sendable, Codable, Hashable {
     public var activitySpans: [ChartStateSpanDto]?
     public var tempBasalSpans: [ChartStateSpanDto]?
     public var basalDeliverySpans: [BasalDeliverySpanDto]?
+    public var lastPumpSyncMills: Int64?
     public var basalInjectionMarkers: [BasalInjectionMarkerDto]?
     public var systemEventMarkers: [SystemEventMarkerDto]?
     public var trackerMarkers: [TrackerMarkerDto]?
     public var heartRateSeries: [HeartRatePointDto]?
     public var stepSeries: [StepBubbleDto]?
 
-    public init(iobSeries: [TimeSeriesPoint]? = nil, cobSeries: [TimeSeriesPoint]? = nil, basalSeries: [BasalPoint]? = nil, defaultBasalRate: Double? = nil, maxBasalRate: Double? = nil, maxIob: Double? = nil, maxCob: Double? = nil, glucoseData: [GlucosePointDto]? = nil, thresholds: ChartThresholdsDto? = nil, bolusMarkers: [BolusMarkerDto]? = nil, carbMarkers: [CarbMarkerDto]? = nil, deviceEventMarkers: [DeviceEventMarkerDto]? = nil, bgCheckMarkers: [BgCheckMarkerDto]? = nil, pumpModeSpans: [ChartStateSpanDto]? = nil, profileSpans: [ChartStateSpanDto]? = nil, overrideSpans: [ChartStateSpanDto]? = nil, activitySpans: [ChartStateSpanDto]? = nil, tempBasalSpans: [ChartStateSpanDto]? = nil, basalDeliverySpans: [BasalDeliverySpanDto]? = nil, basalInjectionMarkers: [BasalInjectionMarkerDto]? = nil, systemEventMarkers: [SystemEventMarkerDto]? = nil, trackerMarkers: [TrackerMarkerDto]? = nil, heartRateSeries: [HeartRatePointDto]? = nil, stepSeries: [StepBubbleDto]? = nil) {
+    public init(iobSeries: [TimeSeriesPoint]? = nil, cobSeries: [TimeSeriesPoint]? = nil, basalSeries: [BasalPoint]? = nil, defaultBasalRate: Double? = nil, maxBasalRate: Double? = nil, minIob: Double? = nil, maxIob: Double? = nil, maxCob: Double? = nil, glucoseData: [GlucosePointDto]? = nil, thresholds: ChartThresholdsDto? = nil, bolusMarkers: [BolusMarkerDto]? = nil, carbMarkers: [CarbMarkerDto]? = nil, deviceEventMarkers: [DeviceEventMarkerDto]? = nil, bgCheckMarkers: [BgCheckMarkerDto]? = nil, pumpModeSpans: [ChartStateSpanDto]? = nil, profileSpans: [ChartStateSpanDto]? = nil, overrideSpans: [ChartStateSpanDto]? = nil, activitySpans: [ChartStateSpanDto]? = nil, tempBasalSpans: [ChartStateSpanDto]? = nil, basalDeliverySpans: [BasalDeliverySpanDto]? = nil, lastPumpSyncMills: Int64? = nil, basalInjectionMarkers: [BasalInjectionMarkerDto]? = nil, systemEventMarkers: [SystemEventMarkerDto]? = nil, trackerMarkers: [TrackerMarkerDto]? = nil, heartRateSeries: [HeartRatePointDto]? = nil, stepSeries: [StepBubbleDto]? = nil) {
         self.iobSeries = iobSeries
         self.cobSeries = cobSeries
         self.basalSeries = basalSeries
         self.defaultBasalRate = defaultBasalRate
         self.maxBasalRate = maxBasalRate
+        self.minIob = minIob
         self.maxIob = maxIob
         self.maxCob = maxCob
         self.glucoseData = glucoseData
@@ -54,6 +57,7 @@ public struct DashboardChartData: Sendable, Codable, Hashable {
         self.activitySpans = activitySpans
         self.tempBasalSpans = tempBasalSpans
         self.basalDeliverySpans = basalDeliverySpans
+        self.lastPumpSyncMills = lastPumpSyncMills
         self.basalInjectionMarkers = basalInjectionMarkers
         self.systemEventMarkers = systemEventMarkers
         self.trackerMarkers = trackerMarkers
@@ -67,6 +71,7 @@ public struct DashboardChartData: Sendable, Codable, Hashable {
         case basalSeries
         case defaultBasalRate
         case maxBasalRate
+        case minIob
         case maxIob
         case maxCob
         case glucoseData
@@ -81,6 +86,7 @@ public struct DashboardChartData: Sendable, Codable, Hashable {
         case activitySpans
         case tempBasalSpans
         case basalDeliverySpans
+        case lastPumpSyncMills
         case basalInjectionMarkers
         case systemEventMarkers
         case trackerMarkers
@@ -97,6 +103,7 @@ public struct DashboardChartData: Sendable, Codable, Hashable {
         try container.encodeIfPresent(basalSeries, forKey: .basalSeries)
         try container.encodeIfPresent(defaultBasalRate, forKey: .defaultBasalRate)
         try container.encodeIfPresent(maxBasalRate, forKey: .maxBasalRate)
+        try container.encodeIfPresent(minIob, forKey: .minIob)
         try container.encodeIfPresent(maxIob, forKey: .maxIob)
         try container.encodeIfPresent(maxCob, forKey: .maxCob)
         try container.encodeIfPresent(glucoseData, forKey: .glucoseData)
@@ -111,6 +118,7 @@ public struct DashboardChartData: Sendable, Codable, Hashable {
         try container.encodeIfPresent(activitySpans, forKey: .activitySpans)
         try container.encodeIfPresent(tempBasalSpans, forKey: .tempBasalSpans)
         try container.encodeIfPresent(basalDeliverySpans, forKey: .basalDeliverySpans)
+        try container.encodeIfPresent(lastPumpSyncMills, forKey: .lastPumpSyncMills)
         try container.encodeIfPresent(basalInjectionMarkers, forKey: .basalInjectionMarkers)
         try container.encodeIfPresent(systemEventMarkers, forKey: .systemEventMarkers)
         try container.encodeIfPresent(trackerMarkers, forKey: .trackerMarkers)

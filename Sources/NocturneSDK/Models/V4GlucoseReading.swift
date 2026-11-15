@@ -15,14 +15,16 @@ public struct V4GlucoseReading: Sendable, Codable, Hashable {
     public var delta: Double?
     public var mills: Int64?
     public var noise: Int?
+    public var status: GlucoseStatus?
 
-    public init(sgv: Double? = nil, direction: Direction? = nil, trendRate: Double? = nil, delta: Double? = nil, mills: Int64? = nil, noise: Int? = nil) {
+    public init(sgv: Double? = nil, direction: Direction? = nil, trendRate: Double? = nil, delta: Double? = nil, mills: Int64? = nil, noise: Int? = nil, status: GlucoseStatus? = nil) {
         self.sgv = sgv
         self.direction = direction
         self.trendRate = trendRate
         self.delta = delta
         self.mills = mills
         self.noise = noise
+        self.status = status
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -32,6 +34,7 @@ public struct V4GlucoseReading: Sendable, Codable, Hashable {
         case delta
         case mills
         case noise
+        case status
     }
 
     // Encodable protocol methods
@@ -44,6 +47,7 @@ public struct V4GlucoseReading: Sendable, Codable, Hashable {
         try container.encodeIfPresent(delta, forKey: .delta)
         try container.encodeIfPresent(mills, forKey: .mills)
         try container.encodeIfPresent(noise, forKey: .noise)
+        try container.encodeIfPresent(status, forKey: .status)
     }
 }
 

@@ -23,7 +23,7 @@ open class MealMatchingAPI {
     /**
      Accept match
      - POST /api/v4/meal-matching/accept
-     - Writes a treatment_foods row keyed by the carb intake, which NutritionController gates on treatments.readwrite, and marks the connector food entry matched. Gated on the treatments category rather than food because the carb breakdown is a COB input.
+     - Accept a meal match Links the connector food entry to the carb intake and marks the entry matched. Requires the treatments read-write scope.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -66,7 +66,7 @@ open class MealMatchingAPI {
     /**
      Dismiss match
      - POST /api/v4/meal-matching/dismiss
-     - Writes only the connector_food_entries status, which is the food category in GovernedTables, so this action is gated on the food category while AcceptMatch is gated on treatments.
+     - Dismiss a meal match Requires the food read-write scope.
      - Bearer Token:
        - type: http
        - name: bearer

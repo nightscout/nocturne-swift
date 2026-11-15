@@ -11,18 +11,36 @@ public struct TreatmentSummary: Sendable, Codable, Hashable {
 
     public var totals: TreatmentTotals?
     public var treatmentCount: Int?
+    public var bolusCount: Int?
+    public var carbEntryCount: Int?
     public var carbToInsulinRatio: Double?
+    public var averagePerBolus: Double?
+    public var averageCarbsPerEntry: Double?
+    public var dailyBoluses: Double?
+    public var dailyCarbs: Double?
 
-    public init(totals: TreatmentTotals? = nil, treatmentCount: Int? = nil, carbToInsulinRatio: Double? = nil) {
+    public init(totals: TreatmentTotals? = nil, treatmentCount: Int? = nil, bolusCount: Int? = nil, carbEntryCount: Int? = nil, carbToInsulinRatio: Double? = nil, averagePerBolus: Double? = nil, averageCarbsPerEntry: Double? = nil, dailyBoluses: Double? = nil, dailyCarbs: Double? = nil) {
         self.totals = totals
         self.treatmentCount = treatmentCount
+        self.bolusCount = bolusCount
+        self.carbEntryCount = carbEntryCount
         self.carbToInsulinRatio = carbToInsulinRatio
+        self.averagePerBolus = averagePerBolus
+        self.averageCarbsPerEntry = averageCarbsPerEntry
+        self.dailyBoluses = dailyBoluses
+        self.dailyCarbs = dailyCarbs
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case totals
         case treatmentCount
+        case bolusCount
+        case carbEntryCount
         case carbToInsulinRatio
+        case averagePerBolus
+        case averageCarbsPerEntry
+        case dailyBoluses
+        case dailyCarbs
     }
 
     // Encodable protocol methods
@@ -31,7 +49,13 @@ public struct TreatmentSummary: Sendable, Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(totals, forKey: .totals)
         try container.encodeIfPresent(treatmentCount, forKey: .treatmentCount)
+        try container.encodeIfPresent(bolusCount, forKey: .bolusCount)
+        try container.encodeIfPresent(carbEntryCount, forKey: .carbEntryCount)
         try container.encodeIfPresent(carbToInsulinRatio, forKey: .carbToInsulinRatio)
+        try container.encodeIfPresent(averagePerBolus, forKey: .averagePerBolus)
+        try container.encodeIfPresent(averageCarbsPerEntry, forKey: .averageCarbsPerEntry)
+        try container.encodeIfPresent(dailyBoluses, forKey: .dailyBoluses)
+        try container.encodeIfPresent(dailyCarbs, forKey: .dailyCarbs)
     }
 }
 

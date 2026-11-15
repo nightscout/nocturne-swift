@@ -10,146 +10,6 @@ import Foundation
 open class CompressionLowAPI {
 
     /**
-     Accept suggestion
-     
-     - parameter id: (path)  
-     - parameter acceptSuggestionRequest: (body)  
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: StateSpan
-     */
-    open class func compressionLowAcceptSuggestion(id: String, acceptSuggestionRequest: AcceptSuggestionRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> StateSpan {
-        return try await compressionLowAcceptSuggestionWithRequestBuilder(id: id, acceptSuggestionRequest: acceptSuggestionRequest, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     Accept suggestion
-     - POST /api/v4/compression-lows/suggestions/{id}/accept
-     - Accept a suggestion with adjusted bounds
-     - Bearer Token:
-       - type: http
-       - name: bearer
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter id: (path)  
-     - parameter acceptSuggestionRequest: (body)  
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<StateSpan> 
-     */
-    open class func compressionLowAcceptSuggestionWithRequestBuilder(id: String, acceptSuggestionRequest: AcceptSuggestionRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<StateSpan> {
-        var localVariablePath = "/api/v4/compression-lows/suggestions/{id}/accept"
-        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
-        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: acceptSuggestionRequest, codableHelper: apiConfiguration.codableHelper)
-
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/json",
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<StateSpan>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
-
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
-    }
-
-    /**
-     Delete suggestion
-     
-     - parameter id: (path)  
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: Void
-     */
-    open class func compressionLowDeleteSuggestion(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await compressionLowDeleteSuggestionWithRequestBuilder(id: id, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     Delete suggestion
-     - DELETE /api/v4/compression-lows/suggestions/{id}
-     - Delete a suggestion and its associated state span
-     - Bearer Token:
-       - type: http
-       - name: bearer
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter id: (path)  
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
-     */
-    open class func compressionLowDeleteSuggestionWithRequestBuilder(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
-        var localVariablePath = "/api/v4/compression-lows/suggestions/{id}"
-        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
-        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters: [String: any Sendable]? = nil
-
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
-
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
-    }
-
-    /**
-     Dismiss suggestion
-     
-     - parameter id: (path)  
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: Void
-     */
-    open class func compressionLowDismissSuggestion(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
-        return try await compressionLowDismissSuggestionWithRequestBuilder(id: id, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     Dismiss suggestion
-     - POST /api/v4/compression-lows/suggestions/{id}/dismiss
-     - Dismiss a suggestion
-     - Bearer Token:
-       - type: http
-       - name: bearer
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter id: (path)  
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<Void> 
-     */
-    open class func compressionLowDismissSuggestionWithRequestBuilder(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
-        var localVariablePath = "/api/v4/compression-lows/suggestions/{id}/dismiss"
-        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
-        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters: [String: any Sendable]? = nil
-
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
-
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
-    }
-
-    /**
      Get suggestion
      
      - parameter id: (path)  
@@ -245,6 +105,49 @@ open class CompressionLowAPI {
     }
 
     /**
+     Review suggestions
+     
+     - parameter compressionLowBatchRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: Void
+     */
+    open class func compressionLowReviewSuggestions(compressionLowBatchRequest: CompressionLowBatchRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
+        return try await compressionLowReviewSuggestionsWithRequestBuilder(compressionLowBatchRequest: compressionLowBatchRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Review suggestions
+     - POST /api/v4/compression-lows/suggestions/review
+     - Accept, dismiss or delete several suggestions at once Every item is checked before any is written, and one failing item rejects the whole batch. After that the writes are not atomic: a failure part way leaves earlier items applied, and a retry finishes the rest.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter compressionLowBatchRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<Void> 
+     */
+    open class func compressionLowReviewSuggestionsWithRequestBuilder(compressionLowBatchRequest: CompressionLowBatchRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
+        let localVariablePath = "/api/v4/compression-lows/suggestions/review"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: compressionLowBatchRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Trigger detection
      
      - parameter triggerDetectionRequest: (body)  
@@ -258,7 +161,7 @@ open class CompressionLowAPI {
     /**
      Trigger detection
      - POST /api/v4/compression-lows/detect
-     - Provide either a single `nightOf` date or a range with `startDate` and `endDate`. When using a range, detection runs for each night in the range (inclusive). Each night analysed persists the compression_low_suggestions rows it finds (CompressionLowDetectionService.DetectForNightAsync), so this is a write.
+     - Manually trigger detection for a date range (for testing) Provide either nightOf or a startDate and endDate range (inclusive, one run per night). Each night analysed stores the suggestions it finds.
      - Bearer Token:
        - type: http
        - name: bearer

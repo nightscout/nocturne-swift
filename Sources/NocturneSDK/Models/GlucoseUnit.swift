@@ -8,7 +8,8 @@
 import Foundation
 
 /**  */
-public enum GlucoseUnit: String, Sendable, Codable, CaseIterable {
+public enum GlucoseUnit: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case mgDl = "MgDl"
     case mmol = "Mmol"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

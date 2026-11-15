@@ -10,16 +10,13 @@ import Foundation
 public struct AckTrackerRequest: Sendable, Codable, Hashable {
 
     public var snoozeMins: Int?
-    public var global: Bool?
 
-    public init(snoozeMins: Int? = nil, global: Bool? = nil) {
+    public init(snoozeMins: Int? = nil) {
         self.snoozeMins = snoozeMins
-        self.global = global
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case snoozeMins
-        case global
     }
 
     // Encodable protocol methods
@@ -27,7 +24,6 @@ public struct AckTrackerRequest: Sendable, Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(snoozeMins, forKey: .snoozeMins)
-        try container.encodeIfPresent(global, forKey: .global)
     }
 }
 

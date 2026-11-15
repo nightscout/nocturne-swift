@@ -18,8 +18,9 @@ public struct AlertRuleChannelResponse: Sendable, Codable, Hashable {
     public var metadata: JSONValue?
     /** Whether a webhook signing secret is stored for this channel. The secret itself is             never returned. */
     public var hasSecret: Bool?
+    public var recipient: InAppRecipientResponse?
 
-    public init(id: String? = nil, channelType: ChannelType? = nil, destination: String? = nil, destinationLabel: String? = nil, sortOrder: Int? = nil, metadata: JSONValue? = nil, hasSecret: Bool? = nil) {
+    public init(id: String? = nil, channelType: ChannelType? = nil, destination: String? = nil, destinationLabel: String? = nil, sortOrder: Int? = nil, metadata: JSONValue? = nil, hasSecret: Bool? = nil, recipient: InAppRecipientResponse? = nil) {
         self.id = id
         self.channelType = channelType
         self.destination = destination
@@ -27,6 +28,7 @@ public struct AlertRuleChannelResponse: Sendable, Codable, Hashable {
         self.sortOrder = sortOrder
         self.metadata = metadata
         self.hasSecret = hasSecret
+        self.recipient = recipient
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -37,6 +39,7 @@ public struct AlertRuleChannelResponse: Sendable, Codable, Hashable {
         case sortOrder
         case metadata
         case hasSecret
+        case recipient
     }
 
     // Encodable protocol methods
@@ -50,6 +53,7 @@ public struct AlertRuleChannelResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(sortOrder, forKey: .sortOrder)
         try container.encodeIfPresent(metadata, forKey: .metadata)
         try container.encodeIfPresent(hasSecret, forKey: .hasSecret)
+        try container.encodeIfPresent(recipient, forKey: .recipient)
     }
 }
 

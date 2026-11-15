@@ -12,7 +12,10 @@ public struct SleepTrendsSummary: Sendable, Codable, Hashable {
     public var nightCount: Int?
     public var daysInRange: Int?
     public var coveragePct: Double?
+    public var scoredNightCount: Int?
+    public var includesEstimatedScore: Bool?
     public var meanScore: Double?
+    public var tirNightCount: Int?
     public var meanTirPct: Double?
     public var meanAsleepMinutes: Double?
     public var meanDeepPct: Double?
@@ -24,11 +27,14 @@ public struct SleepTrendsSummary: Sendable, Codable, Hashable {
     public var last7dVsPrior7d: SleepTrendsDelta?
     public var referenceRanges: SleepStageReferenceRangeSet?
 
-    public init(nightCount: Int? = nil, daysInRange: Int? = nil, coveragePct: Double? = nil, meanScore: Double? = nil, meanTirPct: Double? = nil, meanAsleepMinutes: Double? = nil, meanDeepPct: Double? = nil, meanRemPct: Double? = nil, meanDawnRiseMg: Double? = nil, meanHrvMs: Double? = nil, nightsWithHypoPct: Double? = nil, totalHypoCount: Int? = nil, last7dVsPrior7d: SleepTrendsDelta? = nil, referenceRanges: SleepStageReferenceRangeSet? = nil) {
+    public init(nightCount: Int? = nil, daysInRange: Int? = nil, coveragePct: Double? = nil, scoredNightCount: Int? = nil, includesEstimatedScore: Bool? = nil, meanScore: Double? = nil, tirNightCount: Int? = nil, meanTirPct: Double? = nil, meanAsleepMinutes: Double? = nil, meanDeepPct: Double? = nil, meanRemPct: Double? = nil, meanDawnRiseMg: Double? = nil, meanHrvMs: Double? = nil, nightsWithHypoPct: Double? = nil, totalHypoCount: Int? = nil, last7dVsPrior7d: SleepTrendsDelta? = nil, referenceRanges: SleepStageReferenceRangeSet? = nil) {
         self.nightCount = nightCount
         self.daysInRange = daysInRange
         self.coveragePct = coveragePct
+        self.scoredNightCount = scoredNightCount
+        self.includesEstimatedScore = includesEstimatedScore
         self.meanScore = meanScore
+        self.tirNightCount = tirNightCount
         self.meanTirPct = meanTirPct
         self.meanAsleepMinutes = meanAsleepMinutes
         self.meanDeepPct = meanDeepPct
@@ -45,7 +51,10 @@ public struct SleepTrendsSummary: Sendable, Codable, Hashable {
         case nightCount
         case daysInRange
         case coveragePct
+        case scoredNightCount
+        case includesEstimatedScore
         case meanScore
+        case tirNightCount
         case meanTirPct
         case meanAsleepMinutes
         case meanDeepPct
@@ -65,7 +74,10 @@ public struct SleepTrendsSummary: Sendable, Codable, Hashable {
         try container.encodeIfPresent(nightCount, forKey: .nightCount)
         try container.encodeIfPresent(daysInRange, forKey: .daysInRange)
         try container.encodeIfPresent(coveragePct, forKey: .coveragePct)
+        try container.encodeIfPresent(scoredNightCount, forKey: .scoredNightCount)
+        try container.encodeIfPresent(includesEstimatedScore, forKey: .includesEstimatedScore)
         try container.encodeIfPresent(meanScore, forKey: .meanScore)
+        try container.encodeIfPresent(tirNightCount, forKey: .tirNightCount)
         try container.encodeIfPresent(meanTirPct, forKey: .meanTirPct)
         try container.encodeIfPresent(meanAsleepMinutes, forKey: .meanAsleepMinutes)
         try container.encodeIfPresent(meanDeepPct, forKey: .meanDeepPct)

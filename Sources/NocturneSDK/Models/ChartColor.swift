@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum ChartColor: String, Sendable, Codable, CaseIterable {
+public enum ChartColor: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case glucoseVeryLow = "glucose-very-low"
     case glucoseLow = "glucose-low"
     case glucoseInRange = "glucose-in-range"
@@ -38,6 +38,7 @@ public enum ChartColor: String, Sendable, Codable, CaseIterable {
     case activityTravel = "activity-travel"
     case trackerSensor = "tracker-sensor"
     case trackerCannula = "tracker-cannula"
+    case trackerPod = "tracker-pod"
     case trackerReservoir = "tracker-reservoir"
     case trackerBattery = "tracker-battery"
     case trackerConsumable = "tracker-consumable"
@@ -50,4 +51,5 @@ public enum ChartColor: String, Sendable, Codable, CaseIterable {
     case chart2 = "chart-2"
     case mutedForeground = "muted-foreground"
     case primary = "primary"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

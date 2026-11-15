@@ -10,6 +10,55 @@ import Foundation
 open class ChartDataAPI {
 
     /**
+     Get basal delivery spans
+     
+     - parameter startTime: (query) Start of the requested window as a Unix timestamp in milliseconds. 
+     - parameter endTime: (query) End of the requested window as a Unix timestamp in milliseconds.             Must be greater than startTime. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [BasalDeliverySpanDto]
+     */
+    open class func chartDataGetBasalDeliverySpans(startTime: Int64, endTime: Int64, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [BasalDeliverySpanDto] {
+        return try await chartDataGetBasalDeliverySpansWithRequestBuilder(startTime: startTime, endTime: endTime, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get basal delivery spans
+     - GET /api/v4/ChartData/basal-delivery-spans
+     - Gets the basal delivery spans overlapping a time window, as the dashboard chart draws them.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter startTime: (query) Start of the requested window as a Unix timestamp in milliseconds. 
+     - parameter endTime: (query) End of the requested window as a Unix timestamp in milliseconds.             Must be greater than startTime. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[BasalDeliverySpanDto]> 
+     */
+    open class func chartDataGetBasalDeliverySpansWithRequestBuilder(startTime: Int64, endTime: Int64, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[BasalDeliverySpanDto]> {
+        let localVariablePath = "/api/v4/ChartData/basal-delivery-spans"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "startTime": (wrappedValue: startTime.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endTime": (wrappedValue: endTime.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[BasalDeliverySpanDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Get basal series
      
      - parameter startTime: (query) Start of the requested window as a Unix timestamp in milliseconds. 
@@ -64,11 +113,12 @@ open class ChartDataAPI {
      - parameter startTime: (query) Start of the requested window as a Unix timestamp in milliseconds. 
      - parameter endTime: (query) End of the requested window as a Unix timestamp in milliseconds.             Must be greater than startTime. 
      - parameter intervalMinutes: (query) Granularity of the returned series in minutes (1–60, default 5). (optional, default to 5)
+     - parameter includeHealthSeries: (query) Whether to return the raw heart-rate and step series (default true).             Pass false when they are not drawn; both series are then empty. (optional, default to true)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DashboardChartData
      */
-    open class func chartDataGetDashboardChartData(startTime: Int64, endTime: Int64, intervalMinutes: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DashboardChartData {
-        return try await chartDataGetDashboardChartDataWithRequestBuilder(startTime: startTime, endTime: endTime, intervalMinutes: intervalMinutes, apiConfiguration: apiConfiguration).execute().body
+    open class func chartDataGetDashboardChartData(startTime: Int64, endTime: Int64, intervalMinutes: Int? = nil, includeHealthSeries: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DashboardChartData {
+        return try await chartDataGetDashboardChartDataWithRequestBuilder(startTime: startTime, endTime: endTime, intervalMinutes: intervalMinutes, includeHealthSeries: includeHealthSeries, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -84,10 +134,11 @@ open class ChartDataAPI {
      - parameter startTime: (query) Start of the requested window as a Unix timestamp in milliseconds. 
      - parameter endTime: (query) End of the requested window as a Unix timestamp in milliseconds.             Must be greater than startTime. 
      - parameter intervalMinutes: (query) Granularity of the returned series in minutes (1–60, default 5). (optional, default to 5)
+     - parameter includeHealthSeries: (query) Whether to return the raw heart-rate and step series (default true).             Pass false when they are not drawn; both series are then empty. (optional, default to true)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DashboardChartData> 
      */
-    open class func chartDataGetDashboardChartDataWithRequestBuilder(startTime: Int64, endTime: Int64, intervalMinutes: Int? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DashboardChartData> {
+    open class func chartDataGetDashboardChartDataWithRequestBuilder(startTime: Int64, endTime: Int64, intervalMinutes: Int? = nil, includeHealthSeries: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DashboardChartData> {
         let localVariablePath = "/api/v4/ChartData/dashboard"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -97,6 +148,7 @@ open class ChartDataAPI {
             "startTime": (wrappedValue: startTime.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "endTime": (wrappedValue: endTime.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "intervalMinutes": (wrappedValue: intervalMinutes?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "includeHealthSeries": (wrappedValue: includeHealthSeries?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [

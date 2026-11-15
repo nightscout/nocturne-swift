@@ -8,9 +8,10 @@
 import Foundation
 
 /**  */
-public enum ConnectorFoodEntryStatus: String, Sendable, Codable, CaseIterable {
+public enum ConnectorFoodEntryStatus: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case pending = "Pending"
     case matched = "Matched"
     case standalone = "Standalone"
     case deleted = "Deleted"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

@@ -66,7 +66,7 @@ open class DevAuthAPI {
     /**
      Login
      - GET /api/v4/dev-only/auth/login
-     - Log in as a tenant member without a WebAuthn ceremony and set the normal session cookies. Navigating a browser to this URL on a tenant subdomain (e.g. https://sleepy.nocturne.localhost:1612/api/v4/dev-only/auth/login) leaves it authenticated and redirects into the app. The tenant resolves from the ?tenant slug, else from the request host; the member from ?username, else the first owner-role member, else the first member. Add format=json to get the token pair instead of a redirect. A state-changing GET is deliberate — browser navigation is the use case — which makes it CSRF-able while a dev stack runs; acceptable only because the controller does not exist outside Development.
+     - Log in as a tenant member without a WebAuthn ceremony and set the normal session cookies. Navigating a browser to this URL on a tenant subdomain (e.g. https://dev.nocturne.localhost:1612/api/v4/dev-only/auth/login) leaves it authenticated and redirects into the app. The tenant resolves from the ?tenant slug, else from the request host; the member from ?username, else the first owner-role member, else the first member. Add format=json to get the token pair instead of a redirect. A state-changing GET is deliberate — browser navigation is the use case — which makes it CSRF-able while a dev stack runs; acceptable only because the controller does not exist outside Development.
      - parameter tenant: (query)  (optional)
      - parameter username: (query)  (optional)
      - parameter redirect: (query)  (optional)

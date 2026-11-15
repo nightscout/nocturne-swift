@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum CompletionReason: String, Sendable, Codable, CaseIterable {
+public enum CompletionReason: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case completed = "Completed"
     case expired = "Expired"
     case other = "Other"
@@ -21,4 +21,5 @@ public enum CompletionReason: String, Sendable, Codable, CaseIterable {
     case rescheduled = "Rescheduled"
     case cancelled = "Cancelled"
     case missed = "Missed"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

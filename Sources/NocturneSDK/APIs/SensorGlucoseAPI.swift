@@ -14,16 +14,16 @@ open class SensorGlucoseAPI {
      
      - parameter requestBody: (body) The unique identifiers of the soft-deleted records. 
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: [SensorGlucose]
+     - returns: BulkRestoreResultOfSensorGlucose
      */
-    open class func sensorGlucoseBulkRestore(requestBody: [String], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [SensorGlucose] {
+    open class func sensorGlucoseBulkRestore(requestBody: [String], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> BulkRestoreResultOfSensorGlucose {
         return try await sensorGlucoseBulkRestoreWithRequestBuilder(requestBody: requestBody, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Bulk restore
      - POST /api/v4/glucose/sensor/restore
-     - Returns `200 OK` with the restored records. IDs that don't match a soft-deleted record are silently ignored.
+     - Restores multiple soft-deleted records by their IDs. IDs that match no soft-deleted record are ignored. A record left deleted because a live record holds its key is listed in `conflicts`; the rest of the batch is still restored. If a live record takes one of those keys while the batch is saving, nothing is restored and the request is refused with `409 Conflict`.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -32,9 +32,9 @@ open class SensorGlucoseAPI {
        - name: oauth2
      - parameter requestBody: (body) The unique identifiers of the soft-deleted records. 
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<[SensorGlucose]> 
+     - returns: RequestBuilder<BulkRestoreResultOfSensorGlucose> 
      */
-    open class func sensorGlucoseBulkRestoreWithRequestBuilder(requestBody: [String], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[SensorGlucose]> {
+    open class func sensorGlucoseBulkRestoreWithRequestBuilder(requestBody: [String], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<BulkRestoreResultOfSensorGlucose> {
         let localVariablePath = "/api/v4/glucose/sensor/restore"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: requestBody, codableHelper: apiConfiguration.codableHelper)
@@ -47,7 +47,7 @@ open class SensorGlucoseAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<[SensorGlucose]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<BulkRestoreResultOfSensorGlucose>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
@@ -66,7 +66,7 @@ open class SensorGlucoseAPI {
     /**
      Create
      - POST /api/v4/glucose/sensor
-     - `Timestamp` must be set on the mapped model; requests that resolve to a default timestamp are rejected with `400 Bad Request`.              On success, responds with `201 Created` and a `Location` header containing the URL of the newly created record.              A record whose `(dataSource, syncIdentifier)` is held by a record the owner deleted is refused with `409 Conflict` — deleting a record stops that record's source from re-uploading it. Restore it from `GET deleted` instead.
+     - Creates a new record and returns it with a `Location` header pointing to the created resource. A request with no `Timestamp` is rejected with `400 Bad Request`. A record whose `(dataSource, syncIdentifier)` is held by a record the owner deleted is refused with `409 Conflict`; restore the deleted record instead.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -109,7 +109,7 @@ open class SensorGlucoseAPI {
     /**
      Create bulk
      - POST /api/v4/glucose/sensor/bulk
-     - Array semantics are per-item, not all-or-nothing. Of the types reachable here, boluses, basal injections and sensor glucose upsert on the sync key: an item carrying both `dataSource` and `syncIdentifier` updates in place the row already matched by that pair. Every other type — notes, device events, BG checks, calibrations, meter readings and bolus calculations — inserts, as does any item not carrying both halves of the pair.              The payload is validated as a whole — an empty body, more than the cap, an item with an unset `timestamp`, an item supplying `syncIdentifier` without `dataSource`, or an item any registered validator rejects, all fail the request with `400 Bad Request` before anything is persisted.              On success, responds with `201 Created` and the written records.
+     - Creates or updates many records in one request, and returns them. Each item's outcome is decided on its own. For types that upsert, an item carrying both `dataSource` and `syncIdentifier` updates the matching record in place, and an item whose pair is held by a deleted record is skipped; other types, and items without both fields, insert. An empty body, too many items, an item with no `timestamp`, an item with `syncIdentifier` but no `dataSource`, or an item that fails validation fails the whole request with `400 Bad Request` before anything is saved.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -152,7 +152,7 @@ open class SensorGlucoseAPI {
     /**
      Delete
      - DELETE /api/v4/glucose/sensor/{id}
-     - Returns `204 No Content` on success, or `404 Not Found` if no record with the given id exists.
+     - Deletes a record by ID.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -194,17 +194,18 @@ open class SensorGlucoseAPI {
      - parameter sort: (query)  (optional, default to "timestamp_desc")
      - parameter device: (query)  (optional)
      - parameter source: (query)  (optional)
+     - parameter includeTotal: (query)  (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedResponseOfSensorGlucose
      */
-    open class func sensorGlucoseGetAll(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfSensorGlucose {
-        return try await sensorGlucoseGetAllWithRequestBuilder(from: from, to: to, limit: limit, offset: offset, sort: sort, device: device, source: source, apiConfiguration: apiConfiguration).execute().body
+    open class func sensorGlucoseGetAll(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, includeTotal: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfSensorGlucose {
+        return try await sensorGlucoseGetAllWithRequestBuilder(from: from, to: to, limit: limit, offset: offset, sort: sort, device: device, source: source, includeTotal: includeTotal, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get all
      - GET /api/v4/glucose/sensor
-     - The patientDeviceId query parameter is read directly from the request because the base list signature (shared by every V4 read controller) has no device-attribution concept — binding it here keeps a single GET action while adding the sensor-glucose-only filter. Never cached, per GetProfileSummary: a newly arrived or corrected reading must not be invisible until a cached list body expires.
+     - Lists sensor glucose readings. Adds an optional patientDeviceId query filter on top of the base list surface: when set, results are that registered device's raw readings (canonical stream selection is bypassed); when unset, the caller sees every stored reading. Pagination totals match the base device/source behaviour (the count is unscoped by the device filters).
      - Bearer Token:
        - type: http
        - name: bearer
@@ -218,10 +219,11 @@ open class SensorGlucoseAPI {
      - parameter sort: (query)  (optional, default to "timestamp_desc")
      - parameter device: (query)  (optional)
      - parameter source: (query)  (optional)
+     - parameter includeTotal: (query)  (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedResponseOfSensorGlucose> 
      */
-    open class func sensorGlucoseGetAllWithRequestBuilder(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfSensorGlucose> {
+    open class func sensorGlucoseGetAllWithRequestBuilder(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, includeTotal: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfSensorGlucose> {
         let localVariablePath = "/api/v4/glucose/sensor"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -235,6 +237,7 @@ open class SensorGlucoseAPI {
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "device": (wrappedValue: device?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "source": (wrappedValue: source?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "includeTotal": (wrappedValue: includeTotal?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ]
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp1)
 
@@ -263,7 +266,7 @@ open class SensorGlucoseAPI {
     /**
      Get by id
      - GET /api/v4/glucose/sensor/{id}
-     - Returns `404 Not Found` if no record with the given id exists.
+     - Retrieves a single record by its unique identifier.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -310,7 +313,7 @@ open class SensorGlucoseAPI {
     /**
      List deleted
      - GET /api/v4/glucose/sensor/deleted
-     - Gated on the write scope although it reads: the recycle bin exists to feed Restore, and records the owner deleted must not be enumerable by read-only credentials — in particular the anonymous public-share principal, which satisfies the class-level category read gate.
+     - Lists soft-deleted records available for restoration, ordered by deletion date (newest first). Needs write access, not only read access, and is refused to read-only credentials such as a public share link.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -358,7 +361,7 @@ open class SensorGlucoseAPI {
     /**
      Restore
      - POST /api/v4/glucose/sensor/{id}/restore
-     - Returns `200 OK` with the restored record, or `404 Not Found` if no soft-deleted record with the given id exists.
+     - Restores a soft-deleted record by ID. Returns `404 Not Found` if no soft-deleted record has the ID. A record whose legacy id or `(dataSource, syncIdentifier)` is now held by a live record is refused with `409 Conflict` and stays deleted.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -405,7 +408,7 @@ open class SensorGlucoseAPI {
     /**
      Update
      - PUT /api/v4/glucose/sensor/{id}
-     - Returns `404 Not Found` if no record with the given id exists.              `Timestamp` must be set on the mapped model; requests that resolve to a default timestamp are rejected with `400 Bad Request`.
+     - Updates an existing record by ID and returns the updated record. Returns `404 Not Found` if the record does not exist, and `400 Bad Request` if the request has no `Timestamp`.
      - Bearer Token:
        - type: http
        - name: bearer

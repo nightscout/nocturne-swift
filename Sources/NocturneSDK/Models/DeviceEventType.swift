@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum DeviceEventType: String, Sendable, Codable, CaseIterable {
+public enum DeviceEventType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case sensorStart = "SensorStart"
     case sensorChange = "SensorChange"
     case sensorStop = "SensorStop"
@@ -32,4 +32,5 @@ public enum DeviceEventType: String, Sendable, Codable, CaseIterable {
     case bolusMaxChanged = "BolusMaxChanged"
     case basalMaxChanged = "BasalMaxChanged"
     case profileSwitch = "ProfileSwitch"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

@@ -11,15 +11,19 @@ public struct ApproveAccessRequestRequest: Sendable, Codable, Hashable {
 
     public var roleIds: [String]?
     public var directPermissions: [String]?
+    /** Restricts the new member's reads to the last 24 hours of data, as on a share or invite. */
+    public var limitTo24Hours: Bool?
 
-    public init(roleIds: [String]? = nil, directPermissions: [String]? = nil) {
+    public init(roleIds: [String]? = nil, directPermissions: [String]? = nil, limitTo24Hours: Bool? = nil) {
         self.roleIds = roleIds
         self.directPermissions = directPermissions
+        self.limitTo24Hours = limitTo24Hours
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case roleIds
         case directPermissions
+        case limitTo24Hours
     }
 
     // Encodable protocol methods
@@ -28,6 +32,7 @@ public struct ApproveAccessRequestRequest: Sendable, Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(roleIds, forKey: .roleIds)
         try container.encodeIfPresent(directPermissions, forKey: .directPermissions)
+        try container.encodeIfPresent(limitTo24Hours, forKey: .limitTo24Hours)
     }
 }
 

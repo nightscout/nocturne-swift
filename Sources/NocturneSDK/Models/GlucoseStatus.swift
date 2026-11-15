@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum GlucoseStatus: String, Sendable, Codable, CaseIterable {
+public enum GlucoseStatus: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case unknown = "Unknown"
     case stale = "Stale"
     case urgentLow = "UrgentLow"
@@ -16,4 +16,5 @@ public enum GlucoseStatus: String, Sendable, Codable, CaseIterable {
     case inRange = "InRange"
     case high = "High"
     case urgentHigh = "UrgentHigh"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

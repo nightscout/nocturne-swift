@@ -12,6 +12,7 @@ public struct StatusResponse: Sendable, Codable, Hashable {
     public var status: String?
     public var name: String?
     public var version: String?
+    public var nocturneVersion: String?
     public var apiVersion: String?
     public var serverTime: Date?
     public var serverTimeEpoch: Int64?
@@ -31,10 +32,11 @@ public struct StatusResponse: Sendable, Codable, Hashable {
     public var anonymousReadAccess: Bool?
     public var tenantSlug: String?
 
-    public init(status: String? = nil, name: String? = nil, version: String? = nil, apiVersion: String? = nil, serverTime: Date? = nil, serverTimeEpoch: Int64? = nil, enabled: [String]? = nil, apiEnabled: Bool? = nil, roles: [String]? = nil, settings: [String: JSONValue]? = nil, extendedSettings: [String: JSONValue]? = nil, careportalEnabled: Bool? = nil, boluscalcEnabled: Bool? = nil, authorized: JSONValue? = nil, runtimeState: String? = nil, head: String? = nil, build: String? = nil, isDemo: Bool? = nil, nextResetAt: Date? = nil, anonymousReadAccess: Bool? = nil, tenantSlug: String? = nil) {
+    public init(status: String? = nil, name: String? = nil, version: String? = nil, nocturneVersion: String? = nil, apiVersion: String? = nil, serverTime: Date? = nil, serverTimeEpoch: Int64? = nil, enabled: [String]? = nil, apiEnabled: Bool? = nil, roles: [String]? = nil, settings: [String: JSONValue]? = nil, extendedSettings: [String: JSONValue]? = nil, careportalEnabled: Bool? = nil, boluscalcEnabled: Bool? = nil, authorized: JSONValue? = nil, runtimeState: String? = nil, head: String? = nil, build: String? = nil, isDemo: Bool? = nil, nextResetAt: Date? = nil, anonymousReadAccess: Bool? = nil, tenantSlug: String? = nil) {
         self.status = status
         self.name = name
         self.version = version
+        self.nocturneVersion = nocturneVersion
         self.apiVersion = apiVersion
         self.serverTime = serverTime
         self.serverTimeEpoch = serverTimeEpoch
@@ -59,6 +61,7 @@ public struct StatusResponse: Sendable, Codable, Hashable {
         case status
         case name
         case version
+        case nocturneVersion
         case apiVersion
         case serverTime
         case serverTimeEpoch
@@ -86,6 +89,7 @@ public struct StatusResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(version, forKey: .version)
+        try container.encodeIfPresent(nocturneVersion, forKey: .nocturneVersion)
         try container.encodeIfPresent(apiVersion, forKey: .apiVersion)
         try container.encodeIfPresent(serverTime, forKey: .serverTime)
         try container.encodeIfPresent(serverTimeEpoch, forKey: .serverTimeEpoch)

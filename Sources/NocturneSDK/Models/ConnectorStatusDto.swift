@@ -18,6 +18,8 @@ public struct ConnectorStatusDto: Sendable, Codable, Hashable {
     public var status: String?
     /** Total number of entries imported by this connector over its lifetime. */
     public var totalEntries: Int64?
+    /** Days back from now that TotalEntries covers, or null when it counts the connector's lifetime. */
+    public var totalEntriesWindowDays: Int?
     /** Timestamp of the most recent entry imported by this connector. */
     public var lastEntryTime: Date?
     /** Number of entries imported in the last 24 hours. */
@@ -45,11 +47,12 @@ public struct ConnectorStatusDto: Sendable, Codable, Hashable {
     /** Breakdown of items processed in the last 24 hours by data type Keys are data type names (e.g., \"Glucose\", \"Treatments\", \"Food\") */
     public var itemsLast24HoursBreakdown: [String: Int]?
 
-    public init(id: String? = nil, name: String? = nil, status: String? = nil, totalEntries: Int64? = nil, lastEntryTime: Date? = nil, entriesLast24Hours: Int? = nil, state: String? = nil, stateMessage: String? = nil, isHealthy: Bool? = nil, lastSyncAttempt: Date? = nil, lastSuccessfulSync: Date? = nil, lastErrorAt: Date? = nil, isEnabled: Bool? = nil, hasDatabaseConfig: Bool? = nil, hasSecrets: Bool? = nil, totalItemsBreakdown: [String: Int64]? = nil, itemsLast24HoursBreakdown: [String: Int]? = nil) {
+    public init(id: String? = nil, name: String? = nil, status: String? = nil, totalEntries: Int64? = nil, totalEntriesWindowDays: Int? = nil, lastEntryTime: Date? = nil, entriesLast24Hours: Int? = nil, state: String? = nil, stateMessage: String? = nil, isHealthy: Bool? = nil, lastSyncAttempt: Date? = nil, lastSuccessfulSync: Date? = nil, lastErrorAt: Date? = nil, isEnabled: Bool? = nil, hasDatabaseConfig: Bool? = nil, hasSecrets: Bool? = nil, totalItemsBreakdown: [String: Int64]? = nil, itemsLast24HoursBreakdown: [String: Int]? = nil) {
         self.id = id
         self.name = name
         self.status = status
         self.totalEntries = totalEntries
+        self.totalEntriesWindowDays = totalEntriesWindowDays
         self.lastEntryTime = lastEntryTime
         self.entriesLast24Hours = entriesLast24Hours
         self.state = state
@@ -70,6 +73,7 @@ public struct ConnectorStatusDto: Sendable, Codable, Hashable {
         case name
         case status
         case totalEntries
+        case totalEntriesWindowDays
         case lastEntryTime
         case entriesLast24Hours
         case state
@@ -93,6 +97,7 @@ public struct ConnectorStatusDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(totalEntries, forKey: .totalEntries)
+        try container.encodeIfPresent(totalEntriesWindowDays, forKey: .totalEntriesWindowDays)
         try container.encodeIfPresent(lastEntryTime, forKey: .lastEntryTime)
         try container.encodeIfPresent(entriesLast24Hours, forKey: .entriesLast24Hours)
         try container.encodeIfPresent(state, forKey: .state)

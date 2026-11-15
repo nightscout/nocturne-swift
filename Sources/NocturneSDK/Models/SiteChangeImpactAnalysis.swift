@@ -13,16 +13,18 @@ public struct SiteChangeImpactAnalysis: Sendable, Codable, Hashable {
     public var averageDaysBetweenChanges: Double?
     public var dataPoints: [SiteChangeImpactDataPoint]?
     public var summary: SiteChangeImpactSummary?
+    public var thresholds: GlycemicThresholds?
     public var hoursBeforeChange: Int?
     public var hoursAfterChange: Int?
     public var bucketSizeMinutes: Int?
     public var hasSufficientData: Bool?
 
-    public init(siteChangeCount: Int? = nil, averageDaysBetweenChanges: Double? = nil, dataPoints: [SiteChangeImpactDataPoint]? = nil, summary: SiteChangeImpactSummary? = nil, hoursBeforeChange: Int? = nil, hoursAfterChange: Int? = nil, bucketSizeMinutes: Int? = nil, hasSufficientData: Bool? = nil) {
+    public init(siteChangeCount: Int? = nil, averageDaysBetweenChanges: Double? = nil, dataPoints: [SiteChangeImpactDataPoint]? = nil, summary: SiteChangeImpactSummary? = nil, thresholds: GlycemicThresholds? = nil, hoursBeforeChange: Int? = nil, hoursAfterChange: Int? = nil, bucketSizeMinutes: Int? = nil, hasSufficientData: Bool? = nil) {
         self.siteChangeCount = siteChangeCount
         self.averageDaysBetweenChanges = averageDaysBetweenChanges
         self.dataPoints = dataPoints
         self.summary = summary
+        self.thresholds = thresholds
         self.hoursBeforeChange = hoursBeforeChange
         self.hoursAfterChange = hoursAfterChange
         self.bucketSizeMinutes = bucketSizeMinutes
@@ -34,6 +36,7 @@ public struct SiteChangeImpactAnalysis: Sendable, Codable, Hashable {
         case averageDaysBetweenChanges
         case dataPoints
         case summary
+        case thresholds
         case hoursBeforeChange
         case hoursAfterChange
         case bucketSizeMinutes
@@ -48,6 +51,7 @@ public struct SiteChangeImpactAnalysis: Sendable, Codable, Hashable {
         try container.encodeIfPresent(averageDaysBetweenChanges, forKey: .averageDaysBetweenChanges)
         try container.encodeIfPresent(dataPoints, forKey: .dataPoints)
         try container.encodeIfPresent(summary, forKey: .summary)
+        try container.encodeIfPresent(thresholds, forKey: .thresholds)
         try container.encodeIfPresent(hoursBeforeChange, forKey: .hoursBeforeChange)
         try container.encodeIfPresent(hoursAfterChange, forKey: .hoursAfterChange)
         try container.encodeIfPresent(bucketSizeMinutes, forKey: .bucketSizeMinutes)

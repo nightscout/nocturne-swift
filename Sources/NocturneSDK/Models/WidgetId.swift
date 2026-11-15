@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum WidgetId: String, Sendable, Codable, CaseIterable {
+public enum WidgetId: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case bgDelta = "BgDelta"
     case lastUpdated = "LastUpdated"
     case connectionStatus = "ConnectionStatus"
@@ -25,4 +25,5 @@ public enum WidgetId: String, Sendable, Codable, CaseIterable {
     case dailyStats = "DailyStats"
     case agp = "Agp"
     case batteryStatus = "BatteryStatus"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

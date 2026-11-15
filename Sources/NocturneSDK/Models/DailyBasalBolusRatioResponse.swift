@@ -13,14 +13,16 @@ public struct DailyBasalBolusRatioResponse: Sendable, Codable, Hashable {
     public var averageBasalPercent: Double?
     public var averageBolusPercent: Double?
     public var averageTdd: Double?
-    public var dayCount: Int?
+    public var daysWithData: Int?
+    public var timeZoneUnavailableReason: TimeZoneUnavailableReason?
 
-    public init(dailyData: [DailyBasalBolusRatioData]? = nil, averageBasalPercent: Double? = nil, averageBolusPercent: Double? = nil, averageTdd: Double? = nil, dayCount: Int? = nil) {
+    public init(dailyData: [DailyBasalBolusRatioData]? = nil, averageBasalPercent: Double? = nil, averageBolusPercent: Double? = nil, averageTdd: Double? = nil, daysWithData: Int? = nil, timeZoneUnavailableReason: TimeZoneUnavailableReason? = nil) {
         self.dailyData = dailyData
         self.averageBasalPercent = averageBasalPercent
         self.averageBolusPercent = averageBolusPercent
         self.averageTdd = averageTdd
-        self.dayCount = dayCount
+        self.daysWithData = daysWithData
+        self.timeZoneUnavailableReason = timeZoneUnavailableReason
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -28,7 +30,8 @@ public struct DailyBasalBolusRatioResponse: Sendable, Codable, Hashable {
         case averageBasalPercent
         case averageBolusPercent
         case averageTdd
-        case dayCount
+        case daysWithData
+        case timeZoneUnavailableReason
     }
 
     // Encodable protocol methods
@@ -39,7 +42,8 @@ public struct DailyBasalBolusRatioResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(averageBasalPercent, forKey: .averageBasalPercent)
         try container.encodeIfPresent(averageBolusPercent, forKey: .averageBolusPercent)
         try container.encodeIfPresent(averageTdd, forKey: .averageTdd)
-        try container.encodeIfPresent(dayCount, forKey: .dayCount)
+        try container.encodeIfPresent(daysWithData, forKey: .daysWithData)
+        try container.encodeIfPresent(timeZoneUnavailableReason, forKey: .timeZoneUnavailableReason)
     }
 }
 

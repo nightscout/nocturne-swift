@@ -9,29 +9,37 @@ import Foundation
 
 public struct SleepTrendsReport: Sendable, Codable, Hashable {
 
+    public var days: [String]?
     public var nights: [SleepNightSummary]?
     public var weeks: [SleepWeekSummary]?
     public var summary: SleepTrendsSummary?
+    public var timeZoneUnavailableReason: TimeZoneUnavailableReason?
 
-    public init(nights: [SleepNightSummary]? = nil, weeks: [SleepWeekSummary]? = nil, summary: SleepTrendsSummary? = nil) {
+    public init(days: [String]? = nil, nights: [SleepNightSummary]? = nil, weeks: [SleepWeekSummary]? = nil, summary: SleepTrendsSummary? = nil, timeZoneUnavailableReason: TimeZoneUnavailableReason? = nil) {
+        self.days = days
         self.nights = nights
         self.weeks = weeks
         self.summary = summary
+        self.timeZoneUnavailableReason = timeZoneUnavailableReason
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
+        case days
         case nights
         case weeks
         case summary
+        case timeZoneUnavailableReason
     }
 
     // Encodable protocol methods
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(days, forKey: .days)
         try container.encodeIfPresent(nights, forKey: .nights)
         try container.encodeIfPresent(weeks, forKey: .weeks)
         try container.encodeIfPresent(summary, forKey: .summary)
+        try container.encodeIfPresent(timeZoneUnavailableReason, forKey: .timeZoneUnavailableReason)
     }
 }
 

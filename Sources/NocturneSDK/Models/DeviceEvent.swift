@@ -26,8 +26,9 @@ public struct DeviceEvent: Sendable, Codable, Hashable {
     public var eventType: DeviceEventType?
     public var notes: String?
     public var syncIdentifier: String?
+    public var isInferred: Bool?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, deviceId: String? = nil, patientDeviceId: String? = nil, eventType: DeviceEventType? = nil, notes: String? = nil, syncIdentifier: String? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, deviceId: String? = nil, patientDeviceId: String? = nil, eventType: DeviceEventType? = nil, notes: String? = nil, syncIdentifier: String? = nil, isInferred: Bool? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -45,6 +46,7 @@ public struct DeviceEvent: Sendable, Codable, Hashable {
         self.eventType = eventType
         self.notes = notes
         self.syncIdentifier = syncIdentifier
+        self.isInferred = isInferred
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -65,6 +67,7 @@ public struct DeviceEvent: Sendable, Codable, Hashable {
         case eventType
         case notes
         case syncIdentifier
+        case isInferred
     }
 
     // Encodable protocol methods
@@ -88,6 +91,7 @@ public struct DeviceEvent: Sendable, Codable, Hashable {
         try container.encodeIfPresent(eventType, forKey: .eventType)
         try container.encodeIfPresent(notes, forKey: .notes)
         try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
+        try container.encodeIfPresent(isInferred, forKey: .isInferred)
     }
 }
 

@@ -13,11 +13,12 @@ open class ServicesAPI {
      Delete connector data
      
      - parameter id: (path) Connector ID (e.g., \&quot;dexcom\&quot;) 
+     - parameter allowReimport: (query) Let the connector import the deleted records again; an enabled connector stays enabled and its next sync re-imports the history. (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DataSourceDeleteResult
      */
-    open class func servicesDeleteConnectorData(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DataSourceDeleteResult {
-        return try await servicesDeleteConnectorDataWithRequestBuilder(id: id, apiConfiguration: apiConfiguration).execute().body
+    open class func servicesDeleteConnectorData(id: String, allowReimport: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DataSourceDeleteResult {
+        return try await servicesDeleteConnectorDataWithRequestBuilder(id: id, allowReimport: allowReimport, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -31,10 +32,11 @@ open class ServicesAPI {
        - type: oauth2
        - name: oauth2
      - parameter id: (path) Connector ID (e.g., \&quot;dexcom\&quot;) 
+     - parameter allowReimport: (query) Let the connector import the deleted records again; an enabled connector stays enabled and its next sync re-imports the history. (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DataSourceDeleteResult> 
      */
-    open class func servicesDeleteConnectorDataWithRequestBuilder(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DataSourceDeleteResult> {
+    open class func servicesDeleteConnectorDataWithRequestBuilder(id: String, allowReimport: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DataSourceDeleteResult> {
         var localVariablePath = "/api/v4/services/connectors/{id}/data"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -42,7 +44,10 @@ open class ServicesAPI {
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "allowReimport": (wrappedValue: allowReimport?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -59,11 +64,12 @@ open class ServicesAPI {
      Delete data source data
      
      - parameter id: (path) Data source ID or device ID 
+     - parameter allowReimport: (query) Let the source send the deleted records again. (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DataSourceDeleteResult
      */
-    open class func servicesDeleteDataSourceData(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DataSourceDeleteResult {
-        return try await servicesDeleteDataSourceDataWithRequestBuilder(id: id, apiConfiguration: apiConfiguration).execute().body
+    open class func servicesDeleteDataSourceData(id: String, allowReimport: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DataSourceDeleteResult {
+        return try await servicesDeleteDataSourceDataWithRequestBuilder(id: id, allowReimport: allowReimport, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -77,10 +83,11 @@ open class ServicesAPI {
        - type: oauth2
        - name: oauth2
      - parameter id: (path) Data source ID or device ID 
+     - parameter allowReimport: (query) Let the source send the deleted records again. (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DataSourceDeleteResult> 
      */
-    open class func servicesDeleteDataSourceDataWithRequestBuilder(id: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DataSourceDeleteResult> {
+    open class func servicesDeleteDataSourceDataWithRequestBuilder(id: String, allowReimport: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DataSourceDeleteResult> {
         var localVariablePath = "/api/v4/services/data-sources/{id}"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -88,7 +95,10 @@ open class ServicesAPI {
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "allowReimport": (wrappedValue: allowReimport?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :
@@ -360,7 +370,7 @@ open class ServicesAPI {
     /**
      Get connector sync status
      
-     - parameter id: (path) The connector ID (e.g., \&quot;dexcom\&quot;, \&quot;libre\&quot;, \&quot;glooko\&quot;) 
+     - parameter id: (path) The connector ID (e.g., \&quot;dexcom\&quot;, \&quot;librelinkup\&quot;, \&quot;glooko\&quot;) 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: ConnectorSyncStatus
      */
@@ -378,7 +388,7 @@ open class ServicesAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter id: (path) The connector ID (e.g., \&quot;dexcom\&quot;, \&quot;libre\&quot;, \&quot;glooko\&quot;) 
+     - parameter id: (path) The connector ID (e.g., \&quot;dexcom\&quot;, \&quot;librelinkup\&quot;, \&quot;glooko\&quot;) 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ConnectorSyncStatus> 
      */
@@ -592,7 +602,7 @@ open class ServicesAPI {
     /**
      Reset connector cursor
      - POST /api/v4/services/connectors/{id}/reset-cursor
-     - Nocturne does not persist a sync cursor — each data type resumes from the latest record already stored. This endpoint forces a fresh ingest of history by running an explicit-range sync (an upper bound of \"now\" bypasses the per-type catch-up cursors), so the effect is a cursor reset. Re-ingested records are deduplicated on their idempotency keys (see the \"Syncing\" guide), so it is safe to run after fixing a connector bug to push corrected data to a tenant.              Latency: this runs synchronously. A full-history re-pull with no lower bound re-ingests every data type over the connector's entire history (glucose can be tens of thousands of records), which is a multi-minute request and may approach or exceed reverse-proxy / browser timeouts. Scope it with from and/or dataTypes when possible. The cross-tenant equivalent (POST /api/v4/admin/connectors/{tenantId}/reset-cursors) runs as a background job to avoid this.
+     - Reset a connector's sync cursor for the current tenant and re-pull historical data. Re-ingested records are deduplicated. The request runs synchronously: a full-history re-pull can take minutes and may exceed proxy or browser timeouts, so limit it with from or dataTypes.
      - Bearer Token:
        - type: http
        - name: bearer

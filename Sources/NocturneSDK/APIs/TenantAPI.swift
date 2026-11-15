@@ -347,7 +347,7 @@ open class TenantAPI {
     /**
      Issue login code
      - POST /api/v4/admin/tenants/{id}/members/{subjectId}/login-code
-     - The code is redeemed at POST /api/auth/handoff on that host. It grants no more than the direct grant TenantDirectGrantController already mints for the same member, and like that one it names the platform-admin caller as the actor in the audit trail rather than the member.
+     - Mints a single-use code that signs a member in on the tenant's own host, for a caller that has already established which browser the member is at. The code is redeemed at POST /api/auth/handoff on the tenant's host and grants no more than a direct grant for the same member. The audit trail names the calling platform admin, not the member.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -361,6 +361,57 @@ open class TenantAPI {
      */
     open class func tenantIssueLoginCodeWithRequestBuilder(id: String, subjectId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<LoginCode> {
         var localVariablePath = "/api/v4/admin/tenants/{id}/members/{subjectId}/login-code"
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let subjectIdPreEscape = "\(APIHelper.mapValueToPathItem(subjectId))"
+        let subjectIdPostEscape = subjectIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{subjectId}", with: subjectIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<LoginCode>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Issue recovery code
+     
+     - parameter id: (path)  
+     - parameter subjectId: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: LoginCode
+     */
+    open class func tenantIssueRecoveryCode(id: String, subjectId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> LoginCode {
+        return try await tenantIssueRecoveryCodeWithRequestBuilder(id: id, subjectId: subjectId, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Issue recovery code
+     - POST /api/v4/admin/tenants/{id}/members/{subjectId}/recovery-code
+     - Mints a single-use recovery code that lets a member enrol a passkey at POST /api/auth/passkey/recovery-mode/redeem on the tenant's host. Returns 404 when the subject is not a member of the tenant, and 409 when the tenant is inactive or the member can still sign in.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter id: (path)  
+     - parameter subjectId: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<LoginCode> 
+     */
+    open class func tenantIssueRecoveryCodeWithRequestBuilder(id: String, subjectId: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<LoginCode> {
+        var localVariablePath = "/api/v4/admin/tenants/{id}/members/{subjectId}/recovery-code"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)

@@ -92,6 +92,47 @@ open class ShareLinkAPI {
     }
 
     /**
+     Reveal share link
+     
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: ShareLinkDto
+     */
+    open class func shareLinkRevealShareLink(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> ShareLinkDto {
+        return try await shareLinkRevealShareLinkWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Reveal share link
+     - POST /api/v4/share/reveal
+     - Show the live link in the clear. A command rather than a query so the secret travels only when the owner asks for it, instead of on every read of the sharing settings. Succeeds with a null URL and canReveal false in the cases ShareTokenEncrypted lists.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<ShareLinkDto> 
+     */
+    open class func shareLinkRevealShareLinkWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<ShareLinkDto> {
+        let localVariablePath = "/api/v4/share/reveal"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ShareLinkDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Rotate share link
      
      - parameter apiConfiguration: The configuration for the http request.

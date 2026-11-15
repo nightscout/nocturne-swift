@@ -9,10 +9,9 @@ import Foundation
 
 public struct Entry: Sendable, Codable, Hashable {
 
-    public var id: String?
-    public var createdAt: String?
     public var mills: Int64?
     public var utcOffset: Int?
+    public var id: String?
     public var date: Int64?
     public var dateString: String?
     public var mgdl: Double?
@@ -36,11 +35,10 @@ public struct Entry: Sendable, Codable, Hashable {
     public var slope: Double?
     public var intercept: Double?
     public var scale: Double?
+    public var createdAt: String?
     public var modifiedAt: Date?
     public var dataSource: String?
     public var meta: [String: JSONValue]?
-    public var canonicalId: String?
-    public var sources: [String]?
     public var app: String?
     public var units: String?
     public var isValid: Bool?
@@ -50,11 +48,10 @@ public struct Entry: Sendable, Codable, Hashable {
     public var srvCreated: Int64?
     public var subject: String?
 
-    public init(id: String? = nil, createdAt: String? = nil, mills: Int64? = nil, utcOffset: Int? = nil, date: Int64? = nil, dateString: String? = nil, mgdl: Double? = nil, mbg: Double? = nil, mmol: Double? = nil, sgv: Double? = nil, direction: String? = nil, trend: Int? = nil, trendRate: Double? = nil, isCalibration: Bool? = nil, type: String? = nil, device: String? = nil, notes: String? = nil, delta: Double? = nil, scaled: JSONValue? = nil, sysTime: String? = nil, noise: Int? = nil, filtered: Double? = nil, unfiltered: Double? = nil, rssi: Int? = nil, slope: Double? = nil, intercept: Double? = nil, scale: Double? = nil, modifiedAt: Date? = nil, dataSource: String? = nil, meta: [String: JSONValue]? = nil, canonicalId: String? = nil, sources: [String]? = nil, app: String? = nil, units: String? = nil, isValid: Bool? = nil, isReadOnly: Bool? = nil, identifier: String? = nil, srvModified: Int64? = nil, srvCreated: Int64? = nil, subject: String? = nil) {
-        self.id = id
-        self.createdAt = createdAt
+    public init(mills: Int64? = nil, utcOffset: Int? = nil, id: String? = nil, date: Int64? = nil, dateString: String? = nil, mgdl: Double? = nil, mbg: Double? = nil, mmol: Double? = nil, sgv: Double? = nil, direction: String? = nil, trend: Int? = nil, trendRate: Double? = nil, isCalibration: Bool? = nil, type: String? = nil, device: String? = nil, notes: String? = nil, delta: Double? = nil, scaled: JSONValue? = nil, sysTime: String? = nil, noise: Int? = nil, filtered: Double? = nil, unfiltered: Double? = nil, rssi: Int? = nil, slope: Double? = nil, intercept: Double? = nil, scale: Double? = nil, createdAt: String? = nil, modifiedAt: Date? = nil, dataSource: String? = nil, meta: [String: JSONValue]? = nil, app: String? = nil, units: String? = nil, isValid: Bool? = nil, isReadOnly: Bool? = nil, identifier: String? = nil, srvModified: Int64? = nil, srvCreated: Int64? = nil, subject: String? = nil) {
         self.mills = mills
         self.utcOffset = utcOffset
+        self.id = id
         self.date = date
         self.dateString = dateString
         self.mgdl = mgdl
@@ -78,11 +75,10 @@ public struct Entry: Sendable, Codable, Hashable {
         self.slope = slope
         self.intercept = intercept
         self.scale = scale
+        self.createdAt = createdAt
         self.modifiedAt = modifiedAt
         self.dataSource = dataSource
         self.meta = meta
-        self.canonicalId = canonicalId
-        self.sources = sources
         self.app = app
         self.units = units
         self.isValid = isValid
@@ -94,10 +90,9 @@ public struct Entry: Sendable, Codable, Hashable {
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
-        case id
-        case createdAt
         case mills
         case utcOffset
+        case id = "_id"
         case date
         case dateString
         case mgdl
@@ -121,11 +116,10 @@ public struct Entry: Sendable, Codable, Hashable {
         case slope
         case intercept
         case scale
+        case createdAt = "created_at"
         case modifiedAt = "modified_at"
         case dataSource = "data_source"
         case meta
-        case canonicalId
-        case sources
         case app
         case units
         case isValid
@@ -140,10 +134,9 @@ public struct Entry: Sendable, Codable, Hashable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(mills, forKey: .mills)
         try container.encodeIfPresent(utcOffset, forKey: .utcOffset)
+        try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(date, forKey: .date)
         try container.encodeIfPresent(dateString, forKey: .dateString)
         try container.encodeIfPresent(mgdl, forKey: .mgdl)
@@ -167,11 +160,10 @@ public struct Entry: Sendable, Codable, Hashable {
         try container.encodeIfPresent(slope, forKey: .slope)
         try container.encodeIfPresent(intercept, forKey: .intercept)
         try container.encodeIfPresent(scale, forKey: .scale)
+        try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
         try container.encodeIfPresent(dataSource, forKey: .dataSource)
         try container.encodeIfPresent(meta, forKey: .meta)
-        try container.encodeIfPresent(canonicalId, forKey: .canonicalId)
-        try container.encodeIfPresent(sources, forKey: .sources)
         try container.encodeIfPresent(app, forKey: .app)
         try container.encodeIfPresent(units, forKey: .units)
         try container.encodeIfPresent(isValid, forKey: .isValid)
@@ -183,5 +175,3 @@ public struct Entry: Sendable, Codable, Hashable {
     }
 }
 
-
-extension Entry: Identifiable {}

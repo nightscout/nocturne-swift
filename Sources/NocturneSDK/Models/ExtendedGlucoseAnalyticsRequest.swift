@@ -18,13 +18,19 @@ public struct ExtendedGlucoseAnalyticsRequest: Sendable, Codable, Hashable {
     public var carbIntakes: [CarbIntake]?
     public var population: DiabetesPopulation?
     public var config: ExtendedAnalysisConfig?
+    /** Start of the window the readings were requested for. With EndDate it sets the reliability minimum. */
+    public var startDate: Date?
+    /** End of the window the readings were requested for. */
+    public var endDate: Date?
 
-    public init(entries: [SensorGlucose]? = nil, boluses: [Bolus]? = nil, carbIntakes: [CarbIntake]? = nil, population: DiabetesPopulation? = nil, config: ExtendedAnalysisConfig? = nil) {
+    public init(entries: [SensorGlucose]? = nil, boluses: [Bolus]? = nil, carbIntakes: [CarbIntake]? = nil, population: DiabetesPopulation? = nil, config: ExtendedAnalysisConfig? = nil, startDate: Date? = nil, endDate: Date? = nil) {
         self.entries = entries
         self.boluses = boluses
         self.carbIntakes = carbIntakes
         self.population = population
         self.config = config
+        self.startDate = startDate
+        self.endDate = endDate
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -33,6 +39,8 @@ public struct ExtendedGlucoseAnalyticsRequest: Sendable, Codable, Hashable {
         case carbIntakes
         case population
         case config
+        case startDate
+        case endDate
     }
 
     // Encodable protocol methods
@@ -44,6 +52,8 @@ public struct ExtendedGlucoseAnalyticsRequest: Sendable, Codable, Hashable {
         try container.encodeIfPresent(carbIntakes, forKey: .carbIntakes)
         try container.encodeIfPresent(population, forKey: .population)
         try container.encodeIfPresent(config, forKey: .config)
+        try container.encodeIfPresent(startDate, forKey: .startDate)
+        try container.encodeIfPresent(endDate, forKey: .endDate)
     }
 }
 

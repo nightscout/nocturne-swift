@@ -227,6 +227,135 @@ open class UISettingsAPI {
     }
 
     /**
+     Patch data quality settings
+     
+     - parameter dataQualitySettings: (body) The fields to change: only the properties present in the body are applied, the rest of the stored section is kept. A key must be the exact, case-sensitive name of a property of the section, at any depth. A null resets a nullable property to its default, and is refused on any other property. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: DataQualitySettings
+     */
+    open class func uISettingsPatchDataQualitySettings(dataQualitySettings: DataQualitySettings, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> DataQualitySettings {
+        return try await uISettingsPatchDataQualitySettingsWithRequestBuilder(dataQualitySettings: dataQualitySettings, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Patch data quality settings
+     - PATCH /api/v4/ui-settings/dataQuality
+     - Patch the data quality section by JSON merge-patch (RFC 7386). Every other section row is left as it is.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter dataQualitySettings: (body) The fields to change: only the properties present in the body are applied, the rest of the stored section is kept. A key must be the exact, case-sensitive name of a property of the section, at any depth. A null resets a nullable property to its default, and is refused on any other property. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<DataQualitySettings> 
+     */
+    open class func uISettingsPatchDataQualitySettingsWithRequestBuilder(dataQualitySettings: DataQualitySettings, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<DataQualitySettings> {
+        let localVariablePath = "/api/v4/ui-settings/dataQuality"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: dataQualitySettings, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<DataQualitySettings>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Patch feature settings
+     
+     - parameter featureSettings: (body) The fields to change: only the properties present in the body are applied, the rest of the stored section is kept. A key must be the exact, case-sensitive name of a property of the section, at any depth. A null resets a nullable property to its default, and is refused on any other property. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: FeatureSettings
+     */
+    open class func uISettingsPatchFeatureSettings(featureSettings: FeatureSettings, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> FeatureSettings {
+        return try await uISettingsPatchFeatureSettingsWithRequestBuilder(featureSettings: featureSettings, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Patch feature settings
+     - PATCH /api/v4/ui-settings/features
+     - Patch the features section by JSON merge-patch (RFC 7386). Every other section row is left as it is.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter featureSettings: (body) The fields to change: only the properties present in the body are applied, the rest of the stored section is kept. A key must be the exact, case-sensitive name of a property of the section, at any depth. A null resets a nullable property to its default, and is refused on any other property. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<FeatureSettings> 
+     */
+    open class func uISettingsPatchFeatureSettingsWithRequestBuilder(featureSettings: FeatureSettings, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<FeatureSettings> {
+        let localVariablePath = "/api/v4/ui-settings/features"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: featureSettings, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<FeatureSettings>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Patch notification settings
+     
+     - parameter notificationSettings: (body) The fields to change: only the properties present in the body are applied, the rest of the stored section is kept. A key must be the exact, case-sensitive name of a property of the section, at any depth. A null resets a nullable property to its default, and is refused on any other property. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: NotificationSettings
+     */
+    open class func uISettingsPatchNotificationSettings(notificationSettings: NotificationSettings, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> NotificationSettings {
+        return try await uISettingsPatchNotificationSettingsWithRequestBuilder(notificationSettings: notificationSettings, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Patch notification settings
+     - PATCH /api/v4/ui-settings/notifications
+     - Patch the notifications section by JSON merge-patch (RFC 7386). Its alarm configuration is the one the notifications/alarms routes serve, and a list in a patch replaces the stored list whole.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter notificationSettings: (body) The fields to change: only the properties present in the body are applied, the rest of the stored section is kept. A key must be the exact, case-sensitive name of a property of the section, at any depth. A null resets a nullable property to its default, and is refused on any other property. 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<NotificationSettings> 
+     */
+    open class func uISettingsPatchNotificationSettingsWithRequestBuilder(notificationSettings: NotificationSettings, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<NotificationSettings> {
+        let localVariablePath = "/api/v4/ui-settings/notifications"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: notificationSettings, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<NotificationSettings>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Save alarm configuration
      
      - parameter userAlarmConfiguration: (body) The alarm configuration to save 
@@ -265,49 +394,6 @@ open class UISettingsAPI {
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
         let localVariableRequestBuilder: RequestBuilder<UserAlarmConfiguration>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
-
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
-    }
-
-    /**
-     Save notification settings
-     
-     - parameter notificationSettings: (body) The notification settings to save 
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: NotificationSettings
-     */
-    open class func uISettingsSaveNotificationSettings(notificationSettings: NotificationSettings, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> NotificationSettings {
-        return try await uISettingsSaveNotificationSettingsWithRequestBuilder(notificationSettings: notificationSettings, apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     Save notification settings
-     - PUT /api/v4/ui-settings/notifications
-     - Save notification settings including alarm configuration.
-     - Bearer Token:
-       - type: http
-       - name: bearer
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter notificationSettings: (body) The notification settings to save 
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<NotificationSettings> 
-     */
-    open class func uISettingsSaveNotificationSettingsWithRequestBuilder(notificationSettings: NotificationSettings, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<NotificationSettings> {
-        let localVariablePath = "/api/v4/ui-settings/notifications"
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: notificationSettings, codableHelper: apiConfiguration.codableHelper)
-
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            "Content-Type": "application/json",
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<NotificationSettings>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }

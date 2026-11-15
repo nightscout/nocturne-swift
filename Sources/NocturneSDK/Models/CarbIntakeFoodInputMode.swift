@@ -8,7 +8,8 @@
 import Foundation
 
 /**  */
-public enum CarbIntakeFoodInputMode: Int, Sendable, Codable, CaseIterable {
+public enum CarbIntakeFoodInputMode: Int, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case _0 = 0
     case _1 = 1
+    case unknownDefaultOpenApi = 11184809
 }

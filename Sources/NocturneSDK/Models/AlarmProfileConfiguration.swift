@@ -23,7 +23,6 @@ public struct AlarmProfileConfiguration: Sendable, Codable, Hashable {
     public var visual: AlarmVisualSettings?
     public var snooze: AlarmSnoozeSettings?
     public var reraise: AlarmReraiseSettings?
-    public var smartSnooze: SmartSnoozeSettings?
     public var schedule: AlarmScheduleSettings?
     public var priority: AlarmPriority?
     public var overrideQuietHours: Bool?
@@ -31,7 +30,7 @@ public struct AlarmProfileConfiguration: Sendable, Codable, Hashable {
     public var createdAt: Date?
     public var updatedAt: Date?
 
-    public init(id: String? = nil, name: String? = nil, description: String? = nil, enabled: Bool? = nil, alarmType: AlarmTriggerType? = nil, threshold: Int? = nil, thresholdHigh: Double? = nil, forecastLeadTimeMinutes: Int? = nil, persistenceMinutes: Int? = nil, audio: AlarmAudioSettings? = nil, vibration: AlarmVibrationSettings? = nil, visual: AlarmVisualSettings? = nil, snooze: AlarmSnoozeSettings? = nil, reraise: AlarmReraiseSettings? = nil, smartSnooze: SmartSnoozeSettings? = nil, schedule: AlarmScheduleSettings? = nil, priority: AlarmPriority? = nil, overrideQuietHours: Bool? = nil, displayOrder: Int? = nil, createdAt: Date? = nil, updatedAt: Date? = nil) {
+    public init(id: String? = nil, name: String? = nil, description: String? = nil, enabled: Bool? = nil, alarmType: AlarmTriggerType? = nil, threshold: Int? = nil, thresholdHigh: Double? = nil, forecastLeadTimeMinutes: Int? = nil, persistenceMinutes: Int? = nil, audio: AlarmAudioSettings? = nil, vibration: AlarmVibrationSettings? = nil, visual: AlarmVisualSettings? = nil, snooze: AlarmSnoozeSettings? = nil, reraise: AlarmReraiseSettings? = nil, schedule: AlarmScheduleSettings? = nil, priority: AlarmPriority? = nil, overrideQuietHours: Bool? = nil, displayOrder: Int? = nil, createdAt: Date? = nil, updatedAt: Date? = nil) {
         self.id = id
         self.name = name
         self.description = description
@@ -46,7 +45,6 @@ public struct AlarmProfileConfiguration: Sendable, Codable, Hashable {
         self.visual = visual
         self.snooze = snooze
         self.reraise = reraise
-        self.smartSnooze = smartSnooze
         self.schedule = schedule
         self.priority = priority
         self.overrideQuietHours = overrideQuietHours
@@ -70,7 +68,6 @@ public struct AlarmProfileConfiguration: Sendable, Codable, Hashable {
         case visual
         case snooze
         case reraise
-        case smartSnooze
         case schedule
         case priority
         case overrideQuietHours
@@ -97,7 +94,6 @@ public struct AlarmProfileConfiguration: Sendable, Codable, Hashable {
         try container.encodeIfPresent(visual, forKey: .visual)
         try container.encodeIfPresent(snooze, forKey: .snooze)
         try container.encodeIfPresent(reraise, forKey: .reraise)
-        try container.encodeIfPresent(smartSnooze, forKey: .smartSnooze)
         try container.encodeIfPresent(schedule, forKey: .schedule)
         try container.encodeIfPresent(priority, forKey: .priority)
         try container.encodeIfPresent(overrideQuietHours, forKey: .overrideQuietHours)

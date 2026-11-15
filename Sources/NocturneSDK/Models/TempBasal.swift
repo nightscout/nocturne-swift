@@ -24,7 +24,10 @@ public struct TempBasal: Sendable, Codable, Hashable {
     public var modifiedAt: Date?
     public var rate: Double?
     public var scheduledRate: Double?
+    public var percent: Double?
+    public var rateFromSchedule: Bool?
     public var origin: TempBasalOrigin?
+    public var originEvidence: TempBasalOriginEvidence?
     public var deviceId: String?
     public var patientDeviceId: String?
     public var pumpRecordId: String?
@@ -33,7 +36,7 @@ public struct TempBasal: Sendable, Codable, Hashable {
     public var insulinContext: TreatmentInsulinContext?
     public var additionalProperties: [String: JSONValue]?
 
-    public init(id: String? = nil, startTimestamp: Date? = nil, endTimestamp: Date? = nil, startMills: Int64? = nil, endMills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, rate: Double? = nil, scheduledRate: Double? = nil, origin: TempBasalOrigin? = nil, deviceId: String? = nil, patientDeviceId: String? = nil, pumpRecordId: String? = nil, syncIdentifier: String? = nil, apsSnapshotId: String? = nil, insulinContext: TreatmentInsulinContext? = nil, additionalProperties: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, startTimestamp: Date? = nil, endTimestamp: Date? = nil, startMills: Int64? = nil, endMills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, rate: Double? = nil, scheduledRate: Double? = nil, percent: Double? = nil, rateFromSchedule: Bool? = nil, origin: TempBasalOrigin? = nil, originEvidence: TempBasalOriginEvidence? = nil, deviceId: String? = nil, patientDeviceId: String? = nil, pumpRecordId: String? = nil, syncIdentifier: String? = nil, apsSnapshotId: String? = nil, insulinContext: TreatmentInsulinContext? = nil, additionalProperties: [String: JSONValue]? = nil) {
         self.id = id
         self.startTimestamp = startTimestamp
         self.endTimestamp = endTimestamp
@@ -49,7 +52,10 @@ public struct TempBasal: Sendable, Codable, Hashable {
         self.modifiedAt = modifiedAt
         self.rate = rate
         self.scheduledRate = scheduledRate
+        self.percent = percent
+        self.rateFromSchedule = rateFromSchedule
         self.origin = origin
+        self.originEvidence = originEvidence
         self.deviceId = deviceId
         self.patientDeviceId = patientDeviceId
         self.pumpRecordId = pumpRecordId
@@ -75,7 +81,10 @@ public struct TempBasal: Sendable, Codable, Hashable {
         case modifiedAt
         case rate
         case scheduledRate
+        case percent
+        case rateFromSchedule
         case origin
+        case originEvidence
         case deviceId
         case patientDeviceId
         case pumpRecordId
@@ -104,7 +113,10 @@ public struct TempBasal: Sendable, Codable, Hashable {
         try container.encodeIfPresent(modifiedAt, forKey: .modifiedAt)
         try container.encodeIfPresent(rate, forKey: .rate)
         try container.encodeIfPresent(scheduledRate, forKey: .scheduledRate)
+        try container.encodeIfPresent(percent, forKey: .percent)
+        try container.encodeIfPresent(rateFromSchedule, forKey: .rateFromSchedule)
         try container.encodeIfPresent(origin, forKey: .origin)
+        try container.encodeIfPresent(originEvidence, forKey: .originEvidence)
         try container.encodeIfPresent(deviceId, forKey: .deviceId)
         try container.encodeIfPresent(patientDeviceId, forKey: .patientDeviceId)
         try container.encodeIfPresent(pumpRecordId, forKey: .pumpRecordId)

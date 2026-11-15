@@ -17,6 +17,7 @@ public struct TenantRoleEntityDto: Sendable, Codable, Hashable {
     public var description: String?
     public var permissions: [String]?
     public var isSystem: Bool?
+    /** Export-only; see DevSnapshotDto. */
     public var sysCreatedAt: Date?
     public var sysUpdatedAt: Date?
 

@@ -17,8 +17,10 @@ public struct TenantRoleDto: Sendable, Codable, Hashable {
     public var isSystem: Bool?
     public var memberCount: Int?
     public var sysCreatedAt: Date?
+    public var canGrant: Bool?
+    public var accessLevel: RoleAccessLevel?
 
-    public init(id: String? = nil, name: String? = nil, slug: String? = nil, description: String? = nil, permissions: [String]? = nil, isSystem: Bool? = nil, memberCount: Int? = nil, sysCreatedAt: Date? = nil) {
+    public init(id: String? = nil, name: String? = nil, slug: String? = nil, description: String? = nil, permissions: [String]? = nil, isSystem: Bool? = nil, memberCount: Int? = nil, sysCreatedAt: Date? = nil, canGrant: Bool? = nil, accessLevel: RoleAccessLevel? = nil) {
         self.id = id
         self.name = name
         self.slug = slug
@@ -27,6 +29,8 @@ public struct TenantRoleDto: Sendable, Codable, Hashable {
         self.isSystem = isSystem
         self.memberCount = memberCount
         self.sysCreatedAt = sysCreatedAt
+        self.canGrant = canGrant
+        self.accessLevel = accessLevel
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -38,6 +42,8 @@ public struct TenantRoleDto: Sendable, Codable, Hashable {
         case isSystem
         case memberCount
         case sysCreatedAt
+        case canGrant
+        case accessLevel
     }
 
     // Encodable protocol methods
@@ -52,6 +58,8 @@ public struct TenantRoleDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(isSystem, forKey: .isSystem)
         try container.encodeIfPresent(memberCount, forKey: .memberCount)
         try container.encodeIfPresent(sysCreatedAt, forKey: .sysCreatedAt)
+        try container.encodeIfPresent(canGrant, forKey: .canGrant)
+        try container.encodeIfPresent(accessLevel, forKey: .accessLevel)
     }
 }
 

@@ -35,6 +35,7 @@ public struct ApsSnapshot: Sendable, Codable, Hashable {
     public var recommendedBolus: Double?
     public var sensitivityRatio: Double?
     public var enacted: Bool?
+    public var closedLoop: Bool?
     public var enactedRate: Double?
     public var enactedDuration: Int?
     public var enactedBolusVolume: Double?
@@ -50,7 +51,7 @@ public struct ApsSnapshot: Sendable, Codable, Hashable {
     public var loopJson: String?
     public var aidVersion: String?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, deviceId: String? = nil, patientDeviceId: String? = nil, syncIdentifier: String? = nil, aidAlgorithm: AidAlgorithm? = nil, iob: Double? = nil, basalIob: Double? = nil, bolusIob: Double? = nil, cob: Double? = nil, currentBg: Double? = nil, eventualBg: Double? = nil, targetBg: Double? = nil, recommendedBolus: Double? = nil, sensitivityRatio: Double? = nil, enacted: Bool? = nil, enactedRate: Double? = nil, enactedDuration: Int? = nil, enactedBolusVolume: Double? = nil, suggestedJson: String? = nil, enactedJson: String? = nil, predictedDefaultJson: String? = nil, predictedIobJson: String? = nil, predictedZtJson: String? = nil, predictedCobJson: String? = nil, predictedUamJson: String? = nil, predictedStartTimestamp: Date? = nil, predictedStartMills: Int64? = nil, loopJson: String? = nil, aidVersion: String? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, deviceId: String? = nil, patientDeviceId: String? = nil, syncIdentifier: String? = nil, aidAlgorithm: AidAlgorithm? = nil, iob: Double? = nil, basalIob: Double? = nil, bolusIob: Double? = nil, cob: Double? = nil, currentBg: Double? = nil, eventualBg: Double? = nil, targetBg: Double? = nil, recommendedBolus: Double? = nil, sensitivityRatio: Double? = nil, enacted: Bool? = nil, closedLoop: Bool? = nil, enactedRate: Double? = nil, enactedDuration: Int? = nil, enactedBolusVolume: Double? = nil, suggestedJson: String? = nil, enactedJson: String? = nil, predictedDefaultJson: String? = nil, predictedIobJson: String? = nil, predictedZtJson: String? = nil, predictedCobJson: String? = nil, predictedUamJson: String? = nil, predictedStartTimestamp: Date? = nil, predictedStartMills: Int64? = nil, loopJson: String? = nil, aidVersion: String? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -77,6 +78,7 @@ public struct ApsSnapshot: Sendable, Codable, Hashable {
         self.recommendedBolus = recommendedBolus
         self.sensitivityRatio = sensitivityRatio
         self.enacted = enacted
+        self.closedLoop = closedLoop
         self.enactedRate = enactedRate
         self.enactedDuration = enactedDuration
         self.enactedBolusVolume = enactedBolusVolume
@@ -120,6 +122,7 @@ public struct ApsSnapshot: Sendable, Codable, Hashable {
         case recommendedBolus
         case sensitivityRatio
         case enacted
+        case closedLoop
         case enactedRate
         case enactedDuration
         case enactedBolusVolume
@@ -166,6 +169,7 @@ public struct ApsSnapshot: Sendable, Codable, Hashable {
         try container.encodeIfPresent(recommendedBolus, forKey: .recommendedBolus)
         try container.encodeIfPresent(sensitivityRatio, forKey: .sensitivityRatio)
         try container.encodeIfPresent(enacted, forKey: .enacted)
+        try container.encodeIfPresent(closedLoop, forKey: .closedLoop)
         try container.encodeIfPresent(enactedRate, forKey: .enactedRate)
         try container.encodeIfPresent(enactedDuration, forKey: .enactedDuration)
         try container.encodeIfPresent(enactedBolusVolume, forKey: .enactedBolusVolume)

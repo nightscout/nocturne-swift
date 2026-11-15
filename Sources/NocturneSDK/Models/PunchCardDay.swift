@@ -11,13 +11,18 @@ public struct PunchCardDay: Sendable, Codable, Hashable {
 
     public var date: String?
     public var timestamp: Int64?
+    public var endTimestamp: Int64?
     public var totalReadings: Int?
     public var inRangeCount: Int?
+    public var veryLowCount: Int?
     public var lowCount: Int?
     public var highCount: Int?
+    public var veryHighCount: Int?
     public var inRangePercent: Double?
+    public var veryLowPercent: Double?
     public var lowPercent: Double?
     public var highPercent: Double?
+    public var veryHighPercent: Double?
     public var averageGlucose: Double?
     public var totalCarbs: Double?
     public var totalInsulin: Double?
@@ -26,16 +31,21 @@ public struct PunchCardDay: Sendable, Codable, Hashable {
     public var carbToInsulinRatio: Double?
     public var entries: [PunchCardEntry]?
 
-    public init(date: String? = nil, timestamp: Int64? = nil, totalReadings: Int? = nil, inRangeCount: Int? = nil, lowCount: Int? = nil, highCount: Int? = nil, inRangePercent: Double? = nil, lowPercent: Double? = nil, highPercent: Double? = nil, averageGlucose: Double? = nil, totalCarbs: Double? = nil, totalInsulin: Double? = nil, totalBolus: Double? = nil, totalBasal: Double? = nil, carbToInsulinRatio: Double? = nil, entries: [PunchCardEntry]? = nil) {
+    public init(date: String? = nil, timestamp: Int64? = nil, endTimestamp: Int64? = nil, totalReadings: Int? = nil, inRangeCount: Int? = nil, veryLowCount: Int? = nil, lowCount: Int? = nil, highCount: Int? = nil, veryHighCount: Int? = nil, inRangePercent: Double? = nil, veryLowPercent: Double? = nil, lowPercent: Double? = nil, highPercent: Double? = nil, veryHighPercent: Double? = nil, averageGlucose: Double? = nil, totalCarbs: Double? = nil, totalInsulin: Double? = nil, totalBolus: Double? = nil, totalBasal: Double? = nil, carbToInsulinRatio: Double? = nil, entries: [PunchCardEntry]? = nil) {
         self.date = date
         self.timestamp = timestamp
+        self.endTimestamp = endTimestamp
         self.totalReadings = totalReadings
         self.inRangeCount = inRangeCount
+        self.veryLowCount = veryLowCount
         self.lowCount = lowCount
         self.highCount = highCount
+        self.veryHighCount = veryHighCount
         self.inRangePercent = inRangePercent
+        self.veryLowPercent = veryLowPercent
         self.lowPercent = lowPercent
         self.highPercent = highPercent
+        self.veryHighPercent = veryHighPercent
         self.averageGlucose = averageGlucose
         self.totalCarbs = totalCarbs
         self.totalInsulin = totalInsulin
@@ -48,13 +58,18 @@ public struct PunchCardDay: Sendable, Codable, Hashable {
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case date
         case timestamp
+        case endTimestamp
         case totalReadings
         case inRangeCount
+        case veryLowCount
         case lowCount
         case highCount
+        case veryHighCount
         case inRangePercent
+        case veryLowPercent
         case lowPercent
         case highPercent
+        case veryHighPercent
         case averageGlucose
         case totalCarbs
         case totalInsulin
@@ -70,13 +85,18 @@ public struct PunchCardDay: Sendable, Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(date, forKey: .date)
         try container.encodeIfPresent(timestamp, forKey: .timestamp)
+        try container.encodeIfPresent(endTimestamp, forKey: .endTimestamp)
         try container.encodeIfPresent(totalReadings, forKey: .totalReadings)
         try container.encodeIfPresent(inRangeCount, forKey: .inRangeCount)
+        try container.encodeIfPresent(veryLowCount, forKey: .veryLowCount)
         try container.encodeIfPresent(lowCount, forKey: .lowCount)
         try container.encodeIfPresent(highCount, forKey: .highCount)
+        try container.encodeIfPresent(veryHighCount, forKey: .veryHighCount)
         try container.encodeIfPresent(inRangePercent, forKey: .inRangePercent)
+        try container.encodeIfPresent(veryLowPercent, forKey: .veryLowPercent)
         try container.encodeIfPresent(lowPercent, forKey: .lowPercent)
         try container.encodeIfPresent(highPercent, forKey: .highPercent)
+        try container.encodeIfPresent(veryHighPercent, forKey: .veryHighPercent)
         try container.encodeIfPresent(averageGlucose, forKey: .averageGlucose)
         try container.encodeIfPresent(totalCarbs, forKey: .totalCarbs)
         try container.encodeIfPresent(totalInsulin, forKey: .totalInsulin)

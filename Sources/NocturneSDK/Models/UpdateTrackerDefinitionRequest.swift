@@ -14,27 +14,32 @@ public struct UpdateTrackerDefinitionRequest: Sendable, Codable, Hashable {
     public var category: TrackerCategory?
     public var icon: String?
     public var triggerEventTypes: [String]?
+    /** Device event types that complete the running instance without starting another. Null keeps the current list; an empty list clears it. */
+    public var endEventTypes: [String]?
+    /** PumpCapability names the tracked hardware provides. Null keeps the current list; an empty list clears it. */
+    public var covers: [String]?
     public var triggerNotesContains: String?
     public var lifespanHours: Int?
-    /** Reservoir category only: units level below which the synced managed reservoir rule fires. The tracker editor posts the whole definition, so for a Reservoir definition this value is applied as-is on every update — null clears the rule (null-means-keep cannot express clearing). */
+    /** For a tracker that holds insulin (a Reservoir category, or one covering Reservoir): units level below which the synced managed reservoir rule fires. The tracker editor posts the whole definition, so for such a definition this value is applied as-is on every update — null clears the rule (null-means-keep cannot express clearing). */
     public var lowReservoirUnits: Double?
     public var lowReservoirUrgency: NotificationUrgency?
     public var notificationThresholds: [CreateNotificationThresholdRequest]?
     public var isFavorite: Bool?
     public var dashboardVisibility: DashboardVisibility?
-    public var visibility: TrackerVisibility?
-    /** Event type to create when tracker is started (for Nightscout compatibility) */
+    /** Event type to create when tracker is started (for Nightscout compatibility). Applied as posted: null or blank clears it. */
     public var startEventType: String?
-    /** Event type to create when tracker is completed (for Nightscout compatibility) */
+    /** Event type to create when tracker is completed (for Nightscout compatibility). Applied as posted: null or blank clears it. */
     public var completionEventType: String?
     public var mode: TrackerMode?
 
-    public init(name: String? = nil, description: String? = nil, category: TrackerCategory? = nil, icon: String? = nil, triggerEventTypes: [String]? = nil, triggerNotesContains: String? = nil, lifespanHours: Int? = nil, lowReservoirUnits: Double? = nil, lowReservoirUrgency: NotificationUrgency? = nil, notificationThresholds: [CreateNotificationThresholdRequest]? = nil, isFavorite: Bool? = nil, dashboardVisibility: DashboardVisibility? = nil, visibility: TrackerVisibility? = nil, startEventType: String? = nil, completionEventType: String? = nil, mode: TrackerMode? = nil) {
+    public init(name: String? = nil, description: String? = nil, category: TrackerCategory? = nil, icon: String? = nil, triggerEventTypes: [String]? = nil, endEventTypes: [String]? = nil, covers: [String]? = nil, triggerNotesContains: String? = nil, lifespanHours: Int? = nil, lowReservoirUnits: Double? = nil, lowReservoirUrgency: NotificationUrgency? = nil, notificationThresholds: [CreateNotificationThresholdRequest]? = nil, isFavorite: Bool? = nil, dashboardVisibility: DashboardVisibility? = nil, startEventType: String? = nil, completionEventType: String? = nil, mode: TrackerMode? = nil) {
         self.name = name
         self.description = description
         self.category = category
         self.icon = icon
         self.triggerEventTypes = triggerEventTypes
+        self.endEventTypes = endEventTypes
+        self.covers = covers
         self.triggerNotesContains = triggerNotesContains
         self.lifespanHours = lifespanHours
         self.lowReservoirUnits = lowReservoirUnits
@@ -42,7 +47,6 @@ public struct UpdateTrackerDefinitionRequest: Sendable, Codable, Hashable {
         self.notificationThresholds = notificationThresholds
         self.isFavorite = isFavorite
         self.dashboardVisibility = dashboardVisibility
-        self.visibility = visibility
         self.startEventType = startEventType
         self.completionEventType = completionEventType
         self.mode = mode
@@ -54,6 +58,8 @@ public struct UpdateTrackerDefinitionRequest: Sendable, Codable, Hashable {
         case category
         case icon
         case triggerEventTypes
+        case endEventTypes
+        case covers
         case triggerNotesContains
         case lifespanHours
         case lowReservoirUnits
@@ -61,7 +67,6 @@ public struct UpdateTrackerDefinitionRequest: Sendable, Codable, Hashable {
         case notificationThresholds
         case isFavorite
         case dashboardVisibility
-        case visibility
         case startEventType
         case completionEventType
         case mode
@@ -76,6 +81,8 @@ public struct UpdateTrackerDefinitionRequest: Sendable, Codable, Hashable {
         try container.encodeIfPresent(category, forKey: .category)
         try container.encodeIfPresent(icon, forKey: .icon)
         try container.encodeIfPresent(triggerEventTypes, forKey: .triggerEventTypes)
+        try container.encodeIfPresent(endEventTypes, forKey: .endEventTypes)
+        try container.encodeIfPresent(covers, forKey: .covers)
         try container.encodeIfPresent(triggerNotesContains, forKey: .triggerNotesContains)
         try container.encodeIfPresent(lifespanHours, forKey: .lifespanHours)
         try container.encodeIfPresent(lowReservoirUnits, forKey: .lowReservoirUnits)
@@ -83,7 +90,6 @@ public struct UpdateTrackerDefinitionRequest: Sendable, Codable, Hashable {
         try container.encodeIfPresent(notificationThresholds, forKey: .notificationThresholds)
         try container.encodeIfPresent(isFavorite, forKey: .isFavorite)
         try container.encodeIfPresent(dashboardVisibility, forKey: .dashboardVisibility)
-        try container.encodeIfPresent(visibility, forKey: .visibility)
         try container.encodeIfPresent(startEventType, forKey: .startEventType)
         try container.encodeIfPresent(completionEventType, forKey: .completionEventType)
         try container.encodeIfPresent(mode, forKey: .mode)

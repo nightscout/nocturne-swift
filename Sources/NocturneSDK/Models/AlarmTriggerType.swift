@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum AlarmTriggerType: String, Sendable, Codable, CaseIterable {
+public enum AlarmTriggerType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case high = "High"
     case low = "Low"
     case urgentHigh = "UrgentHigh"
@@ -18,4 +18,5 @@ public enum AlarmTriggerType: String, Sendable, Codable, CaseIterable {
     case staleData = "StaleData"
     case forecastLow = "ForecastLow"
     case custom = "Custom"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

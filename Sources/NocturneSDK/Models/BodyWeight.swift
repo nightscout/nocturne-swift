@@ -9,10 +9,10 @@ import Foundation
 
 public struct BodyWeight: Sendable, Codable, Hashable {
 
-    public var id: String?
-    public var createdAt: String?
     public var mills: Int64?
     public var utcOffset: Int?
+    public var id: String?
+    public var createdAt: String?
     public var weightKg: Double?
     public var bodyFatPercent: Double?
     public var leanMassKg: Double?
@@ -21,11 +21,11 @@ public struct BodyWeight: Sendable, Codable, Hashable {
     public var dataSource: String?
     public var syncIdentifier: String?
 
-    public init(id: String? = nil, createdAt: String? = nil, mills: Int64? = nil, utcOffset: Int? = nil, weightKg: Double? = nil, bodyFatPercent: Double? = nil, leanMassKg: Double? = nil, device: String? = nil, enteredBy: String? = nil, dataSource: String? = nil, syncIdentifier: String? = nil) {
-        self.id = id
-        self.createdAt = createdAt
+    public init(mills: Int64? = nil, utcOffset: Int? = nil, id: String? = nil, createdAt: String? = nil, weightKg: Double? = nil, bodyFatPercent: Double? = nil, leanMassKg: Double? = nil, device: String? = nil, enteredBy: String? = nil, dataSource: String? = nil, syncIdentifier: String? = nil) {
         self.mills = mills
         self.utcOffset = utcOffset
+        self.id = id
+        self.createdAt = createdAt
         self.weightKg = weightKg
         self.bodyFatPercent = bodyFatPercent
         self.leanMassKg = leanMassKg
@@ -36,10 +36,10 @@ public struct BodyWeight: Sendable, Codable, Hashable {
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
-        case id
-        case createdAt
         case mills
         case utcOffset
+        case id = "_id"
+        case createdAt = "created_at"
         case weightKg
         case bodyFatPercent
         case leanMassKg
@@ -53,10 +53,10 @@ public struct BodyWeight: Sendable, Codable, Hashable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(mills, forKey: .mills)
         try container.encodeIfPresent(utcOffset, forKey: .utcOffset)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(weightKg, forKey: .weightKg)
         try container.encodeIfPresent(bodyFatPercent, forKey: .bodyFatPercent)
         try container.encodeIfPresent(leanMassKg, forKey: .leanMassKg)
@@ -67,5 +67,3 @@ public struct BodyWeight: Sendable, Codable, Hashable {
     }
 }
 
-
-extension BodyWeight: Identifiable {}

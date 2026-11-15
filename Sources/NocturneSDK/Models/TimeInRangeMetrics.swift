@@ -9,33 +9,45 @@ import Foundation
 
 public struct TimeInRangeMetrics: Sendable, Codable, Hashable {
 
+    public var thresholds: GlycemicThresholds?
     public var percentages: TimeInRangePercentages?
     public var durations: TimeInRangeDurations?
     public var episodes: TimeInRangeEpisodes?
     public var rangeStats: TimeInRangeDetailedStats?
+    public var averageDailyMinutes: AverageDailyMinutes?
+    public var averageDailyEpisodes: AverageDailyEpisodes?
 
-    public init(percentages: TimeInRangePercentages? = nil, durations: TimeInRangeDurations? = nil, episodes: TimeInRangeEpisodes? = nil, rangeStats: TimeInRangeDetailedStats? = nil) {
+    public init(thresholds: GlycemicThresholds? = nil, percentages: TimeInRangePercentages? = nil, durations: TimeInRangeDurations? = nil, episodes: TimeInRangeEpisodes? = nil, rangeStats: TimeInRangeDetailedStats? = nil, averageDailyMinutes: AverageDailyMinutes? = nil, averageDailyEpisodes: AverageDailyEpisodes? = nil) {
+        self.thresholds = thresholds
         self.percentages = percentages
         self.durations = durations
         self.episodes = episodes
         self.rangeStats = rangeStats
+        self.averageDailyMinutes = averageDailyMinutes
+        self.averageDailyEpisodes = averageDailyEpisodes
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
+        case thresholds
         case percentages
         case durations
         case episodes
         case rangeStats
+        case averageDailyMinutes
+        case averageDailyEpisodes
     }
 
     // Encodable protocol methods
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(thresholds, forKey: .thresholds)
         try container.encodeIfPresent(percentages, forKey: .percentages)
         try container.encodeIfPresent(durations, forKey: .durations)
         try container.encodeIfPresent(episodes, forKey: .episodes)
         try container.encodeIfPresent(rangeStats, forKey: .rangeStats)
+        try container.encodeIfPresent(averageDailyMinutes, forKey: .averageDailyMinutes)
+        try container.encodeIfPresent(averageDailyEpisodes, forKey: .averageDailyEpisodes)
     }
 }
 

@@ -14,13 +14,15 @@ public struct BasalStats: Sendable, Codable, Hashable {
     public var minRate: Double?
     public var maxRate: Double?
     public var totalDelivered: Double?
+    public var totalDeliveredPerDay: Double?
 
-    public init(count: Int? = nil, avgRate: Double? = nil, minRate: Double? = nil, maxRate: Double? = nil, totalDelivered: Double? = nil) {
+    public init(count: Int? = nil, avgRate: Double? = nil, minRate: Double? = nil, maxRate: Double? = nil, totalDelivered: Double? = nil, totalDeliveredPerDay: Double? = nil) {
         self.count = count
         self.avgRate = avgRate
         self.minRate = minRate
         self.maxRate = maxRate
         self.totalDelivered = totalDelivered
+        self.totalDeliveredPerDay = totalDeliveredPerDay
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -29,6 +31,7 @@ public struct BasalStats: Sendable, Codable, Hashable {
         case minRate
         case maxRate
         case totalDelivered
+        case totalDeliveredPerDay
     }
 
     // Encodable protocol methods
@@ -40,6 +43,7 @@ public struct BasalStats: Sendable, Codable, Hashable {
         try container.encodeIfPresent(minRate, forKey: .minRate)
         try container.encodeIfPresent(maxRate, forKey: .maxRate)
         try container.encodeIfPresent(totalDelivered, forKey: .totalDelivered)
+        try container.encodeIfPresent(totalDeliveredPerDay, forKey: .totalDeliveredPerDay)
     }
 }
 

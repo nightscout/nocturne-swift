@@ -7,13 +7,13 @@
 
 import Foundation
 
-/** Lifecycle state of a MigrationJobInfo. Transitions are: Pending → Validating → Running → Completed|Failed, or any state → Cancelled. */
-public enum MigrationJobState: Int, Sendable, Codable, CaseIterable {
+/** Lifecycle state of a MigrationJobInfo. Transitions are: Pending → Running → Completed|Failed, or a live state → Cancelled. */
+public enum MigrationJobState: Int, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case _0 = 0
-    case _1 = 1
     case _2 = 2
     case _3 = 3
     case _4 = 4
     case _5 = 5
     case _6 = 6
+    case unknownDefaultOpenApi = 11184809
 }

@@ -8,9 +8,10 @@
 import Foundation
 
 /**  */
-public enum AlarmPriority: String, Sendable, Codable, CaseIterable {
+public enum AlarmPriority: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case low = "Low"
     case normal = "Normal"
     case high = "High"
     case critical = "Critical"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

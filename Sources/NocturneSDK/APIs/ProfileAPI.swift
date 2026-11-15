@@ -195,7 +195,7 @@ open class ProfileAPI {
     /**
      Create therapy settings
      - POST /api/v4/profile/settings
-     - Create a new therapy settings record
+     - Create a new therapy settings record isDefault: true makes the new record the tenant's only default; false leaves the current default alone.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -300,6 +300,52 @@ open class ProfileAPI {
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Delete profile by name
+     
+     - parameter profileName: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: Void
+     */
+    open class func profileDeleteProfileByName(profileName: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
+        return try await profileDeleteProfileByNameWithRequestBuilder(profileName: profileName, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Delete profile by name
+     - DELETE /api/v4/profile/by-name/{profileName}
+     - Delete a whole named therapy profile and every schedule record belonging to it. The name is matched case-sensitively, with no lenient fallback.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter profileName: (path)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<Void> 
+     */
+    open class func profileDeleteProfileByNameWithRequestBuilder(profileName: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
+        var localVariablePath = "/api/v4/profile/by-name/{profileName}"
+        let profileNamePreEscape = "\(APIHelper.mapValueToPathItem(profileName))"
+        let profileNamePostEscape = profileNamePreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{profileName}", with: profileNamePostEscape, options: .literal, range: nil)
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
@@ -452,6 +498,55 @@ open class ProfileAPI {
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Get active schedules
+     
+     - parameter from: (query)  
+     - parameter to: (query)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [ActiveProfileSchedules]
+     */
+    open class func profileGetActiveSchedules(from: Date, to: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [ActiveProfileSchedules] {
+        return try await profileGetActiveSchedulesWithRequestBuilder(from: from, to: to, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get active schedules
+     - GET /api/v4/profile/active-schedules
+     - The profiles in force over [from, to), the longest first, each with the schedules it read then.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter from: (query)  
+     - parameter to: (query)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[ActiveProfileSchedules]> 
+     */
+    open class func profileGetActiveSchedulesWithRequestBuilder(from: Date, to: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[ActiveProfileSchedules]> {
+        let localVariablePath = "/api/v4/profile/active-schedules"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "from": (wrappedValue: from.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "to": (wrappedValue: to.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[ActiveProfileSchedules]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 
     /**
@@ -923,18 +1018,19 @@ open class ProfileAPI {
     /**
      Get therapy settings
      
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
-     - parameter limit: (query)  (optional, default to 100)
-     - parameter offset: (query)  (optional, default to 0)
-     - parameter sort: (query)  (optional, default to "timestamp_desc")
-     - parameter device: (query)  (optional)
-     - parameter source: (query)  (optional)
+     - parameter from: (query) Start of the time range to return. Unbounded when omitted. (optional)
+     - parameter to: (query) End of the time range to return. Unbounded when omitted. (optional)
+     - parameter limit: (query) Maximum number of records in the page. Defaults to &#x60;100&#x60;. (optional, default to 100)
+     - parameter offset: (query) Number of records to skip before the page. Defaults to &#x60;0&#x60;. (optional, default to 0)
+     - parameter sort: (query) Order by timestamp: &#x60;timestamp_desc&#x60; or &#x60;timestamp_asc&#x60;. Any other value is a 400. Defaults to &#x60;timestamp_desc&#x60;. (optional, default to "timestamp_desc")
+     - parameter device: (query) Return only records from this device. (optional)
+     - parameter source: (query) Return only records from this data source. (optional)
+     - parameter includeTotal: (query) Count every record in the range and return it as &#x60;pagination.total&#x60;. Defaults to &#x60;false&#x60;. (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedResponseOfTherapySettings
      */
-    open class func profileGetTherapySettings(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfTherapySettings {
-        return try await profileGetTherapySettingsWithRequestBuilder(from: from, to: to, limit: limit, offset: offset, sort: sort, device: device, source: source, apiConfiguration: apiConfiguration).execute().body
+    open class func profileGetTherapySettings(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, includeTotal: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfTherapySettings {
+        return try await profileGetTherapySettingsWithRequestBuilder(from: from, to: to, limit: limit, offset: offset, sort: sort, device: device, source: source, includeTotal: includeTotal, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -947,17 +1043,18 @@ open class ProfileAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
-     - parameter limit: (query)  (optional, default to 100)
-     - parameter offset: (query)  (optional, default to 0)
-     - parameter sort: (query)  (optional, default to "timestamp_desc")
-     - parameter device: (query)  (optional)
-     - parameter source: (query)  (optional)
+     - parameter from: (query) Start of the time range to return. Unbounded when omitted. (optional)
+     - parameter to: (query) End of the time range to return. Unbounded when omitted. (optional)
+     - parameter limit: (query) Maximum number of records in the page. Defaults to &#x60;100&#x60;. (optional, default to 100)
+     - parameter offset: (query) Number of records to skip before the page. Defaults to &#x60;0&#x60;. (optional, default to 0)
+     - parameter sort: (query) Order by timestamp: &#x60;timestamp_desc&#x60; or &#x60;timestamp_asc&#x60;. Any other value is a 400. Defaults to &#x60;timestamp_desc&#x60;. (optional, default to "timestamp_desc")
+     - parameter device: (query) Return only records from this device. (optional)
+     - parameter source: (query) Return only records from this data source. (optional)
+     - parameter includeTotal: (query) Count every record in the range and return it as &#x60;pagination.total&#x60;. Defaults to &#x60;false&#x60;. (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedResponseOfTherapySettings> 
      */
-    open class func profileGetTherapySettingsWithRequestBuilder(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfTherapySettings> {
+    open class func profileGetTherapySettingsWithRequestBuilder(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, includeTotal: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfTherapySettings> {
         let localVariablePath = "/api/v4/profile/settings"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -971,6 +1068,7 @@ open class ProfileAPI {
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "device": (wrappedValue: device?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "source": (wrappedValue: source?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "includeTotal": (wrappedValue: includeTotal?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ]
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp1)
 
@@ -1091,7 +1189,7 @@ open class ProfileAPI {
     /**
      Set default profile
      - POST /api/v4/profile/set-default/{profileName}
-     - Set a profile as the active (default) profile. Clears IsDefault on all other profiles.
+     - Make the newest settings row of the profile ResolveProfile finds for profileName the tenant's only default profile.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -1330,7 +1428,7 @@ open class ProfileAPI {
     /**
      Update therapy settings
      - PUT /api/v4/profile/settings/{id}
-     - Update an existing therapy settings record
+     - Update an existing therapy settings record isDefault: true makes the record the tenant's only default. false keeps the stored flag, so an update never demotes the default; promote another record to move it.
      - Bearer Token:
        - type: http
        - name: bearer

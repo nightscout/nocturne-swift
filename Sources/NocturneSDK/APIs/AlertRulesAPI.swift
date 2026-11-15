@@ -99,6 +99,47 @@ open class AlertRulesAPI {
     }
 
     /**
+     Get in app recipients
+     
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: [InAppRecipientResponse]
+     */
+    open class func alertRulesGetInAppRecipients(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [InAppRecipientResponse] {
+        return try await alertRulesGetInAppRecipientsWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get in app recipients
+     - GET /api/v4/alert-rules/in-app-recipients
+     - The members an in-app channel may be sent to, for the rule editor's recipient picker.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<[InAppRecipientResponse]> 
+     */
+    open class func alertRulesGetInAppRecipientsWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[InAppRecipientResponse]> {
+        let localVariablePath = "/api/v4/alert-rules/in-app-recipients"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[InAppRecipientResponse]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Get rule
      
      - parameter id: (path)  

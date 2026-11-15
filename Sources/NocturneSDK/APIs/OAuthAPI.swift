@@ -280,11 +280,12 @@ open class OAuthAPI {
      Get client info
      
      - parameter clientId: (query) The client identifier to look up. (optional)
+     - parameter scope: (query) The space-delimited scopes the client is requesting. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: OAuthClientInfoResponse
      */
-    open class func oAuthGetClientInfo(clientId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> OAuthClientInfoResponse {
-        return try await oAuthGetClientInfoWithRequestBuilder(clientId: clientId, apiConfiguration: apiConfiguration).execute().body
+    open class func oAuthGetClientInfo(clientId: String? = nil, scope: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> OAuthClientInfoResponse {
+        return try await oAuthGetClientInfoWithRequestBuilder(clientId: clientId, scope: scope, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -292,10 +293,11 @@ open class OAuthAPI {
      - GET /api/oauth/client-info
      - Get client info for the consent page.
      - parameter clientId: (query) The client identifier to look up. (optional)
+     - parameter scope: (query) The space-delimited scopes the client is requesting. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<OAuthClientInfoResponse> 
      */
-    open class func oAuthGetClientInfoWithRequestBuilder(clientId: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<OAuthClientInfoResponse> {
+    open class func oAuthGetClientInfoWithRequestBuilder(clientId: String? = nil, scope: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<OAuthClientInfoResponse> {
         let localVariablePath = "/api/oauth/client-info"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -303,6 +305,7 @@ open class OAuthAPI {
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "client_id": (wrappedValue: clientId?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "scope": (wrappedValue: scope?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
@@ -418,7 +421,7 @@ open class OAuthAPI {
     /**
      Introspect
      - POST /api/oauth/introspect
-     - RFC 7662 section 2.1 requires the endpoint to authenticate its caller. Every client here is public (no client secrets), so the caller authenticates as a subject the same way the other credential-bearing endpoints on this controller do, and a request with no identity is refused rather than answered. The response is bounded by that identity: a token issued to another subject reads as inactive, so the endpoint resolves only tokens the caller already holds an identity for.
+     - Token introspection endpoint (RFC 7662). Returns metadata about a token including its active status, scopes, and subject. Per RFC 7662, an authenticated caller always gets 200 OK; invalid tokens get active=false. A request with no identity is refused. A token issued to another subject reads as inactive.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -468,7 +471,7 @@ open class OAuthAPI {
     /**
      Register
      - POST /api/oauth/register
-     - RFC 7591 Dynamic Client Registration. Allows third-party native apps (Trio, xDrip+, Loop, AAPS) to obtain a tenant-scoped client_id without any out-of-band registration step. Idempotent on (tenant, software_id): re-registering with the same software_id returns the existing client_id.
+     - RFC 7591 Dynamic Client Registration. Allows third-party native apps (Trio, xDrip+, Loop, AAPS) to obtain a tenant-scoped client_id without any out-of-band registration step. Every call issues a new client; see RegisterClientAsync.
      - parameter clientRegistrationRequest: (body) The client registration metadata including redirect URIs, scopes, and optional software ID. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ClientRegistrationResponse> 
@@ -506,7 +509,7 @@ open class OAuthAPI {
     /**
      Revoke
      - POST /api/oauth/revoke
-     - Anonymous, unlike the introspection endpoint below: the response carries nothing about the token, and a client whose token has already stopped working still needs to be able to retire it.
+     - Token revocation endpoint (RFC 7009). Per the specification, always returns 200 OK regardless of whether the token was found or already revoked. Requires no authentication.
      - parameter token: (form)  (optional)
      - parameter tokenTypeHint: (form)  (optional)
      - parameter apiConfiguration: The configuration for the http request.

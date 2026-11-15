@@ -12,26 +12,38 @@ public struct PunchCardMonthSummary: Sendable, Codable, Hashable {
     public var dayCount: Int?
     public var totalReadings: Int?
     public var inRangePercent: Double?
+    public var veryLowPercent: Double?
     public var lowPercent: Double?
     public var highPercent: Double?
+    public var veryHighPercent: Double?
     public var avgGlucose: Double?
+    public var tdd: Double?
+    public var avgDailyCarbs: Double?
 
-    public init(dayCount: Int? = nil, totalReadings: Int? = nil, inRangePercent: Double? = nil, lowPercent: Double? = nil, highPercent: Double? = nil, avgGlucose: Double? = nil) {
+    public init(dayCount: Int? = nil, totalReadings: Int? = nil, inRangePercent: Double? = nil, veryLowPercent: Double? = nil, lowPercent: Double? = nil, highPercent: Double? = nil, veryHighPercent: Double? = nil, avgGlucose: Double? = nil, tdd: Double? = nil, avgDailyCarbs: Double? = nil) {
         self.dayCount = dayCount
         self.totalReadings = totalReadings
         self.inRangePercent = inRangePercent
+        self.veryLowPercent = veryLowPercent
         self.lowPercent = lowPercent
         self.highPercent = highPercent
+        self.veryHighPercent = veryHighPercent
         self.avgGlucose = avgGlucose
+        self.tdd = tdd
+        self.avgDailyCarbs = avgDailyCarbs
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case dayCount
         case totalReadings
         case inRangePercent
+        case veryLowPercent
         case lowPercent
         case highPercent
+        case veryHighPercent
         case avgGlucose
+        case tdd
+        case avgDailyCarbs
     }
 
     // Encodable protocol methods
@@ -41,9 +53,13 @@ public struct PunchCardMonthSummary: Sendable, Codable, Hashable {
         try container.encodeIfPresent(dayCount, forKey: .dayCount)
         try container.encodeIfPresent(totalReadings, forKey: .totalReadings)
         try container.encodeIfPresent(inRangePercent, forKey: .inRangePercent)
+        try container.encodeIfPresent(veryLowPercent, forKey: .veryLowPercent)
         try container.encodeIfPresent(lowPercent, forKey: .lowPercent)
         try container.encodeIfPresent(highPercent, forKey: .highPercent)
+        try container.encodeIfPresent(veryHighPercent, forKey: .veryHighPercent)
         try container.encodeIfPresent(avgGlucose, forKey: .avgGlucose)
+        try container.encodeIfPresent(tdd, forKey: .tdd)
+        try container.encodeIfPresent(avgDailyCarbs, forKey: .avgDailyCarbs)
     }
 }
 

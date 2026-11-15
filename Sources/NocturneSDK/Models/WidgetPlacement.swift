@@ -8,7 +8,8 @@
 import Foundation
 
 /**  */
-public enum WidgetPlacement: String, Sendable, Codable, CaseIterable {
+public enum WidgetPlacement: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case top = "Top"
     case main = "Main"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

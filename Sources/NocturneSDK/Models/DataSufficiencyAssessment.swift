@@ -21,8 +21,9 @@ public struct DataSufficiencyAssessment: Sendable, Codable, Hashable {
     public var status: DataSufficiencyStatus?
     public var warningMessage: String?
     public var recommendation: String?
+    public var timeZoneUnavailableReason: TimeZoneUnavailableReason?
 
-    public init(isSufficient: Bool? = nil, totalDays: Int? = nil, daysWithData: Int? = nil, expectedReadings: Int? = nil, actualReadings: Int? = nil, completenessPercentage: Double? = nil, minimumRequiredCompleteness: Double? = nil, averageReadingsPerDay: Double? = nil, longestGapHours: Double? = nil, status: DataSufficiencyStatus? = nil, warningMessage: String? = nil, recommendation: String? = nil) {
+    public init(isSufficient: Bool? = nil, totalDays: Int? = nil, daysWithData: Int? = nil, expectedReadings: Int? = nil, actualReadings: Int? = nil, completenessPercentage: Double? = nil, minimumRequiredCompleteness: Double? = nil, averageReadingsPerDay: Double? = nil, longestGapHours: Double? = nil, status: DataSufficiencyStatus? = nil, warningMessage: String? = nil, recommendation: String? = nil, timeZoneUnavailableReason: TimeZoneUnavailableReason? = nil) {
         self.isSufficient = isSufficient
         self.totalDays = totalDays
         self.daysWithData = daysWithData
@@ -35,6 +36,7 @@ public struct DataSufficiencyAssessment: Sendable, Codable, Hashable {
         self.status = status
         self.warningMessage = warningMessage
         self.recommendation = recommendation
+        self.timeZoneUnavailableReason = timeZoneUnavailableReason
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -50,6 +52,7 @@ public struct DataSufficiencyAssessment: Sendable, Codable, Hashable {
         case status
         case warningMessage
         case recommendation
+        case timeZoneUnavailableReason
     }
 
     // Encodable protocol methods
@@ -68,6 +71,7 @@ public struct DataSufficiencyAssessment: Sendable, Codable, Hashable {
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(warningMessage, forKey: .warningMessage)
         try container.encodeIfPresent(recommendation, forKey: .recommendation)
+        try container.encodeIfPresent(timeZoneUnavailableReason, forKey: .timeZoneUnavailableReason)
     }
 }
 

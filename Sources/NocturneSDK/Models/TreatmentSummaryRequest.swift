@@ -14,15 +14,19 @@ public struct TreatmentSummaryRequest: Sendable, Codable, Hashable {
     public var boluses: [Bolus]?
     /** Optional collection of carb intakes */
     public var carbIntakes: [CarbIntake]?
+    /** Calendar days the records cover, for the per-day averages. Defaults to one day. */
+    public var dayCount: Int?
 
-    public init(boluses: [Bolus]? = nil, carbIntakes: [CarbIntake]? = nil) {
+    public init(boluses: [Bolus]? = nil, carbIntakes: [CarbIntake]? = nil, dayCount: Int? = nil) {
         self.boluses = boluses
         self.carbIntakes = carbIntakes
+        self.dayCount = dayCount
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case boluses
         case carbIntakes
+        case dayCount
     }
 
     // Encodable protocol methods
@@ -31,6 +35,7 @@ public struct TreatmentSummaryRequest: Sendable, Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(boluses, forKey: .boluses)
         try container.encodeIfPresent(carbIntakes, forKey: .carbIntakes)
+        try container.encodeIfPresent(dayCount, forKey: .dayCount)
     }
 }
 

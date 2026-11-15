@@ -13,12 +13,14 @@ public struct MemberInviteResult: Sendable, Codable, Hashable {
     public var token: String?
     public var inviteUrl: String?
     public var expiresAt: Date?
+    public var createdByName: String?
 
-    public init(id: String? = nil, token: String? = nil, inviteUrl: String? = nil, expiresAt: Date? = nil) {
+    public init(id: String? = nil, token: String? = nil, inviteUrl: String? = nil, expiresAt: Date? = nil, createdByName: String? = nil) {
         self.id = id
         self.token = token
         self.inviteUrl = inviteUrl
         self.expiresAt = expiresAt
+        self.createdByName = createdByName
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -26,6 +28,7 @@ public struct MemberInviteResult: Sendable, Codable, Hashable {
         case token
         case inviteUrl
         case expiresAt
+        case createdByName
     }
 
     // Encodable protocol methods
@@ -36,6 +39,7 @@ public struct MemberInviteResult: Sendable, Codable, Hashable {
         try container.encodeIfPresent(token, forKey: .token)
         try container.encodeIfPresent(inviteUrl, forKey: .inviteUrl)
         try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
+        try container.encodeIfPresent(createdByName, forKey: .createdByName)
     }
 }
 

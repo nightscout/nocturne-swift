@@ -10,13 +10,15 @@ import Foundation
 public struct CgmProperties: Sendable, Codable, Hashable {
 
     public var sensorDurationDays: Int?
+    public var graceHours: Int?
     public var warmupMinutes: Int?
     public var updateIntervalMinutes: Int?
     public var hasSeparateTransmitter: Bool?
     public var transmitterDurationDays: Int?
 
-    public init(sensorDurationDays: Int? = nil, warmupMinutes: Int? = nil, updateIntervalMinutes: Int? = nil, hasSeparateTransmitter: Bool? = nil, transmitterDurationDays: Int? = nil) {
+    public init(sensorDurationDays: Int? = nil, graceHours: Int? = nil, warmupMinutes: Int? = nil, updateIntervalMinutes: Int? = nil, hasSeparateTransmitter: Bool? = nil, transmitterDurationDays: Int? = nil) {
         self.sensorDurationDays = sensorDurationDays
+        self.graceHours = graceHours
         self.warmupMinutes = warmupMinutes
         self.updateIntervalMinutes = updateIntervalMinutes
         self.hasSeparateTransmitter = hasSeparateTransmitter
@@ -25,6 +27,7 @@ public struct CgmProperties: Sendable, Codable, Hashable {
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case sensorDurationDays
+        case graceHours
         case warmupMinutes
         case updateIntervalMinutes
         case hasSeparateTransmitter
@@ -36,6 +39,7 @@ public struct CgmProperties: Sendable, Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(sensorDurationDays, forKey: .sensorDurationDays)
+        try container.encodeIfPresent(graceHours, forKey: .graceHours)
         try container.encodeIfPresent(warmupMinutes, forKey: .warmupMinutes)
         try container.encodeIfPresent(updateIntervalMinutes, forKey: .updateIntervalMinutes)
         try container.encodeIfPresent(hasSeparateTransmitter, forKey: .hasSeparateTransmitter)

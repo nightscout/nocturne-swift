@@ -19,13 +19,15 @@ public struct CurrentTherapyStateResponse: Sendable, Codable, Hashable {
     public var pumpBatteryPercent: Int?
     /** Pump battery voltage from the most recent pump snapshot, or null when the pump reports no battery voltage. */
     public var pumpBatteryVoltage: Double?
+    public var thresholds: ChartThresholdsDto?
 
-    public init(currentPumpMode: PumpModeState? = nil, sensitivityPercent: Double? = nil, reservoir: Double? = nil, pumpBatteryPercent: Int? = nil, pumpBatteryVoltage: Double? = nil) {
+    public init(currentPumpMode: PumpModeState? = nil, sensitivityPercent: Double? = nil, reservoir: Double? = nil, pumpBatteryPercent: Int? = nil, pumpBatteryVoltage: Double? = nil, thresholds: ChartThresholdsDto? = nil) {
         self.currentPumpMode = currentPumpMode
         self.sensitivityPercent = sensitivityPercent
         self.reservoir = reservoir
         self.pumpBatteryPercent = pumpBatteryPercent
         self.pumpBatteryVoltage = pumpBatteryVoltage
+        self.thresholds = thresholds
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -34,6 +36,7 @@ public struct CurrentTherapyStateResponse: Sendable, Codable, Hashable {
         case reservoir
         case pumpBatteryPercent
         case pumpBatteryVoltage
+        case thresholds
     }
 
     // Encodable protocol methods
@@ -45,6 +48,7 @@ public struct CurrentTherapyStateResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(reservoir, forKey: .reservoir)
         try container.encodeIfPresent(pumpBatteryPercent, forKey: .pumpBatteryPercent)
         try container.encodeIfPresent(pumpBatteryVoltage, forKey: .pumpBatteryVoltage)
+        try container.encodeIfPresent(thresholds, forKey: .thresholds)
     }
 }
 

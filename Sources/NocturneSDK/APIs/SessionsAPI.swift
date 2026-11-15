@@ -64,7 +64,7 @@ open class SessionsAPI {
     /**
      Revoke
      - DELETE /api/v4/account/sessions/{sessionId}
-     - The demo's subject is shared, so these sessions belong to other visitors and revoking one logs a stranger out. A visitor ending their own session uses POST /api/auth/oidc/logout, which stays open.
+     - Revoke a login session, logging that device out. Revoking the current session is allowed and acts as a logout. The demo's shared visitor cannot call it (403).
      - Bearer Token:
        - type: http
        - name: bearer
@@ -109,7 +109,7 @@ open class SessionsAPI {
     /**
      Revoke others
      - POST /api/v4/account/sessions/revoke-others
-     - On the shared demo subject, \"everything else\" is every other visitor currently using it.
+     - Revoke every session except the current one (log out everywhere else). The demo's shared visitor cannot call it (403).
      - Bearer Token:
        - type: http
        - name: bearer

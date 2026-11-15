@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum ChannelType: String, Sendable, Codable, CaseIterable {
+public enum ChannelType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case webPush = "web_push"
     case inApp = "in_app"
     case webhook = "webhook"
@@ -24,4 +24,5 @@ public enum ChannelType: String, Sendable, Codable, CaseIterable {
     case homeAssistant = "home_assistant"
     case resendEmail = "resend_email"
     case deviceAction = "device_action"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

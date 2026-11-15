@@ -161,7 +161,7 @@ open class HeartRateAPI {
     /**
      Get heart rates
      - GET /api/v4/HeartRate
-     - A date range without a count reads up to MaxPageSize records rather than the whole range, so a wide range cannot load the table into memory. Page through the rest with skip.
+     - Get heart rate records with optional pagination and date filtering. A date range without count returns at most the maximum page size of records; page through the rest with skip.
      - Bearer Token:
        - type: http
        - name: bearer

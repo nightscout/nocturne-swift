@@ -14,21 +14,29 @@ public struct MigrationJobStatus: Sendable, Codable, Hashable {
     public var state: MigrationJobState?
     public var progressPercentage: Double?
     public var currentOperation: String?
+    public var phase: MigrationPhase?
+    /** The key in CollectionProgress of the collection being pulled, or null when none is. */
+    public var currentCollection: String?
     public var errorMessage: String?
     public var startedAt: Date?
     public var completedAt: Date?
     public var estimatedTimeRemaining: String?
+    /** Whether ErrorMessage reports a fault. A run that completed carrying only a skip — a read-only API secret cannot list sign-ins, which is the ordinary setup — has a message to show and nothing to warn about, and history has no per-collection detail of its own to tell the two apart with. */
+    public var hasFailures: Bool?
     public var collectionProgress: [String: CollectionProgress]?
 
-    public init(jobId: String? = nil, state: MigrationJobState? = nil, progressPercentage: Double? = nil, currentOperation: String? = nil, errorMessage: String? = nil, startedAt: Date? = nil, completedAt: Date? = nil, estimatedTimeRemaining: String? = nil, collectionProgress: [String: CollectionProgress]? = nil) {
+    public init(jobId: String? = nil, state: MigrationJobState? = nil, progressPercentage: Double? = nil, currentOperation: String? = nil, phase: MigrationPhase? = nil, currentCollection: String? = nil, errorMessage: String? = nil, startedAt: Date? = nil, completedAt: Date? = nil, estimatedTimeRemaining: String? = nil, hasFailures: Bool? = nil, collectionProgress: [String: CollectionProgress]? = nil) {
         self.jobId = jobId
         self.state = state
         self.progressPercentage = progressPercentage
         self.currentOperation = currentOperation
+        self.phase = phase
+        self.currentCollection = currentCollection
         self.errorMessage = errorMessage
         self.startedAt = startedAt
         self.completedAt = completedAt
         self.estimatedTimeRemaining = estimatedTimeRemaining
+        self.hasFailures = hasFailures
         self.collectionProgress = collectionProgress
     }
 
@@ -37,10 +45,13 @@ public struct MigrationJobStatus: Sendable, Codable, Hashable {
         case state
         case progressPercentage
         case currentOperation
+        case phase
+        case currentCollection
         case errorMessage
         case startedAt
         case completedAt
         case estimatedTimeRemaining
+        case hasFailures
         case collectionProgress
     }
 
@@ -52,10 +63,13 @@ public struct MigrationJobStatus: Sendable, Codable, Hashable {
         try container.encodeIfPresent(state, forKey: .state)
         try container.encodeIfPresent(progressPercentage, forKey: .progressPercentage)
         try container.encodeIfPresent(currentOperation, forKey: .currentOperation)
+        try container.encodeIfPresent(phase, forKey: .phase)
+        try container.encodeIfPresent(currentCollection, forKey: .currentCollection)
         try container.encodeIfPresent(errorMessage, forKey: .errorMessage)
         try container.encodeIfPresent(startedAt, forKey: .startedAt)
         try container.encodeIfPresent(completedAt, forKey: .completedAt)
         try container.encodeIfPresent(estimatedTimeRemaining, forKey: .estimatedTimeRemaining)
+        try container.encodeIfPresent(hasFailures, forKey: .hasFailures)
         try container.encodeIfPresent(collectionProgress, forKey: .collectionProgress)
     }
 }

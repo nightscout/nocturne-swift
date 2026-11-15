@@ -8,8 +8,9 @@
 import Foundation
 
 /**  */
-public enum InsulinRole: String, Sendable, Codable, CaseIterable {
+public enum InsulinRole: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case bolus = "Bolus"
     case basal = "Basal"
     case both = "Both"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

@@ -8,8 +8,9 @@
 import Foundation
 
 /**  */
-public enum SystemEventCategory: String, Sendable, Codable, CaseIterable {
+public enum SystemEventCategory: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case pump = "Pump"
     case cgm = "Cgm"
     case connectivity = "Connectivity"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

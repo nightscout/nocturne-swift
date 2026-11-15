@@ -10,6 +10,130 @@ import Foundation
 open class TenantSettingsAPI {
 
     /**
+     Change subdomain
+     
+     - parameter changeSubdomainRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: TenantSubdomainDto
+     */
+    open class func tenantSettingsChangeSubdomain(changeSubdomainRequest: ChangeSubdomainRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> TenantSubdomainDto {
+        return try await tenantSettingsChangeSubdomainWithRequestBuilder(changeSubdomainRequest: changeSubdomainRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Change subdomain
+     - PUT /api/v4/tenant-settings/subdomain
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter changeSubdomainRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<TenantSubdomainDto> 
+     */
+    open class func tenantSettingsChangeSubdomainWithRequestBuilder(changeSubdomainRequest: ChangeSubdomainRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<TenantSubdomainDto> {
+        let localVariablePath = "/api/v4/tenant-settings/subdomain"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: changeSubdomainRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<TenantSubdomainDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Get patient relationship
+     
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: PatientRelationshipDto
+     */
+    open class func tenantSettingsGetPatientRelationship(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PatientRelationshipDto {
+        return try await tenantSettingsGetPatientRelationshipWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get patient relationship
+     - GET /api/v4/tenant-settings/patient-relationship
+     - Who the tenant is for, as its onboarder answered, with the patient's preferred name. Owner-only: the answer describes the owner's own relationship to the patient.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<PatientRelationshipDto> 
+     */
+    open class func tenantSettingsGetPatientRelationshipWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PatientRelationshipDto> {
+        let localVariablePath = "/api/v4/tenant-settings/patient-relationship"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<PatientRelationshipDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Get subdomain
+     
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: TenantSubdomainDto
+     */
+    open class func tenantSettingsGetSubdomain(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> TenantSubdomainDto {
+        return try await tenantSettingsGetSubdomainWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get subdomain
+     - GET /api/v4/tenant-settings/subdomain
+     - The tenant's subdomain and address, and whether the caller may change it: an owner may when the platform policy allows owners to, and an owner who is a platform admin always may.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<TenantSubdomainDto> 
+     */
+    open class func tenantSettingsGetSubdomainWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<TenantSubdomainDto> {
+        let localVariablePath = "/api/v4/tenant-settings/subdomain"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<TenantSubdomainDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Get tenant settings
      
      - parameter apiConfiguration: The configuration for the http request.
@@ -50,6 +174,140 @@ open class TenantSettingsAPI {
     }
 
     /**
+     Get units and timezone
+     
+     - parameter locale: (query) The browser&#39;s language tag (e.g. \&quot;en-AU\&quot;), for the units default. (optional)
+     - parameter fromNightscout: (query) Also read the saved Nightscout instance&#39;s settings. (optional, default to false)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: UnitsAndTimezoneDto
+     */
+    open class func tenantSettingsGetUnitsAndTimezone(locale: String? = nil, fromNightscout: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> UnitsAndTimezoneDto {
+        return try await tenantSettingsGetUnitsAndTimezoneWithRequestBuilder(locale: locale, fromNightscout: fromNightscout, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get units and timezone
+     - GET /api/v4/tenant-settings/units-and-timezone
+     - The glucose units and timezone onboarding asks the owner to confirm, pre-filled as GetAsync describes. Owner-only: the units are the owner's own display units.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter locale: (query) The browser&#39;s language tag (e.g. \&quot;en-AU\&quot;), for the units default. (optional)
+     - parameter fromNightscout: (query) Also read the saved Nightscout instance&#39;s settings. (optional, default to false)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<UnitsAndTimezoneDto> 
+     */
+    open class func tenantSettingsGetUnitsAndTimezoneWithRequestBuilder(locale: String? = nil, fromNightscout: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<UnitsAndTimezoneDto> {
+        let localVariablePath = "/api/v4/tenant-settings/units-and-timezone"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "locale": (wrappedValue: locale?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "fromNightscout": (wrappedValue: fromNightscout?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<UnitsAndTimezoneDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Set display name
+     
+     - parameter setDisplayNameRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: TenantSettingsDto
+     */
+    open class func tenantSettingsSetDisplayName(setDisplayNameRequest: SetDisplayNameRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> TenantSettingsDto {
+        return try await tenantSettingsSetDisplayNameWithRequestBuilder(setDisplayNameRequest: setDisplayNameRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Set display name
+     - PUT /api/v4/tenant-settings/display-name
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter setDisplayNameRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<TenantSettingsDto> 
+     */
+    open class func tenantSettingsSetDisplayNameWithRequestBuilder(setDisplayNameRequest: SetDisplayNameRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<TenantSettingsDto> {
+        let localVariablePath = "/api/v4/tenant-settings/display-name"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: setDisplayNameRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<TenantSettingsDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Set patient relationship
+     
+     - parameter setPatientRelationshipRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: PatientRelationshipDto
+     */
+    open class func tenantSettingsSetPatientRelationship(setPatientRelationshipRequest: SetPatientRelationshipRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PatientRelationshipDto {
+        return try await tenantSettingsSetPatientRelationshipWithRequestBuilder(setPatientRelationshipRequest: setPatientRelationshipRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Set patient relationship
+     - PUT /api/v4/tenant-settings/patient-relationship
+     - Records who the tenant is for, overwriting any earlier answer. A non-blank PatientName becomes the patient record's preferred name; Self never touches it.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter setPatientRelationshipRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<PatientRelationshipDto> 
+     */
+    open class func tenantSettingsSetPatientRelationshipWithRequestBuilder(setPatientRelationshipRequest: SetPatientRelationshipRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PatientRelationshipDto> {
+        let localVariablePath = "/api/v4/tenant-settings/patient-relationship"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: setPatientRelationshipRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<PatientRelationshipDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Set public docs
      
      - parameter setPublicDocsRequest: (body)  
@@ -87,6 +345,49 @@ open class TenantSettingsAPI {
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
         let localVariableRequestBuilder: RequestBuilder<TenantSettingsDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Set units and timezone
+     
+     - parameter setUnitsAndTimezoneRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: UnitsAndTimezoneDto
+     */
+    open class func tenantSettingsSetUnitsAndTimezone(setUnitsAndTimezoneRequest: SetUnitsAndTimezoneRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> UnitsAndTimezoneDto {
+        return try await tenantSettingsSetUnitsAndTimezoneWithRequestBuilder(setUnitsAndTimezoneRequest: setUnitsAndTimezoneRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Set units and timezone
+     - PUT /api/v4/tenant-settings/units-and-timezone
+     - Saves the owner's display units, the tenant default units for members who have not chosen their own, and the patient's timezone. Nothing already stored in other units is converted.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter setUnitsAndTimezoneRequest: (body)  
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<UnitsAndTimezoneDto> 
+     */
+    open class func tenantSettingsSetUnitsAndTimezoneWithRequestBuilder(setUnitsAndTimezoneRequest: SetUnitsAndTimezoneRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<UnitsAndTimezoneDto> {
+        let localVariablePath = "/api/v4/tenant-settings/units-and-timezone"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: setUnitsAndTimezoneRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<UnitsAndTimezoneDto>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }

@@ -8,11 +8,12 @@
 import Foundation
 
 /**  */
-public enum InsulinCategory: String, Sendable, Codable, CaseIterable {
+public enum InsulinCategory: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case rapidActing = "RapidActing"
     case shortActing = "ShortActing"
     case intermediateActing = "IntermediateActing"
     case longActing = "LongActing"
     case ultraLongActing = "UltraLongActing"
     case premixed = "Premixed"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

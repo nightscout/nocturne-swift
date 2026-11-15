@@ -298,7 +298,7 @@ open class FoodsAPI {
     /**
      Get foods
      - GET /api/v4/foods
-     - The picker and the food page ask for no count and render the whole catalog, so an absent count reads up to MaxPageSize records rather than every row. find matches name, category, and subcategory.
+     - List foods with optional filtering and pagination. This is a V4 endpoint (not Nightscout-legacy) used by the meal attribution UI. Without count, returns at most the maximum page size of records. find is free text matched against name, category and subcategory.
      - Bearer Token:
        - type: http
        - name: bearer

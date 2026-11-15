@@ -8,11 +8,12 @@
 import Foundation
 
 /**  */
-public enum DeviceCategory: String, Sendable, Codable, CaseIterable {
+public enum DeviceCategory: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case insulinPump = "InsulinPump"
     case cgm = "CGM"
     case glucoseMeter = "GlucoseMeter"
     case insulinPen = "InsulinPen"
     case smartPen = "SmartPen"
     case uploader = "Uploader"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

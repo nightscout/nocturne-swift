@@ -8,7 +8,8 @@
 import Foundation
 
 /** Kind of a manually reported reservoir value. */
-public enum ReservoirReportKind: String, Sendable, Codable, CaseIterable {
+public enum ReservoirReportKind: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case reading = "Reading"
     case fill = "Fill"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

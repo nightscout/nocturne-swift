@@ -11,21 +11,27 @@ public struct ReportAnalysisResult: Sendable, Codable, Hashable {
 
     public var analysis: ExtendedGlucoseAnalytics?
     public var averagedStats: [AveragedStats]?
+    public var hourlyBandThresholds: GlycemicThresholds?
     public var contributingDevices: [ContributingDevice]?
     public var personalRange: PersonalRangeTimeInRange?
+    public var timeZoneUnavailableReason: TimeZoneUnavailableReason?
 
-    public init(analysis: ExtendedGlucoseAnalytics? = nil, averagedStats: [AveragedStats]? = nil, contributingDevices: [ContributingDevice]? = nil, personalRange: PersonalRangeTimeInRange? = nil) {
+    public init(analysis: ExtendedGlucoseAnalytics? = nil, averagedStats: [AveragedStats]? = nil, hourlyBandThresholds: GlycemicThresholds? = nil, contributingDevices: [ContributingDevice]? = nil, personalRange: PersonalRangeTimeInRange? = nil, timeZoneUnavailableReason: TimeZoneUnavailableReason? = nil) {
         self.analysis = analysis
         self.averagedStats = averagedStats
+        self.hourlyBandThresholds = hourlyBandThresholds
         self.contributingDevices = contributingDevices
         self.personalRange = personalRange
+        self.timeZoneUnavailableReason = timeZoneUnavailableReason
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case analysis
         case averagedStats
+        case hourlyBandThresholds
         case contributingDevices
         case personalRange
+        case timeZoneUnavailableReason
     }
 
     // Encodable protocol methods
@@ -34,8 +40,10 @@ public struct ReportAnalysisResult: Sendable, Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(analysis, forKey: .analysis)
         try container.encodeIfPresent(averagedStats, forKey: .averagedStats)
+        try container.encodeIfPresent(hourlyBandThresholds, forKey: .hourlyBandThresholds)
         try container.encodeIfPresent(contributingDevices, forKey: .contributingDevices)
         try container.encodeIfPresent(personalRange, forKey: .personalRange)
+        try container.encodeIfPresent(timeZoneUnavailableReason, forKey: .timeZoneUnavailableReason)
     }
 }
 

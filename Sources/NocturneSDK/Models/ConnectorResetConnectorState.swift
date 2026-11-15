@@ -8,9 +8,10 @@
 import Foundation
 
 /** State of a single connector within a reset job. */
-public enum ConnectorResetConnectorState: String, Sendable, Codable, CaseIterable {
+public enum ConnectorResetConnectorState: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case pending = "Pending"
     case running = "Running"
     case succeeded = "Succeeded"
     case failed = "Failed"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

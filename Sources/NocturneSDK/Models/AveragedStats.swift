@@ -17,9 +17,10 @@ public struct AveragedStats: Sendable, Codable, Hashable {
     public var standardDeviation: Double?
     public var percentiles: GlucosePercentiles?
     public var hour: Int?
+    public var dayCount: Int?
     public var timeInRange: ExtendedTimeInRangePercentages?
 
-    public init(count: Int? = nil, mean: Double? = nil, median: Double? = nil, min: Double? = nil, max: Double? = nil, standardDeviation: Double? = nil, percentiles: GlucosePercentiles? = nil, hour: Int? = nil, timeInRange: ExtendedTimeInRangePercentages? = nil) {
+    public init(count: Int? = nil, mean: Double? = nil, median: Double? = nil, min: Double? = nil, max: Double? = nil, standardDeviation: Double? = nil, percentiles: GlucosePercentiles? = nil, hour: Int? = nil, dayCount: Int? = nil, timeInRange: ExtendedTimeInRangePercentages? = nil) {
         self.count = count
         self.mean = mean
         self.median = median
@@ -28,6 +29,7 @@ public struct AveragedStats: Sendable, Codable, Hashable {
         self.standardDeviation = standardDeviation
         self.percentiles = percentiles
         self.hour = hour
+        self.dayCount = dayCount
         self.timeInRange = timeInRange
     }
 
@@ -40,6 +42,7 @@ public struct AveragedStats: Sendable, Codable, Hashable {
         case standardDeviation
         case percentiles
         case hour
+        case dayCount
         case timeInRange
     }
 
@@ -55,6 +58,7 @@ public struct AveragedStats: Sendable, Codable, Hashable {
         try container.encodeIfPresent(standardDeviation, forKey: .standardDeviation)
         try container.encodeIfPresent(percentiles, forKey: .percentiles)
         try container.encodeIfPresent(hour, forKey: .hour)
+        try container.encodeIfPresent(dayCount, forKey: .dayCount)
         try container.encodeIfPresent(timeInRange, forKey: .timeInRange)
     }
 }

@@ -11,20 +11,40 @@ import Foundation
 public struct CollectionProgress: Sendable, Codable, Hashable {
 
     public var collectionName: String?
+    /** Documents the collection is expected to hold: the source's count while it is in flight, 0 while the source has given none, and what the source served once it is complete. */
     public var totalDocuments: Int64?
+    /** Documents Nocturne took in. Excludes DocumentsSkippedUnsupported and DocumentsSkippedDeleted. */
     public var documentsMigrated: Int64?
     public var documentsFailed: Int64?
+    /** Documents of a kind Nocturne does not store, so nothing was written for them. */
+    public var documentsSkippedUnsupported: Int64?
+    /** Documents whose one record was not written because the user had deleted it. Only a collection whose documents each become a single record can say this; elsewhere see RecordsSkippedDeleted. */
+    public var documentsSkippedDeleted: Int64?
+    /** Documents that need no further work: migrated or skipped. What the collection's progress is measured by. */
+    public var documentsProcessed: Int64?
+    /** DocumentsProcessed as a share of TotalDocuments; a finished collection whose total was never known reads 100. */
+    public var progressPercentage: Double?
+    /** Records this collection's documents were written or updated as. A document can become several records, and one Nocturne already held unchanged may not be counted, so this is not comparable with the document counts. */
+    public var recordsStored: Int64?
+    /** Records not written because the user had deleted them, so a re-import does not bring them back. Counted in records rather than documents: one treatment can hold several records. */
+    public var recordsSkippedDeleted: Int64?
     public var isComplete: Bool?
     /** Why this collection stopped short, in the words shown to whoever ran the import; null when it finished. A collection can end complete and failed at the same time — IsComplete only means nothing more will be attempted for it. */
     public var failureReason: String?
     /** Why this collection was passed over, or null when it was attempted. */
     public var skippedReason: String?
 
-    public init(collectionName: String? = nil, totalDocuments: Int64? = nil, documentsMigrated: Int64? = nil, documentsFailed: Int64? = nil, isComplete: Bool? = nil, failureReason: String? = nil, skippedReason: String? = nil) {
+    public init(collectionName: String? = nil, totalDocuments: Int64? = nil, documentsMigrated: Int64? = nil, documentsFailed: Int64? = nil, documentsSkippedUnsupported: Int64? = nil, documentsSkippedDeleted: Int64? = nil, documentsProcessed: Int64? = nil, progressPercentage: Double? = nil, recordsStored: Int64? = nil, recordsSkippedDeleted: Int64? = nil, isComplete: Bool? = nil, failureReason: String? = nil, skippedReason: String? = nil) {
         self.collectionName = collectionName
         self.totalDocuments = totalDocuments
         self.documentsMigrated = documentsMigrated
         self.documentsFailed = documentsFailed
+        self.documentsSkippedUnsupported = documentsSkippedUnsupported
+        self.documentsSkippedDeleted = documentsSkippedDeleted
+        self.documentsProcessed = documentsProcessed
+        self.progressPercentage = progressPercentage
+        self.recordsStored = recordsStored
+        self.recordsSkippedDeleted = recordsSkippedDeleted
         self.isComplete = isComplete
         self.failureReason = failureReason
         self.skippedReason = skippedReason
@@ -35,6 +55,12 @@ public struct CollectionProgress: Sendable, Codable, Hashable {
         case totalDocuments
         case documentsMigrated
         case documentsFailed
+        case documentsSkippedUnsupported
+        case documentsSkippedDeleted
+        case documentsProcessed
+        case progressPercentage
+        case recordsStored
+        case recordsSkippedDeleted
         case isComplete
         case failureReason
         case skippedReason
@@ -48,6 +74,12 @@ public struct CollectionProgress: Sendable, Codable, Hashable {
         try container.encodeIfPresent(totalDocuments, forKey: .totalDocuments)
         try container.encodeIfPresent(documentsMigrated, forKey: .documentsMigrated)
         try container.encodeIfPresent(documentsFailed, forKey: .documentsFailed)
+        try container.encodeIfPresent(documentsSkippedUnsupported, forKey: .documentsSkippedUnsupported)
+        try container.encodeIfPresent(documentsSkippedDeleted, forKey: .documentsSkippedDeleted)
+        try container.encodeIfPresent(documentsProcessed, forKey: .documentsProcessed)
+        try container.encodeIfPresent(progressPercentage, forKey: .progressPercentage)
+        try container.encodeIfPresent(recordsStored, forKey: .recordsStored)
+        try container.encodeIfPresent(recordsSkippedDeleted, forKey: .recordsSkippedDeleted)
         try container.encodeIfPresent(isComplete, forKey: .isComplete)
         try container.encodeIfPresent(failureReason, forKey: .failureReason)
         try container.encodeIfPresent(skippedReason, forKey: .skippedReason)

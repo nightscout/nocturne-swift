@@ -111,7 +111,7 @@ open class RoleAPI {
     /**
      Get roles
      - GET /api/v4/roles
-     - List roles for the current tenant.
+     - List roles for the current tenant. A roles.manage caller gets every role; a members.invite or members.manage caller gets only the roles it can grant. CanGrant on each role says whether the caller may confer it.
      - Bearer Token:
        - type: http
        - name: bearer

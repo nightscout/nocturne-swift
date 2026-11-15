@@ -195,7 +195,7 @@ open class StatisticsAPI {
     /**
      Calculate averaged stats
      - POST /api/v4/Statistics/averaged-stats
-     - Calculate averaged statistics for each hour of the day (0-23)
+     - Calculate averaged statistics for each hour of the day (0-23), on the tenant's local clock
      - Bearer Token:
        - type: http
        - name: bearer
@@ -718,7 +718,7 @@ open class StatisticsAPI {
     /**
      Get aid system metrics
      - GET /api/v4/Statistics/aid-system-metrics
-     - Fetches APS snapshots, temp basals, device events, glucose readings, and target-range schedules from their respective repositories. CGM active time comes from CalculateCgmActivePercent, measured against the registered CGMs' windows where the tenant has registered any. Target range is optional; the method continues without it if the repository throws.
+     - Calculates AID (Automated Insulin Delivery) system metrics for a date range. Uses patient device records to segment the period by algorithm and compute time-weighted metrics via AidSystemMetricsReader. CGM active time is measured against the registered CGMs' windows where any are registered. The target range is optional; the report goes without it if it cannot be read. Each figure is narrowed to the caller's categories. A history-clamped caller reads the last 24 hours whatever the dates, and a window ending in the future stops at now.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -850,8 +850,8 @@ open class StatisticsAPI {
     /**
      Get daily basal bolus ratios
      
-     - parameter startDate: (query) Start date of the analysis period 
-     - parameter endDate: (query) End date of the analysis period 
+     - parameter startDate: (query)  
+     - parameter endDate: (query)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: DailyBasalBolusRatioResponse
      */
@@ -862,15 +862,15 @@ open class StatisticsAPI {
     /**
      Get daily basal bolus ratios
      - GET /api/v4/Statistics/daily-basal-bolus-ratios
-     - Calculate daily basal/bolus ratio statistics for a date range
+     - Calculate daily basal/bolus ratio statistics for a date range, with each day's carbs
      - Bearer Token:
        - type: http
        - name: bearer
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter startDate: (query) Start date of the analysis period 
-     - parameter endDate: (query) End date of the analysis period 
+     - parameter startDate: (query)  
+     - parameter endDate: (query)  
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<DailyBasalBolusRatioResponse> 
      */
@@ -911,7 +911,7 @@ open class StatisticsAPI {
     /**
      Get hourly insulin delivery
      - GET /api/v4/Statistics/hourly-insulin-delivery
-     - Calculates the average insulin delivered per hour of day, split by scheduled basal, temp adjustments, and boluses, from pump-confirmed delivery records. Basal insulin is duration-weighted across the user-local hours each TempBasal overlaps, and averages are taken over the days that have delivery data — a window that extends before the first record does not distort the pattern.
+     - Calculates the average insulin delivered per hour of day, split by scheduled basal, temp adjustments, and boluses, from pump-confirmed delivery records. Basal insulin is duration-weighted across the user-local hours each TempBasal overlaps, and averages are taken over the days that have delivery data — a window that extends before the first record does not distort the pattern. Also serves the profile's scheduled rate per hour and the period totals of total and basal delivery.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -946,15 +946,65 @@ open class StatisticsAPI {
     }
 
     /**
+     Get hourly patterns
+     
+     - parameter startDate: (query) Start of the window (inclusive, UTC). 
+     - parameter endDate: (query) End of the window (exclusive, UTC). 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: HourlyPatterns
+     */
+    open class func statisticsGetHourlyPatterns(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> HourlyPatterns {
+        return try await statisticsGetHourlyPatternsWithRequestBuilder(startDate: startDate, endDate: endDate, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get hourly patterns
+     - GET /api/v4/Statistics/hourly-patterns
+     - Which hours of the day go best and worst for a date range, bucketed on the tenant's local clock. Backs the hourly-patterns report.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter startDate: (query) Start of the window (inclusive, UTC). 
+     - parameter endDate: (query) End of the window (exclusive, UTC). 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<HourlyPatterns> 
+     */
+    open class func statisticsGetHourlyPatternsWithRequestBuilder(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<HourlyPatterns> {
+        let localVariablePath = "/api/v4/Statistics/hourly-patterns"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "startDate": (wrappedValue: startDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endDate": (wrappedValue: endDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HourlyPatterns>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Get insulin delivery statistics
      
-     - parameter startDate: (query) Start date of the analysis period 
-     - parameter endDate: (query) End date of the analysis period 
+     - parameter startDate: (query) Start of the period. 
+     - parameter endDate: (query) End of the period. 
+     - parameter includeBoluses: (query) Fill ManualBoluses with the records behind ManualBolus; ignored unless the caller holds treatments.read. (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: InsulinDeliveryStatistics
      */
-    open class func statisticsGetInsulinDeliveryStatistics(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> InsulinDeliveryStatistics {
-        return try await statisticsGetInsulinDeliveryStatisticsWithRequestBuilder(startDate: startDate, endDate: endDate, apiConfiguration: apiConfiguration).execute().body
+    open class func statisticsGetInsulinDeliveryStatistics(startDate: Date, endDate: Date, includeBoluses: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> InsulinDeliveryStatistics {
+        return try await statisticsGetInsulinDeliveryStatisticsWithRequestBuilder(startDate: startDate, endDate: endDate, includeBoluses: includeBoluses, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -967,12 +1017,13 @@ open class StatisticsAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter startDate: (query) Start date of the analysis period 
-     - parameter endDate: (query) End date of the analysis period 
+     - parameter startDate: (query) Start of the period. 
+     - parameter endDate: (query) End of the period. 
+     - parameter includeBoluses: (query) Fill ManualBoluses with the records behind ManualBolus; ignored unless the caller holds treatments.read. (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<InsulinDeliveryStatistics> 
      */
-    open class func statisticsGetInsulinDeliveryStatisticsWithRequestBuilder(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<InsulinDeliveryStatistics> {
+    open class func statisticsGetInsulinDeliveryStatisticsWithRequestBuilder(startDate: Date, endDate: Date, includeBoluses: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<InsulinDeliveryStatistics> {
         let localVariablePath = "/api/v4/Statistics/insulin-delivery-stats"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -981,6 +1032,7 @@ open class StatisticsAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "startDate": (wrappedValue: startDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "endDate": (wrappedValue: endDate.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "includeBoluses": (wrappedValue: includeBoluses?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
@@ -1007,7 +1059,7 @@ open class StatisticsAPI {
     /**
      Get multi period statistics
      - GET /api/v4/Statistics/periods
-     - When no TempBasal or algorithm bolus records are found but a profile is loaded, the method falls back to integrating scheduled basal across the period via IBasalSegmentService. GMI reliability is assessed per-period using context-appropriate recommended-day minimums (e.g., 1-day periods cannot require 14 days of data).
+     - Gets comprehensive statistics for multiple time periods (1, 3, 7, 30, and 90 days). Reads sensor glucose, bolus, carb, and temp-basal data for the 90-day window once and slices each period from it, computes GlucoseAnalytics, TreatmentSummary, and InsulinDeliveryStatistics, and caches the result for 5 minutes. When a period has no temp basals, profile basal may stand in for scheduled basal. GMI reliability is assessed per period against a recommended-days minimum suited to the period's length. Each response is narrowed to the caller's read scopes.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -1036,10 +1088,69 @@ open class StatisticsAPI {
     }
 
     /**
+     Get period comparison
+     
+     - parameter startDateA: (query) Start of the first period (inclusive, UTC). 
+     - parameter endDateA: (query) End of the first period (exclusive, UTC). 
+     - parameter startDateB: (query) Start of the second period (inclusive, UTC). 
+     - parameter endDateB: (query) End of the second period (exclusive, UTC). 
+     - parameter units: (query) The units glucose metrics are served in. Defaults to the tenant&#39;s. (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: PeriodComparison
+     */
+    open class func statisticsGetPeriodComparison(startDateA: Date, endDateA: Date, startDateB: Date, endDateB: Date, units: GlucoseUnit? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PeriodComparison {
+        return try await statisticsGetPeriodComparisonWithRequestBuilder(startDateA: startDateA, endDateA: endDateA, startDateB: startDateB, endDateB: endDateB, units: units, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get period comparison
+     - GET /api/v4/Statistics/period-comparison
+     - Two periods' glucose and insulin figures side by side, with each metric's change from the first period to the second. Reads each period through ReadWithInsulinDeliveryAsync, and states the change per PeriodComparisonCalculator.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter startDateA: (query) Start of the first period (inclusive, UTC). 
+     - parameter endDateA: (query) End of the first period (exclusive, UTC). 
+     - parameter startDateB: (query) Start of the second period (inclusive, UTC). 
+     - parameter endDateB: (query) End of the second period (exclusive, UTC). 
+     - parameter units: (query) The units glucose metrics are served in. Defaults to the tenant&#39;s. (optional)
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<PeriodComparison> 
+     */
+    open class func statisticsGetPeriodComparisonWithRequestBuilder(startDateA: Date, endDateA: Date, startDateB: Date, endDateB: Date, units: GlucoseUnit? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PeriodComparison> {
+        let localVariablePath = "/api/v4/Statistics/period-comparison"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        let _qp1: [String: (wrappedValue: (any Sendable)?, isExplode: Bool)] = [
+            "startDateA": (wrappedValue: startDateA.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endDateA": (wrappedValue: endDateA.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "startDateB": (wrappedValue: startDateB.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "endDateB": (wrappedValue: endDateB.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "units": (wrappedValue: units?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ]
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp1)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<PeriodComparison>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Get punch card data
      
-     - parameter startDate: (query) Inclusive start of the date range. 
-     - parameter endDate: (query) Inclusive end of the date range. 
+     - parameter startDate: (query) Inclusive start calendar date in the tenant&#39;s timezone. 
+     - parameter endDate: (query) Inclusive end calendar date in the tenant&#39;s timezone. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PunchCardResponse
      */
@@ -1050,15 +1161,15 @@ open class StatisticsAPI {
     /**
      Get punch card data
      - GET /api/v4/Statistics/punch-card
-     - Pre-aggregated month-by-day statistics for the calendar punch-card view. Fetches glucose, boluses, carb intakes, and daily basal totals in a single batch, then computes per-day TIR and treatment summaries inline (no per-day round-trips). Replaces a frontend orchestrator that was issuing ~62 sequential HTTP calls per 31-day month.
+     - Pre-aggregated month-by-day statistics for the calendar punch-card view. Fetches glucose, boluses, carb intakes, and basal records in a single batch for CalculatePunchCard (no per-day round-trips). Without either reports.read or treatments.read, every carb, insulin and ratio figure is zero.
      - Bearer Token:
        - type: http
        - name: bearer
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter startDate: (query) Inclusive start of the date range. 
-     - parameter endDate: (query) Inclusive end of the date range. 
+     - parameter startDate: (query) Inclusive start calendar date in the tenant&#39;s timezone. 
+     - parameter endDate: (query) Inclusive end calendar date in the tenant&#39;s timezone. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PunchCardResponse> 
      */
@@ -1090,7 +1201,7 @@ open class StatisticsAPI {
      - parameter startDate: (query) Start of the window (inclusive, UTC). 
      - parameter endDate: (query) End of the window (exclusive, UTC). 
      - parameter population: (query) Diabetes population for clinical target assessment. Defaults to Type 1 adult. (optional)
-     - parameter patientDeviceId: (query)  (optional)
+     - parameter patientDeviceId: (query) Restricts glucose to readings from this one patient device,             in place of the canonical stream selected across all devices. Boluses and carb intakes are             not filtered. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: ReportAnalysisResult
      */
@@ -1111,7 +1222,7 @@ open class StatisticsAPI {
      - parameter startDate: (query) Start of the window (inclusive, UTC). 
      - parameter endDate: (query) End of the window (exclusive, UTC). 
      - parameter population: (query) Diabetes population for clinical target assessment. Defaults to Type 1 adult. (optional)
-     - parameter patientDeviceId: (query)  (optional)
+     - parameter patientDeviceId: (query) Restricts glucose to readings from this one patient device,             in place of the canonical stream selected across all devices. Boluses and carb intakes are             not filtered. (optional)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<ReportAnalysisResult> 
      */
@@ -1145,9 +1256,9 @@ open class StatisticsAPI {
      - parameter startDate: (query) Start of the window (inclusive, UTC). 
      - parameter endDate: (query) End of the window (exclusive, UTC). 
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: [WeekdayGlucoseSlot]
+     - returns: WeekdayAveragesResponse
      */
-    open class func statisticsGetWeekdayAverages(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [WeekdayGlucoseSlot] {
+    open class func statisticsGetWeekdayAverages(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> WeekdayAveragesResponse {
         return try await statisticsGetWeekdayAveragesWithRequestBuilder(startDate: startDate, endDate: endDate, apiConfiguration: apiConfiguration).execute().body
     }
 
@@ -1164,9 +1275,9 @@ open class StatisticsAPI {
      - parameter startDate: (query) Start of the window (inclusive, UTC). 
      - parameter endDate: (query) End of the window (exclusive, UTC). 
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<[WeekdayGlucoseSlot]> 
+     - returns: RequestBuilder<WeekdayAveragesResponse> 
      */
-    open class func statisticsGetWeekdayAveragesWithRequestBuilder(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[WeekdayGlucoseSlot]> {
+    open class func statisticsGetWeekdayAveragesWithRequestBuilder(startDate: Date, endDate: Date, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<WeekdayAveragesResponse> {
         let localVariablePath = "/api/v4/Statistics/weekday-averages"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -1183,7 +1294,7 @@ open class StatisticsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<[WeekdayGlucoseSlot]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<WeekdayAveragesResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }

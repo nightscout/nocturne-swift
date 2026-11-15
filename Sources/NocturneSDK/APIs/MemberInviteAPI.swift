@@ -23,7 +23,7 @@ open class MemberInviteAPI {
     /**
      Accept invite
      - POST /api/v4/member-invites/{token}/accept
-     - The caller must be signed in as some subject, but need not already belong to this tenant — that is the point of an invite. InviteTokenAuthorizedAttribute is what lets a non-member reach this action at all, and the token is re-validated against the resolved tenant by the service before any membership is written.
+     - Accept an invite and join the tenant. The caller must be signed in but need not already belong to the tenant.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -144,66 +144,25 @@ open class MemberInviteAPI {
     }
 
     /**
-     Get followers
-     
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: [TenantMemberDto]
-     */
-    open class func memberInviteGetFollowers(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [TenantMemberDto] {
-        return try await memberInviteGetFollowersWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
-    }
-
-    /**
-     Get followers
-     - GET /api/v4/member-invites/members/followers
-     - List followers of the current tenant (members with the follower role).
-     - Bearer Token:
-       - type: http
-       - name: bearer
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<[TenantMemberDto]> 
-     */
-    open class func memberInviteGetFollowersWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[TenantMemberDto]> {
-        let localVariablePath = "/api/v4/member-invites/members/followers"
-        let localVariableURLString = apiConfiguration.basePath + localVariablePath
-        let localVariableParameters: [String: any Sendable]? = nil
-
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
-
-        let localVariableNillableHeaders: [String: (any Sendable)?] = [
-            :
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<[TenantMemberDto]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
-
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
-    }
-
-    /**
      Get invite info
      
      - parameter token: (path)  
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: MemberInviteInfo
+     - returns: JoinInviteInfo
      */
-    open class func memberInviteGetInviteInfo(token: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> MemberInviteInfo {
+    open class func memberInviteGetInviteInfo(token: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> JoinInviteInfo {
         return try await memberInviteGetInviteInfoWithRequestBuilder(token: token, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get invite info
      - GET /api/v4/member-invites/{token}/info
-     - Anonymous, because the invitee may have no account yet. A caller who does arrive signed in is reported in Viewer so the join page can offer acceptance instead of a second registration — including when they are signed in as a member of some other tenant on this instance, whose session cookie is domain-wide. The token is the whole of the authorization, so an invite that can no longer be accepted answers with the reason alone, as the sibling alert-invite lookup does. The record it would otherwise return names the tenant, the inviter, the roles and permissions being granted and every subject that has already joined through it.
+     - Get invite info for the accept page, along with where the caller stands relative to it. Requires no authentication. An invite that can no longer be accepted answers with the reason only.
      - parameter token: (path)  
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<MemberInviteInfo> 
+     - returns: RequestBuilder<JoinInviteInfo> 
      */
-    open class func memberInviteGetInviteInfoWithRequestBuilder(token: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<MemberInviteInfo> {
+    open class func memberInviteGetInviteInfoWithRequestBuilder(token: String, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<JoinInviteInfo> {
         var localVariablePath = "/api/v4/member-invites/{token}/info"
         let tokenPreEscape = "\(APIHelper.mapValueToPathItem(token))"
         let tokenPostEscape = tokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -219,7 +178,7 @@ open class MemberInviteAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<MemberInviteInfo>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<JoinInviteInfo>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
     }
@@ -319,7 +278,6 @@ open class MemberInviteAPI {
     /**
      Remove member
      - DELETE /api/v4/member-invites/members/{subjectId}
-     - Keyed by subject, unlike the sibling members/{id} routes below, which take the membership id. Removal is the one operation whose caller — the cloud billing service as well as the member list — knows the subject rather than the membership.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -507,7 +465,7 @@ open class MemberInviteAPI {
     /**
      Set member roles
      - PUT /api/v4/member-invites/members/{id}/roles
-     - Set roles for a member (replaces all role assignments).
+     - Set roles for a member. RoleIds is the member's whole role set after the change. Only the change is checked against the caller's grant ceiling, so a role the caller could not grant but the member already holds must stay in the set; removing it is refused like adding it.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -538,5 +496,46 @@ open class MemberInviteAPI {
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Step down
+     
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: Void
+     */
+    open class func memberInviteStepDown(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) {
+        return try await memberInviteStepDownWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Step down
+     - POST /api/v4/member-invites/members/self/step-down
+     - Replaces the caller's own roles with Caretaker, for a helper handing the tenant over. Direct permissions and the history clamp stay as they are. Refused unless the caller could grant that role.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<Void> 
+     */
+    open class func memberInviteStepDownWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<Void> {
+        let localVariablePath = "/api/v4/member-invites/members/self/step-down"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

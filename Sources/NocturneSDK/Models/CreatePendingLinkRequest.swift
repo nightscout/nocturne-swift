@@ -11,12 +11,14 @@ public struct CreatePendingLinkRequest: Sendable, Codable, Hashable {
 
     public var platform: String?
     public var platformUserId: String?
+    public var platformUserName: String?
     public var tenantSlug: String?
     public var source: String?
 
-    public init(platform: String? = nil, platformUserId: String? = nil, tenantSlug: String? = nil, source: String? = nil) {
+    public init(platform: String? = nil, platformUserId: String? = nil, platformUserName: String? = nil, tenantSlug: String? = nil, source: String? = nil) {
         self.platform = platform
         self.platformUserId = platformUserId
+        self.platformUserName = platformUserName
         self.tenantSlug = tenantSlug
         self.source = source
     }
@@ -24,6 +26,7 @@ public struct CreatePendingLinkRequest: Sendable, Codable, Hashable {
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case platform
         case platformUserId
+        case platformUserName
         case tenantSlug
         case source
     }
@@ -34,6 +37,7 @@ public struct CreatePendingLinkRequest: Sendable, Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(platform, forKey: .platform)
         try container.encodeIfPresent(platformUserId, forKey: .platformUserId)
+        try container.encodeIfPresent(platformUserName, forKey: .platformUserName)
         try container.encodeIfPresent(tenantSlug, forKey: .tenantSlug)
         try container.encodeIfPresent(source, forKey: .source)
     }

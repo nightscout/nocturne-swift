@@ -136,6 +136,82 @@ open class GuestLinkAPI {
     }
 
     /**
+     Get guest code pending
+     
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: GuestCodePendingResponse
+     */
+    open class func guestLinkGetGuestCodePending(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> GuestCodePendingResponse {
+        return try await guestLinkGetGuestCodePendingWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get guest code pending
+     - GET /api/v4/guest-links/pending
+     - Whether this tenant has a guest code waiting to be redeemed, so the sign-in page can open on code entry. Answers only yes or no: nothing about the code, its label or its owner.
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<GuestCodePendingResponse> 
+     */
+    open class func guestLinkGetGuestCodePendingWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<GuestCodePendingResponse> {
+        let localVariablePath = "/api/v4/guest-links/pending"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<GuestCodePendingResponse>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Get guest link scope options
+     
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: GuestLinkScopeOptions
+     */
+    open class func guestLinkGetGuestLinkScopeOptions(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> GuestLinkScopeOptions {
+        return try await guestLinkGetGuestLinkScopeOptionsWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Get guest link scope options
+     - GET /api/v4/guest-links/scope-options
+     - The categories the caller may share on a new guest link, and the ones ticked by default.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<GuestLinkScopeOptions> 
+     */
+    open class func guestLinkGetGuestLinkScopeOptionsWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<GuestLinkScopeOptions> {
+        let localVariablePath = "/api/v4/guest-links/scope-options"
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters: [String: any Sendable]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<GuestLinkScopeOptions>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
      Get guest links
      
      - parameter includeDismissed: (query)  (optional, default to false)

@@ -9,23 +9,15 @@ import Foundation
 
 public struct OverallAverages: Sendable, Codable, Hashable {
 
-    public var avgTotalDaily: Double?
     public var avgBolus: Double?
-    public var avgBasal: Double?
-    public var bolusPercentage: Double?
-    public var basalPercentage: Double?
     public var avgCarbs: Double?
     public var avgProtein: Double?
     public var avgFat: Double?
     public var avgTimeInRange: Double?
     public var avgTightTimeInRange: Double?
 
-    public init(avgTotalDaily: Double? = nil, avgBolus: Double? = nil, avgBasal: Double? = nil, bolusPercentage: Double? = nil, basalPercentage: Double? = nil, avgCarbs: Double? = nil, avgProtein: Double? = nil, avgFat: Double? = nil, avgTimeInRange: Double? = nil, avgTightTimeInRange: Double? = nil) {
-        self.avgTotalDaily = avgTotalDaily
+    public init(avgBolus: Double? = nil, avgCarbs: Double? = nil, avgProtein: Double? = nil, avgFat: Double? = nil, avgTimeInRange: Double? = nil, avgTightTimeInRange: Double? = nil) {
         self.avgBolus = avgBolus
-        self.avgBasal = avgBasal
-        self.bolusPercentage = bolusPercentage
-        self.basalPercentage = basalPercentage
         self.avgCarbs = avgCarbs
         self.avgProtein = avgProtein
         self.avgFat = avgFat
@@ -34,11 +26,7 @@ public struct OverallAverages: Sendable, Codable, Hashable {
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
-        case avgTotalDaily
         case avgBolus
-        case avgBasal
-        case bolusPercentage
-        case basalPercentage
         case avgCarbs
         case avgProtein
         case avgFat
@@ -50,11 +38,7 @@ public struct OverallAverages: Sendable, Codable, Hashable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(avgTotalDaily, forKey: .avgTotalDaily)
         try container.encodeIfPresent(avgBolus, forKey: .avgBolus)
-        try container.encodeIfPresent(avgBasal, forKey: .avgBasal)
-        try container.encodeIfPresent(bolusPercentage, forKey: .bolusPercentage)
-        try container.encodeIfPresent(basalPercentage, forKey: .basalPercentage)
         try container.encodeIfPresent(avgCarbs, forKey: .avgCarbs)
         try container.encodeIfPresent(avgProtein, forKey: .avgProtein)
         try container.encodeIfPresent(avgFat, forKey: .avgFat)

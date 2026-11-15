@@ -8,7 +8,8 @@
 import Foundation
 
 /**  */
-public enum TrackerMode: String, Sendable, Codable, CaseIterable {
+public enum TrackerMode: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case duration = "Duration"
     case event = "Event"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

@@ -16,11 +16,12 @@ public struct DeviceActionIntent: Sendable, Codable, Hashable {
     public var targetKind: String?
     public var capabilities: [String]?
     public var acknowledged: Bool?
+    public var acknowledgesForEveryone: Bool?
     public var startedAt: Date?
     public var glucoseValue: Double?
     public var trend: String?
 
-    public init(intent: String? = nil, excursionId: String? = nil, ruleName: String? = nil, severity: AlertRuleSeverity? = nil, targetKind: String? = nil, capabilities: [String]? = nil, acknowledged: Bool? = nil, startedAt: Date? = nil, glucoseValue: Double? = nil, trend: String? = nil) {
+    public init(intent: String? = nil, excursionId: String? = nil, ruleName: String? = nil, severity: AlertRuleSeverity? = nil, targetKind: String? = nil, capabilities: [String]? = nil, acknowledged: Bool? = nil, acknowledgesForEveryone: Bool? = nil, startedAt: Date? = nil, glucoseValue: Double? = nil, trend: String? = nil) {
         self.intent = intent
         self.excursionId = excursionId
         self.ruleName = ruleName
@@ -28,6 +29,7 @@ public struct DeviceActionIntent: Sendable, Codable, Hashable {
         self.targetKind = targetKind
         self.capabilities = capabilities
         self.acknowledged = acknowledged
+        self.acknowledgesForEveryone = acknowledgesForEveryone
         self.startedAt = startedAt
         self.glucoseValue = glucoseValue
         self.trend = trend
@@ -41,6 +43,7 @@ public struct DeviceActionIntent: Sendable, Codable, Hashable {
         case targetKind
         case capabilities
         case acknowledged
+        case acknowledgesForEveryone
         case startedAt
         case glucoseValue
         case trend
@@ -57,6 +60,7 @@ public struct DeviceActionIntent: Sendable, Codable, Hashable {
         try container.encodeIfPresent(targetKind, forKey: .targetKind)
         try container.encodeIfPresent(capabilities, forKey: .capabilities)
         try container.encodeIfPresent(acknowledged, forKey: .acknowledged)
+        try container.encodeIfPresent(acknowledgesForEveryone, forKey: .acknowledgesForEveryone)
         try container.encodeIfPresent(startedAt, forKey: .startedAt)
         try container.encodeIfPresent(glucoseValue, forKey: .glucoseValue)
         try container.encodeIfPresent(trend, forKey: .trend)

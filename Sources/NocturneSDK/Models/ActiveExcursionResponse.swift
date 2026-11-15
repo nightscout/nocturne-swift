@@ -17,10 +17,16 @@ public struct ActiveExcursionResponse: Sendable, Codable, Hashable {
     public var startedAt: Date?
     public var acknowledgedAt: Date?
     public var acknowledgedBy: String?
+    /** True when the caller muted this excursion for themselves. It is still unacknowledged for everyone else. */
+    public var mutedByCaller: Bool?
     public var hysteresisStartedAt: Date?
+    /** Latest SnoozedUntil among the active instances; null when none is snoozed. */
+    public var snoozedUntil: Date?
     public var activeInstances: [ActiveInstanceResponse]?
+    /** Who has recorded seeing it, oldest first: every viewer for a caller with an account, only its own for a share or guest link. */
+    public var receipts: [AlertReceiptResponse]?
 
-    public init(id: String? = nil, alertRuleId: String? = nil, ruleName: String? = nil, conditionType: AlertConditionType? = nil, severity: AlertRuleSeverity? = nil, startedAt: Date? = nil, acknowledgedAt: Date? = nil, acknowledgedBy: String? = nil, hysteresisStartedAt: Date? = nil, activeInstances: [ActiveInstanceResponse]? = nil) {
+    public init(id: String? = nil, alertRuleId: String? = nil, ruleName: String? = nil, conditionType: AlertConditionType? = nil, severity: AlertRuleSeverity? = nil, startedAt: Date? = nil, acknowledgedAt: Date? = nil, acknowledgedBy: String? = nil, mutedByCaller: Bool? = nil, hysteresisStartedAt: Date? = nil, snoozedUntil: Date? = nil, activeInstances: [ActiveInstanceResponse]? = nil, receipts: [AlertReceiptResponse]? = nil) {
         self.id = id
         self.alertRuleId = alertRuleId
         self.ruleName = ruleName
@@ -29,8 +35,11 @@ public struct ActiveExcursionResponse: Sendable, Codable, Hashable {
         self.startedAt = startedAt
         self.acknowledgedAt = acknowledgedAt
         self.acknowledgedBy = acknowledgedBy
+        self.mutedByCaller = mutedByCaller
         self.hysteresisStartedAt = hysteresisStartedAt
+        self.snoozedUntil = snoozedUntil
         self.activeInstances = activeInstances
+        self.receipts = receipts
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -42,8 +51,11 @@ public struct ActiveExcursionResponse: Sendable, Codable, Hashable {
         case startedAt
         case acknowledgedAt
         case acknowledgedBy
+        case mutedByCaller
         case hysteresisStartedAt
+        case snoozedUntil
         case activeInstances
+        case receipts
     }
 
     // Encodable protocol methods
@@ -58,8 +70,11 @@ public struct ActiveExcursionResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(startedAt, forKey: .startedAt)
         try container.encodeIfPresent(acknowledgedAt, forKey: .acknowledgedAt)
         try container.encodeIfPresent(acknowledgedBy, forKey: .acknowledgedBy)
+        try container.encodeIfPresent(mutedByCaller, forKey: .mutedByCaller)
         try container.encodeIfPresent(hysteresisStartedAt, forKey: .hysteresisStartedAt)
+        try container.encodeIfPresent(snoozedUntil, forKey: .snoozedUntil)
         try container.encodeIfPresent(activeInstances, forKey: .activeInstances)
+        try container.encodeIfPresent(receipts, forKey: .receipts)
     }
 }
 

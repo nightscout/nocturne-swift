@@ -54,31 +54,37 @@ open class MyTenantsAPI {
     /**
      Get my tenants
      
+     - parameter reachableOnly: (query) Leaves out inactive tenants. (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: [TenantDto]
      */
-    open class func myTenantsGetMyTenants(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [TenantDto] {
-        return try await myTenantsGetMyTenantsWithRequestBuilder(apiConfiguration: apiConfiguration).execute().body
+    open class func myTenantsGetMyTenants(reachableOnly: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [TenantDto] {
+        return try await myTenantsGetMyTenantsWithRequestBuilder(reachableOnly: reachableOnly, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get my tenants
      - GET /api/v4/me/tenants
+     - Returns every tenant the caller belongs to, or with reachableOnly only those they can go to.
      - Bearer Token:
        - type: http
        - name: bearer
      - OAuth:
        - type: oauth2
        - name: oauth2
+     - parameter reachableOnly: (query) Leaves out inactive tenants. (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<[TenantDto]> 
      */
-    open class func myTenantsGetMyTenantsWithRequestBuilder(apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[TenantDto]> {
+    open class func myTenantsGetMyTenantsWithRequestBuilder(reachableOnly: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[TenantDto]> {
         let localVariablePath = "/api/v4/me/tenants"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "reachableOnly": (wrappedValue: reachableOnly?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+        ])
 
         let localVariableNillableHeaders: [String: (any Sendable)?] = [
             :

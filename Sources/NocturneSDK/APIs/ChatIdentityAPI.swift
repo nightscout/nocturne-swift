@@ -23,7 +23,7 @@ open class ChatIdentityAPI {
     /**
      Claim link
      - POST /api/v4/chat-identity/links/claim
-     - A token carries no subject, and a chat account already linked to this tenant keeps the link it has, so the row this returns may belong to another subject and predate the claim.
+     - Claim a pending link token after /connect slash command auth. Answers 400 for a token that cannot be claimed here and 409 when this tenant's link for the chat account belongs to another member.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -65,7 +65,7 @@ open class ChatIdentityAPI {
     /**
      Get links
      - GET /api/v4/chat-identity
-     - The list stays tenant-scoped, so a chat account linked to several tenants shows a non-default row here while its default sits on a row this tenant cannot see. Naming that row's label closes the gap without widening the list, and it is filled in only for the caller's own links: a co-member's chat account may be linked to tenants the caller has no part in, and its label is that tenant's slug. A co-member's row is listed so the tenant's bot routing is legible, but the chat account behind it is the co-member's and not this tenant's to hand out, so PlatformUserId is withheld on the same terms.
+     - List active chat identity links for the current tenant, including other members' links. The chat account ID is withheld on other members' links, and the default-link label is filled in only for the caller's own.
      - Bearer Token:
        - type: http
        - name: bearer

@@ -35,12 +35,13 @@ public struct TherapySettings: Sendable, Codable, Hashable {
     public var delayMedium: Int?
     public var delayLow: Int?
     public var loopSettings: LoopProfileSettings?
+    public var isAPNSProduction: Bool?
     public var isDefault: Bool?
     public var enteredBy: String?
     public var isExternallyManaged: Bool?
     public var startDate: String?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, profileName: String? = nil, timezone: String? = nil, units: String? = nil, dia: Double? = nil, carbsHr: Int? = nil, delay: Int? = nil, perGIValues: Bool? = nil, carbsHrHigh: Int? = nil, carbsHrMedium: Int? = nil, carbsHrLow: Int? = nil, delayHigh: Int? = nil, delayMedium: Int? = nil, delayLow: Int? = nil, loopSettings: LoopProfileSettings? = nil, isDefault: Bool? = nil, enteredBy: String? = nil, isExternallyManaged: Bool? = nil, startDate: String? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, profileName: String? = nil, timezone: String? = nil, units: String? = nil, dia: Double? = nil, carbsHr: Int? = nil, delay: Int? = nil, perGIValues: Bool? = nil, carbsHrHigh: Int? = nil, carbsHrMedium: Int? = nil, carbsHrLow: Int? = nil, delayHigh: Int? = nil, delayMedium: Int? = nil, delayLow: Int? = nil, loopSettings: LoopProfileSettings? = nil, isAPNSProduction: Bool? = nil, isDefault: Bool? = nil, enteredBy: String? = nil, isExternallyManaged: Bool? = nil, startDate: String? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -67,6 +68,7 @@ public struct TherapySettings: Sendable, Codable, Hashable {
         self.delayMedium = delayMedium
         self.delayLow = delayLow
         self.loopSettings = loopSettings
+        self.isAPNSProduction = isAPNSProduction
         self.isDefault = isDefault
         self.enteredBy = enteredBy
         self.isExternallyManaged = isExternallyManaged
@@ -100,6 +102,7 @@ public struct TherapySettings: Sendable, Codable, Hashable {
         case delayMedium
         case delayLow
         case loopSettings
+        case isAPNSProduction
         case isDefault
         case enteredBy
         case isExternallyManaged
@@ -136,6 +139,7 @@ public struct TherapySettings: Sendable, Codable, Hashable {
         try container.encodeIfPresent(delayMedium, forKey: .delayMedium)
         try container.encodeIfPresent(delayLow, forKey: .delayLow)
         try container.encodeIfPresent(loopSettings, forKey: .loopSettings)
+        try container.encodeIfPresent(isAPNSProduction, forKey: .isAPNSProduction)
         try container.encodeIfPresent(isDefault, forKey: .isDefault)
         try container.encodeIfPresent(enteredBy, forKey: .enteredBy)
         try container.encodeIfPresent(isExternallyManaged, forKey: .isExternallyManaged)

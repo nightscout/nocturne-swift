@@ -13,12 +13,11 @@ public struct SubjectEntityDto: Sendable, Codable, Hashable {
     public var id: String?
     public var name: String?
     public var username: String?
-    public var accessTokenHash: String?
-    public var accessTokenPrefix: String?
     public var email: String?
     public var notes: String?
     public var isActive: Bool?
     public var isSystemSubject: Bool?
+    /** Export-only; see DevSnapshotDto. */
     public var createdAt: Date?
     public var updatedAt: Date?
     public var lastLoginAt: Date?
@@ -28,12 +27,10 @@ public struct SubjectEntityDto: Sendable, Codable, Hashable {
     public var accessRequestMessage: String?
     public var isPlatformAdmin: Bool?
 
-    public init(id: String? = nil, name: String? = nil, username: String? = nil, accessTokenHash: String? = nil, accessTokenPrefix: String? = nil, email: String? = nil, notes: String? = nil, isActive: Bool? = nil, isSystemSubject: Bool? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, lastLoginAt: Date? = nil, originalId: String? = nil, preferredLanguage: String? = nil, approvalStatus: String? = nil, accessRequestMessage: String? = nil, isPlatformAdmin: Bool? = nil) {
+    public init(id: String? = nil, name: String? = nil, username: String? = nil, email: String? = nil, notes: String? = nil, isActive: Bool? = nil, isSystemSubject: Bool? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, lastLoginAt: Date? = nil, originalId: String? = nil, preferredLanguage: String? = nil, approvalStatus: String? = nil, accessRequestMessage: String? = nil, isPlatformAdmin: Bool? = nil) {
         self.id = id
         self.name = name
         self.username = username
-        self.accessTokenHash = accessTokenHash
-        self.accessTokenPrefix = accessTokenPrefix
         self.email = email
         self.notes = notes
         self.isActive = isActive
@@ -52,8 +49,6 @@ public struct SubjectEntityDto: Sendable, Codable, Hashable {
         case id
         case name
         case username
-        case accessTokenHash
-        case accessTokenPrefix
         case email
         case notes
         case isActive
@@ -75,8 +70,6 @@ public struct SubjectEntityDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(username, forKey: .username)
-        try container.encodeIfPresent(accessTokenHash, forKey: .accessTokenHash)
-        try container.encodeIfPresent(accessTokenPrefix, forKey: .accessTokenPrefix)
         try container.encodeIfPresent(email, forKey: .email)
         try container.encodeIfPresent(notes, forKey: .notes)
         try container.encodeIfPresent(isActive, forKey: .isActive)

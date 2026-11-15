@@ -13,18 +13,24 @@ public struct DailyBasalBolusRatioData: Sendable, Codable, Hashable {
     public var displayDate: String?
     public var basal: Double?
     public var bolus: Double?
+    public var manualBolus: Double?
+    public var automaticBolus: Double?
     public var total: Double?
     public var basalPercent: Double?
     public var bolusPercent: Double?
+    public var carbs: Double?
 
-    public init(date: String? = nil, displayDate: String? = nil, basal: Double? = nil, bolus: Double? = nil, total: Double? = nil, basalPercent: Double? = nil, bolusPercent: Double? = nil) {
+    public init(date: String? = nil, displayDate: String? = nil, basal: Double? = nil, bolus: Double? = nil, manualBolus: Double? = nil, automaticBolus: Double? = nil, total: Double? = nil, basalPercent: Double? = nil, bolusPercent: Double? = nil, carbs: Double? = nil) {
         self.date = date
         self.displayDate = displayDate
         self.basal = basal
         self.bolus = bolus
+        self.manualBolus = manualBolus
+        self.automaticBolus = automaticBolus
         self.total = total
         self.basalPercent = basalPercent
         self.bolusPercent = bolusPercent
+        self.carbs = carbs
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -32,9 +38,12 @@ public struct DailyBasalBolusRatioData: Sendable, Codable, Hashable {
         case displayDate
         case basal
         case bolus
+        case manualBolus
+        case automaticBolus
         case total
         case basalPercent
         case bolusPercent
+        case carbs
     }
 
     // Encodable protocol methods
@@ -45,9 +54,12 @@ public struct DailyBasalBolusRatioData: Sendable, Codable, Hashable {
         try container.encodeIfPresent(displayDate, forKey: .displayDate)
         try container.encodeIfPresent(basal, forKey: .basal)
         try container.encodeIfPresent(bolus, forKey: .bolus)
+        try container.encodeIfPresent(manualBolus, forKey: .manualBolus)
+        try container.encodeIfPresent(automaticBolus, forKey: .automaticBolus)
         try container.encodeIfPresent(total, forKey: .total)
         try container.encodeIfPresent(basalPercent, forKey: .basalPercent)
         try container.encodeIfPresent(bolusPercent, forKey: .bolusPercent)
+        try container.encodeIfPresent(carbs, forKey: .carbs)
     }
 }
 

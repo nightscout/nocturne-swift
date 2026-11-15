@@ -8,7 +8,8 @@
 import Foundation
 
 /** Enumerates the modes for data migration */
-public enum MigrationMode: Int, Sendable, Codable, CaseIterable {
+public enum MigrationMode: Int, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case _0 = 0
     case _1 = 1
+    case unknownDefaultOpenApi = 11184809
 }

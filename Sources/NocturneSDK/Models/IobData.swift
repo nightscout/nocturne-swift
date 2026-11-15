@@ -11,7 +11,9 @@ import Foundation
 public struct IobData: Sendable, Codable, Hashable {
 
     public var total: Double?
+    /** The bolus part of Total; null when a device reported the total without it. */
     public var bolus: Double?
+    /** The net basal part of Total; null when no temp basal delivered, or a device reported the total without it. */
     public var basal: Double?
     public var activity: Double?
     public var source: String?

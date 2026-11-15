@@ -148,7 +148,7 @@ open class SupportAPI {
     /**
      Get support config
      - GET /api/v4/support/config
-     - Anonymous because the hosts that most need the operator's address — an inactive tenant's, and the apex with no tenant — are the ones no session can be established on.
+     - Returns operator support configuration for the frontend. When no operator is configured, both channels are null and the default GitHub flow applies. Does not require authentication.
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<SupportConfigResponse> 
      */
@@ -183,7 +183,7 @@ open class SupportAPI {
     /**
      Get support diagnostics
      - GET /api/v4/support/diagnostics
-     - Gated like ConnectorStatusController, whose connector health this reports a subset of: reaching it with a narrower credential than that endpoint requires would make support the way to read connector state without tenant_settings.
+     - Returns the tenant configuration a reporter may attach to a support issue. Requires the tenant settings scope.
      - Bearer Token:
        - type: http
        - name: bearer

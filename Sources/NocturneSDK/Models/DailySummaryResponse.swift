@@ -12,17 +12,20 @@ public struct DailySummaryResponse: Sendable, Codable, Hashable {
     public var year: Int?
     public var dataSources: [String]?
     public var days: [DailySummaryDay]?
+    public var timeZoneUnavailableReason: TimeZoneUnavailableReason?
 
-    public init(year: Int? = nil, dataSources: [String]? = nil, days: [DailySummaryDay]? = nil) {
+    public init(year: Int? = nil, dataSources: [String]? = nil, days: [DailySummaryDay]? = nil, timeZoneUnavailableReason: TimeZoneUnavailableReason? = nil) {
         self.year = year
         self.dataSources = dataSources
         self.days = days
+        self.timeZoneUnavailableReason = timeZoneUnavailableReason
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case year
         case dataSources
         case days
+        case timeZoneUnavailableReason
     }
 
     // Encodable protocol methods
@@ -32,6 +35,7 @@ public struct DailySummaryResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(year, forKey: .year)
         try container.encodeIfPresent(dataSources, forKey: .dataSources)
         try container.encodeIfPresent(days, forKey: .days)
+        try container.encodeIfPresent(timeZoneUnavailableReason, forKey: .timeZoneUnavailableReason)
     }
 }
 

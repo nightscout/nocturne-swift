@@ -12,7 +12,7 @@ open class ConnectorAdminAPI {
     /**
      Cancel reset job
      
-     - parameter jobId: (path) The job id to cancel. 
+     - parameter jobId: (path) The job id returned by ResetTenantCursors. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: Void
      */
@@ -30,7 +30,7 @@ open class ConnectorAdminAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter jobId: (path) The job id to cancel. 
+     - parameter jobId: (path) The job id returned by ResetTenantCursors. 
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<Void> 
      */
@@ -115,7 +115,7 @@ open class ConnectorAdminAPI {
     /**
      Get tenant connectors
      - GET /api/v4/admin/connectors/{tenantId}
-     - Lets an admin inspect the data gap (last successful sync, health, last error) before deciding to reset cursors.
+     - List the connectors a target tenant has configured, with their last-sync and health state.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -162,7 +162,7 @@ open class ConnectorAdminAPI {
     /**
      Reset tenant cursors
      - POST /api/v4/admin/connectors/{tenantId}/reset-cursors
-     - A full re-pull can take minutes per connector — far longer than gateway/proxy/browser request timeouts — so the work runs on a background job that outlives the request. This returns 202 Accepted with a job id immediately; poll GetResetJobStatus for per-connector progress, and CancelResetJob to stop it.
+     - Enqueue a background reset of the sync cursor for every connector configured on a target tenant, forcing a re-pull of history. Use after fixing a connector bug to push corrected data to an affected tenant. Returns 202 Accepted with a job id at once; the re-pull runs in the background and can take minutes per connector. Poll the reset job status for per-connector progress, or cancel the job.
      - Bearer Token:
        - type: http
        - name: bearer

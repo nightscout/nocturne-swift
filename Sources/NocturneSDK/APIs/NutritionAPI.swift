@@ -114,7 +114,7 @@ open class NutritionAPI {
     /**
      Create carb intakes bulk
      - POST /api/v4/nutrition/carbs/bulk
-     - Array semantics are per-item upsert, not all-or-nothing: each intake carrying both `dataSource` and `syncIdentifier` updates the row already matched by that pair; all others insert. Validation failures reject the whole request with `400 Bad Request` before anything is persisted.
+     - Create or update carb intakes in bulk (max 1000). An intake with both `dataSource` and `syncIdentifier` updates the existing row matching that pair; any other intake is inserted. An item whose pair is held by a deleted record is skipped and left out of the response. A validation failure rejects the whole request with `400 Bad Request` and stores nothing.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -427,18 +427,19 @@ open class NutritionAPI {
     /**
      Get carb intakes
      
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
-     - parameter limit: (query)  (optional, default to 100)
-     - parameter offset: (query)  (optional, default to 0)
-     - parameter sort: (query)  (optional, default to "timestamp_desc")
-     - parameter device: (query)  (optional)
-     - parameter source: (query)  (optional)
+     - parameter from: (query) Inclusive start of the date range filter. (optional)
+     - parameter to: (query) Inclusive end of the date range filter. (optional)
+     - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
+     - parameter offset: (query) Number of records to skip for pagination. Defaults to &#x60;0&#x60;. (optional, default to 0)
+     - parameter sort: (query) Sort order by timestamp: &#x60;timestamp_asc&#x60; or &#x60;timestamp_desc&#x60;. Defaults to &#x60;timestamp_desc&#x60;. (optional, default to "timestamp_desc")
+     - parameter device: (query) Optional filter to restrict results to a specific device. (optional)
+     - parameter source: (query) Optional filter to restrict results to a specific data source. (optional)
+     - parameter includeTotal: (query) Count every record in the range and return it as &#x60;pagination.total&#x60;. Defaults to &#x60;false&#x60;. (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedResponseOfCarbIntake
      */
-    open class func nutritionGetCarbIntakes(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfCarbIntake {
-        return try await nutritionGetCarbIntakesWithRequestBuilder(from: from, to: to, limit: limit, offset: offset, sort: sort, device: device, source: source, apiConfiguration: apiConfiguration).execute().body
+    open class func nutritionGetCarbIntakes(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, includeTotal: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfCarbIntake {
+        return try await nutritionGetCarbIntakesWithRequestBuilder(from: from, to: to, limit: limit, offset: offset, sort: sort, device: device, source: source, includeTotal: includeTotal, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
@@ -451,17 +452,18 @@ open class NutritionAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter from: (query)  (optional)
-     - parameter to: (query)  (optional)
-     - parameter limit: (query)  (optional, default to 100)
-     - parameter offset: (query)  (optional, default to 0)
-     - parameter sort: (query)  (optional, default to "timestamp_desc")
-     - parameter device: (query)  (optional)
-     - parameter source: (query)  (optional)
+     - parameter from: (query) Inclusive start of the date range filter. (optional)
+     - parameter to: (query) Inclusive end of the date range filter. (optional)
+     - parameter limit: (query) Maximum number of records to return. Defaults to &#x60;100&#x60;. (optional, default to 100)
+     - parameter offset: (query) Number of records to skip for pagination. Defaults to &#x60;0&#x60;. (optional, default to 0)
+     - parameter sort: (query) Sort order by timestamp: &#x60;timestamp_asc&#x60; or &#x60;timestamp_desc&#x60;. Defaults to &#x60;timestamp_desc&#x60;. (optional, default to "timestamp_desc")
+     - parameter device: (query) Optional filter to restrict results to a specific device. (optional)
+     - parameter source: (query) Optional filter to restrict results to a specific data source. (optional)
+     - parameter includeTotal: (query) Count every record in the range and return it as &#x60;pagination.total&#x60;. Defaults to &#x60;false&#x60;. (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedResponseOfCarbIntake> 
      */
-    open class func nutritionGetCarbIntakesWithRequestBuilder(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfCarbIntake> {
+    open class func nutritionGetCarbIntakesWithRequestBuilder(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, includeTotal: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfCarbIntake> {
         let localVariablePath = "/api/v4/nutrition/carbs"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -475,6 +477,7 @@ open class NutritionAPI {
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "device": (wrappedValue: device?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "source": (wrappedValue: source?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "includeTotal": (wrappedValue: includeTotal?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ]
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp1)
 

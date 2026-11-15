@@ -8,7 +8,8 @@
 import Foundation
 
 /**  */
-public enum OidcProviderType: String, Sendable, Codable, CaseIterable {
+public enum OidcProviderType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case oidc = "Oidc"
     case oauth2 = "OAuth2"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

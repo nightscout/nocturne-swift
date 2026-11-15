@@ -23,7 +23,7 @@ open class ClientDevicesAPI {
     /**
      Get active intents
      - GET /api/v4/client-devices/{id}/active-intents
-     - The actuation intents currently active for this device — the reconcile snapshot a push-mode device reads on (re)connect to start anything still active and drop anything resolved. Empty for a local-engine device or one the caller does not own.
+     - The actuation intents currently active for this device — the reconcile snapshot a push-mode device reads on (re)connect to start anything still active and drop anything resolved. Empty for a local-engine device or one the caller does not own. Each intent carries AcknowledgesForEveryone so the device labels its acknowledge action as the acknowledge endpoint will treat it.
      - Bearer Token:
        - type: http
        - name: bearer

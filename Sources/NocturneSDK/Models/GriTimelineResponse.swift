@@ -11,15 +11,18 @@ public struct GriTimelineResponse: Sendable, Codable, Hashable {
 
     public var year: Int?
     public var periods: [GriTimelinePeriod]?
+    public var timeZoneUnavailableReason: TimeZoneUnavailableReason?
 
-    public init(year: Int? = nil, periods: [GriTimelinePeriod]? = nil) {
+    public init(year: Int? = nil, periods: [GriTimelinePeriod]? = nil, timeZoneUnavailableReason: TimeZoneUnavailableReason? = nil) {
         self.year = year
         self.periods = periods
+        self.timeZoneUnavailableReason = timeZoneUnavailableReason
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case year
         case periods
+        case timeZoneUnavailableReason
     }
 
     // Encodable protocol methods
@@ -28,6 +31,7 @@ public struct GriTimelineResponse: Sendable, Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(year, forKey: .year)
         try container.encodeIfPresent(periods, forKey: .periods)
+        try container.encodeIfPresent(timeZoneUnavailableReason, forKey: .timeZoneUnavailableReason)
     }
 }
 

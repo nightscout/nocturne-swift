@@ -243,7 +243,7 @@ open class ConfigurationAPI {
     /**
      Save configuration
      - PUT /api/v4/connectors/config/{connectorName}
-     - Saves or updates runtime configuration for a connector. Only properties marked with [RuntimeConfigurable] are accepted. Validates the configuration against the connector's schema before saving.
+     - Saves or updates runtime configuration for a connector. Only properties marked with [RuntimeConfigurable] are accepted. Validates the configuration against the connector's schema before saving. Refused for Google Health, whose options are saved by the Google Health endpoint.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -370,5 +370,53 @@ open class ConfigurationAPI {
         let localVariableRequestBuilder: RequestBuilder<Void>.Type = apiConfiguration.requestBuilderFactory.getNonDecodableBuilder()
 
         return localVariableRequestBuilder.init(method: "PATCH", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
+    }
+
+    /**
+     Verify credentials
+     
+     - parameter connectorName: (path) The connector name 
+     - parameter verifyConnectorCredentialsRequest: (body) The configuration and secrets to verify 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: ConnectorCredentialVerificationResult
+     */
+    open class func configurationVerifyCredentials(connectorName: String, verifyConnectorCredentialsRequest: VerifyConnectorCredentialsRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> ConnectorCredentialVerificationResult {
+        return try await configurationVerifyCredentialsWithRequestBuilder(connectorName: connectorName, verifyConnectorCredentialsRequest: verifyConnectorCredentialsRequest, apiConfiguration: apiConfiguration).execute().body
+    }
+
+    /**
+     Verify credentials
+     - POST /api/v4/connectors/config/{connectorName}/verify
+     - Verifies connector credentials against the provider without persisting anything. Accepts the combined configuration and secrets payload (the same field shapes the configuration and secrets PUT endpoints take) and attempts a live authentication. Connectors that do not support verification return supported = false. The submitted values are never stored, logged, or echoed back. A secret named in storedSecrets is read from the tenant's stored secrets and verified against the stored configuration, with the same outcome a submitted secret would give.
+     - Bearer Token:
+       - type: http
+       - name: bearer
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter connectorName: (path) The connector name 
+     - parameter verifyConnectorCredentialsRequest: (body) The configuration and secrets to verify 
+     - parameter apiConfiguration: The configuration for the http request.
+     - returns: RequestBuilder<ConnectorCredentialVerificationResult> 
+     */
+    open class func configurationVerifyCredentialsWithRequestBuilder(connectorName: String, verifyConnectorCredentialsRequest: VerifyConnectorCredentialsRequest, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<ConnectorCredentialVerificationResult> {
+        var localVariablePath = "/api/v4/connectors/config/{connectorName}/verify"
+        let connectorNamePreEscape = "\(APIHelper.mapValueToPathItem(connectorName))"
+        let connectorNamePostEscape = connectorNamePreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{connectorName}", with: connectorNamePostEscape, options: .literal, range: nil)
+        let localVariableURLString = apiConfiguration.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: verifyConnectorCredentialsRequest, codableHelper: apiConfiguration.codableHelper)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: (any Sendable)?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ConnectorCredentialVerificationResult>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
 }

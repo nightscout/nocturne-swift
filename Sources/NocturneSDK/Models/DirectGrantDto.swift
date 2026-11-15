@@ -20,8 +20,10 @@ public struct DirectGrantDto: Sendable, Codable, Hashable {
     public var lastUsedAt: Date?
     /** True when this grant was created from a migrated Nightscout API secret rather than as a scoped noc_ token. */
     public var isLegacy: Bool?
+    /** True when the grant may read only the last 24 hours of time-series data. */
+    public var limitTo24Hours: Bool?
 
-    public init(id: String? = nil, subjectId: String? = nil, label: String? = nil, scopes: [String]? = nil, createdAt: Date? = nil, expiresAt: Date? = nil, lastUsedAt: Date? = nil, isLegacy: Bool? = nil) {
+    public init(id: String? = nil, subjectId: String? = nil, label: String? = nil, scopes: [String]? = nil, createdAt: Date? = nil, expiresAt: Date? = nil, lastUsedAt: Date? = nil, isLegacy: Bool? = nil, limitTo24Hours: Bool? = nil) {
         self.id = id
         self.subjectId = subjectId
         self.label = label
@@ -30,6 +32,7 @@ public struct DirectGrantDto: Sendable, Codable, Hashable {
         self.expiresAt = expiresAt
         self.lastUsedAt = lastUsedAt
         self.isLegacy = isLegacy
+        self.limitTo24Hours = limitTo24Hours
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -41,6 +44,7 @@ public struct DirectGrantDto: Sendable, Codable, Hashable {
         case expiresAt
         case lastUsedAt
         case isLegacy
+        case limitTo24Hours
     }
 
     // Encodable protocol methods
@@ -55,6 +59,7 @@ public struct DirectGrantDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(expiresAt, forKey: .expiresAt)
         try container.encodeIfPresent(lastUsedAt, forKey: .lastUsedAt)
         try container.encodeIfPresent(isLegacy, forKey: .isLegacy)
+        try container.encodeIfPresent(limitTo24Hours, forKey: .limitTo24Hours)
     }
 }
 

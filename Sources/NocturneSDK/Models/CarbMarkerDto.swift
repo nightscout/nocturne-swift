@@ -12,14 +12,16 @@ public struct CarbMarkerDto: Sendable, Codable, Hashable {
     public var time: Int64?
     public var carbs: Double?
     public var label: String?
+    public var mealPeriod: MealPeriod?
     public var treatmentId: String?
     public var isOffset: Bool?
     public var dataSource: String?
 
-    public init(time: Int64? = nil, carbs: Double? = nil, label: String? = nil, treatmentId: String? = nil, isOffset: Bool? = nil, dataSource: String? = nil) {
+    public init(time: Int64? = nil, carbs: Double? = nil, label: String? = nil, mealPeriod: MealPeriod? = nil, treatmentId: String? = nil, isOffset: Bool? = nil, dataSource: String? = nil) {
         self.time = time
         self.carbs = carbs
         self.label = label
+        self.mealPeriod = mealPeriod
         self.treatmentId = treatmentId
         self.isOffset = isOffset
         self.dataSource = dataSource
@@ -29,6 +31,7 @@ public struct CarbMarkerDto: Sendable, Codable, Hashable {
         case time
         case carbs
         case label
+        case mealPeriod
         case treatmentId
         case isOffset
         case dataSource
@@ -41,6 +44,7 @@ public struct CarbMarkerDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(time, forKey: .time)
         try container.encodeIfPresent(carbs, forKey: .carbs)
         try container.encodeIfPresent(label, forKey: .label)
+        try container.encodeIfPresent(mealPeriod, forKey: .mealPeriod)
         try container.encodeIfPresent(treatmentId, forKey: .treatmentId)
         try container.encodeIfPresent(isOffset, forKey: .isOffset)
         try container.encodeIfPresent(dataSource, forKey: .dataSource)

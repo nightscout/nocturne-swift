@@ -35,14 +35,18 @@ public struct UpsertSensorGlucoseRequest: Sendable, Codable, Hashable {
     public var unfiltered: Double?
     /** Glucose delta in mg/dL over the last 5 minutes */
     public var delta: Double?
+    /** Received signal strength the uploader reported for the reading */
+    public var rssi: Int?
     /** Whether this glucose value is smoothed or unsmoothed. Accepted values: \"Smoothed\", \"Unsmoothed\". Case-insensitive. Null for unknown. */
     public var glucoseProcessing: String?
     /** Smoothed glucose value in mg/dL, when known. */
     public var smoothedMgdl: Double?
     /** Unsmoothed (raw) glucose value in mg/dL, when known. */
     public var unsmoothedMgdl: Double?
+    /** Upstream record identifier within DataSource. A create whose pair matches a stored reading updates it in place, so a re-upload does not duplicate it. Ignored on update: the stored value is kept. */
+    public var syncIdentifier: String?
 
-    public init(timestamp: Date? = nil, utcOffset: Int? = nil, device: String? = nil, patientDeviceId: String? = nil, app: String? = nil, dataSource: String? = nil, mgdl: Double? = nil, direction: GlucoseDirection? = nil, trendRate: Double? = nil, noise: Int? = nil, filtered: Double? = nil, unfiltered: Double? = nil, delta: Double? = nil, glucoseProcessing: String? = nil, smoothedMgdl: Double? = nil, unsmoothedMgdl: Double? = nil) {
+    public init(timestamp: Date? = nil, utcOffset: Int? = nil, device: String? = nil, patientDeviceId: String? = nil, app: String? = nil, dataSource: String? = nil, mgdl: Double? = nil, direction: GlucoseDirection? = nil, trendRate: Double? = nil, noise: Int? = nil, filtered: Double? = nil, unfiltered: Double? = nil, delta: Double? = nil, rssi: Int? = nil, glucoseProcessing: String? = nil, smoothedMgdl: Double? = nil, unsmoothedMgdl: Double? = nil, syncIdentifier: String? = nil) {
         self.timestamp = timestamp
         self.utcOffset = utcOffset
         self.device = device
@@ -56,9 +60,11 @@ public struct UpsertSensorGlucoseRequest: Sendable, Codable, Hashable {
         self.filtered = filtered
         self.unfiltered = unfiltered
         self.delta = delta
+        self.rssi = rssi
         self.glucoseProcessing = glucoseProcessing
         self.smoothedMgdl = smoothedMgdl
         self.unsmoothedMgdl = unsmoothedMgdl
+        self.syncIdentifier = syncIdentifier
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -75,9 +81,11 @@ public struct UpsertSensorGlucoseRequest: Sendable, Codable, Hashable {
         case filtered
         case unfiltered
         case delta
+        case rssi
         case glucoseProcessing
         case smoothedMgdl
         case unsmoothedMgdl
+        case syncIdentifier
     }
 
     // Encodable protocol methods
@@ -97,9 +105,11 @@ public struct UpsertSensorGlucoseRequest: Sendable, Codable, Hashable {
         try container.encodeIfPresent(filtered, forKey: .filtered)
         try container.encodeIfPresent(unfiltered, forKey: .unfiltered)
         try container.encodeIfPresent(delta, forKey: .delta)
+        try container.encodeIfPresent(rssi, forKey: .rssi)
         try container.encodeIfPresent(glucoseProcessing, forKey: .glucoseProcessing)
         try container.encodeIfPresent(smoothedMgdl, forKey: .smoothedMgdl)
         try container.encodeIfPresent(unsmoothedMgdl, forKey: .unsmoothedMgdl)
+        try container.encodeIfPresent(syncIdentifier, forKey: .syncIdentifier)
     }
 }
 

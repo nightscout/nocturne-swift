@@ -16,8 +16,9 @@ public struct TimeInRangeDurations: Sendable, Codable, Hashable {
     public var high: Double?
     public var veryHigh: Double?
     public var aboveRange: Double?
+    public var belowRange: Double?
 
-    public init(veryLow: Double? = nil, low: Double? = nil, target: Double? = nil, tightTarget: Double? = nil, high: Double? = nil, veryHigh: Double? = nil, aboveRange: Double? = nil) {
+    public init(veryLow: Double? = nil, low: Double? = nil, target: Double? = nil, tightTarget: Double? = nil, high: Double? = nil, veryHigh: Double? = nil, aboveRange: Double? = nil, belowRange: Double? = nil) {
         self.veryLow = veryLow
         self.low = low
         self.target = target
@@ -25,6 +26,7 @@ public struct TimeInRangeDurations: Sendable, Codable, Hashable {
         self.high = high
         self.veryHigh = veryHigh
         self.aboveRange = aboveRange
+        self.belowRange = belowRange
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -35,6 +37,7 @@ public struct TimeInRangeDurations: Sendable, Codable, Hashable {
         case high
         case veryHigh
         case aboveRange
+        case belowRange
     }
 
     // Encodable protocol methods
@@ -48,6 +51,7 @@ public struct TimeInRangeDurations: Sendable, Codable, Hashable {
         try container.encodeIfPresent(high, forKey: .high)
         try container.encodeIfPresent(veryHigh, forKey: .veryHigh)
         try container.encodeIfPresent(aboveRange, forKey: .aboveRange)
+        try container.encodeIfPresent(belowRange, forKey: .belowRange)
     }
 }
 

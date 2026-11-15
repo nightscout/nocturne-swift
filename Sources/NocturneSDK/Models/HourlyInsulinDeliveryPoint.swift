@@ -13,18 +13,24 @@ public struct HourlyInsulinDeliveryPoint: Sendable, Codable, Hashable {
     public var scheduledBasal: Double?
     public var tempBasal: Double?
     public var basal: Double?
-    public var bolus: Double?
+    public var manualBolus: Double?
+    public var manualBolusesPerDay: Double?
+    public var automaticBolus: Double?
     public var total: Double?
     public var count: Int?
+    public var profileBasalRate: Double?
 
-    public init(hour: Int? = nil, scheduledBasal: Double? = nil, tempBasal: Double? = nil, basal: Double? = nil, bolus: Double? = nil, total: Double? = nil, count: Int? = nil) {
+    public init(hour: Int? = nil, scheduledBasal: Double? = nil, tempBasal: Double? = nil, basal: Double? = nil, manualBolus: Double? = nil, manualBolusesPerDay: Double? = nil, automaticBolus: Double? = nil, total: Double? = nil, count: Int? = nil, profileBasalRate: Double? = nil) {
         self.hour = hour
         self.scheduledBasal = scheduledBasal
         self.tempBasal = tempBasal
         self.basal = basal
-        self.bolus = bolus
+        self.manualBolus = manualBolus
+        self.manualBolusesPerDay = manualBolusesPerDay
+        self.automaticBolus = automaticBolus
         self.total = total
         self.count = count
+        self.profileBasalRate = profileBasalRate
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -32,9 +38,12 @@ public struct HourlyInsulinDeliveryPoint: Sendable, Codable, Hashable {
         case scheduledBasal
         case tempBasal
         case basal
-        case bolus
+        case manualBolus
+        case manualBolusesPerDay
+        case automaticBolus
         case total
         case count
+        case profileBasalRate
     }
 
     // Encodable protocol methods
@@ -45,9 +54,12 @@ public struct HourlyInsulinDeliveryPoint: Sendable, Codable, Hashable {
         try container.encodeIfPresent(scheduledBasal, forKey: .scheduledBasal)
         try container.encodeIfPresent(tempBasal, forKey: .tempBasal)
         try container.encodeIfPresent(basal, forKey: .basal)
-        try container.encodeIfPresent(bolus, forKey: .bolus)
+        try container.encodeIfPresent(manualBolus, forKey: .manualBolus)
+        try container.encodeIfPresent(manualBolusesPerDay, forKey: .manualBolusesPerDay)
+        try container.encodeIfPresent(automaticBolus, forKey: .automaticBolus)
         try container.encodeIfPresent(total, forKey: .total)
         try container.encodeIfPresent(count, forKey: .count)
+        try container.encodeIfPresent(profileBasalRate, forKey: .profileBasalRate)
     }
 }
 

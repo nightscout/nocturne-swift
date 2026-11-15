@@ -23,7 +23,7 @@ open class UploaderSnapshotAPI {
     /**
      Create uploader snapshots
      - POST /api/v4/device-status/uploader
-     - Array semantics are per-item upsert, not all-or-nothing: each snapshot carrying both `dataSource` and `syncIdentifier` updates the row already matched by that pair; all others insert. Validation failures reject the whole request with `400 Bad Request` before anything is persisted.              Device attribution is a deliberate scope cut: unlike the legacy decomposer path, records written here carry no Device/PatientDevice link (snapshots are not IDeviceAttributed, so the stamper can't take them). Reads that join by correlationId are unaffected.
+     - Create or update uploader snapshots in bulk (max 1000). A snapshot with both `dataSource` and `syncIdentifier` updates the existing row matching that pair; any other snapshot is inserted. An item whose pair is held by a deleted record is skipped and left out of the response. A validation failure rejects the whole request with `400 Bad Request` and stores nothing.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -62,17 +62,18 @@ open class UploaderSnapshotAPI {
      - parameter sort: (query) Sort order for results by timestamp. Defaults to &#x60;timestamp_desc&#x60;. (optional, default to "timestamp_desc")
      - parameter device: (query) Optional filter to restrict results to a specific device. (optional)
      - parameter source: (query) Optional filter to restrict results to a specific data source. (optional)
+     - parameter includeTotal: (query) Count every record in the range and return it as &#x60;pagination.total&#x60;. Defaults to &#x60;false&#x60;. (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedResponseOfUploaderSnapshot
      */
-    open class func uploaderSnapshotGetAll(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfUploaderSnapshot {
-        return try await uploaderSnapshotGetAllWithRequestBuilder(from: from, to: to, limit: limit, offset: offset, sort: sort, device: device, source: source, apiConfiguration: apiConfiguration).execute().body
+    open class func uploaderSnapshotGetAll(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, includeTotal: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfUploaderSnapshot {
+        return try await uploaderSnapshotGetAllWithRequestBuilder(from: from, to: to, limit: limit, offset: offset, sort: sort, device: device, source: source, includeTotal: includeTotal, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get all
      - GET /api/v4/device-status/uploader
-     - The `sort` parameter accepts exactly two values: - `timestamp_asc` — oldest records first - `timestamp_desc` — newest records first (default)              Use `limit` and `offset` together for paginated access to large result sets. `limit` is capped at MaxPageSize, and a `from`/`to` range wider than MaxDateSpanDays days is rejected with `400 Bad Request`.
+     - Lists records with pagination, optional date range, device, and source filtering. `sort` is `timestamp_asc` (oldest first) or `timestamp_desc` (newest first, the default). `limit` is capped at a maximum page size, and a `from`/`to` range wider than the maximum span is rejected with `400 Bad Request`. `pagination.total` is returned only when `includeTotal` is `true`, or when a first page shorter than `limit` carries its own length; `includeTotal` counts the date range only, not `device` or `source`.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -86,10 +87,11 @@ open class UploaderSnapshotAPI {
      - parameter sort: (query) Sort order for results by timestamp. Defaults to &#x60;timestamp_desc&#x60;. (optional, default to "timestamp_desc")
      - parameter device: (query) Optional filter to restrict results to a specific device. (optional)
      - parameter source: (query) Optional filter to restrict results to a specific data source. (optional)
+     - parameter includeTotal: (query) Count every record in the range and return it as &#x60;pagination.total&#x60;. Defaults to &#x60;false&#x60;. (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedResponseOfUploaderSnapshot> 
      */
-    open class func uploaderSnapshotGetAllWithRequestBuilder(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfUploaderSnapshot> {
+    open class func uploaderSnapshotGetAllWithRequestBuilder(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, includeTotal: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfUploaderSnapshot> {
         let localVariablePath = "/api/v4/device-status/uploader"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -103,6 +105,7 @@ open class UploaderSnapshotAPI {
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "device": (wrappedValue: device?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "source": (wrappedValue: source?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "includeTotal": (wrappedValue: includeTotal?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ]
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp1)
 
@@ -131,7 +134,7 @@ open class UploaderSnapshotAPI {
     /**
      Get by id
      - GET /api/v4/device-status/uploader/{id}
-     - Returns `404 Not Found` if no record with the given id exists.
+     - Retrieves a single record by its unique identifier.
      - Bearer Token:
        - type: http
        - name: bearer

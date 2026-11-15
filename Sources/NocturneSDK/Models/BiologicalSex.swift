@@ -8,7 +8,8 @@
 import Foundation
 
 /**  */
-public enum BiologicalSex: String, Sendable, Codable, CaseIterable {
+public enum BiologicalSex: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case female = "Female"
     case male = "Male"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

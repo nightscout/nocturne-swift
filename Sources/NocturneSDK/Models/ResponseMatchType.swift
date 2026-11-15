@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum ResponseMatchType: Int, Sendable, Codable, CaseIterable {
+public enum ResponseMatchType: Int, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case _0 = 0
     case _1 = 1
     case _2 = 2
@@ -17,4 +17,5 @@ public enum ResponseMatchType: Int, Sendable, Codable, CaseIterable {
     case _5 = 5
     case _6 = 6
     case _7 = 7
+    case unknownDefaultOpenApi = 11184809
 }

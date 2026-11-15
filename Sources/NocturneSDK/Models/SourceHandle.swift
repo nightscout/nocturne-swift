@@ -8,8 +8,9 @@
 import Foundation
 
 /**  */
-public enum SourceHandle: String, Sendable, Codable, CaseIterable {
+public enum SourceHandle: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case device = "device"
     case datasource = "dataSource"
     case unknown = "unknown"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

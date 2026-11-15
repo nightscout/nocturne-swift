@@ -13,6 +13,7 @@ public struct TenantMemberEntityDto: Sendable, Codable, Hashable {
     public var id: String?
     public var tenantId: String?
     public var subjectId: String?
+    /** Export-only; see DevSnapshotDto. */
     public var sysCreatedAt: Date?
     public var sysUpdatedAt: Date?
     public var directPermissions: [String]?
@@ -22,9 +23,8 @@ public struct TenantMemberEntityDto: Sendable, Codable, Hashable {
     public var lastUsedAt: Date?
     public var lastUsedIp: String?
     public var lastUsedUserAgent: String?
-    public var revokedAt: Date?
 
-    public init(id: String? = nil, tenantId: String? = nil, subjectId: String? = nil, sysCreatedAt: Date? = nil, sysUpdatedAt: Date? = nil, directPermissions: [String]? = nil, label: String? = nil, limitTo24Hours: Bool? = nil, createdFromInviteId: String? = nil, lastUsedAt: Date? = nil, lastUsedIp: String? = nil, lastUsedUserAgent: String? = nil, revokedAt: Date? = nil) {
+    public init(id: String? = nil, tenantId: String? = nil, subjectId: String? = nil, sysCreatedAt: Date? = nil, sysUpdatedAt: Date? = nil, directPermissions: [String]? = nil, label: String? = nil, limitTo24Hours: Bool? = nil, createdFromInviteId: String? = nil, lastUsedAt: Date? = nil, lastUsedIp: String? = nil, lastUsedUserAgent: String? = nil) {
         self.id = id
         self.tenantId = tenantId
         self.subjectId = subjectId
@@ -37,7 +37,6 @@ public struct TenantMemberEntityDto: Sendable, Codable, Hashable {
         self.lastUsedAt = lastUsedAt
         self.lastUsedIp = lastUsedIp
         self.lastUsedUserAgent = lastUsedUserAgent
-        self.revokedAt = revokedAt
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -53,7 +52,6 @@ public struct TenantMemberEntityDto: Sendable, Codable, Hashable {
         case lastUsedAt
         case lastUsedIp
         case lastUsedUserAgent
-        case revokedAt
     }
 
     // Encodable protocol methods
@@ -72,7 +70,6 @@ public struct TenantMemberEntityDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(lastUsedAt, forKey: .lastUsedAt)
         try container.encodeIfPresent(lastUsedIp, forKey: .lastUsedIp)
         try container.encodeIfPresent(lastUsedUserAgent, forKey: .lastUsedUserAgent)
-        try container.encodeIfPresent(revokedAt, forKey: .revokedAt)
     }
 }
 

@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum AlertConditionType: String, Sendable, Codable, CaseIterable {
+public enum AlertConditionType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case threshold = "threshold"
     case rateOfChange = "rate_of_change"
     case signalLoss = "signal_loss"
@@ -42,4 +42,5 @@ public enum AlertConditionType: String, Sendable, Codable, CaseIterable {
     case stateSpanActive = "state_span_active"
     case sleepSessionActive = "sleep_session_active"
     case trackerAge = "tracker_age"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

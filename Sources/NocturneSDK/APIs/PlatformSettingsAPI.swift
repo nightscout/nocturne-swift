@@ -198,7 +198,7 @@ open class PlatformSettingsAPI {
     /**
      Upsert
      - PUT /api/v4/admin/platform-settings/{category}
-     - Upserts platform settings for a category. Blank fields preserve existing values. Returns restartRequired: true — the SvelteKit frontend must be restarted for changes to take effect.
+     - Upserts platform settings for a category. Blank fields preserve existing values. Google Health takes effect on the next request; bot settings require a frontend restart.
      - Bearer Token:
        - type: http
        - name: bearer

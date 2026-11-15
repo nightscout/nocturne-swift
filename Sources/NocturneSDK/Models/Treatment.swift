@@ -9,10 +9,9 @@ import Foundation
 
 public struct Treatment: Sendable, Codable, Hashable {
 
-    public var id: String?
-    public var createdAt: String?
     public var mills: Int64?
     public var utcOffset: Int?
+    public var id: String?
     public var identifier: String?
     public var srvModified: Int64?
     public var srvCreated: Int64?
@@ -26,6 +25,7 @@ public struct Treatment: Sendable, Codable, Hashable {
     public var fat: Double?
     public var foodType: String?
     public var units: String?
+    public var createdAt: String?
     public var duration: Double?
     public var percent: Double?
     public var absolute: Double?
@@ -38,7 +38,7 @@ public struct Treatment: Sendable, Codable, Hashable {
     public var date: Int64?
     public var carbTime: Int?
     public var boluscalc: [String: JSONValue]?
-    public var timestamp: String?
+    public var timestamp: JSONValue?
     public var cuttedby: String?
     public var cutting: String?
     public var eventTime: String?
@@ -104,15 +104,12 @@ public struct Treatment: Sendable, Codable, Hashable {
     public var originalTimeshift: Int?
     public var originalCustomizedName: String?
     public var originalEnd: Int64?
-    public var canonicalId: String?
-    public var sources: [String]?
     public var insulinContext: TreatmentInsulinContext?
 
-    public init(id: String? = nil, createdAt: String? = nil, mills: Int64? = nil, utcOffset: Int? = nil, identifier: String? = nil, srvModified: Int64? = nil, srvCreated: Int64? = nil, eventType: String? = nil, reason: String? = nil, glucose: Double? = nil, glucoseType: String? = nil, carbs: Double? = nil, insulin: Double? = nil, protein: Double? = nil, fat: Double? = nil, foodType: String? = nil, units: String? = nil, duration: Double? = nil, percent: Double? = nil, absolute: Double? = nil, notes: String? = nil, enteredBy: String? = nil, targetTop: Double? = nil, targetBottom: Double? = nil, profile: String? = nil, split: String? = nil, date: Int64? = nil, carbTime: Int? = nil, boluscalc: [String: JSONValue]? = nil, timestamp: String? = nil, cuttedby: String? = nil, cutting: String? = nil, eventTime: String? = nil, preBolus: Double? = nil, rate: Double? = nil, mgdl: Double? = nil, mmol: Double? = nil, endmills: Int64? = nil, durationType: String? = nil, isAnnouncement: Bool? = nil, profileJson: String? = nil, endprofile: String? = nil, insulinNeedsScaleFactor: Double? = nil, absorptionTime: Int? = nil, enteredinsulin: Double? = nil, splitNow: Double? = nil, splitExt: Double? = nil, status: String? = nil, relative: Double? = nil, CR: Double? = nil, NSCLIENT_ID: String? = nil, first: Bool? = nil, end: Bool? = nil, circadianPercentageProfile: Bool? = nil, percentage: Double? = nil, timeshift: Double? = nil, transmitterId: String? = nil, remoteCarbs: Double? = nil, remoteAbsorption: Double? = nil, remoteBolus: Double? = nil, reasonDisplay: String? = nil, otp: String? = nil, syncIdentifier: String? = nil, insulinType: String? = nil, automatic: Bool? = nil, temp: String? = nil, amount: Double? = nil, programmed: Double? = nil, unabsorbed: Double? = nil, type: String? = nil, bolusType: String? = nil, dataSource: String? = nil, insulinRecommendationForCarbs: Double? = nil, insulinRecommendationForCorrection: Double? = nil, insulinProgrammed: Double? = nil, insulinDelivered: Double? = nil, insulinOnBoard: Double? = nil, bloodGlucoseInput: Double? = nil, bloodGlucoseInputSource: String? = nil, calculationType: CalculationType2? = nil, durationInMilliseconds: Int64? = nil, pumpId: Int64? = nil, pumpSerial: String? = nil, pumpType: String? = nil, endId: Int64? = nil, isValid: Bool? = nil, isReadOnly: Bool? = nil, isBasalInsulin: Bool? = nil, bolusCalculatorResult: String? = nil, originalDuration: Int? = nil, originalProfileName: String? = nil, originalPercentage: Int? = nil, originalTimeshift: Int? = nil, originalCustomizedName: String? = nil, originalEnd: Int64? = nil, canonicalId: String? = nil, sources: [String]? = nil, insulinContext: TreatmentInsulinContext? = nil) {
-        self.id = id
-        self.createdAt = createdAt
+    public init(mills: Int64? = nil, utcOffset: Int? = nil, id: String? = nil, identifier: String? = nil, srvModified: Int64? = nil, srvCreated: Int64? = nil, eventType: String? = nil, reason: String? = nil, glucose: Double? = nil, glucoseType: String? = nil, carbs: Double? = nil, insulin: Double? = nil, protein: Double? = nil, fat: Double? = nil, foodType: String? = nil, units: String? = nil, createdAt: String? = nil, duration: Double? = nil, percent: Double? = nil, absolute: Double? = nil, notes: String? = nil, enteredBy: String? = nil, targetTop: Double? = nil, targetBottom: Double? = nil, profile: String? = nil, split: String? = nil, date: Int64? = nil, carbTime: Int? = nil, boluscalc: [String: JSONValue]? = nil, timestamp: JSONValue? = nil, cuttedby: String? = nil, cutting: String? = nil, eventTime: String? = nil, preBolus: Double? = nil, rate: Double? = nil, mgdl: Double? = nil, mmol: Double? = nil, endmills: Int64? = nil, durationType: String? = nil, isAnnouncement: Bool? = nil, profileJson: String? = nil, endprofile: String? = nil, insulinNeedsScaleFactor: Double? = nil, absorptionTime: Int? = nil, enteredinsulin: Double? = nil, splitNow: Double? = nil, splitExt: Double? = nil, status: String? = nil, relative: Double? = nil, CR: Double? = nil, NSCLIENT_ID: String? = nil, first: Bool? = nil, end: Bool? = nil, circadianPercentageProfile: Bool? = nil, percentage: Double? = nil, timeshift: Double? = nil, transmitterId: String? = nil, remoteCarbs: Double? = nil, remoteAbsorption: Double? = nil, remoteBolus: Double? = nil, reasonDisplay: String? = nil, otp: String? = nil, syncIdentifier: String? = nil, insulinType: String? = nil, automatic: Bool? = nil, temp: String? = nil, amount: Double? = nil, programmed: Double? = nil, unabsorbed: Double? = nil, type: String? = nil, bolusType: String? = nil, dataSource: String? = nil, insulinRecommendationForCarbs: Double? = nil, insulinRecommendationForCorrection: Double? = nil, insulinProgrammed: Double? = nil, insulinDelivered: Double? = nil, insulinOnBoard: Double? = nil, bloodGlucoseInput: Double? = nil, bloodGlucoseInputSource: String? = nil, calculationType: CalculationType2? = nil, durationInMilliseconds: Int64? = nil, pumpId: Int64? = nil, pumpSerial: String? = nil, pumpType: String? = nil, endId: Int64? = nil, isValid: Bool? = nil, isReadOnly: Bool? = nil, isBasalInsulin: Bool? = nil, bolusCalculatorResult: String? = nil, originalDuration: Int? = nil, originalProfileName: String? = nil, originalPercentage: Int? = nil, originalTimeshift: Int? = nil, originalCustomizedName: String? = nil, originalEnd: Int64? = nil, insulinContext: TreatmentInsulinContext? = nil) {
         self.mills = mills
         self.utcOffset = utcOffset
+        self.id = id
         self.identifier = identifier
         self.srvModified = srvModified
         self.srvCreated = srvCreated
@@ -126,6 +123,7 @@ public struct Treatment: Sendable, Codable, Hashable {
         self.fat = fat
         self.foodType = foodType
         self.units = units
+        self.createdAt = createdAt
         self.duration = duration
         self.percent = percent
         self.absolute = absolute
@@ -204,16 +202,13 @@ public struct Treatment: Sendable, Codable, Hashable {
         self.originalTimeshift = originalTimeshift
         self.originalCustomizedName = originalCustomizedName
         self.originalEnd = originalEnd
-        self.canonicalId = canonicalId
-        self.sources = sources
         self.insulinContext = insulinContext
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
-        case id
-        case createdAt
         case mills
         case utcOffset
+        case id = "_id"
         case identifier
         case srvModified
         case srvCreated
@@ -227,6 +222,7 @@ public struct Treatment: Sendable, Codable, Hashable {
         case fat
         case foodType
         case units
+        case createdAt = "created_at"
         case duration
         case percent
         case absolute
@@ -305,8 +301,6 @@ public struct Treatment: Sendable, Codable, Hashable {
         case originalTimeshift
         case originalCustomizedName
         case originalEnd
-        case canonicalId
-        case sources
         case insulinContext
     }
 
@@ -314,10 +308,9 @@ public struct Treatment: Sendable, Codable, Hashable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(mills, forKey: .mills)
         try container.encodeIfPresent(utcOffset, forKey: .utcOffset)
+        try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(identifier, forKey: .identifier)
         try container.encodeIfPresent(srvModified, forKey: .srvModified)
         try container.encodeIfPresent(srvCreated, forKey: .srvCreated)
@@ -331,6 +324,7 @@ public struct Treatment: Sendable, Codable, Hashable {
         try container.encodeIfPresent(fat, forKey: .fat)
         try container.encodeIfPresent(foodType, forKey: .foodType)
         try container.encodeIfPresent(units, forKey: .units)
+        try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(duration, forKey: .duration)
         try container.encodeIfPresent(percent, forKey: .percent)
         try container.encodeIfPresent(absolute, forKey: .absolute)
@@ -409,11 +403,7 @@ public struct Treatment: Sendable, Codable, Hashable {
         try container.encodeIfPresent(originalTimeshift, forKey: .originalTimeshift)
         try container.encodeIfPresent(originalCustomizedName, forKey: .originalCustomizedName)
         try container.encodeIfPresent(originalEnd, forKey: .originalEnd)
-        try container.encodeIfPresent(canonicalId, forKey: .canonicalId)
-        try container.encodeIfPresent(sources, forKey: .sources)
         try container.encodeIfPresent(insulinContext, forKey: .insulinContext)
     }
 }
 
-
-extension Treatment: Identifiable {}

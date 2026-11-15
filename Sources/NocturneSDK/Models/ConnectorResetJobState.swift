@@ -8,11 +8,12 @@
 import Foundation
 
 /** Lifecycle state of a connector cursor reset job. */
-public enum ConnectorResetJobState: String, Sendable, Codable, CaseIterable {
+public enum ConnectorResetJobState: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case pending = "Pending"
     case running = "Running"
     case completed = "Completed"
     case failed = "Failed"
     case cancelled = "Cancelled"
     case interrupted = "Interrupted"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

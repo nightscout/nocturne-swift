@@ -18,8 +18,9 @@ public struct AidSystemMetrics: Sendable, Codable, Hashable {
     public var targetHigh: Double?
     public var siteChangeCount: Int?
     public var segments: [AidTimeSegment]?
+    public var timeZoneUnavailableReason: TimeZoneUnavailableReason?
 
-    public init(cgmDeviceNames: String? = nil, pumpDeviceNames: String? = nil, pumpUsePercent: Double? = nil, aidActivePercent: Double? = nil, cgmActivePercent: Double? = nil, targetLow: Double? = nil, targetHigh: Double? = nil, siteChangeCount: Int? = nil, segments: [AidTimeSegment]? = nil) {
+    public init(cgmDeviceNames: String? = nil, pumpDeviceNames: String? = nil, pumpUsePercent: Double? = nil, aidActivePercent: Double? = nil, cgmActivePercent: Double? = nil, targetLow: Double? = nil, targetHigh: Double? = nil, siteChangeCount: Int? = nil, segments: [AidTimeSegment]? = nil, timeZoneUnavailableReason: TimeZoneUnavailableReason? = nil) {
         self.cgmDeviceNames = cgmDeviceNames
         self.pumpDeviceNames = pumpDeviceNames
         self.pumpUsePercent = pumpUsePercent
@@ -29,6 +30,7 @@ public struct AidSystemMetrics: Sendable, Codable, Hashable {
         self.targetHigh = targetHigh
         self.siteChangeCount = siteChangeCount
         self.segments = segments
+        self.timeZoneUnavailableReason = timeZoneUnavailableReason
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -41,6 +43,7 @@ public struct AidSystemMetrics: Sendable, Codable, Hashable {
         case targetHigh
         case siteChangeCount
         case segments
+        case timeZoneUnavailableReason
     }
 
     // Encodable protocol methods
@@ -56,6 +59,7 @@ public struct AidSystemMetrics: Sendable, Codable, Hashable {
         try container.encodeIfPresent(targetHigh, forKey: .targetHigh)
         try container.encodeIfPresent(siteChangeCount, forKey: .siteChangeCount)
         try container.encodeIfPresent(segments, forKey: .segments)
+        try container.encodeIfPresent(timeZoneUnavailableReason, forKey: .timeZoneUnavailableReason)
     }
 }
 

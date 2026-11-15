@@ -14,16 +14,16 @@ open class BolusAPI {
      
      - parameter requestBody: (body) The unique identifiers of the soft-deleted records. 
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: [Bolus]
+     - returns: BulkRestoreResultOfBolus
      */
-    open class func bolusBulkRestore(requestBody: [String], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> [Bolus] {
+    open class func bolusBulkRestore(requestBody: [String], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> BulkRestoreResultOfBolus {
         return try await bolusBulkRestoreWithRequestBuilder(requestBody: requestBody, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Bulk restore
      - POST /api/v4/insulin/boluses/restore
-     - Returns `200 OK` with the restored records. IDs that don't match a soft-deleted record are silently ignored.
+     - Restores multiple soft-deleted records by their IDs. IDs that match no soft-deleted record are ignored. A record left deleted because a live record holds its key is listed in `conflicts`; the rest of the batch is still restored. If a live record takes one of those keys while the batch is saving, nothing is restored and the request is refused with `409 Conflict`.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -32,9 +32,9 @@ open class BolusAPI {
        - name: oauth2
      - parameter requestBody: (body) The unique identifiers of the soft-deleted records. 
      - parameter apiConfiguration: The configuration for the http request.
-     - returns: RequestBuilder<[Bolus]> 
+     - returns: RequestBuilder<BulkRestoreResultOfBolus> 
      */
-    open class func bolusBulkRestoreWithRequestBuilder(requestBody: [String], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<[Bolus]> {
+    open class func bolusBulkRestoreWithRequestBuilder(requestBody: [String], apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<BulkRestoreResultOfBolus> {
         let localVariablePath = "/api/v4/insulin/boluses/restore"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: requestBody, codableHelper: apiConfiguration.codableHelper)
@@ -47,7 +47,7 @@ open class BolusAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<[Bolus]>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<BulkRestoreResultOfBolus>.Type = apiConfiguration.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true, apiConfiguration: apiConfiguration)
     }
@@ -66,7 +66,7 @@ open class BolusAPI {
     /**
      Create
      - POST /api/v4/insulin/boluses
-     - `Timestamp` must be set on the mapped model; requests that resolve to a default timestamp are rejected with `400 Bad Request`.              On success, responds with `201 Created` and a `Location` header containing the URL of the newly created record.              A record whose `(dataSource, syncIdentifier)` is held by a record the owner deleted is refused with `409 Conflict` — deleting a record stops that record's source from re-uploading it. Restore it from `GET deleted` instead.
+     - Creates a new record and returns it with a `Location` header pointing to the created resource. A request with no `Timestamp` is rejected with `400 Bad Request`. A record whose `(dataSource, syncIdentifier)` is held by a record the owner deleted is refused with `409 Conflict`; restore the deleted record instead.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -109,7 +109,7 @@ open class BolusAPI {
     /**
      Create bulk
      - POST /api/v4/insulin/boluses/bulk
-     - Array semantics are per-item, not all-or-nothing. Of the types reachable here, boluses, basal injections and sensor glucose upsert on the sync key: an item carrying both `dataSource` and `syncIdentifier` updates in place the row already matched by that pair. Every other type — notes, device events, BG checks, calibrations, meter readings and bolus calculations — inserts, as does any item not carrying both halves of the pair.              The payload is validated as a whole — an empty body, more than the cap, an item with an unset `timestamp`, an item supplying `syncIdentifier` without `dataSource`, or an item any registered validator rejects, all fail the request with `400 Bad Request` before anything is persisted.              On success, responds with `201 Created` and the written records.
+     - Creates or updates many records in one request, and returns them. Each item's outcome is decided on its own. For types that upsert, an item carrying both `dataSource` and `syncIdentifier` updates the matching record in place, and an item whose pair is held by a deleted record is skipped; other types, and items without both fields, insert. An empty body, too many items, an item with no `timestamp`, an item with `syncIdentifier` but no `dataSource`, or an item that fails validation fails the whole request with `400 Bad Request` before anything is saved.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -152,7 +152,7 @@ open class BolusAPI {
     /**
      Delete
      - DELETE /api/v4/insulin/boluses/{id}
-     - Returns `204 No Content` on success, or `404 Not Found` if no record with the given id exists.
+     - Deletes a record by ID.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -243,17 +243,17 @@ open class BolusAPI {
      - parameter sort: (query)  (optional, default to "timestamp_desc")
      - parameter device: (query)  (optional)
      - parameter source: (query)  (optional)
+     - parameter includeTotal: (query)  (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: PaginatedResponseOfBolus
      */
-    open class func bolusGetAll(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfBolus {
-        return try await bolusGetAllWithRequestBuilder(from: from, to: to, limit: limit, offset: offset, sort: sort, device: device, source: source, apiConfiguration: apiConfiguration).execute().body
+    open class func bolusGetAll(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, includeTotal: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) async throws(ErrorResponse) -> PaginatedResponseOfBolus {
+        return try await bolusGetAllWithRequestBuilder(from: from, to: to, limit: limit, offset: offset, sort: sort, device: device, source: source, includeTotal: includeTotal, apiConfiguration: apiConfiguration).execute().body
     }
 
     /**
      Get all
      - GET /api/v4/insulin/boluses
-     - Never cached, per GetProfileSummary: a just-entered bolus must not be invisible until a cached list body expires.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -267,10 +267,11 @@ open class BolusAPI {
      - parameter sort: (query)  (optional, default to "timestamp_desc")
      - parameter device: (query)  (optional)
      - parameter source: (query)  (optional)
+     - parameter includeTotal: (query)  (optional, default to false)
      - parameter apiConfiguration: The configuration for the http request.
      - returns: RequestBuilder<PaginatedResponseOfBolus> 
      */
-    open class func bolusGetAllWithRequestBuilder(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfBolus> {
+    open class func bolusGetAllWithRequestBuilder(from: Date? = nil, to: Date? = nil, limit: Int? = nil, offset: Int? = nil, sort: String? = nil, device: String? = nil, source: String? = nil, includeTotal: Bool? = nil, apiConfiguration: NocturneSDKAPIConfiguration = NocturneSDKAPIConfiguration.shared) -> RequestBuilder<PaginatedResponseOfBolus> {
         let localVariablePath = "/api/v4/insulin/boluses"
         let localVariableURLString = apiConfiguration.basePath + localVariablePath
         let localVariableParameters: [String: any Sendable]? = nil
@@ -284,6 +285,7 @@ open class BolusAPI {
             "sort": (wrappedValue: sort?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "device": (wrappedValue: device?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
             "source": (wrappedValue: source?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
+            "includeTotal": (wrappedValue: includeTotal?.asParameter(codableHelper: apiConfiguration.codableHelper), isExplode: true),
         ]
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems(_qp1)
 
@@ -312,7 +314,7 @@ open class BolusAPI {
     /**
      Get by id
      - GET /api/v4/insulin/boluses/{id}
-     - Returns `404 Not Found` if no record with the given id exists.
+     - Retrieves a single record by its unique identifier.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -359,7 +361,7 @@ open class BolusAPI {
     /**
      List deleted
      - GET /api/v4/insulin/boluses/deleted
-     - Gated on the write scope although it reads: the recycle bin exists to feed Restore, and records the owner deleted must not be enumerable by read-only credentials — in particular the anonymous public-share principal, which satisfies the class-level category read gate.
+     - Lists soft-deleted records available for restoration, ordered by deletion date (newest first). Needs write access, not only read access, and is refused to read-only credentials such as a public share link.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -407,7 +409,7 @@ open class BolusAPI {
     /**
      Restore
      - POST /api/v4/insulin/boluses/{id}/restore
-     - Returns `200 OK` with the restored record, or `404 Not Found` if no soft-deleted record with the given id exists.
+     - Restores a soft-deleted record by ID. Returns `404 Not Found` if no soft-deleted record has the ID. A record whose legacy id or `(dataSource, syncIdentifier)` is now held by a live record is refused with `409 Conflict` and stays deleted.
      - Bearer Token:
        - type: http
        - name: bearer
@@ -454,7 +456,7 @@ open class BolusAPI {
     /**
      Update
      - PUT /api/v4/insulin/boluses/{id}
-     - Returns `404 Not Found` if no record with the given id exists.              `Timestamp` must be set on the mapped model; requests that resolve to a default timestamp are rejected with `400 Bad Request`.
+     - Updates an existing record by ID and returns the updated record. Returns `404 Not Found` if the record does not exist, and `400 Bad Request` if the request has no `Timestamp`.
      - Bearer Token:
        - type: http
        - name: bearer

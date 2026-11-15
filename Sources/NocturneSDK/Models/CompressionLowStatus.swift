@@ -8,8 +8,9 @@
 import Foundation
 
 /**  */
-public enum CompressionLowStatus: String, Sendable, Codable, CaseIterable {
+public enum CompressionLowStatus: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case pending = "Pending"
     case accepted = "Accepted"
     case dismissed = "Dismissed"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

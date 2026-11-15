@@ -8,10 +8,11 @@
 import Foundation
 
 /**  */
-public enum DeduplicationJobState: String, Sendable, Codable, CaseIterable {
+public enum DeduplicationJobState: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case pending = "Pending"
     case running = "Running"
     case completed = "Completed"
     case failed = "Failed"
     case cancelled = "Cancelled"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

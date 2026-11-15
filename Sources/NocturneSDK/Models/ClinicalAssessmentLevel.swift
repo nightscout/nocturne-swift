@@ -8,9 +8,11 @@
 import Foundation
 
 /**  */
-public enum ClinicalAssessmentLevel: String, Sendable, Codable, CaseIterable {
+public enum ClinicalAssessmentLevel: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case excellent = "Excellent"
     case good = "Good"
     case needsAttention = "NeedsAttention"
     case needsSignificantImprovement = "NeedsSignificantImprovement"
+    case insufficientData = "InsufficientData"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

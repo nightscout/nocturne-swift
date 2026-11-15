@@ -32,13 +32,14 @@ public struct SensorGlucose: Sendable, Codable, Hashable {
     public var filtered: Double?
     public var unfiltered: Double?
     public var delta: Double?
+    public var rssi: Int?
     public var glucoseProcessing: GlucoseProcessing?
     public var smoothedMgdl: Double?
     public var smoothedMmol: Double?
     public var unsmoothedMgdl: Double?
     public var unsmoothedMmol: Double?
 
-    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, patientDeviceId: String? = nil, syncIdentifier: String? = nil, mgdl: Double? = nil, mmol: Double? = nil, direction: GlucoseDirection? = nil, trend: GlucoseTrend? = nil, trendRate: Double? = nil, noise: Int? = nil, filtered: Double? = nil, unfiltered: Double? = nil, delta: Double? = nil, glucoseProcessing: GlucoseProcessing? = nil, smoothedMgdl: Double? = nil, smoothedMmol: Double? = nil, unsmoothedMgdl: Double? = nil, unsmoothedMmol: Double? = nil) {
+    public init(id: String? = nil, timestamp: Date? = nil, mills: Int64? = nil, utcOffset: Int? = nil, device: String? = nil, app: String? = nil, dataSource: String? = nil, correlationId: String? = nil, legacyId: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil, additionalProperties: [String: JSONValue]? = nil, patientDeviceId: String? = nil, syncIdentifier: String? = nil, mgdl: Double? = nil, mmol: Double? = nil, direction: GlucoseDirection? = nil, trend: GlucoseTrend? = nil, trendRate: Double? = nil, noise: Int? = nil, filtered: Double? = nil, unfiltered: Double? = nil, delta: Double? = nil, rssi: Int? = nil, glucoseProcessing: GlucoseProcessing? = nil, smoothedMgdl: Double? = nil, smoothedMmol: Double? = nil, unsmoothedMgdl: Double? = nil, unsmoothedMmol: Double? = nil) {
         self.id = id
         self.timestamp = timestamp
         self.mills = mills
@@ -62,6 +63,7 @@ public struct SensorGlucose: Sendable, Codable, Hashable {
         self.filtered = filtered
         self.unfiltered = unfiltered
         self.delta = delta
+        self.rssi = rssi
         self.glucoseProcessing = glucoseProcessing
         self.smoothedMgdl = smoothedMgdl
         self.smoothedMmol = smoothedMmol
@@ -93,6 +95,7 @@ public struct SensorGlucose: Sendable, Codable, Hashable {
         case filtered
         case unfiltered
         case delta
+        case rssi
         case glucoseProcessing
         case smoothedMgdl
         case smoothedMmol
@@ -127,6 +130,7 @@ public struct SensorGlucose: Sendable, Codable, Hashable {
         try container.encodeIfPresent(filtered, forKey: .filtered)
         try container.encodeIfPresent(unfiltered, forKey: .unfiltered)
         try container.encodeIfPresent(delta, forKey: .delta)
+        try container.encodeIfPresent(rssi, forKey: .rssi)
         try container.encodeIfPresent(glucoseProcessing, forKey: .glucoseProcessing)
         try container.encodeIfPresent(smoothedMgdl, forKey: .smoothedMgdl)
         try container.encodeIfPresent(smoothedMmol, forKey: .smoothedMmol)

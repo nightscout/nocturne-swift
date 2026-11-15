@@ -12,26 +12,29 @@ public struct BasalAnalysisResponse: Sendable, Codable, Hashable {
     public var stats: BasalStats?
     public var tempBasalInfo: TempBasalInfo?
     public var hourlyPercentiles: [HourlyBasalPercentileData]?
-    public var dayCount: Int?
+    public var windowDays: Int?
     public var startDate: String?
     public var endDate: String?
+    public var timeZoneUnavailableReason: TimeZoneUnavailableReason?
 
-    public init(stats: BasalStats? = nil, tempBasalInfo: TempBasalInfo? = nil, hourlyPercentiles: [HourlyBasalPercentileData]? = nil, dayCount: Int? = nil, startDate: String? = nil, endDate: String? = nil) {
+    public init(stats: BasalStats? = nil, tempBasalInfo: TempBasalInfo? = nil, hourlyPercentiles: [HourlyBasalPercentileData]? = nil, windowDays: Int? = nil, startDate: String? = nil, endDate: String? = nil, timeZoneUnavailableReason: TimeZoneUnavailableReason? = nil) {
         self.stats = stats
         self.tempBasalInfo = tempBasalInfo
         self.hourlyPercentiles = hourlyPercentiles
-        self.dayCount = dayCount
+        self.windowDays = windowDays
         self.startDate = startDate
         self.endDate = endDate
+        self.timeZoneUnavailableReason = timeZoneUnavailableReason
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case stats
         case tempBasalInfo
         case hourlyPercentiles
-        case dayCount
+        case windowDays
         case startDate
         case endDate
+        case timeZoneUnavailableReason
     }
 
     // Encodable protocol methods
@@ -41,9 +44,10 @@ public struct BasalAnalysisResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(stats, forKey: .stats)
         try container.encodeIfPresent(tempBasalInfo, forKey: .tempBasalInfo)
         try container.encodeIfPresent(hourlyPercentiles, forKey: .hourlyPercentiles)
-        try container.encodeIfPresent(dayCount, forKey: .dayCount)
+        try container.encodeIfPresent(windowDays, forKey: .windowDays)
         try container.encodeIfPresent(startDate, forKey: .startDate)
         try container.encodeIfPresent(endDate, forKey: .endDate)
+        try container.encodeIfPresent(timeZoneUnavailableReason, forKey: .timeZoneUnavailableReason)
     }
 }
 

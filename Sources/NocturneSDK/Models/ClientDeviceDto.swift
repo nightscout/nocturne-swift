@@ -13,15 +13,19 @@ public struct ClientDeviceDto: Sendable, Codable, Hashable {
     public var installId: String?
     public var kind: String?
     public var label: String?
+    public var appName: String?
+    public var linkedToApp: Bool?
     public var capabilities: [String]?
     public var lastSeenAt: Date?
     public var createdAt: Date?
 
-    public init(id: String? = nil, installId: String? = nil, kind: String? = nil, label: String? = nil, capabilities: [String]? = nil, lastSeenAt: Date? = nil, createdAt: Date? = nil) {
+    public init(id: String? = nil, installId: String? = nil, kind: String? = nil, label: String? = nil, appName: String? = nil, linkedToApp: Bool? = nil, capabilities: [String]? = nil, lastSeenAt: Date? = nil, createdAt: Date? = nil) {
         self.id = id
         self.installId = installId
         self.kind = kind
         self.label = label
+        self.appName = appName
+        self.linkedToApp = linkedToApp
         self.capabilities = capabilities
         self.lastSeenAt = lastSeenAt
         self.createdAt = createdAt
@@ -32,6 +36,8 @@ public struct ClientDeviceDto: Sendable, Codable, Hashable {
         case installId
         case kind
         case label
+        case appName
+        case linkedToApp
         case capabilities
         case lastSeenAt
         case createdAt
@@ -45,6 +51,8 @@ public struct ClientDeviceDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(installId, forKey: .installId)
         try container.encodeIfPresent(kind, forKey: .kind)
         try container.encodeIfPresent(label, forKey: .label)
+        try container.encodeIfPresent(appName, forKey: .appName)
+        try container.encodeIfPresent(linkedToApp, forKey: .linkedToApp)
         try container.encodeIfPresent(capabilities, forKey: .capabilities)
         try container.encodeIfPresent(lastSeenAt, forKey: .lastSeenAt)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)

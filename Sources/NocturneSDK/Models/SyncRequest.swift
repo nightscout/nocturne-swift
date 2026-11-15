@@ -12,17 +12,20 @@ public struct SyncRequest: Sendable, Codable, Hashable {
     public var from: Date?
     public var to: Date?
     public var dataTypes: [SyncDataType]?
+    public var fromIsGlucoseResumePoint: Bool?
 
-    public init(from: Date? = nil, to: Date? = nil, dataTypes: [SyncDataType]? = nil) {
+    public init(from: Date? = nil, to: Date? = nil, dataTypes: [SyncDataType]? = nil, fromIsGlucoseResumePoint: Bool? = nil) {
         self.from = from
         self.to = to
         self.dataTypes = dataTypes
+        self.fromIsGlucoseResumePoint = fromIsGlucoseResumePoint
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case from
         case to
         case dataTypes
+        case fromIsGlucoseResumePoint
     }
 
     // Encodable protocol methods
@@ -32,6 +35,7 @@ public struct SyncRequest: Sendable, Codable, Hashable {
         try container.encodeIfPresent(from, forKey: .from)
         try container.encodeIfPresent(to, forKey: .to)
         try container.encodeIfPresent(dataTypes, forKey: .dataTypes)
+        try container.encodeIfPresent(fromIsGlucoseResumePoint, forKey: .fromIsGlucoseResumePoint)
     }
 }
 

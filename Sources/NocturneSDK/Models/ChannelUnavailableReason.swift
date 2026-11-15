@@ -8,7 +8,8 @@
 import Foundation
 
 /**  */
-public enum ChannelUnavailableReason: String, Sendable, Codable, CaseIterable {
+public enum ChannelUnavailableReason: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case adapterNotConfigured = "adapter_not_configured"
     case heartbeatStale = "heartbeat_stale"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

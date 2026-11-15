@@ -10,87 +10,129 @@ import Foundation
 public struct InsulinDeliveryStatistics: Sendable, Codable, Hashable {
 
     public var totalBolus: Double?
+    public var manualBolus: Double?
+    public var automaticBolus: Double?
     public var totalBasal: Double?
     public var scheduledBasal: Double?
     public var additionalBasal: Double?
     public var totalInsulin: Double?
     public var totalCarbs: Double?
-    public var bolusCount: Int?
+    public var carbsPerDay: Double?
+    public var manualBolusCount: Int?
     public var basalCount: Int?
+    public var insulinEventCount: Int?
     public var basalPercent: Double?
     public var bolusPercent: Double?
     public var tdd: Double?
+    public var manualBolusPerDay: Double?
+    public var automaticBolusPerDay: Double?
+    public var totalBasalPerDay: Double?
+    public var totalBolusPerDay: Double?
+    public var scheduledBasalPerDay: Double?
     public var avgBolus: Double?
     public var mealBoluses: Int?
     public var correctionBoluses: Int?
+    public var mealBolusesPerDay: Double?
+    public var correctionBolusesPerDay: Double?
+    public var mealBolusPercent: Double?
+    public var correctionBolusPercent: Double?
     public var icRatio: Double?
+    public var unpairedCarbs: Double?
     public var bolusesPerDay: Double?
-    public var dayCount: Int?
+    public var windowDays: Int?
     public var startDate: String?
     public var endDate: String?
     public var carbCount: Int?
     public var carbBolusCount: Int?
-    public var microBolusCount: Int?
-    public var microBolusInsulin: Double?
+    public var automaticBolusCount: Int?
     public var basalInjectionInsulin: Double?
     public var basalInjectionCount: Int?
+    public var manualBoluses: [Bolus]?
     public var reliability: StatisticReliability?
 
-    public init(totalBolus: Double? = nil, totalBasal: Double? = nil, scheduledBasal: Double? = nil, additionalBasal: Double? = nil, totalInsulin: Double? = nil, totalCarbs: Double? = nil, bolusCount: Int? = nil, basalCount: Int? = nil, basalPercent: Double? = nil, bolusPercent: Double? = nil, tdd: Double? = nil, avgBolus: Double? = nil, mealBoluses: Int? = nil, correctionBoluses: Int? = nil, icRatio: Double? = nil, bolusesPerDay: Double? = nil, dayCount: Int? = nil, startDate: String? = nil, endDate: String? = nil, carbCount: Int? = nil, carbBolusCount: Int? = nil, microBolusCount: Int? = nil, microBolusInsulin: Double? = nil, basalInjectionInsulin: Double? = nil, basalInjectionCount: Int? = nil, reliability: StatisticReliability? = nil) {
+    public init(totalBolus: Double? = nil, manualBolus: Double? = nil, automaticBolus: Double? = nil, totalBasal: Double? = nil, scheduledBasal: Double? = nil, additionalBasal: Double? = nil, totalInsulin: Double? = nil, totalCarbs: Double? = nil, carbsPerDay: Double? = nil, manualBolusCount: Int? = nil, basalCount: Int? = nil, insulinEventCount: Int? = nil, basalPercent: Double? = nil, bolusPercent: Double? = nil, tdd: Double? = nil, manualBolusPerDay: Double? = nil, automaticBolusPerDay: Double? = nil, totalBasalPerDay: Double? = nil, totalBolusPerDay: Double? = nil, scheduledBasalPerDay: Double? = nil, avgBolus: Double? = nil, mealBoluses: Int? = nil, correctionBoluses: Int? = nil, mealBolusesPerDay: Double? = nil, correctionBolusesPerDay: Double? = nil, mealBolusPercent: Double? = nil, correctionBolusPercent: Double? = nil, icRatio: Double? = nil, unpairedCarbs: Double? = nil, bolusesPerDay: Double? = nil, windowDays: Int? = nil, startDate: String? = nil, endDate: String? = nil, carbCount: Int? = nil, carbBolusCount: Int? = nil, automaticBolusCount: Int? = nil, basalInjectionInsulin: Double? = nil, basalInjectionCount: Int? = nil, manualBoluses: [Bolus]? = nil, reliability: StatisticReliability? = nil) {
         self.totalBolus = totalBolus
+        self.manualBolus = manualBolus
+        self.automaticBolus = automaticBolus
         self.totalBasal = totalBasal
         self.scheduledBasal = scheduledBasal
         self.additionalBasal = additionalBasal
         self.totalInsulin = totalInsulin
         self.totalCarbs = totalCarbs
-        self.bolusCount = bolusCount
+        self.carbsPerDay = carbsPerDay
+        self.manualBolusCount = manualBolusCount
         self.basalCount = basalCount
+        self.insulinEventCount = insulinEventCount
         self.basalPercent = basalPercent
         self.bolusPercent = bolusPercent
         self.tdd = tdd
+        self.manualBolusPerDay = manualBolusPerDay
+        self.automaticBolusPerDay = automaticBolusPerDay
+        self.totalBasalPerDay = totalBasalPerDay
+        self.totalBolusPerDay = totalBolusPerDay
+        self.scheduledBasalPerDay = scheduledBasalPerDay
         self.avgBolus = avgBolus
         self.mealBoluses = mealBoluses
         self.correctionBoluses = correctionBoluses
+        self.mealBolusesPerDay = mealBolusesPerDay
+        self.correctionBolusesPerDay = correctionBolusesPerDay
+        self.mealBolusPercent = mealBolusPercent
+        self.correctionBolusPercent = correctionBolusPercent
         self.icRatio = icRatio
+        self.unpairedCarbs = unpairedCarbs
         self.bolusesPerDay = bolusesPerDay
-        self.dayCount = dayCount
+        self.windowDays = windowDays
         self.startDate = startDate
         self.endDate = endDate
         self.carbCount = carbCount
         self.carbBolusCount = carbBolusCount
-        self.microBolusCount = microBolusCount
-        self.microBolusInsulin = microBolusInsulin
+        self.automaticBolusCount = automaticBolusCount
         self.basalInjectionInsulin = basalInjectionInsulin
         self.basalInjectionCount = basalInjectionCount
+        self.manualBoluses = manualBoluses
         self.reliability = reliability
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case totalBolus
+        case manualBolus
+        case automaticBolus
         case totalBasal
         case scheduledBasal
         case additionalBasal
         case totalInsulin
         case totalCarbs
-        case bolusCount
+        case carbsPerDay
+        case manualBolusCount
         case basalCount
+        case insulinEventCount
         case basalPercent
         case bolusPercent
         case tdd
+        case manualBolusPerDay
+        case automaticBolusPerDay
+        case totalBasalPerDay
+        case totalBolusPerDay
+        case scheduledBasalPerDay
         case avgBolus
         case mealBoluses
         case correctionBoluses
+        case mealBolusesPerDay
+        case correctionBolusesPerDay
+        case mealBolusPercent
+        case correctionBolusPercent
         case icRatio
+        case unpairedCarbs
         case bolusesPerDay
-        case dayCount
+        case windowDays
         case startDate
         case endDate
         case carbCount
         case carbBolusCount
-        case microBolusCount
-        case microBolusInsulin
+        case automaticBolusCount
         case basalInjectionInsulin
         case basalInjectionCount
+        case manualBoluses
         case reliability
     }
 
@@ -99,30 +141,44 @@ public struct InsulinDeliveryStatistics: Sendable, Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(totalBolus, forKey: .totalBolus)
+        try container.encodeIfPresent(manualBolus, forKey: .manualBolus)
+        try container.encodeIfPresent(automaticBolus, forKey: .automaticBolus)
         try container.encodeIfPresent(totalBasal, forKey: .totalBasal)
         try container.encodeIfPresent(scheduledBasal, forKey: .scheduledBasal)
         try container.encodeIfPresent(additionalBasal, forKey: .additionalBasal)
         try container.encodeIfPresent(totalInsulin, forKey: .totalInsulin)
         try container.encodeIfPresent(totalCarbs, forKey: .totalCarbs)
-        try container.encodeIfPresent(bolusCount, forKey: .bolusCount)
+        try container.encodeIfPresent(carbsPerDay, forKey: .carbsPerDay)
+        try container.encodeIfPresent(manualBolusCount, forKey: .manualBolusCount)
         try container.encodeIfPresent(basalCount, forKey: .basalCount)
+        try container.encodeIfPresent(insulinEventCount, forKey: .insulinEventCount)
         try container.encodeIfPresent(basalPercent, forKey: .basalPercent)
         try container.encodeIfPresent(bolusPercent, forKey: .bolusPercent)
         try container.encodeIfPresent(tdd, forKey: .tdd)
+        try container.encodeIfPresent(manualBolusPerDay, forKey: .manualBolusPerDay)
+        try container.encodeIfPresent(automaticBolusPerDay, forKey: .automaticBolusPerDay)
+        try container.encodeIfPresent(totalBasalPerDay, forKey: .totalBasalPerDay)
+        try container.encodeIfPresent(totalBolusPerDay, forKey: .totalBolusPerDay)
+        try container.encodeIfPresent(scheduledBasalPerDay, forKey: .scheduledBasalPerDay)
         try container.encodeIfPresent(avgBolus, forKey: .avgBolus)
         try container.encodeIfPresent(mealBoluses, forKey: .mealBoluses)
         try container.encodeIfPresent(correctionBoluses, forKey: .correctionBoluses)
+        try container.encodeIfPresent(mealBolusesPerDay, forKey: .mealBolusesPerDay)
+        try container.encodeIfPresent(correctionBolusesPerDay, forKey: .correctionBolusesPerDay)
+        try container.encodeIfPresent(mealBolusPercent, forKey: .mealBolusPercent)
+        try container.encodeIfPresent(correctionBolusPercent, forKey: .correctionBolusPercent)
         try container.encodeIfPresent(icRatio, forKey: .icRatio)
+        try container.encodeIfPresent(unpairedCarbs, forKey: .unpairedCarbs)
         try container.encodeIfPresent(bolusesPerDay, forKey: .bolusesPerDay)
-        try container.encodeIfPresent(dayCount, forKey: .dayCount)
+        try container.encodeIfPresent(windowDays, forKey: .windowDays)
         try container.encodeIfPresent(startDate, forKey: .startDate)
         try container.encodeIfPresent(endDate, forKey: .endDate)
         try container.encodeIfPresent(carbCount, forKey: .carbCount)
         try container.encodeIfPresent(carbBolusCount, forKey: .carbBolusCount)
-        try container.encodeIfPresent(microBolusCount, forKey: .microBolusCount)
-        try container.encodeIfPresent(microBolusInsulin, forKey: .microBolusInsulin)
+        try container.encodeIfPresent(automaticBolusCount, forKey: .automaticBolusCount)
         try container.encodeIfPresent(basalInjectionInsulin, forKey: .basalInjectionInsulin)
         try container.encodeIfPresent(basalInjectionCount, forKey: .basalInjectionCount)
+        try container.encodeIfPresent(manualBoluses, forKey: .manualBoluses)
         try container.encodeIfPresent(reliability, forKey: .reliability)
     }
 }

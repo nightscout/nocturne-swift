@@ -19,12 +19,13 @@ public struct ClinicalTargetAssessment: Sendable, Codable, Hashable {
     public var cvAssessment: TargetAssessment?
     public var targetsMet: Int?
     public var totalTargets: Int?
+    public var targetsAssessed: Int?
     public var overallAssessment: ClinicalAssessmentLevel?
     public var actionableInsights: [LocalizedInsight]?
     public var priorityAreas: [LocalizedInsight]?
     public var strengths: [LocalizedInsight]?
 
-    public init(population: DiabetesPopulation? = nil, targets: ClinicalTargets? = nil, tirAssessment: TargetAssessment? = nil, tbrAssessment: TargetAssessment? = nil, veryLowAssessment: TargetAssessment? = nil, tarAssessment: TargetAssessment? = nil, veryHighAssessment: TargetAssessment? = nil, cvAssessment: TargetAssessment? = nil, targetsMet: Int? = nil, totalTargets: Int? = nil, overallAssessment: ClinicalAssessmentLevel? = nil, actionableInsights: [LocalizedInsight]? = nil, priorityAreas: [LocalizedInsight]? = nil, strengths: [LocalizedInsight]? = nil) {
+    public init(population: DiabetesPopulation? = nil, targets: ClinicalTargets? = nil, tirAssessment: TargetAssessment? = nil, tbrAssessment: TargetAssessment? = nil, veryLowAssessment: TargetAssessment? = nil, tarAssessment: TargetAssessment? = nil, veryHighAssessment: TargetAssessment? = nil, cvAssessment: TargetAssessment? = nil, targetsMet: Int? = nil, totalTargets: Int? = nil, targetsAssessed: Int? = nil, overallAssessment: ClinicalAssessmentLevel? = nil, actionableInsights: [LocalizedInsight]? = nil, priorityAreas: [LocalizedInsight]? = nil, strengths: [LocalizedInsight]? = nil) {
         self.population = population
         self.targets = targets
         self.tirAssessment = tirAssessment
@@ -35,6 +36,7 @@ public struct ClinicalTargetAssessment: Sendable, Codable, Hashable {
         self.cvAssessment = cvAssessment
         self.targetsMet = targetsMet
         self.totalTargets = totalTargets
+        self.targetsAssessed = targetsAssessed
         self.overallAssessment = overallAssessment
         self.actionableInsights = actionableInsights
         self.priorityAreas = priorityAreas
@@ -52,6 +54,7 @@ public struct ClinicalTargetAssessment: Sendable, Codable, Hashable {
         case cvAssessment
         case targetsMet
         case totalTargets
+        case targetsAssessed
         case overallAssessment
         case actionableInsights
         case priorityAreas
@@ -72,6 +75,7 @@ public struct ClinicalTargetAssessment: Sendable, Codable, Hashable {
         try container.encodeIfPresent(cvAssessment, forKey: .cvAssessment)
         try container.encodeIfPresent(targetsMet, forKey: .targetsMet)
         try container.encodeIfPresent(totalTargets, forKey: .totalTargets)
+        try container.encodeIfPresent(targetsAssessed, forKey: .targetsAssessed)
         try container.encodeIfPresent(overallAssessment, forKey: .overallAssessment)
         try container.encodeIfPresent(actionableInsights, forKey: .actionableInsights)
         try container.encodeIfPresent(priorityAreas, forKey: .priorityAreas)

@@ -17,18 +17,22 @@ public struct AlertRuleResponse: Sendable, Codable, Hashable {
     public var isEnabled: Bool?
     public var sortOrder: Int?
     public var severity: AlertRuleSeverity?
-    /** When true, this rule still fires while the tenant is in Do Not Disturb mode.             Critical rules implicitly bypass DND regardless of this flag. */
+    /** When true, this rule still fires while the tenant is in Do not disturb mode.             Critical rules implicitly bypass DND regardless of this flag. */
     public var allowThroughDnd: Bool?
     public var scopeClass: RuleScopeClass?
     /** Owner tag when this rule is synthesised from another feature's configuration             (e.g. tracker:{definitionId}). Null for user-authored rules. Managed rules             cannot be deleted here — the owning configuration re-syncs their condition, name and             severity; channels and client configuration remain user-editable. */
     public var managedBy: String?
+    /** Why a data repair changed or disabled this rule (AlertRuleReviewReasons);             null when none did. Cleared by the next edit. */
+    public var reviewReason: String?
+    /** Every problem that keeps one of the rule's stored condition trees from being             evaluated: with one in its body the rule is skipped, in its auto-resolve tree it never             resolves, and in its smart-snooze conditions the snooze clears. */
+    public var conditionIssues: [RustValidationIssue]?
     public var autoResolveEnabled: Bool?
     public var autoResolveParams: JSONValue?
     public var clientConfiguration: JSONValue?
     /** Flat list of delivery channels. Dispatched in parallel when the rule fires. */
     public var channels: [AlertRuleChannelResponse]?
 
-    public init(id: String? = nil, name: String? = nil, description: String? = nil, conditionType: AlertConditionType? = nil, conditionParams: JSONValue? = nil, isEnabled: Bool? = nil, sortOrder: Int? = nil, severity: AlertRuleSeverity? = nil, allowThroughDnd: Bool? = nil, scopeClass: RuleScopeClass? = nil, managedBy: String? = nil, autoResolveEnabled: Bool? = nil, autoResolveParams: JSONValue? = nil, clientConfiguration: JSONValue? = nil, channels: [AlertRuleChannelResponse]? = nil) {
+    public init(id: String? = nil, name: String? = nil, description: String? = nil, conditionType: AlertConditionType? = nil, conditionParams: JSONValue? = nil, isEnabled: Bool? = nil, sortOrder: Int? = nil, severity: AlertRuleSeverity? = nil, allowThroughDnd: Bool? = nil, scopeClass: RuleScopeClass? = nil, managedBy: String? = nil, reviewReason: String? = nil, conditionIssues: [RustValidationIssue]? = nil, autoResolveEnabled: Bool? = nil, autoResolveParams: JSONValue? = nil, clientConfiguration: JSONValue? = nil, channels: [AlertRuleChannelResponse]? = nil) {
         self.id = id
         self.name = name
         self.description = description
@@ -40,6 +44,8 @@ public struct AlertRuleResponse: Sendable, Codable, Hashable {
         self.allowThroughDnd = allowThroughDnd
         self.scopeClass = scopeClass
         self.managedBy = managedBy
+        self.reviewReason = reviewReason
+        self.conditionIssues = conditionIssues
         self.autoResolveEnabled = autoResolveEnabled
         self.autoResolveParams = autoResolveParams
         self.clientConfiguration = clientConfiguration
@@ -58,6 +64,8 @@ public struct AlertRuleResponse: Sendable, Codable, Hashable {
         case allowThroughDnd
         case scopeClass
         case managedBy
+        case reviewReason
+        case conditionIssues
         case autoResolveEnabled
         case autoResolveParams
         case clientConfiguration
@@ -79,6 +87,8 @@ public struct AlertRuleResponse: Sendable, Codable, Hashable {
         try container.encodeIfPresent(allowThroughDnd, forKey: .allowThroughDnd)
         try container.encodeIfPresent(scopeClass, forKey: .scopeClass)
         try container.encodeIfPresent(managedBy, forKey: .managedBy)
+        try container.encodeIfPresent(reviewReason, forKey: .reviewReason)
+        try container.encodeIfPresent(conditionIssues, forKey: .conditionIssues)
         try container.encodeIfPresent(autoResolveEnabled, forKey: .autoResolveEnabled)
         try container.encodeIfPresent(autoResolveParams, forKey: .autoResolveParams)
         try container.encodeIfPresent(clientConfiguration, forKey: .clientConfiguration)

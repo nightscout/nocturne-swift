@@ -8,10 +8,11 @@
 import Foundation
 
 /**  */
-public enum TempBasalOrigin: Int, Sendable, Codable, CaseIterable {
+public enum TempBasalOrigin: Int, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case _0 = 0
     case _1 = 1
     case _2 = 2
     case _3 = 3
     case _4 = 4
+    case unknownDefaultOpenApi = 11184809
 }

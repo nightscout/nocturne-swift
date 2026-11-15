@@ -117,7 +117,7 @@ open class SleepReportAPI {
     /**
      Get trends
      - GET /api/v4/sleep/report/trends
-     - Get a multi-night trends report. Maximum date range is 90 days. When source is omitted, sessions are deduplicated to one per calendar night (longest sleep wins; source priority as tie-breaker).
+     - Get a multi-night trends report, over at most MaxAnalyticsSpanDays local days. When source is omitted, sessions are deduplicated to one per calendar night (longest sleep wins; source priority as tie-breaker).
      - Bearer Token:
        - type: http
        - name: bearer

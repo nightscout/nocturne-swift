@@ -26,8 +26,11 @@ public struct Food: Sendable, Codable, Hashable {
     public var hidden: Bool?
     public var position: Int?
     public var createdAt: String?
+    public var srvModified: Int64?
+    public var srvCreated: Int64?
+    public var isValid: Bool?
 
-    public init(id: String? = nil, type: String? = nil, category: String? = nil, subcategory: String? = nil, name: String? = nil, portion: Double? = nil, carbs: Double? = nil, fat: Double? = nil, protein: Double? = nil, energy: Double? = nil, gi: Int? = nil, unit: String? = nil, foods: [QuickPickFood]? = nil, hideafteruse: Bool? = nil, hidden: Bool? = nil, position: Int? = nil, createdAt: String? = nil) {
+    public init(id: String? = nil, type: String? = nil, category: String? = nil, subcategory: String? = nil, name: String? = nil, portion: Double? = nil, carbs: Double? = nil, fat: Double? = nil, protein: Double? = nil, energy: Double? = nil, gi: Int? = nil, unit: String? = nil, foods: [QuickPickFood]? = nil, hideafteruse: Bool? = nil, hidden: Bool? = nil, position: Int? = nil, createdAt: String? = nil, srvModified: Int64? = nil, srvCreated: Int64? = nil, isValid: Bool? = nil) {
         self.id = id
         self.type = type
         self.category = category
@@ -45,6 +48,9 @@ public struct Food: Sendable, Codable, Hashable {
         self.hidden = hidden
         self.position = position
         self.createdAt = createdAt
+        self.srvModified = srvModified
+        self.srvCreated = srvCreated
+        self.isValid = isValid
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -65,6 +71,9 @@ public struct Food: Sendable, Codable, Hashable {
         case hidden
         case position
         case createdAt = "created_at"
+        case srvModified
+        case srvCreated
+        case isValid
     }
 
     // Encodable protocol methods
@@ -88,6 +97,9 @@ public struct Food: Sendable, Codable, Hashable {
         try container.encodeIfPresent(hidden, forKey: .hidden)
         try container.encodeIfPresent(position, forKey: .position)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        try container.encodeIfPresent(srvModified, forKey: .srvModified)
+        try container.encodeIfPresent(srvCreated, forKey: .srvCreated)
+        try container.encodeIfPresent(isValid, forKey: .isValid)
     }
 }
 

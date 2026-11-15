@@ -22,10 +22,8 @@ public struct StateSpan: Sendable, Codable, Hashable {
     public var createdAt: Date?
     public var updatedAt: Date?
     public var supersededById: String?
-    public var canonicalId: String?
-    public var sources: [String]?
 
-    public init(id: String? = nil, category: StateSpanCategory? = nil, state: String? = nil, startTimestamp: Date? = nil, endTimestamp: Date? = nil, startMills: Int64? = nil, endMills: Int64? = nil, source: String? = nil, metadata: [String: JSONValue]? = nil, originalId: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, supersededById: String? = nil, canonicalId: String? = nil, sources: [String]? = nil) {
+    public init(id: String? = nil, category: StateSpanCategory? = nil, state: String? = nil, startTimestamp: Date? = nil, endTimestamp: Date? = nil, startMills: Int64? = nil, endMills: Int64? = nil, source: String? = nil, metadata: [String: JSONValue]? = nil, originalId: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, supersededById: String? = nil) {
         self.id = id
         self.category = category
         self.state = state
@@ -39,8 +37,6 @@ public struct StateSpan: Sendable, Codable, Hashable {
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.supersededById = supersededById
-        self.canonicalId = canonicalId
-        self.sources = sources
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -57,8 +53,6 @@ public struct StateSpan: Sendable, Codable, Hashable {
         case createdAt
         case updatedAt
         case supersededById
-        case canonicalId
-        case sources
     }
 
     // Encodable protocol methods
@@ -78,8 +72,6 @@ public struct StateSpan: Sendable, Codable, Hashable {
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(updatedAt, forKey: .updatedAt)
         try container.encodeIfPresent(supersededById, forKey: .supersededById)
-        try container.encodeIfPresent(canonicalId, forKey: .canonicalId)
-        try container.encodeIfPresent(sources, forKey: .sources)
     }
 }
 

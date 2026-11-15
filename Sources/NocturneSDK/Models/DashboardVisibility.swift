@@ -8,11 +8,12 @@
 import Foundation
 
 /**  */
-public enum DashboardVisibility: String, Sendable, Codable, CaseIterable {
+public enum DashboardVisibility: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case off = "Off"
     case always = "Always"
     case info = "Info"
     case warn = "Warn"
     case hazard = "Hazard"
     case urgent = "Urgent"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

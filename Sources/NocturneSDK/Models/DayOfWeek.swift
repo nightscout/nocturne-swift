@@ -8,7 +8,7 @@
 import Foundation
 
 /**  */
-public enum DayOfWeek: Int, Sendable, Codable, CaseIterable {
+public enum DayOfWeek: Int, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case _0 = 0
     case _1 = 1
     case _2 = 2
@@ -16,4 +16,5 @@ public enum DayOfWeek: Int, Sendable, Codable, CaseIterable {
     case _4 = 4
     case _5 = 5
     case _6 = 6
+    case unknownDefaultOpenApi = 11184809
 }

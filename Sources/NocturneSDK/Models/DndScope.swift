@@ -8,8 +8,9 @@
 import Foundation
 
 /**  */
-public enum DndScope: String, Sendable, Codable, CaseIterable {
+public enum DndScope: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case lows = "lows"
     case highs = "highs"
     case all = "all"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

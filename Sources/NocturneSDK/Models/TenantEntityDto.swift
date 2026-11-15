@@ -16,6 +16,7 @@ public struct TenantEntityDto: Sendable, Codable, Hashable {
     public var isActive: Bool?
     public var lastReadingAt: Date?
     public var allowAccessRequests: Bool?
+    /** Export-only; see DevSnapshotDto. */
     public var sysCreatedAt: Date?
     public var sysUpdatedAt: Date?
 

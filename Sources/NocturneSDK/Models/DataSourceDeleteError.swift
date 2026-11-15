@@ -8,7 +8,9 @@
 import Foundation
 
 /**  */
-public enum DataSourceDeleteError: String, Sendable, Codable, CaseIterable {
+public enum DataSourceDeleteError: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case notFound = "NotFound"
     case deleteFailed = "DeleteFailed"
+    case syncRunning = "SyncRunning"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

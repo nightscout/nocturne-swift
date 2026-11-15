@@ -8,8 +8,9 @@
 import Foundation
 
 /**  */
-public enum BolusType: String, Sendable, Codable, CaseIterable {
+public enum BolusType: String, Sendable, Codable, CaseIterable, CaseIterableDefaultsLast {
     case normal = "Normal"
     case square = "Square"
     case dual = "Dual"
+    case unknownDefaultOpenApi = "unknown_default_open_api"
 }

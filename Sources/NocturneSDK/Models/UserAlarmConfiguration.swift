@@ -17,9 +17,8 @@ public struct UserAlarmConfiguration: Sendable, Codable, Hashable {
     public var profiles: [AlarmProfileConfiguration]?
     public var customSounds: [CustomSoundReference]?
     public var emergencyContacts: [EmergencyContactConfig]?
-    public var channels: NotificationChannelsConfig?
 
-    public init(version: Int? = nil, enabled: Bool? = nil, soundEnabled: Bool? = nil, vibrationEnabled: Bool? = nil, globalVolume: Int? = nil, profiles: [AlarmProfileConfiguration]? = nil, customSounds: [CustomSoundReference]? = nil, emergencyContacts: [EmergencyContactConfig]? = nil, channels: NotificationChannelsConfig? = nil) {
+    public init(version: Int? = nil, enabled: Bool? = nil, soundEnabled: Bool? = nil, vibrationEnabled: Bool? = nil, globalVolume: Int? = nil, profiles: [AlarmProfileConfiguration]? = nil, customSounds: [CustomSoundReference]? = nil, emergencyContacts: [EmergencyContactConfig]? = nil) {
         self.version = version
         self.enabled = enabled
         self.soundEnabled = soundEnabled
@@ -28,7 +27,6 @@ public struct UserAlarmConfiguration: Sendable, Codable, Hashable {
         self.profiles = profiles
         self.customSounds = customSounds
         self.emergencyContacts = emergencyContacts
-        self.channels = channels
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -40,7 +38,6 @@ public struct UserAlarmConfiguration: Sendable, Codable, Hashable {
         case profiles
         case customSounds
         case emergencyContacts
-        case channels
     }
 
     // Encodable protocol methods
@@ -55,7 +52,6 @@ public struct UserAlarmConfiguration: Sendable, Codable, Hashable {
         try container.encodeIfPresent(profiles, forKey: .profiles)
         try container.encodeIfPresent(customSounds, forKey: .customSounds)
         try container.encodeIfPresent(emergencyContacts, forKey: .emergencyContacts)
-        try container.encodeIfPresent(channels, forKey: .channels)
     }
 }
 

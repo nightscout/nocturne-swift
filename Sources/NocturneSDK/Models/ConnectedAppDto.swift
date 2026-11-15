@@ -15,23 +15,26 @@ public struct ConnectedAppDto: Sendable, Codable, Hashable {
     public var clientName: String?
     public var clientUri: String?
     public var logoUri: String?
-    public var isVerified: Bool?
+    public var identity: OAuthClientIdentity?
     public var scopes: [String]?
     public var label: String?
     public var createdAt: Date?
     public var lastUsedAt: Date?
+    /** Devices currently paired under this grant; revoked with it. */
+    public var deviceCount: Int?
 
-    public init(grantId: String? = nil, clientId: String? = nil, clientName: String? = nil, clientUri: String? = nil, logoUri: String? = nil, isVerified: Bool? = nil, scopes: [String]? = nil, label: String? = nil, createdAt: Date? = nil, lastUsedAt: Date? = nil) {
+    public init(grantId: String? = nil, clientId: String? = nil, clientName: String? = nil, clientUri: String? = nil, logoUri: String? = nil, identity: OAuthClientIdentity? = nil, scopes: [String]? = nil, label: String? = nil, createdAt: Date? = nil, lastUsedAt: Date? = nil, deviceCount: Int? = nil) {
         self.grantId = grantId
         self.clientId = clientId
         self.clientName = clientName
         self.clientUri = clientUri
         self.logoUri = logoUri
-        self.isVerified = isVerified
+        self.identity = identity
         self.scopes = scopes
         self.label = label
         self.createdAt = createdAt
         self.lastUsedAt = lastUsedAt
+        self.deviceCount = deviceCount
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -40,11 +43,12 @@ public struct ConnectedAppDto: Sendable, Codable, Hashable {
         case clientName
         case clientUri
         case logoUri
-        case isVerified
+        case identity
         case scopes
         case label
         case createdAt
         case lastUsedAt
+        case deviceCount
     }
 
     // Encodable protocol methods
@@ -56,11 +60,12 @@ public struct ConnectedAppDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(clientName, forKey: .clientName)
         try container.encodeIfPresent(clientUri, forKey: .clientUri)
         try container.encodeIfPresent(logoUri, forKey: .logoUri)
-        try container.encodeIfPresent(isVerified, forKey: .isVerified)
+        try container.encodeIfPresent(identity, forKey: .identity)
         try container.encodeIfPresent(scopes, forKey: .scopes)
         try container.encodeIfPresent(label, forKey: .label)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(lastUsedAt, forKey: .lastUsedAt)
+        try container.encodeIfPresent(deviceCount, forKey: .deviceCount)
     }
 }
 

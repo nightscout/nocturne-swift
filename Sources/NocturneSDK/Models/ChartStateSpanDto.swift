@@ -17,8 +17,9 @@ public struct ChartStateSpanDto: Sendable, Codable, Hashable {
     public var endMills: Int64?
     public var color: ChartColor?
     public var metadata: [String: JSONValue]?
+    public var profileActivation: ProfileActivationDto?
 
-    public init(id: String? = nil, kind: ChartSpanKind? = nil, category: StateSpanCategory? = nil, state: String? = nil, startMills: Int64? = nil, endMills: Int64? = nil, color: ChartColor? = nil, metadata: [String: JSONValue]? = nil) {
+    public init(id: String? = nil, kind: ChartSpanKind? = nil, category: StateSpanCategory? = nil, state: String? = nil, startMills: Int64? = nil, endMills: Int64? = nil, color: ChartColor? = nil, metadata: [String: JSONValue]? = nil, profileActivation: ProfileActivationDto? = nil) {
         self.id = id
         self.kind = kind
         self.category = category
@@ -27,6 +28,7 @@ public struct ChartStateSpanDto: Sendable, Codable, Hashable {
         self.endMills = endMills
         self.color = color
         self.metadata = metadata
+        self.profileActivation = profileActivation
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -38,6 +40,7 @@ public struct ChartStateSpanDto: Sendable, Codable, Hashable {
         case endMills
         case color
         case metadata
+        case profileActivation
     }
 
     // Encodable protocol methods
@@ -52,6 +55,7 @@ public struct ChartStateSpanDto: Sendable, Codable, Hashable {
         try container.encodeIfPresent(endMills, forKey: .endMills)
         try container.encodeIfPresent(color, forKey: .color)
         try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(profileActivation, forKey: .profileActivation)
     }
 }
 
